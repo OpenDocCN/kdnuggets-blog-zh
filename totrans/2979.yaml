@@ -1,32 +1,45 @@
 - en: Beating the Bookies with Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用机器学习战胜博彩公司
 - en: 原文：[https://www.kdnuggets.com/2019/03/beating-bookies-machine-learning.html](https://www.kdnuggets.com/2019/03/beating-bookies-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/beating-bookies-machine-learning.html](https://www.kdnuggets.com/2019/03/beating-bookies-machine-learning.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Richard Bartels](https://www.linkedin.com/in/richard-bartels-827a7b27),
     Data scientist at Vantage AI**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者: [Richard Bartels](https://www.linkedin.com/in/richard-bartels-827a7b27),
+    Vantage AI的数据科学家**。'
 - en: “The dealer always wins” is a typical saying in gambling. It reflects the fact
     that in most games of chance the house (e.g. the casino or the bookmaker) has
     a statistical advantage. In other words, assuming the betted amount is 1, the
     house has an expected return higher than 1, in contrast to the gambler who has
     an expected return smaller than 1\. Therefore, if you visit the casino, most likely
     you will make a net loss in the long run.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: “庄家总是赢”是赌博中的一句俗语。它反映了在大多数运气游戏中，赌场（例如赌场或博彩公司）具有统计上的优势。换句话说，假设下注金额为1，赌场的预期回报高于1，而赌徒的预期回报低于1。因此，如果你去赌场，长期来看，你很可能会遭遇净亏损。
 - en: Sports betting is no different. Both the bettor and the bookmaker can be equally
     skilled in predicting the outcome of a match, however the bookmaker sets the rules
     for the bet and thereby guarantee themselves a profit in the long run. The way
     they do this is by controlling what is called the payout.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 体育博彩也不例外。投注者和博彩公司都可以在预测比赛结果上具备同等的技能，但博彩公司设定了投注规则，从而确保长期获利。他们这样做的方式是控制所谓的支付率。
 - en: 'Here is a quick example. Lets take two darts players who are equally skilled
     and thus objectively would both have a 50% chance of winning a head-to-head game.
     The bookmaker can set the odds, which we will define as O₁ and O₂ for player 1
@@ -35,11 +48,16 @@
     the expected value of your return, X? Well if you bet $1 on a win for player 1,
     your expected return for this game is (remember that the win probability for each
     player is 50%):'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一个简单的例子。假设有两个水平相当的飞镖运动员，因此在一场对决中他们都有50%的获胜机会。博彩公司可以设定赔率，我们将其定义为O₁和O₂分别对应于运动员1和2。在这个特定的比赛中，O₁
+    = O₂ = 1.90是合理的赔率。这意味着每下注1美元，如果你赢了，就能得到1.90美元的回报。那么你的预期回报X是什么呢？如果你对运动员1下注1美元，你的预期回报为（记住每个运动员的获胜概率是50%）：
 - en: '![](../Images/b4e93cdcff3f5b146ac0db4bede49b98.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b4e93cdcff3f5b146ac0db4bede49b98.png)'
 - en: So in the long run, each dollar spent resuls in 95 cents return, and you will
     make a loss! I.e. the ‘payout’ the bookmaker sets for this game is 95%, meaning
     that the bookmaker will expect to make a profit of 5% over all bets, assuming
@@ -47,59 +65,84 @@
     set are not fair, fair odds would have been O₁ = O₂ = 2.0\. Note that these odds
     also corresponds to equal winning probabilites for each player, namely P₁ = O₂/(O₁
     + O₂)=0.5 and P₂ = O₁/(O₁ + O₂)=0.5.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以从长远来看，每花费1美元会得到95美分的回报，你将会亏损！也就是说，博彩公司为这个游戏设置的“支付率”是95%，这意味着博彩公司预计会从所有投注中获得5%的利润，前提是他们准确评估了获胜概率。所以我们看到，博彩公司设定的赔率是不公平的，公平的赔率应该是O₁
+    = O₂ = 2.0。注意，这些赔率也对应于每个运动员的相等获胜概率，即P₁ = O₂/(O₁ + O₂)=0.5和P₂ = O₁/(O₁ + O₂)=0.5。
 - en: In the remainder of this blog post we will focus on the specific game of darts,
     where games are head-to-head and results depend largely on the players’ skills.
     However, the discussion generalizes to other sports too.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本博客的其余部分，我们将专注于飞镖这种特定的游戏，其中比赛是对决的，结果在很大程度上取决于运动员的技能。然而，这个讨论也可以推广到其他体育运动。
 - en: '![](../Images/225b95959e4bafeb38500a6f18737f4c.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/225b95959e4bafeb38500a6f18737f4c.png)'
 - en: '**Image credit: [http://www.1zoom.me/en/wallpaper/517285/z7641.3/](http://www.1zoom.me/en/wallpaper/517285/z7641.3/).**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图片来源: [http://www.1zoom.me/en/wallpaper/517285/z7641.3/](http://www.1zoom.me/en/wallpaper/517285/z7641.3/).**'
 - en: How to beat the bookmaker
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何战胜博彩公司
 - en: What we have seen above is that bookmakers make a profit by controlling the
     payout. In order to do so they have to set the odds accordingly. For this, they
     need to know the probabilities. An omniscient bookmaker who gets all probabilities
     spot on cannot be beaten (in the long run). But bookmakers are not omniscient
     and therefore there are two ways in which they can be beaten, purely based on
     estimating the probabilities better.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们上面看到的情况是，博彩公司通过控制赔付来获利。为了做到这一点，他们必须相应地设置赔率。为此，他们需要知道概率。一个能准确获取所有概率的全知博彩公司在长期内是无法被击败的。但博彩公司并非全知，因此有两种方法可以在纯粹基于概率估算上击败他们。
 - en: If you consistently assess the probabilites better than the bookmaker, by such
     a margin that you make up for the leeway they have built into the payout.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你 consistently 评估概率比博彩公司更准确，并且这个差距足以弥补他们在赔付中预留的余地。
 - en: If you only bet on those games where you know the bookmaker made a mistake and
     the odds are ‘fair’.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你只投注那些你知道博彩公司犯了错误且赔率“公平”的比赛。
 - en: In fact, strategy 1 is just a specific version of strategy 2\. Nevertheless,
     even if you manage to predict each game more accurately than the bookmakers, you
     are unlikely to make a profit, since the bookmakers get pretty close to getting
     the probabilities right. This can be seen from Fig. 1, which shows that the bookmakers
     do a pretty good job at estimating the odds correctly for darts.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，策略 1 只是策略 2 的一个特定版本。尽管如此，即使你能够比博彩公司更准确地预测每场比赛，也不太可能获利，因为博彩公司对概率的估算非常接近正确。从图
+    1 可以看出，博彩公司在准确估算飞镖赔率方面做得相当好。
 - en: '![](../Images/838ec3c7840c4f51d165849b96c06425.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/838ec3c7840c4f51d165849b96c06425.png)'
 - en: '**Fig. 1: Win probability derived from the bookmaker odds compared to the observed
     win ratio (blue line) for almost 3700 games of darts. The dashed black line corresponds
     to being able to predict the probabilities perftectly for an infinite number of
     games. The dark (light) grey bands are the 68% (95%) intervals from intrinsic
     noise due to the limited sample size. Since the blue line stays pretty well within
     the grey bands. It seems the bookmakers know what they are doing.**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1：从博彩公司赔率得出的胜率与观察到的胜率（蓝线）对比，涵盖了将近 3700 场飞镖比赛。虚线黑线对应于能够在无限场比赛中完美预测概率。深灰（浅灰）带是由于有限样本量的固有噪声所产生的
+    68%（95%）区间。由于蓝线在灰色带内保持得相当好，似乎博彩公司知道他们在做什么。**'
 - en: Fig. 1 illustrates that bookmakers assess the probabilities right on a large
     sample of games. But they could still be wrong on a number of individual games.
     Strategy 2, as outlined above, relies on identifying where the bookmakers misjudge
@@ -110,18 +153,25 @@
     identify all such games. However, since most of the time it is not easy to tell
     when the bookmakers are wrong, we can try to have a machine-learning (ML) algorithm
     do this for us.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1 说明博彩公司在大量比赛中正确评估了概率。但他们在一些个别比赛中仍可能出错。上述提到的策略 2 依赖于识别博彩公司对实际概率的误判。例如，在博彩公司提供相等赔率的非现实事件中，例如
+    O₁ = O₂ = 1.90，在现任世界冠军迈克尔·范·格尔文与世界第 94 名对手的比赛中，我们的直觉已经告诉我们通过投注范·格尔文可能会获利。目标是识别所有这样的比赛。然而，由于大多数时候很难判断博彩公司何时出错，我们可以尝试让机器学习（ML）算法为我们完成这项工作。
 - en: Betting on darts with the help of ML
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 利用 ML 进行飞镖投注
 - en: For the purpose of this project we used darts statistics, including features
     such as averages, checkout percentages, number of 180s (maximum score with 3 darts)
     and head-to-head statistics. In addition, we used historic odds in order to assess
     whether this model could have made a profit.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了这个项目，我们使用了飞镖统计数据，包括平均值、结算百分比、180 分（用 3 支飞镖的最高分）和交锋统计等特征。此外，我们使用了历史赔率来评估这个模型是否能够获利。
 - en: First, to further motivate our tactics of only betting on a selection of games
     lets consider the benchmark accuracies. If we would always bet on the player with
     the highest win chance according to the bookmakers we achieve an accuracy of 70%.
@@ -131,23 +181,31 @@
     carefully constructed features and optimized on a binary-cross entropy loss function
     we also got to 70% accuracy. Clearly we are not outperforming the bookmakers,
     so there is little chance to make a profit.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，为了进一步激励我们仅在一部分比赛中下注的策略，我们来看一下基准准确率。如果我们总是根据博彩公司给出的最高获胜概率的选手下注，我们能达到70%的准确率。仅基于比赛结果构建的[技能评级](https://trueskill.org/)在相同数据上也能达到69%的准确率。当训练一个机器学习模型，如随机森林、提升树或经过精心构建特征优化的全连接神经网络，并使用二元交叉熵损失函数进行优化时，我们也达到了70%的准确率。显然，我们没有超越博彩公司，因此获利的机会很小。
 - en: A custom loss function
+  id: totrans-23
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 自定义损失函数
 - en: The binary-cross entropy loss function optimizes our ability to predict the
     outcome of games correctly, i.e. it optimizes the accuracy with which we predict
     games. However, that is not our goal. What we want is to identify the games where
     the bookmaker misjudges the true probability and thus offers favourable odds.
     I.e. we want to optimize our return-on-investment. Below is a loss function constructed
     to do exactly this.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 二元交叉熵损失函数优化了我们正确预测比赛结果的能力，即优化了我们预测比赛的准确性。然而，这并不是我们的最终目标。我们想要的是识别博彩公司误判真实概率的比赛，从而提供有利的赔率。即，我们想要优化投资回报率。以下是一个精确实现这一点的损失函数。
 - en: '![](../Images/bff3bac101d86ad4e22445bcdb533b09.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bff3bac101d86ad4e22445bcdb533b09.png)'
 - en: 'The custom loss function contains two elements, the terms between square brackets
     are the returns if we bet $1,- on player 1 or 2, respectively. Note that this
     depends on the outcome of the game (yᵢ), if we get it wrong we loose our money.
@@ -159,34 +217,47 @@
     other words, if our model believes the odds are unfair, it won’t bet any money.
     On the other hand, the more favourable the odds appear, the higher the amount
     the model will bet.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 自定义损失函数包含两个元素，方括号中的项是我们分别在玩家1或2上下注$1的回报。请注意，这取决于比赛结果（yᵢ），如果我们预测错误，我们会损失资金。 [ReLu函数](https://ml-cheatsheet.readthedocs.io/en/latest/activation_functions.html#relu)包含了我们的下注策略。它的特性是当x
+    ≤ 0时，Relu(x) = 0，否则Relu(x) = x。参数是我们的预期回报：赔率乘以我们估计的获胜概率减去1。鉴于ReLu函数的特性，这意味着只有在我们认为赔率对我们有利时，它才会大于0。换句话说，如果我们的模型认为赔率不公平，它不会下注任何资金。另一方面，赔率越有利，模型下注的金额就会越高。
 - en: This loss function ensures that what we are optimizing is not how well we can
     predict the outcome of a game, but rather our winnings. Note that as a consequence
     of our custom loss function, the predicted probabilities are not representative
     of the true probabilities, since when the model thinks the bookmakers are off
     it will push the probabilities towards the extremes (0 or 1) in order to bet more.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个损失函数确保我们优化的不是预测比赛结果的准确性，而是我们的赢利。注意，由于我们的自定义损失函数，预测的概率并不代表真实的概率，因为当模型认为博彩公司给出的赔率不准确时，它会将概率推向极端（0或1），以便下注更多。
 - en: So how does it perform?
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那么它的表现如何？
 - en: In order to test our model performance we constructed a densely-connected neural
     network with two hidden layers. The final layer is a sigmoid layer that predicts
     the probability of player 1 winning. Using the bookmaker odds and the outcome
     of the game we then compute the loss with the custom loss function described above.
     All of this is implemented in [PyTorch](https://cs230-stanford.github.io/pytorch-getting-started.html#loss-function).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了测试我们的模型性能，我们构建了一个具有两个隐藏层的密集连接神经网络。最终层是一个sigmoid层，用于预测玩家1获胜的概率。然后，我们使用博彩公司赔率和比赛结果来计算使用上述自定义损失函数的损失。所有这些都在[PyTorch](https://cs230-stanford.github.io/pytorch-getting-started.html#loss-function)中实现。
 - en: Since this is a time-series, the model is trained on historical data upto a
     given point and subsequently applied to the next 50 games. This process is then
     repeated for the next 50 games, etc. Results are shown in Fig. 2.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这是一个时间序列模型，该模型在给定时间点之前的历史数据上进行训练，然后应用于接下来的50场比赛。这个过程会对接下来的50场比赛重复进行，依此类推。结果如图2所示。
 - en: '![](../Images/626104d2f0b35ccf7df88a9b146f4bf3.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/626104d2f0b35ccf7df88a9b146f4bf3.png)'
 - en: 'Fig. 2: Cumulative winnings over time for two different betting strategies.
     Red dots are for a strategy where we always bet a fixed amount on the player with
     the highest winning probability according to the bookmaker odds. In the long run
@@ -195,8 +266,10 @@
     it expects to make a profit. The total earning fluctuate around 0\. However, there
     are also a few major winnings, that overcompensate large losses. In this particular
     case we made a profit of about ~10%.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2：两种不同投注策略的累计收益随时间的变化。红点表示我们始终对博彩公司赔率中获胜概率最高的玩家下注的策略。从长远来看，这导致了约5%的损失，对应于博彩公司支付方案。绿点是由我们的机器学习模型进行的投注。它只在预计会获得利润时才下注。总体收益波动在0附近。然而，也有一些重大收益，能够弥补较大的损失。在这种情况下，我们的利润约为~10%。
 - en: Our model managed to a make a profit, albeit with large fluctuations over time.
     It suffered from a few major losses, but also made some major winnings compensating
     the losses. In the end the return on investment was about 10%. As a benchmark
@@ -204,135 +277,201 @@
     according to the bookmaker (which would not be very different from a model where
     we optimize using binary cross-entropy to predict the winner). Since the odds
     are unfair, we make a loss of about 5% in the long run.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的模型成功地实现了盈利，尽管随着时间的推移波动较大。它经历了一些重大损失，但也取得了一些主要的收益来弥补这些损失。最终的投资回报率约为10%。作为基准，我们采用了一种策略，即始终对博彩公司认为最有可能获胜的玩家进行投注（这与我们使用二元交叉熵优化预测赢家的模型不会有太大不同）。由于赔率不公平，我们在长期内会损失约5%。
 - en: In summary
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: Bookmakers make a profit by controlling the payout.
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 博彩公司通过控制支付金额来获得利润。
 - en: For darts, they tend to be good at assessing the winning probabilities. This
     makes it difficult to make a profit by just predicting the outcome of darts games.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于飞镖比赛，它们通常能够很好地评估获胜概率。这使得仅仅通过预测飞镖比赛结果来获利变得困难。
 - en: A machine learning model with a custom loss function — with the objective to
     identify shortcomings in the bookmaker odds and make profit, rather than optimising
     the accuracy of predicting the winner correctly — can provide a profitable betting
     strategy.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一种具有自定义损失函数的机器学习模型——其目标是识别博彩公司赔率中的不足并获取利润，而不是优化正确预测赢家的准确性——可以提供一种有利可图的投注策略。
 - en: The return on investment at any given time is subject to large fluctuations
     and profits can only be expected over extended periods of time.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在任何给定时间点的投资回报率会受到较大波动的影响，只有在较长的时间段内才能期望获得利润。
 - en: The presented model is by no means a guaranteed profit-making machine. Instead,
     it serves as a proof-of-concept describing how to set up your machine learning
     model to beat the bookmaker.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所提出的模型绝不是一个保证盈利的机器。相反，它作为一个概念验证，描述了如何设置你的机器学习模型以击败博彩公司。
 - en: Acknowledgements
+  id: totrans-40
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 致谢
 - en: Thanks to [Guido Tournois](https://medium.com/@guido.tournois) with whom I collaborated
     on this project.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢[Guido Tournois](https://medium.com/@guido.tournois)与我在这个项目中的合作。
 - en: '**Bio**: [Richard Bartels](https://www.linkedin.com/in/richard-bartels-827a7b27) is
     a data scientist at Vantage AI, a data science consultancy company in the Netherlands.
     If you need help with creating machine learning models for your data, feel free
     to contact us at [**info@vantage-ai.com**](mailto:info@vantage-ai.com).'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介**：[Richard Bartels](https://www.linkedin.com/in/richard-bartels-827a7b27)是荷兰数据科学咨询公司Vantage
+    AI的数据科学家。如果你需要帮助创建适用于数据的机器学习模型，请随时通过[**info@vantage-ai.com**](mailto:info@vantage-ai.com)与我们联系。'
 - en: '[Original](https://medium.com/vantageai/beating-the-bookies-with-machine-learning-7b429a0b5980).
     Reposted with permission.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/vantageai/beating-the-bookies-with-machine-learning-7b429a0b5980)。转载时经许可。'
 - en: '**Resources:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**资源：**'
 - en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
     education](https://www.kdnuggets.com/education/online.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在线和基于网络的：分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)'
 - en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析、数据科学、数据挖掘和机器学习的软件](https://www.kdnuggets.com/software/index.html)'
 - en: '**Related:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[4 Reasons Why Your Machine Learning Code is Probably Bad](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你的机器学习代码可能很糟糕的 4 个原因](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)'
 - en: '[Leveraging Agent-based Models (ABM) and Digital Twins to Prevent Injuries](https://www.kdnuggets.com/2018/08/leveraging-agent-based-models-digital-twins-prevent-injuries.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用基于代理的模型 (ABM) 和数字双胞胎来防止伤害](https://www.kdnuggets.com/2018/08/leveraging-agent-based-models-digital-twins-prevent-injuries.html)'
 - en: '[Why Germany did not defeat Brazil in the final, or Data Science lessons from
     the World Cup](https://www.kdnuggets.com/2018/07/worldcup-data-science-lessons.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么德国在决赛中没有战胜巴西，或来自世界杯的数据科学课程](https://www.kdnuggets.com/2018/07/worldcup-data-science-lessons.html)'
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多内容
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月14日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位机器学习工程师都应该掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
 - en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
 - en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[打破数据障碍：零样本、单样本和少样本学习如何转变机器学习](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
 - en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[联邦学习：协作机器学习教程…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'

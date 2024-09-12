@@ -1,136 +1,196 @@
 - en: 'Towards Automatic Text Summarization: Extractive Methods'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自动文本摘要：提取方法
 - en: 原文：[https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html](https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html](https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Sciforce](https://sciforce.solutions/)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Sciforce](https://sciforce.solutions/)**。'
 - en: 'For those who had academic writing, summarization — *the task of producing
     a concise and fluent summary while preserving key information content and overall
     meaning**—*was if not a nightmare, then a constant challenge close to guesswork
     to detect what the professor would find important. Though the basic idea looks
     simple: find the gist, cut off all opinions and detail, and write a couple of
     perfect sentences, the task inevitably ended up in toil and turmoil.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于那些进行学术写作的人来说，总结——*在保持关键信息内容和整体意义的同时，生成简明流畅的摘要的任务*——如果不是噩梦，那就是一个近乎猜测的常规挑战，以确定教授认为重要的内容。尽管基本思路看似简单：找出要点，去除所有意见和细节，然后写几句完美的句子，但任务不可避免地陷入了艰辛与混乱。
 - en: 'On the other hand, in real life we are perfect summarizers: we can describe
     the whole War and Peace in one word, be it “masterpiece” or “rubbish”. We can
     read tons of news about state-of-the-art technologies and sum them up in “Musk
     sent Tesla to the Moon”.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，在现实生活中，我们是完美的总结者：我们可以用一个词描述整部《战争与和平》，无论是“杰作”还是“废话”。我们可以阅读大量关于尖端技术的新闻，并将其总结为“马斯克把特斯拉送上了月球”。
 - en: We would expect that the computer could be even better. Where humans are imperfect,
     artificial intelligence depraved of emotions and opinions of its own would do
     the job.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们期望计算机能够做得更好。人类不完美的地方，情感和意见缺失的人工智能将能够完成这项工作。
 - en: The story began in the 1950s. An important research of these days introduced
     a method to extract salient sentences from the text using features such as[*word
     and phrase frequency*](http://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf).
     In this work, Luhl proposed to weight the sentences of a document as a function
     of high frequency words, ignoring very high frequency common words –the approach
     that became the one of the pillars of NLP.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 故事始于1950年代。那时的一项重要研究介绍了一种从文本中提取显著句子的办法，使用[*单词和短语频率*](http://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf)等特征。在这项工作中，Luhl提议根据高频词的函数加权文档中的句子，忽略非常高频的常见词——这一方法成为了NLP的基石之一。
 - en: '![](../Images/49a513eb683ab527ed04b52a4610cb0e.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/49a513eb683ab527ed04b52a4610cb0e.png)'
 - en: '**World-frequency diagram. Abscissa represents individual words arranged in
     order of frequency**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**词频图。横坐标表示按频率排序的单个单词**'
 - en: 'By now, the whole branch of natural language processing dedicated to summarization
     emerged, covering a[ variety of tasks](https://www.amazon.com/Advances-Automatic-Text-Summarization-Press/dp/0262133598/ref=as_li_ss_tl?ie=UTF8&qid=1503872626&sr=8-1&keywords=text+summarization&linkCode=sl1&tag=inspiredalgor-20&linkId=75d9f8d62261d17bdddf5c5c0f43881a):'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，专注于摘要的自然语言处理分支已经出现，涵盖了[各种任务](https://www.amazon.com/Advances-Automatic-Text-Summarization-Press/dp/0262133598/ref=as_li_ss_tl?ie=UTF8&qid=1503872626&sr=8-1&keywords=text+summarization&linkCode=sl1&tag=inspiredalgor-20&linkId=75d9f8d62261d17bdddf5c5c0f43881a)：
 - en: headlines (from around the world);
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 头条（全球新闻）；
 - en: outlines (notes for students);
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大纲（学生笔记）；
 - en: minutes (of a meeting);
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 会议记录；
 - en: previews (of movies);
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预告片（电影）；
 - en: synopses (soap opera listings);
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大纲（肥皂剧列表）；
 - en: reviews (of a book, CD, movie, etc.);
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 书评（书籍、CD、电影等）；
 - en: digests (TV guide);
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 摘要（电视指南）；
 - en: biography (resumes, obituaries);
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 传记（简历、讣告）；
 - en: abridgments (Shakespeare for children);
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 摘要（儿童莎士比亚）；
 - en: bulletins (weather forecasts/stock market reports);
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 公告（天气预报/股票市场报告）；
 - en: sound bites (politicians on a current issue);
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 声音片段（政客对时事的评论）；
 - en: histories (chronologies of salient events).
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 历史（重要事件的年表）。
 - en: '![](../Images/fbfbba1f1927c357a54cf80b33969f4f.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fbfbba1f1927c357a54cf80b33969f4f.png)'
 - en: The approaches to text summarization vary depending on the number of input documents
     (single or multiple), purpose (generic, domain specific, or query-based) and output
     (extractive or abstractive).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本摘要的方法因输入文档的数量（单个或多个）、目的（通用、特定领域或基于查询）和输出（提取式或抽象式）而异。
 - en: '**Extractive summarization** means identifying important sections of the text
     and generating them verbatim producing a subset of the sentences from the original
     text; while **abstractive summarization** reproduces important material in a new
     way after interpretation and examination of the text using advanced natural language
     techniques to generate a new shorter text that conveys the most critical information
     from the original one.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**抽取式总结** 指的是识别文本中的重要部分，并逐字生成这些部分，从而产生原文的句子子集；而 **抽象总结** 则是在对文本进行解释和审查后，以一种新的方式再现重要材料，使用先进的自然语言技术生成一个更短的新文本，从中传达原文的最关键信息。'
 - en: Obviously, abstractive summarization is more advanced and closer to human-like
     interpretation. Though it has more potential (and is generally more interesting
     for researchers and developers), so far the more traditional methods have proved
     to yield better results.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，抽象总结更为先进，并且更接近于人类式的解释。尽管它具有更大的潜力（通常也更吸引研究人员和开发者），但到目前为止，传统方法已被证明能够产生更好的结果。
 - en: That is why in this blog post we’ll give a short overview of such traditional
     approaches that have beaten a path to advanced deep learning techniques.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么在这篇博客文章中，我们将简要概述这些传统方法，它们为先进的深度学习技术铺平了道路。
 - en: 'By now, the core of all extractive summarizers is formed of three independent
     tasks:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 到现在为止，所有抽取式总结的核心包括三个独立的任务：
 - en: '**1) Construction of an intermediate representation of the input text**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1) 输入文本的中间表示构建**'
 - en: 'There are two types of representation-based approaches: topic representation
     and indicator representation. Topic representation transforms the text into an
     intermediate representation and interpret the topic(s) discussed in the text.
@@ -139,40 +199,56 @@
     and Bayesian topic models. Indicator representation describes every sentence as
     a list of formal features (indicators) of importance such as sentence length,
     position in the document, having certain phrases, etc.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 表示基础的方法有两种类型：主题表示和指示符表示。主题表示将文本转换为中间表示，并解释文本中讨论的主题。用于这一过程的技术在复杂性上有所不同，分为频率驱动的方法、主题词方法、潜在语义分析和贝叶斯主题模型。指示符表示将每个句子描述为重要形式特征（指示符）的列表，如句子长度、在文档中的位置、包含特定短语等。
 - en: 2) **Scoring the sentences** **based on the representation**
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 2) **基于表示的句子评分**
 - en: When the intermediate representation is generated, an importance score is assigned
     to each sentence. In topic representation approaches, the score of a sentence
     represents how well the sentence explains some of the most important topics of
     the text. In indicator representation, the score is computed by aggregating the
     evidence from different weighted indicators.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 当生成中间表示后，会为每个句子分配一个重要性评分。在主题表示方法中，句子的评分表示句子解释文本中一些最重要主题的能力。在指示符表示中，评分是通过聚合来自不同加权指示符的证据来计算的。
 - en: '**3) Selection of a summary comprising of a number of sentences**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3) 选择包含若干句子的摘要**'
 - en: The summarizer system selects the top *k* most important sentences to produce
     a summary. Some approaches use greedy algorithms to select the important sentences
     and some approaches may convert the selection of sentences into an optimization
     problem where a collection of sentences is chosen, considering the constraint
     that it should maximize overall importance and coherency and minimize the redundancy.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结系统选择最重要的 *k* 个句子来生成摘要。一些方法使用贪婪算法来选择重要句子，而有些方法则可能将句子的选择转换为一个优化问题，在考虑到应该最大化整体重要性和连贯性，并最小化冗余的约束下，选择一组句子。
 - en: 'Let’s have a closer look at the approaches we mentioned and outline the differences
     between them:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们更详细地查看我们提到的方法，并概述它们之间的差异：
 - en: Topic Representation Approaches
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主题表示方法
 - en: Topic words
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主题词
 - en: 'This common technique aims to identify words that describe the topic of the
     input document. An advance of the initial Luhn’s idea was to use log-likelihood
     ratio test to identify explanatory words known as the[ “topic signature”](http://aclweb.org/anthology/J93-1003).
@@ -181,12 +257,16 @@
     of the topic signatures in the sentence. While the first method gives higher scores
     to longer sentences with more words, the second one measures the density of the
     topic words.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种常见技术旨在识别描述输入文档主题的词。对最初 Luhn 思路的改进是使用对数似然比检验来识别称为[“主题签名”](http://aclweb.org/anthology/J93-1003)的解释性词。一般来说，有两种计算句子重要性的方法：作为其包含的主题签名数量的函数，或作为句子中主题签名的比例。第一种方法给包含更多词的较长句子更高的分数，而第二种方法则测量主题词的密度。
 - en: Frequency-driven approaches
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于频率的方法
 - en: 'This approach uses frequency of words as indicators of importance. The two
     most common techniques in this category are: word probability and TF-IDF (Term
     Frequency Inverse Document Frequency). The probability of a word w is determined
@@ -203,12 +283,19 @@
     that consist of the words whose TF-IDF scores are higher than a certain threshold
     and form the cluster. Afterwards, the centroids are used to identify sentences
     in each cluster that are central to the topic.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法使用词频作为重要性的指标。这一类别中最常见的两种技术是：词概率和TF-IDF（词频逆文档频率）。词 w 的概率是通过将词的出现次数 f (w)
+    除以输入中所有词的总数来确定的（输入可以是单个文档或多个文档）。概率最高的词被认为代表了文档的主题，并被包含在摘要中。TF-IDF 是一种更复杂的技术，它评估词的重要性，并通过给出现于大多数文档中的词以低权重来识别非常常见的词（这些词应被排除在考虑之外）。TF-IDF
+    让位于[基于质心的方法](https://dl.acm.org/citation.cfm?id=1036121)，这种方法通过计算一组特征的显著性来对句子进行排序。在创建文档的
+    TF-IDF 向量表示后，描述相同主题的文档被聚类在一起，并计算质心——这些伪文档由 TF-IDF 分数高于某个阈值的词组成，并形成聚类。之后，质心被用来识别每个聚类中与主题相关的句子。
 - en: Latent Semantic Analysis
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 潜在语义分析
 - en: '[Latent semantic analysis (LSA)](http://lsa.colorado.edu/papers/JASIS.lsi.90.pdf) is
     an unsupervised method for extracting a representation of text semantics based
     on observed words. The first step is to build a term-sentence matrix, where each
@@ -221,12 +308,18 @@
     matrix with weights with the topic-sentence matrix, the result will describe how
     much a sentence represent a topic, in other words, the weight of the topic i in
     sentence j.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[潜在语义分析 (LSA)](http://lsa.colorado.edu/papers/JASIS.lsi.90.pdf)是一种基于观察到的词提取文本语义表示的无监督方法。第一步是建立一个词-句子矩阵，其中每一行对应输入中的一个词（n
+    个词），每一列对应一个句子。矩阵的每个条目是通过 TF-IDF 技术计算的词 i 在句子 j 中的权重。然后对矩阵进行奇异值分解（SVD），将初始矩阵转换为三个矩阵：一个词-主题矩阵，包含词的权重，一个对角矩阵，每一行对应一个主题的权重，以及一个主题-句子矩阵。如果将带权重的对角矩阵与主题-句子矩阵相乘，结果将描述一个句子代表一个主题的程度，换句话说，就是主题
+    i 在句子 j 中的权重。'
 - en: Discourse Based Method
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 话语基础方法
 - en: A logical development of analyzing semantics, is perform discourse analysis,
     finding the semantic relations between textual units, to form a summary. The study
     on cross-document relations was initiated by Radev, who came up with[Cross-Document
@@ -236,12 +329,17 @@
     relevance as well as to treat repetition, complementarity and inconsistency among
     the diverse data sources. Nonetheless, the significant limitation of this method
     is that the CST relations should be explicitly determined by human.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 语义分析的逻辑发展是进行话语分析，找到文本单元之间的语义关系，以形成摘要。跨文档关系的研究由 Radev 发起，他提出了[跨文档结构理论 (CST) 模型](http://www.aclweb.org/anthology/W00-1009)。在他的模型中，词语、短语或句子可以互相连接，如果它们在语义上是相关的。CST
+    确实对文档摘要有用，可以确定句子的相关性以及处理不同数据源之间的重复、互补和不一致性。然而，这种方法的一个显著限制是 CST 关系必须由人工明确确定。
 - en: Bayesian Topic Models
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 贝叶斯主题模型
 - en: While other approaches do not have very clear probabilistic interpretations,
     Bayesian topic models are probabilistic models that thanks to their describing
     topics in more detail can represent the information that is lost in other approaches.
@@ -252,21 +350,29 @@
     assumptions and the outcomes of previous related events. The model is constantly
     improved by going through many iterations where a prior probability is updated
     with observational evidence to produce a new posterior probability.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然其他方法没有很清晰的概率解释，但贝叶斯主题模型是概率模型，因其能够更详细地描述主题，能够表示在其他方法中丢失的信息。在文本文档的主题建模中，目标是根据对文档语料库的先验分析，推断与某个主题相关的词汇和某个文档中讨论的主题。这可以通过贝叶斯推理来实现，该推理计算事件的概率，基于常识假设的组合以及之前相关事件的结果。该模型通过多次迭代不断改进，其中先验概率会随着观测证据的增加而更新，以产生新的后验概率。
 - en: Indicator representation approaches
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 指示符表示方法
 - en: The second large group of techniques aims to represent the text based on a set
     of features and use them to directly rank the sentences without representing the
     topics of the input text.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二大类技术旨在基于一组特征来表示文本，并使用这些特征直接对句子进行排名，而不表示输入文本的主题。
 - en: Graph Methods
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 图方法
 - en: 'Influenced by[ PageRank algorithm](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf),
     these methods represent documents as a connected graph, where sentences form the
     vertices and edges between the sentences indicate how similar the two sentences
@@ -280,12 +386,17 @@
     processing, it can be applied to various languages [43]. At the same time, such
     measuring only of the formal side of the sentence structure without the syntactic
     and semantic information limits the application of the method.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 受[PageRank 算法](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf)的影响，这些方法将文档表示为一个连通图，其中句子形成顶点，句子之间的边表示这两个句子的相似程度。两个句子的相似度通过使用
+    TF-IDF 权重的余弦相似度来测量，如果相似度大于某个阈值，这些句子就会被连接起来。这种图表示的结果有两个：图中包含的子图创建了文档中涉及的主题，并且重要的句子被识别出来。那些在子图中与许多其他句子连接的句子可能是图的中心，并将被包含在摘要中。由于这种方法不需要特定语言的语言学处理，它可以应用于各种语言[43]。与此同时，这种仅仅测量句子结构的形式而没有语法和语义信息的方式限制了该方法的应用。
 - en: Machine Learning
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 机器学习
 - en: Machine learning approaches that treat summarization as a classification problem
     are widely used now trying to apply Naive Bayes, decision trees, support vector
     machines, Hidden Markov models and Conditional Random Fields to obtain a true-to-life
@@ -293,128 +404,192 @@
     between sentences ([Hidden Markov model](https://pdfs.semanticscholar.org/1213/3cfc6688cc2cdea57595b045a28b94d98f1d.pdf) and[ Conditional
     Random Fields](https://pdfs.semanticscholar.org/8ddf/5baeeab2e2fd401c0959a2d70e4c2ba68a33.pdf))
     often outperform other techniques.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前广泛使用的机器学习方法将摘要视为分类问题，尝试应用朴素贝叶斯、决策树、支持向量机、隐马尔可夫模型和条件随机场来获得真实的摘要。事实证明，明确假设句子之间依赖关系的方法（[隐马尔可夫模型](https://pdfs.semanticscholar.org/1213/3cfc6688cc2cdea57595b045a28b94d98f1d.pdf)
+    和 [条件随机场](https://pdfs.semanticscholar.org/8ddf/5baeeab2e2fd401c0959a2d70e4c2ba68a33.pdf)）通常优于其他技术。
 - en: '![](../Images/e143f2ae387b7c545a074fac77433e11.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e143f2ae387b7c545a074fac77433e11.png)'
 - en: '**Figure 1: Summary Extraction Markov Model to Extract 2 Lead Sentences and
     Additional Supporting Sentences**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1：摘要提取马尔可夫模型以提取 2 个主要句子和额外支持句子**'
 - en: '![](../Images/eedd2f6fa8d655cbb8b5b2979ca90860.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/eedd2f6fa8d655cbb8b5b2979ca90860.png)'
 - en: '**Figure 2: Summary Extraction Markov Model to Extract 3 Sentences**'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 2：摘要提取马尔可夫模型以提取 3 个句子**'
 - en: Yet, the problem with classifiers is that if we utilize supervised learning
     methods for summarization, we need a set of labeled documents to train the classifier,
     meaning development of a corpus. A possible way-out is to apply semi-supervised
     approaches that combine a small amount of labeled data along with a large amount
     of unlabeled data in training.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，分类器的问题在于，如果我们使用监督学习方法进行摘要生成，我们需要一组标记文档来训练分类器，这意味着需要开发一个语料库。一个可能的解决方法是应用半监督方法，将少量标记数据与大量未标记数据结合进行训练。
 - en: Overall, machine learning methods have proved to be very effective and successful
     both in single and multi-document summarization, especially in class-specific
     summarization such as drawing scientific paper abstracts or biographical summaries.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，机器学习方法在单文档和多文档摘要生成中都被证明是非常有效和成功的，特别是在特定领域的摘要生成，例如撰写科学论文摘要或传记摘要。
 - en: Though abundant, all the summarization methods we have mentioned could not produce
     summaries that would similar to human-created summaries. In many cases, the soundness
     and readability of created summaries are not satisfactory, because they fail to
     cover all the semantically relevant aspects of data in an effective way and afterwards
     they fail to connect sentences in a natural way.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管方法丰富，但我们提到的所有摘要方法仍无法生成与人类创建的摘要类似的结果。在许多情况下，生成的摘要在准确性和可读性方面不尽如人意，因为它们未能以有效的方式覆盖数据中的所有语义相关方面，并且之后未能自然地连接句子。
 - en: '[Original](https://medium.com/sciforce/towards-automatic-text-summarization-extractive-methods-e8439cd54715).
     Reposted with permission.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/sciforce/towards-automatic-text-summarization-extractive-methods-e8439cd54715)。已获得许可转载。'
 - en: '**Bio**: [Sciforce](https://sciforce.solutions/)is a Ukraine-based IT company
     specialized in development of software solutions based on science-driven information
     technologies. We have wide-ranging expertise in many key AI technologies, including
     Data Mining, Digital Signal Processing, Natural Language Processing, Machine Learning,
     Image Processing and Computer Vision.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介**：[Sciforce](https://sciforce.solutions/) 是一家总部位于乌克兰的 IT 公司，专注于基于科学驱动的信息技术开发软件解决方案。我们在许多关键的人工智能技术领域拥有广泛的专业知识，包括数据挖掘、数字信号处理、自然语言处理、机器学习、图像处理和计算机视觉。'
 - en: '**Resources:**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**资源：**'
 - en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
     education](https://www.kdnuggets.com/education/online.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在线和基于网络的：分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)'
 - en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于分析、数据科学、数据挖掘和机器学习的软件](https://www.kdnuggets.com/software/index.html)'
 - en: '**Related:**'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[PDF Data Extraction: What You Need to Know](https://www.kdnuggets.com/2019/02/datalogics-pdf-data-extraction.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PDF 数据提取：你需要了解的事项](https://www.kdnuggets.com/2019/02/datalogics-pdf-data-extraction.html)'
 - en: '[Top 10 Books on NLP and Text Analysis](https://www.kdnuggets.com/2019/01/top-10-books-nlp-text-analysis.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于 NLP 和文本分析的十大书籍](https://www.kdnuggets.com/2019/01/top-10-books-nlp-text-analysis.html)'
 - en: '[Text Preprocessing in Python: Steps, Tools, and Examples](https://www.kdnuggets.com/2018/11/text-preprocessing-python.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中文本预处理：步骤、工具和示例](https://www.kdnuggets.com/2018/11/text-preprocessing-python.html)'
 - en: '* * *'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作。'
 - en: '* * *'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 的提取式摘要](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会引领我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
 - en: '[Map out your journey towards SAS Certification](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[规划你的 SAS 认证之旅](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)'
 - en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本摘要方法概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
 - en: '[Getting Started with Automated Text Summarization](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门自动化文本摘要](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
 - en: '[Text Summarization Development: A Python Tutorial with GPT-3.5](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本摘要开发：一个基于 GPT-3.5 的 Python 教程](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)'
