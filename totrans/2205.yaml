@@ -3,62 +3,77 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释
 - en: 原文：[https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)
 - en: '![Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](../Images/97aa1d8c8affaf9e44ae26a81fe8b3ff.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释](../Images/97aa1d8c8affaf9e44ae26a81fe8b3ff.png)'
 - en: Image by Author
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: Every machine learning model that you train has a set of parameters or model
     coefficients. The goal of the machine learning algorithm—formulated as an optimization
     problem—is to learn the optimal values of these parameters.
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个你训练的机器学习模型都有一组参数或模型系数。机器学习算法的目标——作为一个优化问题——是学习这些参数的最佳值。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In addition, machine learning models also have a set of hyperparameters. Such
     as the value of K, the number of neighbors, in the K-Nearest Neighbors algorithm.
     Or the batch size when training a deep neural network, and more.
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，机器学习模型还有一组超参数。例如，K-最近邻算法中的 K 值，即邻居的数量，或者在训练深度神经网络时的批次大小等等。
 - en: These hyperparameters are not learned by the model. But rather specified by
     the developer. They influence model performance and are tunable. So how do you
     find the best values for these hyperparameters? This process is called **hyperparameter
@@ -66,39 +81,47 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些超参数不是由模型学习的，而是由开发者指定的。它们影响模型性能，并且是可调节的。那么你如何找到这些超参数的最佳值呢？这个过程称为**超参数优化**或**超参数调优**。
 - en: 'The two most common hyperparameter tuning techniques include:'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 两种最常见的超参数调优技术包括：
 - en: Grid search
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 网格搜索
 - en: Randomized search
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机搜索
 - en: In this guide, we’ll learn how these techniques work and their scikit-learn
     implementation.
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本指南中，我们将学习这些技术的工作原理及其在 scikit-learn 中的实现。
 - en: Training a Baseline SVM Classifier
   id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 训练基线 SVM 分类器
 - en: Let's start by training a simple [Support Vector Machine (SVM) classifier](/2023/07/gentle-introduction-support-vector-machines.html)
     on the wine dataset.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始在酒类数据集上训练一个简单的 [支持向量机 (SVM) 分类器](/2023/07/gentle-introduction-support-vector-machines.html)。
 - en: 'First, import the required modules and classes:'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，导入所需的模块和类：
 - en: '[PRE0]'
   id: totrans-20
   prefs: []
@@ -109,6 +132,7 @@
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 酒类数据集是 scikit-learn 中内置数据集的一部分。所以让我们按如下方式读取特征和目标标签：
 - en: '[PRE1]'
   id: totrans-22
   prefs: []
@@ -121,20 +145,24 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 酒类数据集是一个简单的数据集，包含13个数值特征和三个输出类别标签。这是一个很好的数据集，用于了解多分类问题。你可以运行`wine.DESCR`来获取数据集的描述。
 - en: '![Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](../Images/b96d32e12e7d2cdc4fdf54c6d1bbfe48.png)'
   id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释](../Images/b96d32e12e7d2cdc4fdf54c6d1bbfe48.png)'
 - en: Output of wine.DESCR
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: wine.DESCR 的输出
 - en: Next, split the dataset into train and test sets. Here we’ve used a `test_size`
     of 0.2\. So 80% of the data goes into the training dataset and 20% to the test
     dataset.
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，将数据集分成训练集和测试集。在这里，我们使用了`test_size`为0.2。所以80%的数据进入训练数据集，20%进入测试数据集。
 - en: '[PRE2]'
   id: totrans-27
   prefs: []
@@ -145,6 +173,7 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在实例化一个支持向量分类器并将模型拟合到训练数据集。然后评估其在测试集上的性能。
 - en: '[PRE3]'
   id: totrans-29
   prefs: []
