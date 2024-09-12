@@ -1,48 +1,71 @@
 - en: 'Apache Arrow and Apache Parquet: Why We Needed Different Projects for Columnar
     Data, On Disk and In-Memory'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Apache Arrow与Apache Parquet：为什么我们需要不同的列式数据项目，分别用于磁盘和内存中
 - en: 原文：[https://www.kdnuggets.com/2017/02/apache-arrow-parquet-columnar-data.html](https://www.kdnuggets.com/2017/02/apache-arrow-parquet-columnar-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/02/apache-arrow-parquet-columnar-data.html](https://www.kdnuggets.com/2017/02/apache-arrow-parquet-columnar-data.html)
 - en: '**By Julien LeDem, architect, [Dremio](http://www.dremio.com/).**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Julien LeDem，架构师， [Dremio](http://www.dremio.com/)。**'
 - en: Columnar data structures provide a number of performance advantages over traditional
     row-oriented data structures for analytics. These include benefits for data on
     disk – fewer disk seeks, more effective compression, faster scan rates – as well
     as more efficient use of CPU for data in memory.  Today columnar data is very
     common and is implemented by most analytical databases, including Teradata, Vertica,
     Oracle, and others.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 列式数据结构相比传统的行式数据结构在分析中提供了许多性能优势。这些优势包括磁盘上的数据——更少的磁盘查找，更有效的压缩，更快的扫描速度——以及内存中数据的CPU使用效率。今天，列式数据非常普遍，大多数分析数据库，包括Teradata、Vertica、Oracle等，都实现了这种结构。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In 2012 and 2013 several of us at Twitter and Cloudera created Apache Parquet
     (originally called Red Elm, an anagram for Google’s Dremel) to bring these ideas
     to the Hadoop ecosystem. Four years later, Parquet is the standard for columnar
@@ -50,22 +73,31 @@
     standard way of representing columnar data in memory. In this article we’ll take
     a closer look at why we need two projects, one for storing data on disk and one
     for processing data in memory, and how they work together.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在2012年和2013年，我们在Twitter和Cloudera的一些人创建了Apache Parquet（最初称为Red Elm，是Google的Dremel的字母重排）以将这些理念引入Hadoop生态系统。四年后，Parquet已成为磁盘上列式数据的标准，而一个名为Apache
+    Arrow的新项目也已出现，成为内存中列式数据的标准表示方式。本文将深入探讨为什么我们需要两个项目，一个用于磁盘上的数据存储，另一个用于内存中的数据处理，以及它们如何协同工作。
 - en: What’s wrong with rows, and what’s right with columns?
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 行式有什么问题，列式又有什么优点？
 - en: Back in 2007 Vertica, one of the early commercial columnar databases, had a
     clever marketing slogan “The Tables Have Turned.”  This isn’t a bad way of visualizing
     how columnar databases work – turn a table 90 degrees and now what used to be
     reading a row is reading a single column. This approach has a lot of advantages
     when it comes to analytical workloads.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到2007年，Vertica，一款早期的商业列式数据库，曾有一个巧妙的营销口号“局势已变”。这并不是一种糟糕的方式来形象化列式数据库的工作方式——将表格旋转90度，现在曾经的行读取变成了单列读取。这种方法在分析工作负载方面具有很多优点。
 - en: '![](../Images/ed551a87e16d9473437bf40dfeb79e19.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ed551a87e16d9473437bf40dfeb79e19.png)'
 - en: Most systems are engineered to minimize the number of disk seeks and the amount
     of data scanned, as these operations can add tremendous latency. In transactional
     workloads, as data is written to a table in a row-oriented database, the columns
@@ -74,80 +106,115 @@
     of the columns for large numbers of rows at a time. In a traditional row-oriented
     database, the system might perform a seek for each row, and most of the columns
     would be read from disk into memory unnecessarily.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数系统都被设计成最小化磁盘查找次数和扫描的数据量，因为这些操作会增加巨大的延迟。在事务工作负载中，当数据写入到行式数据库中的表时，给定行的列会连续写入磁盘，这对写入非常高效。分析工作负载则不同，因为大多数查询一次读取大量行中的少量列。在传统的行式数据库中，系统可能会为每行执行查找，大多数列会不必要地从磁盘读取到内存中。
 - en: A columnar database organizes the values for a given column contiguously on
     disk. This has the advantage of significantly reducing the number of seeks for
     multi-row reads. Furthermore, compression algorithms tend to be much more effective
     on a single data type rather than the mix of types present in a typical row. The
     tradeoff is that writes are slower, but this is a good optimization for analytics
     where reads typically far outnumber writes.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 列式数据库将给定列的值连续地组织在磁盘上。这有助于显著减少多行读取的寻道次数。此外，压缩算法在单一数据类型上往往更为有效，而不是典型行中存在的混合类型。权衡是写入速度较慢，但这是一个很好的优化，用于分析中读取通常远多于写入的情况。
 - en: Columnar, meet Hadoop
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 列式数据，见 Hadoop
 - en: At Twitter we were big users of Hadoop, which is very scalable, good at storing
     a wide range of data, and good at parallelizing workloads across hundreds or thousands
     of servers. In general Hadoop is fairly high latency, and so we were also big
     users of Vertica, which gave us great performance but for only a small subset
     of our data.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Twitter，我们大量使用 Hadoop，它非常可扩展，擅长存储各种数据，并能在数百或数千台服务器上并行处理工作负载。通常 Hadoop 的延迟比较高，因此我们也大量使用
+    Vertica，它为我们的少量数据提供了出色的性能。
 - en: We felt that by doing a better job of organizing the data in a columnar model
     in HDFS we could significantly improve the performance of Hadoop for analytical
     jobs, primarily for Hive queries, but for other projects as well. At the time
     we had around 400M users and were generating over 100TB of compressed data per
     day, so there was a lot of interest in this project.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们认为通过在 HDFS 中以列式模型更好地组织数据，可以显著提高 Hadoop 对分析作业的性能，主要是 Hive 查询，但其他项目也是如此。当时我们大约有
+    4 亿用户，每天生成超过 100TB 的压缩数据，因此对这个项目有很大的兴趣。
 - en: 'We saw a lot of benefits in our early tests: we reduced storage overhead by
     28%, and we saw a 90% reduction in time to read a single column. We kept at it,
     adding column-specific compression options, dictionary compression, bit packing
     and run length encoding, ultimately reducing storage another 52% and read times
     another 48%.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在早期测试中看到很多好处：我们减少了 28% 的存储开销，单列读取时间减少了 90%。我们不断优化，增加了列特定的压缩选项、字典压缩、位打包和运行长度编码，最终减少了
+    52% 的存储和 48% 的读取时间。
 - en: '![Columnar data](../Images/db84f998e32079445312e5e853a9089d.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![列式数据](../Images/db84f998e32079445312e5e853a9089d.png)'
 - en: Parquet was also designed to handle richly structured data like JSON. It was
     very beneficial to us at Twitter and many other early adopters, and today most
     Hadoop users store their data in Parquet. There is pervasive support for Parquet
     across the Hadoop ecosystem, including Spark, Presto, Hive, Impala, Drill, Kite,
     and others. Even outside of Hadoop it has been adopted in some scientific communities,
     such as CERN’s ROOT project.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Parquet 也被设计用来处理结构丰富的数据，如 JSON。这对我们在 Twitter 及许多其他早期用户非常有益，如今大多数 Hadoop 用户将数据存储在
+    Parquet 中。Hadoop 生态系统中对 Parquet 的支持广泛，包括 Spark、Presto、Hive、Impala、Drill、Kite 等。即便在
+    Hadoop 之外，它也被一些科学社区采纳，例如 CERN 的 ROOT 项目。
 - en: Building on the ideas of Parquet for in-memory processing
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于 Parquet 的内存处理理念
 - en: Hardware has changed a lot in the 15 years since original Google papers that
     inspired Hadoop. The most important change is the dramatic decline in RAM prices.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 自最初启发 Hadoop 的 Google 论文发布以来，硬件已经发生了很大变化。最重要的变化是 RAM 价格的显著下降。
 - en: '![](../Images/ad2bc32d89913243206f9bbc9fe58f27.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad2bc32d89913243206f9bbc9fe58f27.png)'
 - en: Servers today have a lot more RAM than they did when I was at Twitter, and because
     reading data from memory is thousands of times faster than reading data from disk,
     there is enormous interest in the data world in how to make optimal use of RAM
     for analytics.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在的服务器比我在 Twitter 时拥有更多的 RAM，因为从内存中读取数据的速度比从磁盘读取数据快几千倍，因此数据界对如何在分析中优化使用 RAM
+    非常感兴趣。
 - en: The trade-offs being for columnar data are different for in-memory. For data
     on disk, usually IO dominates latency, which can be addressed with aggressive
     compression, at the cost of CPU. In memory, access is much faster and we want
     to optimize for CPU throughput by paying attention to cache locality, pipelining,
     and SIMD instructions.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 列式数据的权衡与内存中的情况不同。对于磁盘上的数据，通常 IO 支配延迟，可以通过激进的压缩来解决，但这会增加 CPU 负担。在内存中，访问速度要快得多，我们希望通过关注缓存局部性、流水线处理和
+    SIMD 指令来优化 CPU 吞吐量。
 - en: Streamlining the interface between systems
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 精简系统之间的接口
 - en: One of the funny things about computer science is that while there is a common
     set of resources – RAM, CPU, storage, network – each language has an entirely
     different way of interacting with those resources. When different programs need
@@ -156,14 +223,20 @@
     before the Euro where you needed a different currency for each country, and by
     the end of the trip you could be sure you had lost a lot of money with all the
     exchanges!
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算机科学中有趣的一点是，虽然有一套通用的资源——RAM、CPU、存储、网络——但每种语言与这些资源的交互方式完全不同。当不同的程序需要交互时——无论是在语言内部还是跨语言——在交接过程中会出现效率低下的问题，这可能主导了整体成本。这有点像在欧元出现之前的欧洲旅行，你需要为每个国家使用不同的货币，到旅行结束时，你可以确定在所有兑换中丢失了很多钱！
 - en: '![](../Images/16e8a5fea28863305881f3286da70634.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/16e8a5fea28863305881f3286da70634.png)'
 - en: '![](../Images/016ddeda494124b5d26a1629156392b8.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/016ddeda494124b5d26a1629156392b8.png)'
 - en: We viewed these handoffs as the next obvious bottleneck for in-memory processing,
     and set out to work across a wide range of projects to develop a common set of
     interfaces that would remove unnecessary serialization and deserialization when
@@ -171,44 +244,67 @@
     that is the same as the wire representation. Today it includes first class bindings
     in over 13 projects, including Spark, Hadoop, R, Python/Pandas, and my company,
     Dremio.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将这些交接视为内存处理中的下一个明显瓶颈，并着手在广泛的项目中开发一套通用接口，以去除在数据传输时不必要的序列化和反序列化。Apache Arrow
+    标准化了一种高效的内存列式表示，它与传输表示相同。如今，它在超过 13 个项目中包括了一级绑定，包括 Spark、Hadoop、R、Python/Pandas
+    以及我的公司 Dremio。
 - en: '![](../Images/c80acb3b2f2ee35321befe15be4dccee.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c80acb3b2f2ee35321befe15be4dccee.png)'
 - en: Python in particular has very strong support in the Pandas library, and supports
     working directly with Arrow record batches and persisting them to Parquet.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 特别在 Pandas 库中有很强的支持，并且支持直接处理 Arrow 记录批次并将其持久化为 Parquet。
 - en: These are still early days for Apache Arrow, but the results are very promising.
     It is not uncommon for users to see 10x-100x improvements in performance across
     a range of workloads.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些对于 Apache Arrow 来说仍然是早期阶段，但结果非常有希望。用户在各种工作负载中看到性能提升 10 倍到 100 倍并不罕见。
 - en: Parquet and Arrow, working together
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Parquet 和 Arrow，协同工作
 - en: Interoperability between Parquet and Arrow has been a goal since day 1\. While
     each project can be used independently, both provide APIs to read and write between
     the formats. ![](../Images/3fe6329df67b98a388942afb32a69f2d.png)
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: Parquet 和 Arrow 之间的互操作性从第一天起就是一个目标。虽然每个项目都可以独立使用，但两者都提供了在格式之间读写的 API。 ![](../Images/3fe6329df67b98a388942afb32a69f2d.png)
 - en: Since both are columnar we can implement efficient vectorized converters from
     one to the other and read from Parquet to Arrow much faster than in a row-oriented
     representation. We are still working on ways to make this integration even more
     seamless, including a vectorized Java reader, and full type equivalence.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这两者都是列式的，我们可以实现从一种格式到另一种格式的高效向量化转换，并且从 Parquet 读取到 Arrow 的速度比行式表示要快得多。我们仍在努力使这一集成更加无缝，包括向量化的
+    Java 读取器和完整的类型等价性。
 - en: Pandas is a good example of using both projects. Users can save a Pandas data
     frame to Parquet and read a Parquet file to in-memory Arrow. Pandas can directly
     work on top of Arrow columns, paving the way for a faster Spark integration.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 是使用这两个项目的一个好例子。用户可以将 Pandas 数据框保存为 Parquet，并将 Parquet 文件读取到内存中的 Arrow。Pandas
+    可以直接在 Arrow 列上工作，为更快的 Spark 集成铺平道路。
 - en: At my current company, Dremio, we are hard at work on a new project that makes
     extensive use of Apache Arrow and Apache Parquet. You can learn more at [www.dremio.com](http://www.dremio.com).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我目前的公司 Dremio，我们正在努力开发一个广泛使用 Apache Arrow 和 Apache Parquet 的新项目。你可以在 [www.dremio.com](http://www.dremio.com)
+    了解更多信息。
 - en: '**Bio:** Julien LeDem, architect, [Dremio](http://www.dremio.com) is the co-author
     of Apache Parquet and the PMC Chair of the project. He is also a committer and
     PMC Member on Apache Pig. Julien is an architect at Dremio, and was previously
@@ -216,48 +312,73 @@
     Twitter handle ([@J_](https://twitter.com/j_)). Prior to Twitter, Julien was a
     Principal engineer and tech lead working on Content Platforms at Yahoo! where
     he received his Hadoop initiation.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** Julien LeDem，建筑师，[Dremio](http://www.dremio.com)的Apache Parquet的共同作者以及项目的PMC主席。他还是Apache
+    Pig的提交者和PMC成员。Julien是Dremio的建筑师，之前是Twitter数据处理工具的技术负责人，他还获得了一个两字符的Twitter用户名（[@J_](https://twitter.com/j_))。在Twitter之前，Julien是Yahoo!内容平台的首席工程师和技术负责人，在那里他获得了Hadoop的初步经验。'
 - en: '**Related:**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Spark with Tungsten Burns Brighter](/2016/05/spark-tungsten-burns-brighter.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Spark与Tungsten的结合更为耀眼](/2016/05/spark-tungsten-burns-brighter.html)'
 - en: '[Spark for Scale: Machine Learning for Big Data](/2016/09/spark-scale-machine-learning-big-data.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Spark扩展：大数据的机器学习](/2016/09/spark-scale-machine-learning-big-data.html)'
 - en: '[Big RAM is eating big data – Size of datasets used for analytics](/2015/11/big-ram-big-data-size-datasets.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大内存正在吞噬大数据——分析用数据集的大小](/2015/11/big-ram-big-data-size-datasets.html)'
 - en: More On This Topic
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[Are Data Scientists Still Needed in the Age of Generative AI?](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在生成AI时代，数据科学家是否仍然需要？](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)'
 - en: '[Low Code: Are Developers Still Needed?](https://www.kdnuggets.com/2022/04/low-code-developers-still-needed.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[低代码：开发者仍然需要吗？](https://www.kdnuggets.com/2022/04/low-code-developers-still-needed.html)'
 - en: '[5 Different Ways to Load Data in Python](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5种在Python中加载数据的不同方式](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)'
 - en: '[How is Data Mining Different from Machine Learning?](https://www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据挖掘与机器学习有何不同？](https://www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html)'
 - en: '[How to Transition into Data Science from a Different Background?](https://www.kdnuggets.com/2023/05/transition-data-science-different-background.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从不同背景过渡到数据科学？](https://www.kdnuggets.com/2023/05/transition-data-science-different-background.html)'
