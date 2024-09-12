@@ -1,334 +1,514 @@
 - en: Comparing MobileNet Models in TensorFlow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 中比较 MobileNet 模型
 - en: 原文：[https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html](https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html](https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Harshit Dwivedi](https://harshit.app/), Android Instructor**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Harshit Dwivedi](https://harshit.app/) 提供，Android 讲师**'
 - en: '![Header image](../Images/b19415c11ab86d4e586a957be6c5ae05.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![标题图像](../Images/b19415c11ab86d4e586a957be6c5ae05.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT 管理'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In recent years, neural networks and deep learning have sparked tremendous progress
     in the field of [natural language processing](https://heartbeat.fritz.ai/the-7-nlp-techniques-that-will-change-how-you-communicate-in-the-future-part-i-f0114b2f0497) (NLP)
     and [computer vision](https://heartbeat.fritz.ai/the-5-computer-vision-techniques-that-will-change-how-you-see-the-world-1ee19334354b).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 近年来，神经网络和深度学习在 [自然语言处理](https://heartbeat.fritz.ai/the-7-nlp-techniques-that-will-change-how-you-communicate-in-the-future-part-i-f0114b2f0497)（NLP）和
+    [计算机视觉](https://heartbeat.fritz.ai/the-5-computer-vision-techniques-that-will-change-how-you-see-the-world-1ee19334354b)
+    领域取得了巨大进展。
 - en: While many of the [face](https://heartbeat.fritz.ai/building-a-real-time-face-detector-in-android-with-ml-kit-f930eb7b36d9), [object](https://heartbeat.fritz.ai/counting-items-in-real-time-on-android-with-fritz-object-detection-c450d6957448),
     landmark, logo, and [text recognition](https://heartbeat.fritz.ai/choose-the-right-on-device-text-recognition-sdk-on-android-using-deltaml-9b4b3e409b6e) and
     detection technologies are provided for Internet-connected devices, we believe
     that the [ever-increasing computational power of mobile devices](https://heartbeat.fritz.ai/hardware-acceleration-for-machine-learning-on-apple-and-android-f3e6ca85bda6) can
     enable the delivery of these technologies into the hands of users anytime, anywhere,
     regardless of Internet connection.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然许多 [人脸](https://heartbeat.fritz.ai/building-a-real-time-face-detector-in-android-with-ml-kit-f930eb7b36d9)、[物体](https://heartbeat.fritz.ai/counting-items-in-real-time-on-android-with-fritz-object-detection-c450d6957448)、地标、徽标和
+    [文本识别](https://heartbeat.fritz.ai/choose-the-right-on-device-text-recognition-sdk-on-android-using-deltaml-9b4b3e409b6e)
+    和检测技术已提供给联网设备，但我们相信 [移动设备日益增长的计算能力](https://heartbeat.fritz.ai/hardware-acceleration-for-machine-learning-on-apple-and-android-f3e6ca85bda6)
+    可以使这些技术随时随地交到用户手中，无论是否有互联网连接。
 - en: However, computer vision for on-device and embedded applications faces many
     challenges — models must run quickly with high accuracy in a resource-constrained
     environment, making use of limited computation, power, and space.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，针对设备和嵌入式应用的计算机视觉面临许多挑战——模型必须在资源受限的环境中快速运行并保持高准确率，同时利用有限的计算能力、功耗和空间。
 - en: TensorFlow offers various pre-trained models, such as drag-and-drop models,
     in order to identify approximately 1,000 default objects.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 提供了各种预训练模型，例如拖放模型，以识别约 1,000 种默认对象。
 - en: When compared with other similar models, such as the [Inception](https://github.com/tensorflow/models/tree/master/research/inception) model
     datasets, [MobileNet](https://medium.com/@yu4u/why-mobilenet-and-its-variants-e-g-shufflenet-are-fast-1c7048b9618d) works
     better with latency, size, and accuracy. In terms of output performance, there
     is a significant amount of lag with a full-fledged model.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其他类似模型（如 [Inception](https://github.com/tensorflow/models/tree/master/research/inception)
+    模型数据集）相比，[MobileNet](https://medium.com/@yu4u/why-mobilenet-and-its-variants-e-g-shufflenet-are-fast-1c7048b9618d)
+    在延迟、大小和准确性方面表现更好。在输出性能方面，完整模型存在显著的延迟。
 - en: However, the trade-off is acceptable when the model is deployable on a mobile
     device for real-time offline detection.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，当模型可以部署到移动设备上进行实时离线检测时，这种权衡是可以接受的。
 - en: 'Let’s look at an example of how to use MobileNet. We will write a simple classifier
     to find Pikachu in an image. The following are sample pictures showing an image
     of Pikachu and an image without Pikachu:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看一个如何使用 MobileNet 的示例。我们将编写一个简单的分类器来识别图片中的 Pikachu。以下是显示 Pikachu 图片和不含 Pikachu
+    图片的示例：
 - en: '![Figure](../Images/bf3576eec85638c94663edb9e2286300.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/bf3576eec85638c94663edb9e2286300.png)'
 - en: Pikachu![Figure](../Images/8ed1ecdd534c72ece76faecdf43ef50b.png)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: Pikachu![图](../Images/8ed1ecdd534c72ece76faecdf43ef50b.png)
 - en: Not Pikachu, assuming there’s no Pikachu to collect in Pokémon Go…
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 不是 Pikachu，假设在 Pokémon Go 中没有 Pikachu 可收集……
 - en: Building the dataset
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建数据集
 - en: To build our own classifier, we need to have datasets that contain images with
     and without Pikachu.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 要构建我们自己的分类器，我们需要有包含 Pikachu 和不包含 Pikachu 的图片的数据集。
 - en: 'Let’s start with 1,000 images on each database. You can pull such images here:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从每个数据库的 1,000 张图片开始。你可以在这里获取这样的图片：
 - en: '[**CC Search**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**CC 搜索**'
 - en: '*Creative Commons licenses provide a flexible range of protections and freedoms
     for authors, artists, and educators.*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Creative Commons 许可证为作者、艺术家和教育工作者提供了一系列灵活的保护和自由。*'
 - en: search.creativecommons.org](https://search.creativecommons.org/)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[search.creativecommons.org](https://search.creativecommons.org/)'
 - en: Next up, let’s create two folders named **pikachu** and **no-pikachu** and drop
     those images accordingly.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们创建两个文件夹，命名为**pikachu**和**no-pikachu**，并将图片分别放入这些文件夹中。
 - en: 'Another handy dataset containing images for all the generation one Pokémon
     can be found here:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个包含所有第一代 Pokémon 图片的实用数据集可以在这里找到：
 - en: '[**Pokemon Generation One**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Pokemon 第一代**'
 - en: '*Gotta train ''em all!*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*必须训练全部！*'
 - en: www.kaggle.com](https://www.kaggle.com/thedagger/pokemon-generation-one)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[www.kaggle.com](https://www.kaggle.com/thedagger/pokemon-generation-one)'
 - en: 'Now we have an image folder, which is structured as follows:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了一个图片文件夹，结构如下：
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Retraining Images**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**重训练图片**'
 - en: 'We can now start labeling our images. With TensorFlow, this job becomes easier.
     Assuming that TensorFlow [is installed](https://www.tensorflow.org/install/) on
     the training machine already, download the following retraining script:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以开始标记我们的图片了。使用 TensorFlow，这项工作变得更容易。假设 TensorFlow 已经在训练机器上[安装](https://www.tensorflow.org/install/)，下载以下重训练脚本：
 - en: '[PRE1]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Next up, we’ll retrain the image with this Python script :'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将使用此 Python 脚本重训练图片：
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Note : If you set `validation_batch_size` to -1, it will validate the whole
     dataset. `learning_rate` = 0.0001 works well. You can adjust and try this for
     yourself.'
+  id: totrans-39
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 注：如果将 `validation_batch_size` 设置为 -1，它将验证整个数据集。`learning_rate` = 0.0001 的效果很好。你可以调整并自己尝试。
 - en: ''
+  id: totrans-40
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: In the `architecture` flag, we choose which version of MobileNet to use, from
     versions 1.0, 0.75, 0.50, and 0.25\. The suffix number 224 represents the image
     resolution. You can specify 224, 192, 160, or 128 as well.
+  id: totrans-41
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在 `architecture` 标志中，我们选择使用哪个版本的 MobileNet，版本包括 1.0、0.75、0.50 和 0.25。后缀数字 224
+    代表图像分辨率。你也可以指定 224、192、160 或 128。
 - en: Model conversion from GraphDef to TFLite
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 从 GraphDef 到 TFLite 的模型转换
 - en: TOCO Converter is used to convert from a TensorFlow GraphDef file or SavedModel
     into either a TFLite FlatBuffer or graph visualization.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: TOCO 转换器用于将 TensorFlow GraphDef 文件或 SavedModel 转换为 TFLite FlatBuffer 或图形可视化。
 - en: (TOCO stands for [**TensorFlow Lite Optimizing Converter**.](https://www.tensorflow.org/lite/convert/))
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: (TOCO 代表[**TensorFlow Lite 优化转换器**](https://www.tensorflow.org/lite/convert/))
 - en: 'We need to pass the data through command-line arguments. There are a few command-line
     arguments that can be passed in while converting the model:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要通过命令行参数传递数据。在转换模型时可以传递一些命令行参数：
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'We can now use the TOCO tool to convert the TensorFlow model into a [TensorFlow
     Lite](https://heartbeat.fritz.ai/how-tensorflow-lite-optimizes-neural-networks-for-mobile-machine-learning-e6ffa7f8ee12) model:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以使用 TOCO 工具将 TensorFlow 模型转换为[TensorFlow Lite](https://heartbeat.fritz.ai/how-tensorflow-lite-optimizes-neural-networks-for-mobile-machine-learning-e6ffa7f8ee12)模型：
 - en: '[PRE4]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Similarly, we can use the MobileNet model in similar applications; for example,
     in the next section, we’ll be looking at a gender model and an emotion model.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，我们可以在类似的应用中使用 MobileNet 模型；例如，在下一部分中，我们将讨论性别模型和情感模型。
 - en: Gender Model
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性别模型
 - en: This model uses the [IMDB WIKI dataset](https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/),
     which contains 500k+ celebrity faces. It uses the MobileNet_V1_224_0.5 version
     of MobileNet.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型使用[IMDB WIKI 数据集](https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/)，包含超过
+    50 万张名人面孔。它使用 MobileNet_V1_224_0.5 版本的 MobileNet。
 - en: 'It is very rare to find public datasets with thousands of images. This dataset
     is built on top of a large collection of celebrity faces. There are two common
     places: one is IMDb and the other one is Wikipedia. More than 100K celebrities’
     details were retrieved from their profiles from both sources through scripts.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 公开数据集中有数千张图像的情况非常罕见。该数据集基于大量名人面部图像集合构建。两个常见的来源是IMDb和维基百科。通过脚本从这两个来源的资料中检索了超过10万名名人的详细信息。
 - en: Then it was organized by removing noise (irrelevant content). All the images
     without a timestamp were removed, assuming that images with a single photo are
     likely to show the person with correct birth date details. At the end, there were
     460,723 faces from 20,284 celebrities from IMDb, and 62,328 from Wikipedia, for
     a total of 523,051.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后通过去除噪声（无关内容）来组织数据。所有没有时间戳的图像被删除，假设只有单张照片的图像更可能显示正确的出生日期细节。最终，共有来自IMDb的20,284名名人的460,723张面孔和来自维基百科的62,328张面孔，总计523,051张。
 - en: Emotion model
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 情感模型
 - en: This is built on the AffectNet model with more than 1 million images. It uses
     the MobileNet_V2_224_1.4 version of MobileNet.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型基于超过100万张图像的AffectNet模型。它使用了MobileNet_V2_224_1.4版本的MobileNet。
 - en: 'The link to the data model project can be found here:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据模型项目的链接可以在这里找到：
 - en: '[**AffectNet - Mohammad H. Mahoor, PhD**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**AffectNet - Mohammad H. Mahoor, PhD**](http://mohammadmahoor.com/affectnet/)'
 - en: '*Currently the test set is not released. We are planning to organize a challenge
     on AffectNet in near future and the…*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*当前测试集尚未发布。我们计划在不久的将来组织一个AffectNet挑战赛，敬请期待…*'
 - en: mohammadmahoor.com](http://mohammadmahoor.com/affectnet/)
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[mohammadmahoor.com](http://mohammadmahoor.com/affectnet/)'
 - en: The AffectNet model is built by collecting and annotating facial images of more
     than 1 million faces from the Internet. The images were sourced from three search
     engines, using around 1,250 related keywords in six different languages.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: AffectNet模型通过从互联网收集和标注超过100万张面部图像而建立。这些图像来自三个搜索引擎，使用了约1250个相关关键词，涵盖六种不同的语言。
 - en: Among the collected images, half of the images were manually annotated for the
     presence of seven discrete facial expressions (categorical model) and the intensity
     of valence and arousal (dimensional model).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在收集的图像中，一半的图像被手动标注了七种不同的面部表情（分类模型）以及情感的强度和唤醒度（维度模型）。
 - en: Comparison of MobileNet Versions
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MobileNet版本对比
 - en: In both of the above models, different versions of MobileNet models are used.
     MobileNet V2 is mostly an updated version of V1 that makes it even more efficient
     and powerful in terms of performance.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述两种模型中，使用了不同版本的MobileNet模型。MobileNet V2主要是V1的更新版本，使其在性能方面更加高效和强大。
 - en: '![Figure](../Images/555491ca9161425d40ad4aa667cf92bc.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/555491ca9161425d40ad4aa667cf92bc.png)'
 - en: 'Note: Lower is better'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：值越低越好
 - en: MACs are [multiply-accumulate operations](https://www.semanticscholar.org/topic/Multiply%E2%80%93accumulate-operation/408575),
     which measure how many calculations are needed to perform inference on a single
     224×224 RGB image.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: MACs是[multiply-accumulate operations](https://www.semanticscholar.org/topic/Multiply%E2%80%93accumulate-operation/408575)，用于测量对单张224×224
+    RGB图像进行推断所需的计算次数。
 - en: From the number of MACs alone, V2 should be almost twice as fast as V1\. However,
     it’s not just about the number of calculations. On mobile devices, [memory access](https://heartbeat.fritz.ai/profiling-your-app-with-android-studio-7accc268cb98) is
     much slower than computation. V2 only has 80% of the parameter count that V1 has
     hence making it better than V1.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 从MACs的数量来看，V2的速度应当几乎是V1的两倍。然而，这不仅仅关乎计算次数。在移动设备上，[内存访问](https://heartbeat.fritz.ai/profiling-your-app-with-android-studio-7accc268cb98)比计算要慢得多。V2的参数数量只有V1的80%，因此它比V1更优。
 - en: By seeing the results we can assume that V2 is almost twice as fast as V1 model.
     On a mobile device when memory access is limited, the computational capability
     of V2 works very well.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 从结果来看，我们可以假设V2的速度几乎是V1模型的两倍。在内存访问受限的移动设备上，V2的计算能力表现得非常好。
 - en: 'In terms of accuracy:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 在准确性方面：
 - en: '![Figure](../Images/7986e778d85c5164a94878ca5b376c05.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/7986e778d85c5164a94878ca5b376c05.png)'
 - en: Here MobileNet V2 is slightly, if not significantly, better than V1.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，MobileNet V2在性能上比V1稍好，虽然不一定显著。
 - en: Conclusion
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: MobileNets are a family of *mobile-first* computer vision models for [TensorFlow](https://www.tensorflow.org/),
     designed to effectively maximize accuracy while being mindful of the restricted
     resources for an on-device or embedded application.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: MobileNet是一系列*以移动为优先*的计算机视觉模型，适用于[TensorFlow](https://www.tensorflow.org/)，旨在有效地最大化准确性，同时考虑到设备或嵌入式应用的有限资源。
 - en: MobileNets are small, low-latency, low-power models parameterized to meet the
     resource constraints of a variety of use cases. They can be built upon for classification,
     detection, embeddings, and segmentation, similar to how other popular large scale
     models, such as [Inception](https://arxiv.org/pdf/1602.07261.pdf), are used.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: MobileNets 是小型、低延迟、低功耗的模型，参数化以满足各种使用情况的资源限制。它们可以用于分类、检测、嵌入和分割，类似于其他流行的大规模模型，如
+    [Inception](https://arxiv.org/pdf/1602.07261.pdf)。
 - en: 'If you want to go ahead and fuel your curiosity, a bunch of pre trained models
     can be found here :'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想进一步探索和满足好奇心，可以在这里找到一堆预训练模型：
 - en: '[**tensorflow/models**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**tensorflow/models**'
 - en: '*Models and examples built with TensorFlow. Contribute to tensorflow/models
     development by creating an account on…*'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 TensorFlow 构建的模型和示例。通过创建账户来为 tensorflow/models 开发贡献力量…*'
 - en: github.com](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md)
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[github.com](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md)'
 - en: 'Also, here’s a blog post outlining how you can build a real like Pokémon classifier
     using MobileNets and TensorFlow Lite:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，这里有一篇博客文章概述了如何使用 MobileNets 和 TensorFlow Lite 构建一个真实的 Pokémon 分类器：
 - en: '[**Building “Pokédex” in Android using TensorFlow Lite and Firebase’s ML Kit**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在 Android 中使用 TensorFlow Lite 和 Firebase 的 ML Kit 构建“宝可梦图鉴”**'
 - en: heartbeat.fritz.ai](https://heartbeat.fritz.ai/building-pok%C3%A9dex-in-android-using-tensorflow-lite-and-firebase-cc780848395)
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[heartbeat.fritz.ai](https://heartbeat.fritz.ai/building-pok%C3%A9dex-in-android-using-tensorflow-lite-and-firebase-cc780848395)'
 - en: '*Thanks for reading! If you enjoyed this story, please ****click the ***????*** button******and
     share ****to help others find it! Feel free to leave a comment *????* below. Have
     feedback? Let’s connect *[*on Twitter*](https://twitter.com/daggerdwivedi)*.*'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '*感谢阅读！如果你喜欢这个故事，请****点击 ***????*** 按钮******并分享****以帮助其他人找到它！欢迎在下面留下评论 *????*。有反馈？我们可以在*[*Twitter*](https://twitter.com/daggerdwivedi)*上联系。*'
 - en: '*If you found this article interesting, you can explore *[*Machine Learning
     Projects for Mobile Applications*](https://www.amazon.com/Machine-Learning-Projects-Mobile-Applications/dp/1788994590)*.
     Written by Karthikeyan MG, an ML expert, *[*Machine Learning Projects for Mobile
@@ -336,77 +516,119 @@
     the implementation of 7 practical, real-world projects that will teach you how
     to leverage TensorFlow Lite and Core ML to perform efficient machine learning
     on a cross-platform mobile OS.*'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果你觉得这篇文章有趣，可以探索*[*移动应用的机器学习项目*](https://www.amazon.com/Machine-Learning-Projects-Mobile-Applications/dp/1788994590)*。由
+    ML 专家 Karthikeyan MG 撰写，*[*移动应用的机器学习项目*](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-projects-mobile-applications)*
+    介绍了 7 个实际的、真实世界的项目实施，这些项目将教你如何利用 TensorFlow Lite 和 Core ML 在跨平台移动操作系统上执行高效的机器学习。*'
 - en: '***Want to start building amazing Android Apps? Check out my course on Coding
     Bocks: ***[https://online.codingblocks.com/courses/android-app-training-online](https://online.codingblocks.com/courses/android-app-training-online)'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '***想要开始构建令人惊叹的 Android 应用程序吗？查看我在 Coding Blocks 上的课程：***[https://online.codingblocks.com/courses/android-app-training-online](https://online.codingblocks.com/courses/android-app-training-online)'
 - en: Ready to dive into some code? Check out [Fritz on GitHub](https://github.com/fritzlabs).
     You’ll find open source, mobile-friendly implementations of the popular machine
     and deep learning models along with training scripts, project templates, and tools
     for building your own ML-powered iOS and Android apps.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 准备好进入代码世界了吗？查看 [Fritz 在 GitHub 上](https://github.com/fritzlabs)。你会找到流行的机器学习和深度学习模型的开源、适用于移动设备的实现，以及训练脚本、项目模板和用于构建自己的
+    ML 驱动的 iOS 和 Android 应用程序的工具。
 - en: Join us on [Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtNTI4MDcxMzI1MzAwLWIyMjRmMGYxYjUwZmE3MzA0MWQ0NDk0YjA2NzE3M2FjM2Y5MjQxMWM2MmQ4ZTdjNjViYjM3NDE0OWQxOTBmZWI)
     for help with technical problems, to share what you’re working on, or just chat
     with us about mobile development and machine learning. And follow us on [Twitter](https://twitter.com/fritzlabs)
     and [LinkedIn](https://www.linkedin.com/company/fritz-labs-inc/) for the all the
     latest content, news, and more from the mobile machine learning world.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 加入我们在 [Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtNTI4MDcxMzI1MzAwLWIyMjRmMGYxYjUwZmE3MzA0MWQ0NDk0YjA2NzE3M2FjM2Y5MjQxMWM2MmQ4ZTdjNjViYjM3NDE0OWQxOTBmZWI)
+    上的讨论，以获得技术问题的帮助，分享你正在做的工作，或与我们讨论移动开发和机器学习。关注我们的 [Twitter](https://twitter.com/fritzlabs)
+    和 [LinkedIn](https://www.linkedin.com/company/fritz-labs-inc/) 以获取移动机器学习世界的最新内容、新闻及更多信息。
 - en: Thanks to [Austin Kodra](https://medium.com/@austin_32493?source=post_page).
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢 [Austin Kodra](https://medium.com/@austin_32493?source=post_page)。
 - en: '**Bio: [Harshit Dwivedi](https://harshit.app/)** has an *approximate* knowledge
     of many things. He''s an Android instructor at Coding Blocks, a contributing author
     for Heartbeat, by Fritz, public speaker, & Astrophysics enthusiast.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Harshit Dwivedi](https://harshit.app/)** 对许多事物有*大致*的了解。他是 Coding Blocks
+    的 Android 教师，Fritz 的 Heartbeat 贡献作者，公共演讲者，以及天体物理学爱好者。'
 - en: '[Original](https://heartbeat.fritz.ai/exploring-the-mobilenet-models-in-tensorflow-d9d21774cdab).
     Reposted with permission.'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/exploring-the-mobilenet-models-in-tensorflow-d9d21774cdab)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to do Everything in Computer Vision](/2019/02/everything-computer-vision.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在计算机视觉中做一切](/2019/02/everything-computer-vision.html)'
 - en: '[10 Best Mobile Apps for Data Scientist / Data Analysts](/2018/10/10-best-mobile-apps-data-scientist.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家/数据分析师的 10 款最佳移动应用](/2018/10/10-best-mobile-apps-data-scientist.html)'
 - en: '[State of the art in AI and Machine Learning – highlights of papers with code](/2019/02/paperswithcode-ai-machine-learning-highlights.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能和机器学习的最新进展 - 带代码的论文亮点](/2019/02/paperswithcode-ai-machine-learning-highlights.html)'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 还是 TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
 - en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较线性回归与逻辑回归](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
 - en: '[Comparing Natural Language Processing Techniques: RNNs, Transformers, BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较自然语言处理技术：RNNs、Transformers、BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 在计算机视觉中的应用 - 转移学习简化](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Tensorflow 的“Hello World”](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
