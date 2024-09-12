@@ -1,416 +1,596 @@
 - en: 'Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](../Images/97aa1d8c8affaf9e44ae26a81fe8b3ff.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Every machine learning model that you train has a set of parameters or model
     coefficients. The goal of the machine learning algorithm—formulated as an optimization
     problem—is to learn the optimal values of these parameters.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: In addition, machine learning models also have a set of hyperparameters. Such
     as the value of K, the number of neighbors, in the K-Nearest Neighbors algorithm.
     Or the batch size when training a deep neural network, and more.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: These hyperparameters are not learned by the model. But rather specified by
     the developer. They influence model performance and are tunable. So how do you
     find the best values for these hyperparameters? This process is called **hyperparameter
     optimization** or **hyperparameter tuning**.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: 'The two most common hyperparameter tuning techniques include:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: Grid search
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Randomized search
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: In this guide, we’ll learn how these techniques work and their scikit-learn
     implementation.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: Training a Baseline SVM Classifier
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: Let's start by training a simple [Support Vector Machine (SVM) classifier](/2023/07/gentle-introduction-support-vector-machines.html)
     on the wine dataset.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'First, import the required modules and classes:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The wine dataset is part of the built-in datasets in scikit-learn. So let''s
     read in the features and the target labels as shown:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The wine dataset is a simple dataset with 13 numeric features and three output
     class labels. It’s a good candidate dataset to learn your way around multi-class
     classification  problems. You can run `wine.DESCR` to get a description of the
     dataset.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '![Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](../Images/b96d32e12e7d2cdc4fdf54c6d1bbfe48.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
 - en: Output of wine.DESCR
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: Next, split the dataset into train and test sets. Here we’ve used a `test_size`
     of 0.2\. So 80% of the data goes into the training dataset and 20% to the test
     dataset.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Now instantiate a support vector classifier and fit the model to the training
     dataset. Then evaluate its performance on the test set.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Because it is a simple multi-classification problem, we can look at the model’s
     accuracy.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为这是一个简单的多分类问题，我们可以查看模型的准确率。
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: We see that the accuracy score of this model with the default values for hyperparameters
     is about 0.78.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们看到这个模型在默认超参数值下的准确率约为 0.78。
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Here we used a `random_state` of 24\. For a different random state you will
     get a different training test split, and subsequently different accuracy score.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里我们使用了 `random_state` 为 24。对于不同的随机状态，你将得到不同的训练测试拆分，从而得到不同的准确率分数。
 - en: So we need a better way than a single train-test split to evaluate the model’s
     performance. Perhaps, train the model on many such splits and consider the average
     accuracy. While also trying out different combinations of hyperparameters? Yes,
     that is why we use cross validation in model evaluation and hyperparameter search.
     We’ll learn more in the following sections.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以我们需要比单一训练-测试拆分更好的方法来评估模型性能。也许，可以在许多这样的拆分上训练模型，并考虑平均准确率，同时尝试不同的超参数组合？是的，这就是我们在模型评估和超参数搜索中使用交叉验证的原因。我们将在接下来的部分中了解更多。
 - en: Next let's identify the hyperparameters that we cantune for this support vector
     machine classifier.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来让我们确定可以为这个支持向量机分类器调整的超参数。
 - en: SVM Hyperparameters to Tune
+  id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SVM 超参数调整
 - en: 'In hyperparameter tuning, we aim to find the best combination of hyperparameter
     values for our SVM classifier. The commonly tuned hyperparameters for the support
     vector classifier include:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在超参数调优中，我们的目标是找到 SVM 分类器的最佳超参数值组合。支持向量分类器常调的超参数包括：
 - en: '**C**: Regularization parameter, controlling the trade-off between maximizing
     the margin and minimizing classification error.'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**C**：正则化参数，控制最大化边界和最小化分类错误之间的权衡。'
 - en: '**kernel**: Specifies the type of kernel function to use (e.g., ''linear,''
     ''rbf,'' ''poly'').'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**kernel**：指定要使用的核函数类型（例如 ''linear''，''rbf''，''poly''）。'
 - en: '**gamma**: Kernel coefficient for ''rbf'' and ''poly'' kernels.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**gamma**：''rbf'' 和 ''poly'' 核的核系数。'
 - en: Understanding the Role of Cross-Validation
+  id: totrans-42
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理解交叉验证的作用
 - en: '**Cross-validation** helps assess how well the model *generalizes* to unseen
     data and reduces the risk of overfitting to a single train-test split. The commonly
     used k-fold cross-validation involves splitting the dataset into **k** equally
     sized folds. The model is trained **k** times, with each fold serving as the validation
     set *once* and the remaining folds as the training set. So for each fold, we’ll
     get a cross-validation accuracy.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**交叉验证** 帮助评估模型 *对未见数据的泛化能力*，并减少对单一训练-测试拆分的过拟合风险。常用的 k 折交叉验证涉及将数据集拆分为 **k**
+    个相等大小的折叠。模型被训练 **k** 次，每个折叠 *一次* 作为验证集，其余折叠作为训练集。因此，对于每个折叠，我们将获得一个交叉验证准确率。'
 - en: When we run the grid and randomized searches for finding the best hyperparameters,
     we’ll choose the hyperparameters based on the best average cross-validation score.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们运行网格和随机搜索以找到最佳超参数时，我们将基于最佳的平均交叉验证得分选择超参数。
 - en: What Is Grid Search?
+  id: totrans-45
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是网格搜索？
 - en: '**Grid search** is a hyperparameter tuning technique that performs an **exhaustive
     search over a specified hyperparameter space** to find the combination of hyperparameters
     that yields the best model performance.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**网格搜索** 是一种超参数调优技术，通过 **对指定的超参数空间进行全面搜索** 来找到产生最佳模型性能的超参数组合。'
 - en: How Grid Search Works
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 网格搜索如何工作
 - en: We define the hyperparameter search space as a parameter grid. The **parameter
     grid** is a dictionary where you specify each hyperparameter you want to tune
     with a list of values to explore.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将超参数搜索空间定义为参数网格。**参数网格** 是一个字典，在其中你指定每个要调整的超参数及其要探索的值列表。
 - en: Grid search then systematically explores every possible combination of hyperparameters
     from the parameter grid. It fits and evaluates the model for each combination
     using cross-validation and selects the combination that yields the best performance.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 网格搜索系统地探索超参数网格中的每一个可能组合。它使用交叉验证对每个组合进行模型拟合和评估，并选择产生最佳性能的组合。
 - en: Next, let’s implement grid search in scikit-learn.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们在 scikit-learn 中实现网格搜索。
 - en: GridSearchCV in Scikit-Learn
+  id: totrans-51
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Scikit-Learn 中的 GridSearchCV
 - en: 'First, import the `GridSearchCV` class from scikit-learn’s [model_selection](https://scikit-learn.org/stable/model_selection.html)
     module:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，从 scikit-learn 的 [model_selection](https://scikit-learn.org/stable/model_selection.html)
+    模块中导入 `GridSearchCV` 类：
 - en: '[PRE6]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Let’s define the parameter grid for the SVM classifier:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们定义 SVM 分类器的参数网格：
 - en: '[PRE7]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Grid search then systematically explores every possible combination of hyperparameters
     from the parameter grid. For this example, it evaluates the model''s performance
     with:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 网格搜索则系统地探索参数网格中的每一个可能组合。在这个例子中，它使用以下参数评估模型的性能：
 - en: '`C` set to 0.1, 1, and 10,'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`C` 设置为 0.1, 1 和 10，'
 - en: '`kernel` set to ''linear'', ''rbf'', and ''poly'', and'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`kernel` 设置为 ''linear'', ''rbf'' 和 ''poly''，并且'
 - en: '`gamma` set to 0.1, 1, ''scale'', and ''auto''.'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`gamma` 设置为 0.1, 1, ''scale'' 和 ''auto''。'
 - en: This results in a total of 3 * 3 * 4 = 36 different combinations to evaluate.
     Grid search fits and evaluates the model for each combination using cross-validation
     and selects the combination that yields the best performance.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将导致总共36种不同的组合需要评估。网格搜索对每个组合进行拟合和评估，并使用交叉验证选择出最佳表现的组合。
 - en: 'We then instantiate `GridSearchCV` to tune the hyperparameters of the `baseline_svm`:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们实例化`GridSearchCV`来调整`baseline_svm`的超参数：
 - en: '[PRE8]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Note that we've used 5-fold cross-validation.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，我们使用了5折交叉验证。
 - en: 'Finally, we evaluate the performance of the best model—with the optimal hyperparameters
     found by grid search—on the test data:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们在测试数据上评估通过网格搜索找到的最佳模型——具有最优超参数的模型的性能：
 - en: '[PRE9]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'As seen, the model achieves an accuracy score of 0.94 for the following hyperparameters:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 如所见，模型在以下超参数下达到了0.94的准确率：
 - en: '[PRE10]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Pros and Cons of Grid Search
+  id: totrans-68
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 网格搜索的优缺点
 - en: 'Using grid search for hyperparameter tuning has the following advantages:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用网格搜索进行超参数调整具有以下优点：
 - en: Grid search explores all specified combinations, ensuring you don't miss the
     best hyperparameters within the defined search space.
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 网格搜索探索所有指定的组合，确保你不会错过定义的搜索空间中的最佳超参数。
 - en: It is a good choice for exploring smaller hyperparameter spaces.
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它适合于探索较小的超参数空间。
 - en: 'On the flip side, however:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，另一方面：
 - en: Grid search can be computationally expensive, especially when dealing with a
     large number of hyperparameters and their values. It may not be feasible for very
     complex models or extensive hyperparameter searches.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 网格搜索可能计算开销较大，尤其是在处理大量超参数及其值时。对于非常复杂的模型或广泛的超参数搜索，可能不切实际。
 - en: Now let’s learn about randomized search.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们了解一下随机搜索。
 - en: What Is Randomized Search?
+  id: totrans-75
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是随机搜索？
 - en: '**Randomized search** is another hyperparameter tuning technique that **explores
     random combinations of hyperparameters within specified distributions or ranges**.
     It''s particularly useful when dealing with a large hyperparameter search space.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**随机搜索**是另一种超参数调整技术，它**探索指定分布或范围内的随机超参数组合**。当处理较大的超参数搜索空间时，它特别有用。'
 - en: How Randomized Search Works
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 随机搜索如何工作
 - en: In randomized search, instead of specifying a grid of values, you can define
     probability distributions or ranges for each hyperparameter. Which becomes a much
     larger hyperparameter search space.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 在随机搜索中，你可以定义每个超参数的概率分布或范围，而不是指定一个值的网格。这会变成一个更大的超参数搜索空间。
 - en: Randomized search then *randomly samples* a fixed number of combinations of
     hyperparameters from these distributions. This allows randomized search to explore
     a diverse set of hyperparameter combinations efficiently.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机搜索然后*随机抽样*从这些分布中选取固定数量的超参数组合。这使得随机搜索能够高效地探索多样的超参数组合。
 - en: RandomizedSearchCV in Scikit-Learn
+  id: totrans-80
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Scikit-Learn中的RandomizedSearchCV
 - en: Now let's tune the parameters of the baseline SVM classifier using randomized
     search.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用随机搜索来调整基线SVM分类器的参数。
 - en: 'We import the `RandomizedSearchCV` class and define `param_dist`, a much larger
     hyperparameter search space:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们导入`RandomizedSearchCV`类并定义`param_dist`，一个更大的超参数搜索空间：
 - en: '[PRE11]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Similar to grid search, we instantiate the randomized search model to search
     for the best hyperparameters. Here, we set `n_iter` to 20; so 20 random hyperparameter
     combinations will be sampled.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于网格搜索，我们实例化随机搜索模型来寻找最佳超参数。在这里，我们将`n_iter`设置为20；因此将采样20个随机的超参数组合。
 - en: '[PRE12]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'We then evaluate model’s performance with the best hyper parameters found through
     randomized search:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们评估通过随机搜索找到的最佳超参数的模型性能：
 - en: '[PRE13]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'The best accuracy and optimal hyperparameters are:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 最佳准确率和最优超参数为：
 - en: '[PRE14]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The parameters found through randomized search are different from those found
     through grid search. The model with these hyperparameters also achieves an accuracy
     score of 0.94.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过随机搜索找到的参数与通过网格搜索找到的参数不同。具有这些超参数的模型也达到了0.94的准确率。
 - en: Pros and Cons of Randomized Search
+  id: totrans-91
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 随机搜索的优缺点
 - en: 'Let’s sum up the advantages of randomized search:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们总结一下随机搜索的优点：
 - en: Randomized search is efficient when dealing with a large number of hyperparameters
     or a wide range of values because it doesn't require an exhaustive search.
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机搜索在处理大量超参数或广泛范围的值时效率较高，因为它不需要进行详尽的搜索。
 - en: It can handle various parameter types, including continuous and discrete values.
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它可以处理各种参数类型，包括连续值和离散值。
 - en: 'Here are some limitations of randomized search:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是随机搜索的一些限制：
 - en: Due to its random nature, it may not always find the best hyperparameters. But
     it often finds good ones quickly.
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于其随机特性，它可能不会总是找到最佳的超参数。但它通常能快速找到好的超参数。
 - en: Unlike grid search, it doesn't guarantee that all possible combinations will
     be explored.
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与网格搜索不同，它不保证所有可能的组合都会被探索。
 - en: Conclusion
+  id: totrans-98
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: We learned how to perform hyperparameter tuning with `RandomizedSearchCV` and
     `GridSearchCV` in scikit-learn. We then evaluated our model’s performance with
     the best hyperparameters.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们学习了如何使用`RandomizedSearchCV`和`GridSearchCV`进行超参数调整。然后，我们用最佳超参数评估了模型的性能。
 - en: In summary, grid search exhaustively searches through all possible combinations
     in the parameter grid. While randomized search randomly samples hyperparameter
     combinations.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，网格搜索详尽地搜索参数网格中的所有可能组合，而随机搜索则是随机抽样超参数组合。
 - en: Both these techniques help you identify the optimal hyperparameters for your
     machine learning model while reducing the risk of overfitting to a specific train-test
     split.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两种技术都帮助你确定机器学习模型的最佳超参数，同时减少对特定训练-测试划分的过拟合风险。
 - en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
     is a developer and technical writer from India. She likes working at the intersection
     of math, programming, data science, and content creation. Her areas of interest
@@ -419,33 +599,50 @@
     and sharing her knowledge with the developer community by authoring tutorials,
     how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
     and coding tutorials.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    是一位来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。'
 - en: More On This Topic
+  id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调整](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：10个顶级Python库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[Data Governance and Observability, Explained](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据治理与可观测性解释](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
 - en: '[Confusion Matrix, Precision, and Recall Explained](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[混淆矩阵、精确度和召回率解释](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
 - en: '[KDnuggets News, November 16: How LinkedIn Uses Machine Learning •…](https://www.kdnuggets.com/2022/n45.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，11月16日：LinkedIn如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)'
 - en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用HuggingFace微调BERT进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
