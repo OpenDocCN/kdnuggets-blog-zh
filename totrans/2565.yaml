@@ -1,38 +1,56 @@
 - en: 'High-Performance Deep Learning: How to train smaller, faster, and better models
     – Part 2'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 高性能深度学习：如何训练更小、更快、更好的模型 – 第2部分
 - en: 原文：[https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
 - en: In [Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html),
     we discussed why efficiency is important for deep learning models to achieve high-performance
     models that are pareto-optimal. Let us further dive deeper into the tools and
     techniques for achieving efficiency.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)中，我们讨论了为什么效率对深度学习模型至关重要，以实现高性能的帕累托最优模型。让我们进一步深入探讨实现效率的工具和技术。
 - en: Focus Areas of Efficiency in Deep Learning
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 深度学习中的效率关注领域
 - en: We can think of the work on efficiency to be categorized in roughly four pillars
     of modelling techniques and a foundation of infrastructure and hardware.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将关于效率的工作大致分为四个建模技术支柱和一个基础的基础设施与硬件。
 - en: '![](../Images/da8235ca2af85196243d7dd45e540c35.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/da8235ca2af85196243d7dd45e540c35.png)'
 - en: '*Focus Areas of Efficient Deep Learning.*'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '*高效深度学习的关注领域。*'
 - en: '**Compression Techniques**: These are general techniques and algorithms that
     look at optimizing the architecture itself, typically by compressing its layers.
     Often, these approaches are generic enough to be used across architectures. A
@@ -40,18 +58,22 @@
     of a layer by reducing its precision (e.g., from 32-bit floating-point values
     to 8-bit unsigned integers). Quantization can generally be applied to any network
     which has a weight matrix.'
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**压缩技术**：这些是常见的技术和算法，旨在优化架构本身，通常通过压缩其层来实现。这些方法通常足够通用，可以跨架构使用。一个经典的例子是量化[1,2]，它尝试通过减少其精度（例如，从32位浮点值到8位无符号整数）来压缩层的权重矩阵。量化通常可以应用于任何具有权重矩阵的网络。'
 - en: '**Learning Techniques**: These are algorithms that focus on training the model
     differently so as to make fewer prediction errors. Improved accuracy can then
     be exchanged for a smaller footprint or a more efficient model by trimming the
     number of parameters if needed. An example of a learning technique is Distillation
     [3], which, as mentioned earlier, helps a smaller model learn from a larger, more
     accurate model.'
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**学习技术**：这些算法专注于不同的训练模型方式，以减少预测错误。通过裁剪参数数量，可以将改进的准确性转换为更小的占用空间或更高效的模型。如果需要，学习技术还可以使模型更精简。一个学习技术的例子是蒸馏[3]，正如前面提到的，它帮助一个较小的模型从一个更大、更准确的模型中学习。'
 - en: '**Automation**: These are tools for automatically improving the core metrics
     of the given model using automation. An example is a hyper-parameter search [4],
     where the model architecture remains the same, but optimizing the hyper-parameters
@@ -60,9 +82,11 @@
     the architecture itself is tuned, and the search helps find a model that optimizes
     both the loss/accuracy and some other objective function. An example of a secondary
     objective function could be the model latency/size, etc.'
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**自动化**：这些工具用于通过自动化来改进给定模型的核心指标。例如，超参数搜索[4]就是一个例子，其中模型架构保持不变，但优化超参数有助于提高准确性，这样可以换取一个参数更少的模型。类似地，架构搜索[5,6]也属于这一类别，其中架构本身被调整，搜索有助于找到一个优化了损失/准确性和其他目标函数的模型。一个次要目标函数的例子可能是模型延迟/大小等。'
 - en: '**Efficient Model Architectures & Layers**: These form the crux of efficiency
     in deep learning and are the fundamental blocks that were designed from scratch
     (Convolutional Layers, Attention, etc.), which are a significant leap over the
@@ -73,13 +97,17 @@
     Avoiding over-parameterization further helps in making the networks more robust.
     In this pillar, we would look at layers and architectures that have been designed
     specifically with efficiency in mind.'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**高效模型架构与层**：这些是深度学习中效率的核心，是从头设计的基本构件（卷积层、注意力机制等），比之前使用的基线方法有了显著的跃进。例如，卷积层引入了参数共享和用于图像模型的滤波器，从而避免了为每个输入像素学习单独的权重。这在与标准多层感知机（MLP）网络比较时显然节省了参数数量。避免过度参数化进一步有助于提高网络的鲁棒性。在这一支柱中，我们将关注那些专门为提高效率而设计的层和架构。'
 - en: Infrastructure & Hardware
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基础设施与硬件
 - en: Finally, we also need a foundation of infrastructure and tools that help us
     build and leverage efficient models. This includes the model training framework,
     such as Tensorflow, PyTorch, etc., as introduced earlier. Often these frameworks
@@ -89,8 +117,12 @@
     Similarly, TFLite Micro [8] helps in running these models on DSPs. Just like Tensorflow,
     PyTorch also offers PyTorch Mobile for quantizing and exporting models for inference
     on mobile and embedded devices.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们还需要一个基础设施和工具的基础，以帮助我们构建和利用高效的模型。这包括之前介绍过的模型训练框架，如 Tensorflow、PyTorch 等。这些框架通常会与特定的工具配对，以部署高效模型。例如，Tensorflow
+    与 Tensorflow Lite (TFLite) [7] 和相关库紧密集成，允许在移动设备上导出和运行模型。同样，TFLite Micro [8] 有助于在
+    DSP 上运行这些模型。与 Tensorflow 类似，PyTorch 也提供 PyTorch Mobile 用于量化和导出模型，以在移动和嵌入式设备上进行推理。
 - en: We often depend on this infrastructure and tooling to leverage the gains from
     efficient models. For example, for obtaining both size and latency improvements
     with quantized models, we need the inference platform to support common neural
@@ -98,75 +130,119 @@
     export of models with 8-bit unsigned int weights and having integration with libraries
     like GEMMLOWP [8] and XNNPACK [9] for fast inference. Similarly, PyTorch uses
     QNNPACK [10] to support quantized operations.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们常常依赖这些基础设施和工具来利用高效模型的优势。例如，为了获得量化模型的大小和延迟改进，我们需要推理平台支持量化模式下的常见神经网络层。TFLite
+    通过允许导出具有 8 位无符号整数权重的模型，并与如 GEMMLOWP [8] 和 XNNPACK [9] 等库集成以实现快速推理，从而支持量化模型。同样，PyTorch
+    使用 QNNPACK [10] 支持量化操作。
 - en: On the hardware front, we rely on devices like CPUs, GPUs, and Tensor Processing
     Units (TPUs) [11] to allow us to train and deploy these models. On the mobile
     and embedded front, we have ARM-based processors, mobile GPUs, and other accelerators
     [12] that let us leverage efficiency gains for deployment (inference).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在硬件方面，我们依赖于 CPU、GPU 和 Tensor Processing Units (TPUs) [11] 等设备，以便训练和部署这些模型。在移动和嵌入式领域，我们拥有基于
+    ARM 的处理器、移动 GPU 和其他加速器 [12]，让我们能够利用效率提升进行部署（推理）。
 - en: In our next part, we will go over examples of tools and techniques that fit
     in each of these pillars. Also, feel free to go over our [survey paper](https://arxiv.org/abs/2106.08962)
     that explores this topic in detail.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一部分，我们将讨论适合这些支柱的工具和技术示例。也可以查看我们的 [调查论文](https://arxiv.org/abs/2106.08962)，详细探讨了这个话题。
 - en: References
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Benoit Jacob, Skirmantas Kligys, Bo Chen, Menglong Zhu, Matthew Tang, Andrew
     Howard, Hartwig Adam, and Dmitry Kalenichenko. 2018\. Quantization and training
     of neural networks for efficient integer-arithmetic-only inference. In Proceedings
     of the IEEE Conference on Computer Vision and Pattern Recognition. 2704–2713.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Benoit Jacob, Skirmantas Kligys, Bo Chen, Menglong Zhu, Matthew Tang, Andrew
+    Howard, Hartwig Adam, 和 Dmitry Kalenichenko. 2018\. 量化和训练神经网络以实现高效的整数运算推理。见于 IEEE
+    计算机视觉与模式识别会议论文集。2704–2713。'
 - en: '[2] Raghuraman Krishnamoorthi. 2018\. Quantizing deep convolutional networks
     for efficient inference: A whitepaper. arXiv (Jun 2018). arXiv:1806.08342'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] Raghuraman Krishnamoorthi. 2018\. 量化深度卷积网络以实现高效推理：白皮书。arXiv (2018年6月)。arXiv:1806.08342'
 - en: '[3] Geoffrey Hinton, Oriol Vinyals, and Jeff Dean. 2015\. Distilling the knowledge
     in a neural network. arXiv preprint arXiv:1503.02531 (2015)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] Geoffrey Hinton, Oriol Vinyals, 和 Jeff Dean. 2015\. 提炼神经网络中的知识。arXiv预印本
+    arXiv:1503.02531 (2015)'
 - en: '[4] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John
     Karro, and D Sculley. 2017\. Google vizier: A service for black-box optimization.
     In Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery
     and data mining. 1487–1495.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John
+    Karro, 和 D Sculley. 2017\. Google vizier: 一项黑箱优化服务。发表于第23届ACM SIGKDD国际知识发现与数据挖掘会议。1487–1495.'
 - en: '[5] Barret Zoph and Quoc V Le. 2016\. Neural architecture search with reinforcement
     learning. arXiv preprint arXiv:1611.01578 (2016).'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5] Barret Zoph 和 Quoc V Le. 2016\. 使用强化学习的神经网络架构搜索。arXiv预印本 arXiv:1611.01578
+    (2016).'
 - en: '[6] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew
     Howard, and Quoc V Le. 2019\. Mnasnet: Platform-aware neural architecture search
     for mobile. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
     Recognition. 2820–2828.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[6] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew
+    Howard, 和 Quoc V Le. 2019\. Mnasnet: 针对移动设备的平台感知神经网络架构搜索。发表于IEEE/CVF计算机视觉与模式识别会议。2820–2828.'
 - en: '[7] ML for Mobile and Edge Devices. [https://www.tensorflow.org/lite](https://www.tensorflow.org/lite)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[7] 移动和边缘设备的机器学习。 [https://www.tensorflow.org/lite](https://www.tensorflow.org/lite)'
 - en: '[8] GEMMLOWP. - [https://github.com/google/gemmlowp](https://github.com/google/gemmlowp)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[8] GEMMLOWP. - [https://github.com/google/gemmlowp](https://github.com/google/gemmlowp)'
 - en: '[9] XNNPACK. - [https://github.com/google/XNNPACK](https://github.com/google/XNNPACK)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[9] XNNPACK. - [https://github.com/google/XNNPACK](https://github.com/google/XNNPACK)'
 - en: '[10] Marat Dukhan, Yiming Wu Wu, and Hao Lu. 2020\. QNNPACK: Open source library
     for optimized mobile deep learning - Facebook Engineering. [https://engineering.fb.com/2018/10/29/ml-applications/qnnpack](https://engineering.fb.com/2018/10/29/ml-applications/qnnpack)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[10] Marat Dukhan, Yiming Wu Wu, 和 Hao Lu. 2020\. QNNPACK: 用于优化移动深度学习的开源库 -
+    Facebook工程。 [https://engineering.fb.com/2018/10/29/ml-applications/qnnpack](https://engineering.fb.com/2018/10/29/ml-applications/qnnpack)'
 - en: '[11] Norman P Jouppi, Cliff Young, Nishant Patil, David Patterson, Gaurav Agrawal,
     Raminder Bajwa, Sarah Bates, Suresh Bhatia, Nan Boden, Al Borchers, et al. 2017\.
     In-datacenter performance analysis of a tensor processing unit. In Proceedings
     of the 44th annual international symposium on computer architecture. 1–12.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[11] Norman P Jouppi, Cliff Young, Nishant Patil, David Patterson, Gaurav Agrawal,
+    Raminder Bajwa, Sarah Bates, Suresh Bhatia, Nan Boden, Al Borchers, 等. 2017\.
+    数据中心内的张量处理单元性能分析。发表于第44届国际计算机架构年会。1–12.'
 - en: '[12] EdgeTPU. [https://cloud.google.com/edge-tpu](https://cloud.google.com/edge-tpu)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[12] EdgeTPU. [https://cloud.google.com/edge-tpu](https://cloud.google.com/edge-tpu)'
 - en: '**Bio:** [Gaurav Menghani](http://www.gaurav.im/) ([@GauravML](https://twitter.com/GauravML)) is
     a Staff Software Engineer at Google Research, where he leads research projects
     geared towards optimizing large machine learning models for efficient training
@@ -177,73 +253,113 @@
     worked at Facebook for 4.5 years and has contributed significantly to Facebook’s
     Search system and large-scale distributed databases. He has an M.S. in Computer
     Science from Stony Brook University.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [Gaurav Menghani](http://www.gaurav.im/) ([@GauravML](https://twitter.com/GauravML))
+    是Google Research的高级软件工程师，领导旨在优化大型机器学习模型以实现高效训练和推理的研究项目，涵盖从微控制器到基于TPU的服务器的设备。他的工作对YouTube、Cloud、Ads、Chrome等超过10亿活跃用户产生了积极影响。他还是即将出版的《高效机器学习》一书的作者之一。在Google之前，Gaurav在Facebook工作了4.5年，对Facebook的搜索系统和大规模分布式数据库做出了重要贡献。他拥有斯托尼布鲁克大学计算机科学硕士学位。'
 - en: '**Related:**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[High Performance Deep Learning, Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高性能深度学习，第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)'
 - en: '[5 Challenges to Scaling Machine Learning Models](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个挑战：扩展机器学习模型](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)'
 - en: '[Scaling a Massive State-of-the-art Deep Learning Model in Production](https://www.kdnuggets.com/2019/07/scaling-massive-deep-learning-model-production.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在生产环境中扩展大规模先进深度学习模型](https://www.kdnuggets.com/2019/07/scaling-massive-deep-learning-model-production.html)'
 - en: '* * *'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT 管理'
 - en: '* * *'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT 让您编写代码更高效、更快速的 7 种方法](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
 - en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[oBERT：复合稀疏化带来更快速、准确的 NLP 模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从零开始构建和训练一个 Transformer 模型……](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参与竞赛以 4 倍速度学习机器学习](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么我们始终需要人类来训练 AI——有时需要实时](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
