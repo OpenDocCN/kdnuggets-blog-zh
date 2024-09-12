@@ -1,81 +1,101 @@
 - en: Approaching (Almost) Any Machine Learning Problem
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html/2](https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Next, we come to the stacker module. Stacker module is not a model stacker but
     a feature stacker. The different features after the processing steps described
     above can be combined using the stacker module.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0d2fc441e33e2479dc1398c5c92db1e8.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
 - en: You can horizontally stack all the features before putting them through further
     processing by using numpy hstack or sparse hstack depending on whether you have
     dense or sparse features.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/534f1f2ac0d4c9ea55dda8088c038ad7.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
 - en: And can also be achieved by FeatureUnion module in case there are other processing
     steps such as pca or feature selection (we will visit decomposition and feature
     selection later in this post).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/226c8c202aa480e3cafff0426108d0ab.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
 - en: 'Once, we have stacked the features together, we can start applying machine
     learning models. At this stage only models you should go for should be ensemble
     tree based models. These models include:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: RandomForestClassifier
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: RandomForestRegressor
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: ExtraTreesClassifier
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: ExtraTreesRegressor
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: XGBClassifier
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: XGBRegressor
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: We cannot apply linear models to the above features since they are not normalized.
     To use linear models, one can use Normalizer or StandardScaler from scikit-learn.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: 'These normalization methods work only on dense features and don’t give very
     good results if applied on sparse features. Yes, one can apply StandardScaler
     on sparse matrices without using the mean (parameter: with_mean=False).'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: If the above steps give a “good” model, we can go for optimization of hyperparameters
     and in case it doesn’t we can go for the following steps and improve our model.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: 'The next steps include decomposition methods:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/2ea88d8b389703c648a4ba1fbb629e14.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
 - en: For the sake of simplicity, we will leave out LDA and QDA transformations. For
@@ -83,33 +103,41 @@
     with 10-15 components and increase this number as long as the quality of result
     improves substantially. For other type of data, we select 50-60 components initially
     (we tend to avoid PCA as long as we can deal with the numerical data as it is).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/932bf19fff5e1fdbc2d3d4278c273f24.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
 - en: 'can be found here:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: For text data, after conversion of text to sparse matrix, go for Singular Value
     Decomposition (SVD). A variation of SVD called TruncatedSVD can be found in scikit-learn.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/4283cfbfce157dff2410f4c7bf25e78b.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
 - en: The number of SVD components that generally work for TF-IDF or counts are between
     120-200\. Any number above this might improve the performance but not substantially
     and comes at the cost of computing power.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: After evaluating further performance of the models, we move to scaling of the
     datasets, so that we can evaluate linear models too. The normalized or scaled
     features can then be sent to the machine learning models or feature selection
     modules.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/1f724aaae7b4f9ab788d90bf2c4aea82.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
 - en: 'There are multiple ways in which feature selection can be achieved. One of
@@ -121,123 +149,151 @@
     selection with AUC as evaluation metric can be found here: [https://github.com/abhishekkrthakur/greedyFeatureSelection](https://github.com/abhishekkrthakur/greedyFeatureSelection).
     It must be noted that this implementation is not perfect and must be changed/modified
     according to the requirements.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: Other faster methods of feature selection include selecting best features from
     a model. We can either look at coefficients of a logit model or we can train a
     random forest to select best features and then use them later with other machine
     learning models.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/f4689040f98c60eb3104949992f9d01d.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
 - en: Remember to keep low number of estimators and minimal optimization of hyper
     parameters so that you don’t overfit.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: The feature selection can also be achieved using Gradient Boosting Machines.
     It is good if we use xgboost instead of the implementation of GBM in scikit-learn
     since xgboost is much faster and more scalable.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/fb2c548d2699931784540723a0f77760.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
 - en: We can also do feature selection of sparse datasets using RandomForestClassifier
     / RandomForestRegressor and xgboost.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: Another popular method for feature selection from positive sparse datasets is
     chi-2 based feature selection and we also have that implemented in scikit-learn.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/be57230fe837bc13a2b4b0ca2914c157.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
 - en: Here, we use chi2 in conjunction with SelectKBest to select 20 features from
     the data. This also becomes a hyperparameter we want to optimize to improve the
     result of our machine learning models.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Don’t forget to dump any kinds of transformers you use at all the steps. You
     will need them to evaluate performance on the validation set.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: Next (or intermediate) major step is model selection + hyperparameter optimization.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/02a6679552c13c5f074c5f62ed401777.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
 - en: 'We generally use the following algorithms in the process of selecting a machine
     learning model:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '**Classification**:'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Random Forest
+  id: totrans-43
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: GBM
+  id: totrans-44
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Logistic Regression
+  id: totrans-45
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Naive Bayes
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Support Vector Machines
+  id: totrans-47
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: k-Nearest Neighbors
+  id: totrans-48
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Regression**'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Random Forest
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: GBM
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Linear Regression
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Ridge
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Lasso
+  id: totrans-54
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: SVR
+  id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
@@ -248,39 +304,50 @@
     + parameters on a large number of datasets. Also people who have experience are
     not willing to share their secrets. Luckily, I have quite a bit of experience
     too and I’m willing to give away some of the stuff.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let’s break down the hyperparameters, model wise:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[![](../Images/999cce9d8f4839d8aa947045af1c85d4.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAilAAAAJDhiNGE5YTVmLTJhNTAtNGNkZS1hNDAwLTY5YTJiMTE1ZmI3Zg.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: RS* = Cannot say about proper values, go for Random Search in these hyperparameters.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: In my opinion, and strictly my opinion, the above models will out-perform any
     others and we don’t need to evaluate any other models.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: 'Once again, remember to save the transformers:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '[![](../Images/e03f6db43132da2f4d6b3b4ab2aa98cd.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAhzAAAAJGNhOTU4MGRjLWE3YzAtNDFmMi1hMjg0LWUyOGIwMDBlNzUxYw.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: 'And apply them on validation set separately:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '[![](../Images/da94fbdea0582fd1492738a7335435b4.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAllAAAAJDgxZjdjNjcwLTQ0ZDktNDU0Mi04YzQzLThjMGM1NWY5ZWFkNQ.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: The above rules and the framework has performed very well in most of the datasets
     I have dealt with. Of course, it has also failed for very complicated tasks. Nothing
     is perfect and we keep on improving on what we learn. Just like in machine learning.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: 'Get in touch with me with any doubts: abhishek4 [at] gmail [dot] com'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Abhishek Thakur](https://www.linkedin.com/in/abhisvnit)** holds a Master''s
@@ -288,77 +355,106 @@
     on the Data Science team at Searchmetrics Inc., working on some of the most interesting
     data driven studies, applied machine learning algorithms and deriving insights
     from huge amounts of data. He is also a Kaggle competition Grandmaster.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://www.linkedin.com/pulse/approaching-almost-any-machine-learning-problem-abhishek-thakur).
     Reposted with permission.'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '[Contest Winner: Winning the AutoML Challenge with Auto-sklearn](/2016/08/winning-automl-challenge-auto-sklearn.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Contest 2nd Place: Automating Data Science](/2016/08/automating-data-science.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[TPOT: A Python Tool for Automating Data Science](/2016/05/tpot-python-automating-data-science.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-74
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NExT-GPT简介：任意对任意的多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
 - en: '[Frameworks for Approaching the Machine Learning Process](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理机器学习过程的框架](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
 - en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SHAP：在Python中解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
 - en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在没有任何工作经验的情况下获得你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
 - en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在参加任何免费的数据科学课程之前阅读此内容](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
 - en: '[The Range of NLP Applications in the Real World: A Different…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[现实世界中NLP应用的范围：一种不同的解决方案](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'

@@ -1,14 +1,20 @@
 - en: Approaching (Almost) Any Machine Learning Problem
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: (几乎)解决任何机器学习问题
 - en: 原文：[https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html](https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html](https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html)
 - en: '**By Abhishek Thakur, Senior Data Scientist @ Searchmetrics Inc.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Abhishek Thakur 提供，Searchmetrics Inc. 高级数据科学家**'
 - en: An average data scientist deals with loads of data daily. Some say over 60-70%
     time is spent in data cleaning, munging and bringing data to a suitable format
     such that machine learning models can be applied on that data. This post focuses
@@ -17,304 +23,454 @@
     machine learning competitions that I’ve taken part in. It must be noted that the
     discussion here is very general but very useful and there can also be very complicated
     methods which exist and are practised by professionals.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一名普通的数据科学家每天处理大量数据。有些人说超过 60-70% 的时间都花在数据清洗、整理和将数据转换为适合应用机器学习模型的格式上。本文重点关注第二部分，即应用机器学习模型，包括预处理步骤。本文讨论的流程是我参与的超过一百个机器学习竞赛的结果。需要注意的是，这里的讨论非常一般但非常有用，同时也存在非常复杂的方法，由专业人士实践。
 - en: We will be using python!
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 Python！
 - en: Data
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: Before applying the machine learning models, the data must be converted to a
     tabular form. This whole process is the most time consuming and difficult process
     and is depicted in the figure below.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在应用机器学习模型之前，数据必须转换为表格形式。整个过程是最耗时和困难的，如下图所示。
 - en: '![](../Images/ef6687bb8240699f296448972864d37d.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ef6687bb8240699f296448972864d37d.png)'
 - en: The machine learning models are then applied to the tabular data. Tabular data
     is most common way of representing data in machine learning or data mining. We
     have a data table, rows with different samples of the data or X and labels, y.
     The labels can be single column or multi-column, depending on the type of problem.
     We will denote data by X and labels by y.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后将机器学习模型应用于表格数据。表格数据是机器学习或数据挖掘中最常见的数据表示方式。我们有一个数据表，行包含不同的样本数据或 X 和标签 y。标签可以是单列或多列，取决于问题的类型。我们将用
+    X 表示数据，用 y 表示标签。
 - en: Types of labels
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 标签类型
 - en: 'The labels define the problem and can be of different types, such as:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签定义了问题，并且可以有不同的类型，例如：
 - en: Single column, binary values (classification problem, one sample belongs to
     one class only and there are only two classes)
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单列，二进制值（分类问题，一个样本仅属于一个类别，且只有两个类别）
 - en: Single column, real values (regression problem, prediction of only one value)
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单列，实值（回归问题，仅预测一个值）
 - en: Multiple column, binary values (classification problem, one sample belongs to
     one class, but there are more than two classes)
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多列，二进制值（分类问题，一个样本属于一个类别，但类别数多于两个）
 - en: Multiple column, real values (regression problem, prediction of multiple values)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多列，实值（回归问题，多值预测）
 - en: And multilabel (classification problem, one sample can belong to several classes)
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多标签（分类问题，一个样本可以属于多个类别）
 - en: Evaluation Metrics
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 评估指标
 - en: For any kind of machine learning problem, we must know how we are going to evaluate
     our results, or what the evaluation metric or objective is. For example in case
     of a skewed binary classification problem we generally choose area under the receiver
     operating characteristic curve (ROC AUC or simply AUC). In case of multi-label
     or multi-class classification problems, we generally choose categorical cross-entropy
     or multiclass log loss and mean squared error in case of regression problems.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于任何类型的机器学习问题，我们必须知道如何评估结果，或者评估指标或目标是什么。例如，对于不平衡的二分类问题，我们通常选择接收者操作特征曲线下的面积（ROC
+    AUC 或简单地 AUC）。对于多标签或多分类问题，我们通常选择类别交叉熵或多分类对数损失，对于回归问题则选择均方误差。
 - en: I won’t go into details of the different evaluation metrics as we can have many
     different types, depending on the problem.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会详细说明不同的评估指标，因为根据问题的不同，我们可能会有多种不同的类型。
 - en: The Libraries
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 库
 - en: To start with the machine learning libraries, install the basic and most important
     ones first, for example, numpy and scipy.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始使用机器学习库时，首先安装最基本和最重要的库，例如 numpy 和 scipy。
 - en: 'To see and do operations on data: pandas ([http://pandas.pydata.org/](http://pandas.pydata.org/))'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于查看和操作数据：pandas ([http://pandas.pydata.org/](http://pandas.pydata.org/))
 - en: 'For all kinds of machine learning models: scikit-learn ([http://scikit-learn.org/stable/](http://scikit-learn.org/stable/))'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于各种机器学习模型：scikit-learn ([http://scikit-learn.org/stable/](http://scikit-learn.org/stable/))
 - en: 'The best gradient boosting library: xgboost ([https://github.com/dmlc/xgboost](https://github.com/dmlc/xgboost))'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最佳梯度提升库：xgboost ([https://github.com/dmlc/xgboost](https://github.com/dmlc/xgboost))
 - en: 'For neural networks: keras ([http://keras.io/](http://keras.io/))'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于神经网络：keras ([http://keras.io/](http://keras.io/))
 - en: 'For plotting data: matplotlib ([http://matplotlib.org/](http://matplotlib.org/))'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于绘制数据：matplotlib ([http://matplotlib.org/](http://matplotlib.org/))
 - en: 'To monitor progress: tqdm ([https://pypi.python.org/pypi/tqdm](https://pypi.python.org/pypi/tqdm))'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 监控进度：tqdm ([https://pypi.python.org/pypi/tqdm](https://pypi.python.org/pypi/tqdm))
 - en: I don’t use Anaconda ([https://www.continuum.io/downloads](https://www.continuum.io/downloads)).
     It’s easy and does everything for you, but I want more freedom. The choice is
     yours. :)
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不使用Anaconda ([https://www.continuum.io/downloads](https://www.continuum.io/downloads))。它很方便，做了所有的事情，但我想要更多的自由。选择权在你。
 - en: The Machine Learning Framework
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 机器学习框架
 - en: 'In 2015, I came up with a framework for automatic machine learning which is
     still under development and will be released soon. For this post, the same framework
     will be the basis. The framework is shown in the figure below:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在2015年，我提出了一个自动机器学习框架，该框架仍在开发中，并将很快发布。在这篇文章中，相同的框架将作为基础。该框架如下面的图所示：
 - en: '[![](../Images/67917490fbdb01f12e1d3d52ba80e0a9.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAeqAAAAJDVkYTViYjM5LTZjOWMtNGVhYS1iYjljLWZhOWMyNzJkZGU1MQ.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/67917490fbdb01f12e1d3d52ba80e0a9.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAeqAAAAJDVkYTViYjM5LTZjOWMtNGVhYS1iYjljLWZhOWMyNzJkZGU1MQ.png)'
 - en: '*Figure from: A. Thakur and A. Krohn-Grimberghe, AutoCompete: A Framework for
     Machine Learning Competitions, AutoML Workshop, International Conference on Machine
     Learning 2015*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图来源：A. Thakur 和 A. Krohn-Grimberghe，AutoCompete：机器学习竞赛框架，AutoML研讨会，国际机器学习会议2015*'
 - en: In the framework shown above, the pink lines represent the most common paths
     followed. After we have extracted and reduced the data to a tabular format, we
     can go ahead with building machine learning models.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述框架中，粉色线条代表了最常见的路径。我们将数据提取并减少到表格格式后，就可以开始构建机器学习模型了。
 - en: The very first step is identification of the problem. This can be done by looking
     at the labels. One must know if the problem is a binary classification, a multi-class
     or multi-label classification or a regression problem. After we have identified
     the problem, we split the data into two different parts, a training set and a
     validation set as depicted in the figure below.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是识别问题。这可以通过查看标签来完成。必须知道问题是二分类、多分类还是回归问题。在确定了问题后，我们将数据分成两个部分，一个训练集和一个验证集，如下图所示。
 - en: '![](../Images/a3ddcff4ccc903bce6eb8996747d0e84.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a3ddcff4ccc903bce6eb8996747d0e84.png)'
 - en: The splitting of data into training and validation sets “must” be done according
     to labels. In case of any kind of classification problem, use stratified splitting.
     In python, you can do this using scikit-learn very easily.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据的拆分“必须”根据标签进行。在任何分类问题中，使用分层拆分。在Python中，你可以使用scikit-learn非常轻松地做到这一点。
 - en: '![](../Images/2afb7eca83a58c0dc890d549a98527ed.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2afb7eca83a58c0dc890d549a98527ed.png)'
 - en: In case of regression task, a simple K-Fold splitting should suffice. There
     are, however, some complex methods which tend to keep the distribution of labels
     same for both training and validation set and this is left as an exercise for
     the reader.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回归任务中，简单的K折拆分应该足够了。然而，也有一些复杂的方法倾向于保持训练集和验证集的标签分布相同，这留给读者作为练习。
 - en: '![](../Images/152dbbee815ca5077eee782730c1be65.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/152dbbee815ca5077eee782730c1be65.png)'
 - en: I have chosen the eval_size or the size of the validation set as 10% of the
     full data in the examples above, but one can choose this value according to the
     size of the data they have.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述示例中，我选择了eval_size或验证集的大小为全部数据的10%，但可以根据手头数据的大小选择此值。
 - en: After the splitting of the data is done, leave this data out and don’t touch
     it. Any operations that are applied on training set must be saved and then applied
     to the validation set. Validation set, in any case, should not be joined with
     the training set. Doing so will result in very good evaluation scores and make
     the user happy but instead he/she will be building a useless model with very high
     overfitting.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据分割完成后，留出这部分数据，不要触碰它。对训练集应用的任何操作都必须保存，并在验证集上应用。验证集在任何情况下都不应与训练集合并。这样做会导致非常好的评估分数，使用户满意，但实际上会导致构建一个过度拟合的无用模型。
 - en: Next step is identification of different variables in the data. There are usually
     three types of variables we deal with. Namely, numerical variables, categorical
     variables and variables with text inside them. Let’s take example of the popular
     Titanic dataset ([https://www.kaggle.com/c/titanic/data](https://www.kaggle.com/c/titanic/data)).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是识别数据中的不同变量。我们通常处理三种类型的变量：数值变量、分类变量和文本变量。以流行的 Titanic 数据集为例 ([https://www.kaggle.com/c/titanic/data](https://www.kaggle.com/c/titanic/data))。
 - en: '![](../Images/d2f1e23d36e48c6037e583baac8946fa.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d2f1e23d36e48c6037e583baac8946fa.png)'
 - en: Here, survival is the label. We have already separated labels from the training
     data in the previous step. Then, we have pclass, sex, embarked. These variables
     have different levels and thus they are categorical variables. Variables like
     age, sibsp, parch, etc are numerical variables. Name is a variable with text data
     but I don’t think it’s a useful variable to predict survival.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，生存是标签。我们已经在之前的步骤中将标签从训练数据中分离出来了。接下来，我们有 pclass、sex 和 embarked。这些变量有不同的层次，因此它们是分类变量。像
+    age、sibsp、parch 等变量是数值变量。Name 是一个包含文本数据的变量，但我认为它对预测生存没有用处。
 - en: Separate out the numerical variables first. These variables don’t need any kind
     of processing and thus we can start applying normalization and machine learning
     models to these variables.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先分离出数值变量。这些变量不需要任何处理，因此我们可以开始对这些变量应用归一化和机器学习模型。
 - en: 'There are two ways in which we can handle categorical data:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以用两种方法处理分类数据：
 - en: Convert the categorical data to labels
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将分类数据转换为标签
 - en: '![](../Images/a396bfd14528ff13740905abdaf37f3a.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a396bfd14528ff13740905abdaf37f3a.png)'
 - en: Convert the labels to binary variables (one-hot encoding)
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将标签转换为二进制变量（独热编码）
 - en: '![](../Images/6a38c90b9fe8de52a5bc78e3abdfe04e.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a38c90b9fe8de52a5bc78e3abdfe04e.png)'
 - en: Please remember to convert categories to numbers first using LabelEncoder before
     applying OneHotEncoder on it.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记得在应用 OneHotEncoder 之前，先使用 LabelEncoder 将类别转换为数字。
 - en: Since, the Titanic data doesn’t have good example of text variables, let’s formulate
     a general rule on handling text variables. We can combine all the text variables
     into one and then use some algorithms which work on text data and convert it to
     numbers.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Titanic 数据中没有好的文本变量示例，让我们制定一个处理文本变量的一般规则。我们可以将所有文本变量合并为一个，然后使用一些处理文本数据的算法将其转换为数字。
 - en: 'The text variables can be joined as follows:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本变量可以如下连接：
 - en: '[![](../Images/2f45bd10b152be923a2f5cdbd88a6a64.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAdhAAAAJDQ4ZGU0YTRkLTI2ZjctNDc3My05YjVjLWIzZGY3Y2Y1NzI5ZQ.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/2f45bd10b152be923a2f5cdbd88a6a64.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAdhAAAAJDQ4ZGU0YTRkLTI2ZjctNDc3My05YjVjLWIzZGY3Y2Y1NzI5ZQ.png)'
 - en: 'We can then use CountVectorizer or TfidfVectorizer on it:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以在其上使用 CountVectorizer 或 TfidfVectorizer：
 - en: '![](../Images/5a7b509c6e6740ab905d9840682b5374.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5a7b509c6e6740ab905d9840682b5374.png)'
 - en: or
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者
 - en: '![](../Images/bfe12de70d35cb15eb03108be0fdfcef.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bfe12de70d35cb15eb03108be0fdfcef.png)'
 - en: The TfidfVectorizer performs better than the counts most of the time and I have
     seen that the following parameters for TfidfVectorizer work almost all the time.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: TfidfVectorizer 通常比计数方法表现更好，我发现 TfidfVectorizer 的以下参数几乎总是有效。
 - en: '![](../Images/56d69dd6ad0339e02ebbc2d8f79dd197.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/56d69dd6ad0339e02ebbc2d8f79dd197.png)'
 - en: If you are applying these vectorizers only on the training set, make sure to
     dump it to hard drive so that you can use it later on the validation set.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你只在训练集上应用这些向量化器，请确保将其保存到硬盘上，以便稍后在验证集上使用。
 - en: '![](../Images/317e9a15abba9a733f02b5396e3e01d7.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/317e9a15abba9a733f02b5396e3e01d7.png)'
 - en: '* * *'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-63
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NExT-GPT 介绍：任何到任何的多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
 - en: '[Frameworks for Approaching the Machine Learning Process](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[接近机器学习过程的框架](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
 - en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SHAP：在 Python 中解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
 - en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在没有工作经验的情况下获得你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
 - en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在参加任何免费的数据科学课程之前请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
 - en: '[The Range of NLP Applications in the Real World: A Different…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[现实世界中 NLP 应用的范围：不同的解决方案](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
