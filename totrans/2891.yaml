@@ -1,22 +1,27 @@
 - en: Train sklearn 100x Faster
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html](https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/), Manager,
     Machine Learning and Data Science at Ibotta, Inc.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: At Ibotta we train a lot of machine learning models. These models power our
     recommendation system, search engine, pricing optimization engine, data quality,
     and more. They make predictions for millions of users as they interact with our
     mobile app.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: While we do much of our data processing with [Spark](https://spark.apache.org/),
@@ -25,9 +30,11 @@
     more critical, we’ve explored options for speeding up model training. One of those
     solutions is to combine elements from Spark and scikit-learn into our own hybrid
     solution.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Introducing sk-dist
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -40,9 +47,11 @@
     search](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV))
     and multi-class techniques ([one vs rest](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier) and [one
     vs one](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier)).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/4df608e27f8783fb241b1762eed6f489.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
 - en: Our primary motivation is to fill a void in the space of options for distributing
@@ -51,9 +60,11 @@
     spent on training a single model on a single dataset. The bulk of time is spent
     training multiple iterations of a model on multiple iterations of a dataset using
     meta-estimators like grid search or ensembles.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: Example
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -63,36 +74,45 @@
     this dataset of 1797 records very quickly on a single machine. It takes under
     a second. But hyperparameter tuning requires a number of training jobs on different
     subsets of the training data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Shown below, we’ve built a parameter grid totaling 1050 required training jobs.
     It takes only 3.4 seconds with sk-dist on a Spark cluster with over a hundred
     cores. The total task time of this job is 7.2 minutes, meaning it would take this
     long to train on a single machine with no parallelization.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'This example illustrates the common scenario where fitting data into memory
     and training a single classifier is trivial but the number of required fits for
     hyperparameter tuning adds up quickly. Here is a look under the hood at running
     a grid search problem like the above example with sk-dist:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/282b2a6db0d1e7459055893272e39ba7.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
 - en: Grid Search with sk-dist
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: 'For real-world applications of traditional machine learning at Ibotta, we often
     find ourselves in a similar situation: small to medium sized data (100k to 1M
     records) with many iterations of simple classifiers to fit for hyperparameter
     tuning, ensembles and multi-class solutions.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Existing Solutions
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -106,6 +126,7 @@
     tolerance](https://techvidvan.com/tutorials/fault-tolerance-in-spark/), as well
     as cost control options like using [spot instances](https://aws.amazon.com/ec2/spot/) for
     worker nodes.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: Another existing solution is [Spark ML](https://spark.apache.org/docs/latest/ml-guide.html).
@@ -115,12 +136,15 @@
     While this sounds like it may be a sufficient solution for distributing scikit-learn
     style machine learning workloads, it distributes training in a way that doesn’t
     solve the kind of parallelism of interest to us.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/3fcf7a970a8832f2998bd8ca037f6870.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
 - en: Distributed on Different Dimensions
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: As shown above, Spark ML will train a single model on data that is distributed
@@ -130,6 +154,7 @@
     ML trains each decision tree in sequence. Wall time for this job will scale linearly
     with the number of decision trees regardless of the resources allocated to the
     job.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: For [grid search, Spark ML](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator) does
@@ -138,6 +163,7 @@
     However each individual model is still training on data that is distributed across
     executors. The total parallelism of the job is a [fraction of what it could be](https://github.com/Ibotta/sk-dist/blob/master/examples/search/spark_ml.py) if
     distributed purely along the dimension of models rather than data.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Ultimately, we want to distribute our training on a different dimension than
@@ -148,21 +174,25 @@
     forest. Distributing along this dimension can be [orders of magnitude faster](https://github.com/Ibotta/sk-dist/blob/master/examples/search/spark_ml.py) than
     distributing the data and training decision trees in serial. This behavior is
     similar for other meta-estimator techniques like grid search and multi-class.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: Features
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Given the limitations of these existing solutions in our problem space, we decided
     to develop sk-dist in-house. The bottom line is that we want to **distribute models,
     not data**.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: While the primary focus is on distributed training of meta-estimators, sk-dist
     also includes modules for distributed prediction of scikit-learn models with Spark,
     several pre/post processing scikit-learn transformers for use without Spark, and
     a flexible feature encoder for use with or without Spark.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '**Distributed Training** — Distribute meta-estimator training with Spark. The
@@ -171,6 +201,7 @@
     random forests, extra trees, and random trees embedding, and [multi-class strategies](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/multiclass.py) with
     one-vs-rest and one-vs-one. All of these meta-estimators mirror their scikit-learn
     counterparts after the fit.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -178,6 +209,7 @@
     fitted scikit-learn estimators with [Spark DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html).
     This enables large scale distributed prediction with portable scikit-learn estimators
     that can be used with or without Spark.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -188,15 +220,18 @@
     of standard feature encoding techniques. It can also be used as a fully customizable
     feature union-like encoder with the added advantage of distributed transformer
     fitting with Spark.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Use Cases
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Here are some guidelines for deciding whether or not sk-dist is a good fit
     for your machine learning problem space:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '**Traditional Machine Learning** — Methods like [generalized linear models](https://scikit-learn.org/stable/modules/linear_model.html), [stochastic
@@ -205,6 +240,7 @@
     trees](https://scikit-learn.org/stable/modules/tree.html), and [naive bayes](https://scikit-learn.org/stable/modules/naive_bayes.html) work
     well with sk-dist. These all have implementations in scikit-learn which are ready
     for direct implementation with sk-dist meta-estimators.'
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -213,6 +249,7 @@
     of the models, not the data. Data needs to not only fit in memory on each executor,
     but also be small enough to broadcast. Depending on Spark configuration, the maximum
     broadcast size can be limiting.'
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -221,6 +258,7 @@
     teams. Additionally, some Spark tuning and configuration will be necessary to
     get the most out of sk-dist in a cost effective way, which requires some training
     in Spark fundamentals.'
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -231,9 +269,11 @@
     at Ibotta [we’ve been using](https://medium.com/building-ibotta/heating-up-word2vec-blazingtext-for-real-time-search-c2121bd1396) [Amazon
     SageMaker](https://aws.amazon.com/sagemaker/) for these techniques, which we’ve
     found to be a more efficient use of compute than Spark for these workloads.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Getting Started
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -241,13 +281,16 @@
     The code repository also contains a library of [examples](https://github.com/Ibotta/sk-dist/tree/master/examples) to
     illustrate some of the use cases of sk-dist. [All are welcome](https://github.com/Ibotta/sk-dist/blob/master/CODE_OF_CONDUCT.md) to
     submit issues and contribute to the project.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: If these kinds of projects and challenges sound interesting to you, Ibotta is
     hiring! Check out our [jobs page](https://ibotta.com/careers) for more information.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: Thanks to charley frazier, Chad Foley, and Sam Weiss.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/)** is
@@ -255,78 +298,103 @@
     He is currently leading a machine learning team which is building services for
     search relevancy, content recommendations, pricing optimization and fraud detection,
     powering a mobile application serving millions of users.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://medium.com/building-ibotta/train-sklearn-100x-faster-bec530fc1f45).
     Reposted with permission.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '[Understanding Decision Trees for Classification in Python](/2019/08/understanding-decision-trees-classification-python.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Advanced Keras — Accurately Resuming a Training Process](/2019/03/advanced-keras-accurately-resuming-training-process.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Distributed Artificial Intelligence: A primer on Multi-Agent Systems, Agent-Based
     Modeling, and Swarm Intelligence](/2019/04/distributed-artificial-intelligence-multi-agent-systems-agent-based-modeling-swarm-intelligence.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的人工智能失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'

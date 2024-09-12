@@ -1,45 +1,63 @@
 - en: Can graph machine learning identify hate speech in online social networks?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 图形机器学习能否识别在线社交网络中的仇恨言论？
 - en: 原文：[https://www.kdnuggets.com/2019/09/graph-machine-learning-hate-speech-social-networks.html](https://www.kdnuggets.com/2019/09/graph-machine-learning-hate-speech-social-networks.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/09/graph-machine-learning-hate-speech-social-networks.html](https://www.kdnuggets.com/2019/09/graph-machine-learning-hate-speech-social-networks.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By Pantelis Elinas, Anna Leontjeva, and Yuriy Tyshetskiy**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Pantelis Elinas、Anna Leontjeva 和 Yuriy Tyshetskiy 撰写**。'
 - en: '![](../Images/ddd24baf552f68f88b2b391bd337ce2b.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ddd24baf552f68f88b2b391bd337ce2b.png)'
 - en: Over three decades, the Internet has grown from a small network of computers
     used by research scientists to communicate and exchange data to a technology that
     has penetrated almost every aspect of our day-to-day lives. Today, it is hard
     to imagine a life without online access for business, shopping, and socialising.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 三十多年来，互联网从一个用于研究科学家交流和交换数据的小型计算机网络，发展成了一种渗透到我们日常生活几乎每个方面的技术。今天，很难想象没有在线访问的生活，无论是为了商业、购物还是社交。
 - en: A technology that has connected humanity at a scale never before possible has
     also amplified some of our worst qualities. Online hate speech spreads virally
     across the globe with short- and long-term consequences for individuals and societies.
     These consequences are often difficult to measure and predict. Online social media
     websites and mobile apps have inadvertently become the platform for the spread
     and proliferation of hate speech.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种以从未有过的规模连接人类的技术，同时也放大了我们一些最糟糕的特质。在线仇恨言论以病毒式的方式在全球传播，对个人和社会产生了短期和长期的影响。这些后果往往难以衡量和预测。在线社交媒体网站和移动应用程序无意中成为了仇恨言论传播和扩散的平台。
 - en: What is online hate speech?
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是在线仇恨言论？
 - en: “Hate speech is a type of speech that takes place online (e.g., the Internet,
     online social media platforms) with the purpose to attack a person or a group
     on the basis of attributes such as race, religion, ethnic origin, sexual orientation,
     disability, or gender.” [[source](https://en.wikipedia.org/wiki/Online_hate_speech)]
+  id: totrans-8
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “仇恨言论是一种在线（例如，互联网、在线社交媒体平台）发生的言论，其目的是基于种族、宗教、民族背景、性取向、残疾或性别等特征攻击某个人或群体。” [[来源](https://en.wikipedia.org/wiki/Online_hate_speech)]
 - en: A number of international institutions, including the [UN Human Rights Council](https://www.ohchr.org/en/hrbodies/hrc/pages/home.aspx)
     and the [Online Hate Prevention Institute](https://ohpi.org.au/) are engaged in
     understanding the nature, proliferation, and prevention of online hate speech.
@@ -48,36 +66,51 @@
     Academic researchers are constantly improving machine learning systems for hate
     speech classification. Simultaneously, all major social media networks are deploying
     and constantly fine-tuning similar tools and systems.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多国际机构，包括 [联合国人权理事会](https://www.ohchr.org/en/hrbodies/hrc/pages/home.aspx)
+    和 [在线仇恨预防机构](https://ohpi.org.au/)，致力于理解在线仇恨言论的性质、传播和预防。近期机器学习的进展为这些努力提供了有希望的结果，特别是作为一种可扩展的自动化系统，用于早期检测和预防。学术研究人员不断改进用于仇恨言论分类的机器学习系统。同时，所有主要的社交媒体网络都在部署并不断优化类似的工具和系统。
 - en: Online hate speech is a complex subject. In this article, we consider using
     machine learning to detect hateful users based on their activities on the Twitter
     social network. The problem and dataset were first published in [1]. The data
     are freely available for download from Kaggle [here](https://www.kaggle.com/manoelribeiro/hateful-users-on-twitter).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线仇恨言论是一个复杂的主题。在这篇文章中，我们考虑使用机器学习来检测基于其在 Twitter 社交网络上的活动的仇恨用户。这个问题和数据集首次发布在
+    [1]。数据可以从 Kaggle 上 [这里](https://www.kaggle.com/manoelribeiro/hateful-users-on-twitter)
+    自由下载。
 - en: In what follows, we develop and compare two machine learning methods for classifying
     a small subset of Twitter’s users as hateful or normal (not hateful). First, we
     employ a traditional machine learning method to train a classifier based on users’
     lexicons and social profiles. Next, we apply a state-of-the-art graph neural network
     (GNN) machine learning algorithm to solve the same problem, but now also considering
     the relationships between users.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的内容中，我们开发并比较了两种机器学习方法，以将 Twitter 用户的小子集分类为仇恨用户或正常用户（非仇恨）。首先，我们采用传统的机器学习方法，根据用户的词汇和社交资料训练分类器。接下来，我们应用最先进的图神经网络（GNN）机器学习算法解决同样的问题，但现在还考虑用户之间的关系。
 - en: '*If you wish to follow along, the Python code in a Jupyter Notebook can be
     found* [*here*](https://github.com/stellargraph/stellargraph/tree/develop/demos/use-cases)*.*'
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*如果你希望跟随，Jupyter Notebook中的Python代码可以在* [*这里*](https://github.com/stellargraph/stellargraph/tree/develop/demos/use-cases)*找到。*'
 - en: '**Dataset**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据集**'
 - en: We demonstrate applying machine learning for online hate speech detection using
     a dataset of Twitter users and their activities on the social media network. The
     dataset was originally published by researchers from Universidade Federal de Minas
     Gerais, Brazil [1], and we use it without modification.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了如何使用机器学习进行在线仇恨言论检测，使用的数据集包括Twitter用户及其在社交媒体网络上的活动。该数据集最初由巴西米纳斯吉拉斯联邦大学的研究人员发布[1]，我们使用时未做修改。
 - en: The data covers 100,368 Twitter users. For each user, a number of activity-related
     features is available. Such features include the frequency of tweeting, the number
     of followers, the number of favourites, and the number of hashtags. Furthermore,
@@ -86,30 +119,40 @@
     tool [2], was used to analyse each user’s lexicon with regards to categories such
     as love, violence, community, warmth, ridicule, independence, envy, and politics,
     and assign numeric values indicating the user’s alignment with each category.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据涵盖了100,368个Twitter用户。每个用户都有多个与活动相关的特征，如发推频率、粉丝数量、收藏数量和标签数量。此外，通过分析每个用户最近200条推文中的词汇，我们得到了大量关于语言内容的特征。斯坦福大学的[Empath](http://empath.stanford.edu/)工具[2]被用来分析每个用户在爱、暴力、社区、温暖、嘲笑、独立、嫉妒和政治等类别中的词汇，并分配数值以表示用户与每个类别的关系。
 - en: In total, we use 204 features to characterise each user in the dataset. For
     each user, we collect these features to form a 204-dimensional *feature vector*
     to be used as input to a machine learning model for classifying users as hateful
     or normal.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 总的来说，我们使用204个特征来描述数据集中的每个用户。对于每个用户，我们收集这些特征形成一个204维的*特征向量*，用于作为机器学习模型的输入，以分类用户为仇恨或正常。
 - en: The dataset also includes relationships between the users. A user is considered
     connected with another user if the former has re-tweeted the latter. This relationship
     structure gives rise to a network which is different from Twitter’s network of
     follower and followee relationships. Followees are hidden from us since users
     can elect to keep their network private, while the retweet network remains public
     so long as the original tweets are public.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集还包括用户之间的关系。如果一个用户转发了另一个用户的推文，那么这两个用户被认为是相连的。这种关系结构形成了一个网络，与Twitter的关注者和被关注者网络不同。关注者对我们是隐蔽的，因为用户可以选择将他们的网络设置为私密，而转发网络保持公开，只要原始推文是公开的。
 - en: '![](../Images/9229077a5a84c30f9595fa27eae80ae3.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9229077a5a84c30f9595fa27eae80ae3.png)'
 - en: '*The relative proportions of annotated users in the dataset where red are **hateful**,
     green are **normal**, and blue are **other**. Few of the users are known to be
     hateful or not.*'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*数据集中标注用户的相对比例，其中红色表示**仇恨**，绿色表示**正常**，蓝色表示**其他**。少数用户被知晓是仇恨的或非仇恨的。*'
 - en: 'Finally, users are labelled as belonging to one of three categories: **hateful**,
     **normal**, or **other**. Out of ~100k (we use the symbol ~ to denote approximate
     numbers) users in the dataset, only ~5k have been manually annotated as **hateful**
@@ -118,156 +161,223 @@
     dataset are shown on the left where red is **hateful**, green is **normal**, and
     blue are **other**. Few of the users are known to be hateful or not. The authors
     in [1] describe in more detail the protocol guiding the data annotation process.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，用户被标记为三种类别之一：**仇恨**、**正常**或**其他**。在数据集中的约10万用户中，仅约5千个用户被手动标注为**仇恨**或**正常**；其余约9.5万用户属于**其他**类别，即尚未被标注。数据集中标注用户的相对比例如左侧所示，其中红色是**仇恨**，绿色是**正常**，蓝色是**其他**。少数用户被知晓为仇恨的或非仇恨的。文献[1]中详细描述了数据标注过程的协议。
 - en: Figure 1 shows a graphical representation of the dataset. We show users annotated
     as **hateful** in red circles, whereas we show users annotated as **normal** in
     green circles. Users labelled as **other** (not annotated) are left blank.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1显示了数据集的图形表示。我们用红色圆圈表示标注为**仇恨**的用户，用绿色圆圈表示标注为**正常**的用户。标注为**其他**（未标注）的用户则留空。
 - en: '![](../Images/734b5a2c75c48b6c5d43eb5ce33b4a45.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/734b5a2c75c48b6c5d43eb5ce33b4a45.png)'
 - en: '*Figure 1: The hateful Twitter dataset structure and basic statistics.*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1：仇恨Twitter数据集结构和基本统计数据。*'
 - en: Hateful user classification using Machine Learning
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用机器学习进行仇恨用户分类
 - en: Our objective is to train a binary classification model that can be used to
     classify users as hateful or normal. However, the dataset used to train the model
     presents two challenges.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是训练一个二分类模型，用于将用户分类为仇恨或正常。然而，用于训练模型的数据集面临两个挑战。
 - en: 'Firstly, only a small subset of users is annotated as **hateful** or **normal**,
     with majority of users’ labels unknown (**other** category). Secondly, the labelled
     data is highly imbalanced in terms of label distribution: out of the ~5k annotated
     users, only ~500 (~10%) have been annotated as **hateful** and the remaining as
     **normal**.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，只有一小部分用户被标注为**仇恨**或**正常**，大多数用户的标签未知（**其他**类别）。其次，标注数据在标签分布上高度不平衡：在约5000个标注用户中，仅约500个（约10%）被标注为**仇恨**，其余的标注为**正常**。
 - en: '[Semi-supervised machine learning](https://en.wikipedia.org/wiki/Semi-supervised_learning)
     methods can help us alleviate the small labelled sample issue by making use of
     both labelled and unlabelled data. We will consider such methods later in this
     article within the context of GNNs.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[半监督机器学习](https://en.wikipedia.org/wiki/Semi-supervised_learning)方法可以帮助我们通过利用标注数据和未标注数据来缓解标注样本不足的问题。我们将在本文后续部分讨论这些方法，尤其是在GNNs的背景下。'
 - en: To deal with class imbalance in the labelled training set, we calculate and
     use class weights; these weights are used in the model’s loss function (that is
     optimised during model training) to penalise the model’s mistakes in classifying
     users from the “minority” class (the class with fewer examples, or in this case
     the **hateful** class of users) proportionally more than mistakes in classifying
     users from the “majority” class (the **normal** class of users).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了处理标注训练集中的类别不平衡，我们计算并使用类别权重；这些权重用于模型的损失函数（在模型训练过程中优化），以使模型在将用户分类为“少数”类别（即示例较少的类别，或在本例中为**仇恨**用户类别）的错误受到比分类“多数”类别（即**正常**用户类别）的错误更多的惩罚。
 - en: '**Splitting the data into training and test sets**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**将数据划分为训练集和测试集**'
 - en: We split this data into a training and a test sets using stratified sampling
     such that 15% of the annotated user data is selected for training, and the remaining
     85% for testing the trained classification model.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将数据划分为训练集和测试集，使用分层抽样方法，使15%的标注用户数据用于训练，其余85%用于测试训练后的分类模型。
 - en: 'The statistics of our train and test sets are as follows:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的训练集和测试集的统计数据如下：
 - en: '**Train normal: 664, hateful: 81**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练正常: 664，仇恨: 81**'
 - en: '**Test normal: 3,763, hateful: 463**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**测试正常: 3,763，仇恨: 463**'
 - en: 'The training dataset exhibits high-class imbalance. We can compensate for this
     imbalance by using class weights such that more emphasis is given to the underrepresented
     class when the loss function is evaluated during model training. We calculated
     class weights **normal: 0.56 and hateful: 4.60;** that is, the positive class
     will be given **~8 times** the weight in calculating the loss function.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '训练数据集表现出高度的类别不平衡。我们可以通过使用类别权重来补偿这种不平衡，从而在模型训练过程中评估损失函数时，给予代表性较少的类别更多的权重。我们计算了类别权重**正常:
+    0.56 和仇恨: 4.60**；也就是说，正类在计算损失函数时将获得**约8倍**的权重。'
 - en: '**Evaluation metrics**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**评估指标**'
 - en: 'In order to evaluate the performance and compare the trained classification
     models, we are going to consider the following three metrics (for a description
     of evaluation metrics for binary classifiers see [here](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)),
     evaluated on the held-out test set of annotated users:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了评估性能并比较训练后的分类模型，我们将考虑以下三项指标（有关二分类器评估指标的描述请见[这里](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)），这些指标是在持出测试集的标注用户上进行评估的：
 - en: Accuracy
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 准确率
 - en: Receiver Operating Characteristic (ROC) curve
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 接收器操作特征（ROC）曲线
 - en: Area Under the ROC curve (AU-ROC)
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: ROC曲线下面积（AU-ROC）
 - en: '**Logistic regression model**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**逻辑回归模型**'
 - en: Let’s begin by training a [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression)
     (LR) model to predict a **normal** or **hateful** label for a user.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先训练一个[逻辑回归](https://en.wikipedia.org/wiki/Logistic_regression)（LR）模型，以预测用户是**正常**还是**仇恨**。
 - en: When training and evaluating this model, we will ignore users that are not annotated
     as either **normal** or **hateful** as well as the relationships between users
     due to lack of direct support for such information in LR.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练和评估这个模型时，我们将忽略那些未被标注为**正常**或**恶意**的用户以及用户之间的关系，因为LR模型不直接支持这些信息。
 - en: The training and test data are structured in tabular format, as shown in Figure
     2\. The annotated users in the training set are shown using red and green circles.
     The feature vectors for each of the users are stacked vertically to create the
     design matrix input to the LR model. After training the LR model, we can make
     predictions for the users in the held-out test set in order to measure the generalisation
     performance of the trained model.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练和测试数据以表格格式呈现，如图2所示。训练集中标注的用户用红色和绿色圆圈表示。每个用户的特征向量垂直堆叠，形成输入LR模型的设计矩阵。在训练LR模型后，我们可以对保留的测试集中的用户进行预测，以测量训练模型的泛化性能。
 - en: '![](../Images/378420260464df07c36d2e90b039f399.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/378420260464df07c36d2e90b039f399.png)'
 - en: '*Figure 2: The setup for training and evaluating a logistic regression model
     for online hate speech classification.*'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图2：用于训练和评估逻辑回归模型的设置，用于在线仇恨言论分类。*'
 - en: After training the model, we can use it to make a prediction for each user in
     the test set and calculate the accuracy and AU-ROC metrics as well as plot the
     ROC curve. The accuracy on the test set is **85.9%,** and the AU-ROC is **0.81**.
     A plot of the ROC curve can be seen in the below figure.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练模型后，我们可以用它对测试集中的每个用户进行预测，并计算准确率和AU-ROC指标，同时绘制ROC曲线。测试集上的准确率为**85.9%**，AU-ROC为**0.81**。下面的图中可以看到ROC曲线的绘制。
 - en: '![](../Images/bb2bd9a950bec8f272459c2e60af965b.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bb2bd9a950bec8f272459c2e60af965b.png)'
 - en: '*Figure 3: The ROC curve for the logistic regression classifier calculated
     using the test data. The area under the ROC curve is 0.81.*'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图3：使用测试数据计算的逻辑回归分类器的ROC曲线。ROC曲线下面积为0.81。*'
 - en: '**Graph Neural Networks**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图神经网络**'
 - en: In the specification and training of the LR model, we ignored the ~95k users
     that have not been annotated as **hateful** or **normal**. Furthermore, we ignored
     the relationships between users.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在LR模型的规范和训练中，我们忽略了约95k个未被标注为**恶意**或**正常**的用户。此外，我们忽略了用户之间的关系。
 - en: It is conceivable that a hateful user would take measures to avoid easy identification
     by, for example, being cautious not to use obviously hateful vocabulary. However,
     the same user might be comfortable retweeting other users’ hateful tweets. This
     information is hidden in the relationships between users. The LR model we employed
     above did not utilise these relationships.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以想象，一个恶意用户可能会采取措施避免被轻易识别，例如小心不使用明显的恶意词汇。然而，同一个用户可能会乐于转发其他用户的恶意推文。这些信息隐藏在用户之间的关系中。我们上述使用的LR模型没有利用这些关系。
 - en: '*This leads us to ask; can we exploit the relationships between users, as well
     as the data about non-annotated users to improve the predictive performance of
     a machine learning model? And if so, what kind of machine learning model can we
     use, and how?*'
+  id: totrans-52
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*这使我们提出了一个问题：我们能否利用用户之间的关系以及关于未标注用户的数据来提高机器学习模型的预测性能？如果可以，我们可以使用什么样的机器学习模型，以及如何使用？*'
 - en: One way to use the relationship data is to do manual [feature engineering](https://en.wikipedia.org/wiki/Feature_engineering),
     introducing network-related features into the LR model. Examples of such features
     include various [centrality measures](https://en.wikipedia.org/wiki/Centrality)
@@ -280,20 +390,27 @@
     process of manual feature engineering. (This automation of feature engineering,
     however, comes at a price of interpretability of the resulting model — a subject
     of another discussion.)
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用关系数据的一种方法是进行手动[特征工程](https://en.wikipedia.org/wiki/Feature_engineering)，将与网络相关的特征引入LR模型。此类特征的例子包括各种[中心性度量](https://en.wikipedia.org/wiki/Centrality)，这些度量量化了图中节点的位置重要性。事实上，[1]中发布的数据集包括了这些工程化的网络相关特征，但我们故意从数据中删除了这些特征，以展示现代机器学习的核心思想之一。这一思想由深度学习方法普及，即可以让机器学习算法*自动*学习适合的特征以最大化模型性能，从而避免了繁琐的手动特征工程过程。（然而，这种特征工程的自动化带来了模型解释性的代价——这是另一个讨论的话题。）
 - en: Guided by the above idea, we forgo feature engineering and tackle online hate
     speech classification using a state-of-the-art GNN algorithm. The GNN model jointly
     exploits user features and relationships between all users in the dataset, including
     those users that are not annotated. We expect that the GNN model using this additional
     information will outperform the baseline LR model.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述思想的指导下，我们放弃了特征工程，使用最先进的GNN算法来处理在线仇恨言论分类。GNN模型共同利用用户特征和数据集中所有用户之间的关系，包括那些没有标注的用户。我们期望使用这些额外信息的GNN模型会优于基线LR模型。
 - en: '*The article* [*Knowing Your Neighbours: Machine Learning on Graphs*](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896)
     *provides an introductory yet comprehensive overview of graph machine learning.*'
+  id: totrans-55
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*这篇文章* [*了解你的邻居：图上的机器学习*](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896)
+    *提供了图机器学习的入门性但全面的概述。*'
 - en: The particular GNN algorithm we employ here was published in [3]. It is called
     Graph Sample and Aggregate (GraphSAGE) and builds on the insight that a prediction
     for a node should be based on the node’s feature vector but also those of its
@@ -302,8 +419,10 @@
     to be connected with other hateful users. The strength of this connection will
     depend on both the graph distance between the two users (the [graph distance](https://en.wikipedia.org/wiki/Distance_%28graph_theory%29)
     between the two user nodes) and their feature vectors.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里使用的特定GNN算法已在[3]中发布。它被称为图采样与聚合（GraphSAGE），并基于这样的洞察：对一个节点的预测应该基于该节点的特征向量，但也应考虑其邻居的特征向量，甚至其邻居的邻居，等等。以分类仇恨用户为例，我们的工作假设是仇恨用户可能与其他仇恨用户相连。这种连接的强度将取决于两个用户之间的图距离（两个用户节点之间的[图距离](https://en.wikipedia.org/wiki/Distance_%28graph_theory%29)）以及它们的特征向量。
 - en: GraphSAGE introduces a new type of graph convolutional neural network layer
     that propagates information from a node’s neighbourhood while training a classifier.
     This new layer is summarised in Figure 4\. As described in [3] such a layer “generates
@@ -314,17 +433,24 @@
     such layers in sequence to construct a deeper network that fuses information from
     larger network neighbourhoods. The number of GraphSAGE layers to use is problem
     specific and should be tuned appropriately as a model hyperparameter.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: GraphSAGE 引入了一种新的图卷积神经网络层，该层在训练分类器时传播节点邻域的信息。这种新层在图4中进行了总结。正如[3]中所描述的，这种层“通过从节点的局部邻域中采样和聚合特征来生成嵌入。”嵌入是节点的潜在表示，可用作分类模型的输入，通常是一个全连接神经网络，从而可以以端到端的方式训练所有模型参数。我们可以将多个这样的层按顺序堆叠起来，以构建一个更深的网络，该网络融合了来自更大网络邻域的信息。使用多少
+    GraphSAGE 层是特定于问题的，应作为模型超参数进行适当调整。
 - en: '![](../Images/0df8c1b7670b5ef2edebf19dd1a79110.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0df8c1b7670b5ef2edebf19dd1a79110.png)'
 - en: '*Figure 4: Description of a GraphSAGE neural network layer. It uses aggregate
     information to form a node’s neighbourhood to learn how to make better predictions.
     The blue arrows indicate the node’s neighbours considered during the aggregation
     step.*'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图4：GraphSAGE 神经网络层的描述。它使用聚合信息来形成节点的邻域，以学习如何做出更好的预测。蓝色箭头表示在聚合步骤中考虑的节点邻居。*'
 - en: Generally, graph neural network models can become computationally unwieldy for
     large graphs with high degree nodes. To avoid this, GraphSAGE employs a sampling
     scheme to limit the number of neighbours whose feature information is passed to
@@ -335,68 +461,101 @@
     only part of the graph is available at training time (while this is not the case
     for our working example, you can find such a demonstration in the Jupyter Notebook
     [here](https://github.com/stellargraph/stellargraph/blob/develop/demos/node-classification/graphsage/graphsage-pubmed-inductive-node-classification-example.ipynb).)
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般而言，对于具有高节点度的大图，图神经网络模型可能变得计算上难以处理。为避免这种情况，GraphSAGE 使用一种采样方案来限制将特征信息传递给中心节点的邻居数量，如图4中的“AGGREGATE”步骤所示。此外，GraphSAGE
+    模型学习的函数可以用于生成在训练期间网络中不存在的节点的潜在表示。因此，GraphSAGE 可以在仅有部分图在训练时可用的归纳设置中进行预测（尽管这不是我们工作的示例中情况，你可以在
+    Jupyter Notebook [这里](https://github.com/stellargraph/stellargraph/blob/develop/demos/node-classification/graphsage/graphsage-pubmed-inductive-node-classification-example.ipynb)
+    找到这样的演示）。
 - en: The open source [StellarGraph Python Library](https://github.com/stellargraph/stellargraph)
     provides an easy to use implementation of the GraphSAGE algorithm. In this article,
     we will use StellarGraph to build and train a GraphSAGE model for predicting hateful
     Twitter users. See the Jupyter notebook [here](https://github.com/stellargraph/stellargraph/tree/develop/demos/use-cases)
     for how to do this.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 开源的 [StellarGraph Python 库](https://github.com/stellargraph/stellargraph) 提供了一个易于使用的
+    GraphSAGE 算法实现。在本文中，我们将使用 StellarGraph 来构建和训练一个 GraphSAGE 模型，以预测仇恨的 Twitter 用户。请参见
+    Jupyter notebook [这里](https://github.com/stellargraph/stellargraph/tree/develop/demos/use-cases)
+    了解如何操作。
 - en: We can visualise the node latent representations for annotated users. We take
     the output activations of the first GraphSAGE layer as the node representations.
     These are shown in 2-D in Figure 5 where **hateful** users are shown in red and
     **normal** users in blue.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以可视化注释用户的节点潜在表示。我们将第一个 GraphSAGE 层的输出激活作为节点表示。这些在图5中以二维形式显示，其中 **仇恨** 用户用红色显示，**普通**
+    用户用蓝色显示。
 - en: '![](../Images/f6b789d1de743112302a276b377d0c27.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f6b789d1de743112302a276b377d0c27.png)'
 - en: '*Figure 5: Visualisation of the node embeddings for annotated users. Hateful
     users are shown in red and normal users are shown in blue.*'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图5：注释用户节点嵌入的可视化。仇恨用户用红色显示，普通用户用蓝色显示。*'
 - en: The node latent representations shown in Figure 6 indicate that the majority
     of hateful users tend to cluster together. However, some normal users are also
     in the same neighbourhood, and these will be difficult to distinguish from hateful
     ones. Similarly, there are a small number of hateful users dispersed among normal
     users, and these will also be difficult to classify correctly.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 图6中显示的节点潜在表示表明，大多数仇恨用户倾向于聚集在一起。然而，一些正常用户也在同一区域，这些用户将难以与仇恨用户区分开来。同样，有少量仇恨用户分散在正常用户中，这些也将很难正确分类。
 - en: The GraphSAGE user classification model achieves an accuracy of **88.9%** on
     the test data and an AU-ROC score of **0.88**.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: GraphSAGE用户分类模型在测试数据上的准确率为**88.9%**，AU-ROC得分为**0.88**。
 - en: '**Comparison between models**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型之间的比较**'
 - en: Let’s now compare the GraphSAGE and logistic regression models, to see whether
     using the additional information about unlabelled users and relationships between
     users actually helped to make a better user classifier.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们比较一下GraphSAGE和逻辑回归模型，看看使用有关未标记用户和用户之间关系的额外信息是否真的有助于提高用户分类器的性能。
 - en: The ROC curves for both models are drawn together in Figure 6\. The AU-ROC is
     **0.81** and **0.88** for the LR and GraphSAGE models respectively (larger numbers
     denote better performance). By this measure, we see that utilising relationship
     information in the machine learning model improves overall predictive performance.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 图6中同时绘制了两个模型的ROC曲线。LR和GraphSAGE模型的AU-ROC分别为**0.81**和**0.88**（较大的数字表示更好的性能）。通过这一测量，我们可以看到，利用关系信息的机器学习模型提高了整体预测性能。
 - en: '![](../Images/cf98f511b9f19c8e6571fcba01a32580.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cf98f511b9f19c8e6571fcba01a32580.png)'
 - en: '*Figure 6: Plot of the ROC curves for logistic regression (orange) and GraphSAGE
     (blue) models. Also shown are the areas under the curves. The curves are drawn
     using data in the test set.*'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图6：逻辑回归（橙色）和GraphSAGE（蓝色）模型的ROC曲线图。还显示了曲线下的面积。曲线是使用测试集的数据绘制的。*'
 - en: When classifying users as **hateful** (positive class) or **normal** (negative
     class) it is important to minimise the number of false positives or the number
     of normal users that are incorrectly classified as hateful. At the same time,
     we want to correctly classify as many hateful users as possible. We can achieve
     both these goals by setting decision thresholds guided by the ROC curve.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将用户分类为**仇恨**（正类）或**正常**（负类）时，重要的是要最小化假阳性的数量，即被错误分类为仇恨的正常用户数量。同时，我们也希望能正确分类尽可能多的仇恨用户。我们可以通过设置由ROC曲线指导的决策阈值来实现这两个目标。
 - en: Assuming we are willing to tolerate a false positive rate of approximately 2%,
     the two models achieve true positive rates of **0.378** and **0.253** for GraphSAGE
     and LR respectively. We thus see that for a fixed false positive rate of 2%, the
@@ -406,23 +565,31 @@
     information available in the data, as well as the unlabelled user information,
     the performance of a machine learning model on sparsely labelled datasets with
     underlying network structure is greatly improved.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们愿意容忍约2%的假阳性率，则GraphSAGE和LR模型分别达到了**0.378**和**0.253**的真实正例率。因此，我们可以看到，对于固定的2%假阳性率，GraphSAGE模型的真实正例率比LR模型高出**12%**。也就是说，我们可以在相同的低误分类正常用户的情况下，正确识别更多的仇恨用户。我们可以得出结论，通过利用数据中可用的关系信息以及未标记用户信息，机器学习模型在具有潜在网络结构的稀疏标记数据集上的性能得到了极大提升。
 - en: Conclusion
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, we considered the rise of online hate speech fuelled by the
     Internet’s growth and asked the question; *“Can graph machine learning identify
     hate speech in online social networks?”*
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们考虑了互联网增长推动的在线仇恨言论的兴起，并提出了一个问题；*“图机器学习能否识别在线社交网络中的仇恨言论？”*
 - en: Our technical analysis answers this question with a resounding; *“Yes, but there
     is still plenty of room for improvement.”* We demonstrated that modern GNNs could
     help identify online hate speech at a much higher accuracy than traditional machine
     learning methods.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的技术分析明确回答了这个问题，*“是的，但仍有很大的改进空间。”* 我们展示了现代GNNs能够以比传统机器学习方法更高的准确度识别在线仇恨言论。
 - en: The [Council on Foreign Relations](https://www.cfr.org/) recently published
     [this article](https://www.cfr.org/backgrounder/hate-speech-social-media-global-comparisons)
     stating; “Violence attributed to online hate speech has increased worldwide.”
@@ -430,124 +597,191 @@
     fight against online hate speech. Our results provide encouragement for additional
     research for online hate speech classification with larger network datasets and
     more complex GNN methods.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[对外关系委员会](https://www.cfr.org/) 最近发表了 [这篇文章](https://www.cfr.org/backgrounder/hate-speech-social-media-global-comparisons)，指出：“归因于在线仇恨言论的暴力在全球范围内增加。”我们已经表明，图形机器学习是对抗在线仇恨言论的强有力武器。我们的结果为使用更大网络数据集和更复杂的
+    GNN 方法进行在线仇恨言论分类的额外研究提供了鼓励。'
 - en: If you want to learn more about how to use state-of-the-art GNN models for predictive
     modelling, have a look at the [StellarGraph graph machine learning library](https://github.com/stellargraph/stellargraph)
     and the numerous accompanying [demos](https://github.com/stellargraph/stellargraph/tree/develop/demos).
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于如何使用最先进的 GNN 模型进行预测建模的信息，可以查看 [StellarGraph 图形机器学习库](https://github.com/stellargraph/stellargraph)
+    和众多配套的 [演示](https://github.com/stellargraph/stellargraph/tree/develop/demos)。
 - en: This work is supported by [CSIRO’s Data61](https://www.data61.csiro.au/), Australia’s
     leading digital research network.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 本工作得到 [CSIRO Data61](https://www.data61.csiro.au/) 的支持，这是澳大利亚领先的数字研究网络。
 - en: '**References**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献**'
 - en: '“[Like Sheep Among Wolves](https://arxiv.org/abs/1801.00317)”: Characterizing
     Hateful Users on Twitter. M. H. Ribeiro, P. H. Calais, Y. A. Santos, V. A. F.
     Almeida, and W. Meira Jr. 2018.'
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: “[像狼群中的绵羊](https://arxiv.org/abs/1801.00317)”：对 Twitter 上仇恨用户的特征描述。M. H. Ribeiro,
+    P. H. Calais, Y. A. Santos, V. A. F. Almeida 和 W. Meira Jr. 2018年。
 - en: '[Empath: Understanding Topic Signals in Large-Scale Text](https://arxiv.org/abs/1602.06979).
     E. Fast, B. Chen, M. S. Bernstein, Proceedings of the CHI Conference on Human
     Factors in Computing Systems, 2016.'
+  id: totrans-82
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[Empath：理解大规模文本中的话题信号](https://arxiv.org/abs/1602.06979)。E. Fast, B. Chen,
+    M. S. Bernstein，CHI 人机交互系统会议论文集，2016年。'
 - en: '[Inductive Representation Learning on Large Graphs](http://papers.nips.cc/paper/6703-inductive-representation-learning-on-large-graphs).
     W. L. Hamilton, R. Ying, and J. Leskovec, NeurIPS, 2017'
+  id: totrans-83
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[大规模图上的归纳表示学习](http://papers.nips.cc/paper/6703-inductive-representation-learning-on-large-graphs)。W.
+    L. Hamilton, R. Ying 和 J. Leskovec，NeurIPS，2017年'
 - en: '[Original](https://medium.com/stellargraph/can-graph-machine-learning-identify-hate-speech-in-online-social-networks-58e3b80c9f7e).
     Reposted with permission.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/stellargraph/can-graph-machine-learning-identify-hate-speech-in-online-social-networks-58e3b80c9f7e)。经许可转载。'
 - en: '**Bios: **[Pantelis Elinas](https://au.linkedin.com/in/pantelis-elinas-370971119)
     is a Senior Research Engineer working at CSIRO’s Data61, Australia’s leading digital
     research network. He enjoys working on interesting problems, sharing knowledge,
     and developing useful software tools.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：**[Pantelis Elinas](https://au.linkedin.com/in/pantelis-elinas-370971119)
+    是在澳大利亚领先的数字研究网络 CSIRO Data61 工作的高级研究工程师。他喜欢解决有趣的问题，分享知识和开发有用的软件工具。'
 - en: '[Anna Leontjeva](https://au.linkedin.com/in/anna-leontjeva-datascientist) is
     a Senior Data Scientist with more than 10+ years of experience currently working
     in CSIRO''s Data61 on StellarGraph, the machine learning library for graphs.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Anna Leontjeva](https://au.linkedin.com/in/anna-leontjeva-datascientist) 是一位拥有超过
+    10 年经验的高级数据科学家，目前在 CSIRO Data61 从事 StellarGraph 的工作，这是一个图形机器学习库。'
 - en: '[Yuriy Tyshetskiy](https://au.linkedin.com/in/yuriy-tyshetskiy-b42bb216) is
     a Senior Research Engineer leading the Graph Machine Learning Systems team at
     CSIRO''s Data61, developing the StellarGraph library. His experience ranges across
     disciplines such as theoretical plasma physics, computer vision, and graph machine
     learning.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Yuriy Tyshetskiy](https://au.linkedin.com/in/yuriy-tyshetskiy-b42bb216) 是在
+    CSIRO Data61 领导图形机器学习系统团队的高级研究工程师，开发 StellarGraph 库。他的经验涉及理论等离子体物理、计算机视觉和图形机器学习等多个学科。'
 - en: '**Related:**'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Top 30 Social Network Analysis and Visualization Tools](https://www.kdnuggets.com/2015/06/top-30-social-network-analysis-visualization-tools.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前30名社交网络分析与可视化工具](https://www.kdnuggets.com/2015/06/top-30-social-network-analysis-visualization-tools.html)'
 - en: '[Knowing Your Neighbours: Machine Learning on Graphs](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解你的邻居：图上的机器学习](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)'
 - en: '[Graphs Are The Next Frontier In Data Science](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图是数据科学的下一个前沿](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
 - en: '* * *'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-93
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 需求'
 - en: '* * *'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[4 Factors to Identify Machine Learning Solvable Problems](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[识别机器学习可解决问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)'
 - en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何识别时间序列数据集中的缺失数据](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
 - en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于值得信赖的图神经网络的全面调查：…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
 - en: '[How Machine Learning Can Benefit Online Learning](https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习如何促进在线学习](https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html)'
 - en: '[Build a Text-to-Speech Converter with Python in 5 Minutes](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 5 分钟内用 Python 构建文本转语音转换器](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)'
 - en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语音识别指标的演变](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
