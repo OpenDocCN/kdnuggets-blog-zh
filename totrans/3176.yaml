@@ -1,58 +1,85 @@
 - en: Learning Curves for Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习的学习曲线
 - en: 原文：[https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html](https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html](https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/01/learning-curves-machine-learning.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/01/learning-curves-machine-learning.html?page=2#comments)'
 - en: '**By [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/), Student
     Success Specialist at Dataquest.io**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)，Dataquest.io
+    学生成功专家**'
 - en: When building machine learning models, we want to keep error as low as possible.
     Two major sources of error are bias and variance. If we managed to reduce these
     two, then we could build more accurate models.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在构建机器学习模型时，我们希望将误差保持在尽可能低的水平。误差的两个主要来源是偏差和方差。如果我们能够减少这两个因素，那么我们可以构建出更准确的模型。
 - en: But how do we diagnose bias and variance in the first place? And what actions
     should we take once we've detected something?
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，我们首先如何诊断偏差和方差？一旦检测到问题，我们应该采取什么措施？
 - en: In this post, we'll learn how to answer both these questions using learning
     curves. We'll work with a real world data set and try to predict the electrical
     energy output of a power plant.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将学习如何利用学习曲线回答这两个问题。我们将使用一个实际数据集，尝试预测电厂的电能输出。
 - en: '![topimage](../Images/b33264e06b657964ebe236ca92cc602e.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![topimage](../Images/b33264e06b657964ebe236ca92cc602e.png)'
 - en: We'll generate learning curves while trying to predict the electrical energy
     output of a power plant. Image source: [Pexels](https://www.pexels.com/photo/black-metal-current-posts-157827/).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将生成学习曲线，同时尝试预测电厂的电能输出。图片来源：[Pexels](https://www.pexels.com/photo/black-metal-current-posts-157827/)。
 - en: Some familiarity with scikit-learn and machine learning theory is assumed. If
     you don't frown when I say *cross-validation* or *supervised learning*, then you're
     good to go. If you're new to machine learning and have never tried scikit, a good
     place to start is [this blog post](https://www.dataquest.io/blog/machine-learning-tutorial/).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你对 scikit-learn 和机器学习理论有一定的了解。如果你在听到*交叉验证*或*监督学习*时没有皱眉，那么你可以继续。如果你是机器学习的新手，从[这篇博客文章](https://www.dataquest.io/blog/machine-learning-tutorial/)开始是个不错的选择。
 - en: We begin with a brief introduction to bias and variance.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先简要介绍偏差和方差。
 - en: The bias-variance trade-off
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 偏差-方差权衡
 - en: In supervised learning, we *assume* there's a real relationship between feature(s)
     and target and estimate this unknown relationship with a model. Provided the assumption
     is true, there really is a model, which we'll call ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png),
     which describes perfectly the relationship between features and target.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在监督学习中，我们*假设*特征和目标之间存在真实关系，并用模型估计这个未知的关系。如果假设是正确的，确实存在一个模型，我们称之为![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png)，它完美描述了特征和目标之间的关系。
 - en: In practice, ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png) is
     almost always completely unknown, and we try to estimate it with a model ![Equation](../Images/a94d66a6a6aee949360df0defda68828.png)
     (notice the slight difference in notation between ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png) and ![Equation](../Images/a94d66a6a6aee949360df0defda68828.png)).
@@ -61,8 +88,10 @@
     As we keep changing training sets, we get different outputs for ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
     The amount by which ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) varies
     as we change training sets is called **variance**.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实际操作中，![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png)几乎总是完全未知的，我们尝试用模型来估计它！[Equation](../Images/a94d66a6a6aee949360df0defda68828.png)（注意![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png)和![Equation](../Images/a94d66a6a6aee949360df0defda68828.png)之间符号的细微差别）。我们使用某个训练集并得到某个![Equation](../Images/a94d66a6a6aee949360df0defda68828.png)。如果使用不同的训练集，我们很可能会得到不同的![Equation](../Images/f882e047405752e27ee94c30f948ef78.png)。随着训练集的不断变化，我们会得到不同的![Equation](../Images/f882e047405752e27ee94c30f948ef78.png)的输出。![Equation](../Images/f882e047405752e27ee94c30f948ef78.png)随着训练集的变化而变化的程度称为**方差**。
 - en: To estimate the true ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png),
     we use different methods, like linear regression or random forests. Linear regression,
     for instance, assumes linearity between features and target. For most real-life
@@ -70,79 +99,111 @@
     and far from linear. Simplifying assumptions give **bias** to a model. The more
     erroneous the assumptions with respect to the true relationship, the higher the
     bias, and vice-versa.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 要估计真实的 ![方程式](../Images/0124e78268c96059dbff35809fb67ffe.png)，我们使用不同的方法，如线性回归或随机森林。例如，线性回归假设特征与目标之间的关系是线性的。然而，在大多数现实场景中，特征与目标之间的真实关系是复杂的，远非线性。简化的假设会给模型带来**偏差**。假设与真实关系的误差越大，偏差越高，反之亦然。
 - en: Generally, a model ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) will
     have some error when tested on some test data. It can be shown [mathematically](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff#Bias.E2.80.93variance_decomposition_of_squared_error) that
     both bias and variance can only add to a model's error. We want a low error, so
     we need to keep both bias and variance at their minimum. However, that's not quite
     possible. There's a trade-off between bias and variance.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，模型 ![方程式](../Images/f882e047405752e27ee94c30f948ef78.png) 在测试一些测试数据时会有一些误差。可以通过 [数学方法](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff#Bias.E2.80.93variance_decomposition_of_squared_error) 证明，偏差和方差都会增加模型的误差。我们希望误差低，所以需要将偏差和方差保持在最低水平。然而，这并不完全可能。偏差和方差之间存在权衡。
 - en: A low-biased method fits training data very well. If we change training sets,
     we'll get significantly different models ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 低偏差的方法能很好地拟合训练数据。如果我们改变训练集，我们将获得显著不同的模型 ![方程式](../Images/f882e047405752e27ee94c30f948ef78.png)。
 - en: '![low_bias](../Images/ab1470baaa9fe78506fbcac164556371.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![低偏差](../Images/ab1470baaa9fe78506fbcac164556371.png)'
 - en: You can see that a low-biased method captures most of the differences (even
     the minor ones) between the different training sets. ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) *varies* a
     lot as we change training sets, and this indicates high variance.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到，低偏差的方法能够捕捉到不同训练集之间的大多数差异（即使是微小的差异）。 ![方程式](../Images/f882e047405752e27ee94c30f948ef78.png) *变化* 很大，随着训练集的改变，这表明方差很高。
 - en: The less biased a method, the greater its ability to fit data well. The greater
     this ability, the higher the variance. Hence, the lower the bias, the greater
     the variance.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法的偏差越小，其对数据的拟合能力越强。拟合能力越强，方差也越高。因此，偏差越低，方差越大。
 - en: 'The reverse also holds: the greater the bias, the lower the variance. A high-bias
     method builds simplistic models that generally don''t fit well training data.
     As we change training sets, the models ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) we
     get from a high-bias algorithm are, generally, not very different from one another.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 反之亦然：偏差越大，方差越低。高偏差的方法构建了通常不能很好拟合训练数据的简单模型。当我们改变训练集时，从高偏差算法得到的模型 ![方程式](../Images/f882e047405752e27ee94c30f948ef78.png) 通常不会彼此有很大的不同。
 - en: '![high_bias](../Images/86c72c905bc8f130a0bba3d54a627202.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![高偏差](../Images/86c72c905bc8f130a0bba3d54a627202.png)'
 - en: 'If ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) doesn''t change
     too much as we change training sets, the variance is low, which proves our point:
     the greater the bias, the lower the variance.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 ![方程式](../Images/f882e047405752e27ee94c30f948ef78.png) 在我们改变训练集时变化不大，则方差很低，这证明了我们的观点：偏差越大，方差越低。
 - en: Mathematically, it's clear why we want low bias and low variance. As mentioned
     above, bias and variance can only add to a model's error. From a more intuitive
     perspective though, we want low bias to avoid building a model that's too simple.
     In most cases, a simple model performs poorly on training data, and it's extremely
     likely to repeat the poor performance on test data.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数学上讲，我们之所以希望偏差和方差都低是显而易见的。如上所述，偏差和方差只会增加模型的误差。然而，从更直观的角度来看，我们希望偏差低，以避免构建过于简单的模型。在大多数情况下，简单模型在训练数据上的表现较差，而且极有可能在测试数据上重复这种差劲的表现。
 - en: Similarly, we want low variance to avoid building an overly complex model. Such
     a model fits almost perfectly all the data points in the training set. Training
     data, however, generally contains noise and is only a sample from a much larger
     population. An overly complex model captures that noise. And when tested on *out-of-sample* data,
     the performance is usually poor. That's because the model learns the *sample* training
     data too well. It knows a lot about something and little about anything else.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，我们希望低方差，以避免构建一个过于复杂的模型。这样的模型几乎完美地拟合了训练集中的所有数据点。然而，训练数据通常包含噪声，并且只是来自更大人群的一个样本。一个过于复杂的模型会捕捉到这些噪声。当在*out-of-sample*数据上进行测试时，性能通常较差。这是因为模型过于完美地学习了*样本*训练数据，对其他任何东西了解较少。
 - en: In practice, however, we need to accept a trade-off. We can't have both low
     bias and low variance, so we want to aim for something in the middle.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，在实践中，我们需要接受权衡。我们不能同时拥有低偏差和低方差，因此我们希望在两者之间找到一个平衡点。
 - en: '![biasvariance](../Images/6938ccb23dc3c764c12b74135c1b9c98.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![biasvariance](../Images/6938ccb23dc3c764c12b74135c1b9c98.png)'
 - en: Source: [Scott Fortmann-Roe - Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[Scott Fortmann-Roe - 理解偏差-方差权衡](http://scott.fortmann-roe.com/docs/BiasVariance.html)
 - en: We'll try to build some practical intuition for this trade-off as we generate
     and interpret learning curves below.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在下文生成和解释学习曲线时，试图建立对这种权衡的实际直觉。
 - en: Learning curves - the basic idea
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 学习曲线 - 基本概念
 - en: Let's say we have some data and split it into a training set and [validation](https://stats.stackexchange.com/questions/19048/what-is-the-difference-between-test-set-and-validation-set#19051) set.
     We take one single instance (that's right, one!) from the training set and use
     it to estimate a model. Then we measure the model's error on the validation set
@@ -151,215 +212,322 @@
     the validation set, however, will be very large. That's because the model is built
     around a single instance, and it almost certainly won't be able to generalize
     accurately on data that hasn't seen before.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们有一些数据并将其拆分为训练集和[验证集](https://stats.stackexchange.com/questions/19048/what-is-the-difference-between-test-set-and-validation-set#19051)。我们从训练集中取出一个实例（没错，就一个！）来估计模型。然后我们测量模型在验证集和该单一训练实例上的错误。训练实例上的错误将为0，因为完美拟合一个数据点相当容易。然而，验证集上的错误将非常大。这是因为模型是围绕一个实例构建的，它几乎肯定无法准确泛化到未见过的数据上。
 - en: Now let's say that instead of one training instance, we take ten and repeat
     the error measurements. Then we take fifty, one hundred, five hundred, until we
     use our entire training set. The error scores will vary more or less as we change
     the training set.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在假设我们不是使用一个训练实例，而是使用十个，并重复错误测量。然后我们使用五十个、一百个、五百个，直到使用整个训练集。随着我们改变训练集，错误评分会有所变化。
 - en: 'We thus have two error scores to monitor: one for the validation set, and one
     for the training sets. If we plot the evolution of the two error scores as training
     sets change, we end up with two curves. These are called *learning curves*.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们需要监控两个错误评分：一个用于验证集，另一个用于训练集。如果我们绘制两个错误评分在训练集变化时的演变图，就会得到两条曲线。这些曲线被称为*学习曲线*。
 - en: In a nutshell, a learning curve shows how error changes as the training set
     size increases. The diagram below should help you visualize the process described
     so far. On the training set column you can see that we constantly increase the
     size of the training sets. This causes a slight change in our models ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，学习曲线显示了随着训练集大小的增加，错误如何变化。下图应帮助你可视化到目前为止描述的过程。在训练集列中，你可以看到我们不断增加训练集的大小。这会导致我们的模型发生轻微变化
+    ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png)。
 - en: In the first row, where n = 1 (*n* is the number of training instances), the
     model fits perfectly that single training data point. However, the very same model
     fits really bad a validation set of 20 different data points. So the model's error
     is 0 on the training set, but much higher on the validation set.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一行中，当n = 1（*n*是训练实例的数量）时，模型完美地拟合了那个单一的训练数据点。然而，同样的模型在一个包含20个不同数据点的验证集上的拟合效果非常差。因此，模型在训练集上的错误为0，但在验证集上的错误则高得多。
 - en: As we increase the training set size, the model cannot fit perfectly anymore
     the training set. So the training error becomes larger. However, the model is
     trained on more data, so it manages to fit better the validation set. Thus, the
     validation error decreases. To remind you, the validation set stays the same across
     all three cases.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着训练集大小的增加，模型无法再完美地拟合训练集。因此，训练误差变大。然而，模型在更多数据上进行训练，因此它能更好地拟合验证集。因此，验证误差减少。请注意，验证集在所有三个情况中保持不变。
 - en: '![models](../Images/266e92e6dd9cc26c3063532071441905.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![models](../Images/266e92e6dd9cc26c3063532071441905.png)'
 - en: 'If we plotted the error scores for each training size, we''d get two learning
     curves looking similarly to these:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们绘制每个训练集大小的误差得分，我们会得到类似于这些的两个学习曲线：
 - en: '![learning_curves](../Images/41b716750016cb9f85f40fba3a46795d.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![learning_curves](../Images/41b716750016cb9f85f40fba3a46795d.png)'
 - en: Learning curves give us an opportunity to diagnose bias and variance in supervised
     learning models. We'll see how that's possible in what follows.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习曲线为我们提供了诊断监督学习模型偏差和方差的机会。我们将在接下来的内容中看到这是如何实现的。
 - en: Introducing the data
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 引入数据
 - en: The learning curves plotted above are idealized for teaching purposes. In practice,
     however, they usually look significantly different. So let's move the discussion
     in a practical setting by using some real-world data.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述绘制的学习曲线是为了教学目的而理想化的。然而，在实践中，它们通常看起来有很大不同。因此，让我们使用一些真实世界的数据，将讨论转到实际环境中。
 - en: 'We''ll try to build regression models that predict the hourly electrical energy
     output of a power plant. The data we use come from Turkish researchers Pınar Tüfekci
     and Heysem Kaya, and can be downloaded from [here](https://archive.ics.uci.edu/ml/datasets/Combined+Cycle+Power+Plant).
     As the data is stored in a `.xlsx` file, we use pandas'' `read_excel()` [function](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html?highlight=read_excel#pandas.read_excel) to
     read it in:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将尝试构建回归模型，预测电厂的每小时电能输出。我们使用的数据来自土耳其研究人员 Pınar Tüfekci 和 Heysem Kaya，可以从[这里](https://archive.ics.uci.edu/ml/datasets/Combined+Cycle+Power+Plant)下载。由于数据存储在`.xlsx`文件中，我们使用
+    pandas 的 `read_excel()` [函数](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html?highlight=read_excel#pandas.read_excel)来读取数据：
 - en: '[PRE0]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '|  | AT | V | AP | RH | PE |'
+  id: totrans-45
   prefs: []
   type: TYPE_TB
+  zh: '|  | AT | V | AP | RH | PE |'
 - en: '| --- | :-- | :-- | :-- | :-- | :-- |'
+  id: totrans-46
   prefs: []
   type: TYPE_TB
+  zh: '| --- | :-- | :-- | :-- | :-- | :-- |'
 - en: '| 0 | 14.96 | 41.76 | 1024.07 | 73.17 | 463.26 |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 14.96 | 41.76 | 1024.07 | 73.17 | 463.26 |'
 - en: '| 1 | 25.18 | 62.96 | 1020.04 | 59.08 | 444.37 |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 25.18 | 62.96 | 1020.04 | 59.08 | 444.37 |'
 - en: '| 2 | 5.11 | 39.40 | 1012.16 | 92.14 | 488.56 |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 5.11 | 39.40 | 1012.16 | 92.14 | 488.56 |'
 - en: 'Let''s quickly decipher each column name:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们快速解读每一列的名称：
 - en: '| ABBREVIATION | FULL NAME |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| 缩写 | 全名 |'
 - en: '| :-- | :-- |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| :-- | :-- |'
 - en: '| AT | Ambiental Temperature |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| AT | 环境温度 |'
 - en: '| V | Exhaust Vacuum |'
+  id: totrans-54
   prefs: []
   type: TYPE_TB
+  zh: '| V | 排气真空 |'
 - en: '| AP | Ambiental Pressure |'
+  id: totrans-55
   prefs: []
   type: TYPE_TB
+  zh: '| AP | 环境压力 |'
 - en: '| RH | Relative Humidity |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '| RH | 相对湿度 |'
 - en: '| PE | Electrical Energy Output |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| PE | 电能输出 |'
 - en: The `PE` column is the target variable, and it describes the net hourly electrical
     energy output. All the other variables are potential features, and the values
     for each are actually hourly averages (not net values, like for `PE`).
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '`PE`列是目标变量，描述了净每小时电能输出。其他所有变量都是潜在的特征，且每个变量的值实际上是每小时的平均值（不是像`PE`那样的净值）。'
 - en: The electricity is generated by gas turbines, steam turbines, and heat recovery
     steam generators. According to the documentation of the data set, the vacuum level
     has an effect on steam turbines, while the other three variables affect the gas
     turbines. Consequently, we'll use all of the feature columns in our regression
     models.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 电力由燃气涡轮机、蒸汽涡轮机和热回收蒸汽发生器产生。根据数据集的文档，真空水平对蒸汽涡轮机有影响，而其他三个变量则影响燃气涡轮机。因此，我们将在回归模型中使用所有特征列。
 - en: At this step we'd normally put aside a test set, explore the training data thoroughly,
     remove any outliers, measure correlations, etc. For teaching purposes, however,
     we'll assume that's already done and jump straight to generate some learning curves.
     Before we start that, it's worth noticing that there are no missing values. Also,
     the numbers are unscaled, but we'll avoid using models that have problems with
     unscaled data.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个步骤中，我们通常会留出一个测试集，彻底探索训练数据，移除任何异常值，测量相关性等。然而，为了教学目的，我们将假设这些步骤已经完成，并直接生成一些学习曲线。在开始之前，值得注意的是没有缺失值。此外，数字是未缩放的，但我们将避免使用对未缩放数据有问题的模型。
 - en: Deciding upon the training set sizes
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 确定训练集大小
 - en: Let's first decide what training set sizes we want to use for generating the
     learning curves.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先决定我们想用什么训练集大小来生成学习曲线。
 - en: The minimum value is 1\. The maximum is given by the number of instances in
     the training set. Our training set has 9568 instances, so the maximum value is
     9568.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 最小值是1。最大值由训练集中的实例数决定。我们的训练集有9568个实例，所以最大值是9568。
 - en: However, we haven't yet put aside a validation set. We'll do that using an 80:20
     ratio, ending up with a training set of 7654 instances (80%), and a validation
     set of 1914 instances (20%). Given that our training set will have 7654 instances,
     the maximum value we can use to generate our learning curves is 7654.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，我们还没有留出验证集。我们将使用80:20的比例，最终得到一个包含7654个实例（80%）的训练集和一个包含1914个实例（20%）的验证集。鉴于我们的训练集将有7654个实例，我们生成学习曲线时可以使用的最大值是7654。
 - en: 'For our case, here, we use these six sizes:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的案例，我们使用这六种大小：
 - en: '[PRE2]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: An important thing to be aware of is that for each specified size a new model
     is trained. If you're using cross-validation, which we'll do in this post, *k* models
     will be trained for each training size (where *k* is given by the number of folds
     used for cross-validation). To save code running time, it's good practice to limit
     yourself to 5-10 training sizes.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个重要的注意事项是，对于每个指定的大小都会训练一个新的模型。如果你使用交叉验证，我们将在本帖中进行的，*k*个模型会为每个训练大小进行训练（其中*k*由交叉验证使用的折数决定）。为了节省代码运行时间，最好将训练大小限制在5-10个之间。
 - en: '* * *'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT工作'
 - en: '* * *'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，12月14日：3门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个机器学习工程师都应该具备的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
 - en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
 - en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[打破数据壁垒：零样本、单样本和少样本学习…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
 - en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[联邦学习：协作机器学习教程…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
