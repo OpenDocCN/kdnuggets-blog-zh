@@ -1,81 +1,121 @@
 - en: Running Mixtral 8x7b On Google Colab For Free
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在Google Colab上免费运行Mixtral 8x7b
 - en: 原文：[https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)
 - en: '![Running Mixtral 8x7b On Google Colab For Free](../Images/6b600750560720253d21d9da4c0e64ad.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![在Google Colab上免费运行Mixtral 8x7b](../Images/6b600750560720253d21d9da4c0e64ad.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: In this post, we will explore the new state-of-the-art open-source model called
     Mixtral 8x7b. We will also learn how to access it using the LLaMA C++ library
     and how to run large language models on reduced computing and memory.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将深入探讨一种名为Mixtral 8x7b的最新开源模型。我们还将学习如何使用LLaMA C++库来访问它，以及如何在减少计算和内存的条件下运行大型语言模型。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在IT领域'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What is Mixtral 8x7b?
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Mixtral 8x7b是什么？
 - en: '[Mixtral 8x7b](https://mistral.ai/news/mixtral-of-experts/) is a high-quality
     sparse mixture of experts (SMoE) model with open weights, created by Mistral AI.
     It is licensed under Apache 2.0 and outperforms Llama 2 70B on most benchmarks
     while having 6x faster inference. Mixtral matches or beats GPT3.5 on most standard
     benchmarks and is the best open-weight model regarding cost/performance.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Mixtral 8x7b](https://mistral.ai/news/mixtral-of-experts/)是一个高质量的稀疏专家混合（SMoE）模型，由Mistral
+    AI创建，具有开放权重。它在大多数基准测试中超越Llama 2 70B，推理速度快6倍。Mixtral在大多数标准基准测试中与GPT3.5相当或超越，是成本/性能比最佳的开放权重模型。'
 - en: '![Running Mixtral 8x7b On Google Colab For Free](../Images/a3cdcbacf215cf2d37c88bf6a9e58dad.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![在Google Colab上免费运行Mixtral 8x7b](../Images/a3cdcbacf215cf2d37c88bf6a9e58dad.png)'
 - en: Image from [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来自 [Mixtral专家](https://mistral.ai/news/mixtral-of-experts/)
 - en: Mixtral 8x7B uses a decoder-only sparse mixture-of-experts network. This involves
     a feedforward block selecting from 8 groups of parameters, with a router network
     choosing two of these groups for each token, combining their outputs additively.
     This method enhances the model's parameter count while managing cost and latency,
     making it as efficient as a 12.9B model, despite having 46.7B total parameters.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Mixtral 8x7B使用仅解码器的稀疏专家混合网络。这涉及到一个前馈块从8组参数中选择，路由网络为每个token选择其中两个组，将它们的输出进行加和。这种方法在管理成本和延迟的同时增强了模型的参数数量，使其在效率上等同于一个12.9B模型，尽管总参数量为46.7B。
 - en: Mixtral 8x7B model excels in handling a wide context of 32k tokens and supports
     multiple languages, including English, French, Italian, German, and Spanish. It
     demonstrates strong performance in code generation and can be fine-tuned into
     an instruction-following model, achieving high scores on benchmarks like MT-Bench.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Mixtral 8x7B模型在处理32k tokens的广泛上下文方面表现出色，并支持包括英语、法语、意大利语、德语和西班牙语在内的多种语言。它在代码生成方面表现强劲，并可以被微调为一个指令跟随模型，在MT-Bench等基准测试中取得高分。
 - en: Running Mixtral 8x7b using LLaMA C++
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用LLaMA C++运行Mixtral 8x7b
 - en: '[LLaMA.cpp](https://github.com/ggerganov/llama.cpp) is a C/C++ library that
     provides a high-performance interface for large language models (LLMs) based on
     Facebook''s LLM architecture. It is a lightweight and efficient library that can
@@ -83,119 +123,182 @@
     answering. LLaMA.cpp supports a wide range of LLMs, including LLaMA, LLaMA 2,
     Falcon, Alpaca, Mistral 7B, Mixtral 8x7B, and GPT4ALL. It is compatible with all
     operating systems and can function on both CPUs and GPUs.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[LLaMA.cpp](https://github.com/ggerganov/llama.cpp) 是一个 C/C++ 库，提供了一个高性能接口，用于大型语言模型（LLMs），基于
+    Facebook 的 LLM 架构。它是一个轻量且高效的库，可用于多种任务，包括文本生成、翻译和问答。LLaMA.cpp 支持广泛的 LLM，包括 LLaMA、LLaMA
+    2、Falcon、Alpaca、Mistral 7B、Mixtral 8x7B 和 GPT4ALL。它与所有操作系统兼容，可以在 CPU 和 GPU 上运行。'
 - en: In this section, we will be running the llama.cpp web application on Colab.
     By writing a few lines of code, you will be able to experience the new state-of-the-art
     model performance on your PC or on Google Colab.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一部分，我们将在 Colab 上运行 llama.cpp web 应用程序。通过编写几行代码，你将能够在你的 PC 或 Google Colab 上体验到最新的模型性能。
 - en: Getting Started
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 入门指南
 - en: 'First, we will download the llama.cpp GitHub repository using the command line
     below:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将使用以下命令行下载 llama.cpp GitHub 仓库：
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After that, we will change directory into the repository and install the llama.cpp
     using the `make` command. We are installing the llama.cpp for the NVidia GPU with
     CUDA installed.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，我们将切换到代码库目录，并使用 `make` 命令安装 llama.cpp。我们为安装了 CUDA 的 NVidia GPU 安装 llama.cpp。
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Download the Model
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 下载模型
 - en: We can download the model from the Hugging Face Hub by selecting the appropriate
     version of the `.gguf` model file. More information on various versions can be
     found in [TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF](https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF#provided-files).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以从 Hugging Face Hub 下载模型，通过选择适当版本的 `.gguf` 模型文件。有关不同版本的更多信息，请参阅 [TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF](https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF#provided-files)。
 - en: '![Running Mixtral 8x7b On Google Colab For Free](../Images/f0245bfd4ff28d35bbad7830b74de525.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/f0245bfd4ff28d35bbad7830b74de525.png)'
 - en: Image from [TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF](https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/tree/main)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF](https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/tree/main)
 - en: You can use the command `wget` to download the model in the current directory.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用命令 `wget` 在当前目录中下载模型。
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: External Address for LLaMA Server
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: LLaMA 服务器的外部地址
 - en: When we run the LLaMA server it will give us a localhost IP which is useless
     for us on Colab. We need the connection to the localhost proxy by using the Colab
     kernel proxy port.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们运行 LLaMA 服务器时，它会给我们一个 localhost IP，这对我们在 Colab 上无用。我们需要通过使用 Colab 内核代理端口连接到
+    localhost 代理。
 - en: After running the code below, you will get the global hyperlink. We will use
     this link to access our webapp later.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行以下代码后，你将获得全球超链接。我们稍后将使用这个链接来访问我们的 webapp。
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Running the Server
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 运行服务器
 - en: To run the LLaMA C++ server, you need to provide the server command with the
     location of the model file and the correct port number. It's important to make
     sure that the port number matches the one we initiated in the previous step for
     the proxy port.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 要运行 LLaMA C++ 服务器，你需要提供服务器命令，指定模型文件的位置以及正确的端口号。确保端口号与我们在前一步为代理端口初始化的端口号匹配非常重要。
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Running Mixtral 8x7b On Google Colab For Free](../Images/c08977e32df06174dee0deab33f7fec8.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/c08977e32df06174dee0deab33f7fec8.png)'
 - en: The chat webapp can be accessed by clicking on the proxy port hyperlink in the
     previous step since the server is not running locally.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于服务器没有在本地运行，可以通过点击前一步中的代理端口超链接访问聊天 webapp。
 - en: LLaMA C++ Webapp
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: LLaMA C++ Webapp
 - en: Before we begin using the chatbot, we need to customize it. Replace "LLaMA"
     with your model name in the prompt section. Additionally, modify the user name
     and bot name to distinguish between the generated responses.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始使用聊天机器人之前，我们需要对其进行自定义。在提示部分将 "LLaMA" 替换为你的模型名称。此外，修改用户名和机器人名称以区分生成的回复。
 - en: '![Running Mixtral 8x7b On Google Colab For Free](../Images/041c82e7530fabeadb9e877db16fc582.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/041c82e7530fabeadb9e877db16fc582.png)'
 - en: Start chatting by scrolling down and typing in the chat section. Feel free to
     ask technical questions that other open source models have failed to answer properly.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过向下滚动并在聊天区域输入来开始聊天。随意提出其他开源模型无法正确回答的技术问题。
 - en: '![Running Mixtral 8x7b On Google Colab For Free](../Images/12c1e90834baaa365a694671d711c2b7.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/12c1e90834baaa365a694671d711c2b7.png)'
 - en: 'If you encounter issues with the app, you can try running it on your own using
     my Google Colab: https://colab.research.google.com/drive/1gQ1lpSH-BhbKN-DdBmq5r8-8Rw8q1p9r?usp=sharing'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你遇到应用程序的问题，可以尝试使用我的 Google Colab 运行它：https://colab.research.google.com/drive/1gQ1lpSH-BhbKN-DdBmq5r8-8Rw8q1p9r?usp=sharing
 - en: Conclusion
+  id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: This tutorial provides a comprehensive guide on how to run the advanced open-source
     model, Mixtral 8x7b, on Google Colab using the LLaMA C++ library. Compared to
     other models, Mixtral 8x7b delivers superior performance and efficiency, making
@@ -203,13 +306,18 @@
     models but do not have extensive computational resources. You can easily run it
     on your laptop or on a free cloud compute. It is user-friendly, and you can even
     deploy your chat app for others to use and experiment with.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程提供了如何使用 LLaMA C++ 库在 Google Colab 上运行高级开源模型 Mixtral 8x7b 的全面指南。与其他模型相比，Mixtral
+    8x7b 提供了更出色的性能和效率，成为那些希望尝试大型语言模型但没有广泛计算资源的人的理想解决方案。你可以轻松地在笔记本电脑或免费的云计算平台上运行它。它用户友好，你甚至可以为其他人部署你的聊天应用进行使用和实验。
 - en: I hope you found this simple solution to running the large model helpful. I
     am always looking for simple and better options. If you have an even better solution,
     please let me know, and I will cover it next time.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望你发现这个简单的解决方案对运行大型模型有所帮助。我始终在寻找更简单、更好的选项。如果你有更好的解决方案，请告诉我，我会在下次介绍。
 - en: '[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)****
     ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) is a certified data
     scientist professional who loves building machine learning models. Currently,
@@ -218,33 +326,51 @@
     and a bachelor''s degree in telecommunication engineering. His vision is to build
     an AI product using a graph neural network for students struggling with mental
     illness.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)****
+    ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid
+    拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个 AI 产品，帮助那些在精神健康方面遇到困难的学生。'
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Running Redis on Google Colab](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 上运行 Redis](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)'
 - en: '[Fine Tuning LLAMAv2 with QLora on Google Colab for Free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 上免费微调 LLAMAv2 与 QLora](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)'
 - en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从 Google Colab 到 Ploomber 管道：使用 GPU 扩展机器学习](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
 - en: '[RAPIDS cuDF for Accelerated Data Science on Google Colab](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 上加速数据科学的 RAPIDS cuDF](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
 - en: '[How to Get Up and Running with SQL - A List of Free Learning Resources](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何开始使用 SQL - 免费学习资源列表](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)'
 - en: '[7 Steps to Running a Small Language Model on a Local CPU](https://www.kdnuggets.com/7-steps-to-running-a-small-language-model-on-a-local-cpu)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在本地 CPU 上运行小型语言模型的 7 个步骤](https://www.kdnuggets.com/7-steps-to-running-a-small-language-model-on-a-local-cpu)'
