@@ -1,600 +1,909 @@
 - en: How to Package and Distribute Machine Learning Models with MLFlow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 MLFlow 打包和分发机器学习模型
 - en: 原文：[https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)
 - en: One of the fundamental activities during each stage of the ML model life cycle
     development is collaboration. Taking an ML model from its conception to deployment
     requires participation and interaction between different roles involved in constructing
     the model. In addition, the nature of ML model development involves experimentation,
     tracking of artifacts and metrics, model versions, etc., which demands an effective
     organization for the correct maintenance of the ML model life cycle.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习模型生命周期开发的每个阶段，协作是一个基本活动。将机器学习模型从构思到部署的过程需要不同角色之间的参与和互动。此外，机器学习模型开发的性质涉及实验、工件和指标的跟踪、模型版本等，这要求有效的组织来正确维护机器学习模型生命周期。
 - en: Fortunately, there are tools for developing and maintaining a model’s life cycle,
     such as [MLflow](https://mlflow.org/). In this article, we will break down MLflow,
     its main components, and its characteristics. We’ll also offer examples showing
     how MLflow works in practice.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，有一些工具用于开发和维护模型生命周期，比如 [MLflow](https://mlflow.org/)。在本文中，我们将解析 MLflow、它的主要组件及其特性。我们还将提供示例，展示
+    MLflow 在实际中的工作方式。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What is MLflow?
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是 MLflow？
 - en: MLflow is an open-source tool for the development, maintenance, and collaboration
     in each phase of the life cycle of an ML model. Furthermore, MLflow is a framework-agnostic
     tool, so any ML / DL framework can quickly adapt to the ecosystem that MLflow
     proposes.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: MLflow 是一个开源工具，旨在支持机器学习模型生命周期的每个阶段的开发、维护和协作。此外，MLflow 是一个框架无关的工具，因此任何机器学习/深度学习框架都可以迅速适应
+    MLflow 提出的生态系统。
 - en: MLflow emerges as a platform that offers tools for tracking metrics, artifacts,
     and metadata. It also provides standard formats for packaging, distributing, and
     deploying models and projects.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: MLflow 是一个提供跟踪指标、工件和元数据工具的平台。它还提供了用于打包、分发和部署模型及项目的标准格式。
 - en: 'MLflow also offers tools for managing model versions. These tools are encapsulated
     in its four main components:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: MLflow 还提供了管理模型版本的工具。这些工具被封装在其四个主要组件中：
 - en: MLflow Tracking,
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MLflow 跟踪，
 - en: MLflow Projects,
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MLflow 项目，
 - en: MLflow Models and
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MLflow 模型和
 - en: MLflow Registry.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MLflow 注册表。
 - en: MLflow Tracking
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: MLflow 跟踪
 - en: '[MLflow Tracking](https://mlflow.org/docs/latest/tracking.html) is an API-based
     tool for logging metrics, parameters, model versions, code versions, and files.
     MLflow Tracking is integrated with a UI for visualizing and managing artifacts,
     models, files, etc.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[MLflow 跟踪](https://mlflow.org/docs/latest/tracking.html) 是一个基于 API 的工具，用于记录指标、参数、模型版本、代码版本和文件。MLflow
+    跟踪集成了一个用户界面，用于可视化和管理工件、模型、文件等。'
 - en: Each MLflow Tracking session is organized and managed under the concept of runs.
     A run refers to the execution of code where the artifact log is performed explicitly.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个 MLflow 跟踪会话都在运行的概念下组织和管理。运行指的是代码的执行，其中工件日志被显式记录。
 - en: MLflow Tracking allows you to generate runs through MLflow’s [Python](https://www.mlflow.org/docs/latest/python_api/index.html),
     [R](https://www.mlflow.org/docs/latest/R-api.html), [Java](https://www.mlflow.org/docs/latest/java_api/index.html),
     and [REST APIs](https://www.mlflow.org/docs/latest/rest-api.html). By default,
     the runs are stored in the directory where the code session is executed. However,
     MLflow also allows storing artifacts on a local or remote server.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: MLflow Tracking 允许你通过 MLflow 的 [Python](https://www.mlflow.org/docs/latest/python_api/index.html)、[R](https://www.mlflow.org/docs/latest/R-api.html)、[Java](https://www.mlflow.org/docs/latest/java_api/index.html)
+    和 [REST APIs](https://www.mlflow.org/docs/latest/rest-api.html) 生成运行记录。默认情况下，这些运行记录会存储在代码会话执行的目录中。不过，MLflow
+    也允许将工件存储在本地或远程服务器上。
 - en: MLflow Model
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: MLflow 模型
 - en: '[MLflow Models](https://mlflow.org/docs/latest/models.html) allow packaging
     machine learning models in a standard format to be consumed directly through different
     services such as REST API, Microsoft Azure ML, Amazon SageMaker, or Apache Spark.
     One of the advantages of the MLflow Models convention is that the packaging is
     multi-language or multi-flavor.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[MLflow Models](https://mlflow.org/docs/latest/models.html) 允许将机器学习模型打包为标准格式，以便通过
+    REST API、Microsoft Azure ML、Amazon SageMaker 或 Apache Spark 等不同服务直接使用。MLflow Models
+    规范的一个优点是打包支持多语言或多风味。'
 - en: For packaging, MLflow generates a directory with two files, the model and a
     file that specifies the packaging and loading details of the model. For example,
     the following code snippet shows an MLmodel file where the flavor loader is specified
     as well as the `conda.yaml` file  that defines the environment.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于打包，MLflow 会生成一个包含两个文件的目录，一个是模型文件，另一个是指定模型打包和加载细节的文件。例如，下面的代码片段展示了一个 MLmodel
+    文件，其中指定了风味加载器以及定义环境的 `conda.yaml` 文件。
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: MLflow Project
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: MLflow 项目
 - en: '[MLflow Projects](https://www.mlflow.org/docs/latest/projects.html) provides
     a standard format for packaging, sharing, and reusing machine learning projects.
     Each project can be a remote repository or a local directory. Unlike MLflow Models,
     MLflow Projects aims at the portability and distribution of machine learning projects.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[MLflow Projects](https://www.mlflow.org/docs/latest/projects.html) 提供了一个用于打包、共享和重用机器学习项目的标准格式。每个项目可以是一个远程仓库或本地目录。与
+    MLflow Models 不同，MLflow Projects 旨在实现机器学习项目的可移植性和分发。'
 - en: An MLflow Project is defined by a YAML manifest called `MLProject`, where the
     project’s specifications are exposed.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 MLflow 项目由一个名为 `MLProject` 的 YAML 清单定义，其中公开了项目的规格。
 - en: 'The key features for the implementation of the model are specified in the MLProject
     file. These include:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型实现的关键特性在 MLProject 文件中指定。这些特性包括：
 - en: the input parameters that the model receives,
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型接收的输入参数，
 - en: the data type of the parameters,
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 参数的数据类型，
 - en: the command for executing the model, and
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 执行模型的命令，以及
 - en: the environment in which the project runs.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 项目运行的环境。
 - en: The following code snippet shows an example of an MLProject file where the model
     to implement is a decision tree whose only parameter is the depth of the tree
     and whose default value is 2.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码片段展示了一个 MLProject 文件的示例，其中实现的模型是一个决策树，其唯一参数是树的深度，默认值为 2。
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Likewise, MLflow provides a CLI to run projects located on a local server or
     a remote repository. The following code snippet shows an example of how a project
     is run from a local server or a remote repository:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，MLflow 提供了一个 CLI 来运行位于本地服务器或远程仓库中的项目。下面的代码片段展示了如何从本地服务器或远程仓库运行项目的示例：
 - en: '[PRE2]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: In both examples, the environment will be generated based on the `MLProject
     file` specification. The command that triggers the model will be executed under
     the arguments passed on the command line. Since the model allows input parameters,
     these are assigned through the `-P` flag. In both examples, the model parameter
     refers to the maximum depth of the decision tree.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这两个示例中，环境将根据 `MLProject file` 规格生成。触发模型的命令将在命令行上传递的参数下执行。由于模型允许输入参数，这些参数通过
+    `-P` 标志进行分配。在这两个示例中，模型参数指的是决策树的最大深度。
 - en: By default, a run like the one shown in the example will store the artifacts
     in the `.mlruns` directory.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，如示例所示的运行将把工件存储在 `.mlruns` 目录中。
 - en: How to Store Artifacts in an MLflow Server?
+  id: totrans-40
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在 MLflow 服务器中存储工件？
 - en: 'One of the most common use cases when implementing MLflow is using MLflow Server
     to log metrics and artifacts. The MLflow Server is responsible for managing the
     artifacts and files generated by an MLflow Client. These artifacts can be stored
     in different schemes, from a file directory to a remote database. For example,
     to run an MLflow Server locally, we type:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 实施 MLflow 时最常见的用例之一是使用 MLflow 服务器来记录指标和工件。MLflow 服务器负责管理由 MLflow 客户端生成的工件和文件。这些工件可以存储在不同的方案中，从文件目录到远程数据库。例如，要在本地运行
+    MLflow 服务器，我们输入：
 - en: '[PRE3]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The above command will start an MLflow service through the IP address http://127.0.0.1:5000/.
     To store artifacts and metrics, the tracking URI of the server is defined in a
     client session
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述命令将通过 IP 地址 http://127.0.0.1:5000/ 启动一个 MLflow 服务。为了存储工件和指标，服务器的跟踪 URI 在客户端会话中定义。
 - en: 'In the following code snippet, we will see the basic implementation of artifact
     storage in an MLflow Server:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面的代码片段中，我们将看到在 MLflow 服务器中实施工件存储的基本实现：
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The `MLflow.set_tracking_uri ()` command sets the location of the server.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '`MLflow.set_tracking_uri ()` 命令设置服务器的位置。'
 - en: How to Run Authentication in an MLflow Server?
+  id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在 MLflow 服务器中运行身份验证？
 - en: 'Exposing a  server with no authentication can be risky. Therefore, it is convenient
     to add authentication. Authentication will depend on the ecosystem in which you
     will deploy the server:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 暴露一个没有身份验证的服务器可能是有风险的。因此，添加身份验证是很方便的。身份验证将取决于你部署服务器的生态系统：
 - en: on a local server, it is enough to add a basic authentication based on *user*
     and *password*,
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在本地服务器上，只需添加基于 *用户* 和 *密码* 的基本身份验证即可，
 - en: on a remote server, credentials must be adjusted coupled with respective proxies.
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在远程服务器上，凭据必须与相应的代理一起调整。
 - en: For illustration, let's look at an example of an MLflow Server deployed with
     basic authentication (*username* and *password*). We will also see how to configure
     a client to make use of this server.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明，我们来看一个应用基本身份验证（*用户名* 和 *密码*）的 MLflow 服务器示例。我们还将看到如何配置客户端以使用该服务器。
 - en: 'Example: MLflow Server authentication'
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例：MLflow 服务器身份验证
 - en: In this example, we apply basic user and password authentication to the MLflow
     Server through an Nginx reverse proxy.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，我们通过 Nginx 反向代理对 MLflow 服务器应用基本的用户名和密码身份验证。
 - en: 'Let''s start with the installation of Nginx, which we can do in the following
     way:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从安装 Nginx 开始，我们可以通过以下方式进行：
 - en: '[PRE5]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: For Windows OS, you have to use the native Win32 API. Please follow the detailed
     instructions [here](https://nginx.org/en/docs/windows.html).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 Windows 操作系统，你需要使用本机 Win32 API。请按照 [这里](https://nginx.org/en/docs/windows.html)
+    的详细说明操作。
 - en: 'Once installed, we will proceed to generate a user with its respective password
     using the `htpasswd` command, which is as follows:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装完成后，我们将使用 `htpasswd` 命令生成一个具有相应密码的用户，如下所示：
 - en: '[PRE6]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The above command generates credentials for the user `mlflow-user` in the `.htpasswd`
     file of the nginx service. Later, to define the proxy under the created user credentials,
     the configuration file `/usr/local/etc/nginx/nginx.conf` is modified, which by
     default has the following content: :'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述命令为 `.htpasswd` 文件中的用户 `mlflow-user` 生成凭据。之后，为了在创建的用户凭据下定义代理，将修改配置文件 `/usr/local/etc/nginx/nginx.conf`，该文件默认内容如下：
 - en: '[PRE7]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'which has to look like this:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成的凭据应如下所示：
 - en: '[PRE8]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'We are defining an authentication proxy for localhost through port 5000\. This
     is the IP address and port number where MLflow Server is deployed by default.
     When using a cloud provider, you must configure the credentials and proxies necessary
     for the implementation. Now initialize the MLflow server as shown in the following
     code snippet:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过端口 5000 为 localhost 定义了一个身份验证代理。这是 MLflow 服务器默认部署的 IP 地址和端口号。当使用云提供商时，你必须配置实现所需的凭据和代理。现在按照以下代码片段初始化
+    MLflow 服务器：
 - en: '[PRE9]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: When trying to access http://localhost in the browser, authentication will be
     requested through the username and password created.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 当尝试在浏览器中访问 http://localhost 时，将会要求通过创建的用户名和密码进行身份验证。
 - en: '![Login](../Images/75f7e933ab09a0f7fb49dc4d8a1bcbf1.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![登录](../Images/75f7e933ab09a0f7fb49dc4d8a1bcbf1.png)'
 - en: Figure 1\. Login
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1\. 登录
 - en: Once you have entered the credentials, you will be directed to the MLflow Server
     UI.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入凭据后，你将被引导到 MLflow 服务器 UI。
 - en: '![MLflow Server UI](../Images/ee8980fc7b14bbdc2fb10610bfc24070.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![MLflow 服务器 UI](../Images/ee8980fc7b14bbdc2fb10610bfc24070.png)'
 - en: Figure 2\. MLflow Server UI
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 2\. MLflow 服务器 UI
 - en: 'To store data in MLflow Server from a client, you have to:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 要从客户端将数据存储到 MLflow 服务器，你需要：
 - en: define the environment variables that will contain the credentials to access
     the server and
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义将包含访问服务器凭证的环境变量，并
 - en: set the URI where the artifacts will be stored.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置将存储工件的URI。
 - en: 'So, for the credentials, we are going to export the following environment variables:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，对于凭证，我们将导出以下环境变量：
 - en: '[PRE10]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Once you have defined the environment variables, you only need to define the
     server URI for the artifact storage.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦定义了环境变量，你只需定义工件存储的服务器URI。
 - en: '[PRE11]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: When executing the code snippet above, we can see the test metric and parameter
     reflect on the server.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行上述代码片段时，我们可以看到测试指标和参数在服务器上的反映。
 - en: '![Metrics and parameters stored from a client service with authentication on
     the server.](../Images/27b97fd9e33290425f2e3d54daec50bc.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![从带有服务器身份验证的客户端服务中存储的指标和参数。](../Images/27b97fd9e33290425f2e3d54daec50bc.png)'
 - en: Figure 3\. Metrics and parameters stored from a client service with authentication
     on the server.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3\. 从带有服务器身份验证的客户端服务中存储的指标和参数。
 - en: How to Register an MLflow Model?
+  id: totrans-81
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何注册一个MLflow模型？
 - en: One of the everyday needs when developing machine learning models is to maintain
     order in the versions of the models. For this, MLflow offers the [MLflow Registry](https://mlflow.org/docs/latest/model-registry.html).
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开发机器学习模型时，一个日常需求是保持模型版本的有序性。为此，MLflow提供了[MLflow注册表](https://mlflow.org/docs/latest/model-registry.html)。
 - en: 'The MLflow Registry is an extension that helps to:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: MLflow注册表是一个扩展，有助于：
 - en: manage versions of each MLModel and
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 管理每个MLModel的版本并
 - en: 'record the evolution of each model in three different phases: archive, *staging,*
     and *production. It is* very similar to the git version system.'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 记录每个模型在三个不同阶段的演变：归档、*暂存*和*生产。它是* 与git版本系统非常相似。
 - en: 'There are four alternatives for registering a model:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 有四种注册模型的替代方案：
 - en: through the UI,
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过UI，
 - en: as an argument to `MLflow.<flavor> .log_model()`,
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 作为`MLflow.<flavor>.log_model()`的参数，
 - en: with the `MLflow.register_model()` method or
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`MLflow.register_model()`方法或
 - en: with the `create_registered_model()` client API.
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`create_registered_model()`客户端API。
 - en: 'In the following example, the model is registered using the `MLflow.<flavor>
     .log_model()` method:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 在以下示例中，使用`MLflow.<flavor>.log_model()`方法注册模型：
 - en: '[PRE12]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: If it is a new model, MLFlow will initialize it as *Version 1*. If the model
     is already versioned, it will be initialized as *Version 2* (or subsequent version).
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这是一个新模型，MLFlow会将其初始化为*版本1*。如果模型已经有版本，它将被初始化为*版本2*（或后续版本）。
 - en: 'By default, when registering a model, the assigned status is none. To assign
     a status to a registered model, we can do it in the following way:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，注册模型时分配的状态为无。要为注册的模型分配状态，我们可以按以下方式进行：
 - en: '[PRE13]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'In the above code snippet, *version 2* of the *Decision Tree* model is assigned
     to the *Staging* state. In the server UI, we can see the states as shown in Figure
     4:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述代码片段中，*版本2*的*决策树*模型被分配到*暂存*状态。在服务器UI中，我们可以看到状态，如图4所示：
 - en: '![Registered Models](../Images/a520e6d37fe1a626f8761a15d3e6ee51.png)'
+  id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![注册的模型](../Images/a520e6d37fe1a626f8761a15d3e6ee51.png)'
 - en: Figure 4\. Registered Models
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 图4\. 注册的模型
 - en: 'To serve the model we will use the MLflow CLI, for this we only need the server
     URI, the model name, and the model status, as shown below:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了服务模型，我们将使用MLflow CLI，为此我们只需服务器URI、模型名称和模型状态，如下所示：
 - en: '[PRE14]'
+  id: totrans-100
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Model is Served and POST Eequests
+  id: totrans-101
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 模型的服务和POST请求
 - en: '[PRE15]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: In the previous code snippet, a POST request is made to the address where the
     model is served. An array that contains five elements has been passed in the request,
     which is what the model expects as input data for the inference. The prediction,
     in this case, turned out to be 1.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的代码片段中，向模型服务的地址发送了一个POST请求。请求中传递了一个包含五个元素的数组，这正是模型期望的推断输入数据。此情况下的预测结果为1。
 - en: However, it is important to mention that MLFlow allows defining the data structure
     for inferring in the `MLmodel` file through the implementation of [signatures](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html).
     Likewise, the data passed through the request can be of different types, which
     can be consulted [here](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html).
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，需要提到的是，MLFlow允许通过[签名](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html)的实现定义`MLmodel`文件的推断数据结构。同样，请求中传递的数据可以是不同类型的，这些类型可以在[这里](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html)查看。
 - en: 'The full implementation of the previous example can be found here: [https://github.com/FernandoLpz/MLFlow-example](https://github.com/FernandoLpz/MLFlow-example)'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述示例的完整实现可以在此找到：[https://github.com/FernandoLpz/MLFlow-example](https://github.com/FernandoLpz/MLFlow-example)
 - en: MLflow Plugins
+  id: totrans-106
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MLflow 插件
 - en: Due to the framework-agnostic nature of MLflow, [MLflow Plugins](https://mlflow.org/docs/latest/plugins.html#writing-your-own-mlflow-plugins)
     emerged.  Its primary function is to extend the functionalities of MLflow in an
     adaptive way to different frameworks.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 MLflow 的框架无关特性，[MLflow 插件](https://mlflow.org/docs/latest/plugins.html#writing-your-own-mlflow-plugins)
+    应运而生。其主要功能是以适应不同框架的方式扩展 MLflow 的功能。
 - en: MLflow Plugins allow customization and adaptation of the deployment and storage
     of artifacts for specific platforms.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: MLflow 插件允许对特定平台的部署和工件存储进行自定义和调整。
 - en: 'For example, there are plugins for a platform-specific deployment:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，针对平台特定部署有插件：
 - en: '[MLflow-redisai](https://github.com/RedisAI/mlflow-redisai): which allows the
     creation of deployments to [RedisAI](https://oss.redislabs.com/redisai/) from
     models created and managed in MLFlow,'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLflow-redisai](https://github.com/RedisAI/mlflow-redisai)：允许将从 MLFlow 创建和管理的模型部署到
+    [RedisAI](https://oss.redislabs.com/redisai/)。'
 - en: '[MLflow-torchserve](https://github.com/mlflow/mlflow-torchserve): which enables
     [PyTorch](https://pytorch.org/) models to be deployed directly to [TorchServe](https://github.com/pytorch/serve),'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLflow-torchserve](https://github.com/mlflow/mlflow-torchserve)：使 [PyTorch](https://pytorch.org/)
+    模型能够直接部署到 [TorchServe](https://github.com/pytorch/serve)。'
 - en: '[MLflow-algorithmia](https://github.com/algorithmiaio/mlflow-algorithmia):
     that allows deployment of  models created and managed with MLFlow, to the [Algorithmia](https://algorithmia.com/)
     infrastructure, and'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLflow-algorithmia](https://github.com/algorithmiaio/mlflow-algorithmia)：允许将使用
+    MLFlow 创建和管理的模型部署到 [Algorithmia](https://algorithmia.com/) 基础设施中。'
 - en: '[MLflow-ray-serve](https://github.com/ray-project/mlflow-ray-serve): that supports
     deployment of MLFlow models to the [Ray](https://docs.ray.io/en/master/serve/)
     infrastructure.'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLflow-ray-serve](https://github.com/ray-project/mlflow-ray-serve)：支持将 MLFlow
+    模型部署到 [Ray](https://docs.ray.io/en/master/serve/) 基础设施中。'
 - en: On the other hand, for the management of MLflow Projects, we have [MLflow-yarn](https://github.com/criteo/mlflow-yarn),
     a plugin for managing MLProjects under a [Hadoop](https://hadoop.apache.org/)
     / [Yarn](https://yarnpkg.com/) backed. For the customization of MLflow Tracking,
     we have [MLflow-elasticsearchstore](https://github.com/criteo/mlflow-elasticsearchstore),
     which allows the management of the MLFlow Tracking extension under an [Elasticsearch](https://www.elastic.co/)
     environment.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，对于 MLflow 项目的管理，我们有 [MLflow-yarn](https://github.com/criteo/mlflow-yarn)，一个用于在
+    [Hadoop](https://hadoop.apache.org/) / [Yarn](https://yarnpkg.com/) 支持下管理 MLProjects
+    的插件。对于 MLflow Tracking 的自定义，我们有 [MLflow-elasticsearchstore](https://github.com/criteo/mlflow-elasticsearchstore)，它允许在
+    [Elasticsearch](https://www.elastic.co/) 环境下管理 MLFlow Tracking 扩展。
 - en: 'Likewise, specific plugins are offered for deployment in *AWS* and *Azure*.
     They are:'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，针对 *AWS* 和 *Azure* 的特定插件也可用。
 - en: '[*MLflow.sagemaker*](https://www.mlflow.org/docs/latest/python_api/mlflow.sagemaker.html)
     and'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[*MLflow.sagemaker*](https://www.mlflow.org/docs/latest/python_api/mlflow.sagemaker.html)
+    和'
 - en: '[*MLflow.azureml*](https://docs.microsoft.com/en-us/azure/databricks/applications/mlflow/).'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[*MLflow.azureml*](https://docs.microsoft.com/en-us/azure/databricks/applications/mlflow/)。'
 - en: It is essential to mention that MLflow provides the ability to create and [customize
     plugins](https://www.mlflow.org/docs/latest/plugins.html#writing-your-own-mlflow-plugins)
     according to needs.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要提到的是，MLflow 提供了根据需求创建和 [自定义插件](https://www.mlflow.org/docs/latest/plugins.html#writing-your-own-mlflow-plugins)
+    的功能。
 - en: MLflow vs. Kubeflow
+  id: totrans-119
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MLflow 与 Kubeflow
 - en: Due to the increasing demand for tools to develop and maintain the life cycle
     of machine learning models, different alternatives such as MLflow and [KubeFlow](https://www.kubeflow.org/)
     have emerged.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于对开发和维护机器学习模型生命周期工具的需求不断增加，像 MLflow 和 [KubeFlow](https://www.kubeflow.org/)
+    这样的不同替代方案应运而生。
 - en: As we have already seen throughout this article, MLflow is a tool that allows
     collaboration in developing the life cycle of machine learning models, mainly
     focused on tracking artifacts (MLflow Tracking), collaboration, maintenance, and
     versioning of the project.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在本文中所见，MLflow 是一个允许在开发机器学习模型生命周期中协作的工具，主要集中在工件跟踪（MLflow Tracking）、协作、维护和项目版本控制上。
 - en: On the other hand, there is KubeFlow, which, like MLflow, is a tool for developing
     machine learning models with some specific differences.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，还有 KubeFlow，它与 MLflow 类似，是一个用于开发机器学习模型的工具，但有一些具体的区别。
 - en: Kubeflow is a platform that works on a [Kubernetes](https://kubernetes.io/)
     cluster; that is, KubeFlow takes advantage of the containerization nature of Kubernetes.
     Also, KubeFlow provides tools such as [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/),
     which aim to generate and automate pipelines (DAGs) through an SDK extension.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: Kubeflow 是一个运行在 [Kubernetes](https://kubernetes.io/) 集群上的平台；也就是说，KubeFlow 利用
+    Kubernetes 的容器化特性。此外，KubeFlow 提供了如 [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/)
+    等工具，旨在通过 SDK 扩展生成和自动化管道（DAGs）。
 - en: KubeFlow also offers [Katib](https://www.kubeflow.org/docs/components/katib/overview/),
     a tool for optimizing hyperparameters on a large scale and provides a service
     for management and collaboration from Jupyter notebooks.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: KubeFlow 还提供了 [Katib](https://www.kubeflow.org/docs/components/katib/overview/)，这是一个用于大规模优化超参数的工具，并提供来自
+    Jupyter notebooks 的管理和协作服务。
 - en: 'SEO Link: Kubernetes and Kubeflow guides'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: SEO链接：Kubernetes 和 Kubeflow 指南
 - en: Specifically, MLflow is a tool focused on management and collaboration for the
     development of machine learning projects. On the other hand, Kubeflow is a platform
     focused on developing, training, and deploying models through a Kubernetes cluster
     and the use of containers.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 具体来说，MLflow 是一个专注于机器学习项目开发管理和协作的工具。另一方面，Kubeflow 是一个专注于通过 Kubernetes 集群和容器使用开发、训练和部署模型的平台。
 - en: Both platforms offer significant advantages and are alternatives for developing,
     maintaining, and deploying machine learning models. However, it is vital to consider
     the barrier to entry for the use, implementation, and integration of these technologies
     in development teams.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个平台都提供了显著的优势，是开发、维护和部署机器学习模型的替代方案。然而，考虑到这些技术在开发团队中的使用、实施和集成的门槛是至关重要的。
 - en: Since Kubeflow is linked to a Kubernetes cluster for its implementation and
     integration, it is advisable to have an expert for managing this technology. Likewise,
     developing and configuring pipeline automation is also a challenge that demands
     a learning curve, which under specific circumstances may not be beneficial for
     companies.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Kubeflow 与 Kubernetes 集群相关联用于实施和集成，因此建议有专家来管理这项技术。同样，开发和配置管道自动化也是一个挑战，可能在特定情况下对公司不利。
 - en: In conclusion, MLflow and Kubeflow are platforms focused on specific stages
     of the life cycle of machine learning models. MLflow is a tool with a collaboration
     orientation, and Kubeflow is more oriented to take advantage of a Kubernetes cluster
     to generate machine learning tasks. However, Kubeflow requires experience in the
     MLOps part. One needs to know about the deployment of services in Kubernetes,
     which can be an issue to consider when trying to approach Kubeflow.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，MLflow 和 Kubeflow 是专注于机器学习模型生命周期特定阶段的平台。MLflow 是一个具有协作导向的工具，而 Kubeflow
+    更侧重于利用 Kubernetes 集群生成机器学习任务。然而，Kubeflow 需要 MLOps 部分的经验。需要了解 Kubernetes 中服务的部署，这可能是在尝试接触
+    Kubeflow 时需要考虑的问题。
 - en: '**[Fernando López](https://www.linkedin.com/in/ferneutron/)** ([GitHub](https://github.com/FernandoLpz))
     is Head of Data Science at Hitch leading a data science team for the development
     and deployment of artificial intelligence models throughout the organization for
     video interview evaluation, candidate profiling and evaluation pipeline.'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Fernando López](https://www.linkedin.com/in/ferneutron/)** ([GitHub](https://github.com/FernandoLpz))
+    是 Hitch 的数据科学负责人，领导一个数据科学团队，负责整个组织中人工智能模型的开发和部署，用于视频面试评估、候选人画像和评估管道。'
 - en: More On This Topic
+  id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Distribute and Run LLMs with llamafile in 5 Simple Steps](https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 llamafile 以 5 个简单步骤分发和运行 LLMs](https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps)'
 - en: '[Why Do Machine Learning Models Die In Silence?](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么机器学习模型会在沉默中消亡？](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)'
 - en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在机器学习模型中处理稀疏特征](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
 - en: '[Models Are Rarely Deployed: An Industry-wide Failure in Machine…](https://www.kdnuggets.com/2022/01/models-rarely-deployed-industrywide-failure-machine-learning-leadership.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型很少被部署：机器学习行业的普遍失败](https://www.kdnuggets.com/2022/01/models-rarely-deployed-industrywide-failure-machine-learning-leadership.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
 - en: '[5 Machine Learning Models Explained in 5 Minutes](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5分钟解释的机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)'
