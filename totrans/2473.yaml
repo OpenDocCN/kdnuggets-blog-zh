@@ -1,274 +1,401 @@
 - en: Interpretable Neural Networks with PyTorch
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 PyTorch 的可解释神经网络
 - en: 原文：[https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
 - en: '![Interpretable Neural Networks With PyTorch](../Images/5ba5c52449e7cf37809764fe94987d2c.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释神经网络与 PyTorch](../Images/5ba5c52449e7cf37809764fe94987d2c.png)'
 - en: 'Photo by [Jan Schulz # Webdesigner Stuttgart](https://unsplash.com/@wombat?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '图片由 [Jan Schulz # Webdesigner Stuttgart](https://unsplash.com/@wombat?utm_source=medium&utm_medium=referral)
+    提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)'
 - en: There are several approaches to rate machine learning models, two of them being
     **accuracy** and **interpretability**. A model with high accuracy is what we usually
     call a *good* model, it learned the relationship between the inputs *X* and outputs *y* well.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 有几种方法来评估机器学习模型，其中两种是 **准确性** 和 **可解释性**。一个具有高准确性的模型通常被称为 *优秀* 模型，它很好地学习了输入 *X*
+    和输出 *y* 之间的关系。
 - en: 'If a model has high interpretability or explainability, we understand how the
     model makes a prediction and how we can **influence** this prediction by changing
     input features. While it is hard to say how the output of a deep neural network
     behaves when we increase or decrease a certain feature of the input, for a linear
     model it is extremely easy: if you increase the feature by one, the output increases
     by the coefficient of that feature. Easy.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一个模型具有高可解释性或解释性，我们可以理解模型如何做出预测，以及如何通过改变输入特征来 **影响** 这种预测。虽然很难说当我们增加或减少输入的某个特征时深度神经网络的输出会如何变化，但对于线性模型来说非常简单：如果你增加特征值，输出会按该特征的系数增加。很简单。
 - en: 'Now, you have probably often heard something like this:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你可能经常听到这样的说法：
 - en: “There are interpretable models an there are well-performing models.” — someone
     who doesn’t know it better
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “有可解释的模型，也有表现良好的模型。” — 不了解情况的人
 - en: However, if you have read my article about the [Explainable Boosting Machine](https://github.com/interpretml/interpret) (EBM),
     then you already know that this is not true. The EBM is an example of a model
     that has a great performance while being interpretable.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，如果你读过我关于 [可解释增强型机器](https://github.com/interpretml/interpret)（EBM）的文章，那么你已经知道这并不准确。EBM
+    是一个在保持可解释性的同时具有出色性能的模型示例。
 - en: '[**The Explainable Boosting Machine**](https://towardsdatascience.com/the-explainable-boosting-machine-f24152509ebb)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**可解释增强型机器**](https://towardsdatascience.com/the-explainable-boosting-machine-f24152509ebb)'
 - en: For my old article, I created the following figure displaying how we can place
     some models in the *interpretability-accuracy space*.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我的旧文章中，我创建了以下图表，展示了我们如何将一些模型放置在 *可解释性-准确性空间* 中。
 - en: '![Interpretable Neural Networks With PyTorch](../Images/62ba27e46c8b8ea08845bc506f6bd858.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释神经网络与 PyTorch](../Images/62ba27e46c8b8ea08845bc506f6bd858.png)'
 - en: Image by the author.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片。
 - en: In particular, I placed the deep neural networks (omitting the *deep*) more
     in the** very accurate, but hard to explain** region. Sure, you can mitigate the
     interpretability issue to some extent by using libraries like [shap](https://github.com/slundberg/shap) or [lime](https://github.com/marcotcr/lime),
     but these approaches come with their own set of assumptions and problems. So,
     let us take another path and create a neural network architecture that is interpretable
     by design in this article.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 特别是，我将深度神经网络（省略 *深度*）更多地放在 **非常准确但难以解释** 的区域。当然，你可以通过使用像 [shap](https://github.com/slundberg/shap)
+    或 [lime](https://github.com/marcotcr/lime) 这样的库在一定程度上缓解解释性问题，但这些方法也有其自身的假设和问题。因此，让我们在本文中采用另一条路径，创建一种设计上具有可解释性的神经网络架构。
 - en: '***Disclaimer:*** *The architecture that I am about to present just came to
     my mind. I do not know if there is literature about it already, at least I could
     not find anything. But if you know of any paper that does what I am doing here,
     please let me know! I will put it in the references then.*'
+  id: totrans-14
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '***免责声明：*** *我即将呈现的架构只是我脑海中的构想。我不知道是否已有相关文献，至少我没有找到相关资料。但如果你知道任何做过类似工作的论文，请告知我！我会将其添加到参考文献中。*'
 - en: Interpretable Architecture Idea
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 可解释架构理念
 - en: '*Please note that I expect that you know how feedforward neural networks work.
     I will not give a full introduction here because there are many great resources
     about it already.*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*请注意，我期望你了解前馈神经网络的工作原理。我不会在这里进行详细介绍，因为已有许多很好的资源。*'
 - en: Consider the following toy neural network, having three input nodes *x*₁, *x*₂, *x*₃,
     a single output node *ŷ*, and three hidden layers with six nodes each. I omitted
     bias terms here.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑以下玩具神经网络，它具有三个输入节点 *x*₁、*x*₂、*x*₃，一个输出节点 *ŷ*，以及三个具有六个节点的隐藏层。我在这里省略了偏置项。
 - en: '![Interpretable Neural Networks With PyTorch](../Images/73ca1116db1a3c9fe17827a150296371.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/73ca1116db1a3c9fe17827a150296371.png)'
 - en: Image by the author.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: The problem with this architecture for interpretability is that the inputs get
     all completely mixed together because of the fully connected layers. Each single
     input node influences all hidden layer nodes, and this influence gets more complicated
     the deeper we go into the network.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种架构在可解释性上的问题在于，由于全连接层，输入完全混合在一起。每个单独的输入节点影响所有隐藏层节点，这种影响随着我们深入网络而变得更加复杂。
 - en: Inspiration by Trees
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 源自树的灵感
 - en: It is usually the same for tree-based models because a decision tree can potentially
     use every feature to create a split if we do not restrict it. For example, standard
     gradient boosting and its derivations like [XGBoost](https://xgboost.readthedocs.io/en/stable/), [LightGBM](https://lightgbm.readthedocs.io/en/latest/),
     and [CatBoost](https://catboost.ai/) are not really interpretable on their own.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于基于树的模型来说，通常是相同的，因为如果我们不加限制，决策树可以使用每个特征来创建一个划分。例如，标准的梯度提升及其衍生版本如 [XGBoost](https://xgboost.readthedocs.io/en/stable/)、[LightGBM](https://lightgbm.readthedocs.io/en/latest/)
+    和 [CatBoost](https://catboost.ai/) 本身并不是很具备可解释性。
 - en: However, you can make gradient boosting interpretable by using **decision trees
     that only depend on a single feature**, as done with the EBM (read my article
     about it! ????).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，通过使用**仅依赖于单一特征的决策树**，如 EBM 所做的那样，你可以使梯度提升模型具有可解释性（阅读我的文章了解更多！????）。
 - en: 'Restricting the trees like this does not hurt the performance too much in many
     cases, but enables us to visualize the feature impacts like this:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 将树限制为这样的形式在许多情况下不会对性能产生太大影响，但使我们能够像这样可视化特征的影响：
 - en: '![Interpretable Neural Networks With PyTorch](../Images/6010d7abeb3804d7d84a7e363a4dcfc6.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/6010d7abeb3804d7d84a7e363a4dcfc6.png)'
 - en: The output of **interpretml**’s show function. Image by the author.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**interpretml** 的 show 函数输出。图片由作者提供。'
 - en: Just take a look at the top part of the graphic with the blue line. It shows
     the impact of feature_4 on the output in some regression problem. On the *x*-axis,
     you can see the range of feature_4\. The *y*-axis shows the **Score**, which is
     the value by how much the output is changed. The histogram below shows you the
     distribution of feature_4.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需看看图形顶部的蓝线部分。它显示了 feature_4 对某些回归问题输出的影响。在 *x* 轴上，你可以看到 feature_4 的范围。*y* 轴显示了
+    **分数**，即输出的变化值。下面的直方图显示了 feature_4 的分布。
 - en: 'We can see the following from the graphic:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图形中，我们可以看到以下内容：
 - en: If feature_4 is about 0.62, the output increases by about 10 compared to feature_4
     being 0.6 or 0.65.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果 feature_4 约为 0.62，则输出比 feature_4 为 0.6 或 0.65 时增加约 10。
 - en: If feature_4 is larger than 0.66, the impact on the output is negative.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果 feature_4 大于 0.66，则对输出的影响为负。
 - en: Changing feature_4 in the range 0.4 to 0.56 a bit does change the output much.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改变 feature_4 在 0.4 到 0.56 范围内的值会显著改变输出。
 - en: The final prediction of the model is then just the sum of the different feature
     scores. This behavior is similar to Shapley values but without the need to compute
     them. Great, right? Now, let me show you how we can do the same for neural networks.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的最终预测只是不同特征分数的总和。这种行为类似于 Shapley 值，但无需计算它们。很棒，对吧？现在，让我展示如何对神经网络进行相同的操作。
 - en: Remove Edges
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 删除边缘
 - en: 'So, if the problem is that the inputs of the neural network get scattered all
     around the hidden layers because of too many edges, let us just remove some. In
     particular, we have to remove edges that allow information of one feature to flow
     to another feature. Deleting only these *spilling edges*, the toy neural network
     from above becomes:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，如果问题在于神经网络的输入由于边缘过多而散布在隐藏层中，我们可以考虑删除一些边缘。特别是，我们需要删除那些允许一个特征的信息流向另一个特征的边缘。仅删除这些*溢出边缘*，上面的玩具神经网络变为：
 - en: '![Interpretable Neural Networks With PyTorch](../Images/e9f1afaa6b7136c25c2db9c8e15edef7.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/e9f1afaa6b7136c25c2db9c8e15edef7.png)'
 - en: Image by the author.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: We created three separate **blocks** for the three input variables, each block
     being a fully connected network with a single partial output *ŷᵢ . *As the last
     step, these* ŷᵢ *are summed, and a bias (omitted in the graphic) is added to produce
     the final output *ŷ*.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为三个输入变量创建了三个单独的**块**，每个块都是一个具有单个部分输出的完全连接网络*ŷᵢ*。作为最后一步，这些*ŷᵢ*被加和，并且加上一个偏置（在图示中省略）以产生最终输出*ŷ*。
 - en: We introduced the partial outputs to be able to create the same kind of plots
     that the EBM allows. One single block in the picture above allows for one plot: *xᵢ *goes
     in*, ŷᵢ *comes out. We will see how to do this later.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们引入部分输出是为了能够创建与EBM允许的相同类型的图。上图中的一个块允许一个图：*xᵢ* 输入，ŷᵢ* 输出。稍后我们将看到如何做到这一点。
 - en: Here we already have the complete architecture! I think it is quite easy to
     understand it in theory, but let us also implement it. In this way, you are happy
     because you can employ neural networks, and the business is happy because the
     neural networks are interpretable.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经有了完整的架构！我认为理论上理解它是相当简单的，但让我们也来实现一下。这样，你会很高兴，因为你可以使用神经网络，而业务也会很高兴，因为神经网络是可解释的。
 - en: Implementation in PyTorch
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在PyTorch中的实现
 - en: I do not expect that you are completely familiar with [PyTorch](https://pytorch.org/),
     so I will explain some basics on the way that will help you understand our custom
     implementation. If you know the PyTorch basics, you can skip the **Fully Connected
     Layers** section. If you have not installed PyTorch, [choose your version here](https://pytorch.org/).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不期望你完全熟悉[PyTorch](https://pytorch.org/)，所以我会在过程中解释一些基础知识，这将帮助你理解我们自定义的实现。如果你了解PyTorch的基础知识，可以跳过**完全连接层**部分。如果你还没有安装PyTorch，[选择你的版本](https://pytorch.org/)。
 - en: Fully Connected Layers
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 完全连接层
 - en: 'These layers are also known as **linear** in PyTorch or **dense **in [Keras](https://keras.io/).
     They connect *n* input nodes to *m* output nodes using *nm* edges with multiplication
     weights. This is basically a matrix multiplication plus an addition of a bias
     term, as you can see in the following two code snippets:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些层在PyTorch中也被称为**线性**，在[Keras](https://keras.io/)中称为**密集**。它们将*n*个输入节点连接到*m*个输出节点，使用*nm*条带有乘法权重的边。这基本上是矩阵乘法加上一个偏置项，如以下两个代码片段所示：
 - en: '[PRE0]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This is how you can create fully connected layers and apply them to PyTorch
     tensors. You can get the matrix that is used for the multiplication via `linear_layer.weight` and
     the bias via `linear_layer.bias` . Then you can do
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是你如何创建完全连接层并将它们应用于PyTorch张量。你可以通过`linear_layer.weight`获取用于乘法的矩阵，通过`linear_layer.bias`获取偏置。然后你可以这样做
 - en: '[PRE1]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Nice, it’s the same! Now, the great part about PyTorch, Keras, and co. is that
     you can stack many of these layers together to create a neural network. In PyTorch,
     you can achieve this stacking via `torch.nn.Sequential` . To recreate the dense
     network from above, you could do a simple
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，它是一样的！现在，PyTorch、Keras等的一个好处是你可以将许多这样的层堆叠在一起以创建神经网络。在PyTorch中，你可以通过`torch.nn.Sequential`来实现这种堆叠。为了重建上面的密集网络，你可以做一个简单的
 - en: '[PRE2]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '***Note:**** I have not shown you how to train this network so far, it is just
     the definition of the architecture, including the initialization of the parameters.
     But you can feed the network three dimensional inputs and receive one dimensional
     outputs.*'
+  id: totrans-49
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '***注意：*** 我尚未向你展示如何训练这个网络，这只是架构的定义，包括参数的初始化。但你可以输入三维输入并接收一维输出。'
 - en: 'Since we want to create our own layer, let us practice with something easy
     first: recreating PyTorch’s `Linear` layer. Here is how you can do it:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们想要创建自己的层，让我们先从简单的开始：重建PyTorch的`Linear`层。以下是如何做到这一点：
 - en: '[PRE3]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: This code deserved some explanation. In the first bold block, we introduce the
     weights of the linear layer by
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码需要一些解释。在第一个**粗体**块中，我们通过
 - en: creating a PyTorch tensor (containing all zeroes, but this does not matter)
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个PyTorch张量（包含所有零，但这并不重要）
 - en: registering it as a learnable parameter to the layer meaning that gradient descent
     can update it during the training, and then
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将其注册为可学习的参数到该层，这意味着梯度下降可以在训练过程中更新它，然后
 - en: initializing the parameters.
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 初始化参数。
 - en: Initializing parameters of a neural network is a whole topic on its own, so
     we will not go down the rabbit hole. If it bothers you too much, you can also
     initialize it differently, for example via using a standard normal distribution `torch.randn(out_features,
     in_features)` , but chances are that training is slower then. Anyway, we do the
     same for the bias.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 神经网络的参数初始化是一个完整的话题，所以我们不会深入探讨。如果这让你感到困扰，你也可以通过使用标准正态分布`torch.randn(out_features,
+    in_features)`来初始化，但这可能会导致训练变慢。不管怎样，我们对偏置做同样的处理。
 - en: Then, the layer needs to know the mathematical operations it should perform
     in the `forward` method. This is just the linear operation, i.e. a matrix multiplication
     and addition of the bias.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，层需要知道它在`forward`方法中应该执行的数学操作。这只是线性操作，即矩阵乘法和偏置的加法。
 - en: Okay, now we are ready to implement the layer for our interpretable neural network!
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，现在我们准备为我们的可解释神经网络实现这一层了！
 - en: Block Linear Layers
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Block Linear Layers
 - en: 'We now design a `BlockLinear` layer that we will use in the following way:
     First, we start with *n* features. The `BlockLinear` layer should then create *n* blocks
     consisting of *h* hidden neurons. To simplify things, *h* is the same in each
@@ -276,191 +403,286 @@
     will consist of *nh* neurons, but also only *nh* edges are connected to them (instead
     of *n*²*h *for a fully connected layer)*. *To understand it better, see the picture
     from above again. here, *n *= 3, *h *= 2.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们设计一个`BlockLinear`层，我们将以以下方式使用它：首先，我们从*n*特征开始。`BlockLinear`层应该创建*n*个块，每个块由*h*个隐藏神经元组成。为了简化问题，*h*在每个块中是相同的，但你当然可以对其进行泛化。总的来说，第一个隐藏层将由*nh*个神经元组成，但只有*nh*条边连接到它们（而不是*n*²*h
+    *用于完全连接的层*）。*要更好地理解，请再次查看上面的图片。在这里，*n* = 3，*h* = 2。
 - en: '![Interpretable Neural Networks With PyTorch](../Images/850b88736969d2cad733483126d2b29b.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 PyTorch 的可解释神经网络](../Images/850b88736969d2cad733483126d2b29b.png)'
 - en: Image by the author.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片。
 - en: Then — after using some non-linearity like ReLU — we will put another `BlockLinear` layer
     behind this one because the different blocks should not be merged again. We repeat
     this a lot until we use a `Linear` layer at the end to tie everything up again.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后——在使用一些非线性操作如ReLU之后——我们将在这层后面再加一个`BlockLinear`层，因为不同的块不应该再次合并。我们重复这个过程，直到最后使用`Linear`层将一切重新绑定起来。
 - en: Implementation of the Block Linear Layer
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实现 Block Linear Layer
 - en: Let us get to the code. It is quite similar to our custom-made linear layer,
     so the code should not be too intimidating.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始编写代码。它与我们定制的线性层非常相似，因此代码应该不会太令人畏惧。
 - en: '[PRE4]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: I highlighted a few lines again. The first bold lines are similar to what we
     have seen in our homemade linear layer, just repeated `n_blocks` times. This creates
     an independent linear layer for each block.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 我再次强调了几行。第一组粗体行类似于我们在自制线性层中看到的，只是重复了`n_blocks`次。这为每个块创建了一个独立的线性层。
 - en: 'In the forward method, we get an `x` as a single tensor that we have to split
     into blocks again first using `torch.split`. As an example, a block size of 2
     does the following: `[1, 2, 3, 4, 5, 6] -> [1, 2], [3, 4], [5, 6]`. We then apply
     the independent linear transformations to the different blocks, and glue the results
     together using `torch.cat`. Done!'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前向方法中，我们得到一个`x`作为单个张量，我们首先需要使用`torch.split`将其拆分成块。举例来说，块大小为2时，结果如下：[1, 2, 3,
+    4, 5, 6] -> [1, 2], [3, 4], [5, 6]。然后，我们对不同的块应用独立的线性变换，并使用`torch.cat`将结果粘合在一起。完成了！
 - en: Training the Interpretable Neural Network
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练可解释神经网络
 - en: 'Now, we have all the ingredients to define our interpretable neural network.
     We just have to create a dataset first:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们拥有了定义我们可解释神经网络所需的所有要素。我们只需要先创建一个数据集：
 - en: '[PRE5]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We can see that we deal with a three-dimensional dataset consisting of a thousand
     samples here. The true relationship is linear if you square feature 1 and cube
     feature 2 — and this is what we want to recover with our model! So, let us define
     a small model that should be able to capture this relationship.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到这里处理的是一个包含一千个样本的三维数据集。真实关系是线性的，如果你对特征1进行平方，对特征2进行立方——这就是我们想要用模型恢复的！所以，让我们定义一个小模型，应该能够捕捉到这种关系。
 - en: '[PRE6]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'I split the model into two steps:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将模型分为两个步骤：
 - en: Computing the partial outputs *ŷᵢ *with `self.features` and then
+  id: totrans-75
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用`self.features`计算部分输出*ŷᵢ*，然后
 - en: Compute the final prediction *ŷ *as a weighted sum of the* ŷᵢ *with `self.lr` .
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算最终预测*ŷ*作为*ŷᵢ*的加权和，使用`self.lr`。
 - en: This makes it easier to extract the feature explanations. In the definition
     of `self.features` you can see that we create a neural network with three blocks
     because we have three features in the dataset. For each block, we create many
     hidden layers with 20 neurons per block.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得提取特征解释变得更容易。在`self.features`的定义中，你可以看到我们创建了一个包含三个块的神经网络，因为数据集中有三个特征。对于每个块，我们创建了许多隐藏层，每个块有
+    20 个神经元。
 - en: 'Now, we can create a simple training loop:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以创建一个简单的训练循环：
 - en: '[PRE7]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Basically, we choose Adam as an optimizer, the MSE as the loss, and then do
     standard gradient descent, i.e. erase old gradient with `optimzer.zero_grad()` ,
     compute the predictions, compute the loss, differentiate the loss via `loss.backward()` and
     update the model parameters via `optimizer.step()` . You can see the training
     loss decline over time. We do not care about validation or test sets here. The **training** *r*²
     should be larger than 0.95 at the end.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本上，我们选择 Adam 作为优化器，MSE 作为损失函数，然后进行标准梯度下降，即用`optimizer.zero_grad()`擦除旧梯度，计算预测值，计算损失，通过`loss.backward()`计算损失的梯度，并通过`optimizer.step()`更新模型参数。你可以看到训练损失随着时间的推移而下降。我们在这里不关注验证集或测试集。**训练**
+    *r*² 在最后应该大于 0.95。
 - en: We can now print the model explanations via
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以通过以下方式打印模型解释：
 - en: '[PRE8]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: and get
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 并获得
 - en: '![Interpretable Neural Networks With PyTorch](../Images/21a485232a93af651ab9510e4408481f.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/21a485232a93af651ab9510e4408481f.png)'
 - en: '![Interpretable Neural Networks With PyTorch](../Images/7d728428c5301fd14a4a70d1ca9995b6.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/7d728428c5301fd14a4a70d1ca9995b6.png)'
 - en: '![Interpretable Neural Networks With PyTorch](../Images/3109aaf24d8963643432d4720e885970.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/3109aaf24d8963643432d4720e885970.png)'
 - en: Images by the author.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: This looks pretty neat! The model figures out that the impact of feature 1 is
     linear, the impact of feature 2 is quadratic and the impact of feature 3 is cubic.
     And not only that, **the model is able to show it to us**, which is the great
     thing about the whole construction!
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这看起来非常不错！模型发现特征 1 的影响是线性的，特征 2 的影响是二次的，特征 3 的影响是立方的。不仅如此，**模型能够向我们展示这一点**，这是整个构建过程的伟大之处！
 - en: '**You can even throw the network away and make predictions solely based on
     these charts!**'
+  id: totrans-89
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**你甚至可以丢掉网络，仅仅基于这些图表进行预测！**'
 - en: As an example, let us estimate the output of the network for *x* = (2, -2, 0).
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 举个例子，让我们估计网络对于*x* = (2, -2, 0)的输出。
 - en: '*x*₁ = 2 translates into a **+5** for the prediction, based on the first figure.'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*x*₁ = 2 根据第一幅图表转换为**+5**的预测结果。'
 - en: '*x*₂ = -2 translates to a **+9** for the prediction, based on the second figure.'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*x*₂ = -2 根据第二幅图表转换为**+9**的预测结果。'
 - en: '*x*₃ = 0 translates to a **+0** for the prediction, based on the third figure.'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*x*₃ = 0 根据第三幅图表转换为**+0**的预测结果。'
 - en: There is still a **bias** from the last linear layer that you can access via `model.get_submodule('lr').bias` this
     has to be added as well, but it should be small.
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从最后一层线性层仍然存在一个**偏差**，你可以通过`model.get_submodule('lr').bias`访问这个偏差，这也需要添加，但应该很小。
 - en: In total, your prediction should be around *ŷ ***≈ **5 + 9 + 0 + bias **≈ **14,
     which is fairly accurate.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 总的来说，你的预测结果应该在*ŷ* ***≈** 5 + 9 + 0 + bias **≈** 14，这相当准确。
 - en: 'You can also see what you have to do to minimize the output: choose small values
     for feature 1, values close to zero for feature 2, and small values for feature
     3\. This is something that you usually cannot see just looking at the neural network,
     but with the score functions, we can. That is one huge benefit of interpretability.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以看到你需要做什么才能最小化输出：为特征 1 选择小值，为特征 2 选择接近零的值，为特征 3 选择小值。这是你通常不能仅通过查看神经网络看到的，但通过得分函数，我们可以。这是可解释性的一个巨大好处。
 - en: 'Note that the learned score functions from above can only be confident for
     regions where we **actually had training data**. In our dataset, we actually only
     observed values between -3 and 3 for each feature. Therefore, we can see that
     we did not get perfect *x*² and *x*³ polynomials on the edges. But I think it
     is still impressive that the directions of the graphs are about right. To fully
     appreciate this, compare it to the results of the EBM:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，上述学习到的得分函数只能对**实际有训练数据**的区域有信心。在我们的数据集中，我们实际上只观察到每个特征在 -3 到 3 之间的值。因此，我们可以看到，在边缘没有得到完美的*x*²和*x*³多项式。但我认为即便如此，图形的方向也大致正确，这还是很令人印象深刻的。为了充分欣赏这一点，可以将其与
+    EBM 的结果进行比较：
 - en: '![Interpretable Neural Networks With PyTorch](../Images/6f653b465a72e7ced37b73d08bc971a9.png)'
+  id: totrans-98
   prefs: []
   type: TYPE_IMG
+  zh: '![可解释的神经网络与 PyTorch](../Images/6f653b465a72e7ced37b73d08bc971a9.png)'
 - en: '![Interpretable Neural Networks With PyTorch](../Images/64cb4eb2acb266b653ac6cc856e9f59d.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '-   ![使用PyTorch的可解释神经网络](../Images/64cb4eb2acb266b653ac6cc856e9f59d.png)'
 - en: Images by the author.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   作者提供的图片。'
 - en: '**The curves are blocky, and the extrapolation is just a straight line to both
     sides, which is one of the main disadvantages of tree-based methods.**'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **这些曲线是块状的，外推只是两边的直线，这是基于树的方法的主要缺点之一。**'
 - en: Conclusion
+  id: totrans-102
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   结论'
 - en: In this article, we have talked about the interpretability of models, and how
     neural networks and gradient boosting fail to deliver it. While the authors of
     the interpretml package created the EBM, an interpretable gradient boosting algorithm,
     I presented to you a method to create interpretable neural networks.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   在这篇文章中，我们讨论了模型的可解释性，以及神经网络和梯度提升如何未能提供它。虽然interpretml包的作者创建了EBM，一个可解释的梯度提升算法，但我向你介绍了一种创建可解释神经网络的方法。'
 - en: We have then implemented it in PyTorch, which was a bit code-heavy, but nothing
     too crazy. As for the EBM, we could extract the learned score functions per feature
     that we can even use to make predictions.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我们已经在PyTorch中实现了它，虽然代码量有点多，但也没什么太疯狂的。至于EBM，我们可以提取每个特征的学习得分函数，甚至可以用它们来进行预测。'
 - en: '**The actual trained model is not even necessary anymore, which makes it possible
     to deploy and use it on weak hardware. **This is because we only have to store
     one lookup table per feature, which is light on memory. Using a grid size of *g* per
@@ -469,102 +691,157 @@
     is cheap as well: just add some numbers from the lookup tables. Since this has
     a **time complexity of only** ***O*(*n*_features)** lookups and additions, it
     is much faster than a forward pass through the network.'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **实际训练的模型甚至不再必要，这使得在低配置硬件上部署和使用成为可能。** 这是因为我们只需存储每个特征的一个查找表，这在内存上很轻量。使用每个查找表的网格大小为*g*会导致**只存储*O*(*n*_features
+    * *g*)个元素**，而不是可能的数百万甚至数十亿个模型参数。进行预测也很便宜：只需从查找表中加一些数字。由于这有**仅为***O*(*n*_features)**的时间复杂度，查找和加法速度远快于网络的前向传播。'
 - en: '***Disclaimer again:**** I am not sure if this is a novel idea, but here it
     is anyway! If you know of any paper that explained the same idea, please leave
     me a message and I will reference it.*'
+  id: totrans-106
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '-   ***再次声明：**** 我不确定这是否是一个新想法，但反正就是这样！如果你知道有解释相同想法的论文，请给我留言，我会引用它。*'
 - en: I hope that you learned something new, interesting, and useful today. Thanks
     for reading!
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我希望你今天学到了一些新的、有趣的、有用的东西。感谢阅读！'
 - en: '**As the last point, if you**'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **作为最后一点，如果你**'
 - en: '**want to support me in writing more about machine learning and**'
+  id: totrans-109
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '-   **想要支持我继续撰写更多关于机器学习的内容**'
 - en: '**plan to get a Medium subscription anyway,**'
+  id: totrans-110
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '-   **计划无论如何获取Medium订阅，**'
 - en: '**why not do it **[**via this link**](https://dr-robert-kuebler.medium.com/membership)**?
     This would help me a lot! ????**'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **为什么不通过[这个链接](https://dr-robert-kuebler.medium.com/membership)来支持我呢**？这对我帮助很大！????'
 - en: '*To be transparent, the price for you does not change, but about half of the
     subscription fees go directly to me.*'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   *为了透明起见，您的价格不会变化，但大约一半的订阅费用会直接到我这里。*'
 - en: '**Thanks a lot, if you consider supporting me!**'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **非常感谢，如果你考虑支持我！**'
 - en: If you have any questions, write me on [LinkedIn](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)!
+  id: totrans-114
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '-   如果你有任何问题，可以在[LinkedIn](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)上联系我！'
 - en: '**[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** is a Data
     Scientist at Publicis Media and Author at Towards Data Science.'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** 是Publicis
+    Media的数据科学家和Towards Data Science的作者。'
 - en: '[Original](https://towardsdatascience.com/interpretable-neural-networks-with-pytorch-76f1c31260fe).
     Reposted with permission.'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   [原文](https://towardsdatascience.com/interpretable-neural-networks-with-pytorch-76f1c31260fe)。转载许可。'
 - en: '* * *'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-118
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   我们的前三个课程推荐'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyTorch 构建卷积神经网络](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
 - en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会引导我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最先进的深度学习技术解释性预测和现况预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用卷积神经网络（CNNs）进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于可信赖的图神经网络的全面调查：隐私、鲁棒性、公平性和可解释性](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
