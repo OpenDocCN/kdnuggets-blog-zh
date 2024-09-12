@@ -1,43 +1,66 @@
 - en: Generate Synthetic Time-series Data with Open-source Tools
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用开源工具生成合成时间序列数据
 - en: 原文：[https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
 - en: '![Generate Synthetic Time-series Data with Open-source Tools](../Images/a38f7eb18adf87ff57a1f54d4e214cf3.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用开源工具生成合成时间序列数据](../Images/a38f7eb18adf87ff57a1f54d4e214cf3.png)'
 - en: Introduction
+  id: totrans-3
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织IT工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Time series data, a sequence of measurements of the same variables across multiple
     points in time, is ubiquitous in the modern data world. Just as with tabular data,
     we often want to generate synthetic time series data to protect sensitive information
@@ -46,8 +69,10 @@
     market prices, and medical records. The additional dimension of time where trends
     and correlations across time are just as important as correlations between variables
     creates added challenges for synthetic data.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列数据，即在多个时间点对相同变量的测量序列，在现代数据世界中无处不在。就像表格数据一样，我们经常希望生成合成时间序列数据以保护敏感信息或在真实数据稀缺时创建更多训练数据。一些合成时间序列数据的应用包括传感器读数、时间戳日志消息、金融市场价格和医疗记录。时间维度的额外要求，其中趋势和时间间的相关性与变量之间的相关性同样重要，为合成数据带来了额外的挑战。
 - en: 'At Gretel, we’ve previously published blogs on synthesizing time series data
     ([financial data](https://gretel.ai/blog/creating-synthetic-time-series-data-for-global-financial-institutions-a-poc-deep-diveQ),
     [time series basics](https://gretel.ai/blog/creating-synthetic-time-series-data)),
@@ -59,62 +84,87 @@
     the DoppelGANger model in PyTorch and are thrilled to release it as part of our
     open source [gretel-synthetics](https://github.com/gretelai/gretel-synthetics)
     library.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Gretel，我们之前发布了关于合成时间序列数据的博客（[金融数据](https://gretel.ai/blog/creating-synthetic-time-series-data-for-global-financial-institutions-a-poc-deep-diveQ)、[时间序列基础](https://gretel.ai/blog/creating-synthetic-time-series-data)），但我们始终在寻找可以改进合成数据生成的新模型。我们非常喜欢DoppelGANger模型及其相关论文（[使用GAN共享网络时间序列数据：挑战、初步承诺和开放问题](https://arxiv.org/abs/1909.13403)
+    由Lin等人撰写），并正在将该模型集成到我们的[API](https://gretel.ai/products)和[控制台](https://console.gretel.cloud/)中。作为这项工作的一个部分，我们在PyTorch中重新实现了DoppelGANger模型，并非常高兴将其作为我们开源[gretel-synthetics](https://github.com/gretelai/gretel-synthetics)库的一部分发布。
 - en: In this article, we give a brief overview of the DoppelGANger model, provide
     sample usage of our PyTorch implementation, and demonstrate excellent synthetic
     data quality on a task synthesizing daily wikipedia web traffic with a ~40x runtime
     speedup compared to the TensorFlow 1 implementation.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们简要概述了DoppelGANger模型，提供了我们PyTorch实现的示例用法，并展示了在合成每日维基百科网页流量任务中的优异合成数据质量，与TensorFlow
+    1实现相比，运行速度提升了约40倍。
 - en: DoppelGANger Model
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: DoppelGANger模型
 - en: DoppelGANger is based on a generative adversarial network ([GAN](https://developers.google.com/machine-learning/gan))
     with some modifications to better fit the time series generation task. As a GAN,
     the model uses an adversarial training scheme to simultaneously optimize the discriminator
     (or critic) and generator networks by comparing synthetic and real data. Once
     trained, arbitrary amounts of synthetic time-series data can be created by passing
     input noise to the generator network.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: DoppelGANger 基于生成对抗网络 ([GAN](https://developers.google.com/machine-learning/gan))，并进行了些许修改以更好地适应时间序列生成任务。作为
+    GAN，该模型使用对抗训练方案，通过比较合成数据和真实数据，来同时优化鉴别器（或评论员）和生成器网络。一旦训练完成，可以通过将输入噪声传递给生成器网络来生成任意数量的合成时间序列数据。
 - en: 'In their [paper](https://arxiv.org/abs/1909.13403), Lin et al. review existing
     synthetic time series approaches and their own observations to identify limitations
     and propose several specific improvements that make up DoppelGANger. These range
     from generic GAN improvements, to time-series specific tricks. A few of these
     key modifications are listed below:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在他们的[论文](https://arxiv.org/abs/1909.13403)中，Lin 等人回顾了现有的合成时间序列方法及其观察结果，以识别局限性并提出了几个特定的改进，这些改进构成了
+    DoppelGANger。这些改进范围从通用 GAN 改进到时间序列特定技巧。以下列出了其中的一些关键修改：
 - en: Generator contains an [LSTM](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
     to produce sequence data, but with a batch setup where each LSTM cell outputs
     multiple time points to improve temporal correlations.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成器包含一个[LSTM](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)来生成序列数据，但采用批处理设置，每个
+    LSTM 单元输出多个时间点，以改善时间相关性。
 - en: Supports variable-length sequences in both training and generation (planned,
     but not yet implemented in our PyTorch version). For example, one model can use
     and create 10 or 15 seconds of sensor measurements.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持训练和生成中的可变长度序列（计划中，但在我们的 PyTorch 版本中尚未实现）。例如，一个模型可以使用和生成 10 或 15 秒的传感器测量数据。
 - en: Supports fixed variables (attributes) that do not vary over time. This information
     is often found with time series data, for example, an industry or sector associated
     with each stock in financial price history data.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持不随时间变化的固定变量（属性）。这些信息通常在时间序列数据中找到，例如与金融价格历史数据中每个股票相关的行业或部门。
 - en: Supports per-example scaling of continuous variables to handle data with large
     dynamic range. For example, differences of several orders of magnitude in page
     views for popular versus rare wikipedia pages.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持对连续变量的每个示例进行缩放，以处理具有大动态范围的数据。例如，流行与稀有维基百科页面的页面浏览量差异可以达到几个数量级。
 - en: Uses [Wasserstein loss with gradient penalty](https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490)
     to reduce mode collapse and improve training.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用[带梯度惩罚的 Wasserstein 损失](https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490)以减少模式崩溃并改善训练。
 - en: A small note on terminology and data setup. DoppelGANger requires training data
     with multiple examples of time series. Each **example** consists of 0 or more
     **attribute** values, fixed variables that do not vary over time, and 1 or more
@@ -123,35 +173,51 @@
     and a 3d array of features (example x time x time variable). Depending on the
     task and available data, this setup may require splitting a few long time sequences
     into shorter chunks that can be used as the examples for training.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于术语和数据设置的小说明。DoppelGANger 需要包含多个时间序列示例的训练数据。每个**示例**由 0 个或多个**属性**值、在时间上不变的固定变量和
+    1 个或多个在每个时间点观察到的**特征**组成。组合成训练数据集时，这些示例看起来像一个 2d 数组的属性（示例 x 固定变量）和一个 3d 数组的特征（示例
+    x 时间 x 时间变量）。根据任务和可用数据，此设置可能需要将几个较长的时间序列拆分成较短的块，以用作训练的示例。
 - en: Overall these modifications to a basic GAN provide an expressive time series
     model that produces high-fidelity synthetic data. We are particularly impressed
     with DoppelGANger’s ability to learn and generate data with temporal correlations
     at different scales, such as weekly and yearly trends. For full details on the
     model, please read the excellent [paper](https://arxiv.org/abs/1909.13403) by
     Lin et. al.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，这些对基本 GAN 的修改提供了一个表达力强的时间序列模型，能够生成高保真度的合成数据。我们特别印象深刻的是 DoppelGANger 在不同尺度下学习和生成具有时间相关性的数据的能力，例如每周和每年的趋势。有关模型的详细信息，请阅读
+    Lin 等人撰写的出色[论文](https://arxiv.org/abs/1909.13403)。
 - en: Sample Usage
+  id: totrans-23
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: Our PyTorch implementation supports 2 styles of input (numpy arrays or pandas
     DataFrame) plus a number of configuration options for the model. For full reference
     documentation, see [https://synthetics.docs.gretel.ai/](https://synthetics.docs.gretel.ai/en/latest/models/timeseries_dgan.html)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 PyTorch 实现支持两种输入风格（numpy 数组或 pandas DataFrame）以及模型的多种配置选项。有关完整的参考文档，请参见[https://synthetics.docs.gretel.ai/](https://synthetics.docs.gretel.ai/en/latest/models/timeseries_dgan.html)
 - en: The simplest way to use our model is with your training data in a pandas DataFrame.
     For this setup, the data must be in a “wide” format where each row is an example,
     some columns may be attributes, and the remaining columns are the time series
     values. The following snippet demonstrates training and generating data from a
     DataFrame.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用我们的模型的最简单方法是将训练数据放在 pandas DataFrame 中。对于这种设置，数据必须是“宽格式”，其中每行是一个示例，一些列可能是属性，其余列是时间序列值。以下代码片段演示了如何从
+    DataFrame 进行训练和生成数据。
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: If your data isn’t already in this “wide” format, you may be able to use the
     [pandas pivot](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html)
     method to convert it to the expected structure. The DataFrame input is somewhat
@@ -159,46 +225,68 @@
     time series data in the future. For the most control and flexibility, you can
     also pass numpy arrays directly for training (and similarly receive the attribute
     and feature arrays back when generating data), demonstrated below.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的数据还不是这种“宽格式”，你可以使用[pandas pivot](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html)方法将其转换为预期的结构。目前，DataFrame
+    输入在某些方面有些限制，但我们计划在未来支持其他接受时间序列数据的方式。为了获得最大控制和灵活性，你也可以直接传递 numpy 数组进行训练（类似地，在生成数据时接收属性和特征数组），如下所示。
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Runnable versions of these snippets are available at [sample_usage.ipynb](https://github.com/gretelai/public_research/blob/main/oss_doppelganger/sample_usage.ipynb).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些代码片段的可运行版本可在[sample_usage.ipynb](https://github.com/gretelai/public_research/blob/main/oss_doppelganger/sample_usage.ipynb)中找到。
 - en: Results
+  id: totrans-30
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结果
 - en: As a new implementation that switches from TensorFlow 1 to PyTorch (with potential
     differences in underlying components such as optimizers, parameter initialization,
     etc.), we want to confirm our PyTorch code works as expected. To do this, we’ve
     replicated a selection of results from the original paper. Since our current implementation
     only supports fixed-length sequences, we focus on a data set of wikipedia web
     traffic (WWT).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一种从 TensorFlow 1 转到 PyTorch 的新实现（其中可能存在底层组件如优化器、参数初始化等的差异），我们希望确认我们的 PyTorch
+    代码按预期工作。为此，我们复制了原始论文中的一部分结果。由于我们当前的实现仅支持固定长度的序列，因此我们专注于维基百科网页流量（WWT）数据集。
 - en: The WWT data set, used by Lin et. al. and originally from [Kaggle](https://www.kaggle.com/competitions/web-traffic-time-series-forecasting/),
     contains daily traffic measurements to various wikipedia pages. There are 3 discrete
     attributes (domain, access type, and agent) associated with each page and a single
     time series feature of daily page views for 1.5 years (550 days). See Image 1
     for a few example time series from the WWT data set.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: WWT 数据集由 Lin 等人使用，最初来自[Kaggle](https://www.kaggle.com/competitions/web-traffic-time-series-forecasting/)，包含各种维基百科页面的每日流量测量。每个页面有
+    3 个离散属性（域名、访问类型和代理），以及一个持续 1.5 年（550 天）的每日页面浏览量时间序列特征。请参见图 1 了解 WWT 数据集中的一些示例时间序列。
 - en: '![Scaled daily page views for 3 wikipedia pages with page attributes listed
     on the right](../Images/aab1b50cadd29990b12994b432f3907c.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![3 个维基百科页面的缩放每日页面浏览量，页面属性列在右侧](../Images/aab1b50cadd29990b12994b432f3907c.png)'
 - en: 'Image 1: Scaled daily page views for 3 wikipedia pages with page attributes
     listed on the right.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1：3 个维基百科页面的缩放每日页面浏览量，页面属性列在右侧。
 - en: Note the page views are log scaled to [-1,1] based on min/max page views across
     the entire data set. The training data of 50k pages we used in our experiments
     (already scaled) is available as a [csv on S3](https://gretel-public-website.s3.us-west-2.amazonaws.com/datasets/wiki-web-traffic-data/wikipedia-web-traffic-training.csv).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，页面浏览量已基于整个数据集的最小/最大页面浏览量进行[-1,1]对数缩放。我们在实验中使用的 50k 页面训练数据（已缩放）可以作为[csv 文件在
+    S3 上](https://gretel-public-website.s3.us-west-2.amazonaws.com/datasets/wiki-web-traffic-data/wikipedia-web-traffic-training.csv)获得。
 - en: 'We present 3 images showing different aspects of the fidelity of the synthetic
     data. In each image, we compare the real data with 3 synthetic versions: 1) fast
     PyTorch implementation with larger batch size and smaller learning rate, 2) PyTorch
@@ -206,14 +294,22 @@
     2, we look at the distribution of attributes where the synthetic data is a close
     match to the real distributions (modeled after Figure 19 from the [appendix of
     Lin et. al.](https://arxiv.org/abs/1909.13403)).'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了 3 张图像，展示了合成数据的不同方面的保真度。在每张图像中，我们将真实数据与 3 个合成版本进行比较：1) 使用更大批量和更小学习率的快速
+    PyTorch 实现，2) 使用原始参数的 PyTorch 实现，3) TensorFlow 1 实现。在图像 2 中，我们查看了属性分布，其中合成数据与真实分布的匹配度较高（参考
+    [Lin et. al.](https://arxiv.org/abs/1909.13403) 的附录中的图 19）。
 - en: '![v](../Images/04f392d189a052b1c1c3f9032de32662.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![v](../Images/04f392d189a052b1c1c3f9032de32662.png)'
 - en: 'Image 2: Attribute distributions of real and synthetic WWT data.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像 2：实际和合成的 WWT 数据的属性分布。
 - en: One of the challenges with the WWT data is that different time series have very
     different ranges of page views. Some wikipedia pages consistently receive lots
     of traffic, while others are much less popular, but occasionally get a spike due
@@ -224,43 +320,64 @@
     each example, the midpoint is halfway between the minimum and maximum page views
     attained over the 550 days. Our PyTorch implementation shows similar fidelity
     for the midpoints.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: WWT 数据的挑战之一是不同的时间序列具有非常不同的页面视图范围。有些维基百科页面始终接收大量流量，而其他页面则不那么受欢迎，但偶尔由于一些相关的时事，例如与页面相关的突发新闻，会出现流量激增。Lin
+    等人发现 DoppelGANger 在生成不同规模的时间序列方面非常有效（原始论文的图 6）。在图像 3 中，我们提供了类似的图表，显示时间序列中点的分布。每个示例中的中点是
+    550 天内获得的最小和最大页面视图之间的一半。我们的 PyTorch 实现显示了类似的中点保真度。
 - en: '![Time series midpoint distributions of real and synthetic WWT data](../Images/e8eac3e5b9a89c12f1dab7838c0a33ed.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![实际和合成的 WWT 数据的时间序列中点分布](../Images/e8eac3e5b9a89c12f1dab7838c0a33ed.png)'
 - en: 'Image 3: Time series midpoint distributions of real and synthetic WWT data.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像 3：实际和合成的 WWT 数据的时间序列中点分布。
 - en: Lastly, traffic to most wikipedia pages exhibits weekly and yearly patterns.
     To evaluate these patterns, we use autocorrelation, that is, Pearson correlation
     of page views at different time lags (1 day, 2 days, etc.). Autocorrelation plots
     for the 3 synthetic versions are shown in Image 4 (similar to Figure 1 of the
     original paper).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，大多数维基百科页面的流量展示了每周和每年的模式。为了评估这些模式，我们使用自相关，即不同时间滞后的页面视图的皮尔逊相关性（1 天、2 天等）。3
+    个合成版本的自相关图显示在图像 4 中（类似于原始论文的图 1）。
 - en: '![Autocorrelation for real and synthetic WWT data](../Images/7ea0c5cc1f63ff8151ab4e409ceb6968.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![实际和合成的 WWT 数据的自相关](../Images/7ea0c5cc1f63ff8151ab4e409ceb6968.png)'
 - en: 'Image 4: Autocorrelation for real and synthetic WWT data.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像 4：实际和合成的 WWT 数据的自相关。
 - en: Both PyTorch versions produce the weekly and yearly trend as observed in the
     original paper. The TensorFlow 1 results don’t match Figure 1 of Lin et al. exactly
     as the above plots are from our experiments. We observed somewhat inconsistent
     training using the original parameters where the model occasionally does not pick
     up the yearly (or even weekly) pattern. The lower learning rate (1e-4) and larger
     batch size (1000) used in our fast version makes retrainings more consistent.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个 PyTorch 版本生成了与原始论文中观察到的每周和每年趋势一致的结果。TensorFlow 1 的结果并不完全匹配 Lin 等人的图 1，因为上述图表来自我们的实验。我们观察到使用原始参数进行训练时，模型偶尔无法捕捉到每年（甚至每周）的模式。我们快速版本中使用的较低学习率（1e-4）和较大批量（1000）使得重新训练更为一致。
 - en: Analysis code to produce the images in this section and to train the 3 models
     are shared as notebooks on [github](https://github.com/gretelai/public_research/tree/main/oss_doppelganger).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成本节图像以及训练 3 个模型的分析代码以笔记本形式共享在 [github](https://github.com/gretelai/public_research/tree/main/oss_doppelganger)。
 - en: Runtime
+  id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 运行时
 - en: Last but not least, a crucial aspect of more complex models is runtime. An amazing
     model that takes weeks to train is much more practically limited than one that
     takes an hour to train. Here, the PyTorch implementation compares extremely well
@@ -269,24 +386,39 @@
     n1-standard-8 instances (8 virtual CPUs, 30 GB RAM) with an NVIDIA Tesla T4\.
     Going from 13 hours to 0.3 hours is crucial for making this impressive model more
     useful in practice!
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后但同样重要的是，更复杂模型的一个关键方面是运行时间。一个需要几周才能训练的惊人模型在实践中比一个只需一小时训练的模型更受限。在这里，PyTorch
+    实现的表现极其出色（尽管正如作者在他们的论文中提到的，他们没有对 TensorFlow 1 代码进行性能优化）。所有模型都使用 GPU 进行训练，并在 GCP
+    n1-standard-8 实例（8 个虚拟 CPU，30 GB 内存）上运行，配备 NVIDIA Tesla T4。将训练时间从 13 小时缩短到 0.3
+    小时对于使这个令人印象深刻的模型在实践中更具实用性至关重要！
 - en: '| **Version** | **Training time** |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| **版本** | **训练时间** |'
 - en: '| TensorFlow 1  | 12.9 hours |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| TensorFlow 1  | 12.9 小时 |'
 - en: '| PyTorch, batch_size=100 (original parameters) | 1.6 hours |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| PyTorch, batch_size=100（原始参数） | 1.6 小时 |'
 - en: '| PyTorch, batch_size=1000 | 0.3 hours |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| PyTorch, batch_size=1000 | 0.3 小时 |'
 - en: Conclusion
+  id: totrans-53
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Gretel.ai has added a PyTorch implementation of the DoppelGANger time series
     model to our open-source gretel-synthetics library. We showed this implementation
     produces high-quality synthetic data, and is substantially faster (~40x) than
@@ -296,48 +428,76 @@
     any questions!** Please watch for more blogs on time series as we incorporate
     DoppelGANger into our APIs and add additional features such as support for variable-length
     sequences.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: Gretel.ai 已经在我们的开源 gretel-synthetics 库中添加了 DoppelGANger 时间序列模型的 PyTorch 实现。我们展示了这一实现能够生成高质量的合成数据，并且速度比之前的
+    TensorFlow 1 实现快了大约 ~40 倍。**如果你喜欢这篇文章，请在我们的** [**gretel-synthetics GitHub**](https://github.com/gretelai/gretel-synthetics)
+    **上留下一个 ⭐，如果你有任何问题，请在我们的** [**Slack**](https://gretel.ai/slackinvite) **上告诉我们！**
+    请关注更多关于时间序列的博客，我们会将 DoppelGANger 融入我们的 API 并添加更多功能，比如支持可变长度的序列。
 - en: Credits
+  id: totrans-55
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 致谢
 - en: 'Thanks to the authors of the excellent DoppelGANger paper: [Using GANs for
     Sharing Networked Time Series Data: Challenges, Initial Promise, and Open Questions](http://arxiv.org/abs/1909.13403)
     by Zinan Lin, Alankar Jain, Chen Wang, Giulia Fanti, Vyas Sekar. And we’re especially
     grateful to Zinan Lin for responding to questions about the paper and TensorFlow
     1 code.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢优秀 DoppelGANger 论文的作者：[使用 GAN 共享网络时间序列数据：挑战、初步前景和开放问题](http://arxiv.org/abs/1909.13403)
+    由 Zinan Lin, Alankar Jain, Chen Wang, Giulia Fanti, Vyas Sekar 合著。我们特别感谢 Zinan
+    Lin 对论文和 TensorFlow 1 代码问题的回答。
 - en: '**[Kendrick Boyd](https://www.linkedin.com/in/kendrickboyd/)** is Principal
     ML Engineer at [Gretel.ai](http://gretel.ai/).'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Kendrick Boyd](https://www.linkedin.com/in/kendrickboyd/)** 是 [Gretel.ai](http://gretel.ai/)
+    的首席机器学习工程师。'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何生成合成表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
 - en: '[Combining Data Management and Data Storytelling to Generate Value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[结合数据管理和数据讲述以创造价值](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
 - en: '[High-Fidelity Synthetic Data for Data Engineers and Data Scientists Alike](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高保真合成数据适用于数据工程师和数据科学家](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
 - en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用合成数据克服机器学习模型训练中的数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
 - en: '[How to Democratize AI/ML and Data Science with AI-generated Synthetic Data](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过 AI 生成的合成数据民主化 AI/ML 和数据科学](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)'
 - en: '[Synthetic Data Platforms: Unlocking the Power of Generative AI for…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[合成数据平台：解锁生成式 AI 的力量以处理结构化数据](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)'
