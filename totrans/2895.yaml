@@ -924,12 +924,60 @@
   id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE31] 导入 `speech_recognition` 模块为 `sr`，导入 `os`，`sys`，`re`，`webbrowser`，`smtplib`，`requests`，`subprocess`，从
+    `pyowm` 导入 `OWM`，导入 `youtube_dl`，`vlc`，`urllib`，`urllib2`，`json`，从 `bs4` 导入 `BeautifulSoup`
+    为 `soup`，从 `urllib2` 导入 `urlopen`，导入 `wikipedia`，`random`，从 `time` 导入 `strftime`。定义
+    `sofiaResponse(audio)`：    "说出作为参数传递的音频"。打印音频。对音频进行行分割：        执行 `os.system("say
+    " + audio)`。定义 `myCommand()`：    "监听命令"。创建 `r` 为 `sr.Recognizer()`。使用 `sr.Microphone()`
+    作为源：        打印“说点什么……”        设置 `r.pause_threshold = 1`        调整环境噪音，持续时间为 1
+    秒        监听音频。尝试：        使用 `r.recognize_google(audio).lower()` 识别命令并打印“你说了: ”
+    + 命令 + ''\n''。        #循环以继续监听命令，如果接收到无法识别的语音则继续。        除非捕获 `sr.UnknownValueError`：            打印“....”            命令
+    = `myCommand()`。        返回命令。定义 `assistant(command)`：    "执行命令的 if 语句"    #打开子版块
+    Reddit。    如果命令中包含 ''open reddit''：        使用正则表达式搜索 ''open reddit (.*)''        设置
+    URL 为 ''https://www.reddit.com/''        如果找到匹配：            从正则表达式组中获取子版块            将
+    URL 更新为 ''r/'' + 子版块        打开 URL        `sofiaResponse(''The Reddit content
+    has been opened for you Sir.'')`    elif ''shutdown'' 在命令中：        `sofiaResponse(''Bye
+    bye Sir. Have a nice day'')`        `sys.exit()`    #打开网站    elif ''open'' 在命令中：        使用正则表达式搜索
+    ''open (.+)''        如果找到匹配：            从正则表达式组中获取域名            打印域名            设置
+    URL 为 ''https://www.'' + 域名            打开 URL            `sofiaResponse(''The
+    website you have requested has been opened for you Sir.'')`        否则：            pass    #问候    elif
+    ''hello'' 在命令中：        获取当前时间小时数        如果时间小于 12：            `sofiaResponse(''Hello
+    Sir. Good morning'')`        elif 12 <= 时间 < 18：            `sofiaResponse(''Hello
+    Sir. Good afternoon'')`        否则：            `sofiaResponse(''Hello Sir. Good
+    evening'')`    elif ''help me'' 在命令中：        `sofiaResponse("""        你可以使用这些命令，我会帮助你：1\.
+    打开 Reddit 子版块：在默认浏览器中打开子版块。        2\. 打开 xyz.com：用任何网站名称替换 xyz。        3\. 发送邮件：将按顺序询问收件人姓名和内容。        4\.
+    当前天气在 {cityname}：告诉你当前天气状况和温度。        5\. 你好        6\. 播放视频：在 VLC 媒体播放器中播放歌曲。        7\.
+    更换壁纸：更改桌面壁纸。        8\. 今日新闻：读取今天的头条新闻。        9\. 时间：当前系统时间。        10\. 谷歌新闻的头条故事（RSS
+    源）。        11\. 告诉我关于 xyz 的事：告诉你关于 xyz 的事。        """)`    #笑话    elif ''joke''
+    在命令中：        从 ''https://icanhazdadjoke.com/'' 获取请求        如果响应状态码为 OK：            `sofiaResponse(str(res.json()[''joke'']))`        否则：            `sofiaResponse(''oops!I
+    ran out of jokes'')`    #谷歌新闻的头条故事    elif ''news for today'' 在命令中：        尝试：            新闻
+    URL 为 "https://news.google.com/news/rss"            客户端 = `urlopen(news_url)`            XML
+    页面 = 客户端.read()            客户端关闭()            soup 页面 = `soup(xml_page,"xml")`            新闻列表
+    = soup_page.findAll("item")            对于前 15 条新闻：                `sofiaResponse(news.title.text.encode(''utf-8''))`        除非捕获异常：            打印异常    #当前天气    elif
+    ''current weather'' 在命令中：        使用正则表达式搜索 ''current weather in (.*)''        如果找到匹配：            从正则表达式组中获取城市            创建
+    OWM 实例，使用 API 密钥            获取该城市的天气            获取天气状态和温度            `sofiaResponse(''当前
+    %s 的天气是 %s。最高温度为 %0.2f 度，最低温度为 %0.2f 度摄氏度'' % (城市, 状态, 温度[''temp_max''], 温度[''temp_min'']))`    #时间    elif
+    ''time'' 在命令中：        导入 `datetime`        当前时间 = `datetime.datetime.now()`        `sofiaResponse(''当前时间是
+    %d 小时 %d 分钟'' % (now.hour, now.minute))`    elif ''email'' 在命令中：        `sofiaResponse(''收件人是谁？'')`        收件人
+    = `myCommand()`        如果收件人中包含 ''rajat''：            `sofiaResponse(''我该对他说什么？'')`            内容
+    = `myCommand()`            创建 SMTP 实例            登录并发送邮件            关闭邮件客户端            `sofiaResponse(''邮件已成功发送。你可以查看你的收件箱。'')`        否则：            `sofiaResponse(''我不知道你在说什么！'')`    #启动应用程序    elif
+    ''launch'' 在命令中：        使用正则表达式搜索 ''launch (.*)''        如果找到匹配：            从正则表达式组中获取应用名称            更新应用名称为
+    ".app"            启动应用程序        `sofiaResponse(''我已启动所需的应用程序'')`    #播放 YouTube
+    歌曲    elif ''play me a song'' 在命令中：        设置路径和文件夹        清理文件夹中的所有文件        `sofiaResponse(''我该播放什么歌曲，先生？'')`        歌曲
+    = `myCommand()`        如果歌曲：            标志 = 0            设置 YouTube 搜索 URL            获取
+    HTML 内容            解析 HTML            获取视频 URL 列表            下载并播放歌曲        如果未找到视频：            `sofiaResponse(''我没有找到任何
+    YouTube 视频 '')`    #更换壁纸    elif ''change wallpaper'' 在命令中：        清理壁纸文件夹中的所有文件        使用
+    Unsplash API 获取随机图片        下载图片并更新壁纸        `sofiaResponse(''壁纸已成功更改'')`    #问我任何事    elif
+    ''tell me about'' 在命令中：        使用正则表达式搜索 ''tell me about (.*)''        尝试：            如果找到匹配：                从维基百科获取主题页面                `sofiaResponse(ny.content[:500].encode(''utf-8''))`        除非捕获异常：            打印异常        `sofiaResponse(''你好用户，我是
+    Sofia，你的个人语音助手，请给出命令或说 "help me"，我将告诉你我能做什么。'')`    #循环继续执行多个命令。    while True：        `assistant(myCommand())`
+    [PRE32]'
 - en: So you have seen how just by writing simple lines of python code we can create
     a very cool voice-based desktop/laptop assistant. Apart from these features, you
     can also include many different features in your voice assistant.
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 你已经看到，通过编写简单的 Python 代码，我们可以创建一个非常酷的语音桌面/笔记本电脑助手。除了这些功能，你还可以在你的语音助手中加入许多其他功能。
 - en: Please not that once you start executing your program, be loud and clear while
     you are interacting with voice assistant because it may happen that if your voice
     is not clear your voice assistant may not be able to interpret you properly.
@@ -937,11 +985,13 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 请注意，一旦你开始执行程序时，在与语音助手互动时要大声且清晰，因为如果你的声音不清楚，语音助手可能无法正确解读你的指令。
 - en: 'Conclusion: What the future holds'
   id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论：未来的展望
 - en: Throughout the history of computing, user interfaces have become progressively
     natural to use. The screen and keyboard were one step in this direction. The mouse
     and graphical user interface were another. Touch screens are the most recent development.
@@ -952,6 +1002,7 @@
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 在计算机历史上，用户界面变得越来越自然易用。屏幕和键盘是朝着这个方向迈出的第一步。鼠标和图形用户界面是另一步。触摸屏是最新的发展。下一步很可能是增强现实、手势和语音命令的混合。毕竟，提问或进行对话通常比输入文本或在在线表单中填写多个细节要简单得多。
 - en: The more a person interacts with voice-activated devices, the more trends, and
     patterns the system identifies based on the information it receives. Then, this
     data can be utilized to determine user preferences and tastes, which is a long-term
@@ -961,11 +1012,14 @@
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们与语音激活设备互动的越多，系统就能根据接收到的信息识别出更多的趋势和模式。然后，这些数据可以用于确定用户的偏好和口味，这对使家庭变得更智能是一个长期的卖点。谷歌和亚马逊正在寻求集成能够分析和响应人类情感的语音启用人工智能。
 - en: I hope you guys have enjoyed reading this article. Share your thoughts/comments/doubts
     in the comment section. You can reach me out over [LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/).
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望大家喜欢阅读这篇文章。请在评论区分享你的想法/评论/疑问。你可以通过 [LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)
+    联系我。
 - en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
     is a Big data developer at CirrusLabs. He has over 4 years of working experience
     in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
@@ -973,66 +1027,83 @@
   id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[纳戈什·辛格·乔汉](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    是 CirrusLabs 的大数据开发人员。他在电信、分析、销售、数据科学等多个领域拥有超过 4 年的工作经验，专注于各种大数据组件。'
 - en: '[Original](https://towardsdatascience.com/build-your-first-voice-assistant-85a5a49f6cc1).
     Reposted with permission.'
   id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/build-your-first-voice-assistant-85a5a49f6cc1)。经许可转载。'
 - en: '**Related:**'
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Practical Speech Recognition with Python: The Basics](/2019/07/practical-speech-recognition-python-basics.html)'
   id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 进行实用语音识别：基础知识](/2019/07/practical-speech-recognition-python-basics.html)'
 - en: '[Comparison of the Top Speech Processing APIs](/2018/12/activewizards-comparison-speech-processing-apis.html)'
   id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[顶级语音处理 API 的比较](/2018/12/activewizards-comparison-speech-processing-apis.html)'
 - en: '[TensorFlow vs PyTorch vs Keras for NLP](/2019/09/tensorflow-pytorch-keras-nlp.html)'
   id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow vs PyTorch vs Keras 在 NLP 中的比较](/2019/09/tensorflow-pytorch-keras-nlp.html)'
 - en: '* * *'
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-121
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
   id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Overcoming Barriers in Multi-lingual Voice Technology: Top 5…](https://www.kdnuggets.com/2023/08/overcoming-barriers-multilingual-voice-technology-top-5-challenges-innovative-solutions.html)'
   id: totrans-127
   prefs:
