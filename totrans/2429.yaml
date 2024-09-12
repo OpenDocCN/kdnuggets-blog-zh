@@ -1,43 +1,66 @@
 - en: Optimizing Genes with a Genetic Algorithm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用遗传算法优化基因
 - en: 原文：[https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)
 - en: '![DNA](../Images/e334bf267c70140986d363797eb1ca51.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![DNA](../Images/e334bf267c70140986d363797eb1ca51.png)'
 - en: '**Introduction**'
+  id: totrans-3
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**介绍**'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT 部门'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Genetic algorithms can be a great way to tackle an optimisation problem because
     they can reliably find a good solution, even in a complex fitness landscape with
     many local optima. I’m using this technique for optimising a DNA sequence to accurately
@@ -45,22 +68,33 @@
     steps of implementing a genetic algorithm rather than diving into the theory behind
     them, but there are plenty more detailed descriptions out there, such as [here](/2018/07/genetic-algorithm-implementation-python.html)
     and [here](https://towardsdatascience.com/introduction-to-genetic-algorithms-including-example-code-e396e98d8bf3).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 遗传算法可以是解决优化问题的好方法，因为它们可以可靠地找到一个好的解决方案，即使在具有许多局部最优解的复杂适应度景观中。我正在使用这种技术来优化 DNA
+    序列，以准确生产大量有用的蛋白质。在这里，我们将查看实现遗传算法的关键步骤，而不是深入探讨其背后的理论，但在其他地方有许多更详细的描述，例如 [这里](/2018/07/genetic-algorithm-implementation-python.html)
+    和 [这里](https://towardsdatascience.com/introduction-to-genetic-algorithms-including-example-code-e396e98d8bf3)。
 - en: In the simplest terms genetic algorithms simulate a population where each individual
     is a possible “solution” and let survival of the fittest do its thing. The difficult
     part, as with much of data science and machine learning, is how to frame the question
     for the computer. We will see how to improve your solutions just by framing the
     question better.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单来说，遗传算法模拟一个种群，其中每个个体都是一个可能的“解决方案”，并让适者生存发挥作用。困难的部分，就像数据科学和机器学习中的许多问题一样，是如何为计算机构建问题。我们将看到如何通过更好地构建问题来改善您的解决方案。
 - en: '**All the code is available at** [https://github.com/DAWells/codon_path](https://github.com/DAWells/codon_path)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**所有代码均可在** [https://github.com/DAWells/codon_path](https://github.com/DAWells/codon_path)
+    获取'
 - en: '**The Problem**'
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**问题**'
 - en: DNA codes for amino acids, the building blocks of proteins. Three DNA letters
     (A, T, G, or C) in a row code for a single amino acid and is called a *codon*.
     Several different codons could encode the same amino acid. For example CAA and
@@ -70,8 +104,11 @@
     the next amino acid, it may take longer or make a mistake. Although several codons
     can do the same job, not all pairs work well together. My aim is to preferentially
     use these pairs that work well together.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: DNA 代码用于氨基酸，蛋白质的构建块。三个位于一起的 DNA 字母（A、T、G 或 C）编码一个氨基酸，称为*密码子*。几个不同的密码子可以编码相同的氨基酸。例如，CAA
+    和 CAG 都编码氨基酸谷氨酰胺。给定一个已知的蛋白质，我们想要编码的序列应该是简单的。实际上，当蛋白质合成时，前一个密码子可能会影响添加下一个氨基酸的时间，可能需要更长时间或出现错误。尽管几个密码子可以完成相同的工作，但并非所有的配对都能很好地配合在一起。我的目标是优先使用这些配对良好的密码子。
 - en: So why is this important? Optimising a gene in this way can allow you to get
     more of your desired protein. A protein you might need to catalyse a chemical
     reaction, or produce a therapeutic drug. Why is this difficult? Each codon is
@@ -80,15 +117,21 @@
     of two codons at each position and how well adjacent codons work together is indicated
     by the colour connecting them (green>yellow>red). A good codon pair may lock you
     into a bad pair next as shown below.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，为什么这很重要？通过这种方式优化基因可以让你获得更多你想要的蛋白质。你可能需要一种蛋白质来催化化学反应，或者生产治疗药物。为什么这很困难？每个密码子是两个对中的一部分，这意味着你不能单独选择最佳对。相反，你必须同时考虑所有对。在下面的例子中，每个位置有两个密码子的选择，邻近密码子的配合效果由连接它们的颜色（绿色>黄色>红色）表示。一个好的密码子对可能会让你陷入下一个坏对，如下所示。
 - en: '![Three DNA letters problem](../Images/570e8cdbd4d315b99927aac20da10c48.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![三个DNA字母问题](../Images/570e8cdbd4d315b99927aac20da10c48.png)'
 - en: '**The Solution**'
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**解决方案**'
 - en: The first thing you need for a genetic algorithm is a score function, some way
     to measure the fitness of possible solutions to your problem. This is used to
     decide which solutions get to “reproduce”. Deciding how to calculate this number
@@ -99,32 +142,40 @@
     So for any DNA sequence I can add up this value for each consecutive pair of codons
     in my sequence and calculate a score; the higher this score, the better a solution
     it is for my problem.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 遗传算法所需的第一件事是一个评分函数，一种衡量可能解决方案适应性的方式。这用于决定哪些解决方案可以“繁殖”。决定如何计算这个数字是任何优化问题的关键步骤，因为它必须在这个值中捕捉问题的所有复杂性。幸运的是，Coleman等人（2008）为所有3,721对可能的密码子对计算了一个评分，我们使用这个评分作为在蛋白质合成过程中对一对密码子效果的衡量。因此，对于任何DNA序列，我可以将序列中每对连续密码子的值加起来，并计算一个分数；分数越高，解决方案对我的问题越好。
 - en: Next we need to frame the question for the genetic algorithm, what form will
     each possible solution take while the algorithm optimises it? The most obvious
     representation for specifying codons would be a vector where each element is a
     codon, represented by a number 1-61 (for each of the 61 codons). But this is too
     much freedom for our algorithm because it can swap in a codon that produces the
     wrong amino acid.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们需要为遗传算法框定问题，即在算法优化过程中，每个可能的解决方案将采取何种形式？最明显的密码子表示方式是一个向量，其中每个元素是一个密码子，用1-61的数字表示（对应61个密码子中的每一个）。但这对于我们的算法来说自由度过大，因为它可以替换成产生错误氨基酸的密码子。
 - en: A better formulation is each element representing one of the codons that encodes
     the correct amino acid. Figuring out what “the correct amino acid” is can be abstracted
     away to the scoring function, which means our genetic algorithm can’t break anything.
     Any single amino acid can be coded for by up to 6 different codons, so our solution
     vector contains integer values ranging 0-5 encoding the 6 codons, and is as long
     as the string of amino acids we’re optimising (or a third as long as the DNA gene).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 更好的表述是每个元素表示一个编码正确氨基酸的密码子。确定什么是“正确氨基酸”可以抽象到评分函数中，这意味着我们的遗传算法不会破坏任何东西。任何单一氨基酸可以由多达6种不同的密码子编码，因此我们的解决方案向量包含范围为0-5的整数值，编码6种密码子，并且长度与我们优化的氨基酸序列相同（或DNA基因长度的三分之一）。
 - en: Another key benefit of making our solution vectors from 1-6 rather than 1-61
     is a massive reduction in problem space. If L is the length of our vector there
     are 6L rather than 61L possible solutions to explore. A smaller problem space
     means a faster answer, which is particularly important with genetic algorithms.
     Although they find good solutions, they do it slowly. If I hadn’t reformatted
     to a smaller problem space I wouldn’t have had time to optimise genes.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个关键好处是将我们的解决方案向量从1-6而非1-61，这大大减少了问题空间。如果L是我们向量的长度，那么要探索的可能解决方案数量是6L而非61L。较小的问题空间意味着更快的答案，这在遗传算法中尤为重要。尽管它们能找到好的解决方案，但速度较慢。如果我没有重新格式化为较小的问题空间，我就没有时间优化基因。
 - en: There is an issue with using 0-5 to represent codons though, not all amino acids
     have 6 codons e.g. Lysine only has 2\. The genetic algorithm might use the 5th
     Lysine codon (which doesn’t exist); what then? You could have the score function
@@ -133,8 +184,10 @@
     Every possible solution with an invalid codon in it is definitely not the best
     solution. This means lots of tried solutions in our 6L space (which is still an
     awful lot) are wasted effort.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用0-5表示密码子存在一个问题，并不是所有氨基酸都有6个密码子，例如赖氨酸只有2个。遗传算法可能会使用第5个赖氨酸密码子（实际上不存在）；那怎么办？你可以让评分函数在每次使用无效密码子时扣分，并希望这能促使你找到好的有效解决方案，但这并没有高效利用我们的问题空间。任何包含无效密码子的解决方案都绝对不是最佳解决方案。这意味着我们在6L空间中尝试的许多解决方案（尽管仍然很多）都是浪费的努力。
 - en: Instead of a penalty, a better solution is modulo remainders. Whenever the genetic
     algorithm asked for a codon outside of the list of real codons, I looped it back
     to the start of the list. So if it asked for the 5th codon when there were only
@@ -143,11 +196,15 @@
     Because of this, we should get better answers, faster. In the plot below we can
     see that the penalty algorithm is always behind the modulo algorithm and takes
     30 generations just to get to the same start point.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其使用惩罚，更好的解决方案是使用模除余数。每当遗传算法请求一个不在真实密码子列表中的密码子时，我将其循环回列表的开头。因此，如果它请求第5个密码子而列表中只有3个，它将回到开始处并计算剩余的2个。这意味着遗传算法探索的任何解决方案都有可能是最佳解决方案。因此，我们应该能更快地得到更好的答案。在下面的图中，我们可以看到惩罚算法总是落后于模除算法，并且需要30代才能达到相同的起点。
 - en: '![the solution graph1](../Images/67d493d89f389b8daf0d2423dbfd52e4.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![解决方案图1](../Images/67d493d89f389b8daf0d2423dbfd52e4.png)'
 - en: Fortunately this allowed me to get a really good solution, much better than
     the naturally occurring gene. Below I’ve plotted the cumulative fitness over the
     length of the natural and optimised genes; good codon pairs increase the fitness,
@@ -156,15 +213,21 @@
     the slope is much steeper and consistently positive, indicating a much better
     use of codon pairs. In all, our optimised gene is 6 times better than the natural
     gene.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，这使我得到了一个非常好的解决方案，比自然发生的基因要好得多。下面我绘制了自然基因和优化基因在长度上的累积适应度；好的密码子对增加适应度，差的对减少适应度。自然基因的累积得分通常是增加的，因为好的密码子对通常是优选的，但差别不大。而在我们优化的基因中，斜率要陡得多且始终为正，表明密码子对的利用要好得多。总体而言，我们优化的基因比自然基因好6倍。
 - en: '![the solution graph2](../Images/13adb47acbf8ae61d0694036b526f0e8.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![解决方案图2](../Images/13adb47acbf8ae61d0694036b526f0e8.png)'
 - en: '**Conclusions**'
+  id: totrans-27
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: To get the most out of your genetic algorithms you need to frame your question
     such that problem space is as small and efficiently explored as possible. You
     also need a fitness function that accurately captures the essence of what you’re
@@ -172,46 +235,69 @@
     problems into numbers so the computer can help you. With practice you can frame
     the same question in multiple ways. Hopefully this post has shown that the same
     question, if framed properly, can get you a better answer.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了最大限度地发挥你的遗传算法的效果，你需要将问题框架设计得尽可能小且高效地探索问题空间。你还需要一个准确捕捉你试图实现目标本质的适应度函数。数据科学中很大一部分就是将现实世界问题转化为数字，以便计算机可以帮助你。通过实践，你可以用多种方式来框定同一个问题。希望这篇文章展示了如何通过恰当框定同一问题来获得更好的答案。
 - en: '**References**'
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**参考文献**'
 - en: Coleman, J. R., Papamichail, D., Skiena, S., Futcher, B., Wimmer, E., & Mueller,
     S. (2008). Virus attenuation by genome-scale changes in codon pair bias. Science,
     320(5884), 1784–1787\. https://doi.org/10.1126/science.1155761
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: Coleman, J. R., Papamichail, D., Skiena, S., Futcher, B., Wimmer, E., & Mueller,
+    S. (2008). 通过基因组规模的密码子对偏好变化进行病毒减毒。科学，320(5884)，1784–1787。https://doi.org/10.1126/science.1155761
 - en: '**[David Wells](https://dawells.github.io/)** is a bioinformatician applying
     machine learning to genomics to develop vaccines.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[David Wells](https://dawells.github.io/)** 是一位生物信息学家，他将机器学习应用于基因组学以开发疫苗。'
 - en: More On This Topic
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多关于此主题
 - en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[遗传算法关键术语解析](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
 - en: '[Genetic Programming in Python: The Knapsack Problem](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
 - en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解和实现 Python 中的遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入探讨 Python 性能分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Optimizing Data Storage: Exploring Data Types and Normalization in SQL](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化数据存储：探索 SQL 中的数据类型和规范化](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
 - en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化数据分析：在 Databricks 中集成 GitHub Copilot](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
