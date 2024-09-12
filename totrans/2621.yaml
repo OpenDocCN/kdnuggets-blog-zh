@@ -1,293 +1,436 @@
 - en: Getting Started with Distributed Machine Learning with PyTorch and Ray
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 PyTorch 和 Ray 开始分布式机器学习
 - en: 原文：[https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Galarnyk](https://twitter.com/GalarnykMichael), [Richard Liaw](https://twitter.com/richliaw),
     and [Robert Nishihara](https://twitter.com/robertnishihara)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Michael Galarnyk](https://twitter.com/GalarnykMichael)、[Richard Liaw](https://twitter.com/richliaw)
+    和 [Robert Nishihara](https://twitter.com/robertnishihara) 共同撰写**'
 - en: '![Image for post](../Images/2e652136f9d14830daf0b1e7bcade4e5.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/2e652136f9d14830daf0b1e7bcade4e5.png)'
 - en: Machine learning today *requires* distributed computing. Whether you’re [training
     networks](https://www.youtube.com/watch?v=rEB3NPUoxMM), [tuning hyperparameters](https://docs.ray.io/en/master/tune/), [serving
     models](https://docs.ray.io/en/master/serve/), or [processing data](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e),
     machine learning is computationally intensive and can be prohibitively slow without
     access to a cluster. [Ray](https://ray.io/) is a popular framework for distributed
     Python that can be paired with PyTorch to rapidly scale machine learning applications.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前的机器学习*需要*分布式计算。无论你是在[训练网络](https://www.youtube.com/watch?v=rEB3NPUoxMM)、[调整超参数](https://docs.ray.io/en/master/tune/)、[服务模型](https://docs.ray.io/en/master/serve/)，还是[处理数据](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e)，机器学习都是计算密集型的，没有集群的话，可能会极其缓慢。[Ray](https://ray.io/)是一个流行的分布式
+    Python 框架，可以与 PyTorch 配合使用，以迅速扩展机器学习应用。
 - en: This post covers various elements of the Ray ecosystem and how it can be used
     with PyTorch!
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文涵盖了 Ray 生态系统的各种元素以及如何与 PyTorch 配合使用！
 - en: What is Ray
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是 Ray
 - en: '![Image for post](../Images/0c7d3372f00ec70dbc844670bec0f7e5.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/0c7d3372f00ec70dbc844670bec0f7e5.png)'
 - en: 'Ray is an open source library for parallel and distributed Python. The diagram
     above shows that at a high level, the Ray ecosystem consists of three parts: the
     core Ray system, scalable libraries for machine learning (both native and third
     party), and tools for [launching clusters on any cluster or cloud provider](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208).'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray 是一个用于并行和分布式 Python 的开源库。上图展示了 Ray 生态系统的高层结构，它包括三个部分：核心 Ray 系统、用于机器学习的可扩展库（包括本地和第三方），以及用于[在任何集群或云提供商上启动集群的工具](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208)。
 - en: The Core Ray System
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 核心 Ray 系统
 - en: '[Ray](https://github.com/ray-project/ray) can be used to [scale Python applications](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8) across
     multiple cores or machines. It has a couple major advantages including:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Ray](https://github.com/ray-project/ray)可以用于[在多个核心或机器上扩展 Python 应用程序](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8)。它有几个主要的优势，包括：'
 - en: 'Simplicity: you can scale your Python applications without rewriting them,
     and the same code can run on one machine or multiple machines.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单性：你可以在不重写代码的情况下扩展 Python 应用程序，且相同的代码可以在一台机器或多台机器上运行。
 - en: 'Robustness: applications gracefully handle machine failures and preemption.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 稳健性：应用程序能够优雅地处理机器故障和抢占。
 - en: '[Performance](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1):
     tasks run with millisecond latencies, scale to tens of thousands of cores, and
     handle numerical data with minimal serialization overhead.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[性能](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1)：任务以毫秒级延迟运行，扩展到数万个核心，并以最小的序列化开销处理数值数据。'
 - en: Library Ecosystem
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 库生态系统
 - en: Because Ray is a general-purpose framework, the community has built many libraries
     and frameworks on top of it to accomplish different tasks. The vast majority of
     these support PyTorch, require minimal modifications to your code, and integrate
     seamlessly with each other. Below are just a few of the [many libraries](https://www.anyscale.com/blog/understanding-the-ray-ecosystem-and-community) in
     the ecosystem.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Ray 是一个通用框架，社区在其基础上构建了许多库和框架，以完成不同的任务。这些库绝大多数支持 PyTorch，只需对代码进行最小的修改，并且可以无缝集成。以下只是生态系统中[众多库](https://www.anyscale.com/blog/understanding-the-ray-ecosystem-and-community)中的一部分。
 - en: '**RaySGD**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**RaySGD**'
 - en: '![Image for post](../Images/4f506a6863cbb7f15269e461d4ae661a.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/4f506a6863cbb7f15269e461d4ae661a.png)'
 - en: Comparison of PyTorch’s DataParallel vs Ray (which uses PyTorch’s Distributed
     DataParallel underneath the hood) on p3dn.24xlarge instances. [Image source](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在p3dn.24xlarge实例上比较PyTorch的DataParallel与Ray（Ray在底层使用PyTorch的Distributed DataParallel）。[图像来源](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220)。
 - en: RaySGD is a library that provides distributed training wrappers for data parallel
     training. For example, the [RaySGD TorchTrainer](https://docs.ray.io/en/master/raysgd/raysgd_pytorch.html) is
     a wrapper around torch.distributed.launch. It provides a Python API to easily
     incorporate distributed training into a larger Python application, as opposed
     to needing to wrap your training code in bash scripts.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: RaySGD是一个为数据并行训练提供分布式训练封装的库。例如，[RaySGD TorchTrainer](https://docs.ray.io/en/master/raysgd/raysgd_pytorch.html)是torch.distributed.launch的一个封装。它提供了一个Python
+    API，可以轻松地将分布式训练纳入到更大的Python应用中，而不需要将训练代码封装在bash脚本中。
 - en: 'Some other advantages of the library are:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个库的其他一些优点包括：
 - en: 'Ease of use: You can scale PyTorch’s native DistributedDataParallel without
     needing to monitor individual nodes.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 易用性：你可以扩展PyTorch的本地DistributedDataParallel，而不需要监控单个节点。
 - en: 'Scalability: You can scale up and down. Start on a single CPU. Scale up to
     multi-node, multi-CPU, or multi-GPU clusters by changing 2 lines of code.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可扩展性：你可以进行水平和垂直扩展。从单个CPU开始。通过更改2行代码即可扩展到多节点、多CPU或多GPU集群。
 - en: 'Accelerated Training: There is built-in support for mixed precision training
     with NVIDIA Apex.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加速训练：内置支持使用NVIDIA Apex进行混合精度训练。
 - en: 'Fault Tolerance: There is support for automatic recovery when cloud machines
     are preempted.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 容错性：支持在云机器被抢占时的自动恢复。
 - en: 'Compatibility: There is seamless integration with other libraries like [Ray
     Tune](https://docs.ray.io/en/master/tune/index.html) and [Ray Serve](https://docs.ray.io/en/master/serve/).'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 兼容性：与其他库如[Ray Tune](https://docs.ray.io/en/master/tune/index.html)和[Ray Serve](https://docs.ray.io/en/master/serve/)有无缝集成。
 - en: 'You can get started with TorchTrainer by installing Ray (pip install -U ray
     torch) and running the code below:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过安装Ray（pip install -U ray torch）并运行下面的代码来开始使用TorchTrainer：
 - en: The script will download CIFAR10 and use a ResNet18 model to do image classification.
     With a single parameter change (num_workers=N), you can utilize multiple GPUs.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个脚本将下载CIFAR10并使用ResNet18模型进行图像分类。只需修改一个参数（num_workers=N），你就可以利用多个GPU。
 - en: If you would like to learn more about RaySGD and how to scale PyTorch training
     across a cluster, you should check out this [blog post](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于RaySGD以及如何在集群中扩展PyTorch训练的信息，你可以查看这篇[博客文章](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220)。
 - en: '**Ray Tune**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Ray Tune**'
 - en: '![Image for post](../Images/b430f66bf5d49d073a678c7a63666bb1.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/b430f66bf5d49d073a678c7a63666bb1.png)'
 - en: Ray Tune’s implementation of optimization algorithms like Population Based Training
     (shown above) [can be used with PyTorch](https://docs.ray.io/en/master/tune/tutorials/tune-advanced-tutorial.html) for
     more performant models. Image from [Deepmind](https://deepmind.com/blog/article/population-based-training-neural-networks).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Tune实现了如Population Based Training（如上所示）这样的优化算法，[可以与PyTorch一起使用](https://docs.ray.io/en/master/tune/tutorials/tune-advanced-tutorial.html)，以获得更高性能的模型。图像来自[Deepmind](https://deepmind.com/blog/article/population-based-training-neural-networks)。
 - en: '[Ray Tune](https://docs.ray.io/en/master/tune/index.html) is a Python library
     for experiment execution and hyperparameter tuning at any scale. Some advantages
     of the library are:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Ray Tune](https://docs.ray.io/en/master/tune/index.html)是一个用于实验执行和超参数调优的Python库，适用于任何规模。一些库的优点包括：'
 - en: The ability to launch a multi-node [distributed hyperparameter sweep](https://docs.ray.io/en/master/tune/tutorials/tune-distributed.html#tune-distributed) in
     fewer than 10 lines of code.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够在不到10行代码的情况下启动一个多节点的[分布式超参数搜索](https://docs.ray.io/en/master/tune/tutorials/tune-distributed.html#tune-distributed)。
 - en: Support for every major machine learning framework [including PyTorch](https://pytorch.org/tutorials/beginner/hyperparameter_tuning_tutorial.html).
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对每个主要的机器学习框架都有支持，包括[PyTorch](https://pytorch.org/tutorials/beginner/hyperparameter_tuning_tutorial.html)。
 - en: First-class support for GPUs.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对GPU的第一类支持。
 - en: Automatic management of checkpoints and logging to [TensorBoard](https://docs.ray.io/en/master/tune/user-guide.html#tune-logging).
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自动管理检查点和日志记录到[TensorBoard](https://docs.ray.io/en/master/tune/user-guide.html#tune-logging)。
 - en: Access to state of the art algorithms such as [Population Based Training (PBT)](https://docs.ray.io/en/master/tune/api_docs/schedulers.html#tune-scheduler-pbt), [BayesOptSearch](https://docs.ray.io/en/master/tune/api_docs/suggestion.html#bayesopt), [HyperBand/ASHA](https://docs.ray.io/en/master/tune/api_docs/schedulers.html#tune-scheduler-hyperband).
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 访问前沿算法，如 [基于群体的训练 (PBT)](https://docs.ray.io/en/master/tune/api_docs/schedulers.html#tune-scheduler-pbt)、[贝叶斯优化搜索](https://docs.ray.io/en/master/tune/api_docs/suggestion.html#bayesopt)、[HyperBand/ASHA](https://docs.ray.io/en/master/tune/api_docs/schedulers.html#tune-scheduler-hyperband)。
 - en: You can get started with Ray Tune by installing Ray (pip install ray torch torchvision)
     and running the code below.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过安装 Ray（pip install ray torch torchvision）并运行下面的代码来开始使用 Ray Tune。
 - en: If you would like to learn about how to incorporate Ray Tune into your PyTorch
     workflow, you should check out this [blog post](https://towardsdatascience.com/fast-hyperparameter-tuning-at-scale-d428223b081c).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解如何将 Ray Tune 融入你的 PyTorch 工作流，应该查看这个 [博客文章](https://towardsdatascience.com/fast-hyperparameter-tuning-at-scale-d428223b081c)。
 - en: '**Ray Serve**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Ray Serve**'
 - en: '![Image for post](../Images/0b9b606dabee68b96e923ccb4b9d7d5a.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/0b9b606dabee68b96e923ccb4b9d7d5a.png)'
 - en: Ray Serve can not only be used to serve models on its own, but also to[ scale
     other serving tools like FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786).
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve 不仅可以单独用于服务模型，还可以[扩展其他服务工具，如 FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786)。
 - en: '[Ray Serve](https://docs.ray.io/en/master/serve/) is a library for easy-to-use
     scalable model serving. Some advantages of the library are:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Ray Serve](https://docs.ray.io/en/master/serve/) 是一个易于使用的可扩展模型服务库。该库的一些优点包括：'
 - en: The ability to use a single toolkit to serve everything from deep learning models
     (PyTorch, TensorFlow, etc) to scikit-learn models, to arbitrary Python business
     logic.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够使用单一工具包来服务从深度学习模型（PyTorch、TensorFlow 等）到 scikit-learn 模型，以及任意的 Python 业务逻辑。
 - en: Scale to many machines, both in your datacenter and in the cloud.
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可扩展到许多机器，无论是在你的数据中心还是在云端。
 - en: Compatibility with many other libraries like [Ray Tune](https://medium.com/distributed-computing-with-ray/simple-end-to-end-ml-from-selection-to-serving-with-ray-tune-and-ray-serve-10f5564d33ba) and [FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786).
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与许多其他库兼容，如 [Ray Tune](https://medium.com/distributed-computing-with-ray/simple-end-to-end-ml-from-selection-to-serving-with-ray-tune-and-ray-serve-10f5564d33ba)
+    和 [FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786)。
 - en: If you would like to learn how to incorporate Ray Serve and Ray Tune together
     into your PyTorch workflow, you should check out the [documentation](https://docs.ray.io/en/master/tune/tutorials/tune-serve-integration-mnist.html#tune-trainable-for-model-selection) for
     a [full code example](https://docs.ray.io/en/master/tune/tutorials/tune-serve-integration-mnist.html#sphx-glr-download-tune-tutorials-tune-serve-integration-mnist-py).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解如何将 Ray Serve 和 Ray Tune 一起融入你的 PyTorch 工作流，你应该查看 [文档](https://docs.ray.io/en/master/tune/tutorials/tune-serve-integration-mnist.html#tune-trainable-for-model-selection)
+    和 [完整代码示例](https://docs.ray.io/en/master/tune/tutorials/tune-serve-integration-mnist.html#sphx-glr-download-tune-tutorials-tune-serve-integration-mnist-py)。
 - en: '**RLlib**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**RLlib**'
 - en: '![Image for post](../Images/edfac255c7cffdb09e6501e2860a316c.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/edfac255c7cffdb09e6501e2860a316c.png)'
 - en: RLlib provides ways to customize almost all aspects of training, including neural
     network models, action distributions, policy definitions, environments, and the
     sample collection process.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: RLlib 提供了自定义几乎所有训练方面的方法，包括神经网络模型、动作分布、策略定义、环境和样本收集过程。
 - en: '[RLlib](https://docs.ray.io/en/master/rllib.html) is a library for reinforcement
     learning that offers both high scalability and a unified API for a variety of
     applications. Some advantages include:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[RLlib](https://docs.ray.io/en/master/rllib.html) 是一个强化学习库，提供高可扩展性和多种应用的统一
+    API。其一些优点包括：'
 - en: Native support for PyTorch, TensorFlow Eager, and TensorFlow (1.x and 2.x).
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对 PyTorch、TensorFlow Eager 以及 TensorFlow（1.x 和 2.x）提供原生支持。
 - en: Support for model-free, model-based, evolutionary, planning, and multi-agent
     algorithms
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持无模型、基于模型、进化、规划和多代理算法。
 - en: Support for complex model types, such as attention nets and LSTM stacks via
     simple config flags and auto-wrappers
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持复杂模型类型，例如通过简单配置标志和自动包装器的注意力网络和 LSTM 堆栈。
 - en: Compatibility with other libraries like [Ray Tune](https://docs.ray.io/en/master/rllib-training.html).
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与其他库兼容，如 [Ray Tune](https://docs.ray.io/en/master/rllib-training.html)。
 - en: '**Cluster Launcher**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**集群启动器**'
 - en: '![Image for post](../Images/0bc773ad98d89810da54245138a3805e.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![文章配图](../Images/0bc773ad98d89810da54245138a3805e.png)'
 - en: The Ray Cluster Launcher simplifies the process of launching and scaling across
     any cluster or cloud provider.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray 集群启动器简化了在任何集群或云服务提供商中启动和扩展的过程。
 - en: Once you have developed an application on your laptop and want to scale it up
     to the cloud (perhaps with more data or more GPUs), the next steps aren’t always
     clear. The process is either to have an infrastructure team set it up for you
     or to go through the following steps.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你在笔记本电脑上开发了应用程序，并希望将其扩展到云中（可能涉及更多的数据或更多的 GPU），接下来的步骤并不总是很清楚。这个过程要么由基础设施团队为你设置，要么按照以下步骤进行。
 - en: 1\. Choose a cloud provider (AWS, GCP, or Azure).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 1\. 选择一个云服务提供商（AWS、GCP 或 Azure）。
 - en: 2\. Navigate the management console to set instance types, security groups,
     spot prices, instance limits, and more.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 2\. 通过管理控制台设置实例类型、安全组、竞价价格、实例限制等。
 - en: 3\. Figure out how to distribute your Python script across a cluster.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 3\. 了解如何将你的 Python 脚本分发到集群中。
 - en: An easier approach is to use the [Ray Cluster Launcher to launch and scale machines
     across any cluster or cloud provider](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208).
     Cluster Launcher allows you autoscale, sync files, submit scripts, port forward,
     and more. This means that you can run your Ray clusters on Kubernetes, AWS, GCP,
     Azure, or a private cluster without needing to understand the low-level details
     of cluster management.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种更简单的方法是使用 [Ray 集群启动器在任何集群或云服务提供商中启动和扩展机器](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208)。集群启动器允许你自动扩展、同步文件、提交脚本、端口转发等。这意味着你可以在
+    Kubernetes、AWS、GCP、Azure 或私人集群上运行你的 Ray 集群，而无需了解集群管理的低级细节。
 - en: Conclusion
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![Image for post](../Images/b84fa86cf0d0c2f8285a4409d1178478.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![文章配图](../Images/b84fa86cf0d0c2f8285a4409d1178478.png)'
 - en: Ray provides a distributed computing foundation for [Ant Group’s Fusion Engine](https://youtu.be/Wwv9YNlXx0Q).
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray 为 [Ant Group 的 Fusion Engine](https://youtu.be/Wwv9YNlXx0Q) 提供了分布式计算基础。
 - en: This article contained some of the benefits of Ray in the PyTorch ecosystem. [Ray](https://github.com/ray-project/ray) is
     being used for a wide variety of applications from [Ant Group using Ray to support
     its financial business](https://youtu.be/Wwv9YNlXx0Q), to [LinkedIn running Ray
@@ -296,77 +439,121 @@
     have any questions or thoughts about Ray or want to learn more about [parallel
     and distributed Python](https://docs.ray.io/en/master/), please join our community
     through [Discourse](https://discuss.ray.io/) or [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍了 Ray 在 PyTorch 生态系统中的一些好处。 [Ray](https://github.com/ray-project/ray) 被用于各种应用场景，从 [Ant
+    Group 使用 Ray 支持其金融业务](https://youtu.be/Wwv9YNlXx0Q)，到 [LinkedIn 在 Yarn 上运行 Ray](https://youtu.be/0Z0Th9ySIfs)，再到 [Pathmind
+    使用 Ray 将强化学习与仿真软件连接](https://youtu.be/U9deXfKYDSs)，以及更多。如果你对 Ray 有任何问题或想法，或者想了解更多关于 [并行和分布式
+    Python](https://docs.ray.io/en/master/)的信息，请通过 [Discourse](https://discuss.ray.io/) 或 [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform) 加入我们的社区。
 - en: '[Original](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead).
     Reposted with permission.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)'
 - en: '[Train sklearn 100x Faster](/2019/09/train-sklearn-100x-faster.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将 sklearn 训练速度提高 100 倍](/2019/09/train-sklearn-100x-faster.html)'
 - en: '[Computer Vision at Scale With Dask And PyTorch](/2020/11/computer-vision-scale-dask-pytorch.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Dask 和 PyTorch 进行大规模计算机视觉](/2020/11/computer-vision-scale-dask-pytorch.html)'
 - en: '* * *'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch Lightning 入门](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
 - en: '[Getting Started with PyTorch in 5 Steps](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 步骤快速入门 PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
 - en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n07，2月16日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)'
 - en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
 - en: '[Getting Started with Scikit-learn for Classification in Machine Learning](https://www.kdnuggets.com/getting-started-with-scikit-learn-for-classification-in-machine-learning)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Scikit-learn 进行机器学习分类入门](https://www.kdnuggets.com/getting-started-with-scikit-learn-for-classification-in-machine-learning)'
 - en: '[Getting Started With Claude 3 Opus That Just Destroyed GPT-4 and Gemini](https://www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门 Claude 3 Opus，它刚刚摧毁了 GPT-4 和 Gemini](https://www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini)'

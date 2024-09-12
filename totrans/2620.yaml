@@ -1,25 +1,36 @@
 - en: Reducing the High Cost of Training NLP Models With SRU++
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SRU++ 降低 NLP 模型训练的高成本
 - en: 原文：[https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html](https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html](https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/), Research Leader
     and Scientist at ASAPP**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)，ASAPP 研究负责人和科学家撰写** '
 - en: Natural language models have achieved various groundbreaking results in NLP
     and related fields [[1](https://arxiv.org/abs/1810.04805), [2](https://arxiv.org/abs/2005.14165), [3](https://openai.com/blog/dall-e/), [4](https://arxiv.org/abs/1910.13461)].
     At the same time, the size of these models have increased enormously, growing
     to millions (or even billions) of parameters, along with a significant increase
     in the financial cost.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 自然语言模型在 NLP 和相关领域取得了各种突破性成果 [[1](https://arxiv.org/abs/1810.04805), [2](https://arxiv.org/abs/2005.14165),
+    [3](https://openai.com/blog/dall-e/), [4](https://arxiv.org/abs/1910.13461)]。与此同时，这些模型的规模大幅增加，参数量达到百万（甚至十亿），同时财务成本也显著上升。
 - en: The cost associated with training large models limits the research communities
     ability to innovate, because a research project often needs a lot of experimentation.
     Consider training a top-performing language model [[5](https://arxiv.org/abs/1809.10853)]
@@ -28,27 +39,38 @@
     as $36,000 using AWS on-demand instances). That high cost of building such models
     hinders their use in real-world business, and makes monetization of AI & NLP technologies
     more difficult.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练大型模型的成本限制了研究社区的创新能力，因为一个研究项目通常需要大量实验。考虑在 [Billion Word](https://opensource.google/projects/lm-benchmark)
+    基准上训练一个顶级语言模型 [[5](https://arxiv.org/abs/1809.10853)]。一个实验需要 384 GPU 天（6 天 * 64
+    V100 GPU，或者使用 AWS 按需实例花费高达 $36,000）。构建此类模型的高成本阻碍了它们在实际业务中的使用，并使 AI 和 NLP 技术的货币化变得更加困难。
 - en: Our model obtains better perplexity and bits-per-character (bpc) while using
     2.5x-10x less training time and cost compared to top-performing Transformer models.
     Our results reaffirm the empirical observations that attention is not all we need.
+  id: totrans-6
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 我们的模型在使用 2.5 倍到 10 倍更少的训练时间和成本的情况下，获得了更好的困惑度和每字符比特数（bpc）。我们的结果重申了经验观察，即注意力机制并非我们所需的一切。
 - en: ''
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: —[Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)
+  id: totrans-8
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: —[Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)
 - en: The increasing computation time and cost highlight the importance of inventing
     computationally efficient models that retain top modeling power with reduced or
     accelerated computation.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算时间和成本的增加突显了发明计算效率高的模型的重要性，这些模型在减少或加速计算的情况下保持顶级建模能力。
 - en: The Transformer [architecture](https://arxiv.org/abs/1706.03762) was proposed
     to accelerate model training in NLP. Specifically, it is built entirely upon self-attention
     and avoids the use of recurrence. The rationale of this design choice, as mentioned
@@ -57,35 +79,52 @@
     powerful component that permits efficient modeling of variable-length inputs.
     These advantages have made Transformer an expressive and efficient unit, and as
     a result, the predominant architecture for NLP.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: Transformer [架构](https://arxiv.org/abs/1706.03762) 被提出以加速 NLP 模型的训练。具体来说，它完全基于自注意力机制，避免使用递归。这一设计选择的理由，如原始工作中所述，是为了实现强大的并行化（通过充分利用
+    GPU 和 TPU 的计算能力）。此外，注意力机制是一个极其强大的组件，允许高效建模变长输入。这些优势使得 Transformer 成为一种表达能力强且高效的单元，从而成为
+    NLP 的主要架构。
 - en: 'A couple of interesting questions arises following the development of Transformer:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Transformer 发展之后，出现了一些有趣的问题：
 - en: Is attention all we need for modeling?
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们建模时是否只需要注意力机制？
 - en: If recurrence is not a compute bottleneck, can we find better architectures?
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果递归不是计算瓶颈，我们能否找到更好的架构？
 - en: '**SRU++ and related work**'
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**SRU++ 和相关工作**'
 - en: 'We present SRU++ as a possible answer to the above question. The inspiration
     of SRU++ comes from two lines of research:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们提出 SRU++ 作为上述问题的可能答案。SRU++ 的灵感来源于两方面的研究：
 - en: First, previous works have tackled the parallelization/speed problem of RNNs
     and proposed various fast recurrent networks [[7](https://arxiv.org/abs/1611.01576), [8](https://arxiv.org/abs/1709.02755), [9](https://arxiv.org/abs/1708.06834), [10](https://arxiv.org/abs/1905.13324)].
     Examples include [Quasi-RNN](https://github.com/salesforce/pytorch-qrnn) and Simple
     Recurrent Unit ([SRU](https://github.com/asappresearch/sru)), both are highly-parallelizable
     RNNs. **The advance eliminates the need of eschewing recurrences to trade training
     efficiency**.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，以前的研究已经解决了 RNN 的并行化/速度问题，并提出了各种快速递归网络 [[7](https://arxiv.org/abs/1611.01576)，[8](https://arxiv.org/abs/1709.02755)，[9](https://arxiv.org/abs/1708.06834)，[10](https://arxiv.org/abs/1905.13324)]。例如，[Quasi-RNN](https://github.com/salesforce/pytorch-qrnn)
+    和简单递归单元（[SRU](https://github.com/asappresearch/sru)），都是高度并行的 RNN。**这一进展消除了为了提高训练效率而避免使用递归的需求**。
 - en: Second, several recent works have achieved strong results by leveraging recurrence
     in conjunction with self-attention. For example, [Merity](https://arxiv.org/abs/1911.11423) (2019)
     demonstrated a single-headed attention LSTM ([SHA-LSTM](https://github.com/Smerity/sha-rnn))
@@ -94,27 +133,39 @@
     been incorporated into Transformer architectures, resulting in better results
     on machine translation and natural language understanding tasks [[8](https://arxiv.org/abs/1709.02755), [12](https://arxiv.org/abs/2003.07000)]. **These
     results suggest that recurrence and attention are complementary at sequence modeling**.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 其次，近年来有几项研究通过结合递归和自注意力取得了优异的结果。例如，[Merity](https://arxiv.org/abs/1911.11423)（2019）展示了单头注意力
+    LSTM（[SHA-LSTM](https://github.com/Smerity/sha-rnn)）足以在字符级语言建模任务中取得有竞争力的结果，同时所需的训练时间显著减少。此外，RNN
+    被融入了 Transformer 架构中，导致在机器翻译和自然语言理解任务中取得了更好的结果 [[8](https://arxiv.org/abs/1709.02755)，[12](https://arxiv.org/abs/2003.07000)]。**这些结果表明递归和注意力在序列建模中是互补的**。
 - en: In light of the previous research, we enhance the modeling capacity of SRU by
     incorporating self-attention as part of the architecture. A simple illustration
     of the resulting architecture SRU++ is shown in Figure 1c.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 针对之前的研究，我们通过将自注意力纳入 SRU 架构来增强其建模能力。图 1c 展示了结果架构 SRU++ 的简单示意图。
 - en: '![ASAPP - Figure 1: An illustration of SRU and SRU++ networks. (a) the original
     SRU network, (b) the SRU variant using a projection trick to reduce the number
     of parameters, experimented in Lei et al. (2018), and (c) SRU++ proposed in this
     work. Numbers indicate the hidden size of intermediate inputs / outputs. A more
     detailed description of SRU and SRU++ is provided in our paper.](../Images/bc626d6b413b0cd5ff1e1564306c3101.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![ASAPP - 图 1: SRU 和 SRU++ 网络的示意图。 (a) 原始 SRU 网络，(b) 使用投影技巧减少参数数量的 SRU 变体，Lei
+    等（2018）进行的实验，以及 (c) 本研究提出的 SRU++。数字表示中间输入/输出的隐藏尺寸。SRU 和 SRU++ 的更详细描述见我们的论文。](../Images/bc626d6b413b0cd5ff1e1564306c3101.png)'
 - en: 'Figure 1: An illustration of SRU and SRU++ networks. (a) the original SRU network,
     (b) the SRU variant using a projection trick to reduce the number of parameters,
     experimented in Lei et al. (2018), and (c) SRU++ proposed in this work. Numbers
     indicate the hidden size of intermediate inputs / outputs. A more detailed description
     of SRU and SRU++ is provided in our paper.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '图 1: SRU 和 SRU++ 网络的示意图。 (a) 原始 SRU 网络，(b) 使用投影技巧减少参数数量的 SRU 变体，Lei 等（2018）进行的实验，以及
+    (c) 本研究提出的 SRU++。数字表示中间输入/输出的隐藏尺寸。SRU 和 SRU++ 的更详细描述见我们的论文。'
 - en: SRU++ replaces the linear mapping of the input (Figure 1a) by first projecting
     the input into a smaller dimension. An attention operation is then applied, followed
     by a residual connection. The dimension is projected back to the hidden size needed
@@ -122,201 +173,312 @@
     needs attention. When the attention is disabled in SRU++, the network reduces
     to a SRU variant using dimension reduction to reduce the number of parameters
     (Figure 1b).
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: SRU++ 通过首先将输入投影到较小的维度来替代输入的线性映射（图 1a）。然后应用注意力操作，接着是残差连接。该维度被投影回 SRU 的逐元素递归操作所需的隐藏尺寸。此外，并不是每个
+    SRU++ 层都需要注意力。当 SRU++ 中禁用注意力时，网络会降级为使用维度减少的 SRU 变体，从而减少参数数量（图 1b）。
 - en: '**Results**'
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结果**'
 - en: '**1\. SRU++ is a highly-efficient neural architecture**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1\. SRU++ 是一种高效的神经网络架构**'
 - en: We evaluate SRU++ on several language modeling benchmarks such as Enwik8 dataset.
     Compared to Transformer models such as Transformer-XL, SRU++ can achieve similar
     results using only a fraction of the resources. Figure 2 compares the training
     efficiency between the two with directly comparable training settings. SRU++ is
     8.7x more efficient to surpass the dev result of Transformer-XL, and 5.1x more
     efficient to reach a BPC (bits-per-character) of 1.17.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在多个语言建模基准上评估了 SRU++，如 Enwik8 数据集。与 Transformer 模型（如 Transformer-XL）相比，SRU++
+    可以在只使用一部分资源的情况下实现类似的结果。图 2 比较了两者在直接可比训练设置下的训练效率。SRU++ 的效率比 Transformer-XL 高 8.7
+    倍，并且达到 BPC（每字符位数）1.17 的效率提高了 5.1 倍。
 - en: '![ASAPP - Figure 2: Dev BPC on Enwik8 dataset vs GPU hours used for training.
     The SRU++ and Transformer-XL model both have 41-42M parameters and are trained
     with fp32 precision and comparable settings (such as learning rate). ](../Images/10af8624da3dff307c63e66480a869e8.png)Figure
     2: Dev BPC on Enwik8 dataset vs GPU hours used for training. The SRU++ and Transformer-XL
     model both have 41-42M parameters and are trained with fp32 precision and comparable
     settings (such as learning rate).'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '![ASAPP - 图 2：Enwik8 数据集上的开发 BPC 与用于训练的 GPU 小时数的关系。SRU++ 和 Transformer-XL 模型均具有
+    41-42M 参数，并使用 fp32 精度和可比设置（例如学习率）进行训练。](../Images/10af8624da3dff307c63e66480a869e8.png)图
+    2：Enwik8 数据集上的开发 BPC 与用于训练的 GPU 小时数的关系。SRU++ 和 Transformer-XL 模型均具有 41-42M 参数，并使用
+    fp32 精度和可比设置（例如学习率）进行训练。'
 - en: '| **Model** | **Dataset** | **Result** | **GPU Days** |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| **模型** | **数据集** | **结果** | **GPU 天数** |'
 - en: '| [Longformer](https://arxiv.org/pdf/2004.05150.pdf) | Enwik8 | 0.99 | 104*
     |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| [Longformer](https://arxiv.org/pdf/2004.05150.pdf) | Enwik8 | 0.99 | 104*
+    |'
 - en: '| [All-attention network](https://arxiv.org/pdf/1907.01470.pdf) | Enwik8 |
     0.98 | 64 |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| [全注意力网络](https://arxiv.org/pdf/1907.01470.pdf) | Enwik8 | 0.98 | 64 |'
 - en: '| SRU++ | Enwik8 | 0.97 | 7* |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| SRU++ | Enwik8 | 0.97 | 7* |'
 - en: '| SRU++ | Enwik8 | 0.96 | 15* |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| SRU++ | Enwik8 | 0.96 | 15* |'
 - en: '| [Transformer](https://arxiv.org/pdf/1809.10853.pdf) | Wiki-103 | 18.7 | 22*
     |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '| [Transformer](https://arxiv.org/pdf/1809.10853.pdf) | Wiki-103 | 18.7 | 22*
+    |'
 - en: '| [Feedback Transformer](https://arxiv.org/pdf/2002.09402v2.pdf) | Wiki-103
     | 18.2 | 214 |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| [反馈 Transformer](https://arxiv.org/pdf/2002.09402v2.pdf) | Wiki-103 | 18.2
+    | 214 |'
 - en: '| SRU++ | Wiki-103 | 18.4 | 8* |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| SRU++ | Wiki-103 | 18.4 | 8* |'
 - en: '| SRU++ | Wiki-103 | 17.8 | 12* |'
+  id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| SRU++ | Wiki-103 | 17.8 | 12* |'
 - en: 'Table 1: Comparison of reported training costs (measured by total GPU days
     used) and test results between SRU++ and various Transformer models. (*) indicates
     mixed precision training. Numbers are lower the better.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 表 1：SRU++ 与各种 Transformer 模型之间报告的训练成本（以总 GPU 天数为度量）和测试结果的比较。（*）表示混合精度训练。数值越低越好。
 - en: Table 1 further compares the training cost of SRU++ and reported costs of leading
     Transformer-based models on [Enwik8](http://mattmahoney.net/dc/textdata) and [Wiki-103](https://www.salesforce.com/products/einstein/ai-research/the-wikitext-dependency-language-modeling-dataset/) datasets.
     Our model can achieve over 10x cost reduction while still outperforming the baseline
     models on test perplexity or BPC.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 表 1 进一步比较了 SRU++ 的训练成本与领先的基于 Transformer 的模型在 [Enwik8](http://mattmahoney.net/dc/textdata)
+    和 [Wiki-103](https://www.salesforce.com/products/einstein/ai-research/the-wikitext-dependency-language-modeling-dataset/)
+    数据集上的报告成本。我们的模型可以实现超过 10 倍的成本降低，同时在测试困惑度或 BPC 上仍然优于基线模型。
 - en: '**2\. Little attention is needed given recurrence**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2. 由于递归，所需的注意力较少**'
 - en: Similar to the observation of Merity (2019), we found using a couple of attention
     layers sufficient to obtain state-of-the-art results. Table 2 shows an analysis
     by only enabling the attention computation every k layers of SRU++.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于 Merity（2019）的观察，我们发现使用几层注意力足以获得最先进的结果。表 2 显示了仅在每 k 层 SRU++ 中启用注意力计算的分析。
 - en: '| **Number of layers w/ attention** | **Test BPC** (42M model) | **Test BPC**
     (108M model) |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| **带有注意力的层数** | **测试 BPC** (42M 模型) | **测试 BPC** (108M 模型) |'
 - en: '| 0 | 1.190 | – |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 1.190 | – |'
 - en: '| 1 | 1.033 | 0.991 |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 1.033 | 0.991 |'
 - en: '| 2 | 1.032 | 0.980 |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 1.032 | 0.980 |'
 - en: '| 5 | 1.025 | 0.977 |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 1.025 | 0.977 |'
 - en: '| 10 | 1.022 | 0.974 |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| 10 | 1.022 | 0.974 |'
 - en: 'Table 2: Test BPC on Enwik8 dataset by varying the number of active attention
     sub-layers in SRU++ models. We tested two 10-layer SRU++ models with 42M and 108M
     parameters respectively. Most of the gains are obtained using 1 or 2 attention
     sub-layers. Numbers are lower the better.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 表 2：在 Enwik8 数据集上通过调整 SRU++ 模型中活跃注意力子层的数量来测试 BPC。我们测试了两个具有 42M 和 108M 参数的 10
+    层 SRU++ 模型。大多数收益是通过使用 1 或 2 个注意力子层获得的。数值越低越好。
 - en: '**Conclusion**'
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: We present a recurrent architecture with optional built-in self-attention that
     achieves leading model capacity and training efficiency. We demonstrate that highly
     expressive and efficient models can be derived using a combination of attention
     and fast recurrence. Our results reaffirm the empirical observations that attention
     is not all we need, and can be complemented by other sequential modeling modules.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们提出了一种带有可选内置自注意力的递归架构，达到了领先的模型能力和训练效率。我们展示了通过结合注意力和快速递归，可以得出高度表现力和高效的模型。我们的结果重新确认了观察到的经验事实，即注意力并不是我们所需的一切，还可以通过其他序列建模模块进行补充。
 - en: '*For further reading, ASAPP also conducts research to reduce the cost of model
     inference. See our published work on model [distillation](https://www.aclweb.org/anthology/2020.emnlp-main.494.pdf) and [pruning](https://www.aclweb.org/anthology/2020.emnlp-main.496.pdf) for
     example.*'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如需进一步阅读，ASAPP 还进行研究以降低模型推理的成本。请参阅我们发表的关于模型[蒸馏](https://www.aclweb.org/anthology/2020.emnlp-main.494.pdf)和[剪枝](https://www.aclweb.org/anthology/2020.emnlp-main.496.pdf)的工作。*'
 - en: '**Bio: [Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)** is a Research
     Leader and Scientist at ASAPP leading an applied research team for natural language
     processing (NLP) and machine learning. Prior to joining ASAPP, Dr. Lei received
     his PhD from MIT in 2017, where he was advised by Prof. Regina Barzilay. Dr. Lei’s
     research interest lies within the algorithmic perspective of machine learning
     and applications to NLP.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Tao Lei，博士](https://www.asapp.com/blog/author/taolei/)** 是 ASAPP 的研究负责人和科学家，领导着一个应用研究团队，专注于自然语言处理
+    (NLP) 和机器学习。在加入 ASAPP 之前，Lei 博士于 2017 年从 MIT 获得博士学位，导师为 Regina Barzilay 教授。Lei
+    博士的研究兴趣在于机器学习的算法视角及其在 NLP 中的应用。'
 - en: '[Original](https://www.asapp.com/blog/reducing-the-high-cost-of-training-nlp-models-with-sru/).
     Reposted with permission.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.asapp.com/blog/reducing-the-high-cost-of-training-nlp-models-with-sru/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Google’s Model Search is a New Open Source Framework that Uses Neural Networks
     to Build Neural Networks](/2021/03/google-model-search-open-source-framework.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Google 的模型搜索：一个利用神经网络构建神经网络的新开源框架](/2021/03/google-model-search-open-source-framework.html)'
 - en: '[Deep Learning Pioneer Geoff Hinton on his Latest Research and the Future of
     AI](/2021/01/deep-learning-pioneer-geoff-hinton-research-future-ai.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习先驱 Geoff Hinton 论他的最新研究与 AI 的未来](/2021/01/deep-learning-pioneer-geoff-hinton-research-future-ai.html)'
 - en: '[2011: DanNet triggers deep CNN revolution](/2021/02/dannet-triggers-deep-cnn-revolution.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2011：DanNet 引发深度 CNN 革命](/2021/02/dannet-triggers-deep-cnn-revolution.html)'
 - en: '* * *'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你应该了解的 5 个梯度下降和成本函数的概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
 - en: '[HuggingChat Python API: Your No-Cost Alternative](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingChat Python API：您的无成本替代方案](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
 - en: '[Is Academia Obsessing Over Methodology at the Cost of True Insights?](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学术界是否因过度关注方法论而忽视了真正的见解？](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
 - en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大型语言模型的生成式 AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
 - en: '[The High Paying Side Hustles for Data Scientists](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的高薪副业](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)'
 - en: '[People Management for AI: Building High-Velocity AI Teams](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI的人才管理：构建高效能AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)'
