@@ -1,17 +1,25 @@
 - en: Deploying a Streamlit WebApp to Heroku using DAGsHub
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用DAGsHub将Streamlit Web应用程序部署到Heroku
 - en: 原文：[https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/8777cf1d33a7bf623889d0403ebf12e4.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![将Streamlit Web应用程序部署到Heroku使用DAGsHub](../Images/8777cf1d33a7bf623889d0403ebf12e4.png)'
 - en: Cover by author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者封面
 - en: As a beginner, it’s hard to  realize how the end product of your project should
     look. You start with a basic machine learning pipeline, and as the project evolves,
     you adjust and enhance the components to meet your golden metric. But the journey
@@ -19,37 +27,56 @@
     a way for people to interact with the model and evaluate its performance. In this
     blog, we will be learning how to build a Streamlit application using only python
     and deploy it to a remote Heroku server. .
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为初学者，很难意识到项目的最终产品应该是什么样的。你从一个基础的机器学习流程开始，随着项目的演进，你调整和增强组件以满足你的最终标准。但旅程并未止步于此。为了与世界分享你的工作，你希望有一种方式让人们与模型互动并评估其性能。在这篇博客中，我们将学习如何仅使用Python构建一个Streamlit应用程序，并将其部署到远程Heroku服务器上。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Example project - Pneumonia-Classification
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例项目 - 肺炎分类
 - en: 'We will use the [Pneumonia-Classification](https://dagshub.com/nirbarazida/pneumonia-Classification/)
     project and showcase how to deploy its Streamlit app to the cloud. The project
     is divided into five tasks, data labeling, data processing, modeling, evaluation,
@@ -60,180 +87,278 @@
     license and can be used for commercial purposes. We will be focusing on creating
     a web app and deploying it to the cloud, but if you want to learn more about data
     preprocessing and model building, you check out the [project](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC).'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用[Pneumonia-Classification](https://dagshub.com/nirbarazida/pneumonia-Classification/)项目，并展示如何将其Streamlit应用程序部署到云端。该项目分为五个任务：数据标注、数据处理、建模、评估和Streamlit。我们将使用在[Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)上可获得的胸部X光数据集。数据集包含5,863张正面胸部X光图像。它被分为三个文件夹：**train**、**test**、**val**，每个文件夹包含子文件夹**Pneumonia**和**Normal**。我们的数据集使用[CC
+    BY 4.0](https://creativecommons.org/licenses/by/4.0/)许可，可以用于商业用途。我们将重点关注创建Web应用程序并将其部署到云端，但如果你想了解更多数据预处理和模型构建的内容，可以查看[项目](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC)。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/10b0cacfc6ad9f5a367debb028608f50.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![使用DAGsHub将Streamlit Web应用程序部署到Heroku](../Images/10b0cacfc6ad9f5a367debb028608f50.png)'
 - en: Image by [Cell](http://www.cell.com/cell/fulltext/S0092-8674(18)30154-5)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[Cell](http://www.cell.com/cell/fulltext/S0092-8674(18)30154-5)提供
 - en: What is Streamlit?
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是Streamlit？
 - en: '[Streamlit](https://streamlit.io/) is an open-source library that allows you
     to build web applications using ONLY Python. It provides customization options
     to design the application according to your needs without requiring any prior
     knowledge in web development. Using Streamlit, data science practitioners can
     easily communicate their work with technical colleagues or not-so-technical stakeholders
     by building an web application *for their model*.​'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Streamlit](https://streamlit.io/) 是一个开源库，允许你仅使用 Python 构建网页应用程序。它提供了自定义选项，可以根据你的需求设计应用程序，而无需任何网页开发的先验知识。使用
+    Streamlit，数据科学从业者可以通过构建一个 *用于他们模型* 的网页应用程序，轻松地与技术同事或非技术利益相关者沟通他们的工作。'
 - en: How to create a Streamlit application
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何创建一个 Streamlit 应用程序
 - en: In this section we will focus on learning core components of Streamlit and briefly
     understand how other components help us create interactive Streamlit app. The
     core component consists of selecting or uploading images, loading Tensorflow models
     and running predictions to display the results.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将重点学习 Streamlit 的核心组件，并简要了解其他组件如何帮助我们创建互动的 Streamlit 应用程序。核心组件包括选择或上传图像、加载
+    Tensorflow 模型和运行预测以显示结果。
 - en: '**The other component that we used in the application:**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们在应用程序中使用的其他组件：**'
 - en: '[**Page setting**](https://docs.streamlit.io/library/api-reference/utilities/st.set_page_config)**:**
     for header, favicon and application initial configuration.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**页面设置**](https://docs.streamlit.io/library/api-reference/utilities/st.set_page_config)**:**
+    用于设置头部、图标和应用程序的初始配置。'
 - en: '[**Markdown**](https://docs.streamlit.io/library/api-reference/text/st.markdown)**:**
     for writing title, subheading, and description.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**Markdown**](https://docs.streamlit.io/library/api-reference/text/st.markdown)**:**
+    用于编写标题、副标题和描述。'
 - en: '[**Image**](https://docs.streamlit.io/library/api-reference/media/st.image)**:**
     for displaying cover image.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**图像**](https://docs.streamlit.io/library/api-reference/media/st.image)**:**
+    用于显示封面图像。'
 - en: '[**Expander**](https://docs.streamlit.io/library/api-reference/layout/st.expander)**:**
     multi-element container that can be expanded/collapsed for Image pool.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**展开器**](https://docs.streamlit.io/library/api-reference/layout/st.expander)**:**
+    多元素容器，可以展开/折叠，用于图像池。'
 - en: '[**Columns**](https://docs.streamlit.io/library/api-reference/layout/st.columns)**:**
     for creating an image pool table.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**列**](https://docs.streamlit.io/library/api-reference/layout/st.columns)**:**
+    用于创建图像池表格。'
 - en: '[**Progress**](https://docs.streamlit.io/library/api-reference/status/st.progress)**:**
     display progress bar for running model inference.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**进度条**](https://docs.streamlit.io/library/api-reference/status/st.progress)**:**
+    显示运行模型推断的进度条。'
 - en: Selecting & Uploading
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 选择与上传
 - en: The streamlit [sidebar](https://docs.streamlit.io/library/api-reference/layout/st.sidebar)
     function is quite handy as it allows us to add extra functionality into the app.
     The sidebar option adds additional interactivity of **selectbox** and **file**_**uploader**.
     The select box is a drop down option box, which allows us to select from healthy
     or sick xray images. The file_uploader allows us to upload the new Xray image
     for Pneumonia prediction.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: streamlit 的 [侧边栏](https://docs.streamlit.io/library/api-reference/layout/st.sidebar)
+    功能非常方便，因为它允许我们在应用程序中添加额外的功能。侧边栏选项增加了 **selectbox** 和 **file**_**uploader** 的额外交互性。选择框是一个下拉选项框，允许我们从健康或生病的
+    X 光图像中进行选择。file_uploader 允许我们上传新的 X 光图像进行肺炎预测。
 - en: selectbox**:** drop down option for selecting single option.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: selectbox**:** 下拉选项用于选择单一选项。
 - en: file_uploader**:** uploading X-ray image to application.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: file_uploader**:** 将 X 光图像上传到应用程序。
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/3dd09c9a0df517ab0e9e012f06e50ac4.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](../Images/3dd09c9a0df517ab0e9e012f06e50ac4.png)'
 - en: Image of sidebar with selectbox and file_uploader
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 侧边栏的选择框和文件上传器图像
 - en: Model Prediction
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型预测
 - en: The model prediction uses tensorflow to load the model and predict the classification.
     The function below is activated if the option is selected or the image is uploaded.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型预测使用 tensorflow 加载模型并预测分类。下面的函数在选择了选项或上传了图像后激活。
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The `get_prediction` function loads the Tensorflow model, predicts on the image
     (selected / uploaded) and displays the results.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '`get_prediction` 函数加载 Tensorflow 模型，对图像（已选择/上传）进行预测并显示结果。'
 - en: '[PRE2]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: I have also used streamlit [progress](https://docs.streamlit.io/library/api-reference/status/st.progress)
     function to show progress bar. We have also used a streamlit **success** and **warning**
     function to display the prediction.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我还使用了 streamlit [进度条](https://docs.streamlit.io/library/api-reference/status/st.progress)函数来显示进度条。我们还使用了
+    streamlit 的 **成功** 和 **警告** 函数来显示预测结果。
 - en: '[PRE3]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The code below reads the option from the select box and runs the prediction
     on image.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码从选择框中读取选项并对图像进行预测。
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/853cf7d766daaa119d9971688668c150.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![将Streamlit WebApp部署到Heroku，使用DAGsHub](../Images/853cf7d766daaa119d9971688668c150.png)'
 - en: Running prediction with the progress bar is at 50%
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 正在运行带有进度条的预测，进度为50%
 - en: The function below reads the uploaded file and runs the prediction on image.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下函数读取上传的文件并对图像进行预测。
 - en: '[PRE5]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/3660d550769a8fa8de75e709f3897a22.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![将Streamlit WebApp部署到Heroku，使用DAGsHub](../Images/3660d550769a8fa8de75e709f3897a22.png)'
 - en: Image of successful Pneumonia prediction
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 成功的肺炎预测图像
 - en: What’s Next..
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步..
 - en: After creating a Streamlit application for your project and running it locally,
     it's time to deploy and share it with the world. For people who are not familiar
     with the process, deploying an application to the cloud can be very challenging.
     In the next section, we will cover the main issues you might face, explore the
     options to overcome them and choose the best one for the given task.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在为你的项目创建并本地运行Streamlit应用程序之后，是时候将其部署并与世界分享了。对于不熟悉这个过程的人来说，将应用程序部署到云端可能非常具有挑战性。在下一部分中，我们将讨论你可能遇到的主要问题，探讨解决这些问题的选项，并选择适合该任务的最佳方案。
 - en: Choosing a deployment Server for a Streamlit application
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为Streamlit应用程序选择部署服务器
 - en: Selecting a cloud provider to host the app can be [frustrating and overwhelming](https://en.wikipedia.org/wiki/Overchoice#:~:text=Overchoice%20or%20choice%20overload%20is,his%201970%20book%2C%20Future%20Shock.)
     due to the inflation of platforms and the unclarity of their advantages. To help
     you in the process, I compared three cloud services; AWS, Heroku, and Huggingface,
     which work well for machine learning applications designed with Streamlit.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择云提供商来托管应用程序可能会让人感到[沮丧和不知所措](https://en.wikipedia.org/wiki/Overchoice#:~:text=Overchoice%20or%20choice%20overload%20is,his%201970%20book%2C%20Future%20Shock.)，因为平台的膨胀和其优势的不明确。为了帮助你，我比较了三种云服务：AWS、Heroku和Huggingface，它们在使用Streamlit设计的机器学习应用程序方面表现良好。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/c985a73c219122fd700e02726bacf9e0.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![将Streamlit WebApp部署到Heroku，使用DAGsHub](../Images/c985a73c219122fd700e02726bacf9e0.png)'
 - en: Cloud Server Comparison
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 云服务器比较
 - en: AWS EC2
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AWS EC2
 - en: '[Amazon cloud service](https://aws.amazon.com/ec2/) provides secure and resizable
     compute capacity. EC2 allows you to deploy the entire machine learning workflow
     and you can also configure it for a better machine. It is not user-friendly and
@@ -241,24 +366,33 @@
     by using GPU support. If you are interested in learning and deploying your Streamlit
     app using AWS, I suggest you read the great  [blog](https://medium.com/swlh/showcase-you-streamlit-web-app-to-the-world-with-aws-ec2-db603c69aa28)
     written by [Nishtha Goswami](https://medium.com/@goswaminishtha?source=post_page-----db603c69aa28-----------------------------------).'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[亚马逊云服务](https://aws.amazon.com/ec2/)提供安全且可调整大小的计算能力。EC2允许你部署整个机器学习工作流，也可以为更好的机器进行配置。它不够用户友好，学习曲线相当陡峭。然而，EC2通过使用GPU支持提供了更快的推理速度。如果你有兴趣学习和部署你的Streamlit应用程序使用AWS，我建议你阅读由[Nishtha
+    Goswami](https://medium.com/@goswaminishtha?source=post_page-----db603c69aa28-----------------------------------)撰写的精彩[博客](https://medium.com/swlh/showcase-you-streamlit-web-app-to-the-world-with-aws-ec2-db603c69aa28)。'
 - en: Hugging Face
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Hugging Face
 - en: '[HuggingFace Spaces](https://huggingface.co/spaces) provides easy deployment
     and fast inference solutions but it has a drawback as you are restricted to using
     only Streamlit or [Gradiao](https://www.gradio.app/) frameworks. The Spaces servers
     don’t provide flexibility in terms of DVC integration and developing MLOps solutions,
     but they do offer a paid enterprise solution called [Infinity](https://huggingface.co/infinity)
     which comes with a lot of flexibility and faster inference.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[HuggingFace Spaces](https://huggingface.co/spaces)提供了简单的部署和快速推理解决方案，但它有一个缺点，就是你只能使用Streamlit或[Gradiao](https://www.gradio.app/)框架。Spaces服务器在DVC集成和开发MLOps解决方案方面不提供灵活性，但它们提供了一种名为[Infinity](https://huggingface.co/infinity)的付费企业解决方案，具有很大的灵活性和更快的推理速度。'
 - en: Heroku
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Heroku
 - en: '[Salesforce Heroku](https://www.heroku.com/home) comes with a user-friendly
     experience, automation, and flexibility of using multiple [third-party integrations](https://devcenter.heroku.com/categories/add-ons).
     **Biases Alert**: my first ever cloud experience was with Heroku and because the
@@ -266,99 +400,149 @@
     drawbacks; storage limitation (500MB) and slow model inference compared to other
     cloud services. These drawbacks can easily be resolved by using Docker deployment
     and adopting optimizing techniques.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Salesforce Heroku](https://www.heroku.com/home) 提供用户友好的体验、自动化和使用多个 [第三方集成](https://devcenter.heroku.com/categories/add-ons)
+    的灵活性。**偏见提示**：我第一次云端体验是使用 Heroku，因为过程极其简单，我一直在使用他们的服务。Heroku 有两个缺点：存储限制（500MB）和相较于其他云服务，模型推断速度较慢。这些缺点可以通过使用
+    Docker 部署和采纳优化技术来轻松解决。'
 - en: How to Deploy a Streamlit Application on Heroku
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何在 Heroku 上部署 Streamlit 应用。
 - en: Deploy the streamlit app in five steps; Project initialization, creating a web
     app(streamlit), setting up DVC, setting up a web app, and finally deploying it
     to the server. In this section, we will learn about [Heroku GUI](https://id.heroku.com/)
     and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) to initialize
     applications, setting up project for deployment and pushing the code to a cloud
     server.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 streamlit 应用部署分为五个步骤：项目初始化、创建 web 应用（streamlit）、设置 DVC、设置 web 应用，以及最后将其部署到服务器。在本节中，我们将学习如何使用
+    [Heroku GUI](https://id.heroku.com/) 和 [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+    来初始化应用程序、设置项目以进行部署以及将代码推送到云服务器。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/a4e9aba94166b26e83924c62d70e595b.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/a4e9aba94166b26e83924c62d70e595b.png)'
 - en: Steps involved in deploying webapp to Heroku server
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署 web 应用到 Heroku 服务器的步骤。
 - en: Project Initialization
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 项目初始化。
 - en: There are two methods of initializing the project; using Heroku website and
     Heroku CLI. If you are a beginner then you can use a website to perform all the
     tasks from creating an app to deploying the app.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始化项目有两种方法：使用 Heroku 网站和 Heroku CLI。如果你是初学者，可以使用网站完成从创建应用到部署应用的所有任务。
 - en: Initialize an Heroku project using GUI
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 GUI 初始化一个 Heroku 项目。
 - en: '[Signup](https://id.heroku.com/signup/login) for a free Heroku account.'
+  id: totrans-67
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[注册](https://id.heroku.com/signup/login)一个免费的 Heroku 账户。'
 - en: Download [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and
     install it.
+  id: totrans-68
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 下载 [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) 并安装它。
 - en: '[Log in](https://id.heroku.com/login) to your account.'
+  id: totrans-69
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[登录](https://id.heroku.com/login)你的账户。'
 - en: Go to the dashboard and [create a new application](https://dashboard.heroku.com/apps).
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 前往仪表盘并 [创建一个新应用](https://dashboard.heroku.com/apps)。
 - en: Type the application name and select the server’s region.
+  id: totrans-71
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 输入应用名称并选择服务器的区域。
 - en: From the command terminal type git clone https://git.heroku.com/<your-app-name>.git
+  id: totrans-72
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从命令终端输入 git clone https://git.heroku.com/<your-app-name>.git
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/414ae0be532d135ea06c314ec19765da.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/414ae0be532d135ea06c314ec19765da.png)'
 - en: Initializing Heroku app using GUI
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 GUI 初始化 Heroku 应用。
 - en: Initialize an Heroku project using Heroku CLI
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Heroku CLI 初始化一个 Heroku 项目。
 - en: '[Signup](https://id.heroku.com/signup/login) for a free Heroku account.'
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[注册](https://id.heroku.com/signup/login)一个免费的 Heroku 账户。'
 - en: 'From your command terminal, change directories to the project location and
     type: git init.'
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从命令终端，切换到项目目录并输入：git init。
 - en: 'Installing Heroku CLI: sudo snap install --classic heroku'
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 安装 Heroku CLI：sudo snap install --classic heroku
 - en: 'Login: heroku login. This will guide you to the login section in your browser.'
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 登录：heroku login。这将引导你到浏览器中的登录部分。
 - en: 'Creating the App: heroku create <your-app-name> .'
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建应用：heroku create <your-app-name>。
 - en: Setting Up DVC
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置 DVC。
 - en: For data and model versioning I am using [DVC](https://dvc.org/) and [DAGsHub](https://dagshub.com/)
     for remote storage. In this section, we will be automating DVC to pull data from
     a remote server using Heroku [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt).
@@ -368,138 +552,219 @@
     apt-based dependencies for both compile and runtime. Thanks to [GuilhermeBrejeiro](https://github.com/GuilhermeBrejeiro)
     and his project [deploy_ML_model_Heroku_FastAPI](https://github.com/GuilhermeBrejeiro/deploy_ML_model_Heroku_FastAPI)
     which has helped me automate DVC.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于数据和模型版本控制，我使用了 [DVC](https://dvc.org/) 和 [DAGsHub](https://dagshub.com/) 进行远程存储。在本节中，我们将自动化
+    DVC 从远程服务器拉取数据，使用 Heroku [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt)。为什么使用
+    buildpack？为什么不能直接拉取数据？如果我们没有使用 buildpack 拉取数据，webapp 将无法注册新的 DVC 文件。简而言之，如果你希望
+    DVC 为你工作，就必须使用 buildpack。它为编译和运行时的 apt-based 依赖项提供支持。感谢 [GuilhermeBrejeiro](https://github.com/GuilhermeBrejeiro)
+    和他的项目 [deploy_ML_model_Heroku_FastAPI](https://github.com/GuilhermeBrejeiro/deploy_ML_model_Heroku_FastAPI)，它帮助我自动化了
+    DVC。
 - en: '1\. Install buildpack using shell: heroku buildpacks:add --index 1 heroku-community/apt
     or go to app settings and add buildpack as shown below.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 1\. 使用 shell 安装 buildpack：heroku buildpacks:add --index 1 heroku-community/apt，或者前往应用程序设置并添加
+    buildpack，如下所示。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/ec3a5cb7f4222119fa53c982261ae304.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/ec3a5cb7f4222119fa53c982261ae304.png)'
 - en: Adding a build pack
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加 build pack
 - en: '2\. Create an Aptfile and add a link to DVC latest version: [https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb](https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb).
     Make sure that its `.deb` file.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 2\. 创建一个 Aptfile，并添加一个指向 DVC 最新版本的链接：[https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb](https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb)。确保这是一个
+    `.deb` 文件。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/7e471d4dffb62f18efd3ce2d00544099.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/7e471d4dffb62f18efd3ce2d00544099.png)'
 - en: 3\. Add these lines of code in **streamlit_app.py** to pull 4 images and a model.
     This method is used to optimize storage and promote faster build. I have used
     **dvc config** to make it compatible with Heroku server environment. You can read
     more about configs [here](https://dvc.org/doc/command-reference/config).
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 3\. 在 **streamlit_app.py** 中添加这些代码行，以拉取 4 张图片和一个模型。此方法用于优化存储并促进更快的构建。我使用了 **dvc
+    config** 使其与 Heroku 服务器环境兼容。你可以在 [这里](https://dvc.org/doc/command-reference/config)
+    阅读更多关于配置的内容。
 - en: '[PRE6]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The code is checking the [**dyno**](https://www.heroku.com/dynos) and **.dvc**
     folder in the directory and then executing dvc configuration which will enable
     the Heroku server to pull dvc files. Lastly, it’s pulling only the model folder,
     sample images from DVC servers, and deleting unnecessary files.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 该代码检查 [**dyno**](https://www.heroku.com/dynos) 和目录中的 **.dvc** 文件夹，然后执行 dvc 配置，这将使
+    Heroku 服务器能够拉取 dvc 文件。最后，它只拉取模型文件夹、来自 DVC 服务器的样本图片，并删除不必要的文件。
 - en: Setting Up App
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置应用程序
 - en: We need to make some changes so that Heroku can build and run apps smoothly
     without crashing. We will be setting up the **PORT** config variable, creating
     **Profile** and replacing python packages in **requirement.txt**. In most cases
     the heroku needs only requirement.txt to build an app and Procfile to run the
     app.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要做一些更改，以便 Heroku 能够顺利构建和运行应用程序而不会崩溃。我们将设置 **PORT** 配置变量，创建 **Profile**，并替换
+    **requirement.txt** 中的 Python 包。在大多数情况下，Heroku 仅需要 requirement.txt 来构建应用程序和 Procfile
+    来运行应用程序。
 - en: Setting Port
+  id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置端口
 - en: 'We can set up the PORT using Heroku CLI: heroku config:set PORT=8080 or we
     can go to the dashboard settings and add it manually as shown below. This part
     is optional but it’s preferred to set up a port number to avoid [H10](https://devcenter.heroku.com/articles/error-codes#h10-app-crashed)
     error.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 Heroku CLI 设置 PORT：heroku config:set PORT=8080，或者我们可以前往仪表板设置并手动添加，如下所示。这部分是可选的，但建议设置端口号以避免
+    [H10](https://devcenter.heroku.com/articles/error-codes#h10-app-crashed) 错误。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/c30750e20c3e93b85dfa1b19ff31c8c3.png)'
+  id: totrans-95
   prefs: []
   type: TYPE_IMG
+  zh: '![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/c30750e20c3e93b85dfa1b19ff31c8c3.png)'
 - en: Config variables
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置变量
 - en: Procfile
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Procfile
 - en: 'The Procfile contains a web initialization command: web: streamlit run --server.port
     $PORT streamlit_app.py. Without it the app won''t run.'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Procfile 包含一个 web 初始化命令：web: streamlit run --server.port $PORT streamlit_app.py。没有它，应用程序将无法运行。'
 - en: Requirements
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 要求
 - en: 'Finally, make changes in the requirements.txt file to avoid storage and dependencies
     issues. For example, we changed the dependencies in our project as follows:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，修改 requirements.txt 文件以避免存储和依赖问题。例如，我们将项目中的依赖项更改如下：
 - en: Replace **tensorflow** with **tensorflow-cpu** to reduce slug size from 765MB
     to 400MB.
+  id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将 **tensorflow** 替换为 **tensorflow-cpu** 以将 slug 大小从 765MB 减少到 400MB。
 - en: Replace **opencv-python** with **opencv-python-headless** to avoid installing
     extra C++ dependencies.
+  id: totrans-102
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将 **opencv-python** 替换为 **opencv-python-headless** 以避免安装额外的 C++ 依赖项。
 - en: Remove other packages except **Numpy**, **Pillow**, and **Streamlit**.
+  id: totrans-103
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 除了 **Numpy**、**Pillow** 和 **Streamlit** 外，移除其他软件包。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/c675716b4cc6caf39b55d7084963299c.png)'
+  id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](../Images/c675716b4cc6caf39b55d7084963299c.png)'
 - en: Heroku Deployment Packages
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: Heroku 部署包
 - en: Tips
+  id: totrans-106
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 提示
 - en: We only need a few folders and files, add other folders into the `**.slugignore`**
     file to optimize storage. The `[.slugingore](https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore)`
     file works similarly to `.gitingore` but it ignores files during build.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只需要几个文件夹和文件，将其他文件夹添加到 `**.slugignore**` 文件中以优化存储。`[.slugignore](https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore)`
+    文件的功能类似于 `.gitignore`，但它在构建过程中忽略文件。
 - en: Deploying
+  id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 部署
 - en: Deploying is the most simple part of this guide as we need to commit all the
     changes and push our code to the Heroku remote server.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署是本指南中最简单的部分，因为我们只需提交所有更改并将代码推送到 Heroku 远程服务器。
 - en: '[PRE7]'
+  id: totrans-110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The Streamlit Image classification web application is deployed on  ([dagshub-pc-app.herokuapp.com](https://dagshub-pc-app.herokuapp.com/)).
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: Streamlit 图像分类 web 应用程序已部署在 ([dagshub-pc-app.herokuapp.com](https://dagshub-pc-app.herokuapp.com/))。
 - en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/9b1ab414ea59a8ffa87e0856d972e005.png)'
+  id: totrans-112
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](../Images/9b1ab414ea59a8ffa87e0856d972e005.png)'
 - en: It will take less than five minutes to deploy your app to the Heroku server.
     If you are still facing issues in deployment, you can check out my [DAGsHub repository](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC)
     for the reference.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署应用程序到 Heroku 服务器只需不到五分钟。如果你在部署过程中仍然遇到问题，可以查看我的 [DAGsHub 仓库](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC)
+    作为参考。
 - en: Conclusion
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this blog we have learned how to integrate DVC and DAGsHub with Heroku servers.
     We have also learned various ways to optimize the storage and avoid dependency
     issues. Building your web app and then deploying it to the server is satisfying
@@ -508,8 +773,13 @@
     and Heroku. If you want to reduce the slug size try using **joblib** to load the
     model and perform prediction. You can also use a [docker](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)
     file to deploy your web application as they are not subject to size restrictions.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本博客中，我们学习了如何将 DVC 和 DAGsHub 与 Heroku 服务器集成。我们还学习了多种优化存储和避免依赖问题的方法。构建你的 web
+    应用程序并将其部署到服务器上是令人满意的，因为你现在可以与同事和朋友分享它。我们使用 DVC、streamlit、tensorflow、pillow 和 Heroku
+    构建了一个肺炎分类 web 应用程序。如果你想减少 slug 大小，尝试使用 **joblib** 加载模型并进行预测。你也可以使用 [docker](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)
+    文件来部署你的 web 应用程序，因为它们不受大小限制。
 - en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
     is a certified data scientist professional who loves building machine learning
     models. Currently, he is focusing on content creation and writing technical blogs
@@ -517,33 +787,50 @@
     in Technology Management and a bachelor''s degree in Telecommunication Engineering.
     His vision is to build an AI product using a graph neural network for students
     struggling with mental illness.'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为患有心理疾病的学生开发一个人工智能产品。'
 - en: More On This Topic
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Tips & Tricks of Deploying Deep Learning Webapp on Heroku Cloud](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Heroku 云上部署深度学习 web 应用的技巧与窍门](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
 - en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
 - en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Streamlit DIY 自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
 - en: '[LangChain + Streamlit + Llama: Bringing Conversational AI to Your…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LangChain + Streamlit + Llama：将对话式 AI 带到本地机器](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
 - en: '[12 Essential Commands for Streamlit](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Streamlit 的 12 个必备命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)'
