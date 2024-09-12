@@ -1,18 +1,25 @@
 - en: 'Segment Anything Model: Foundation Model for Image Segmentation'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'Segment Anything Model: 图像分割的基础模型'
 - en: 原文：[https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)
 - en: Segmentation, the process of identifying image pixels that belong to objects,
     is at the core of computer vision. This process is used in applications from scientific
     imaging to photo editing, and technical experts must possess both highly skilled
     abilities and access to AI infrastructure with large quantities of annotated data
     for accurate modeling.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 分割，即识别属于对象的图像像素，是计算机视觉的核心。这一过程用于从科学成像到照片编辑的各种应用，技术专家必须具备高度的技能，并拥有大量标注数据的 AI
+    基础设施，以进行准确建模。
 - en: Meta AI recently unveiled its [Segment Anything project](https://github.com/facebookresearch/segment-anything)?
     which is ?an image segmentation dataset and model with the Segment Anything Model
     (SAM) and [the SA-1B mask dataset](https://ai.facebook.com/datasets/segment-anything/)?—?the
@@ -20,177 +27,256 @@
     for computer vision. They made SA-1B available for research use while the SAM
     is licensed under Apache 2.0 open license for anyone to try SAM with your images
     using this [**demo**](https://segment-anything.com/demo)!
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Meta AI 最近揭晓了其 [Segment Anything 项目](https://github.com/facebookresearch/segment-anything)，这是一个图像分割数据集和模型，包含
+    Segment Anything Model (SAM) 和 [SA-1B 掩模数据集](https://ai.facebook.com/datasets/segment-anything/)，这是迄今为止最大的数据集，旨在支持计算机视觉基础模型的进一步研究。他们为研究用途提供了
+    SA-1B，而 SAM 则在 Apache 2.0 开源许可证下授权，任何人都可以使用这个 [**演示**](https://segment-anything.com/demo)
+    来尝试 SAM 和你的图像！
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![Segment Anything Model: Foundation Model for Image Segmentation](../Images/8ff2e4f2d8b63cf085c76b165d8ad402.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![Segment Anything Model: 图像分割的基础模型](../Images/8ff2e4f2d8b63cf085c76b165d8ad402.png)'
 - en: Segment Anything Model / Image by [**Meta AI**](https://segment-anything.com/)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Segment Anything Model / 图像由 [**Meta AI**](https://segment-anything.com/) 提供
 - en: Toward Generalizing the Segmentation Task
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 朝着泛化分割任务的方向前进
 - en: 'Before, segmentation problems were approached using two classes of approaches:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前，分割问题通常采用两类方法：
 - en: Interactive segmentation in which the users guide the segmentation task by iteratively
     refining a mask.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交互式分割，用户通过迭代地优化掩模来指导分割任务。
 - en: Automatic segmentation allowed selective object categories like cats or chairs
     to be segmented automatically but it required large numbers of annotated objects
     for training (i.e. thousands or even tens of thousands of examples of segmented
     cats) along with computing resources and technical expertise to train a segmentation
     model neither approach provided a general, fully automatic solution to segmentation.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自动分割允许选择性地分割如猫或椅子等物体类别，但这需要大量标注对象用于训练（例如，数千个甚至数万个分割猫的例子），以及计算资源和技术专长来训练分割模型。两种方法都没有提供一种通用的、完全自动的分割解决方案。
 - en: '**SAM** uses both interactive and automatic segmentation in one model. The
     proposed interface enables flexible usage, making a wide range of segmentation
     tasks possible by engineering the appropriate prompt (such as clicks, boxes, or
     text).'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**SAM** 在一个模型中使用了交互式和自动化分割。提出的界面支持灵活使用，通过工程化的提示（如点击、框选或文本）使得各种分割任务成为可能。'
 - en: SAM was developed using an expansive, high-quality dataset containing more than
     one billion masks collected as part of this project, giving it the capability
     of generalizing to new types of objects and images beyond those observed during
     training. As a result, practitioners no longer need to collect their segmentation
     data and tailor a model specifically to their use case.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: SAM的开发使用了一个广泛的高质量数据集，其中包含超过十亿个掩码，这些掩码是该项目的一部分，赋予了它对训练期间未观察到的新类型物体和图像进行泛化的能力。因此，实践者无需再收集自己的分割数据或专门为其用例量身定制模型。
 - en: These capabilities enable SAM to generalize both across tasks and domains something
     no other image segmentation software has done before.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些能力使得SAM能够在任务和领域之间进行泛化，这是其他图像分割软件之前从未做到的。
 - en: SAM Capabilities & Use Cases
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SAM的功能和应用场景
 - en: 'SAM comes with powerful capabilities that make the segmentation task more effective:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: SAM具有强大的功能，使得分割任务更加高效：
 - en: '**Variety of input prompts**: Prompts that direct segmentation allow users
     to easily perform different segmentation tasks without additional training requirements.
     You can apply segmentation using interactive points and boxes, automatically segment
     everything in an image, and generate multiple valid masks for ambiguous prompts.
     In the figure below we can see the segmentation is done for certain objects using
     an input text prompt.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**各种输入提示**：引导分割的提示使用户能够轻松执行不同的分割任务，无需额外的训练要求。你可以使用交互式点和框进行分割，自动分割图像中的所有内容，并为模糊提示生成多个有效的掩码。在下图中，我们可以看到通过输入文本提示完成了某些物体的分割。'
 - en: '![Segment Anything Model: Foundation Model for Image Segmentation](../Images/7f04ca955056286284698c7ed2ae9cb9.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![Segment Anything Model: Foundation Model for Image Segmentation](../Images/7f04ca955056286284698c7ed2ae9cb9.png)'
 - en: Bounding box using text prompt.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用文本提示框的边界框。
 - en: '**Integration with other systems**: SAM can accept input prompts from other
     systems, such as in the future taking the user''s gaze from an AR/VR headset and
     selecting objects.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**与其他系统的集成**：SAM可以接受来自其他系统的输入提示，例如未来可能会接受来自AR/VR头显的用户视线并选择物体。'
 - en: '**Extensible outputs**: The output masks can serve as inputs to other AI systems.
     For instance, object masks can be tracked in videos, enabled imaging editing applications,
     lifted into 3D space, or even used creatively such as collating'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**可扩展输出**：输出的掩码可以作为其他AI系统的输入。例如，物体掩码可以在视频中进行跟踪、启用图像编辑应用、提升到3D空间，甚至可以用于创意用途，例如合成。'
 - en: '**Zero-shot generalization**: SAM has developed an understanding of objects
     which allows him to quickly adapt to unfamiliar ones without additional training.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**零样本泛化**：SAM已经发展出了对物体的理解，使其能够快速适应不熟悉的物体，而无需额外的训练。'
 - en: '**Multiple mask generation**: SAM can produce multiple valid masks when faced
     with uncertainty regarding an object being segmented, providing crucial assistance
     when solving segmentation in real-world settings.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**多重掩码生成**：当面对物体分割的不确定性时，SAM可以生成多个有效的掩码，为解决实际环境中的分割问题提供重要帮助。'
 - en: '**Real-time mask generation**: SAM can generate a segmentation mask for any
     prompt in real time after precomputing the image embedding, enabling real-time
     interaction with the model.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**实时掩码生成**：SAM可以在预计算图像嵌入后，实时生成任何提示的分割掩码，实现与模型的实时交互。'
 - en: 'Understanding SAM: How Does It Work?'
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理解SAM：它是如何工作的？
 - en: '![Segment Anything Model: Foundation Model for Image Segmentation](../Images/a46efe7d097d397cc92e12351492b055.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![Segment Anything Model: Foundation Model for Image Segmentation](../Images/a46efe7d097d397cc92e12351492b055.png)'
 - en: Overview of SAM model / Image by [Segment Anything](https://arxiv.org/abs/2304.02643)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: SAM模型概述 / 图片来源于 [Segment Anything](https://arxiv.org/abs/2304.02643)
 - en: One of the recent advances in natural language processing and computer vision
     has been foundation models that enable zero-shot and few-shot learning for new
     datasets and tasks through “prompting”. Meta AI researchers trained SAM to return
     a valid segmentation mask for any prompt, such as foreground/background points,
     rough boxes/masks or masks, freeform text, or any information indicating the target
     object within an image.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 近年来，自然语言处理和计算机视觉领域的一项重要进展是基础模型，这些模型通过“提示”实现了对新数据集和任务的零样本和少样本学习。Meta AI研究人员训练SAM，以便为任何提示返回有效的分割掩码，例如前景/背景点、粗略的框/掩码、自由形式文本或指示图像中目标物体的任何信息。
 - en: 'A valid mask simply means that even when the prompt could refer to multiple
     objects (for instance: one point on a shirt may represent both itself or someone
     wearing it), its output should provide a reasonable mask for one object only?—?thus
     pre-training the model and solving general downstream segmentation tasks via prompting.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 有效的掩码意味着即使提示可能指代多个对象（例如：衬衫上的一个点可能代表它本身或穿着它的人），其输出应仅为一个对象提供合理的掩码？—？从而预训练模型并通过提示解决一般下游分割任务。
 - en: The researchers observed that pretraining tasks and interactive data collection
     imposed specific constraints on model design. Most significantly, real-time simulation
     must run efficiently on a CPU in a web browser to allow annotators to use SAM
     interactively in real-time for efficient annotation. Although runtime constraints
     resulted in tradeoffs between quality and runtime constraints, simple designs
     produced satisfactory results in practice.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 研究人员观察到，预训练任务和交互式数据收集对模型设计施加了特定的限制。最重要的是，实时模拟必须在 CPU 上高效运行，以允许标注者实时交互使用 SAM
+    进行高效标注。尽管运行时限制导致了质量和运行时限制之间的权衡，但简单设计在实际中产生了令人满意的结果。
 - en: Underneath SAM’s hood, an image encoder generates a one-time embedding for images
     while a lightweight encoder converts any prompt into an embedding vector in real-time.
     These information sources are then combined by a lightweight decoder that predicts
     segmentation masks based on image embeddings computed with SAM, so SAM can produce
     segments in just 50 milliseconds for any given prompt in a web browser.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 SAM 的底层，一个图像编码器为图像生成一次性嵌入，而一个轻量级编码器将任何提示实时转换为嵌入向量。这些信息源随后由一个轻量级解码器结合，该解码器根据用
+    SAM 计算的图像嵌入预测分割掩码，因此 SAM 可以在 Web 浏览器中为任何给定提示在 50 毫秒内生成分段。
 - en: 'Building SA-1B: Segmenting 1 Billion Masks'
+  id: totrans-36
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建 SA-1B：分割 10 亿个掩码
 - en: Building and training the model requires access to an enormous and diverse pool
     of data that did not exist at the start of training. Today’s segmentation dataset
     release is by far the largest to date. Annotators used SAM interactively annotate
     images before updating SAM with this new data?—?repeating this cycle many times
     to continuously refine both the model and dataset.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建和训练模型需要访问一个在训练开始时不存在的庞大而多样的数据池。今天的分割数据集发布是迄今为止最大的。标注者使用 SAM 交互式标注图像，然后用这些新数据更新
+    SAM？—？重复这一周期多次，以不断优化模型和数据集。
 - en: SAM makes collecting segmentation masks faster than ever, taking only 14 seconds
     per mask annotated interactively; that process is only two times slower than annotating
     bounding boxes which take only 7 seconds using fast annotation interfaces. Comparable
@@ -199,106 +285,150 @@
     were even faster; its annotation time per mask annotated was 6.5x faster versus
     2x slower in terms of data annotation time than previous model assisted large
     scale data annotations efforts!
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: SAM 使得收集分割掩码比以往更快，每个掩码交互式标注只需 14 秒；这一过程比使用快速标注界面的边界框标注（仅需 7 秒）慢两倍。可比的大规模分割数据收集工作包括
+    COCO 完全手动多边形掩码标注，耗时约 10 小时；SAM 模型辅助的标注工作甚至更快；其每个掩码的标注时间比之前的模型辅助大规模数据标注快了 6.5 倍，而数据标注时间则慢了
+    2 倍！
 - en: Interactively annotating masks is insufficient to generate the SA-1B dataset;
     thus a data engine was developed. This data engine contains three “gears”, starting
     with assisted annotators before moving onto fully automated annotation combined
     with assisted annotation to increase the diversity of collected masks and finally
     fully automatic mask creation for the dataset to scale.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅通过交互式标注掩码不足以生成 SA-1B 数据集，因此开发了一个数据引擎。该数据引擎包含三个“齿轮”，首先是辅助标注者，然后是与辅助标注结合的完全自动化标注，以增加收集的掩码的多样性，最后是数据集扩展的完全自动化掩码创建。
 - en: SA-1B’s final dataset features more than 1.1 billion segmentation masks collected
     on over 11 million licensed and privacy-preserving images, making up 4 times as
     many masks than any existing segmentation dataset, according to human evaluation
     studies. As verified by these human assessments, these masks exhibit high quality
     and diversity compared with previous manually annotated datasets with much smaller
     sample sizes.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据人类评估研究，SA-1B最终数据集包含超过11亿个分割掩码，采集自1100万张有许可和隐私保护的图像，这些掩码的数量是现有任何分割数据集的4倍。经过这些人类评估验证，这些掩码与之前手动注释的数据集相比，展现了更高的质量和多样性。
 - en: Images for SA-1B were obtained via an image provider from multiple countries
     that represented different geographic regions and income levels. While certain
     geographic regions remain underrepresented, SA-1B provides greater representation
     due to its larger number of images and overall better coverage across all regions.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: SA-1B的图像来自多个国家的图像提供商，代表了不同的地理区域和收入水平。虽然某些地理区域仍然代表性不足，但SA-1B由于其图像数量更多和对所有区域的总体覆盖更好，因此提供了更大的代表性。
 - en: Researchers conducted tests aimed at uncovering any biases in the model across
     gender presentation, skin tone perception, the age range of people as well as
     the perceived age of persons presented, finding that the SAM model performed similarly
     across various groups. They hope this will make the resulting work more equitable
     when applied in real-world use cases.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 研究人员进行测试，旨在揭示模型在性别表现、肤色感知、年龄范围以及呈现人物的感知年龄方面的任何偏见，发现SAM模型在各个群体中表现相似。他们希望这能使最终的工作在实际应用中更加公平。
 - en: While SA-1B enabled the research output, it can also enable other researchers
     to train foundation models for image segmentation. Furthermore, this data may
     become the foundation for new datasets with additional annotations.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然SA-1B促进了研究成果，但它也可以使其他研究人员训练基础模型以进行图像分割。此外，这些数据可能成为具有附加注释的新数据集的基础。
 - en: Future Work & Summary
+  id: totrans-44
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 未来的工作与总结
 - en: Meta AI researchers hope that by sharing their research and dataset, they can
     accelerate the research in image segmentation and image and video understanding.
     Since this segmentation model can perform this function as part of larger systems.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: Meta AI 研究人员希望通过共享他们的研究和数据集，可以加速图像分割和图像与视频理解领域的研究。由于这个分割模型可以作为更大系统的一部分来执行这一功能。
 - en: In this article, we covered what is SAM and its capability and use cases. After
     that, we went through how it works, and how it was trained so as to give an overview
     of the model. Finally, we conclude the article with the future vision and work.
     If you would like to know more about SAM make sure to read the [paper](https://arxiv.org/abs/2304.02643)
     and try the [demo](https://segment-anything.com/demo).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们介绍了什么是SAM及其能力和使用案例。随后，我们介绍了它是如何工作的，以及它是如何训练的，以便概述模型。最后，我们以未来愿景和工作总结了文章。如果你想了解更多关于SAM的信息，确保阅读[论文](https://arxiv.org/abs/2304.02643)并尝试[演示](https://segment-anything.com/demo)。
 - en: References
+  id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[Introducing Segment Anything: Working toward the first foundation model for
     image segmentation](https://ai.facebook.com/blog/segment-anything-foundation-model-image-segmentation/)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 Segment Anything：朝着首个图像分割基础模型迈进](https://ai.facebook.com/blog/segment-anything-foundation-model-image-segmentation/)'
 - en: '[SA-1B Dataset](https://ai.facebook.com/datasets/segment-anything/)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SA-1B 数据集](https://ai.facebook.com/datasets/segment-anything/)'
 - en: '[Segment Anything](https://arxiv.org/abs/2304.02643?fbclid=IwAR1Hl8xCPsDfrqqKSVfRwBzSOkKiBDXO2i0HhCvwHE6uvAq_9YtiOfvYsfs)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Segment Anything](https://arxiv.org/abs/2304.02643?fbclid=IwAR1Hl8xCPsDfrqqKSVfRwBzSOkKiBDXO2i0HhCvwHE6uvAq_9YtiOfvYsfs)'
 - en: '**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** is
     a computer vision researcher & data scientist. His research focuses on developing
     real-time computer vision algorithms for healthcare applications. He also worked
     as a data scientist for more than 3 years in the marketing, finance, and healthcare
     domain.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一位计算机视觉研究员和数据科学家。他的研究专注于为医疗保健应用开发实时计算机视觉算法。他还在营销、金融和医疗领域担任数据科学家超过3年。'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Learning How to Use ChatGPT to Learn Python (or anything else)](https://www.kdnuggets.com/2023/02/learn-python-chatgpt.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习如何使用 ChatGPT 学习 Python（或其他任何东西）](https://www.kdnuggets.com/2023/02/learn-python-chatgpt.html)'
 - en: '[What Are Foundation Models and How Do They Work?](https://www.kdnuggets.com/2023/05/foundation-models-work.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是基础模型，它们是如何工作的？](https://www.kdnuggets.com/2023/05/foundation-models-work.html)'
 - en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用聚类分析对数据进行分段](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Misconceptions About Semantic Segmentation Annotation](https://www.kdnuggets.com/2022/01/misconceptions-semantic-segmentation-annotation.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于语义分割注释的误解](https://www.kdnuggets.com/2022/01/misconceptions-semantic-segmentation-annotation.html)'
 - en: '[Customer Segmentation in Python: A Practical Approach](https://www.kdnuggets.com/customer-segmentation-in-python-a-practical-approach)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的客户分段：一种实用方法](https://www.kdnuggets.com/customer-segmentation-in-python-a-practical-approach)'
