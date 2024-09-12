@@ -1,28 +1,40 @@
 - en: 'Contest 2nd Place: Automated Data Science and Machine Learning in Digital Advertising'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 竞赛第二名：数字广告中的自动化数据科学与机器学习
 - en: 原文：[https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html](https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html](https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html)
 - en: '**By Claudia Perlich and Dstillery Data Science Team**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Claudia Perlich 和 Dstillery 数据科学团队**。'
 - en: '**Editor''s note**: This blog post was an entrant in the recent KDnuggets Automated
     Data Science and Machine Learning [blog contest](/2016/06/kdnuggets-blog-contest-automated-data-science.html),
     where it tied for second place.'
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑注**：这篇博客文章是近期 KDnuggets 自动化数据科学与机器学习 [博客竞赛](/2016/06/kdnuggets-blog-contest-automated-data-science.html)
+    的参赛作品之一，获得了第二名。'
 - en: Digital Advertising provides an exciting playground for machine learning in
     general and automated predictive modeling in particular. An increasing proportion
     of digital advertising is delivered through real-time bidding ad exchanges. Ad
     exchanges connect sellers of ad placements (usually websites with ad space to
     monetize) and buyers (usually technology firms like Dstillery, operating on behalf
     of consumer brands and agencies).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 数字广告为机器学习提供了一个令人兴奋的玩乐场，尤其是自动预测建模。越来越多的数字广告通过实时竞标广告交换平台进行交付。广告交换连接广告位的卖方（通常是需要变现广告位的网站）和买方（通常是像
+    Dstillery 这样的技术公司，代表消费品牌和广告代理机构运营）。
 - en: The goals of the buyers vary. At Dstillery, our goal is to identify the best
     audience for each of our advertising clients, and deliver ads to this audience.
     The “best” audience depends on the goals of the advertiser, but we typically optimize
@@ -31,8 +43,10 @@
     a product, or signing up for a service. The post-view qualifier means the conversion
     is observed in some interval following an ad exposure, either with or without
     a click.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 买家的目标各不相同。在 Dstillery，我们的目标是为每一个广告客户识别最佳受众，并将广告投放给该受众。“最佳”受众取决于广告商的目标，但我们通常优化以实现后续转化。“转化”的含义是特定于活动的，但始终需要采取某种消费者行为，如访问网站、购买产品或注册服务。后续转化的限定词意味着转化是在广告曝光后的某个时间间隔内观察到的，无论是否有点击。
 - en: We run completely separate targeting models for each brand we represent. As
     a result, our machine learning system updates and deploys thousands of predictive
     models daily. Our clients’ diverse performance requirements, along with the need
@@ -40,37 +54,52 @@
     challenges. The remainder of this article describes a combination of strategies
     we employ at Dstillery for keeping our targeting system running with minimal human
     intervention.¹
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为每个品牌运行完全独立的目标模型。因此，我们的机器学习系统每天更新和部署数千个预测模型。客户多样化的性能需求，以及保持如此多模型有效运行的需要，带来了许多有趣的技术挑战。本文其余部分描述了我们在
+    Dstillery 使用的一系列策略，以最小的人工干预保持我们的目标系统运行。¹
 - en: High-level system design
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 高级系统设计
 - en: 'There is a great deal of infrastructure supporting our actual predictive modeling
     engine. Data ingestion, normalization, sampling and cleaning are all done in an
     automated fashion with one clear goal: building thousands of sparse models daily
     that are good at classifying brand prospects along a wide variety of products.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持我们实际预测建模引擎的基础设施非常庞大。数据摄取、归一化、采样和清理都是以自动化的方式进行，目标明确：每天构建数千个稀疏模型，这些模型在各种产品类别中对品牌潜在客户进行分类。
 - en: '**Sampling the Event Stream**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**事件流采样**'
 - en: Dstillery has developed a robust data sampling solution that can sample a real-time
     event stream based on any properties of the event, performing a customizable set
     of tasks on each accepted observation.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: Dstillery 开发了一个强大的数据采样解决方案，可以根据事件的任何属性对实时事件流进行采样，并对每个接受的观察执行可定制的一组任务。
 - en: On the average day, over 50 billion events pass through our system. These events
     can be bid requests, impressions, visits to a specific website, uses of a mobile
     app or thousands of other types of actions from Internet-connected devices. The
     sampler dynamically chooses among the events that based on sampling rules that
     we define. This portion of the system is seen in pink in Figure 1, Extensible
     Rules Engine.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在平均一天中，我们的系统处理超过500亿个事件。这些事件可以是竞标请求、展示次数、特定网站访问、移动应用使用或来自互联网连接设备的其他成千上万种行动。采样器根据我们定义的采样规则在事件中动态选择。这部分系统在图1中显示为粉色的可扩展规则引擎。
 - en: '**Event Data Augmentation by Sampler**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由采样器进行事件数据增强**'
 - en: For each sampled observation, the sampler performs a set of tasks, which can
     include logging the event to a number of databases or fetching additional data
     about a device. The User History Augmentation and Scoring System seen in Figure
@@ -78,14 +107,20 @@
     identified via GPS coordinates at a place of interest (e.g., a McDonald's or a
     Pokemon-Go location), and augmenting those events with the historic places the
     device was seen.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个采样观察，采样器执行一组任务，这些任务可能包括将事件记录到多个数据库或获取有关设备的额外数据。图1中的用户历史记录增强和评分系统包括各种任务。一个示例是选择通过GPS坐标在感兴趣地点（例如麦当劳或Pokemon-Go地点）识别的移动设备，并用设备出现的历史地点来增强这些事件。
 - en: '[![Dstillery Overview](../Images/2ff46d9c7eed8d7f5374e3338c664b65.png)](https://i.imgur.com/TLXVbUm.jpg)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Dstillery概览](../Images/2ff46d9c7eed8d7f5374e3338c664b65.png)](https://i.imgur.com/TLXVbUm.jpg)'
 - en: '*Figure 1\. Dstillery sampling, augmentation and model building engine.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1\. Dstillery采样、增强和模型构建引擎。*'
 - en: In data domains that only include thousands or even millions of observations,
     histories can be recreated from scratch by doing full scans of the data. However,
     with billions of data points, **full scans** are not computationally feasible.
@@ -94,8 +129,10 @@
     Cassandra-based key-value stores. This enables the learning of models based on
     long histories of a user’s past actions without having to scan months of full
     data records.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在仅包含数千个甚至数百万个观察数据的数据领域中，可以通过对数据进行全面扫描来从头重建历史记录。然而，对于数十亿个数据点，**全面扫描**在计算上是不可行的。这就是为什么系统在采样时（见图1中心）设计为通过访问多个基于Cassandra的键值存储来补充额外的历史数据。这使得可以基于用户过去行动的长期历史学习模型，而无需扫描数月的完整数据记录。
 - en: The processing system defined above is extremely flexible and allows for the
     sampling of data for specific machine learning tasks, as seen in the Seed Sampler
     in Figure 1\. Histories, or features, can then be fetched at sampling time during
@@ -104,43 +141,61 @@
     Repository in Figure 1\. An alternative sampling task can be kicked off that determines
     when a device should be scored for the models. Finally these scores can be used
     to bid on opportunities in the execution layer.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述处理系统极其灵活，允许为特定的机器学习任务采样数据，如图1中的种子采样器所示。在增强过程中，历史记录或特征可以在采样时被提取。这些数据可以被机器学习系统消耗，该系统在图1中的品牌信号库中存储每天数千个模型的结果。可以启动另一种采样任务，以确定何时应为模型评分。最后，这些分数可以用于执行层中的竞标机会。
 - en: Automated learning of robust ranking models
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自动学习稳健的排名模型
 - en: 'Let’s focus now on the specific task of learning one good ranking model for
     a given campaign automatically. The specific challenges here are:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们专注于自动学习一个适合特定活动的良好排名模型的具体任务。这里的具体挑战是：
 - en: '**Cold start**. Targeting must perform well from the beginning of a campaign,
     even though there may be very little outcome data.'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**冷启动**。即使可能没有多少结果数据，目标也必须从活动开始时就表现良好。'
 - en: '**Low base rate**. Conversion rates can easily be below 1 in 100,000.'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**低基准率**。转化率可能轻易低于1/100,000。'
 - en: '**Non-stationarity**. Changes in behavior over time due to natural seasonality
     and campaign-specific external factors.'
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**非平稳性**。由于自然季节性和活动特定的外部因素，行为随时间发生变化。'
 - en: '**Consistency and robustness**. Unique models for each campaign must perform
     despite disparities in type of product, conversion rate and audience size.'
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**一致性和稳健性**。每个活动的独特模型必须在产品类型、转化率和受众规模的差异中表现出色。'
 - en: Our current system addresses these issues with a number of different components,
     drawing from transfer, ensemble learning, adaptive regularization, and streaming
     updates.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们当前的系统通过多个不同的组件解决了这些问题，借鉴了迁移学习、集成学习、自适应正则化和流式更新技术。
 - en: '**Sampling, Transfer Learning & Stacking**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**采样、迁移学习与堆叠**'
 - en: Both the cold start and the low base rate are addressed by a number of adjustments
     to the sampling (see above) and definition of ‘positive’. In addition to trying
     to capitalize on each and every conversion event (purchase of a product, signup
@@ -148,11 +203,15 @@
     the homepage) as alternative target variables. These many different models for
     a given marketer are blended in an ensemble type model layer with much reduced
     dimensionality.³
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 冷启动和低基础率问题通过对采样（见上文）和“正面”定义的若干调整得到解决。除了尽力利用每一个转化事件（购买产品、注册服务）即使没有展示之外，我们还使用额外的相关事件（访问主页）作为替代目标变量。这些不同的模型通过集成模型层以大幅减少维度进行混合。³
 - en: '**Streaming and Stochastic Gradient Descent**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**流式处理和随机梯度下降**'
 - en: Streaming model updates (using a last known good model and update based on the
     training data collected since the last training iteration) provides a great solution
     for non-stationarity and low data retention. Streaming is most easily implemented
@@ -164,11 +223,16 @@
     hyper-parameter searching. ⁴ Finally, the combination of gradient descent and
     penalty terms helps to avoid overfitting, provides robustness and avoids feature
     selection.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 流式模型更新（使用最后一个已知的良好模型，并基于自上次训练迭代以来收集的训练数据进行更新）为非平稳性和低数据保留问题提供了很好的解决方案。流式处理最容易在像逻辑回归/线性回归这样的参数模型中实现，使用随机梯度下降（SGD）。在我们的背景下，线性建模的另一个巨大好处是从训练到生产和高容量评分的模型转换的简便性。近期在自适应学习率调度和自适应正则化方面的进展允许在数百万维度上对线性模型进行增量训练，而无需进行详尽的超参数搜索。⁴
+    最后，梯度下降和惩罚项的组合有助于避免过拟合，提供鲁棒性并避免特征选择。
 - en: '**Hashing of Binary Indicators**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**二进制指标的哈希处理**'
 - en: One of the key challenges in automating both model training and scoring in a
     dynamic, high-dimensional environment is providing a consistent definition of
     the feature space. Many of our models are based on web history, and the set of
@@ -176,125 +240,191 @@
     lose traffic. By hashing all URL’s into a space of fixed dimensionality, we allow
     our automated model-builders to operate in a static, consistent feature space
     even though the semantic meaning of a feature may change over time.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在动态、高维环境中自动化模型训练和评分的关键挑战之一是提供一致的特征空间定义。我们的许多模型基于网页历史，随着新 URL 的出现和其他 URL 的流量减少，我们的事件流中的
+    URL 集合不断变化。通过将所有 URL 哈希到固定维度的空间中，我们允许我们的自动化模型构建者在一个静态、一致的特征空间中操作，即使特征的语义意义可能随着时间变化。
 - en: '![SGD Model](../Images/a7ac5f835be2103d105cb21e842ae29f.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![SGD模型](../Images/a7ac5f835be2103d105cb21e842ae29f.png)'
 - en: '*Figure 2 shows an update of a current model with 360K features (binary indicators,
     having been updated based on 217 new positive examples and a 2.1K sample of negative
     examples).*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图2显示了当前模型的更新，包含360K个特征（二进制指标，基于217个新的正面样本和2.1K个负面样本更新）。*'
 - en: Whenever multiple URL’s are in a line the hash has caused a collision, whenever
     no URL is presented, the data was pre-hashed for privacy reasons.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当多条 URL 在一行时，哈希值会发生冲突，而当没有 URL 时，数据因隐私原因被预先哈希处理。
 - en: Conclusion
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Drawing from a number of techniques in machine learning and data engineering,
     it is possible to automate a full model creation, scoring, and execution framework.
     The outlined technology is supported by a 13-person data science team and enables
     the execution of hundreds of digital campaigns with high performance simultaneously.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 借鉴机器学习和数据工程中的多种技术，可以自动化完整的模型创建、评分和执行框架。所述技术由一个13人组成的数据科学团队支持，并能够同时高效执行数百个数字化营销活动。
 - en: '**References**:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献**：'
 - en: '¹ For a more detailed description of the system and the process used for building
     many models at scale see: Raeder, Troy, et al. "Design principles of massive,
     robust prediction systems." *Proceedings of the 18th ACM SIGKDD international
     conference on knowledge discovery and data mining*. ACM, 2012.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: ¹ 关于系统的更详细描述以及用于大规模构建多个模型的过程，请参见：Raeder, Troy, 等. "大规模、强健预测系统的设计原则。" *第18届ACM
+    SIGKDD国际知识发现与数据挖掘会议论文集*。ACM, 2012。
 - en: ² Details on the machine learning methods are described in the following section.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: ² 机器学习方法的详细信息描述在以下部分。
 - en: '³ C. Perlich, B. Dalessandro, T. Raeder, O. Stitelman, and F. Provost. Machine
     learning for targeted display advertising: Transfer learning in action. Machine
     Learning, pages 1–25, 2013.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: ³ C. Perlich, B. Dalessandro, T. Raeder, O. Stitelman, 和 F. Provost. 机器学习在目标展示广告中的应用：转移学习实践。机器学习，页码
+    1–25, 2013。
 - en: ⁴ Brian Dalessandro, Daizhuo Chen, Troy Raeder, Claudia Perlich, Melinda Han
     Williams, and Foster Provost. 2014\. Scalable hands-free transfer learning for
     online advertising. In Proceedings of the 20th ACM SIGKDD international conference
     on Knowledge discovery and data mining (KDD '14)
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: ⁴ Brian Dalessandro, Daizhuo Chen, Troy Raeder, Claudia Perlich, Melinda Han
+    Williams, 和 Foster Provost. 2014\. 可扩展的免提转移学习用于在线广告。见《第20届ACM SIGKDD国际知识发现与数据挖掘会议论文集》
+    (KDD '14)
 - en: '**About: [Dstillery](http://dstillery.com/)** is a data analytics company that
     uses machine learning and predictive modeling to provide intelligent solutions
     for brand marketing and other business challenges. Drawing from a unique 360 degree
     view of digital, physical and offline activity, we generate insights and predictions
     about the behaviors of individuals and discrete populations.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**关于：[Dstillery](http://dstillery.com/)** 是一家数据分析公司，利用机器学习和预测建模为品牌营销和其他业务挑战提供智能解决方案。通过对数字、物理和离线活动的360度独特视角，我们生成关于个人和特定人群行为的见解和预测。'
 - en: '**Related:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Data Science Automation: Debunking Misconceptions](/2016/08/data-science-automation-debunking-misconceptions.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学自动化：揭穿误解](/2016/08/data-science-automation-debunking-misconceptions.html)'
 - en: '[Automating Data Science](/2016/08/automating-data-science.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化数据科学](/2016/08/automating-data-science.html)'
 - en: '[And the Winner is… Stepwise Regression](/2016/08/winner-stepwise-regression.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[获奖者是…逐步回归](/2016/08/winner-stepwise-regression.html)'
 - en: '* * *'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Neural Networks and Deep Learning: A Textbook (2nd Edition)](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络与深度学习：教材（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)'
 - en: '[Announcing a Blog Writing Contest, Winner Gets an NVIDIA GPU!](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布博客写作比赛，获胜者将获得NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
 - en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Streamlit的DIY自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
 - en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python进行自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
 - en: '[Automated Machine Learning with Python: A Comparison of Different…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python进行自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)'
 - en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 ChatGPT 进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
