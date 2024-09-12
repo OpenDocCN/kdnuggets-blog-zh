@@ -1,111 +1,163 @@
 - en: Quick Feature Engineering with Dates Using fast.ai
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 fast.ai 进行快速特征工程
 - en: 原文：[https://www.kdnuggets.com/2018/03/feature-engineering-dates-fastai.html](https://www.kdnuggets.com/2018/03/feature-engineering-dates-fastai.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/feature-engineering-dates-fastai.html](https://www.kdnuggets.com/2018/03/feature-engineering-dates-fastai.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: 'As you are no doubt aware, simple date fields are potential treasure troves
     of data. While, at first glance, a date gives us nothing more than a specific
     point on a timeline, knowing where this point on the line is relative to other
     points can generate all sort of insights into a dataset. For instance, a whole
     host of simple questions can be extracted from a date field:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你无疑知道的，简单的日期字段是数据的潜在宝藏。虽然乍一看，日期给我们的仅仅是时间线上的一个特定点，但了解这个点相对于其他点的位置可以对数据集产生各种洞察。例如，可以从日期字段中提取出一系列简单的问题：
 - en: Was it a weekend?
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 是周末吗？
 - en: What day of the week was it?
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 那一天是星期几？
 - en: Was the date the end of a quarter?
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该日期是否是一个季度的末尾？
 - en: Was the day a holiday?
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 那一天是节假日吗？
 - en: Were the Olympics taking place on said date?
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该日期是否发生了奥运会？
 - en: What you want out of a date is dependent on what it is you are doing. Having
     external resources containing the answer to some of the less-intrinsic questions
     above ("Were the Olympics taking place on that date?" -- perhaps a perfectly valid
     question given your project) would certainly be necessary, but even sussing out
     the more elementary questions could prove immensely useful.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 你从日期中想要得到的内容取决于你在做什么。拥有包含一些上述较不内在问题答案的外部资源（例如“该日期是否发生了奥运会？”--可能是你项目中完全有效的问题）无疑是必要的，但即使是解决更基础的问题也可能会极有用。
 - en: Simple feature engineering on dates can mindlessly take care of the latter.
     As I recently sat down to write a general, reusable function to do just that,
     I quickly came to realize that [Jeremy Howard](https://twitter.com/jeremyphoward)
     had taken care of this in his fast.ai library.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 对日期进行简单的特征工程可以不加思索地处理后者。当我最近坐下来编写一个通用的、可重用的函数时，我很快意识到[Jeremy Howard](https://twitter.com/jeremyphoward)在他的fast.ai库中已经处理了这个问题。
 - en: If you don't know, the [fast.ai library](https://github.com/fastai/fastai) is
     a collection of supplementary wrappers for a host of popular machine learning
     libraries, designed to remove the necessity of writing your own functions to take
     care of some repetitive tasks in a machine learning workflow.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你不知道，[fast.ai 库](https://github.com/fastai/fastai)是一个用于许多流行机器学习库的补充包装器集合，旨在消除编写自己函数以处理机器学习工作流中一些重复任务的必要性。
 - en: Just such a function exists within fast.ai which leverages Pandas under the
     hood in order to automate some simple date-related feature engineering.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: fast.ai中确实存在这样的一个函数，它利用 Pandas 在后台自动化一些简单的与日期相关的特征工程。
 - en: Let's have a look. But first, let's get some simple data to test with. To find
     out more about the data and how it's being collected in the below code, see [Data
     Science Dividends – A Gentle Introduction to Financial Data Analysis](/2017/04/data-science-dividends-intro-financial-data-analysis.html).
     Also, it should go without saying that this assumes you have installed the fast.ai
     library.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下。但首先，我们需要一些简单的数据进行测试。要了解更多关于数据及其在下面代码中如何被收集的信息，请参见[数据科学红利 - 财务数据分析的温和介绍](/2017/04/data-science-dividends-intro-financial-data-analysis.html)。此外，这也假设你已经安装了fast.ai库。
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![dexcaus](../Images/41bb73ec010a7d22c85be4c4aa6778c5.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![dexcaus](../Images/41bb73ec010a7d22c85be4c4aa6778c5.png)'
 - en: 'Just so we have an idea of how admittedly simple the code for fast.ai function
     we are going to use is, here''s a look at the [current version''s source](https://github.com/fastai/fastai/blob/master/fastai/structured.py):'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了让我们了解 fast.ai 函数代码的简单性，这里查看一下[当前版本的源代码](https://github.com/fastai/fastai/blob/master/fastai/structured.py)：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Howard has stated in numerous places that his goal in writing the fast.ai wrappers
     is to create useful functions in as few lines as possible, making them succinct,
     easy to read, and focused in their objectives.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: Howard在多个地方表示，他编写fast.ai包装器的目标是用尽可能少的代码创建有用的函数，使它们简洁、易读，并且专注于其目标。
 - en: 'A simple call to the function explodes the DATE field:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 对函数的简单调用会展开 DATE 字段：
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The only additional possible argument to the function is 'drop' which, when
     True, drops the original date column from the dataframe.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数唯一的额外可能参数是 'drop'，当其值为 True 时，将从数据框中删除原始日期列。
 - en: 'And here''s the partial result:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是部分结果：
 - en: '![New features](../Images/473171a63c95941aeee84a883634b76b.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![新特性](../Images/473171a63c95941aeee84a883634b76b.png)'
 - en: 'A complete list of the features:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的特性列表：
 - en: '![Feature list](../Images/63a2d87efc8cb7ea2cc53f7932d49bb4.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![特性列表](../Images/63a2d87efc8cb7ea2cc53f7932d49bb4.png)'
 - en: Since no machine learning algorithm would be able to look at a datetime object
     and automatically infer the above, a simple step like this provides the possibility
     for automated insight into a dataset. Without having to think about it, now all
@@ -113,85 +165,130 @@
     was the first day of the year, the first of the quarter, or the first of the month,
     and by further simple inferral, whether it was a weekend, whether it was in March,
     what year it was, etc.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于没有机器学习算法能够查看日期时间对象并自动推断上述内容，这样一个简单的步骤提供了对数据集的自动洞察的可能性。无需思考，现在所有类型的日期元数据都触手可及，例如是否为年的第一天、季度的第一天或月份的第一天，进一步简单推断出是否是周末、是否在三月、是哪一年等。
 - en: 'This elementary feat of feature engineering should suggest 2 specific things,
     in my view:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 从我个人观点来看，这项基本的特性工程应该提示两个具体的点：
 - en: Feature engineering on time series data should not be feared
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 时间序列数据的特性工程不应被恐惧
 - en: The fast.ai library is something you might want to have a look at
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你可能会想看看 fast.ai 库
 - en: '**Related**:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Time Series for Dummies – The 3 Step Process](/2018/03/time-series-dummies-3-step-process.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[傻瓜时间序列 – 三步流程](/2018/03/time-series-dummies-3-step-process.html)'
 - en: '[Deep Feature Synthesis: How Automated Feature Engineering Works](/2018/02/deep-feature-synthesis-automated-feature-engineering.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度特性合成：自动化特性工程如何运作](/2018/02/deep-feature-synthesis-automated-feature-engineering.html)'
 - en: '[Automated Feature Engineering for Time Series Data](/2017/11/automated-feature-engineering-time-series-data.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[时间序列数据的自动化特性工程](/2017/11/automated-feature-engineering-time-series-data.html)'
 - en: '* * *'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行IT管理'
 - en: '* * *'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特性存储峰会2022：关于特性工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用RAPIDS cuDF在特性工程中使用GPU](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
 - en: '[A Quick Guide to Find the Right Minds for Annotation](https://www.kdnuggets.com/2022/04/quick-guide-find-right-minds-annotation.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[快速指南：如何找到合适的标注人才](https://www.kdnuggets.com/2022/04/quick-guide-find-right-minds-annotation.html)'
 - en: '[Quick Data Science Tips and Tricks to Learn SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[快速数据科学技巧和窍门：学习SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)'
 - en: '[7 Pandas Plotting Functions for Quick Data Visualization](https://www.kdnuggets.com/7-pandas-plotting-functions-for-quick-data-visualization)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7个Pandas绘图函数用于快速数据可视化](https://www.kdnuggets.com/7-pandas-plotting-functions-for-quick-data-visualization)'
 - en: '[A Quick Overview of Voronoi Diagrams](https://www.kdnuggets.com/2022/11/quick-overview-voronoi-diagrams.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Voronoi图的快速概述](https://www.kdnuggets.com/2022/11/quick-overview-voronoi-diagrams.html)'

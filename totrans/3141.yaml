@@ -1,21 +1,31 @@
 - en: CatBoost vs. Light GBM vs. XGBoost
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: CatBoost 与 Light GBM 与 XGBoost
 - en: 原文：[https://www.kdnuggets.com/2018/03/catboost-vs-light-gbm-vs-xgboost.html](https://www.kdnuggets.com/2018/03/catboost-vs-light-gbm-vs-xgboost.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/catboost-vs-light-gbm-vs-xgboost.html](https://www.kdnuggets.com/2018/03/catboost-vs-light-gbm-vs-xgboost.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin), University
     of San Francisco**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)，旧金山大学提供**'
 - en: '![Header image](../Images/bce95a9e42f88fdaba11ede661ef8750.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![头图](../Images/bce95a9e42f88fdaba11ede661ef8750.png)'
 - en: I recently participated in this Kaggle competition (WIDS Datathon by Stanford)
     where I was able to land up in Top 10 using various boosting algorithms. Since
     then, I have been very curious about the fine workings of each model including
@@ -23,282 +33,418 @@
     the recent re-emergence and popularity of neural networks, I am focusing on boosting
     algorithms because they are still more useful in the regime of limited training
     data, little training time and little expertise for parameter tuning.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最近参加了这个 Kaggle 比赛（斯坦福大学的 WIDS Datathon），通过使用各种提升算法，我成功进入了前十名。从那时起，我对每个模型的细节非常感兴趣，包括参数调优、优缺点，因此决定写这篇博客。尽管神经网络最近重新崛起并受到欢迎，我还是专注于提升算法，因为在有限的训练数据、较短的训练时间和较少的参数调优经验的情况下，它们仍然更有用。
 - en: '![](../Images/524ea5bbe63e2ca0102cb6071b43c94e.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/524ea5bbe63e2ca0102cb6071b43c94e.png)'
 - en: Since XGBoost (often called GBM Killer) has been in the machine learning world
     for a longer time now with lots of articles dedicated to it, this post will focus
     more on CatBoost & LGBM. Below are the topics we will cover-
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 XGBoost（常被称为 GBM 杀手）在机器学习界已经存在较长时间，并有大量专门的文章，因此这篇文章将更多关注 CatBoost 和 LGBM。以下是我们将涵盖的主题-
 - en: Structural Differences
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 结构差异
 - en: Treatment of categorical variables by each algorithm
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每种算法对分类变量的处理
 - en: Understanding Parameters
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 理解参数
 - en: Implementation on Dataset
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集上的实现
 - en: Performance of each algorithm
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每种算法的性能
 - en: Structural Differences in LightGBM & XGBoost
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LightGBM 和 XGBoost 的结构差异
 - en: LightGBM uses a novel technique of Gradient-based One-Side Sampling (GOSS) to
     filter out the data instances for finding a split value while XGBoost uses pre-sorted
     algorithm & Histogram-based algorithm for computing the best split. Here instances
     means observations/samples.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 使用一种新颖的基于梯度的单侧抽样（GOSS）技术来筛选数据实例，以找到分裂值，而 XGBoost 使用预排序算法和基于直方图的算法来计算最佳分裂。这里的实例指的是观测/样本。
 - en: First let us understand how pre-sorting splitting works-
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先让我们了解预排序分裂的工作原理-
 - en: For each node, enumerate over all features
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对每个节点，遍历所有特征
 - en: For each feature, sort the instances by feature value
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对每个特征，根据特征值对实例进行排序
 - en: Use a linear scan to decide the best split along that feature basis [information
     gain](https://en.wikipedia.org/wiki/Information_gain_ratio)
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用线性扫描来决定沿该特征基础上的最佳分裂方案 [信息增益](https://en.wikipedia.org/wiki/Information_gain_ratio)
 - en: Take the best split solution along all the features
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在所有特征中选择最佳分裂方案
 - en: In simple terms, Histogram-based algorithm splits all the data points for a
     feature into discrete bins and uses these bins to find the split value of histogram.
     While, it is efficient than pre-sorted algorithm in training speed which enumerates
     all possible split points on the pre-sorted feature values, it is still behind
     GOSS in terms of speed.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单来说，基于直方图的算法将特征的所有数据点分到离散的箱中，并使用这些箱来找到直方图的分裂值。虽然它在训练速度上比预排序算法高效，后者枚举了预排序特征值上的所有可能分裂点，但在速度方面仍落后于
+    GOSS。
 - en: '**So what makes this GOSS method efficient?** In AdaBoost, the sample weight
     serves as a good indicator for the importance of samples. However, in Gradient
     Boosting Decision Tree (GBDT), there are no native sample weights, and thus the
     sampling methods proposed for AdaBoost cannot be directly applied. Here comes
     gradient-based sampling.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**那么 GOSS 方法的高效性体现在哪里？** 在 AdaBoost 中，样本权重是样本重要性的良好指标。然而，在梯度提升决策树（GBDT）中，没有原生的样本权重，因此不能直接应用为
+    AdaBoost 提出的抽样方法。这就引出了基于梯度的抽样。'
 - en: Gradient represents the slope of the tangent of the loss function, so logically
     if gradient of data points are large in some sense, these points are important
     for finding the optimal split point as they have higher error
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 梯度代表损失函数切线的斜率，因此逻辑上如果数据点的梯度在某种意义上较大，这些点对找到最佳分裂点是重要的，因为它们的误差较高
 - en: GOSS keeps all the instances with large gradients and performs random sampling
     on the instances with small gradients. For example, let’s say I have 500K rows
     of data where 10k rows have higher gradients. So my algorithm will choose (10k
     rows of higher gradient+ x% of remaining 490k rows chosen randomly). Assuming
     x is 10%, total rows selected are 59k out of 500K on the basis of which split
     value if found.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: GOSS 保留所有具有大梯度的实例，并对具有小梯度的实例进行随机采样。例如，假设我有 50 万行数据，其中 1 万行具有较高的梯度。因此，我的算法将选择（1
+    万行高梯度 + 剩余 49 万行中的 x% 随机选择）。假设 x 为 10%，则选择的总行数为 59 万，基于此值找到分裂值。
 - en: The basic assumption taken here is that samples with training instances with
     small gradients have smaller training error and it is already well-trained.
+  id: totrans-24
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在这里的基本假设是，具有较小梯度的训练实例的训练误差较小，且已经过充分训练。
 - en: In order to keep the same data distribution, when computing the information
     gain, GOSS introduces a constant multiplier for the data instances with small
     gradients. Thus, GOSS achieves a good balance between reducing the number of data
     instances and keeping the accuracy for learned decision trees.
+  id: totrans-25
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 为了保持相同的数据分布，在计算信息增益时，GOSS 为小梯度的数据实例引入了一个常数乘数。因此，GOSS 在减少数据实例数量和保持学习决策树的准确性之间达到了良好的平衡。
 - en: '![](../Images/6dbd2ba56f33e97353f10aa1eb98428e.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6dbd2ba56f33e97353f10aa1eb98428e.png)'
 - en: Leaf with higher gradient/error is used for growing further in LGBM
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 LGBM 中，具有较高梯度/误差的叶子会进一步生长。
 - en: How each model treats Categorical Variables?
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 每个模型如何处理类别变量？
 - en: '**CatBoost**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**CatBoost**'
 - en: CatBoost has the flexibility of giving indices of categorical columns so that
     it can be encoded as one-hot encoding using one_hot_max_size (Use one-hot encoding
     for all features with number of different values less than or equal to the given
     parameter value).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: CatBoost 具有提供类别列索引的灵活性，以便可以使用 one_hot_max_size 进行独热编码（对于所有不同值数量小于或等于给定参数值的特征使用独热编码）。
 - en: If you don’t pass any anything in cat_features argument, CatBoost will treat
     all the columns as numerical variables.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果在 cat_features 参数中不传递任何内容，CatBoost 会将所有列视为数值变量。
 - en: '**Note: If a column having string values is not provided in the cat_features,
     CatBoost throws an error. Also, a column having default int type will be treated
     as numeric by default, one has to specify it in cat_features to make the algorithm
     treat it as categorical.**'
+  id: totrans-32
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：如果在 cat_features 中没有提供字符串值的列，CatBoost 会抛出错误。此外，具有默认 int 类型的列默认被视为数值型，必须在
+    cat_features 中指定，以使算法将其视为类别型。**'
 - en: '![](../Images/69fdd46bf459ceddc6c7f071ef72bb75.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/69fdd46bf459ceddc6c7f071ef72bb75.png)'
 - en: For remaining categorical columns which have unique number of categories greater
     than one_hot_max_size, CatBoost uses an efficient method of encoding which is
     similar to mean encoding but reduces overfitting. The process goes like this —
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于唯一类别数大于 one_hot_max_size 的剩余类别列，CatBoost 使用一种高效的编码方法，该方法类似于均值编码，但减少了过拟合。过程如下——
 - en: Permuting the set of input observations in a random order. Multiple random permutations
     are generated
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将输入观察值集合随机排列。生成多个随机排列。
 - en: Converting the label value from a floating point or category to an integer
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将标签值从浮点数或类别转换为整数
 - en: 'All categorical feature values are transformed to numeric values using the
     following formula:'
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 所有类别特征值都使用以下公式转换为数值：
 - en: '![](../Images/6b7dc94c4587b4eb4ac5a5f8c92e6773.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6b7dc94c4587b4eb4ac5a5f8c92e6773.png)'
 - en: Where, **CountInClass** is how many times the label value was equal to “1” for
     objects with the current categorical feature value **Prior** is the preliminary
     value for the numerator. It is determined by the starting parameters. **TotalCount**
     is the total number of objects (up to the current one) that have a categorical
     feature value matching the current one.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中，**CountInClass** 表示当前类别特征值为“1”的标签值出现的次数，**Prior** 是分子部分的初始值，由起始参数确定。**TotalCount**
+    是具有当前类别特征值的对象（直到当前对象）的总数。
 - en: 'Mathematically, this can be represented using below equation:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 数学上，这可以通过以下方程表示：
 - en: '![](../Images/14870ff745ee5c94e7bb182010a3522e.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/14870ff745ee5c94e7bb182010a3522e.png)'
 - en: '**LightGBM**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**LightGBM**'
 - en: Similar to CatBoost, LightGBM can also handle categorical features by taking
     the input of feature names. It does not convert to one-hot coding, and is much
     faster than one-hot coding. LGBM uses a special algorithm to find the split value
     of categorical features [[Link](http://www.csiss.org/SPACE/workshops/2004/SAC/files/fisher.pdf)].
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 CatBoost 相似，LightGBM 也可以通过输入特征名称来处理分类特征。它不会转换为独热编码，比独热编码快得多。LGBM 使用特殊算法来寻找分类特征的分裂值
+    [[Link](http://www.csiss.org/SPACE/workshops/2004/SAC/files/fisher.pdf)]。
 - en: '![](../Images/999bab5392ea19967c6590e0ab2f04b1.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/999bab5392ea19967c6590e0ab2f04b1.png)'
 - en: '**Note: You should convert your categorical features to int type before you
     construct Dataset for LGBM. It does not accept string values even if you passes
     it through categorical_feature parameter.**'
+  id: totrans-45
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：在为 LGBM 构建数据集之前，您应该将分类特征转换为 int 类型。即使通过 categorical_feature 参数传递，LGBM
+    也不接受字符串值。**'
 - en: '**XGBoost**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**XGBoost**'
 - en: Unlike CatBoost or LGBM, XGBoost cannot handle categorical features by itself,
     it only accepts numerical values similar to Random Forest. Therefore one has to
     perform various encodings like label encoding, mean encoding or one-hot encoding
     before supplying categorical data to XGBoost.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 CatBoost 或 LGBM 不同，XGBoost 无法自行处理分类特征，它只接受类似于随机森林的数值值。因此，在将分类数据提供给 XGBoost
+    之前，必须进行各种编码，如标签编码、均值编码或独热编码。
 - en: Similarity in Hyperparameters
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 超参数的相似性
 - en: All these models have lots of parameters to tune but we will cover only the
     important ones. Below is the list of these parameters according to their function
     and their counterparts across different models.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些模型都有很多参数需要调整，但我们只会涵盖重要的参数。以下是这些参数按功能划分的列表，以及它们在不同模型中的对应关系。
 - en: '![](../Images/15d1efa342da20fe09437044c82c8d40.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/15d1efa342da20fe09437044c82c8d40.png)'
 - en: Implementation on a Dataset
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集上的实现
 - en: I am using the Kaggle [Dataset](https://www.kaggle.com/usdot/flight-delays/data) of
     flight delays for the year 2015 as it has both categorical and numerical features.
     With approximately 5 million rows, this dataset will be good for judging the performance
     in terms of both speed and accuracy of tuned models for each type of boosting.
     I will be using a 10% subset of this data ~ 500k rows.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用了 Kaggle 的 [数据集](https://www.kaggle.com/usdot/flight-delays/data)，该数据集包含2015年的航班延误数据，因为它同时包含分类特征和数值特征。该数据集大约有
+    500 万行，非常适合评估每种提升模型的速度和准确性。我将使用该数据集的 10% 子集 ~ 50 万行。
 - en: 'Below are the features used for modeling:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是用于建模的特征：
 - en: '**MONTH, DAY, DAY_OF_WEEK**: data type int'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**月份、日期、星期几**：数据类型 int'
 - en: '**AIRLINE and FLIGHT_NUMBER**: data type int'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**航空公司和航班号**：数据类型 int'
 - en: '**ORIGIN_AIRPORT** and **DESTINATION_AIRPORT: **data type string'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**起始机场** 和 **目的地机场**：数据类型字符串'
 - en: '**DEPARTURE_TIME: **data type float'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**出发时间**：数据类型 float'
 - en: '**ARRIVAL_DELAY**: this will be the target and is transformed into boolean
     variable indicating delay of more than 10 minutes'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**到达延迟**：这是目标变量，转化为布尔变量，表示延迟超过 10 分钟'
 - en: '**DISTANCE and AIR_TIME**: data type float'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**距离和飞行时间**：数据类型 float'
 - en: '**XGBoost**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**XGBoost**'
 - en: '**Light GBM**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Light GBM**'
 - en: '**CatBoost**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**CatBoost**'
 - en: While tuning parameters for CatBoost, it is difficult to pass indices for categorical
     features. Therefore, I have tuned parameters without passing categorical features
     and evaluated two model — one with and other without categorical features. I have
     separately tuned one_hot_max_size because it does not impact the other parameters.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在调整 CatBoost 的参数时，传递分类特征的索引比较困难。因此，我在没有传递分类特征的情况下调整了参数，并评估了两个模型——一个有分类特征，另一个没有。我单独调整了
+    one_hot_max_size，因为它不会影响其他参数。
 - en: Results
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: '![](../Images/9398778e4795eb40b2d0aad94a2c74aa.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9398778e4795eb40b2d0aad94a2c74aa.png)'
 - en: End Notes
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结尾说明
 - en: For evaluating model, we should look into the performance of model in terms
     of both speed and accuracy.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了评估模型，我们应该关注模型在速度和准确性方面的表现。
 - en: Keeping that in mind, CatBoost comes out as the winner with maximum accuracy
     on test set (0.816), minimum overfitting (both train and test accuracy are close)
     and minimum prediction time & tuning time. But this happened only because we considered
@@ -306,8 +452,10 @@
     these features of CatBoost, it turned out to be the worst performer with just
     0.752 accuracy. Hence we learnt that CatBoost performs well only when we have
     categorical variables in the data and we properly tune them.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于这一点，CatBoost凭借在测试集上的最高准确率（0.816）、最小过拟合（训练和测试准确率接近）以及最短的预测时间和调优时间脱颖而出。但这仅仅是因为我们考虑了分类变量并调整了one_hot_max_size。如果我们不利用CatBoost的这些特性，它的表现将变得最差，准确率仅为0.752。因此，我们了解到，CatBoost仅在数据中存在分类变量并且我们正确调整它们时表现良好。
 - en: Our next performer was XGBoost which generally works well. It’s accuracy was
     quite close to CatBoost even after ignoring the fact that we have categorical
     variables in the data which we had converted into numerical values for its consumption.
@@ -316,8 +464,10 @@
     bad idea!). The better way is to tune parameters separately rather than using
     GridSearchCV. Check out this [blog](https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/)post
     to understand how to tune parameters smartly.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的下一个表演者是XGBoost，它通常表现良好。即使在忽略了数据中分类变量的事实（我们已将其转换为数值形式供其使用）之后，它的准确性仍然与CatBoost相当。然而，XGBoost唯一的问题是速度太慢。调整其参数非常令人沮丧（我花了6小时运行GridSearchCV——非常糟糕的主意！）。更好的方法是分别调整参数，而不是使用GridSearchCV。查看这个[博客](https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/)文章，了解如何智能地调整参数。
 - en: Finally, the last place goes to Light GBM. An important thing to note here is
     that it performed poorly in terms of both speed and accuracy when cat_features
     is used. I believe the reason why it performed badly was because it uses some
@@ -325,124 +475,190 @@
     accuracy is quite high — 0.999 compared to test accuracy). However if we use it
     normally like XGBoost, it can achieve similar (if not higher) accuracy with much
     faster speed compared to XGBoost (LGBM — 0.785, XGBoost — 0.789).
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，最后一名是Light GBM。需要注意的是，当使用cat_features时，它在速度和准确性方面都表现不佳。我认为它表现不佳的原因是它对分类数据使用了某种改进的均值编码，这导致了过拟合（训练准确率相当高——0.999，相较于测试准确率）。但是，如果像XGBoost一样正常使用，它可以在比XGBoost快得多的速度下实现类似（如果不是更高的话）准确率（LGBM——0.785，XGBoost——0.789）。
 - en: Lastly, I have to say that these observations are true for this particular dataset
     and may or may not remain valid for other datasets. However, one thing which is
     true in general is that XGBoost is slower than the other two algorithms.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我必须说，这些观察结果适用于这个特定的数据集，可能对其他数据集无效。然而，一般来说，XGBoost比其他两个算法都慢。
 - en: So which one is your favorite? Please comment with the reasons.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 那你最喜欢哪个？请评论并说明原因。
 - en: Any feedback or suggestions for improvement will be really appreciated!
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何反馈或改进建议都将非常感谢!
 - en: Check out my other blogs [here](https://medium.com/@aswalin)!
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看我的其他博客[在这里](https://medium.com/@aswalin)!
 - en: '**Resources**'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**资源**'
 - en: '[http://learningsys.org/nips17/assets/papers/paper_11.pdf](http://learningsys.org/nips17/assets/papers/paper_11.pdf)'
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[http://learningsys.org/nips17/assets/papers/paper_11.pdf](http://learningsys.org/nips17/assets/papers/paper_11.pdf)'
 - en: '[https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf)'
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf)'
 - en: '[https://arxiv.org/pdf/1603.02754.pdf](https://arxiv.org/pdf/1603.02754.pdf)'
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://arxiv.org/pdf/1603.02754.pdf](https://arxiv.org/pdf/1603.02754.pdf)'
 - en: '[https://github.com/Microsoft/LightGBM](https://github.com/Microsoft/LightGBM)'
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://github.com/Microsoft/LightGBM](https://github.com/Microsoft/LightGBM)'
 - en: '[https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/](https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/)'
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/](https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/)'
 - en: '[https://stats.stackexchange.com/questions/307555/mathematical-differences-between-gbm-xgboost-lightgbm-catboost](https://stats.stackexchange.com/questions/307555/mathematical-differences-between-gbm-xgboost-lightgbm-catboost)'
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://stats.stackexchange.com/questions/307555/mathematical-differences-between-gbm-xgboost-lightgbm-catboost](https://stats.stackexchange.com/questions/307555/mathematical-differences-between-gbm-xgboost-lightgbm-catboost)'
 - en: '**Bio: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
     is currently pursuing Master''s in Data Science at USF, I am particularly interested
     in Machine Learning & Predictive Modeling. She is a Data Science Intern at Price
     (Fx).'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
+    目前在 USF 攻读数据科学硕士学位，对机器学习与预测建模特别感兴趣。她是 Price (Fx) 的数据科学实习生。'
 - en: '[Original](https://towardsdatascience.com/catboost-vs-light-gbm-vs-xgboost-5f93620723db).
     Reposted with permission.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/catboost-vs-light-gbm-vs-xgboost-5f93620723db)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Gradient Boosting in TensorFlow vs XGBoost](/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 与 XGBoost 中的梯度提升](/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)'
 - en: '[Lessons Learned From Benchmarking Fast Machine Learning Algorithms](/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从基准测试快速机器学习算法中获得的经验教训](/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)'
 - en: '[XGBoost: A Concise Technical Overview](/2017/10/xgboost-concise-technical-overview.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost：简明技术概述](/2017/10/xgboost-concise-technical-overview.html)'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GBM 和 XGBoost 之间的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
 - en: '[Top 5 Advantages That CatBoost ML Brings to Your Data to Make it Purr](https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CatBoost ML 为你的数据带来的 5 大优势](https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html)'
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost 的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
 - en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调优 XGBoost 超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
