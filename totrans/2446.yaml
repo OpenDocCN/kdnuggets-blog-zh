@@ -1,68 +1,97 @@
 - en: DIY Automated Machine Learning with Streamlit
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Streamlit的DIY自动化机器学习
 - en: 原文：[https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
 - en: '![Figure](../Images/09edc90152540fcb82614f36d080450d.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/09edc90152540fcb82614f36d080450d.png)'
 - en: Photo by Soroush Zargar on Unsplash
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由Soroush Zargar拍摄，来源于Unsplash
 - en: You probably know about automated machine learning (AutoML). There's a good
     chance you have hard of the open source AutoML tool [TPOT](https://github.com/EpistasisLab/tpot),
     aka your *data science assistant*. You may have even seen [my recent article](/2021/05/machine-learning-pipeline-optimization-tpot.html)
     on using TPOT to optimize machine learning pipelines (you probably haven't, so
     here's your chance to [go have a look at it](/2021/05/machine-learning-pipeline-optimization-tpot.html)...
     I'll wait).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '你可能知道自动化机器学习（AutoML）。你很有可能听说过开源AutoML工具[TPOT](https://github.com/EpistasisLab/tpot)，也就是你的*数据科学助手*。你甚至可能看过[我最近的文章](/2021/05/machine-learning-pipeline-optimization-tpot.html)，介绍了如何使用TPOT优化机器学习管道（你可能没看过，所以这是你的机会[去看看](/2021/05/machine-learning-pipeline-optimization-tpot.html)...
+    我等着你）。 '
 - en: In any event, exploring AutoML and the knobs of machine learning optimization
     can make more sense when those knobs are visible and easily adjustable. In this
     article, we will implement a version of the TPOT example we looked at in [my previous
     article](/2021/05/machine-learning-pipeline-optimization-tpot.html) as a Streamlit
     app.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论如何，当这些优化按钮可见且易于调整时，探索AutoML和机器学习优化的调整旋钮会更有意义。在这篇文章中，我们将实现一个TPOT示例版本，如在[我之前的文章](/2021/05/machine-learning-pipeline-optimization-tpot.html)中所述，作为一个Streamlit应用。
 - en: 'If you don''t know about [Streamlit](https://streamlit.io/), this is the 30,000
     foot overview:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你不了解[Streamlit](https://streamlit.io/)，这是一个30,000英尺的概览：
 - en: Streamlit turns data scripts into shareable web apps in minutes.
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: Streamlit将数据脚本在几分钟内转化为可分享的网页应用。
 - en: All in Python. All for free. No front‑end experience required.
+  id: totrans-8
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 全部用Python编写。完全免费。不需要前端经验。
 - en: Overview
+  id: totrans-9
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 概述
 - en: I won't go any further into detail about Streamlit beyond what we use in this
     article, but you can find this great introduction [here](/2021/09/create-stunning-web-apps-data-science-projects.html),
     as well as the Streamlit cheat sheet, which basically covers everything you need
     to know after getting a sense of how it works, [here](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会进一步详细说明Streamlit的使用，除了本文中的内容，你可以在[这里](/2021/09/create-stunning-web-apps-data-science-projects.html)找到一个很好的介绍，以及Streamlit速查表，基本涵盖了在了解其工作原理后所需知道的所有内容，[在此](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)。
 - en: Along with getting a quick intro on implementing Streamlit projects, you will
     end up with a sandbox web app allowing for pipeline optimization experiments with
     TPOT using a pair of well-known datasets. With a few modifications, you should
     also be able to get the sandbox running with other datasets and expand the functionality
     to include more knobs as well.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了快速了解如何实现Streamlit项目外，你还将获得一个沙盒网页应用，允许使用TPOT进行管道优化实验，并使用一对知名数据集。通过一些修改，你还应该能够使用其他数据集运行沙盒，并扩展功能以包括更多的调整旋钮。
 - en: '![DIY Automated Machine Learning with Streamlit](../Images/91bea11f3b494355221c0b5481a75a0f.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Streamlit的DIY自动化机器学习](../Images/91bea11f3b494355221c0b5481a75a0f.png)'
 - en: The resulting "AutoML Pipeline Optimization Sandbox" web app we build with Streamlit
     and TPOT
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们用Streamlit和TPOT构建的“AutoML Pipeline Optimization Sandbox”网页应用
 - en: I won't rehash the original blog post (again, feel free to [read it now](/2021/05/machine-learning-pipeline-optimization-tpot.html)),
     but, in a nutshell, we are creating a script to automate the optimization of preprocessing
     and modeling — including a limited number of preprocessing transformations as
@@ -70,60 +99,89 @@
     datasets. Sure, boring datasets, but using well-known data to set the app up isn't
     a bad idea, and like I said above, with changes to a few lines of code you can
     set off trying out whatever other datasets you like.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会重述原始博客文章（再次，随时[阅读它](/2021/05/machine-learning-pipeline-optimization-tpot.html)），但简而言之，我们正在创建一个脚本，以自动化分类任务的预处理和建模优化——包括有限数量的预处理转换以及算法选择——在鸢尾花和数字数据集上。确实，数据集很枯燥，但使用知名数据来设置应用程序并不是一个坏主意，就像我上面说的，通过几行代码的修改，你可以尝试其他任何数据集。
 - en: 'Some points of note about what this optimization process entails, beyond the
     above, include:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于这个优化过程的几点注意事项，超出了上述内容，还包括：
 - en: Cross-validation for model evaluation
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型评估的交叉验证
 - en: Iterating on the modeling more than once (due to the use of genetic algorithms
     internally for TPOT) — likely not useful on such a small dataset, but possibly
     will be as we progress
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对建模进行多次迭代（由于 TPOT 内部使用遗传算法）——在如此小的数据集上可能不太有用，但随着进展可能会有帮助
 - en: Comparing resulting pipelines on these multiple iterations — are they all the
     same?
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 比较这些多次迭代后的结果管道——它们都一样吗？
 - en: Did you know TPOT now uses PyTorch under the hood to build neural networks for
     prediction?
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你知道 TPOT 现在在幕后使用 PyTorch 来构建预测用的神经网络吗？
 - en: That last point won't factor into what we're doing today, but keep it in mind
     for future adventures.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后这一点不会影响我们今天的工作，但请记住它以备将来使用。
 - en: Let's look at the code needed to create this simple Streamlit app.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看创建这个简单 Streamlit 应用程序所需的代码。
 - en: The Code
+  id: totrans-22
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 代码
 - en: 'First, the imports:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，导入：
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Everything should be quite straightforward. The final import, `stqdm`, is a
     [tqdm](https://github.com/tqdm/tqdm)-style progress bar written specifically to
     work with Streamlit.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切都应该非常简单。最后的导入 `stqdm` 是一个专门为 Streamlit 编写的 [tqdm](https://github.com/tqdm/tqdm)
+    风格的进度条。
 - en: 'Next, here''s the data loader function:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，这是数据加载函数：
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We use the load_iris() and load_digits() functions from Scikit-learn (with which
     TPOT integrates closely) to pull the respective datasets. Note that they are split
     into train and test sets here, and train/test features/labels are all returned
@@ -134,20 +192,30 @@
     a problem for such small datasets. Note the @st.cache decorator which caches the
     results of the function for future runs of the app, instead of reloading the data
     every time.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用 Scikit-learn 中的 `load_iris()` 和 `load_digits()` 函数（TPOT 与其紧密集成）来获取相应的数据集。请注意，这里将数据集分为训练集和测试集，并分别返回训练/测试特征/标签，以及用于向用户展示的完整数据集数据框，因为它看起来更美观，尤其是当通过
+    Streamlit 展示时（Streamlit 能够使用其 `write()` 方法解释和正确显示各种对象）。还有其他方法可以实现这一点，但这对如此小的数据集来说简单且没有问题。请注意
+    `@st.cache` 装饰器，它将函数的结果缓存以供应用程序未来的运行，而不是每次都重新加载数据。
 - en: 'Now we set some application wide Streamlit configurations, setup a sidebar,
     assign some variables, and load the data using the above function:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们设置一些应用范围的 Streamlit 配置，设置侧边栏，分配一些变量，并使用上述函数加载数据：
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Comparing the code above, where relevant, to either the previous article in
     which we implemented this as a standalone script or to the Streamlit cheat sheet,
     this should all, again, be quite straightforward.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 比较上述代码，在相关情况下，与你之前实现的独立脚本或 Streamlit 速查表中的内容，这一切应该都相当简单。
 - en: Note the ease of setting up interactive user-configurable variables which are
     then used in our code, as well as the ease of setting up the sidebar. We are able
     to use the sliders, checkbox, and select box to select and display the dataset,
@@ -155,54 +223,83 @@
     for the genetic algorithms TPOT uses internally for its optimization process.
     It should be getting easier to see how opening this up to custom datasets can
     be accomplished without too much trouble.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意设置交互式用户可配置变量的便利，这些变量在我们的代码中被使用，以及设置侧边栏的便利。我们可以使用滑块、复选框和选择框来选择和显示数据集，并设置遗传算法
+    TPOT 内部用于优化过程的搜索迭代次数、代数和种群规模。现在应该越来越容易看到如何在不费太多力气的情况下开放自定义数据集。
 - en: Next, let's define the scoring method; model evaluation method; and the actual
     search method. After this, the optimization loop is shown, which includes the
     display of some iteration-specific output for the user's benefit.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们定义评分方法；模型评估方法；以及实际搜索方法。之后，展示了优化循环，包括为用户利益显示一些特定迭代的输出。
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: At this point, you should compare the the `write()`, `spinner()`, `success()`,
     and other display functionality in the Streamlit cheat sheet.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 此时，你应该比较 Streamlit 速查表中的 `write()`、`spinner()`、`success()` 和其他显示功能。
 - en: 'Once run, the above optimization loop will output something similar to the
     following:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦运行，上述优化循环将输出类似于以下内容的结果：
 - en: '![Image](../Images/6b12e943406dbebe341bf6d696422e7e.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/6b12e943406dbebe341bf6d696422e7e.png)'
 - en: 'Finally, we need to assess our results:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们需要评估我们的结果：
 - en: '[PRE4]{output_folder}/tpot_{dataset}_pipeline_{i}.py[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE4]{output_folder}/tpot_{dataset}_pipeline_{i}.py[PRE5]'
 - en: '![Image](../Images/c850b744efd826a8f55cdcceba7a11c5.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/c850b744efd826a8f55cdcceba7a11c5.png)'
 - en: '...and output the code of the best pipeline (also saved to file):'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '...并输出最佳管道的代码（也保存到文件中）：'
 - en: '[PRE6]{code}[PRE7]'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE6]{code}[PRE7]'
 - en: '![Image](../Images/6e96f0deabe41eb7559d40df9ac25e56.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/6e96f0deabe41eb7559d40df9ac25e56.png)'
 - en: 'Here''s the complete code for Streamlit app (note that nothing beyond this
     single, short Python script is needed to accomplish everything):'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是Streamlit应用程序的完整代码（注意，只需这个简短的Python脚本即可完成所有任务）：
 - en: And that's how to quickly build an AutoML pipeline optimization sandbox powered
     by Streamlit and TPOT, using only Python code. Note the lack of web programming
     skills we needed to succeed in doing so.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是如何利用Streamlit和TPOT快速构建一个AutoML管道优化沙箱，只需使用Python代码。请注意，我们成功完成这一过程并不需要任何网页编程技能。
 - en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
     is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
     Science and Machine Learning resource. His interests lie in natural language processing,
@@ -210,58 +307,91 @@
     automated approaches to machine learning. Matthew holds a Master''s degree in
     computer science and a graduate diploma in data mining. He can be reached at editor1
     at kdnuggets[dot]com.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    是数据科学家和KDnuggets的主编，KDnuggets是开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1
+    at kdnuggets[dot]com联系。'
 - en: '* * *'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT工作'
 - en: '* * *'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Streamlit for Machine Learning Cheat Sheet](https://www.kdnuggets.com/2023/01/streamlit-machine-learning-cheat-sheet.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Streamlit机器学习备忘单](https://www.kdnuggets.com/2023/01/streamlit-machine-learning-cheat-sheet.html)'
 - en: '[LangChain + Streamlit + Llama: Bringing Conversational AI to Your…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LangChain + Streamlit + Llama：将对话式AI带到你的本地机器](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
 - en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用HuggingFace Pipelines和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
 - en: '[Deploying a Streamlit WebApp to Heroku using DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将Streamlit WebApp部署到Heroku，使用DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
 - en: '[12 Essential Commands for Streamlit](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Streamlit的12个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)'
 - en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
