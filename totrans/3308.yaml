@@ -1,219 +1,326 @@
 - en: 'Introducing Dask-SearchCV: Distributed hyperparameter optimization with Scikit-Learn'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍 Dask-SearchCV：与 Scikit-Learn 的分布式超参数优化
 - en: 原文：[https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html](https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html](https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html)
 - en: '**By Jim Crist, Continuum Analytics.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Jim Crist，Continuum Analytics。**'
 - en: Introduction
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 'Last summer I spent some time experimenting with combining [dask](http://dask.pydata.org/en/latest/)
     and [scikit-learn](http://scikit-learn.org/stable/) (chronicled in this [series](http://jcrist.github.io/dask-sklearn-part-1.html)
     [of blog](http://jcrist.github.io/dask-sklearn-part-2.html) [posts](http://jcrist.github.io/dask-sklearn-part-3.html)).
     The library that work produced was extremely alpha, and nothing really came out
     of it. Recently I picked this work up again, and am happy to say that we now have
     something I can be happy with. This involved a few major changes:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 去年夏天，我花了一些时间实验结合了 [dask](http://dask.pydata.org/en/latest/) 和 [scikit-learn](http://scikit-learn.org/stable/)（在这个
+    [系列](http://jcrist.github.io/dask-sklearn-part-1.html) [博客](http://jcrist.github.io/dask-sklearn-part-2.html)
+    [文章](http://jcrist.github.io/dask-sklearn-part-3.html) 中记录）。所做的工作产生的库非常初级，实际上没有什么成果。最近我重新开始了这项工作，很高兴地说，我们现在有了一个我可以满意的成果。这涉及到几个主要的变化：
 - en: A sharp reduction in scope. The previous rendition tried to implement both *model*
     and *data* parallelism. Not being a machine-learning expert, the data parallelism
     was implemented in a less-than-rigorous manner. The scope is now pared back to
     just implementing hyperparameter searches (model parallelism), which is something
     we can do well.
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 范围的大幅缩减。之前的版本尝试实现*模型*和*数据*并行。由于不是机器学习专家，数据并行的实现方式不够严格。现在的范围缩小为仅实现超参数搜索（模型并行），这是我们可以做好的事情。
 - en: 'Optimized graph building. Turns out when people are given the option to run
     grid search across a cluster, they immediately want to scale up the grid size.
     At the cost of more complicated code, we can handle extremely large grids (e.g.
     500,000 candidates now takes seconds for the graph to build, as opposed to minutes
     before). *It should be noted that for grids this size, an active search may perform
     significantly better*. Relevant issue: [#29](https://github.com/dask/dask-searchcv/issues/29).'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 优化的图构建。结果发现，当人们被给予在集群中运行网格搜索的选项时，他们立即想要扩大网格大小。尽管代码变得更复杂，但我们现在可以处理极大的网格（例如，50万候选者现在需要几秒钟构建图，而之前则需要几分钟）。*需要注意的是，对于如此大小的网格，主动搜索可能会显著表现更好*。相关问题：[#29](https://github.com/dask/dask-searchcv/issues/29)。
 - en: Increased compatibility with Scikit-Learn. Now with only a few exceptions, the
     implementations of `GridSearchCV` and `RandomizedSearchCV` should be drop-ins
     for their scikit-learn counterparts.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增强了与 Scikit-Learn 的兼容性。现在只有少数例外，`GridSearchCV` 和 `RandomizedSearchCV` 的实现应该可以直接替代它们的
+    scikit-learn 对应版本。
 - en: 'All these changes have led to a name change (previously was `dask-learn`).
     The new library is [`dask-searchcv`](http://dask-searchcv.readthedocs.io/). It
     can be installed via conda or pip:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些变化导致了名称的更改（之前是 `dask-learn`）。新库是 [`dask-searchcv`](http://dask-searchcv.readthedocs.io/)。它可以通过
+    conda 或 pip 安装：
 - en: In this post I'll give a brief overview of the library, and touch on when you
     might want to use it over other options.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将简要概述这个库，并讨论何时你可能会选择它而不是其他选项。
 - en: What's a grid search?
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是网格搜索？
 - en: Many machine learning algorithms have *hyperparameters* which can be tuned to
     improve the performance of the resulting estimator. A [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search)
     is one way of optimizing these parameters — it works by doing a parameter sweep
     across a cartesian product of a subset of these parameters (the "grid"), and then
     choosing the best resulting estimator. Since this is fitting many independent
     estimators across the same set of data, it can be fairly easily parallelized.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多机器学习算法有*超参数*，可以通过调整这些参数来提高最终估计器的性能。[网格搜索](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search)是一种优化这些参数的方法——它通过在这些参数的一个子集的笛卡尔积（即“网格”）上进行参数扫描，然后选择最佳结果的估计器。由于这涉及在相同的数据集上拟合多个独立的估计器，因此可以很容易地进行并行处理。
 - en: Example using Text Classification
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用文本分类的示例
 - en: We'll be reproducing [this example](http://scikit-learn.org/stable/auto_examples/model_selection/grid_search_text_feature_extraction.html).
     using the newsgroups dataset from the scikit-learn docs.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将重现 [这个示例](http://scikit-learn.org/stable/auto_examples/model_selection/grid_search_text_feature_extraction.html)，使用来自
+    scikit-learn 文档的 news_groups 数据集。
 - en: Setup
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置
 - en: 'First we need to load the data:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要加载数据：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Next, we'll build a pipeline to do the feature extraction and classification.
     This is composed of a[CountVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html),
     a [TfidfTransformer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html),
     and a [SGDClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将构建一个管道来进行特征提取和分类。它由一个 [CountVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html)、一个
+    [TfidfTransformer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html)
+    和一个 [SGDClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html)
+    组成。
 - en: 'All of these take several parameters. We''ll only do a grid search across a
     few of them:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些都需要几个参数。我们只会对其中的一些进行网格搜索：
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Fitting with Scikit-Learn
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Scikit-Learn 拟合
 - en: In Scikit-Learn, a grid search is performed using the `GridSearchCV` class,
     and can (optionally) be automatically parallelized using [joblib](https://pythonhosted.org/joblib/index.html).
     Here we'll parallelize across 8 processes (the number of cores on my machine).
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Scikit-Learn 中，网格搜索是使用 `GridSearchCV` 类进行的，并且可以（可选）使用 [joblib](https://pythonhosted.org/joblib/index.html)
+    自动并行化。在这里，我们将跨 8 个进程进行并行化（即我机器上的核心数量）。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Fitting with Dask-SearchCV
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Dask-SearchCV 拟合
 - en: The implementation of `GridSearchCV` in Dask-SearchCV is (almost) a drop-in
     replacement for the Scikit-Learn version. A few lesser used parameters aren't
     implemented, and there are a few new parameters as well. One of these is the `scheduler`
     parameter for specifying which dask[scheduler](http://dask.pydata.org/en/latest/scheduler-choice.html#choosing-between-schedulers)
     to use. By default, if the global scheduler is set then it is used, and if the
     global scheduler is not set then the threaded scheduler is used.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask-SearchCV 中的 `GridSearchCV` 实现（几乎）可以直接替代 Scikit-Learn 版本。一些不常用的参数没有实现，同时也增加了一些新的参数。其中之一是
+    `scheduler` 参数，用于指定要使用的 dask[scheduler](http://dask.pydata.org/en/latest/scheduler-choice.html#choosing-between-schedulers)。默认情况下，如果设置了全局调度器，则使用它；如果没有设置全局调度器，则使用线程调度器。
 - en: 'In this case, we''ll use the distributed scheduler setup locally with 8 processes,
     each with a single thread. We choose this setup because:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们将使用本地设置的分布式调度器，配置为 8 个进程，每个进程一个线程。我们选择这种设置的原因是：
 - en: We're working with python strings instead of numpy arrays, which means that
     the GIL is held for some of the tasks. This means we at least want to use a couple
     processes to get true parallelism (which excludes the threaded scheduler).
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用的是 Python 字符串而不是 numpy 数组，这意味着某些任务会持有 GIL。这意味着我们至少需要使用几个进程以获得真正的并行性（这排除了线程调度器）。
 - en: For most graphs, the distributed scheduler will be more efficient than the multiprocessing
     scheduler, as it can be smarter about moving data between workers. Since a distributed
     scheduler is easy to setup locally (just create a `dask.distributed.Client()`)
     there's not really a downside to using it when you want multiple processes.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于大多数图，分布式调度器比多进程调度器更高效，因为它在数据移动方面更智能。由于分布式调度器在本地设置非常简单（只需创建一个 `dask.distributed.Client()`），因此当你需要多个进程时，使用它几乎没有缺点。
 - en: 'Note the changes between using Scikit-Learn and Dask-SearchCV here are quite
     small:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，使用 Scikit-Learn 和 Dask-SearchCV 之间的变化相当小：
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Why is the dask version faster?
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么 dask 版本更快？
 - en: If you look at the times above, you'll note that the dask version was `~1.3X`
     faster than the scikit-learn version. This is not because we have optimized any
     of the pieces of the `Pipeline`, or that there's a significant amount of overhead
     to `joblib`. The reason is simply that the dask version is doing less work.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你查看上面的时间，你会注意到 dask 版本比 scikit-learn 版本快 `~1.3X`。这并不是因为我们优化了 `Pipeline` 的任何部分，或者
+    `joblib` 存在显著的开销。原因很简单，就是 dask 版本的工作量更少。
 - en: Given a smaller grid
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定一个较小的网格
 - en: 'and the same pipeline as above, the Scikit-Learn version looks something like
     (simplified):'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及与上述相同的管道，Scikit-Learn 版本大致如下（简化版）：
 - en: 'As a directed acyclic graph, this might look like:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个有向无环图，它可能看起来像这样：
 - en: '![Scikit-Learn Grid Search Graph](../Images/fb1f4a2c477cc380179c1536b5d1ecd9.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![Scikit-Learn 网格搜索图](../Images/fb1f4a2c477cc380179c1536b5d1ecd9.png)'
 - en: 'In contrast, the dask version looks more like:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 相比之下，dask 版本看起来更像是：
 - en: 'As a directed acyclic graph, this might look like:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为有向无环图，这可能看起来像是：
 - en: '![Dask-SearchCV Grid Search Graph](../Images/579dd09f9c87c7484ced84ddcfc673be.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![Dask-SearchCV 网格搜索图](../Images/579dd09f9c87c7484ced84ddcfc673be.png)'
 - en: Looking closely, you can see that the Scikit-Learn version ends up fitting earlier
     steps in the pipeline multiple times with the same parameters and data. Due to
     the increased flexibility of Dask over Joblib, we're able to merge these tasks
     in the graph and only perform the fit step once for any parameter/data/estimator
     combination. For pipelines that have relatively expensive early steps, this can
     be a big win when performing a grid search.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 仔细观察，你会发现 Scikit-Learn 版本会多次使用相同的参数和数据拟合管道中的早期步骤。由于 Dask 比 Joblib 更具灵活性，我们能够在图中合并这些任务，并仅对任何参数/数据/估计器组合执行一次拟合步骤。对于那些早期步骤相对昂贵的管道，这在进行网格搜索时可能是一个重大优势。
 - en: Distributed Grid Search
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分布式网格搜索
 - en: 'Since Dask decouples the scheduler from the graph specification, we can easily
     switch from running on a single machine to running on a cluster with a quick change
     in scheduler. Here I''ve setup a cluster of 3 [m4.2xlarge](https://aws.amazon.com/ec2/pricing/on-demand/)
     instances for the workers (each with 8 single-threaded processes), and another
     instance for the scheduler. This was easy to do with a single command using the
     [`dask-ec2`](https://github.com/dask/dask-ec2) utility:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Dask 将调度程序与图规范解耦，我们可以通过快速更改调度程序轻松地从单台机器切换到集群。我在这里设置了一个由 3 个 [m4.2xlarge](https://aws.amazon.com/ec2/pricing/on-demand/)
+    实例组成的工作集群（每个实例有 8 个单线程进程），以及另一个实例作为调度程序。这通过 [`dask-ec2`](https://github.com/dask/dask-ec2)
+    工具的一个命令很容易实现：
 - en: 'To switch to using the cluster instead of running locally, we just instantiate
     a new client, and then rerun:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 要切换到使用集群而不是本地运行，我们只需实例化一个新客户端，然后重新运行：
 - en: '[PRE5]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Roughly a 3x speedup, which is what we'd expect given 3x more workers. By just
     switching out schedulers we were able to scale our grid search out across multiple
     workers for increased performance.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 速度大约提升了 3 倍，这符合我们预期的 3 倍工作节点。通过简单地更换调度程序，我们能够将网格搜索扩展到多个工作节点，从而提高性能。
 - en: Below you can see the [diagnostic plot](http://distributed.readthedocs.io/en/latest/web.html)
     for this run. These show the operations that each of 24 workers were doing over
     time. We can see that we're keeping the cluster fairly well saturated with work
@@ -221,75 +328,110 @@
     the values being serialized are small, so this is relatively cheap to do. Note
     that this plot is also a bit misleading, as the red boxes are drawn on top of
     the running tasks, making it look worse than it really is.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面你可以看到这个运行的 [诊断图](http://distributed.readthedocs.io/en/latest/web.html)。这些图展示了
+    24 个工作节点随时间推移所执行的操作。我们可以看到我们在保持集群的工作量（蓝色）相对充足，闲置时间（白色）较少。虽然有一定的序列化（红色），但被序列化的值很小，因此这相对便宜。请注意，这个图也有点误导，因为红色框是绘制在正在运行的任务上，使其看起来比实际情况更糟。
 - en: '![Distributed grid search task plot](../Images/1d69dc7b91f6f13fb870a5c37f74d3b9.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![分布式网格搜索任务图](../Images/1d69dc7b91f6f13fb870a5c37f74d3b9.png)'
 - en: Distributed Grid Search with Joblib
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Joblib 的分布式网格搜索
 - en: 'For comparison, we''ll also run the Scikit-Learn grid search using joblib with
     the [`dask.distributed`](http://distributed.readthedocs.io/en/latest/joblib.html)
     backend. This is also only a few lines changed:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了对比，我们还将使用 joblib 运行 Scikit-Learn 网格搜索，后端为 [`dask.distributed`](http://distributed.readthedocs.io/en/latest/joblib.html)。这也只需改变几行代码：
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Analysis
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分析
 - en: 'In this post we performed 4 different grid searches over a pipeline:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们对一个管道进行了 4 次不同的网格搜索：
 - en: '[PRE8]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Looking at these numbers we can see that both the Scikit-Learn and Dask-SearchCV
     implementations scale as more cores are added. However, the Dask-SearchCV implementation
     is faster in both cases because it's able to merge redundant calls to `fit` and
     can avoid unnecessary work. For this simple pipeline this saves only a minute
     or two, but for more expensive transformations or larger grids the savings may
     be substantial.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这些数字来看，我们可以看到无论是 Scikit-Learn 还是 Dask-SearchCV 实现，当增加更多核心时，都会扩展。然而，Dask-SearchCV
+    实现两种情况都更快，因为它能够合并冗余的 `fit` 调用，并避免不必要的工作。对于这个简单的管道，这节省的时间只有一两分钟，但对于更昂贵的转换或更大的网格，节省可能会很可观。
 - en: When is this useful?
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么时候有用？
 - en: For single estimators (no `Pipeline` or `FeatureUnion`) Dask-SearchCV performs
     only a small constant factor faster than using Scikit-Learn with the `dask.distributed`
     backend. The benefits of using Dask-SearchCV in these cases will be minimal.
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于单个估计器（没有 `Pipeline` 或 `FeatureUnion`），Dask-SearchCV 的速度仅比使用带有 `dask.distributed`
+    后端的 Scikit-Learn 快一个小常数因子。在这些情况下，使用 Dask-SearchCV 的好处将是微乎其微的。
 - en: If the model contains meta estimators (`Pipeline` or `FeatureUnion`) then you
     may start seeing performance benefits, especially if early steps in the pipeline
     are relatively expensive.
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果模型包含元估计器（`Pipeline` 或 `FeatureUnion`），你可能会开始看到性能上的好处，特别是当管道中的早期步骤相对昂贵时。
 - en: If the data your're fitting on is already on a cluster, then Dask-SearchCV will
     (currently) be more efficient, as it works nicely with remote data. You can pass
     dask arrays, dataframes or delayed objects to `fit`, and everything will work
     fine without having to bring the data back locally.
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你正在拟合的数据已经在集群上，那么 Dask-SearchCV 将（目前）更有效，因为它与远程数据配合得很好。你可以将 dask 数组、数据框或延迟对象传递给
+    `fit`，一切都能正常工作，无需将数据重新传回本地。
 - en: If your data is too large for Scikit-Learn to work nicely, then this library
     won't help you. This is just for scheduling Scikit-Learn estimator fits in an
     intelligent way on small-medium data. It doesn't reimplement any of the algorithms
     found in Scikit-Learn to scale to larger datasets.
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你的数据太大，Scikit-Learn 无法正常工作，那么这个库将不会对你有帮助。这个库仅用于以智能方式调度 Scikit-Learn 估计器在小到中等数据上的拟合。它并没有重新实现
+    Scikit-Learn 中的任何算法以扩展到更大的数据集。
 - en: Future work
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 未来的工作
 - en: Currently we just mirror the Scikit-Learn classes `GridSearchCV` and `RandomizedSearchCV`
     for doing passive searches through a parameter space. While we [can handle very
     large grids](https://github.com/dask/dask-searchcv/issues/29) at some point switching
@@ -297,92 +439,142 @@
     using the asynchronous methods in `dask.distributed`, and I think would be fun
     to work on. If you have knowledge in this domain, please weigh in on the [related
     issue](https://github.com/dask/dask-searchcv/issues/32).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前我们仅镜像 Scikit-Learn 类 `GridSearchCV` 和 `RandomizedSearchCV` 来进行参数空间的被动搜索。虽然我们
+    [可以处理非常大的网格](https://github.com/dask/dask-searchcv/issues/29)，但在某些情况下，切换到主动搜索方法可能是最好的。可以使用
+    `dask.distributed` 中的异步方法构建类似的功能，我认为这会很有趣。如果你在这个领域有知识，请对 [相关问题](https://github.com/dask/dask-searchcv/issues/32)发表意见。
 - en: '*This work is supported by [Continuum Analytics](http://continuum.io/), [the
     XDATA program](https://www.darpa.mil/program/XDATA), and the Data Driven Discovery
     Initiative from the [Moore Foundation](https://www.moore.org/). Thanks also to
     [Matthew Rocklin](http://matthewrocklin.com/blog/) and [Will Warner](https://github.com/electronwill)
     for feedback on drafts of this post.*'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这项工作得到了 [Continuum Analytics](http://continuum.io/)、[XDATA 项目](https://www.darpa.mil/program/XDATA)
+    和 [摩尔基金会](https://www.moore.org/) 的数据驱动发现计划的支持。同时感谢 [Matthew Rocklin](http://matthewrocklin.com/blog/)
+    和 [Will Warner](https://github.com/electronwill) 对这篇文章草稿的反馈。*'
 - en: '**Bio: [Jim Crist](https://twitter.com/jiminy_crist)** holds a Bachelors and
     a (tentative) Masters in Mechanical Engineering from the University of Minnesota.
     Whilst procrastinating on his thesis, he got involved in the scientific Python
     community. He is currently a software developer at Continuum Analytics.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Jim Crist](https://twitter.com/jiminy_crist)** 拥有明尼苏达大学机械工程的学士学位和（暂定）硕士学位。在拖延其论文的同时，他参与了科学
+    Python 社区。他目前是 Continuum Analytics 的软件开发人员。'
 - en: '[Original](http://jcrist.github.io/introducing-dask-searchcv.html). Reposted
     with permission.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://jcrist.github.io/introducing-dask-searchcv.html)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Dask and Pandas and XGBoost: Playing nicely between distributed systems](/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dask 与 Pandas 和 XGBoost：在分布式系统之间良好配合](/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)'
 - en: '[Introducing Dask for Parallel Programming: An Interview with Project Lead
     Developer](/2016/09/introducing-dask-parallel-programming.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 Dask 并行编程：与项目首席开发者的访谈](/2016/09/introducing-dask-parallel-programming.html)'
 - en: '[An Introduction to Scientific Python (and a Bit of the Maths Behind It) –
     Matplotlib](/2016/06/intro-scientific-python-matplotlib.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[科学 Python 入门（以及背后的数学）– Matplotlib](/2016/06/intro-scientific-python-matplotlib.html)'
 - en: '* * *'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 管理'
 - en: '* * *'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据网格与其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
 - en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n07, 2 月 16 日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调整](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数调整：GridSearchCV 和 RandomizedSearchCV 解释](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
 - en: '[Introducing the Testing Library for Natural Language Processing](https://www.kdnuggets.com/2023/04/introducing-testing-library-natural-language-processing.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍自然语言处理测试库](https://www.kdnuggets.com/2023/04/introducing-testing-library-natural-language-processing.html)'

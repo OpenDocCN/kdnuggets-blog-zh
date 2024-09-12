@@ -1,15 +1,19 @@
 - en: 'Data Version Control: iterative machine learning'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html](https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By Dmitry Petrov, [@FullStackML](https://twitter.com/fullstackml)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: It is hardly possible in real life to develop a good machine learning model
@@ -18,9 +22,11 @@
     your code and data files and all code running arguments. This becomes even more
     important and complicated in a team environment where data scientists’ collaboration
     takes a serious amount of the team’s effort.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '![data-version-control](../Images/d94170a17e22b183d6db453a8b004034.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
 - en: 'Today, we are pleased to announce the beta version release of new open source
@@ -29,126 +35,164 @@
     in the simple form of git-like commands: “**dvc run python train_model.py data/train_matrix.p
     data/model.p**”. Your existing ML processes can be easily transformed into reproducible
     DVC pipelines regardless of which programming language or tool was used.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: 'This blog post walks you through an iterative process of building a machine
     learning model with DVC using [stackoverflow posts dataset](https://archive.org/details/stackexchange).
     First, you should initialize a Git repository and download a modeling source code
     that we will be using to show DVC in action:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ mkdir myrepo*'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ cd myrepo*'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ mkdir code*'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ wget -nv -P code/ https://s3-us-west-2.amazonaws.com/dvc-share/so/code/featurization.py
     \*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/evaluate.py \*'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/train_model.py \*'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/split_train_test.py \*'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/xml_to_tsv.py \*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/requirements.txt*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ pip install -r code/requirements.txt*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git init*'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git add code/*'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git commit -m ‘Download code’*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: The full pipeline could be built by running the bash code below. If you use
     Python version 3, please replace python to python3 and pip to pip3.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Install DVC*'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ pip install dvc*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Initialize DVC repository*'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc init*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Download a file and put to data/ directory.*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/25K/Posts.xml.tgz
     data/*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Extract XML from the archive.*'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc run tar zxf data/Posts.xml.tgz -C data/*'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Prepare data.*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc run python code/xml_to_tsv.py data/Posts.xml data/Posts.tsv python*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Split training and testing dataset. Two output files.*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '*# 0.33 is the test dataset splitting ratio. 20170426 is a seed for randomization.*'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc run python code/split_train_test.py data/Posts.tsv 0.33 20170426 data/Posts-train.tsv
     data/Posts-test.tsv*'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Extract features from text data. Two TSV inputs and two pickle matrixes
     outputs.*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc run python code/featurization.py data/Posts-train.tsv data/Posts-test.tsv
     data/matrix-train.p data/matrix-test.p*'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Train ML model out of the training dataset. 20170426 is another seed value.*'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc run python code/train_model.py data/matrix-train.p 20170426 data/model.p*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Evaluate the model by the testing dataset.*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc run python code/evaluate.py data/model.p data/matrix-test.p data/evaluation.txt*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '*# The result.*'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ cat data/evaluation.txt*'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '*AUC: 0.596182*'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: 'The one thing to wrap your head around is that DVC automatically derives the
@@ -157,107 +201,138 @@
     which were affected by recent changes. In the next code sample we are changing
     feature extraction step of the pipeline and reproduce the final result. DVC derives
     that only three steps out of seven need to be rebuilt and runs these steps:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Improve feature extraction step.*'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ vi code/featurization.py*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Commit all the changes.*'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git commit -am “Add bigram features”*'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: '*[master 50b5a2a] Add bigram features*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '*1 file changed, 5 insertion(+), 2 deletion(-)*'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Reproduce all required steps to get our target metrics file.*'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc repro data/evaluation.txt*'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/matrix-train.p. Args: python code/featurization.py
     data/Posts-train.tsv data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
     data/matrix-train.p 20170426 data/model.p*'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
     data/model.p data/matrix-test.p data/evaluation.txt*'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '*Data item “data/evaluation.txt” was reproduced.*'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Take a look at the target metric improvement.*'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ cat data/evaluation.txt*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '*AUC: 0.627196*'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: If you replace the input file that affects all the steps, then the entire pipeline
     will be reproduced.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Replace small input dataset (25K items) to a bigger one (100K).*'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc remove data/Posts.xml.tgz*'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/100K/Posts.xml.tgz
     data/*'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Reproduce the metric file.*'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc repro data/evaluation.txt*'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/Posts.xml. Args: tar zxf data/Posts.xml.tgz
     -C data*'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/Posts.tsv. Args: python code/xml_to_tsv.py
     data/Posts.xml data/Posts.tsv python*'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/Posts-train.tsv. Args: python code/split_train_test.py
     data/Posts.tsv 0.33 20170426 data/Posts-train.tsv data/Posts-test.tsv*'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/matrix-train.p. Args: python code/featurization.py
     data/Posts-train.tsv data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
     data/matrix-train.p 20170426 data/model.p*'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
     data/model.p data/matrix-test.p data/evaluation.txt*'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '*Data item “data/evaluation.txt” was reproduced.*'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ cat data/evaluation.txt*'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '*AUC: 0.633541*'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: Not only can DVC streamline your work into a single, reproducible environment,
@@ -266,241 +341,313 @@
     the research results in different computers. Moreover, you can share your data
     files through cloud storage services like AWS S3 or GCP Storage since DVC does
     not push data files to Git repositories.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '![data-git](../Images/e992418268b6a645a274161e612fc858.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
 - en: 'The code below shows how to share your code and DAG through the Git and data
     files through S3:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Setup cloud settings. Example: Cloud = AWS, StoragePath=/dvc-share/projects/tag_classifier*'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ vi dvc.conf*'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git commit -am “Set up AWS path”*'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: '*[master ec994b6] Set up AWS path*'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: '*1 file changed, 1 insertion(+), 1 deletion(-)*'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Share the repository with the pipeline and the cloud settings.*'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git remote add origin https://github.com/dmpetrov/tag_classifier.git*'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git push -u origin master*'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Share the most important data files.*'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc sync data/matrix-train.p data/matrix-test.p*'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '*Uploading cache file “.cache/matrix-train.p_1fa3a9b” to S3 “projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: '*Uploading completed*'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '*Uploading cache file “.cache/matrix-test.p_1fa3a9b” to S3 “projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: '*Uploading completed*'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: Now, another data scientist can use this repository and reproduce the data files
     the same way you just did. If she doesn’t want (or has not enough computational
     resources) to reproduce everything, she can sync and lock shared data files. After
     that, only the last steps of the ML process will be reproduced.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Get the repository.*'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git clone https://github.com/dmpetrov/tag_classifier.git*'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Sync the data files from S3.*'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc sync data/*'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: '*Uploading cache file “.cache/empty_0000000” to S3 “projects/tag_classifier/.cache/empty_0000000”*'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: '*Uploading completed*'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: '*Downloading cache file from S3 “dvc-share/projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: '*Downloading completed*'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '*Downloading cache file from S3 “dvc-share/projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
 - en: '*Downloading completed*'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Lock the reproduction process in the feature extraction step*'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: '*# since these data files were synced.*'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc lock data/matrix-t**'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: '*Data item data/matrix-test.p was locked*'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: '*Data item data/matrix-train.p was locked*'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Improve the model.*'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ vi code/train_model.py*'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ git commit -am “Tune the model”*'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: '*[master 77e2943] Tune the model*'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: '*1 file changed, 1 insertion(+), 1 deletion(-)*'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
 - en: '*# Reproduce required steps of the pipeline.*'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ dvc repro data/evaluation.txt*'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
     data/matrix-train.p 20170426 data/model.p*'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
 - en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
     data/model.p data/matrix-test.p data/evaluation.txt*'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: '*Data item “data/evaluation.txt” was reproduced.*'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: '*$ cat data/evaluation.txt*'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: '*AUC: 0.670531*'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
 - en: 'The steps that were reproduced (red):'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '![data-mining](../Images/6d2e0ad482fb831ad427aa29277f20e1.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
 - en: Conclusion
+  id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Thus, the model can be improved iteratively and DVC simplifies the iterative
     ML process and aids collaboration between data scientists.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
 - en: We are very interested in your opinion and feedback. Please post your comments
     here or contact us in twitter — [FullStackML](https://twitter.com/FullStackML).
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
 - en: If you found this tool useful, **please “star” the** [**DVC Github repository**](https://github.com/dataversioncontrol/dvc).
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://blog.dataversioncontrol.com/data-version-control-beta-release-iterative-machine-learning-a7faf7c8be67).
     Reposted with permission.'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Dmitry Petrov](https://blog.dataversioncontrol.com/@fullstackml)**
     is building the future of data science tooling DataVersionControl. Ex-Data Scientist
     at Microsoft. Ex-Researcher. PhD in CS.'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
 - en: '[Fixing Deployment and Iteration Problems in CRISP-DM](/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Data Science Automation: Debunking Misconceptions](/2016/08/data-science-automation-debunking-misconceptions.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[RCloud – DevOps for Data Science](/2016/11/rcloud-devops-data-science.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-133
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Python Basics: Syntax, Data Types, and Control Structures](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Python Control Flow Cheat Sheet](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Nota AI releases beta version of NetPresso Model Search, their…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月14日：3 门免费机器学习课程](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
