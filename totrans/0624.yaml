@@ -1,18 +1,22 @@
 - en: Evaluating Object Detection Models Using Mean Average Precision
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html](https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: To evaluate object detection models like R-CNN and [YOLO](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/),
     the **mean average precision (mAP)** is used. The mAP compares the ground-truth
     bounding box to the detected box and returns a score. The higher the score, the
     more accurate the model is in its detections.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: In my last article we looked in detail at the [confusion matrix, model accuracy,
@@ -20,111 +24,145 @@
     We used the Scikit-learn library to calculate these metrics as well. Now we'll
     extend our discussion to see how precision and recall are used to calculate the
     mAP.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: 'Here are the sections covered in this tutorial:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: From Prediction Score to Class Label
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Precision-Recall Curve
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Average Precision (AP)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Intersection over Union (IoU)
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Mean Average Precision (mAP) for Object Detection
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Let's get started.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '**From Prediction Score to Class Label**'
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In this section we'll do a quick review of how a class label is derived from
     a prediction score.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: Given that there are two classes, *Positive* and *Negative*, here are the ground-truth
     labels of 10 samples.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: When these samples are fed to the model it returns the following prediction
     scores. Based on these scores, how do we classify the samples (i.e. assign a class
     label to each sample)?
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: To convert the scores into a class label, **a threshold is used**. When the
     score is equal to or above the threshold, the sample is classified as one class.
     Otherwise, it is classified as the other class. Let's agree that a sample is *Positive* if
     its score is above or equal to the threshold. Otherwise, it is *Negative*. The
     next block of code converts the scores into class labels with a threshold of **0.5**.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Now both the ground-truth and predicted labels are available in the `y_true` and `y_pred` variables.
     Based on these labels, the [confusion matrix, precision, and recall](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/) can
     be calculated.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: After this quick review of calculating the precision and recall, in the next
     section we'll discuss creating the precision-recall curve.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '**Precision-Recall Curve**'
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -132,6 +170,7 @@
     remember that the higher the precision, the more confident the model is when it
     classifies a sample as *Positive*. The higher the recall, the more positive samples
     the model correctly classified as *Positive*.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: When a model has high recall but low precision, then the model classifies most
@@ -139,137 +178,181 @@
     many *Negative* samples as *Positive*). When a model has high precision but low
     recall, then the model is accurate when it classifies a sample as *Positive* but
     it may classify only some of the positive samples.
+  id: totrans-33
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Due to the importance of both precision and recall, there is a **precision-recall
     curve** the shows the tradeoff between the precision and recall values for different
     thresholds. This curve helps to select the best threshold to maximize both metrics.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: 'There are some inputs needed to create the precision-recall curve:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: The ground-truth labels.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: The prediction scores of the samples.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Some thresholds to convert the prediction scores into class labels.
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: The next block of code creates the `y_true` list to hold the ground-truth labels,
     the `pred_scores` list for the prediction scores, and finally the `thresholds` list
     for different threshold values.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Here are the thresholds saved in the `thresholds` list. Because there are 10
     thresholds, 10 values for precision and recall will be created.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The next function named `precision_recall_curve()` accepts the ground-truth
     labels, prediction scores, and thresholds. It returns two equal-length lists representing
     the precision and recall values.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The next code calls the `precision_recall_curve()` function after passing the
     three previously prepared lists. It returns the `precisions` and `recalls` lists
     that hold all the values of the precisions and recalls, respectively.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Here are the returned values in the `precisions` list.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Here is the list of  values in the `recalls` list.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Given the two lists of equal lengths, it is possible to plot their values in
     a 2D plot as shown below.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: The precision-recall curve is shown in the next figure. Note that as the recall
     increases, the precision decreases. The reason is that when the number of positive
     samples increases (high recall), the accuracy of classifying each sample correctly
     decreases (low precision). This is expected, as the model is more likely to fail
     when there are many samples.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/485ef820cd31ff4ef7c85f2abce540ba.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
 - en: The precision-recall curve makes it easy to decide the point where both the
     precision and recall are high. According to the previous figure, the best point
     is `(recall, precision)=(0.778, 0.875)`.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: Graphically deciding the best values for both the precision and recall might
     work using the previous figure because the curve is not complex. A better way
     is to use a metric called the `f1` score, which is calculated according to the
     next equation.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/55be9dd9d291f369c35c1c9908412e0f.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
 - en: The `f1` metric measures the balance between precision and recall. When the
     value of `f1` is high, this means both the precision and recall are high. A lower `f1` score
     means a greater imbalance between precision and recall.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: According to the previous example, the `f1` is calculated according to the code
     below. According to the values in the `f1` list, the highest score is `0.82352941`.
     It is the 6th element in the list (i.e. index 5). The 6th elements in the `recalls` and `precisions` lists
     are `0.778` and `0.875`, respectively. The corresponding threshold value is `0.45`.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '[PRE14]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The next figure shows, in blue, the location of the point that corresponds to
     the best balance between the recall and the precision. In conclusion, the best
     threshold to balance the precision and recall is `0.45` at which the precision
     is `0.875` and the recall is `0.778`.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/9d90ccf37d25964e2c5bb5fe5eb218d1.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
 - en: After the precision-recall curve is discussed, the next section discusses how
     to calculate the **average precision**.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '**Average Precision (AP)**'
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -279,74 +362,95 @@
     the difference between the current and next recalls is calculated and then multiplied
     by the current precision. In other words, the AP is the weighted sum of precisions
     at each threshold where the weight is the increase in recall.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/b4fb8d00f4ebb4cfde3e78063126b80e.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
 - en: It is important to append the recalls and precisions lists by 0 and 1, respectively.
     For example, if the `recalls` list is0.8,0.60.8,0.6, then it should have 0 appended
     to be0.8,0.6,0.00.8,0.6,0.0\. The same happens for the `precisions` list but have
     1 rather than 0 appended (e.g.0.8,0.2,1.00.8,0.2,1.0).
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: Given that both `recalls` and `precisions` are NumPy arrays, the previous equation
     is modeled according to the next Python line.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Here is the complete code that calculates the AP.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'This is all about the average precision. Here is a summary of the steps to
     calculate the AP:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: Generate the **prediction scores** using the model.
+  id: totrans-75
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Convert the **prediction scores** to **class labels**.
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Calculate the **confusion matrix**.
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Calculate the **precision** and **recall** metrics.
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Create the **precision-recall curve**.
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Measure the **average precision**.
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: The next section talks about the **intersection over union (IoU)** which is
     how an object detection generates the prediction scores.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: '**Intersection over Union (IoU)**'
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'To train an object detection model, usually, there are 2 inputs:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: An image.
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Ground-truth bounding boxes for each object in the image.
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -355,131 +459,169 @@
     shows a cat image. The ground-truth box of the object is in red while the predicted
     one is in yellow. Based on the visualization of the 2 boxes, is the model made
     a good prediction with a high match score?
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: It is difficult to subjectively evaluate the model predictions. For example,
     someone may conclude that there is a 50% match while someone else notices that
     there is a 60% match.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/3db505280cbb6dd521581b900e6e1d7c.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
 - en: '[Image](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) without
     labels from [Pixabay](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) by [susannp4](https://pixabay.com/users/susannp4-1777190)'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: A better alternative is to use a quantitative measure to score how the ground-truth
     and predicted boxes match. This measure is the **intersection over union (IoU)**.
     The IoU helps to know if a region has an object or not.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: The IoU is calculated according to the next equation by dividing the area of
     intersection between the 2 boxes by the area of their union. The higher the IoU,
     the better the prediction.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/65c006c1e81f14f0dffb941e8ddf7fcf.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
 - en: The next figure shows 3 cases with different IoUs. Note that the IoUs at the
     top of each case are objectively measured and may differ a bit from the reality
     but it makes sense.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: For case A, the predicted box in yellow is so far from being aligned on the
     red ground-truth box and thus the IoU score is **0.2** (i.e. there is only a 20%
     overlap between the 2 boxes).
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
 - en: For case B, the intersection area between the 2 boxes is larger but the 2 boxes
     are still not aligned well and thus the IoU score is **0.5**.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: For case C, the coordinates of the 2 boxes are so close and thus their IoU is **0.9** (i.e.
     there is a 90% overlap between the 2 boxes).
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: Note that the IoU is 0.0 when there is a 0% overlap between the predicted and
     ground-truth boxes. The IoU is **1.0** when the 2 boxes fit each other 100%.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/7bb321e12b722d04b585731116b71d26.png)'
+  id: totrans-98
   prefs: []
   type: TYPE_IMG
 - en: 'To calculate the IoU for an image, here is a function named `intersection_over_union()`.
     It accepts the following 2 parameters:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: '`gt_box`: Ground-truth bounding box.'
+  id: totrans-100
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '`pred_box`: Predicted bounding box.'
+  id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: It calculates the intersection and union between the 2 boxes in the `intersection` and `union` variables,
     respectively. Moreover, the IoU is calculated in the `iou` variable. It returns
     all of these 3 variables.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE18]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'The bounding box passed to the function is a list of 4 elements which are:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: The x-axis of the top-left corner.
+  id: totrans-105
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: The y-axis of the top-left corner.
+  id: totrans-106
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Width.
+  id: totrans-107
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Height.
+  id: totrans-108
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Here are the ground-truth and predicted bounding boxes of the car image.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Given that the image is named `cat.jpg`, here is the complete that draws the
     bounding boxes over the image.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE20]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: The next figure shows the image with the bounding boxes.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/3081d86d1a81996b3a304c922d647b98.png)'
+  id: totrans-114
   prefs: []
   type: TYPE_IMG
 - en: To calculate the IoU, just call the `intersection_over_union()` function. Based
     on the bounding boxes, the IoU score is `0.54`.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE21]'
+  id: totrans-116
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '[PRE22]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: The IoU score **0.54** means there is a 54% overlap between the ground-truth
     and predicted bounding boxes. Looking at the boxes, someone may visually feel
     it is good enough to conclude that the model detected the cat object. Someone
     else may feel the model is not yet accurate as the predicted box does not fit
     the ground-truth box well.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: To objectively judge whether the model predicted the box location correctly
@@ -488,57 +630,71 @@
     the predicted box and one of the ground-truth boxes. This means the model was
     able to detect an object successfully. The detected region is classified as **Positive** (i.e.
     contains an object).
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
 - en: On the other hand, when the IoU score is smaller than the threshold, then the
     model made a bad prediction as the predicted box does not overlap with the ground-truth
     box. This means the detected region is classified as **Negative** (i.e. does not
     contain an object).
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/66f31d5e3d700c35d5db1fab90bd1ace.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
 - en: Let's have an example to clarify how the IoU scores help to classify a region
     as an object or not. Assume the object detection model is fed by the next image
     where there are 2 target objects with their ground-truth boxes in red and the
     predicted boxes are in yellow.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
 - en: The next code reads the image (given it is named `pets.jpg`), draws the boxes,
     and calculates the IoU for each object. The IoU for the left object is **0.76** while
     the other object has an IoU score of **0.26**.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE23]'
+  id: totrans-124
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: Given that the IoU threshold is 0.6, then only the regions with IoU scores greater
     than or equal to 0.6 are classified as **Positive** (i.e. having objects). Thus,
     the box with IoU score 0.76 is Positive while the other box with IoU of 0.26 is **Negative**.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/d66ca57f3e5d41315a023aabd18ea039.png)'
+  id: totrans-126
   prefs: []
   type: TYPE_IMG
 - en: Image without Labels from [hindustantimes.com](https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2019/05/25/Pictures/_b336a8c4-7e7b-11e9-8a88-8b84fe2ad6da.png)
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
 - en: If the threshold changed to be **0.2** rather than 0.6, then both predictions
     are **Positive**. If the threshold is **0.8**, then both predictions are **Negative**.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
 - en: As a summary, the IoU score measures how close is the predicted box to the ground-truth
     box. It ranges from 0.0 to 1.0 where 1.0 is the optimal result. When the IoU is
     greater than the threshold, then the box is classified as **Positive** as it surrounds
     an object. Otherwise, it is classified as **Negative**.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
 - en: The next section shows how to benefit from the IoUs to calculate the mean average
     precision (mAP) for an object detection model.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: '**Mean Average Precision (mAP) for Object Detection**'
+  id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -546,66 +702,90 @@
     where each threshold may give different predictions from the other thresholds.
     Assume that the model is fed by an image that has 10 objects distributed across
     2 classes. How to calculate the mAP?
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
 - en: To calculate the mAP, start by calculating the AP for each class. The mean of
     the APs for all classes is the mAP.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
 - en: Assuming that the dataset used has only 2 classes. For the first class, here
     are the ground-truth labels and predicted scores in the `y_true` and `pred_scores` variables,
     respectively.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE24]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: Here are the `y_true` and `pred_scores` variables of the second class.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE25]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: The list of IoU thresholds starts from 0.2 to 0.9 with 0.25 step.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE26]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: To calculate the AP for a class, just feed its `y_true` and `pred_scores` variables
     to the next code.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE27]'
+  id: totrans-141
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: For the first class, here is its precision-recall curve. Based on this curve,
     the AP is `0.949`.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e4291b5f650a2af303082cb38dbe712b.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
 - en: The precision-recall curve of the second class is shown below. Its AP is `0.958`.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/7e8d11fad5d3e86f59a810c177fa82ae.png)'
+  id: totrans-145
   prefs: []
   type: TYPE_IMG
 - en: Based on the APs of the 2 classes (0.949 and 0.958), the mAP of the object detection
     model is calculated according to the next equation.
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/365f7ef8e3a3e4bbdb735aaad8aabed7.png)'
+  id: totrans-147
   prefs: []
   type: TYPE_IMG
 - en: Based on this equation, the mAP is `0.9535`.
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE28]'
+  id: totrans-149
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: '**Conclusion**'
+  id: totrans-150
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -613,11 +793,13 @@
     an object detection model. We started by discussing how to convert a prediction
     score to a class label. Using different thresholds, a precision-recall curve is
     created. From that curve, the average precision (AP) is measured.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
 - en: For an object detection model, the threshold is the intersection over union
     (IoU) that scores the detected objects. Once the AP is measured for each class
     in the dataset, the mAP is calculated.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
@@ -628,53 +810,72 @@
     assistant and a researcher in his faculty. His current research interests include
     deep learning, machine learning, artificial intelligence, digital signal processing,
     and computer vision.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://blog.paperspace.com/mean-average-precision/). Reposted with
     permission.'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
 - en: '[Evaluating Deep Learning Models: The Confusion Matrix, Accuracy, Precision,
     and Recall](/2021/02/evaluating-deep-learning-models-confusion-matrix-accuracy-precision-recall.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Working With The Lambda Layer in Keras](/2021/01/working-lambda-layer-keras.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Create Custom Real-time Plots in Deep Learning](/2020/12/create-custom-real-time-plots-deep-learning.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-159
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Idiot''s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[《傻瓜指南：精确率、召回率与混淆矩阵》](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
 - en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类指标讲解：逻辑回归与…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
 - en: '[Confusion Matrix, Precision, and Recall Explained](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[混淆矩阵、精确率和召回率解释](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
 - en: '[KDnuggets News, November 16: How LinkedIn Uses Machine Learning •…](https://www.kdnuggets.com/2022/n45.html)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，11月16日：LinkedIn如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)'
 - en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™新闻 22:n09，3月2日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)'
 - en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL与对象关系映射（ORM）的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
