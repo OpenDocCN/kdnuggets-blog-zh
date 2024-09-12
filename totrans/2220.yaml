@@ -1,53 +1,80 @@
 - en: Building a Convolutional Neural Network with PyTorch
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 PyTorch 构建卷积神经网络
 - en: 原文：[https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)
 - en: '![Building a Convolutional Neural Network with PyTorch](../Images/ef57307f5583535b4a1ad4932adafb8b.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 PyTorch 构建卷积神经网络](../Images/ef57307f5583535b4a1ad4932adafb8b.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: A Convolutional Neural Network (CNN or ConvNet) is a deep learning algorithm
     specifically designed for tasks where object recognition is crucial - like image
     classification, detection, and segmentation. CNNs are able to achieve state-of-the-art
     accuracy on complex vision tasks, powering many real-life applications such as
     surveillance systems, warehouse management, and more.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积神经网络（CNN 或 ConvNet）是一种深度学习算法，专门用于对象识别至关重要的任务——如图像分类、检测和分割。CNN 能够在复杂的视觉任务上达到最先进的准确率，推动许多实际应用，如监控系统、仓库管理等。
 - en: As humans, we can easily recognize objects in images by analyzing patterns,
     shapes, and colors. CNNs can be trained to perform this recognition too, by learning
     which patterns are important for differentiation. For example, when trying to
@@ -55,195 +82,289 @@
     shape, textures, and facial features. A CNN learns to pick up on these same types
     of distinguishing characteristics. Even for very fine-grained categorization tasks,
     CNNs are able to learn complex feature representations directly from pixels.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为人类，我们可以通过分析模式、形状和颜色轻松识别图像中的对象。CNN 也可以通过学习哪些模式对于区分很重要来进行这种识别。例如，当尝试区分猫和狗的照片时，我们的大脑会关注独特的形状、纹理和面部特征。CNN
+    学会捕捉这些相同类型的区分特征。即使是非常细致的分类任务，CNN 也能直接从像素中学习复杂的特征表示。
 - en: In this blog post, we will learn about Convolutional Neural Networks and how
     to use them to build an image classifier with PyTorch.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我们将学习卷积神经网络以及如何使用它们与 PyTorch 构建图像分类器。
 - en: How Convolutional Neural Networks Work?
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 卷积神经网络是如何工作的？
 - en: 'Convolutional neural networks (CNNs) are commonly used for image classification
     tasks. At a high level, CNNs contain three main types of layers:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积神经网络（CNNs）通常用于图像分类任务。从高层次看，CNN 包含三种主要类型的层：
 - en: '**Convolutional layers.** Apply convolutional filters to the input to extract
     features. The neurons in these layers are called filters and capture spatial patterns
     in the input.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**卷积层。** 对输入应用卷积滤波器以提取特征。这些层中的神经元称为滤波器，捕捉输入中的空间模式。'
 - en: '**Pooling layers.** Downsample the feature maps from the convolutional layers
     to consolidate information. Max pooling and average pooling are commonly used
     strategies.'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**池化层。** 对卷积层的特征图进行降采样，以整合信息。最大池化和平均池化是常用的策略。'
 - en: '**Fully-connected layers.** Take the high-level features from the convolutional
     and pooling layers as input for classification. Multiple fully-connected layers
     can be stacked.'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**全连接层。** 将来自卷积层和池化层的高级特征作为分类的输入。可以堆叠多个全连接层。'
 - en: The convolutional filters act as feature detectors, learning to activate when
     they see specific types of patterns or shapes in the input image. As these filters
     are applied across the image, they produce feature maps that highlight where certain
     features are present.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积滤波器作为特征检测器，当它们看到输入图像中的特定类型模式或形状时会激活。随着这些滤波器在图像上的应用，它们生成的特征图会突出显示某些特征的存在位置。
 - en: For example, one filter might activate when it sees vertical lines, producing
     a feature map showing the vertical lines in the image. Multiple filters applied
     to the same input produce a stack of feature maps, capturing different aspects
     of the image.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，当一个过滤器看到垂直线时，它可能会激活，产生一个特征图，显示图像中的垂直线。应用于相同输入的多个过滤器会产生一系列特征图，捕捉图像的不同方面。
 - en: '![Building a Convolutional Neural Network with PyTorch](../Images/d6733d2f3d9da90f08c34a309f0339f6.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 PyTorch 构建卷积神经网络](../Images/d6733d2f3d9da90f08c34a309f0339f6.png)'
 - en: Gif by [IceCream Labs](https://icecreamlabs.medium.com/3x3-convolution-filters-a-popular-choice-75ab1c8b4da8)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: Gif 来源于 [IceCream Labs](https://icecreamlabs.medium.com/3x3-convolution-filters-a-popular-choice-75ab1c8b4da8)
 - en: By stacking multiple convolutional layers, a CNN can learn hierarchies of features
     - building up from simple edges and patterns to more complex shapes and objects.
     The pooling layers help consolidate the feature representations and provide translational
     invariance.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过堆叠多个卷积层，CNN 可以学习特征的层次结构——从简单的边缘和模式构建到更复杂的形状和物体。池化层有助于巩固特征表示并提供平移不变性。
 - en: The final fully-connected layers take these learned feature representations
     and use them for classification. For an image classification task, the output
     layer typically uses a softmax activation to produce a probability distribution
     over classes.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终的全连接层将这些学到的特征表示用于分类。对于图像分类任务，输出层通常使用 softmax 激活函数来生成类别的概率分布。
 - en: 'In PyTorch, we can define the convolutional, pooling, and fully-connected layers
     to build up a CNN architecture. Here is some sample code:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 PyTorch 中，我们可以定义卷积层、池化层和全连接层来构建 CNN 架构。以下是一些示例代码：
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: We can then train the CNN on image data, using backpropagation and optimization.
     The convolutional and pooling layers will automatically learn effective feature
     representations, allowing the network to achieve strong performance on vision
     tasks.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以在图像数据上训练 CNN，使用反向传播和优化。卷积层和池化层将自动学习有效的特征表示，使网络在视觉任务上表现出色。
 - en: Getting Started with CNNs
+  id: totrans-28
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 入门 CNN
 - en: In this section, we will load CIFAR10 and build and train a CNN-based classification
     model using PyTorch. The CIFAR10 dataset provides 32x32 RGB images across ten
     classes, which is useful for testing image classification models. There are ten
     classes labeled in integers 0 to 9.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一部分，我们将加载 CIFAR10 数据集，并使用 PyTorch 构建和训练一个基于 CNN 的分类模型。CIFAR10 数据集提供了十个类别的
+    32x32 RGB 图像，非常适合测试图像分类模型。共有十个类别，标记为整数 0 到 9。
 - en: '**Note:** The example code is the modified version from [MachineLearningMastery.com](https://machinelearningmastery.com/building-a-convolutional-neural-network-in-pytorch/)
     blog.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 示例代码是来自 [MachineLearningMastery.com](https://machinelearningmastery.com/building-a-convolutional-neural-network-in-pytorch/)
+    博客的修改版本。'
 - en: First, we will use torchvision to download and load the CIFAR10 dataset. We
     will also use torchvision to transform both the testing and training sets to tensors.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将使用 torchvision 下载和加载 CIFAR10 数据集。我们还将使用 torchvision 将测试集和训练集转换为张量。
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After that, we will use a data loader and split the images into the batches.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，我们将使用数据加载器将图像分成批次。
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: To visualize the image in a single batch of the images, we will use matplotlib
     and torchvision utility function.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在图像的一批中可视化图像，我们将使用 matplotlib 和 torchvision 实用函数。
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: As we can see, we have images of cars, animals, planes, and boats.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所见，我们有汽车、动物、飞机和船只的图像。
 - en: '![Building a Convolutional Neural Network with PyTorch](../Images/b79babc9d3e180de665c0c58332fc19d.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 PyTorch 构建卷积神经网络](../Images/b79babc9d3e180de665c0c58332fc19d.png)'
 - en: Next, we will build our CNN model. For that, we have to create a Python class
     and initialize the convolutions, maxpool, and fully connected layers. Our architecture
     has 2 convolutional layers with pooling and linear layers.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将构建我们的 CNN 模型。为此，我们需要创建一个 Python 类并初始化卷积层、最大池化层和全连接层。我们的架构包含 2 个卷积层以及池化和线性层。
 - en: After initializing, we will not connect all the layers sequentially in the forward
     function. If you are new to PyTorch, you should read [Interpretable Neural Networks
     with PyTorch](/2022/01/interpretable-neural-networks-pytorch.html) to understand
     each component in detail.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始化后，我们不会在前向函数中按顺序连接所有层。如果你是 PyTorch 新手，你应该阅读 [可解释的 PyTorch 神经网络](/2022/01/interpretable-neural-networks-pytorch.html)
+    来详细了解每个组件。
 - en: '[PRE5]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We will now initialize our model, set loss function, and optimizer.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将初始化我们的模型，设置损失函数和优化器。
 - en: '[PRE6]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: In the training phase, we will train our model for 10 epochs.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练阶段，我们将训练我们的模型 10 个 epoch。
 - en: We are using the forward function of the model for a forward pass, then a backward
     pass using the loss function, and finally updating the weights. This step is almost
     similar in all kinds of neural network models.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们使用模型的前向函数进行前向传播，然后使用损失函数进行反向传播，最后更新权重。这一步骤在所有类型的神经网络模型中几乎是相似的。
 - en: After that, we are using a test data loader to evaluate model performance at
     the end of each epoch.
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 之后，我们使用测试数据加载器在每个训练轮次结束时评估模型性能。
 - en: Calculating the accuracy of the model and printing the results.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算模型的准确性并打印结果。
 - en: '[PRE7]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Our simple model has achieved 57% accuracy, which is bad. But, you can improve
     the model performance by adding more layers, running it for more epochs, and hyperparameter
     optimization.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的简单模型达到了 57% 的准确率，这个结果并不好。但是，你可以通过添加更多层、增加训练轮次以及优化超参数来提高模型性能。
 - en: '[PRE8]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: With PyTorch, you don't have to create all the components of convolutional neural
     networks from scratch as they are already available. It becomes even simpler if
     you use `torch.nn.Sequential`. PyTorch is designed to be modular and offers greater
     flexibility in building, training, and assessing neural networks.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 PyTorch，你不必从头创建卷积神经网络的所有组件，因为这些组件已经存在。如果使用 `torch.nn.Sequential`，事情会变得更加简单。PyTorch
+    被设计为模块化，并在构建、训练和评估神经网络方面提供了更大的灵活性。
 - en: Conclusion
+  id: totrans-53
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this post, we explored how to build and train a convolutional neural network
     for image classification using PyTorch. We covered the core components of CNN
     architectures - convolutional layers for feature extraction, pooling layers for
     downsampling, and fully-connected layers for prediction.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们探讨了如何使用 PyTorch 构建和训练一个卷积神经网络进行图像分类。我们涵盖了 CNN 架构的核心组件——用于特征提取的卷积层、用于降采样的池化层和用于预测的全连接层。
 - en: I hope this post provided a helpful overview of implementing convolutional neural
     networks with PyTorch. CNNs are fundamental architecture in deep learning for
     computer vision, and PyTorch gives us the flexibility to quickly build, train,
     and evaluate these models.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这篇文章提供了一个有用的概述，介绍了如何使用 PyTorch 实现卷积神经网络。卷积神经网络（CNN）是深度学习中计算机视觉的基础架构，而 PyTorch
+    使我们能够灵活地快速构建、训练和评估这些模型。
 - en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/))
     is a certified data scientist professional who loves building machine learning
     models. Currently, he is focusing on content creation and writing technical blogs
@@ -251,33 +372,51 @@
     in Technology Management and a bachelor''s degree in Telecommunication Engineering.
     His vision is to build an AI product using a graph neural network for students
     struggling with mental illness.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/))
+    是一位认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些面临心理健康问题的学生开发一个
+    AI 产品。'
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过构建 15 个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练您的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卷积神经网络（CNNs）图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[A Comprehensive Guide to Convolutional Neural Networks](https://www.kdnuggets.com/2023/06/comprehensive-guide-convolutional-neural-networks.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卷积神经网络全面指南](https://www.kdnuggets.com/2023/06/comprehensive-guide-convolutional-neural-networks.html)'
 - en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AIMET 优化神经网络](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
 - en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络预测中排列的重要性](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
