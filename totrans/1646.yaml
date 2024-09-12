@@ -1,57 +1,71 @@
 - en: How (dis)similar are my train and test data?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2018/06/how-dissimilar-train-test-data.html](https://www.kdnuggets.com/2018/06/how-dissimilar-train-test-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By [Shikhar Gupta](https://twitter.com/shik1470)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: They always say that don’t compare apples to oranges. But how about if we’re
     comparing one mix of apples and oranges with another mix of apples and oranges,
     but the distribution is different. Can you still compare ? And how will you go
     about it ?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: In most of the cases in the real world, you’ll come across the latter.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/7fd101b721fb668c1c84bbdb733785ce.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
 - en: This happens quite often in data science. While developing a machine learning
     model we come across a situation where our model performs well on our training
     data but it fails to match up to the same performance for the test data.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: I’m not referring to overfitting here. Even if I’ve picked my best model based
@@ -59,19 +73,23 @@
     patterns in test data that we are not capturing.< Imagine a situation where I’m
     trying to model the shopping behaviour of customers. Now if my train and test
     data looks like below then you can clearly see the issue here. ![](../Images/43e718e8ed8f3f92c83ced1e95a27790.png)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: The model will be trained on customers with lower average age compared to test.
     This model would have never seen age patterns like the ones in test data. If age
     is an important feature in your model, then it’ll not perform well on the test.
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: In this post, I’ll talk about how to identify this issue and some raw ideas
     on how we can fix it.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: Covariate Shift
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -79,316 +97,417 @@
     variables in our model. **Covariate shift** refers to a situation where predictor
     variables have different **characteristics (distribution)** in train and test
     data.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: In real world problems with many variables, covariate shift is hard to spot.
     In this post I have tried to discuss a method to identify this and also how to
     account for such shift between train and test.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: Basic Idea
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: If there exist a covariate shift, then upon mixing train and test we’ll still
     be able to classify the origin of each data point (whether it is from test or
     train) with good accuracy.
+  id: totrans-21
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![](../Images/5fffdd4138a36a820dde11d61ba677df.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
 - en: Let’s understand why. Consider the above example where age was the drifting
     feature between test and train. If we take a classifier like Random Forest and
     try to classify rows into test and train, age will be come out be very important
     feature in splitting the data.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/b84dfc6b3d7271b626a6a088a6d0dbfd.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
 - en: Implementation
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Now let’s try to apply this idea on a real dataset. I’m using dataset from
     this kaggle competition: [https://www.kaggle.com/c/porto-seguro-safe-driver-prediction/data](https://www.kaggle.com/c/porto-seguro-safe-driver-prediction/data)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '*Step1: Data pre-processing*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: We have to first clean our data, impute all missing values and do label encoding
     for all the categorical variables. For this dataset, this step was not required
     so I have skipped this step.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '*Step2:*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: We have to add a feature **‘is_train’**in both train and test data. Value for
     this feature will be **0 for test and 1 for train**.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '*Combining train and test*'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: Then we have to combine both the datasets. **Also since train data has the original
     ‘target’ variable which is not present in test, we have to drop that variable
     too.**
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** For your problem, ‘target’ will be replaced by the name of the dependent
     variable for your original problem.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '*Step4: Building and testing a classifier*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: For classification purposes I’m using **Random Forest Classifier** to predict
     the labels for each row in the combined dataset. You can use any other classifier
     also.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We are using stratified 4 fold to ensure that percentage for each class is preserved
     and we cover the whole data once. For each row the classifier will calculate the
     probability of it belonging to train.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '*Step5: Interpreting the results*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: We’ll output the ROC-AUC metric for our classifier as an estimate how much covariate
     shift this data has.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: If the classifier is able to classify the rows into train and test with good
     accuracy, our AUC score should be on the higher side (greater than 0.8). This
     implies strong covariate shift between train and test.
+  id: totrans-46
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: AUC value of 0.49 implies that there is no evidence of strong covariate shift.
     This means that majority of the observations comes from a feature space which
     is not specific to test or train.
+  id: totrans-49
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: As this dataset is taken from Kaggle, this result is quite expected. As in such
     kind of competition dataset is carefully curated to ensure such shifts are not
     there.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: This process can be replicated for any data science problem to check for covariate
     shift before we start modeling.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: Going beyond
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: At this point we either observe covariate shift or not. So what can we possibly
     do to improve our performance on the test data ??
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: Dropping of drifting features
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Importance weight using Density Ratio Estimation
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Dropping of drifting features:**'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** This method is applicable to the situation where you witness covariate
     shift.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: Extract feature importance from the random forest classifier object that we
     have built in the previous section
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The top features are the ones which are drifting and causing the shift
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: From the top features drop one variable at a time and build your model and check
     its performance. Collect all the features for which performance is not degrading
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Now drop all those features while building the final model
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '![](../Images/4f8f24d188f813f569030fe34a3240aa.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
 - en: The idea is to remove the features that fall in the red bucket
+  id: totrans-63
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '**Importance weight using Density Ratio Estimation**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** This method is applicable irrespective of whether there exist a covariate
     shift or not.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s look at the predictions that we have calculated in the previous section.
     For each observation, this prediction tells us the probability that it belongs
     to the training data according to our classifier.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'So for the first row our classifier thinks that it belongs to training data
     with .34 probability. Let’s call this P(train). Or we can also say that it has
     .66 probability of being from the test data. Let’s call this as P(test). Now here
     is the magic trick:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: For each row of training data we calculate a coefficient **w = P(test)/P(train)**.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: 'This w tells us how close is the observation from the training data to our
     test data. Here is the punchline:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: We can use this w as sample weights in any of our classifier to increase the
     weight of these observation which seems similar to our test data. Intuitively
     this makes sense as our model will focus more on capturing patterns from the observations
     which seems similar to our test.
+  id: totrans-72
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: These weights can be calculated using the below code.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '[PRE12]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '< You can pass the weights calculated in the model fit method like this:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '[PRE14]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/4781dc6afd070dbf42e7978dbc01e0f6.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
 - en: 'Some things to notice in the above plot:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: Higher the weight for the observation, more is it similar to the test data
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Almost 70% of training samples have sample weight of close to 1 and hence comes
     from a feature space which is not very specific to train or test high density
     region. This is in line with the AUC value that we have calculated
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: End Notes
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: I hope that now you have a better understanding about covariate shift, how you
     can identify it and treat it effectively.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Shikhar Gupta](https://twitter.com/shik1470)** is pursuing masters
     in data science at U. of San Francisco, Intern @IsaziConsulting, alumni @iitroorkee
     .'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/how-dis-similar-are-my-train-and-test-data-56af3923de9b).
     Reposted with permission.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[Training Sets, Test Sets, and 10-fold Cross-validation](https://www.kdnuggets.com/2018/01/training-test-sets-cross-validation.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The 6 components of Open-Source Data Science/ Machine Learning Ecosystem;
     Did Python declare victory over R?](https://www.kdnuggets.com/2018/06/ecosystem-data-science-python-victory.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Statistics of Gang Violence](https://www.kdnuggets.com/2018/06/statistics-gang-violence.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过使用自动 EDA 工具来通过数据科学评估测试](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
 - en: '[Performing a T-Test in Python](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中执行 T 检验](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)'
 - en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越准确性：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练一个 Transformer 模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么我们总是需要人类来训练 AI——有时甚至是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
