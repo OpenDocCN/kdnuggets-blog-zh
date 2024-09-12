@@ -1,32 +1,46 @@
 - en: How to calculate confidence intervals for performance metrics in Machine Learning
     using an automatic bootstrap method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用自动自助法计算机器学习中性能指标的置信区间
 - en: 原文：[https://www.kdnuggets.com/2021/10/calculate-confidence-intervals-performance-metrics-machine-learning.html](https://www.kdnuggets.com/2021/10/calculate-confidence-intervals-performance-metrics-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/10/calculate-confidence-intervals-performance-metrics-machine-learning.html](https://www.kdnuggets.com/2021/10/calculate-confidence-intervals-performance-metrics-machine-learning.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [David B Rosen (PhD)](http://linkedin.com/in/rosen1), Lead Data Scientist
     for Automated Credit Approval at IBM Global Financing**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[David B Rosen (PhD)](http://linkedin.com/in/rosen1)，IBM全球融资自动化信用审批的首席数据科学家**'
 - en: '![](../Images/c6c5f7248330c5ca16fac26349bbd195.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c6c5f7248330c5ca16fac26349bbd195.png)'
 - en: The orange line shows 89.7% as the lower bound of the Balanced Accuracy confidence
     interval, green for the original observed Balanced Accuracy=92.4% (point estimate),
     and red for upper bound of 94.7%. (This and all images are by the author unless
     otherwise noted.)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 橙色线显示了平衡准确率置信区间的下限89.7%，绿色表示原始观测的平衡准确率=92.4%（点估计），红色表示上限94.7%。（除非另有说明，否则所有图像均由作者提供。）
 - en: Introduction
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 介绍
 - en: If you report your classifier’s performance as having Accuracy=94.8% and F1=92.3%
     on a test set, this doesn’t mean much without knowing something about the size
     and composition of the test set. The margin of error of those performance measurements
@@ -34,40 +48,54 @@
     primarily depending on how many independent instances of the *minority *class
     it contains (more copies of the same instances from oversampling doesn’t help
     for this purpose).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你报告你的分类器在测试集上的表现为准确率=94.8%和F1=92.3%，在不了解测试集的大小和组成情况的情况下，这并不意味着什么。那些性能测量的误差范围会因测试集的大小而变化，或者对于不平衡的数据集，主要取决于其中包含多少个独立的*少数类*实例（重复抽样相同实例对这一目的没有帮助）。
 - en: If you were able to collect another, independent test set of similar origin,
     the Accuracy and F1 of your model on this dataset are unlikely to be the same,
     but how much different might they plausibly be? A question similar to this is
     answered in statistics as the **confidence interval **of the measurement.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你能够收集另一个独立来源的相似测试集，你模型在这个数据集上的准确率和F1分数可能不会相同，但它们可能会有多大的差异呢？类似的问题在统计学中被称为**置信区间**。
 - en: If we were to draw many independent sample datasets from the underlying population,
     then for 95% of those datasets, the true underlying population value of the metric
     would be within the 95% confidence interval that we would calculate for that particular
     sample dataset.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们从基础总体中抽取许多独立的样本数据集，那么对于95%的这些数据集，该指标的真实基础总体值将位于我们为该特定样本数据集计算的95%置信区间内。
 - en: In this article we will show you how to calculate confidence intervals for any
     number of Machine Learning performance metrics at once, with a bootstrap method
     that *automatically *determines how many boot sample datasets to generate by default.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将向你展示如何一次计算任意数量的机器学习性能指标的置信区间，使用一种*自动*确定默认生成多少自助样本数据集的方法。
 - en: If you just want to see how to invoke this code to calculate confidence intervals,
     skip to the section “**Calculate the results!**” down below.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你只是想查看如何调用这些代码来计算置信区间，请跳到下面的部分“**计算结果！**”。
 - en: The bootstrap methodology
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 自助法的方法论
 - en: If we were able to draw additional test datasets from the true distribution
     underlying the data, we would be able to see the distribution of the performance
     metric(s) of interest across those datasets. (When drawing those datasets we would
     not do anything to prevent drawing an identical or similar instance multiple times,
     although this might only happen rarely.)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们能够从数据的真实分布中抽取额外的测试数据集，我们将能够看到这些数据集上感兴趣的性能指标的分布。（在抽取这些数据集时，我们不会采取任何措施来防止多次抽取相同或相似的实例，尽管这种情况可能只会偶尔发生。）
 - en: Since we can’t do that, the next best thing is to draw additional datasets from
     the *empirical distribution* of this test dataset, which means sampling, with
     replacement, from its instances to generate new bootstrap sample datasets. Sampling
@@ -75,48 +103,66 @@
     that we might draw it again for the same sample dataset. Therefore, each such
     dataset generally has multiple copies of some of the instances, and does not include
     all of the instances that are in the base test set.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们不能这样做，下一步最佳的做法是从这个测试数据集的*经验分布*中抽取额外的数据集，这意味着从其实例中进行带替换的抽样，以生成新的引导样本数据集。带替换的抽样意味着一旦我们抽取了某个特定实例，我们将其放回，以便可能再次抽取相同的数据集。因此，每个这样的数据集通常包含一些实例的多个副本，并且不包括基准测试集中所有的实例。
 - en: If we sampled *without *replacement, then we would simply get an identical copy
     of the original dataset every time, shuffled in a different random order, which
     would not be of any use.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们*不带*替换地抽样，那么每次都会得到一个与原始数据集完全相同的副本，只是顺序被打乱，这样的数据没有实际用途。
 - en: 'The *percentile* bootstrap methodology for estimating the confidence interval
     is as follows:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于估计置信区间的*百分位*引导方法如下：
 - en: Generate `*nboots*`“bootstrap sample” datasets, each the same size as the original
     test set. Each sample dataset is obtained by drawing instances at random from
     the test set with replacement.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 生成`*nboots*`个“引导样本”数据集，每个数据集的大小与原始测试集相同。每个样本数据集通过从测试集中随机抽取实例（带替换）来获得。
 - en: On each of the sample datasets, calculate the metric and save it.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在每个样本数据集上，计算度量并保存结果。
 - en: The 95% confidence interval is given by the 2.5*th* to the 97.5*th* percentile
     among the `*nboots*`calculated values of the metric. If `*nboots*`=1001 and you
     sorted the values in a series/array/list *X* of length 1001, the 0*th* percentile
     is *X*[0] and the 100*th* percentile is *X*[1000], so the confidence interval
     would be given by *X*[25] to *X*[975].
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 95%的置信区间由`*nboots*`计算的度量值中的2.5*百分位*到97.5*百分位*给出。如果`*nboots*`=1001，并且你对长度为1001的系列/数组/列表*X*中的值进行了排序，则0*百分位*为*X*[0]，100*百分位*为*X*[1000]，因此置信区间由*X*[25]到*X*[975]给出。
 - en: Of course you can calculate as many metrics as you like for each sample dataset
     in step 2, but in step 3 you would find the percentiles for each metric separately.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，你可以在第2步中计算每个样本数据集的任意数量的度量，但在第3步中，你需要分别查找每个度量的百分位数。
 - en: Example Dataset and Confidence Interval Results
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例数据集和置信区间结果
 - en: We will use results from this prior article as an example: [**How To Deal With
     Imbalanced Classification, Without Re-balancing the Data**: *Before considering
     oversampling your skewed data, try adjusting your classification decision threshold*](/2021/09/imbalanced-classification-without-re-balancing-data.html)*.*
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用来自之前文章的结果作为示例：[**如何处理不平衡分类，而无需重新平衡数据**：*在考虑过采样你的偏斜数据之前，尝试调整你的分类决策阈值*](/2021/09/imbalanced-classification-without-re-balancing-data.html)*。
 - en: In that article we used the *highly*-imbalanced two-class Kaggle [credit card
     fraud identification data set](https://www.kaggle.com/mlg-ulb/creditcardfraud).
     We chose to use a classification threshold quite different from the default 0.5
@@ -124,18 +170,24 @@
     to balance the data. This approach is sometimes termed *threshold moving*, in
     which our classifier assigns the class by applying the chosen threshold to the
     predicted class probability provided by the predict**_proba**() method.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在那篇文章中，我们使用了*高度*不平衡的两类Kaggle [信用卡欺诈识别数据集](https://www.kaggle.com/mlg-ulb/creditcardfraud)。我们选择使用一个与predict()方法中隐含的默认0.5阈值相差甚远的分类阈值，这样就不需要平衡数据。这种方法有时称为*阈值移动*，在这种方法中，我们的分类器通过将所选阈值应用于predict**_proba**()方法提供的预测类概率来分配类别。
 - en: 'We will limit the scope of this article (and code) to binary classification:
     classes 0 and 1, with class 1 by convention being the “positive” class and specifically
     the minority class for imbalanced data, although the code should work for regression
     (single continuous target) as well.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将把本文（和代码）的范围限制为二元分类：类别0和1，其中类别1按惯例为“正类”，特别是在不平衡数据中为少数类，尽管代码也应该适用于回归（单个连续目标）。
 - en: Generating one boot sample dataset
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 生成一个引导样本数据集
 - en: Although our confidence interval code can handle various numbers of data arguments
     to be passed to the metric functions, we will focus on sklearn-style metrics,
     which always accept two data arguments, y_true and y_pred, where y_pred will be
@@ -146,18 +198,24 @@
     test set target values in the [prior article](/2021/09/imbalanced-classification-without-re-balancing-data.html))
     and `hardpredtst_tuned_thresh` (the predicted class). Both contain zeros and ones
     to indicate the true or predicted class for each instance.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们的置信区间代码可以处理传递给度量函数的各种数据参数数量，我们将专注于sklearn风格的度量，这些度量始终接受两个数据参数，`y_true`和`y_pred`，其中`y_pred`可以是二进制类别预测（0或1），或者是连续类别概率或决策函数预测，甚至是连续回归预测（如果`y_true`也是连续的）。以下函数生成一个单一的引导样本数据集。它接受任何`data_args`，但在我们的案例中，这些参数将是`ytest`（我们实际的/真实的测试集目标值，见[前一篇文章](/2021/09/imbalanced-classification-without-re-balancing-data.html)）和`hardpredtst_tuned_thresh`（预测的类别）。这两个参数都包含零和一，用于指示每个实例的真实类别或预测类别。
 - en: Custom metric specificity_score() and utility functions
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 自定义度量`specificity_score()`和实用函数
 - en: 'We will define a custom metric function for Specificity, which is just another
     name for the Recall of the *negative* class (class 0). Also a calc_metrics function
     which which applies a sequence of metrics of interest to our data, and a couple
     of utility functions for it:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将定义一个针对特异性的自定义度量函数，这只是*负类*（类0）的召回率的另一种名称。同时，还定义一个`calc_metrics`函数，它将一系列感兴趣的度量应用于我们的数据，以及几个实用函数：
 - en: Here we make our list of metrics and apply them to the data. We did not consider
     Accuracy to be a relevant metric because a false negative (misclassifying a true
     fraud as legit) is much more costly to the business than a false positive (misclassifying
@@ -165,54 +223,78 @@
     are equally bad and therefore favors correctly-classifying those whose true class
     is the majority class because these occur much more often and so contribute much
     more to the overall Accuracy.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们列出了度量列表并将它们应用于数据。我们没有考虑准确率作为一个相关度量，因为假阴性（将真实的欺诈行为误判为合法）对业务的成本远高于假阳性（将真实的合法行为误判为欺诈），而准确率将这两种误分类视为同样糟糕，因此更倾向于正确分类那些真实类别是多数类的样本，因为这些样本出现得更频繁，从而对总体准确率的贡献更大。
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/f3ca98e5c535788006b5ccfba07c388b.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f3ca98e5c535788006b5ccfba07c388b.png)'
 - en: Making each boot sample dataset and calculating metrics for it
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 制作每个引导样本数据集并计算其度量
 - en: 'In raw_metric_samples() we will actually generate multiple sample datasets
     one by one and save the metrics of each:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`raw_metric_samples()`中，我们将实际逐个生成多个样本数据集，并保存每个数据集的度量：
 - en: You give raw_metric_samples() a list of metrics (or just one metric) of interest
     as well as the true and predicted class data, and it obtains nboots sample datasets
     and returns a dataframe with just the metrics’ values calculated from each dataset.
     Through _boot_generator() it invokes one_boot() one at a time in a generator expression
     rather than storing all the datasets at once as a potentially-*huge *list.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 你给`raw_metric_samples()`提供一个度量列表（或仅一个度量）以及真实和预测类别数据，它会获取nboots个样本数据集，并返回一个仅包含从每个数据集中计算出的度量值的数据框。通过`_boot_generator()`，它一次调用一个`one_boot()`，而不是一次性存储所有数据集作为一个可能*巨大的*列表。
 - en: Look at metrics on 7 boot sample datasets
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查看7个引导样本数据集上的度量
 - en: We make our list of metric functions and invoke raw_metric_samples() to get
     the results for just 7 sample datasets. We are invoking raw_metric_samples() here
     for understanding — it is not necessary in order to get confidence intervals using
     ci_auto() below, although specifying a list of metrics (or just one metric) for
     ci_auto() *is* necessary.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们列出度量函数的列表，并调用`raw_metric_samples()`来获取仅针对7个样本数据集的结果。我们在这里调用`raw_metric_samples()`是为了理解——在使用下面的`ci_auto()`获取置信区间时并不是必须的，不过为`ci_auto()`指定一个度量列表（或仅一个度量）*是*必要的。
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/c846c20dfd1b1fbd5427e5982c455172.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c846c20dfd1b1fbd5427e5982c455172.png)'
 - en: Each column above contains the metrics calculated from one boot sample dataset
     (numbered 0 to 6), so the calculated metric values vary due to the random sampling.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的每一列包含从一个引导样本数据集（编号0到6）计算出的度量，因此计算出的度量值因随机抽样而异。
 - en: Number of boot datasets, with calculated default
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 引导数据集的数量，默认为计算值
 - en: In our implementation, by default the number of boot datasets `nboots` will
     be calculated automatically from the desired confidence level (e.g. 95%) so as
     to meet the recommendation by [North, Curtis, and Sham](https://www.google.com/search?q=Am+J+Hum+Genet.+2002+Aug%3B+71%282%29%3A+439%E2%80%93441.+doi%3A+10.1086%2F341527+A+Note+on+the+Calculation+of+Empirical+P+Values+from+Monte+Carlo+Procedures+B.+V.+North+D.+Curtis+P.+C.+Sham&btnI) to
@@ -223,8 +305,12 @@
     in the tail, [*Davidson & MacKinnon*](http://hdl.handle.net/10419/67820) recommend
     at least 399 boots for 95% confidence, which requires 11 boots in the tail, so
     we use this more-conservative recommendation.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的实现中，默认情况下，`nboots` 的数量将根据所需的置信水平（例如 95%）自动计算，以符合[North, Curtis, and Sham](https://www.google.com/search?q=Am+J+Hum+Genet.+2002+Aug%3B+71%282%29%3A+439%E2%80%93441.+doi%3A+10.1086%2F341527+A+Note+on+the+Calculation+of+Empirical+P+Values+from+Monte+Carlo+Procedures+B.+V.+North+D.+Curtis+P.+C.+Sham&btnI)的建议，即在分布的每个尾部具有最小数量的引导结果。（实际上，这项建议适用于*p*-值和假设检验的*接受区域*，但*置信区间*与这些相似，因此可以作为经验法则。）尽管这些作者建议尾部至少有
+    10 个引导结果，[*Davidson & MacKinnon*](http://hdl.handle.net/10419/67820) 建议 95% 置信度下至少使用
+    399 次引导，这需要尾部有 11 次引导，因此我们采用这一更保守的建议。
 - en: We specify alpha which is 1 - confidence level. E.g. 95% confidence becomes
     0.95 and alpha=0.05\. If you specify an explicit number of boots (perhaps a smaller `nboots` because
     you want faster results) but it is not enough for your requested alpha, a higher
@@ -234,127 +320,189 @@
     which gives an interval from the 30*th* percentile to the 70*th* percentile, which
     has 40% inside the interval but 60% outside it) and it is not clear that the minimum-boots
     recommendation even contemplated such a case.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们指定 alpha，即 1 减去置信水平。例如，95% 置信度变为 0.95，而 alpha=0.05。如果你指定了一个明确的引导次数（可能因为你想要更快的结果而选择较小的
+    `nboots`），但这对于你的请求的 alpha 不够，则会自动选择更高的 alpha，以便为该次数的引导获得准确的置信区间。将使用至少 51 次引导，因为任何更少的次数只能准确计算出异常小的置信水平（例如
+    40% 的置信度，其区间从第 30*百分位数* 到第 70*百分位数*，该区间包含 40% 的内容，但 60% 在区间外），并且不清楚最小引导次数的建议是否考虑了这种情况。
 - en: 'The function get_alpha_nboots() sets the default nboots or modifies the requested
     alpha and nboots per above:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数 get_alpha_nboots() 设置默认 nboots 或根据上述内容修改请求的 alpha 和 nboots：
 - en: 'Let’s show the default nboots for various values of alpha:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们展示不同 alpha 值下的默认 nboots：
 - en: '[PRE2]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/7cbe0c18e8b8170e1285b23a43dfeb0a.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7cbe0c18e8b8170e1285b23a43dfeb0a.png)'
 - en: 'Here’s what happens if we request an explicit nboots:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们请求一个明确的 nboots，会发生什么情况：
 - en: '[PRE3]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/7a2070ccbc3e6f4df16f4b2ea3248dc6.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7a2070ccbc3e6f4df16f4b2ea3248dc6.png)'
 - en: Small nboots values increased alpha to 0.05 and 0.40, and nboots=2 gets changed
     to the minimum of 51.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 较小的 nboots 值将 alpha 提高到 0.05 和 0.40，而 nboots=2 将更改为最小值 51。
 - en: Histogram of bootstrap sample datasets showing confidence interval just for
     Balanced Accuracy
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 引导样本数据集的直方图显示仅针对平衡准确率的置信区间
 - en: Again we don’t need to do this in order to get the confidence intervals below
     by invoking ci_auto().
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次说明，我们不需要通过调用 ci_auto() 来获取下文的置信区间。
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/28956ddfbee463dff63b60b602fb2671.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/28956ddfbee463dff63b60b602fb2671.png)'
 - en: The orange line shows 89.7% as the lower bound of the Balanced Accuracy confidence
     interval, green for the original observed Balanced Accuracy=92.4% (point estimate),
     and red for upper bound of 94.7%. (Same image appears at the top of this article.)
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 橙色线条显示 89.7% 作为平衡准确率置信区间的下界，绿色表示原始观察到的平衡准确率=92.4%（点估计），红色表示上界为 94.7%。（相同的图像出现在本文的顶部。）
 - en: How to calculate all the confidence intervals for list of metrics
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何计算所有度量指标的置信区间
 - en: Here is the main function that invokes the above and calculates the confidence
     intervals from the percentiles of the metric results, and inserts the point estimates
     as the first column of its output dataframe of results.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是调用上述内容并从度量结果的百分位数计算置信区间的主要函数，并将点估计插入其输出结果数据框的第一列。
 - en: Calculate the results!
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 计算结果！
 - en: 'This is all we really needed to do: invoke ci_auto() as follows with a list
     of metrics (`met` assigned above) to get their confidence intervals. The percentage
     formatting is optional:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们真正需要做的：调用 ci_auto()，如下所示，带上一个指标列表（`met` 上述已分配）以获取它们的置信区间。百分比格式是可选的：
 - en: '[PRE5]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/c939ced030c244587387abaa1149ead5.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c939ced030c244587387abaa1149ead5.png)'
 - en: Discussion of resulting confidence intervals
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结果置信区间的讨论
 - en: Here’s the confusion matrix from the [original article](/2021/09/imbalanced-classification-without-re-balancing-data.html).
     Class 0 is the negatives (majority class) and Class 1 is the positives (very rare
     class)
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是来自[原始文章](/2021/09/imbalanced-classification-without-re-balancing-data.html)的混淆矩阵。类别0是负类（多数类），类别1是正类（非常稀有的类别）。
 - en: '![](../Images/0e24bf1a73e647c875c0149f33d4e377.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0e24bf1a73e647c875c0149f33d4e377.png)'
 - en: The Recall (True Positive Rate) of 134/(134+14) has the widest confidence interval
     because this is a binomial proportion involving small counts.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 134/(134+14) 的召回率（真正率）具有最宽的置信区间，因为这是涉及小样本的二项分布比例。
 - en: The Specificity (True Negative Rate) is 80,388/(80,388+4,907), which involves *much *larger
     counts, so it has an extremely narrow confidence interval of just [94.11% to 94.40%].
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 特异性（真负率）为80,388/(80,388+4,907)，涉及*much*更大的样本，因此它具有极其狭窄的置信区间，仅为[94.11%到94.40%]。
 - en: Since the Balanced Accuracy is calculated as simply an average of the Recall
     and the Specificity, the width of its confidence interval is intermediate between
     theirs’.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于平衡准确率仅计算为召回率和特异性的平均值，因此它的置信区间宽度介于两者之间。
 - en: Metric measurement imprecision due to variations in test data, vs. variations
     in train data
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 测量指标的不精确性由于测试数据的变化，与训练数据的变化
 - en: Here we have not considered the variability in the *model* based on the randomness
     of our *training *data (although that can also be of interest for some purposes,
     e.g. if you have automated repeated re-training and want to know how much the
     performance of future models might vary), but rather only the variability in the
     measurement of the performance of this *particular *model (created from some particular
     training data) due to the randomness of our *test* data.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们没有考虑基于我们*训练*数据随机性的*模型*的变异性（尽管这对于某些目的也可能有兴趣，例如如果你有自动重复训练并希望了解未来模型表现可能的变化），而只是考虑了由于我们*测试*数据的随机性造成的这个*特定*模型（从某些特定训练数据创建）的表现测量的变异性。
 - en: If we had enough independent test data, we could measure the performance of
     this particular model on the underlying population very precisely, and we would
     know how it will perform if this model is deployed, irrespective of how we built
     the model and of whether we might obtain a better or worse model with a different
     training sample dataset.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们有足够的独立测试数据，我们可以非常精确地测量该特定模型在基础总体上的表现，我们将知道如果部署该模型，它的表现如何，不管我们是如何构建模型的，也不管我们是否可以通过不同的训练样本数据集获得更好或更差的模型。
 - en: Independence of individual instances
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 个体实例的独立性
 - en: The bootstrap method assumes that each of your instances (cases, observations)
     is drawn independently from an underlying population. If your test set has groups
     of rows that are not independent of each other, for example repeated observations
@@ -363,8 +511,10 @@
     the results might not be valid. You might need to use *grouped* sampling, where
     you draw entire groups together at random rather than individual rows, while avoiding
     breaking up any group or just using part of it.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 自助法假设每个实例（案件，观察值）是从基础总体中独立抽取的。如果你的测试集有不独立的行组，例如相同实体的重复观察可能彼此相关，或测试集中实例被过度抽样/复制/从其他实例生成的结果可能无效。你可能需要使用*分组*抽样，在随机抽取整个组而不是单独的行时，避免拆分任何组或仅使用部分组。
 - en: Also you want to make sure you don’t have groups that were split across the
     training and test set, because then the test set is not necessarily independent
     and you might get undetected overfitting. For example if you use oversampling
@@ -372,12 +522,17 @@
     not before. And normally you would oversample the training set but not the test
     set, since the test set must remain representative of instances the model will
     see upon future deployment. And for cross-validation you would want to use scikit-learn’s `model_selection.GroupKFold()`.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还要确保没有将分组数据分割到训练集和测试集中，因为这样测试集可能不独立，你可能会得到未被检测到的过拟合。例如，如果使用过采样，通常应**在**从测试集中分离之后进行，而不是之前。通常你会对训练集进行过采样，但不对测试集，因为测试集必须保持对模型未来部署时会看到的实例具有代表性。对于交叉验证，你可以使用
+    scikit-learn 的 `model_selection.GroupKFold()`。
 - en: Conclusion
+  id: totrans-74
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: You can always calculate confidence intervals for your evaluation metric(s)
     to see how precisely your test data enables you to measure your model’s performance.
     I’m planning another article to demonstrate confidence intervals for metrics that
@@ -387,100 +542,156 @@
     (hard classification). The same code works for both, as well as for regression
     (predicting a continuous target variable) — you just have to pass it a different
     kind of prediction (and different kind of true targets in the case of regression).
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以随时计算评估指标的置信区间，以查看测试数据如何准确地衡量模型的表现。我计划撰写另一篇文章，展示用于评估概率预测（或置信度评分——与统计置信度无关）的指标的置信区间，即软分类，如
+    Log Loss 或 ROC AUC，而不是我们这里使用的评估模型离散类别选择（硬分类）的指标。相同的代码适用于这两种情况，也适用于回归（预测连续目标变量）——你只需传入不同类型的预测（以及回归情况下不同类型的真实目标）。
 - en: '*This jupyter notebook is available in github: *[*bootConfIntAutoV1o_standalone.ipynb*](https://github.com/DavidRosen/conf-intervals-auto/blob/main/bootConfIntAutoV1o_standalone.ipynb)'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '*此 Jupyter notebook 可在 GitHub 上获取：*[*bootConfIntAutoV1o_standalone.ipynb*](https://github.com/DavidRosen/conf-intervals-auto/blob/main/bootConfIntAutoV1o_standalone.ipynb)'
 - en: '**Was this article informative and/or useful? Please post a comment below if
     you have any comments or questions about this article or about confidence intervals,
     the bootstrap, number of boots, this implementation, dataset, model, threshold
     moving, or results.**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**这篇文章对你有帮助吗？如果你对这篇文章或关于置信区间、自助法、引导数、实现方式、数据集、模型、阈值移动或结果有任何评论或问题，请在下面留言。**'
 - en: In addition to the aforementioned [prior article](https://towardsdatascience.com/how-to-deal-with-imbalanced-classification-without-re-balancing-the-data-8a3c02353fe3),
     you might also be interested in my [**How to Auto-Detect the Date/Datetime Columns
     and Set Their Datatype When Reading a CSV File in Pandas**](https://towardsdatascience.com/auto-detect-and-set-the-date-datetime-datatypes-when-reading-csv-into-pandas-261746095361),
     though it’s not directly related to the present article.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了上述的 [先前文章](https://towardsdatascience.com/how-to-deal-with-imbalanced-classification-without-re-balancing-the-data-8a3c02353fe3)，你可能还对我的
+    [**如何在 Pandas 中自动检测日期/时间列并在读取 CSV 文件时设置其数据类型**](https://towardsdatascience.com/auto-detect-and-set-the-date-datetime-datatypes-when-reading-csv-into-pandas-261746095361)
+    感兴趣，尽管它与当前文章没有直接关系。
 - en: '[Some rights reserved](https://creativecommons.org/licenses/by-sa/4.0/)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[保留一些权利](https://creativecommons.org/licenses/by-sa/4.0/)'
 - en: '**Bio: [David B Rosen (PhD)](http://linkedin.com/in/rosen1)** is Lead Data
     Scientist for Automated Credit Approval at IBM Global Financing. Find more of
     David''s writing at [dabruro.medium.com](https://dabruro.medium.com/).'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[David B Rosen (博士)](http://linkedin.com/in/rosen1)** 是 IBM Global Financing
+    自动化信用审批的首席数据科学家。更多 David 的文章可以在 [dabruro.medium.com](https://dabruro.medium.com/)
+    找到。'
 - en: '[Original](https://towardsdatascience.com/get-confidence-intervals-for-any-model-performance-metrics-in-machine-learning-f9e72a3becb2?source=user_profile---------0----------------------------).
     Reposted with permission.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/get-confidence-intervals-for-any-model-performance-metrics-in-machine-learning-f9e72a3becb2?source=user_profile---------0----------------------------)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to do “Limitless” Math in Python](/2021/10/limitless-math-python.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Python 中进行“无限”数学运算](/2021/10/limitless-math-python.html)'
 - en: '[Advanced Statistical Concepts in Data Science](/2021/09/advanced-statistical-concepts-data-science.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的高级统计概念](/2021/09/advanced-statistical-concepts-data-science.html)'
 - en: '[How to Determine the Best Fitting Data Distribution Using Python](/2021/09/determine-best-fitting-data-distribution-python.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 确定最佳拟合数据分布](/2021/09/determine-best-fitting-data-distribution-python.html)'
 - en: '* * *'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-87
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 需求'
 - en: '* * *'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Working with Confidence Intervals](https://www.kdnuggets.com/2023/04/working-confidence-intervals.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理置信区间](https://www.kdnuggets.com/2023/04/working-confidence-intervals.html)'
 - en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过使用自动 EDA 工具来应对数据科学评估测试](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
 - en: '[How I Did Automatic Image Labeling Using Grounding DINO](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Grounding DINO 自动标记图像](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)'
 - en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandas Dataframes 的 apply() 方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
 - en: '[The Quest for Model Confidence: Can You Trust a Black Box?](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型信心的探索：你能信任黑箱吗？](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
 - en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[更多分类问题的性能评估指标](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
