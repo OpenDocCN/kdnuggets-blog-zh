@@ -1,18 +1,26 @@
 - en: 'High-Performance Deep Learning: How to train smaller, faster, and better models
     – Part 4'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 高性能深度学习：如何训练更小、更快、更好的模型 – 第4部分
 - en: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
 - en: In the previous parts ([Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html),
     [Part 2](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html),
     [Part 3](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)),
@@ -21,31 +29,42 @@
     Learning. We also covered two of the focus areas (Compression Techniques and Learning
     Techniques). Let us continue to spend more time covering the other focus areas.
     You are also welcome to go through our [survey paper on efficiency in deep learning](https://arxiv.org/abs/2106.08962).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的部分（[第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)，[第2部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)，[第3部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)），我们讨论了为什么效率对深度学习模型实现高性能模型和帕累托最优模型至关重要，以及深度学习中效率的关注领域。我们还涵盖了两个关注领域（压缩技术和学习技术）。让我们继续花更多时间讨论其他关注领域。您也可以阅读我们的[深度学习效率调研论文](https://arxiv.org/abs/2106.08962)。
 - en: Automation
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自动化
 - en: Another stream of efforts has been around delegating some of the manual work
     in efficiency to automation. If we let automation help with network design and
     tuning, it would reduce human involvement and the bias that comes along with it.
     The trade-off, though, is increased computational costs that come along with it.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种努力方向是将部分效率的手动工作委托给自动化。如果我们让自动化帮助进行网络设计和调整，它将减少人类的参与以及随之而来的偏见。然而，这种权衡是计算成本的增加。
 - en: '**Hyper-Parameter Optimization (HPO)**: One of the commonly used methods that
     fall under this category is Hyper-Parameter Optimization (HPO) [1]. We know that
     tuning hyper-parameters such as initial learning rate, weight decay, etc., are
     crucial for faster convergence [2]. There can also be parameters that decide the
     network architecture, such as the number of fully connected layers, the number
     of filters in a convolutional layer, etc.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**超参数优化（HPO）**：这一类别下常用的方法之一是**超参数优化（HPO）** [1]。我们知道，调整如初始学习率、权重衰减等超参数对于更快的收敛至关重要
+    [2]。还可以有决定网络结构的参数，如全连接层的数量、卷积层中的滤波器数量等。'
 - en: While we can build intuition with experimentation, finding the best hyper-parameter
     values requires a manual search for the exact values that optimize the given objective
     function (typically the loss value on the validation set).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然我们可以通过实验建立直觉，但找到最佳超参数值需要手动搜索以优化给定的目标函数（通常是验证集上的损失值）的确切值。
 - en: If the user has prior experience on the hyper-parameters to be tuned, a simple
     algorithm for automating HPO that can be used is Grid Search (also referred to
     as Parameter Sweep). In this case we search for all the distinct and valid combinations
@@ -54,15 +73,22 @@
     and the possible values for the weight decay (decay) are {0.1, 0.2}, then there
     would be 4 possible combinations possible {lr=0.01, decay=0.1}, {lr=0.01, decay=0.2},
     {lr=0.05, decay=0.1}, and {lr=0.05, decay=0.2}.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果用户对要调整的超参数有先验经验，可以使用的简单自动化超参数优化算法是网格搜索（也称为参数扫描）。在这种情况下，我们根据用户提供的每个超参数的有效范围，搜索所有不同且有效的超参数组合。例如，如果学习率（lr）的可能值为{0.01,
+    0.05}，权重衰减（decay）的可能值为{0.1, 0.2}，则会有4种可能的组合{lr=0.01, decay=0.1}，{lr=0.01, decay=0.2}，{lr=0.05,
+    decay=0.1}和{lr=0.05, decay=0.2}。
 - en: Each of the above combinations is a *trial,* and each trial can then be run
     in parallel. The optimal combination of the hyper-parameters is found once all
     the trials have been completed. Since this approach tries all possible combinations,
     the total number of trials grows very quickly, and hence it suffers from the curse
     of dimensionality [3].
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述每种组合都是一个*试验*，每个试验可以并行运行。所有试验完成后，将找到超参数的最佳组合。由于这种方法尝试所有可能的组合，因此总试验数量增长非常快，因此遭遇了维度灾难
+    [3]。
 - en: Another approach is Random Search [4], where trials are sampled randomly from
     the search space which is constructed using the range of possible values provided
     by the user. Similar to Grid Search, each trial still runs independently in parallel.
@@ -73,14 +99,21 @@
     good enough. There are also methods like Successive Halving (SHA) [5] and HyperBand
     [6] that are similar to random search, but they allocate more resources to the
     trials which are performing well.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种方法是随机搜索 [4]，其中试验是从搜索空间中随机抽样的，搜索空间是使用用户提供的可能值的范围构建的。类似于网格搜索，每个试验仍然是独立并行运行的。然而，随机搜索易于根据可用的计算能力进行扩展，因为试验是独立同分布的（iid），因此找到最佳试验的可能性随着试验数量的增加而增加。这允许在到目前为止的最佳试验足够好时预先终止搜索。还有类似于随机搜索的方法，如Successive
+    Halving (SHA) [5] 和 HyperBand [6]，但它们将更多资源分配给表现良好的试验。
 - en: '![](../Images/9ca0b362fe05d2c92248f7703eb48306.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9ca0b362fe05d2c92248f7703eb48306.png)'
 - en: '*Grid Search, Random Search, and Bayesian Optimization. [Source](https://en.wikipedia.org/w/index.php?title=Hyperparameter_optimization)*'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '*网格搜索、随机搜索和贝叶斯优化。[来源](https://en.wikipedia.org/w/index.php?title=Hyperparameter_optimization)*'
 - en: Bayesian Optimization (BO)-based search [7] is a more involved method, where
     it keeps a separate model for predicting if a given trial is likely to improve
     on the optimal trial found so far. The model learns to predict this likelihood
@@ -91,8 +124,10 @@
     trials at the same time in parallel (based on the same estimates), which might
     lead to faster convergence at the cost of some wasted trials when compared to
     purely sequential BO.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于贝叶斯优化（BO）的搜索 [7] 是一种更复杂的方法，它保持一个单独的模型来预测给定试验是否可能改进到目前为止找到的最佳试验。该模型基于过去试验的表现来预测这种可能性。BO相对于随机搜索的改进在于搜索是有指导的，而不是随机的。因此，达到最优解所需的试验更少。由于试验的选择依赖于过去试验的结果，因此这种方法是顺序的。然而，可以基于相同的估计同时生成多个试验，这可能会导致比纯顺序BO更快的收敛，但代价是某些试验可能会浪费。
 - en: In terms of practical usage, HPO is available for users in several software
     toolkits that incorporate the algorithms themselves as well as an easy-to-use
     interface (UI to specify the hyper-parameters and their ranges), including Vizier
@@ -103,47 +138,68 @@
     option for Early Stopping of trials that are not promising. Vizier uses the Median
     Stopping Rule, where a trial is terminated if its performance at a time step *t*
     is below the median performance of all trials run till that point in time.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实际应用方面，HPO可供用户在几个软件工具包中使用，这些工具包集成了算法本身以及易于使用的界面（UI用于指定超参数及其范围），包括Vizier [8]（一个内部的Google工具，也可以通过Google
+    Cloud进行黑箱调优）。亚马逊提供了Sagemaker [9]，功能类似，也可以作为AWS服务访问。NNI [10]、Tune [11] 和 Advisor
+    [12] 是其他可以本地使用的开源HPO软件包。这些工具包还提供了对未有前景的试验进行早期停止的选项。Vizier使用中位数停止规则，如果某个试验在时间步*
+    t* 的表现低于到目前为止所有试验的中位数表现，则终止该试验。
 - en: '**Neural Architecture Search (NAS)**: We can think of NAS as an extension of
     HPO where we are searching for parameters that change the network architecture
     itself. NAS can be considered to comprise of the following parts:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**神经架构搜索 (NAS)**：我们可以把 NAS 看作是超参数优化 (HPO) 的扩展，目标是寻找改变网络架构本身的参数。NAS 可以被认为包括以下几个部分：'
 - en: '*Search Space:* These are the neural net operations that are allowed in the
     graph (Convolution (1×1, 3× 3, 5 × 5), Fully Connected, Pooling, etc.), and how
     they connect with each other.  This is provided by the user.'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*搜索空间*：这些是图中允许的神经网络操作（卷积 (1×1, 3×3, 5×5)、全连接、池化等），以及它们之间的连接方式。这由用户提供。'
 - en: '*Search Algorithm & State:* This is the algorithm that controls the architecture
     search itself. Typically the standard algorithms that apply in HPO (Grid Search,
     Random Search, Bayesian Optimization, Evolutionary Algorithms) can be used for
     NAS as well, along with Reinforcement Learning (RL) [13] and Gradient Descent
     [14].'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*搜索算法与状态*：这是控制架构搜索本身的算法。通常适用于 HPO 的标准算法（网格搜索、随机搜索、贝叶斯优化、进化算法）也可以用于 NAS，同时也包括强化学习
+    (RL) [13] 和梯度下降 [14]。'
 - en: '*Evaluation Strategy:* This defines what metric we use to evaluate the model’s
     *fitness*. It can simply be a conventional metric like validation loss, accuracy,
     etc. Or it can also be a compound metric, as in the case of MNasNet [15], which
     creates a single custom metric based on accuracy as well as model latency.'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*评估策略*：这定义了我们用来评估模型 *适应度* 的指标。它可以是简单的传统指标，如验证损失、准确率等。也可以是复合指标，例如 MNasNet [15]
+    中创建的基于准确性和模型延迟的自定义单一指标。'
 - en: '![](../Images/989bce40cf3d67a66e9086d6ec346ff7.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/989bce40cf3d67a66e9086d6ec346ff7.png)'
 - en: '*Neural Architecture Search: The controller is responsible for generating candidate
     models based on the search space and the feedback received from the model evaluation.*'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '*神经架构搜索：控制器负责基于搜索空间和从模型评估中收到的反馈生成候选模型。*'
 - en: The search algorithm with the search space and state can be viewed as a ‘controller’
     which generates sample candidate networks. The evaluation stage trains and evaluates
     the generated candidates for fitness. This fitness value is then passed as feedback
     to the search algorithm, which will use it for generating better candidates.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 搜索算法与搜索空间和状态可以视为一个‘控制器’，它生成样本候选网络。评估阶段训练和评估生成的候选网络的适应度。这个适应度值然后作为反馈传递给搜索算法，后者会用它来生成更好的候选网络。
 - en: 'Zoph et al.’s paper from 2016 [13] demonstrated that end-to-end neural network
     architectures could be generated using Reinforcement Learning. In this case, the
     controller is itself a Recurrent Neural Network (RNN), which generates the architectural
@@ -161,51 +217,78 @@
     cells are stacked in alternating fashion (???? Normal cells followed by 1 Reduction
     cell, where ???? is tunable) to construct an end-to-end network for CIFAR-10 and
     ImageNet.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到端的神经网络架构。在这种情况下，控制器本身是一个递归神经网络 (RNN)，它逐层生成前馈网络的架构超参数，如滤波器数量、步幅、滤波器大小等。然而，训练控制器本身的代价很高（需要
+    22,400 个 GPU 小时 [16]），因为整个候选网络必须从头开始训练才能进行一次梯度更新。在后续的论文 [16] 中，作者将搜索空间细化为搜索 *单元*：一种“正常单元”接收输入，处理后返回相同空间维度的输出。而“缩减单元”处理其输入，返回的输出空间维度缩小了
+    2 倍。每个单元是 ???? 块的组合。控制器的 RNN 一次生成一个块，它选择过去两个块的输出、应用于它们的操作以及如何将它们组合成一个输出。正常单元和缩减单元交替堆叠（????
+    个正常单元后跟 1 个缩减单元，其中 ???? 是可调的）以构建一个用于 CIFAR-10 和 ImageNet 的端到端网络。
 - en: Learning these cells individually rather than learning the entire network seems
     to improve the search time by 7× when compared to the end-to-end network search
     in [13] while beating the state-of-the-art in CIFAR-10 at that time.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 [13] 中的端到端网络搜索相比，单独学习这些单元似乎将搜索时间提高了 7 倍，同时在当时击败了 CIFAR-10 中的最新技术。
 - en: '![](../Images/dd702b82dac94007e1eaf168e23a1b10.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dd702b82dac94007e1eaf168e23a1b10.png)'
 - en: '*A Normal and Reduction Cell. Source: [16]*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*普通和缩减单元。来源：[16]*'
 - en: Other approaches such as evolutionary techniques [17], differentiable architecture
     search [14], progressive search [18], parameter sharing [19], etc. try to reduce
     the cost of architecture search (in some cases reducing the compute cost to a
     couple of GPU days instead of thousands of GPU days). These are covered in detail
     in [20].
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他方法如进化技术 [17]、可微分架构搜索 [14]、渐进搜索 [18]、参数共享 [19] 等，试图降低架构搜索的成本（在某些情况下，将计算成本降低到几天
+    GPU 而不是几千天 GPU）。这些方法在 [20] 中有详细介绍。
 - en: 'When evaluating candidate networks, it is also possible to focus on not just
     quality but also footprint metrics like model size, latency, etc. Architecture
     Search can help with multi-objective searches that optimize for both. As an example,
     MNasNet [15] incorporates the model’s latency on a target mobile device into the
     objective function directly, as follows:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在评估候选网络时，也可以关注不仅仅是质量，还包括模型大小、延迟等足迹指标。架构搜索可以帮助进行多目标搜索以优化两者。例如，MNasNet [15] 直接将模型在目标移动设备上的延迟纳入目标函数，如下所示：
 - en: '![](../Images/c88b99cd0a05ea82161005b7307f808b.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c88b99cd0a05ea82161005b7307f808b.png)'
 - en: '*Multi-Object reward function in MNasNet.*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*MNasNet 中的多目标奖励函数。*'
 - en: '![](../Images/55058749bb9c46eb639000459abcb5c0.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/55058749bb9c46eb639000459abcb5c0.png)'
 - en: '*Generating candidate models in MNASNet, which also optimize for latency on
     mobile devices. Source: [15]*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*生成 MNASNet 中的候选模型，同时优化移动设备上的延迟。来源：[15]*'
 - en: where ???? is the candidate model, ???????????? is the accuracy metric, and
     ???????????? is the latency of the given model on the desired device. ???? is
     the target latency. ???? is recommended to be −0.07.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 ???? 是候选模型， ???????????? 是准确性指标，???????????? 是所给模型在目标设备上的延迟。 ???? 是目标延迟。建议
+    ???? 为 −0.07。
 - en: Overall, automation plays a critical role in model efficiency. HPO is now a
     natural step in training models and can extract significant quality improvements
     while minimizing human involvement. HPO is also available in both independent
@@ -216,34 +299,48 @@
     and an approx cost of $3 GPU/hour on leading cloud computing services, this makes
     using NAS methods financially feasible and not similar in cost to manual experimentation
     with model architecture when optimizing for multiple objectives.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，自动化在模型效率中扮演了关键角色。HPO 现在是训练模型中的自然步骤，可以在最小化人工干预的同时提取显著的质量改进。HPO 也可以在独立的软件库中使用，或者通过云服务获取。类似地，最近的神经架构搜索（NAS）进展也使得在对质量和足迹都有约束的情况下以学习的方式构建架构成为可能。假设
+    NAS 运行所需的计算量为几百小时的 GPU，且领先云计算服务的成本约为每小时 $3 GPU，这使得使用 NAS 方法在财务上是可行的，并且与优化多个目标时手动实验模型架构的成本不同。
 - en: Efficient Architectures (Models & Layers)
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 高效架构（模型与层）
 - en: Another common theme is to redesign efficient layers and models that are better
     than the baseline and can be used for a specific task or as a black box in general.
     In this section, we lay out examples of such efficient layers and models to illustrate
     this idea.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个常见的主题是重新设计比基线更好的高效层和模型，这些模型可以用于特定任务或作为通用黑箱。在本节中，我们展示了一些这样的高效层和模型的示例，以说明这一思想。
 - en: '**Vision:** One of the classic examples of efficient layers in the Vision domain
     is the use of convolutional layers, which improved over Fully Connected (FC) layers
     in Vision models. FC layers suffer from two primary issues:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**视觉：** 视觉领域中一个经典的高效层例子是卷积层的使用，它相对于全连接（FC）层在视觉模型中有所改进。FC 层存在两个主要问题：'
 - en: (1) FC layers ignore the spatial information of the input pixels. Intuitively,
     it is hard to build an understanding of the given input by looking at individual
     pixel values in isolation. They also ignore the spatial locality in nearby regions.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: （1）FC层忽略输入像素的空间信息。从直观上讲，仅通过查看单个像素值很难建立对给定输入的理解。它们还忽略了附近区域的空间局部性。
 - en: (2) Using FC layers also leads to an explosion in the number of parameters when
     working with even moderately sized inputs. A 100 × 100 RGB image with 3 channels
     would lead to each neuron in the first layer having 3 × 10⁴ connections. This
     makes the network susceptible to overfitting also.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: （2）使用FC层还会导致参数数量的爆炸，尤其是在处理中等大小的输入时。一个100 × 100的RGB图像有3个通道，会导致第一层中的每个神经元有3 ×
+    10⁴个连接。这也使得网络容易过拟合。
 - en: Convolutional Layers avoid this by learning filters, where each filter is a
     3D weight matrix of a fixed size (3x3, 5x5, etc.), with the third dimension being
     the same as the number of channels in the input. Each filter is convolved over
@@ -256,21 +353,31 @@
     complex features (each pixel in the feature maps is generated from a progressively
     larger fraction of the image as one starts stacking the layers, increasing the
     *receptive field* for the filter in the next layer).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积层通过学习滤波器来避免这个问题，每个滤波器是一个固定大小的3D权重矩阵（3x3, 5x5等），第三维度与输入的通道数相同。每个滤波器在输入上进行卷积，以生成该滤波器的*特征图*。每个滤波器可以学习检测诸如边缘（水平、垂直、对角线等）之类的特征，从而在特征图中该特征存在的地方值更高。单个卷积层的特征图可以从图像中提取有意义的信息。叠加在上面的卷积层将使用前一层生成的特征图作为输入，逐步学习更复杂的特征（特征图中的每个像素是从图像的逐渐更大部分生成的，随着层的叠加，*感受野*也会增加）。
 - en: '![](../Images/c2527ad7c06c81c339df4fb0558be37c.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c2527ad7c06c81c339df4fb0558be37c.png)'
 - en: '*Illustration of a convolution operation on a 2D input (blue), with a 2x2 filter
     (green). [Source](https://github.com/vdumoulin/conv_arithmetic).*'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '*二维输入（蓝色）上的卷积操作的示意图，使用了2x2的滤波器（绿色）。[来源](https://github.com/vdumoulin/conv_arithmetic)。*'
 - en: '![](../Images/9c48da6a9e44a6704ea9e29e81df5678.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9c48da6a9e44a6704ea9e29e81df5678.png)'
 - en: '*3D visualization of the convolution operation. [Source](https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728)*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*卷积操作的3D可视化。[来源](https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728)*'
 - en: The core idea behind the efficiency of Convolutional Layers is that the same
     filter is used everywhere in the image, regardless of where the filter is applied,
     hence, enforcing spatial invariance while sharing the parameters. Going back to
@@ -279,28 +386,40 @@
     and still be within a very reasonable parameter budget. This also has a regularizing
     effect, wherein a dramatically reduced number of parameters allow for easier optimization
     and better generalization.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积层高效性的核心思想是相同的滤波器在图像的任何位置上使用，无论滤波器应用于何处，从而实现空间不变性，同时共享参数。回到一个100×100 RGB图像的例子，它有3个通道，一个5
+    × 5的滤波器将意味着总共75（5 × 5 × 3）个参数。每一层可以学习多个独特的滤波器，并且仍然在非常合理的参数预算范围内。这也具有正则化效果，即显著减少的参数数量使得优化更容易，泛化更好。
 - en: '**Depth-Separable Convolutional Layers**: In the convolution operation, each
     filter is used to convolve over the two spatial dimensions and the third channel
     dimension. As a result, the size of each filter is s[x] x s[y] x input_channels,
     where s[x] and s[y] are typically equal. This is done for each filter, resulting
     in the convolution operation happening both spatially in the *x* and *y* dimensions
     and depthwise in the z dimension.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**深度可分离卷积层**：在卷积操作中，每个滤波器用于在两个空间维度和第三个通道维度上进行卷积。因此，每个滤波器的大小是s[x] x s[y] x input_channels，其中s[x]和s[y]通常相等。这是对每个滤波器执行的，使得卷积操作在*
+    x *和* y *维度上空间上进行，并在z维度上进行深度卷积。'
 - en: 'Depth-separable convolution breaks this into two steps:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 深度可分离卷积将其分解为两个步骤：
 - en: Doing a point-wise convolution with 1 x 1 filters, such that the resulting feature
     map now has a depth of output_channels.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 `1 x 1` 的滤波器进行逐点卷积，使得结果特征图的深度现在具有输出通道数。
 - en: Doing a spatial convolution with s[x] x s[y] filters in the x and y dimensions.
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 x 和 y 维度上使用 `s[x] x s[y]` 的滤波器进行空间卷积。
 - en: These two operations stacked together (without any intermediate non-linear activation)
     results in an output of the same shape as a regular convolution, with much fewer
     parameters (1 x 1 x input_channels x output_channels + s[x] x s[y] x output_channels,
@@ -312,8 +431,14 @@
     [21] demonstrated using depth-wise separable convolutions in the Inception architecture,
     allowing convergence sooner in terms of steps and a higher accuracy on the ImageNet
     dataset while keeping the number of parameters the same.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 将这两个操作叠加在一起（没有任何中间的非线性激活）会得到与常规卷积相同形状的输出，但参数显著更少（`1 x 1 x input_channels x output_channels
+    + s[x] x s[y] x output_channels`，相比常规卷积的 `s[x] x s[y] x input_channels x output_channels`）。同样，计算量也减少了一个数量级，因为逐点卷积在每个输入通道深度上卷积要便宜得多（更多计算见
+    [这里](https://www.geeksforgeeks.org/depth-wise-separable-convolutional-neural-networks/)
+    和 [这里](https://arxiv.org/pdf/1704.04861.pdf)）。 Xception 模型架构 [21] 展示了在 Inception
+    架构中使用深度可分离卷积，从而在步骤上更早收敛，并在 ImageNet 数据集上获得更高的准确性，同时保持参数数量不变。
 - en: The MobileNet model architecture [22], which was designed for mobile and embedded
     devices, also uses depth-wise separable layers instead of regular convolutional
     layers. This helps them reduce the number of parameters as well as the number
@@ -321,8 +446,11 @@
     Vision tasks. Users can expect a latency between 10-100 ms, depending on the model.
     MobileNet also provides a knob via the depth multiplier for scaling the network
     to allow the user to trade-off between accuracy and latency.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 针对移动和嵌入式设备设计的 MobileNet 模型架构 [22]，也使用深度可分离层而非常规卷积层。这有助于将参数数量以及乘加操作的数量减少 7-10
+    倍，并允许在移动设备上部署计算机视觉任务。用户可以根据模型预期 10-100 毫秒的延迟。MobileNet 还通过深度乘数提供一个旋钮，用于调整网络规模，从而让用户在准确性和延迟之间做出权衡。
 - en: '**Attention Mechanism**: On the Natural Language front, we have seen rapid
     progress too. For sequence-to-sequence models, a persistent issue was that of
     information-bottleneck. These models typically have an encoder layer, which encodes
@@ -330,21 +458,29 @@
     An example of such a task can be machine translation, where the input sequence
     is a sentence in the source language and the output sequence is the sentence in
     the target language.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意机制**：在自然语言领域，我们也见证了快速进展。对于序列到序列模型，持久的问题是信息瓶颈。这些模型通常有一个编码器层，它对输入序列进行编码，以及一个解码序列，对应生成另一个序列。例如，机器翻译任务中，输入序列是源语言的句子，输出序列是目标语言的句子。'
 - en: The way this was traditionally done was with RNNs in both encoders and decoders.
     However, the first decoder layer could only see the hidden state of the final
     encoder step. This is a ‘bottleneck’ because the first decoder step would have
     to extract all information from the final hidden state.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统上，使用 RNN 在编码器和解码器中完成这项工作。然而，第一个解码器层只能看到最终编码器步骤的隐藏状态。这是一个“瓶颈”，因为第一个解码器步骤必须从最终隐藏状态中提取所有信息。
 - en: '![](../Images/0572503216411994f09cfc4a68f95771.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0572503216411994f09cfc4a68f95771.png)'
 - en: '*Information bottleneck for the decoder for a machine translation task from
     English to Hindi.*'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*机器翻译任务中从英语到印地语的解码器信息瓶颈。*'
 - en: The Attention mechanism was introduced in Bahdanau et al. [23] to allow the
     decoder to be able to see all the encoder states. It is a way to highlight the
     relevant parts of an input sequence and compress the input sequence to a *context
@@ -356,28 +492,40 @@
     on the previous hidden state of the decoder. Since Attention creates a weighted
     sum of the encoder states, the weights can also be used for visualizing the behavior
     of the network.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意力机制在Bahdanau等人[23]中被引入，允许解码器能够看到所有的编码器状态。这是一种突出输入序列相关部分并将输入序列压缩为*上下文向量*的方法，基于序列与另一个向量（称为查询向量）的相似性。在像机器翻译这样的序列到序列任务中，这使得可以根据所有编码器状态（表示为键和值）和解码器的先前隐藏状态（查询向量）来调整输入到解码器。上下文向量是基于解码器的先前隐藏状态对编码器状态的加权和。由于注意力机制生成了编码器状态的加权和，这些权重也可以用于可视化网络的行为。
 - en: '![](../Images/23384e064b8600c78f717611afc56206.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/23384e064b8600c78f717611afc56206.png)'
 - en: '*Use of attention in the decoder. [Source](https://arxiv.org/pdf/1902.02181.pdf#:~:text=The%20attention%20mechanism%20is%20a,to%20its%20higher%20level%20representation.)*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意力在解码器中的使用。 [来源](https://arxiv.org/pdf/1902.02181.pdf#:~:text=The%20attention%20mechanism%20is%20a,to%20its%20higher%20level%20representation.)*'
 - en: '**Transformer & Friends**: The Transformer architecture [24] was proposed in
     2017, which introduced using attention for both the decoder and the encoder. In
     the encoder, they use self-attention where the keys, values, and query vectors
     are all derived from the previous encoder layers. Transformer networks were two
     orders of magnitude cheaper to train than the comparable alternatives at the time
     of the paper being authored.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Transformer及其朋友**：Transformer架构[24]在2017年提出，首次引入了对解码器和编码器都使用注意力机制。在编码器中，他们使用自注意力机制，其中键、值和查询向量都来源于先前的编码器层。Transformer网络的训练成本比当时的可比替代方案低两个数量级。'
 - en: '![](../Images/87a8b89453c8d581c2a89ed72dd26879.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/87a8b89453c8d581c2a89ed72dd26879.png)'
 - en: '*Transformer architecture. [Source](https://jalammar.github.io/illustrated-transformer/)*'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Transformer架构。 [来源](https://jalammar.github.io/illustrated-transformer/)*'
 - en: Another core idea is that self-attention allows parallelizing the process of
     deriving relationships between the tokens in the input sequences. RNNs inherently
     force the process to occur one step at a time. For example, in an RNN, the context
@@ -385,210 +533,327 @@
     With attention, all tokens are processed together, and pairwise relationships
     can be learned. This makes it easier to leverage optimized training devices like
     GPUs and TPUs.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个核心思想是自注意力机制允许对输入序列中标记之间的关系进行并行化处理。RNNs本质上要求逐步处理。例如，在RNN中，一个标记的上下文可能在整个序列处理完之前无法完全理解。而有了注意力机制，所有标记可以一起处理，并且可以学习成对的关系。这使得利用优化训练设备如GPU和TPU变得更加容易。
 - en: As introduced in Part 3, the BERT model architecture [25] beat the state-of-the-art
     in several NLU benchmarks. BERT is a stack of Transformer encoder layers that
     are pre-trained using a bi-directional masked language model training objective.
     It can also be used as a general-purpose encoder which can then be used for other
     tasks. Other similar models like the GPT family [26] have also been used for solving
     many NLU tasks.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如第3部分介绍的那样，BERT模型架构[25]在多个自然语言理解基准测试中超越了当时的最先进技术。BERT是一个堆叠的Transformer编码器层，通过双向掩蔽语言模型训练目标进行预训练。它也可以作为一个通用编码器，然后用于其他任务。其他类似的模型，如GPT家族[26]，也被用于解决许多自然语言理解任务。
 - en: References
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Tong Yu and Hong Zhu. 2020\. Hyper-parameter optimization: A review of
     algorithms and applications. arXiv preprint arXiv:2003.05689 (2020).'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Tong Yu和Hong Zhu. 2020\. 超参数优化：算法和应用的回顾。arXiv预印本 arXiv:2003.05689 (2020)。'
 - en: '[2] Jeremy Jordan. 2020\. Setting the learning rate of your neural network.
     Jeremy Jordan (Aug 2020). https://www. jeremyjordan.me/nn-learning-rate'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] Jeremy Jordan. 2020\. 设定神经网络的学习率。Jeremy Jordan (2020年8月)。 [https://www.jeremyjordan.me/nn-learning-rate](https://www.jeremyjordan.me/nn-learning-rate)'
 - en: '[3] [https://en.wikipedia.org/wiki/Curse_of_dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] [https://en.wikipedia.org/wiki/Curse_of_dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)'
 - en: '[4] James Bergstra and Yoshua Bengio. 2012\. Random search for hyper-parameter
     optimization. Journal of machine learning research 13, 2 (2012).'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] James Bergstra 和 Yoshua Bengio. 2012\. 随机搜索超参数优化。机器学习研究杂志 13, 2 (2012)。'
 - en: '[5] Kevin Jamieson and Ameet Talwalkar. 2016\. Non-stochastic best arm identification
     and hyperparameter optimization. In Artificial Intelligence and Statistics. PMLR,
     240–248'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5] Kevin Jamieson 和 Ameet Talwalkar. 2016\. 非随机最优臂识别与超参数优化。见于人工智能与统计。PMLR,
+    240–248。'
 - en: '[6] Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet
     Talwalkar. 2017\. Hyperband: A novel bandit-based approach to hyperparameter optimization.
     The Journal of Machine Learning Research 18, 1 (2017), 6765–6816.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '[6] Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh 和 Ameet Talwalkar.
+    2017\. Hyperband：一种新型基于赌博的超参数优化方法。机器学习研究杂志 18, 1 (2017), 6765–6816。'
 - en: '[7] Apoorv Agnihotri and Nipun Batra. 2020\. Exploring bayesian optimization.
     Distill 5, 5 (2020), e26.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '[7] Apoorv Agnihotri 和 Nipun Batra. 2020\. 探索贝叶斯优化。Distill 5, 5 (2020), e26。'
 - en: '[8] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John
     Karro, and D Sculley. 2017\. Google vizier: A service for black-box optimization.
     In Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery
     and data mining. 1487–1495.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '[8] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John
+    Karro 和 D Sculley. 2017\. Google Vizier：一个黑箱优化服务。见于第23届ACM SIGKDD国际知识发现与数据挖掘会议论文集。1487–1495。'
 - en: '[9] Valerio Perrone, Huibin Shen, Aida Zolic, Iaroslav Shcherbatyi, Amr Ahmed,
     Tanya Bansal, Michele Donini, Fela Winkelmolen, Rodolphe Jenatton, Jean Baptiste
     Faddoul, et al. 2020\. Amazon SageMaker Automatic Model Tuning: Scalable Black-box
     Optimization. arXiv preprint arXiv:2012.08489 (2020).'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[9] Valerio Perrone, Huibin Shen, Aida Zolic, Iaroslav Shcherbatyi, Amr Ahmed,
+    Tanya Bansal, Michele Donini, Fela Winkelmolen, Rodolphe Jenatton, Jean Baptiste
+    Faddoul 等. 2020\. 亚马逊 SageMaker 自动模型调优：可扩展的黑箱优化。arXiv预印本 arXiv:2012.08489 (2020)。'
 - en: '[10] Microsoft Research. 2019\. Neural Network Intelligence - Microsoft Research.
     https://www.microsoft.com/enus/research/project/neural-network-intelligence [Online;
     accessed 3\. Jun. 2021].'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[10] 微软研究院. 2019\. 神经网络智能 - 微软研究院。https://www.microsoft.com/enus/research/project/neural-network-intelligence
+    [在线; 访问日期：2021年6月3日]。'
 - en: '[11] Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez,
     and Ion Stoica. 2018\. Tune: A research platform for distributed model selection
     and training. arXiv preprint arXiv:1807.05118 (2018).'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[11] Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez
+    和 Ion Stoica. 2018\. Tune：一个用于分布式模型选择和训练的研究平台。arXiv预印本 arXiv:1807.05118 (2018)。'
 - en: '[12] Dihao Chen. 2021\. advisor. https://github.com/tobegit3hub/advisor [Online;
     accessed 3\. Jun. 2021].'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[12] Dihao Chen. 2021\. advisor. https://github.com/tobegit3hub/advisor [在线;
+    访问日期：2021年6月3日]。'
 - en: '[13] Barret Zoph and Quoc V Le. 2016\. Neural architecture search with reinforcement
     learning. arXiv preprint arXiv:1611.01578 (2016).'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[13] Barret Zoph 和 Quoc V Le. 2016\. 通过强化学习进行神经网络架构搜索。arXiv预印本 arXiv:1611.01578
+    (2016)。'
 - en: '[14] Hanxiao Liu, Karen Simonyan, and Yiming Yang. 2018\. Darts: Differentiable
     architecture search. arXiv preprint arXiv:1806.09055 (2018).'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[14] Hanxiao Liu, Karen Simonyan 和 Yiming Yang. 2018\. Darts：可微分架构搜索。arXiv预印本
+    arXiv:1806.09055 (2018)。'
 - en: '[15] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew
     Howard, and Quoc V Le. 2019\. Mnasnet: Platform-aware neural architecture search
     for mobile. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
     Recognition. 2820–2828'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[15] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew
+    Howard 和 Quoc V Le. 2019\. Mnasnet：面向平台的移动神经网络架构搜索。见于IEEE/CVF计算机视觉与模式识别会议论文集。2820–2828。'
 - en: '[16] Barret Zoph, Vijay Vasudevan, Jonathon Shlens, and Quoc V Le. 2018\. Learning
     transferable architectures for scalable image recognition. In Proceedings of the
     IEEE conference on computer vision and pattern recognition. 8697–8710.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[16] Barret Zoph, Vijay Vasudevan, Jonathon Shlens 和 Quoc V Le. 2018\. 学习可转移的架构以实现可扩展的图像识别。见于IEEE计算机视觉与模式识别会议论文集。8697–8710。'
 - en: '[17] Esteban Real, Alok Aggarwal, Yanping Huang, and Quoc V Le. 2019\. Regularized
     evolution for image classifier architecture search. In Proceedings of the aaai
     conference on artificial intelligence, Vol. 33\. 4780–4789.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[17] Esteban Real, Alok Aggarwal, Yanping Huang 和 Quoc V Le. 2019\. 用于图像分类器架构搜索的正则化进化。见于AAAI人工智能会议论文集，第33卷。4780–4789。'
 - en: '[18] Chenxi Liu, Barret Zoph, Maxim Neumann, Jonathon Shlens, Wei Hua, Li-Jia
     Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, and Kevin Murphy. 2018\. Progressive
     neural architecture search. In Proceedings of the European conference on computer
     vision (ECCV). 19–34.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '[18] Chenxi Liu, Barret Zoph, Maxim Neumann, Jonathon Shlens, Wei Hua, Li-Jia
+    Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, 和 Kevin Murphy. 2018\. 进阶神经架构搜索。欧洲计算机视觉会议
+    (ECCV) 论文集。19–34。'
 - en: '[19] Hieu Pham, Melody Guan, Barret Zoph, Quoc Le, and Jeff Dean. 2018\. Efficient
     neural architecture search via parameters sharing. In International Conference
     on Machine Learning. PMLR, 4095–4104.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[19] Hieu Pham, Melody Guan, Barret Zoph, Quoc Le, 和 Jeff Dean. 2018\. 通过参数共享进行高效神经架构搜索。国际机器学习会议。PMLR,
+    4095–4104。'
 - en: '[20] Thomas Elsken, Jan Hendrik Metzen, Frank Hutter, et al. 2019\. Neural
     architecture search: A survey. J. Mach. Learn. Res. 20, 55 (2019), 1–21.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[20] Thomas Elsken, Jan Hendrik Metzen, Frank Hutter 等. 2019\. 神经架构搜索：综述。J.
+    Mach. Learn. Res. 20, 55 (2019), 1–21。'
 - en: '[21] François Chollet. 2017\. Xception: Deep learning with depthwise separable
     convolutions. In Proceedings of the IEEE conference on computer vision and pattern
     recognition. 1251–1258'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '[21] François Chollet. 2017\. Xception：深度学习与深度可分离卷积。IEEE计算机视觉与模式识别会议论文集。1251–1258'
 - en: '[22] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and Liang-Chieh
     Chen. 2018\. Mobilenetv2: Inverted residuals and linear bottlenecks. In Proceedings
     of the IEEE conference on computer vision and pattern recognition. 4510–4520.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '[22] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, 和 Liang-Chieh
+    Chen. 2018\. Mobilenetv2：倒置残差和线性瓶颈。IEEE计算机视觉与模式识别会议论文集。4510–4520。'
 - en: '[23] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. 2014\. Neural machine
     translation by jointly learning to align and translate. arXiv preprint arXiv:1409.0473
     (2014).'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '[23] Dzmitry Bahdanau, Kyunghyun Cho, 和 Yoshua Bengio. 2014\. 通过联合学习对齐和翻译进行神经机器翻译。arXiv
+    预印本 arXiv:1409.0473 (2014)。'
 - en: '[24] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
     Aidan N Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017\. Attention is all you
     need. arXiv preprint arXiv:1706.03762 (2017).'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '[24] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+    Aidan N Gomez, Lukasz Kaiser, 和 Illia Polosukhin. 2017\. 注意力机制就是你需要的全部。arXiv 预印本
+    arXiv:1706.03762 (2017)。'
 - en: '[25] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018\.
     Bert: Pre-training of deep bidirectional transformers for language understanding.
     arXiv preprint arXiv:1810.04805 (2018).'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '[25] Jacob Devlin, Ming-Wei Chang, Kenton Lee, 和 Kristina Toutanova. 2018\.
+    Bert：用于语言理解的深度双向变换器预训练。arXiv 预印本 arXiv:1810.04805 (2018)。'
 - en: '[26] Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan,
     Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell,
     et al. 2020\. Language models are few-shot learners. arXiv preprint arXiv:2005.14165
     (2020).'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '[26] Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan,
+    Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell
+    等. 2020\. 语言模型是少样本学习者。arXiv 预印本 arXiv:2005.14165 (2020)。'
 - en: '**Related:**'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Automating Machine Learning Model Optimization](https://www.kdnuggets.com/2021/03/automating-machine-learning-model-optimization.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习模型优化](https://www.kdnuggets.com/2021/03/automating-machine-learning-model-optimization.html)'
 - en: '[Algorithms for Advanced Hyper-Parameter Optimization/Tuning](https://www.kdnuggets.com/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高级超参数优化/调优算法](https://www.kdnuggets.com/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)'
 - en: '[Attention mechanism in Deep Learning, Explained](https://www.kdnuggets.com/2021/01/attention-mechanism-deep-learning-explained.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习中的注意力机制详解](https://www.kdnuggets.com/2021/01/attention-mechanism-deep-learning-explained.html)'
 - en: '* * *'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-96
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三推荐课程
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT需求'
 - en: '* * *'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-101
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 种 ChatGPT 让你编写代码更快更好的方法](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
 - en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[oBERT: 复合稀疏化为 NLP 提供更快更准确的模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练一个 Transformer 模型……](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参加竞赛将机器学习速度提高 4 倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么我们总是需要人类来训练 AI——有时是在实时](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'

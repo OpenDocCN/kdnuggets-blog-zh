@@ -4,19 +4,23 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 高性能深度学习：如何训练更小、更快、更好的模型——第 5 部分
 - en: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
   id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
 - en: In the previous parts ([Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html),
     [Part 2](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html),
     [Part 3](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html),
@@ -30,42 +34,53 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的部分中（[第 1 部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)，[第
+    2 部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)，[第
+    3 部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)，[第
+    4 部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)），我们讨论了效率为何对深度学习模型的重要性，以实现高性能的帕累托最优模型，以及深度学习中效率的关注领域。我们还涵盖了四个关注领域（压缩技术、学习技术、自动化和高效架构）。让我们以关于基础设施的最终部分结束这一系列，这对训练和部署高性能模型至关重要。
 - en: As a side note, you are also welcome to go through our [survey paper on efficiency
     in deep learning](https://arxiv.org/abs/2106.08962), which covers this topic in
     further detail.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 顺便提一下，欢迎您阅读我们关于深度学习效率的[调查论文](https://arxiv.org/abs/2106.08962)，该论文详细涵盖了这个主题。
 - en: Infrastructure
   id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基础设施
 - en: In order to be able to train and run inference efficiently, there has to be
     a robust software and hardware infrastructure foundation. In this section, we
     go over both these aspects.
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了高效地训练和运行推断，必须有一个稳健的软件和硬件基础设施。在这一部分，我们将探讨这两个方面。
 - en: '![](../Images/731ef6c8b32607021623999d6c9877f7.png)'
   id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/731ef6c8b32607021623999d6c9877f7.png)'
 - en: '*A mental model of the software and hardware infrastructure, and how they interact
     with each other.*'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*软件和硬件基础设施的心理模型，以及它们如何相互作用。*'
 - en: '**Tensorflow Ecosystem:**'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Tensorflow 生态系统：**'
 - en: Tensorflow (TF) [1] is a popular machine learning framework that has been used
     in production by many large enterprises. It has some of the most extensive software
     support for model efficiency.
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Tensorflow (TF) [1] 是一个流行的机器学习框架，已被许多大型企业投入生产。它拥有一些最广泛的软件支持，以提高模型效率。
 - en: 'Tensorflow Lite for On-Device Use Cases: Tensorflow Lite (TFLite) [2] is a
     collection of tools and libraries designed for inference in low-resource environments
     such as edge devices. At a high level, we can break down the TFLite into two core
@@ -73,6 +88,8 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Tensorflow Lite 适用于设备端用例：Tensorflow Lite (TFLite) [2] 是一组工具和库，旨在低资源环境（如边缘设备）中进行推断。从高层次来看，我们可以将
+    TFLite 分为两个核心部分：
 - en: 'Interpreter and Op Kernels: TFLite provides an interpreter for running specialized
     TFLite models, along with implementations of common neural net operations (Fully
     Connected, Convolution, Max Pooling, ReLu, Softmax, etc. each of which as an Op).
@@ -83,6 +100,9 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解释器和操作内核：TFLite 提供了一个解释器用于运行专门的 TFLite 模型，并实现了常见的神经网络操作（全连接、卷积、最大池化、ReLu、Softmax
+    等，每个操作都有一个 Op）。截至本文撰写时，这些解释器和操作主要针对 ARM 处理器进行了优化。它们还可以利用智能手机 DSP（如高通的 Hexagon
+    [3]）来加速执行。
 - en: 'Converter: This is a tool for converting the given TF model into a single file
     for inference by the interpreter. Apart from the conversion itself, it handles
     a lot of internal details like getting a graph ready for quantized inference (as
@@ -92,6 +112,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 转换器：这是一个将给定的 TF 模型转换为解释器进行推断的单个文件的工具。除了转换本身，它还处理许多内部细节，例如为量化推断准备图（如前面帖子中提到的），融合操作，向模型添加其他元数据等。
 - en: 'Other Tools for On-Device Inference: Similarly, there are tools for inference
     on other platforms as well. For example, TF Micro [4] has a slimmed-down interpreter
     and a smaller set of ops for inference on very low resource microcontrollers like
@@ -104,6 +125,9 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 设备端推理的其他工具：类似地，其他平台也有推理工具。例如，TF Micro [4] 具有精简的解释器和一组较小的操作，用于在非常低资源的微控制器如 DSP
+    上进行推理。TensorflowJS (TF.JS) [5] 是 TF 生态系统中的一个库，可用于在浏览器中或使用 Node.js 训练和运行神经网络。这些模型也可以通过
+    WebGL 接口 [6] 通过 GPU 加速。它支持导入在 TF 中训练的模型以及在 TF.JS 中从头开始创建新模型。还有 TF 模型优化工具包 [7]，提供了在模型图中添加量化、稀疏性、权重聚类等功能。
 - en: 'XLA for Server-Side Acceleration: XLA (Accelerated Linear Algebra) [8] is a
     graph compiler that can optimize linear algebra computations in a model by generating
     new implementations for operations (kernels) that are customized for the graph.
@@ -116,16 +140,21 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 服务器端加速的 XLA：XLA (Accelerated Linear Algebra) [8] 是一个图编译器，通过生成为图定制的操作（内核）的新实现来优化模型中的线性代数计算。例如，可以将多个可以融合在一起的操作合并为一个复合操作。这避免了在操作数仍在缓存中时进行多次昂贵的
+    RAM 写入。Kanwar 等人 [9] 报告称，使用 XLA 训练 BERT 的吞吐量增加了 7 倍，最大批量大小增加了 5 倍。这使得在 Google
+    Cloud 上用 $32 训练 BERT 模型成为可能。
 - en: '**PyTorch Ecosystem: **'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**PyTorch 生态系统：**'
 - en: PyTorch [10] is another popular machine-learning platform actively used by both
     academia and industry, and it can be compared to Tensorflow in terms of usability
     and features.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch [10] 是另一个流行的机器学习平台，广泛用于学术界和工业界，其在可用性和功能上可以与 Tensorflow 相比。
 - en: 'On-Device Usecases: PyTorch also has a lightweight interpreter that enables
     running PyTorch models on Mobile [11], with native runtimes for Android and iOS
     (analogous to TFLite interpreter). PyTorch also offers post-training quantization
@@ -135,6 +164,8 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 设备端用例：PyTorch 还具有一个轻量级解释器，使得可以在移动设备上运行 PyTorch 模型 [11]，为 Android 和 iOS 提供了原生运行时（类似于
+    TFLite 解释器）。PyTorch 还提供了训练后量化 [12] 和其他图优化步骤，如常量折叠、融合某些操作、将通道置于最后（NHWC）格式以优化卷积层。
 - en: 'General Model Optimization: PyTorch also offers the Just-in-Time (JIT) compilation
     facility [13]  for generating a serializable intermediate representation of the
     model from the code in TorchScript [14], which is a subset of Python and adds
@@ -145,24 +176,31 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 通用模型优化：PyTorch 还提供了 Just-in-Time (JIT) 编译功能 [13]，用于从 TorchScript [14] 代码生成可序列化的中间表示形式，TorchScript
+    是 Python 的一个子集，添加了类型检查等功能。它允许在灵活的 PyTorch 代码用于研究和开发与可部署于生产环境进行推理的表示形式之间创建桥梁。这是
+    PyTorch 模型在移动设备上执行的主要方式。
 - en: The alternatives for XLA in the PyTorch world seem to be the Glow [15] and TensorComprehension
     [16] compilers. They help in generating the lower-level intermediate representation
     (IR) that is derived from the higher-level IR like TorchScript.
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch 世界中 XLA 的替代方案似乎是 Glow [15] 和 TensorComprehension [16] 编译器。它们有助于生成从高层次
+    IR（如 TorchScript）派生的低层次中间表示 (IR)。
 - en: 'PyTorch also offers a model tuning guide [17] which details various options
     that ML practitioners have at their disposal. Some of the core ideas in there
     are:'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch 还提供了一个模型调优指南 [17]，详细说明了 ML 从业者可用的各种选项。其中的一些核心思想包括：
 - en: Fusion of pointwise operations (add, subtract, multiply, divide, etc.) using
     PyTorch JIT.
   id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 PyTorch JIT 进行点对点操作（加法、减法、乘法、除法等）的融合。
 - en: Enabling buffer checkpointing allows keeping the outputs of only certain layers
     in memory and computing the rest during the backward pass. This specifically helps
     with cheap to compute layers with large outputs like activations.
@@ -170,22 +208,26 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 启用缓冲区检查点功能可以只将某些层的输出保存在内存中，并在反向传播时计算其余部分。这特别有助于处理计算便宜但输出较大的层，例如激活层。
 - en: Enabling device-specific optimizations, such as the cuDNN library and Mixed
     Precision Training with NVIDIA GPUs (explained in the GPU subsection).
   id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 启用设备特定优化，如 cuDNN 库和 NVIDIA GPU 的混合精度训练（在 GPU 子节中解释）。
 - en: Train with Distributed Data Parallel Training, which is suitable when there
     is a large amount of data, and multiple GPUs are available for training.
   id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用分布式数据并行训练，当数据量大且有多个 GPU 可用时，这种方法适用。
 - en: '**Hardware-Optimized Libraries:**'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**硬件优化库：**'
 - en: We can further extract efficiency by optimizing our software stack for the hardware
     the neural networks run on. As an example, ARM’s Cortex-family of processors support
     SIMD (Single-Instruction Multiple Data) instructions which allow vectorization
@@ -199,10 +241,15 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以通过针对神经网络运行的硬件优化软件堆栈进一步提升效率。例如，ARM 的 Cortex 系列处理器支持 SIMD（单指令多数据）指令，允许使用
+    Neon 指令集对操作进行向量化（处理数据批次）。QNNPACK [18] 和 XNNPACK [19] 库针对移动和嵌入式设备的 ARM Neon 进行优化，对于
+    x86 SSE2、AVX 架构等也进行了优化。前者用于 PyTorch 的量化推理模式，后者支持 TFLite 的 32 位浮点模型和 16 位浮点模型。类似地，还有其他低级库，如
+    iOS 的 Accelerate [20] 和 Android 的 NNAPI [21]，它们尝试将硬件级加速决策从更高级的 ML 框架中抽象出来。
 - en: '**Hardware **'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**硬件**'
 - en: 'GPU: Graphics Processing Units (GPUs), while originally designed for accelerating
     computer graphics, began to be used for general-purpose use cases with the availability
     of the CUDA library [22] in 2007\. AlexNet’s [23] winning the ImageNet competition
@@ -214,15 +261,20 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: GPU：图形处理单元（GPUs），最初设计用于加速计算机图形，但自 2007 年 CUDA 库 [22] 发布后，开始用于通用用途。AlexNet [23]
+    在 2012 年赢得 ImageNet 比赛，标准化了 GPU 在深度学习模型中的使用。自那时起，Nvidia 发布了几代 GPU 微架构，越来越注重深度学习性能。它还引入了
+    Tensor Cores [24]，这些是专用执行单元，支持多种精度（fp32、TensorFloat32、fp16、bfloat16、int8、int4）的训练和推理。
 - en: '![](../Images/565b5a29e37b45b895dd6b165cd28f3c.png)'
   id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/565b5a29e37b45b895dd6b165cd28f3c.png)'
 - en: '*Reduced Precision Multiply-and-Accumulate (MAC) operation: B x C is an expensive
     operation, and hence it is done with reduced precision.*'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*降低精度的乘加（MAC）操作：B x C 是一个昂贵的操作，因此使用降低精度来完成。*'
 - en: Tensor Cores optimize the standard Multiply-and-Accumulate (MAC) operation,
     A = (B × C) + D. Where, B and C are in a reduced precision (fp16, bfloat16, TensorFloat32),
     while A and D are in fp32\. NVIDIA reports between 1× to 15× training speedup
@@ -237,15 +289,20 @@
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 张量核心优化了标准的乘法和累加（MAC）操作，A = (B × C) + D。其中，B和C采用减少精度（fp16、bfloat16、TensorFloat32），而A和D采用fp32。NVIDIA报告说，这种减少精度的MAC操作在训练速度上可以提高1×到15×，具体取决于模型架构和选择的GPU
+    [25]。NVidia最新的Ampere架构GPU中的张量核心也支持稀疏性下的更快推理（特别是2:4的结构稀疏性，即在一个4元素块中有2个元素是稀疏的）。它们在推理时间上能提高多达1.5×的速度，在单层上能提高多达1.8×的速度。除此之外，NVidia还提供了cuDNN库
+    [29]，其中包含了标准神经网络操作的优化版本，如全连接、卷积、批量归一化、激活等。
 - en: '![](../Images/e9cc7b74251b383ecca7ae12475ef576.png)'
   id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e9cc7b74251b383ecca7ae12475ef576.png)'
 - en: '*Data types used during training and inference on GPUs and TPUs. bfloat16 originated
     with TPUs, and Tensor Float 32 is supported on NVidia GPUs only.*'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*用于GPU和TPU训练和推理的数据类型。bfloat16起源于TPU，而Tensor Float 32仅在NVidia GPU上支持。*'
 - en: 'TPU: TPUs are proprietary application-specific integrated circuits (ASICs)
     that Google designed to accelerate deep learning applications with Tensorflow
     and finely tuned for parallelizing and accelerating linear algebra operations.
@@ -259,6 +316,8 @@
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 'TPU: TPU是谷歌设计的专有应用特定集成电路（ASIC），用于加速深度学习应用，并且针对并行化和加速线性代数运算进行了精细调优。TPU架构支持使用TPU进行训练和推理，并通过谷歌云服务向公众提供。TPU芯片的核心架构利用了脉动阵列设计
+    [26]，在这种设计中，大规模计算被分割到类似网格的拓扑中，每个单元计算一个部分结果，并在每个时钟周期（以类似于脉动心跳的节奏）将结果传递给下一个单元，而无需将中间结果存储在内存中。'
 - en: Each TPU chip has two Tensor Cores (not to be confused with NVidia’s Tensor
     Cores), each of which has a mesh of systolic arrays. There are 4 inter-connected
     TPU chips on a single TPU board. To further scale training and inference, a larger
@@ -273,24 +332,31 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个TPU芯片有两个张量核心（不要与NVidia的张量核心混淆），每个核心都有一个脉动阵列网格。一个TPU板上有4个互联的TPU芯片。为了进一步扩展训练和推理，可以将更多的TPU板以网状拓扑结构连接起来，形成一个“pod”。根据公开发布的数据，每个TPU芯片（v3）可以达到420
+    teraflops，而一个TPU pod可以达到100+ petaflops [27]。TPU在谷歌内部用于训练谷歌搜索模型、通用的BERT模型、如DeepMind的世界领先AlphaGo和AlphaZero模型等应用，以及许多其他研究应用
+    [28]。与GPU类似，TPU支持bfloat16数据类型，这是一种减少精度的替代方案，用于全浮点32位精度训练。XLA支持允许在不改变模型的情况下透明地切换到bfloat16。
 - en: '![](../Images/dd046fd4d4c0c60ff9e84a57d199abf3.png)'
   id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dd046fd4d4c0c60ff9e84a57d199abf3.png)'
 - en: '*An illustration of a basic systolic array cell, and doing a 4x4 matrix multiplication
     using a mesh of systolic array cells.*'
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*基本脉动阵列单元的示意图，以及使用脉动阵列单元网格进行4x4矩阵乘法的演示。*'
 - en: '![](../Images/e07609aef4d23226d614e16bb983f126.png)'
   id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e07609aef4d23226d614e16bb983f126.png)'
 - en: '*Approximate size of the EdgeTPU, Coral, and the Dev Board. **(Courtesy: Bhuwan
     Chopra)*'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '*EdgeTPU、Coral 和开发板的近似大小。**（提供者：Bhuwan Chopra）*'
 - en: 'EdgeTPU: EdgeTPU is also a custom ASIC chip designed by Google. Similar to
     the TPU, it is specialized for accelerating linear algebra operations, but only
     for inference and with a much lower compute budget on edge devices. It is further
@@ -302,14 +368,19 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 'EdgeTPU: EdgeTPU 也是 Google 设计的定制 ASIC 芯片。类似于 TPU，它专门用于加速线性代数操作，但仅限于推理，并且在边缘设备上具有更低的计算预算。它还仅限于部分操作，并且仅与
+    int8 量化的 TensorFlow Lite 模型兼容。EdgeTPU 芯片本身比美国便士还小，使其适合部署在多种 IoT 设备中。它已被部署在类似 Raspberry-Pi
+    的开发板上，在 Pixel 4 智能手机中作为 Pixel Neural Core，也可以独立焊接到 PCB 上。'
 - en: '![](../Images/9a43025da1ed0691405d0901df757dec.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9a43025da1ed0691405d0901df757dec.png)'
 - en: '*Jetson Nano module. ([Source](https://www.nvidia.com/en-us/autonomous-machines/jetson-store/))*'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Jetson Nano 模块。([来源](https://www.nvidia.com/en-us/autonomous-machines/jetson-store/))*'
 - en: 'Jetson: Jetson is a family of accelerators by Nvidia to enable deep learning
     applications for embedded and IoT devices. It comprises the Nano, which is a low-powered
     "system on a module" (SoM) designed for lightweight deployments, as well as the
@@ -319,11 +390,14 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Jetson: Jetson 是 Nvidia 提供的一系列加速器，用于支持嵌入式和物联网设备中的深度学习应用。它包括 Nano，这是一个低功耗的“系统模块”（SoM），适用于轻量级部署，还有更强大的
+    Xavier 和 TX 变体，它们基于 Nvidia Volta 和 Pascal GPU 架构。Nano 适合家庭自动化等应用，其余则适用于如工业机器人等计算密集型应用。'
 - en: Summary
   id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: In this series, we started by demonstrating the rapid growth of models in the
     Deep Learning space and motivating the need for efficiency and performance as
     we continue to scale them up. We followed that up by laying a mental model for
@@ -338,11 +412,13 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本系列中，我们首先展示了深度学习领域模型的快速增长，并激发了在扩展模型时对效率和性能的需求。接着，我们为读者提供了一个心理模型，以理解他们可以使用的广泛工具和技术。然后，我们深入到每个重点领域，提供了详细的示例，并进一步阐明了迄今为止在行业和学术界所做的工作。我们希望这系列博客文章能提供具体且可操作的建议，以及优化模型训练和部署时需要考虑的权衡。我们邀请读者进一步阅读我们的[模型优化和效率的详细调查论文](https://arxiv.org/abs/2106.08962)以获取更多见解。
 - en: References
   id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Martín Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey
     Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al.
     2016\. Tensorflow: A system for large-scale machine learning. In 12th {USENIX}
@@ -350,45 +426,59 @@
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Martín Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey
+    Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard 等。2016\.
+    Tensorflow: 大规模机器学习系统。在第12届 {USENIX} 操作系统设计与实现会议 ({OSDI} 16)。265–283。'
 - en: '[2] Tensorflow Authors. 2021\. TensorFlow Lite | ML for Mobile and Edge Devices.
     https://www.tensorflow.org/lite [Online; accessed 3\. Jun. 2021].'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] Tensorflow 作者。2021\. TensorFlow Lite | 移动和边缘设备的 ML。https://www.tensorflow.org/lite
+    [在线; 访问日期 2021\. 6月3日]。'
 - en: '[3] XNNPACK Authors. 2021\. XNNPACK backend for TensorFlow Lite. https://github.com/tensorflow/tensorflow/blob/
     master/tensorflow/lite/delegates/xnnpack/README.md/#sparse-inference.'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] XNNPACK 作者。2021\. XNNPACK 后端用于 TensorFlow Lite。https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/xnnpack/README.md/#sparse-inference。'
 - en: '[4] Pete Warden and Daniel Situnayake. 2019\. Tinyml: Machine learning with
     tensorflow lite on arduino and ultra-low-power microcontrollers. " O’Reilly Media,
     Inc.".'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] Pete Warden 和 Daniel Situnayake。2019\. Tinyml: 在 Arduino 和超低功耗微控制器上使用 TensorFlow
+    Lite 进行机器学习。“O’Reilly Media, Inc.”。'
 - en: '[5] Tensorflow JS: [https://www.tensorflow.org/js](https://www.tensorflow.org/js)'
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5] Tensorflow JS: [https://www.tensorflow.org/js](https://www.tensorflow.org/js)'
 - en: '[6] WebGL: [https://en.wikipedia.org/wiki/WebGL](https://en.wikipedia.org/wiki/WebGL)'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[6] WebGL: [https://en.wikipedia.org/wiki/WebGL](https://en.wikipedia.org/wiki/WebGL)'
 - en: '[7] TensorFlow. 2019\. TensorFlow Model Optimization Toolkit — Post-Training
     Integer Quantization. Medium (Nov 2019). [https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba)'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[7] TensorFlow. 2019\. TensorFlow 模型优化工具包 — 后训练整数量化。Medium（2019年11月）。[https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba)'
 - en: '[8] Tensorflow Authors. 2021\. XLA: Optimizing Compiler for Machine Learning
     | TensorFlow. https://www.tensorflow. org/xla.'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '[8] Tensorflow 作者. 2021\. XLA：机器学习优化编译器 | TensorFlow。https://www.tensorflow.org/xla'
 - en: '[9] Pankaj Kanwar, Peter Brandt, and Zongwei Zhou. 2021\. TensorFlow 2 MLPerf
     submissions demonstrate best-in-class performance on Google Cloud. https://blog.tensorflow.org/2020/07/tensorflow-2-mlperf-submissions.html.'
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[9] Pankaj Kanwar, Peter Brandt 和 Zongwei Zhou. 2021\. TensorFlow 2 MLPerf
+    提交展示了 Google Cloud 上的最佳性能。https://blog.tensorflow.org/2020/07/tensorflow-2-mlperf-submissions.html'
 - en: '[10] Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
     Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et al. 2019\.
     Pytorch: An imperative style, high-performance deep learning library. arXiv preprint
@@ -396,25 +486,32 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '[10] Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+    Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga 等. 2019\.
+    Pytorch：一种命令式风格的高性能深度学习库。arXiv 预印本 arXiv:1912.01703 (2019).'
 - en: '[11] PyTorch Authors. 2021\. PyTorch Mobile. https://pytorch.org/mobile/home.'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[11] PyTorch 作者. 2021\. PyTorch Mobile。https://pytorch.org/mobile/home'
 - en: '[12] PyTorch Authors. 2021\. Quantization Recipe — PyTorch Tutorials 1.8.1+cu102
     documentation. https://pytorch.org/ tutorials/recipes/quantization.html.'
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[12] PyTorch 作者. 2021\. 量化配方 — PyTorch Tutorials 1.8.1+cu102 文档。https://pytorch.org/tutorials/recipes/quantization.html'
 - en: '[13]  PyTorch Authors. 2021\. torch.jit.script — PyTorch 1.8.1 documentation.
     https://pytorch.org/docs/stable/generated/ torch.jit.script.html'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '[13] PyTorch 作者. 2021\. torch.jit.script — PyTorch 1.8.1 文档。https://pytorch.org/docs/stable/generated/torch.jit.script.html'
 - en: '[14]  PyTorch Authors. 2021\. torch.jit.script — PyTorch 1.8.1 documentation.
     https://pytorch.org/docs/stable/generated/ torch.jit.script.html'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[14] PyTorch 作者. 2021\. torch.jit.script — PyTorch 1.8.1 文档。https://pytorch.org/docs/stable/generated/torch.jit.script.html'
 - en: '[15] Nadav Rotem, Jordan Fix, Saleem Abdulrasool, Garret Catron, Summer Deng,
     Roman Dzhabarov, Nick Gibson, James Hegeman, Meghan Lele, Roman Levenstein, et
     al. 2018\. Glow: Graph lowering compiler techniques for neural networks. arXiv
@@ -422,6 +519,9 @@
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[15] Nadav Rotem, Jordan Fix, Saleem Abdulrasool, Garret Catron, Summer Deng,
+    Roman Dzhabarov, Nick Gibson, James Hegeman, Meghan Lele, Roman Levenstein 等.
+    2018\. Glow：用于神经网络的图形降级编译技术。arXiv 预印本 arXiv:1805.00907 (2018).'
 - en: '[16] Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal,
     Zachary DeVito, William S Moses, Sven Verdoolaege, Andrew Adams, and Albert Cohen.
     2018\. Tensor comprehensions: Framework-agnostic highperformance machine learning
@@ -429,141 +529,177 @@
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '[16] Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal,
+    Zachary DeVito, William S Moses, Sven Verdoolaege, Andrew Adams 和 Albert Cohen.
+    2018\. Tensor comprehensions：框架无关的高性能机器学习抽象。arXiv 预印本 arXiv:1802.04730 (2018).'
 - en: '[17] PyTorch Authors. 2021\. Performance Tuning Guide — PyTorch Tutorials 1.8.1+cu102
     documentation. https: //pytorch.org/tutorials/recipes/recipes/tuning_guide.html'
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[17] PyTorch 作者. 2021\. 性能调优指南 — PyTorch Tutorials 1.8.1+cu102 文档。https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html'
 - en: '[18] Marat Dukhan, Yiming Wu Wu, and Hao Lu. 2020\. QNNPACK: Open source library
     for optimized mobile deep learning - Facebook Engineering. https://engineering.fb.com/2018/10/29/ml-applications/qnnpack'
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[18] Marat Dukhan, Yiming Wu Wu 和 Hao Lu. 2020\. QNNPACK：优化的移动深度学习开源库 - Facebook
+    工程。https://engineering.fb.com/2018/10/29/ml-applications/qnnpack'
 - en: '[19] XNNPACK Authors. 2021\. XNNPACK. https://github.com/google/XNNPACK'
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[19] XNNPACK 作者. 2021\. XNNPACK。https://github.com/google/XNNPACK'
 - en: '[20] Apple Authors. 2021\. Accelerate | Apple Developer Documentation. https://developer.apple.com/documentation/
     accelerate'
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[20] Apple 作者. 2021\. Accelerate | Apple 开发者文档。https://developer.apple.com/documentation/accelerate'
 - en: '[21] Android Developers. 2021\. Neural Networks API | Android NDK | Android
     Developers. https://developer.android. com/ndk/guides/neuralnetworks.'
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[21] Android 开发者. 2021\. 神经网络 API | Android NDK | Android 开发者。https://developer.android.com/ndk/guides/neuralnetworks'
 - en: '[22] Contributors to Wikimedia projects. 2021\. CUDA - Wikipedia. https://en.wikipedia.org/w/index.php?title=CUDA&
     oldid=1025500257.'
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '[22] 维基媒体项目贡献者. 2021\. CUDA - 维基百科。 https://en.wikipedia.org/w/index.php?title=CUDA&oldid=1025500257.'
 - en: '[23] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. 2012\. Imagenet
     classification with deep convolutional neural networks. Advances in neural information
     processing systems 25 (2012), 1097–1105.'
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '[23] Alex Krizhevsky, Ilya Sutskever, 和 Geoffrey E Hinton. 2012\. 使用深度卷积神经网络进行Imagenet分类。神经信息处理系统进展
+    25 (2012), 1097–1105.'
 - en: '[24] NVIDIA. 2020\. Inside Volta: The World’s Most Advanced Data Center GPU
     | NVIDIA Developer Blog. https: //developer.nvidia.com/blog/inside-volta.'
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '[24] NVIDIA. 2020\. 深入Volta：全球最先进的数据中心GPU | NVIDIA开发者博客。 https://developer.nvidia.com/blog/inside-volta.'
 - en: '[25] Dusan Stosic. 2020\. Training Neural Networks with Tensor Cores - Dusan
     Stosic, NVIDIA. https://www.youtube. com/watch?v=jF4-_ZK_tyc'
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[25] Dusan Stosic. 2020\. 使用Tensor Cores训练神经网络 - Dusan Stosic, NVIDIA。 https://www.youtube.com/watch?v=jF4-_ZK_tyc'
 - en: '[26] HT Kung and CE Leiserson. 1980\. Introduction to VLSI systems. Mead, C.
     A_, and Conway, L.,(Eds), Addison-Wesley, Reading, MA (1980), 271–292.'
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[26] HT Kung 和 CE Leiserson. 1980\. 《VLSI系统简介》。Mead, C. A_ 和 Conway, L., (编辑),
+    Addison-Wesley, Reading, MA (1980), 271–292.'
 - en: '[27] Kaz Sato. 2021\. What makes TPUs fine-tuned for deep learning? | Google
     Cloud Blog. https://cloud.google.com/ blog/products/ai-machine-learning/what-makes-tpus-fine-tuned-for-deep-learning'
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[27] Kaz Sato. 2021\. 什么使TPU适合深度学习？| Google Cloud博客。 https://cloud.google.com/blog/products/ai-machine-learning/what-makes-tpus-fine-tuned-for-deep-learning'
 - en: '**Related:**'
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Use NVIDIA GPU Accelerated Libraries](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)'
   id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用NVIDIA GPU加速库](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)'
 - en: '[Getting Started with Distributed Machine Learning with PyTorch and Ray](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
   id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyTorch和Ray进行分布式机器学习入门](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
 - en: '[The Best Machine Learning Frameworks & Extensions for TensorFlow](https://www.kdnuggets.com/2021/04/best-machine-learning-frameworks-extensions-tensorflow.html)'
   id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[适用于TensorFlow的最佳机器学习框架及扩展](https://www.kdnuggets.com/2021/04/best-machine-learning-frameworks-extensions-tensorflow.html)'
 - en: '* * *'
   id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT'
 - en: '* * *'
   id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
   id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7种ChatGPT让你编程更高效的方式](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
 - en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
   id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[oBERT：复合稀疏化为NLP带来更快更准确的模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
   id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从零开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
   id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参与竞赛将机器学习学习速度提高4倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
   id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为何我们始终需要人类来训练AI — 有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
   id: totrans-92
   prefs:
