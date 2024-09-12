@@ -1,90 +1,124 @@
 - en: 'Beyond Pipelines: Graphs as Scikit-Learn Metaestimators'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 超越管道：图作为 Scikit-Learn 元估算器
 - en: 原文：[https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)
 - en: Scikit-learn provides us with a flexible framework for defining machine learning
     (ML) tasks, but its support for composing those tasks into a larger workflow are
     often too limited for the messy world of production. `[skdag](https://github.com/scikit-learn-contrib/skdag)` offers
     a more powerful task composition approach which allows you to get much more out
     of your machine learning tools.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-learn 为定义机器学习（ML）任务提供了一个灵活的框架，但其将这些任务组合成更大工作流的支持通常对生产环境中的复杂世界来说过于有限。`[skdag](https://github.com/scikit-learn-contrib/skdag)`
+    提供了一种更强大的任务组合方法，可以使你从机器学习工具中获得更多收益。
 - en: 'The Scikit-Learn approach to machine learning is popular for a reason. It provides
     ML practitioners with a [common language](https://scikit-learn.org/stable/developers/develop.html) to
     describe and implement many tasks. Let’s briefly go over some key parts of that
     language:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-Learn 的机器学习方法因其原因而受到欢迎。它为 ML 从业者提供了一个[通用语言](https://scikit-learn.org/stable/developers/develop.html)来描述和实现许多任务。让我们简要介绍一下该语言的一些关键部分：
 - en: '**Estimator** — an estimator is an object that takes in data and learns something
     from it in its `fit()`method.'
+  id: totrans-4
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**估算器** — 估算器是一个对象，它接收数据并在其`fit()`方法中从中学习某些东西。'
 - en: '**Transformer** — a type of estimator that filters or modifies its input data
     in some way via its `transform()` method.'
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**变换器** — 一种通过其`transform()`方法以某种方式过滤或修改输入数据的估算器。'
 - en: '**Predictor** — a type of estimator that derives some kind of inference from
     the input data, via the `predict()` method.'
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**预测器** — 一种通过`predict()`方法从输入数据中推导某种推断的估算器。'
 - en: '**Metaestimator** — an estimator which takes one or more estimators as input
     parameters and does something with them. Metaestimators can be used for a range
     of tasks including hyperparameter optimisation (e.g. `[GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)`),
     model ensembling (e.g. `[StackingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html)`)
     or workflow composition (`[Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)`).'
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**元估算器** — 一种接收一个或多个估算器作为输入参数并对其进行处理的估算器。元估算器可用于一系列任务，包括超参数优化（例如`[GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)`）、模型集成（例如`[StackingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html)`）或工作流组成（`[Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)`）。'
 - en: 'The metaestimators for workflow composition focus on simplicity: simplicity
     of both the composition interface and of the composition itself. Here’s a quick
     example that creates a small pipeline:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作流组成的元估算器关注于简单性：包括组成接口和组成本身的简单性。这里有一个创建小型管道的快速示例：
 - en: 'The clear interface makes it easy to see what’s going on here. We start off
     by filling in any missing values in our input data with the feature mean, we then
     perform some SVD dimensionality reduction before training a random forest regressor
     to make some predictions. The beauty of the `Pipeline` metaestimator is that it
     can be treated as an estimator itself which just runs all of the relevant methods,
     quietly chaining together the inputs and outputs of each step:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 清晰的接口使得观察这些操作变得容易。我们开始通过用特征均值填补输入数据中的任何缺失值，然后在训练随机森林回归器以进行一些预测之前执行一些 SVD 降维。`Pipeline`
+    元估算器的美妙之处在于，它可以被视为一个估算器，它只是运行所有相关方法，悄然将每一步的输入和输出链接在一起：
 - en: 'Real-life problems are rarely solved with a model this simple though. Let’s
     take a deeper look at features in the [*diabetes* dataset](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset),
     which are used to predict a measure of disease progression after one year:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 现实问题很少能通过如此简单的模型解决。让我们深入探讨一下用于预测疾病进展测量的[*糖尿病* 数据集](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset)中的特征：
 - en: …age, sex, body mass index, average blood pressure, and six blood serum measurements
+  id: totrans-11
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: …年龄、性别、体重指数、平均血压和六项血清测量值
 - en: 'These features are quite varied. Does it really make sense to perform the exact
     same pre-processing on all of them? Probably not. Here’s how we can process some
     features differently using only what `sklearn` gives us:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些特性非常多样。对所有特性进行完全相同的预处理真的有意义吗？可能没有。以下是我们如何仅使用`sklearn`提供的功能来对某些特性进行不同处理：
 - en: To treat each feature differently we need to bring in a new estimator, `ColumnTransformer`,
     and start nesting things to get the desired behaviour of different imputation
     strategies, along with some SVD but only on the blood serum tests. Our code is
     rapidly becoming less readable and less manageable.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了对每个特征进行不同的处理，我们需要引入一个新的估算器，`ColumnTransformer`，并开始嵌套以获得不同插补策略的期望行为，同时对血清测试应用一些SVD。我们的代码正变得越来越不易读和管理。
 - en: Replacing Pipelines with Graphs
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用图替换管道
 - en: Even this relatively small example shows that pipelines sacrifice too much flexibility
     in the name of simplicity. What we need is an approach that keeps our code simple
     but doesn’t force our workflows to be simple. Such an approach exists: [*directed
     acyclic graphs*](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAGs).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使是这个相对较小的示例也表明，管道在追求简洁的过程中牺牲了太多的灵活性。我们需要的是一种方法，它保持代码简单，但不强迫我们的工作流也简单。这种方法存在：[*有向无环图*](https://en.wikipedia.org/wiki/Directed_acyclic_graph)（DAGs）。
 - en: 'Many production frameworks used by industry define ML workflows as DAGs for
     just these reasons, but they lack the tight integration with the scikit-learn
     API that can make pipelines so easy to use and also come with a lot of extra overhead,
@@ -95,8 +129,11 @@
     in (`pip install skdag`). *skdag* is a small extension for scikit-learn that implements
     DAG metaestimators. This allows it to go beyond pipelines and column transformers
     in several ways. Let’s demonstrate by recreating our previous workflow in *skdag*:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多工业界使用的生产框架正是出于这些原因将ML工作流定义为DAG，但它们缺乏与scikit-learn API的紧密集成，这使得管道使用起来非常方便，并且还附带了许多额外的开销，例如延迟依赖和分布式处理。这些功能对于scikit-learn擅长的许多用例是不需要的，例如小规模实验和定义模型架构（这些模型可以在上述框架中运行）。这就是*skdag*的用武之地（`pip
+    install skdag`）。*skdag*是一个针对scikit-learn的小扩展，实现了DAG元估算器。这使得它能够在多个方面超越管道和列转换器。让我们通过在*skdag*中重建之前的工作流来演示：
 - en: 'With the DAG approach, no matter how complex our workflow is the code will
     always be a simple list of steps, each one defining what its dependencies are.
     Dependencies can simply be a list of step names, or if we only wish to take certain
@@ -104,26 +141,36 @@
     columns. Another benefit of using *skdag* is that it allows you to easily visualise
     the workflow with `dag.show()` which can be very useful for verifying complex
     workflows do what we expect:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用DAG方法，无论我们的工作流多么复杂，代码始终会是一个简单的步骤列表，每个步骤都定义了它的依赖关系。依赖关系可以简单地是步骤名称的列表，或者如果我们只希望从一个步骤的输出中取某些列，我们可以提供一个步骤名称到列的字典。使用*skdag*的另一个好处是它允许你通过`dag.show()`轻松可视化工作流，这对于验证复杂工作流是否符合预期非常有用：
 - en: '![Graphs as Scikit-Learn Metaestimators](../Images/a2ea0a33e0d3de6f9aac042020dc307e.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![作为Scikit-Learn元估算器的图](../Images/a2ea0a33e0d3de6f9aac042020dc307e.png)'
 - en: '**skdag**-generated workflow visualisation.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**skdag**生成的工作流可视化。'
 - en: Another benefit of using DAGs is the ability to understand dependencies better.
     In the above DAG, we can see that `mean`, `ohe`, `ref` and `median` don’t depend
     on one another so in theory there is no reason we couldn’t perform them all at
     the same time. One small change in our DAG creation allows us to do this in practice.
     Replacing `make_dag()` with `make_dag(n_jobs=-1)` will tell the DAG to run steps
     in parallel wherever possible.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用DAG的另一个好处是更好地理解依赖关系。在上面的DAG中，我们可以看到`mean`、`ohe`、`ref`和`median`彼此之间没有依赖关系，因此理论上没有理由不能同时执行它们。对DAG创建进行一次小改动使我们能够在实践中做到这一点。将`make_dag()`替换为`make_dag(n_jobs=-1)`将告诉DAG在可能的情况下并行运行步骤。
 - en: Model Stacking
+  id: totrans-21
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 模型堆叠
 - en: Let’s say we want to make our workflow even more complex. Instead of using a
     single random forest regressor to make our predictions, let’s use a diverse variety
     of models and then [stack](https://towardsdatascience.com/simple-model-stacking-explained-and-automated-1b54e4357916) them
@@ -131,89 +178,135 @@
     from multiple models, and use them as inputs to a final meta-learner which is
     usually a very simple model that simply combines the results together, deciding
     how much weight to apply to each model.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想让我们的工作流程变得更加复杂。我们不使用单一的随机森林回归器进行预测，而是使用各种不同的模型，然后将它们[堆叠](https://towardsdatascience.com/simple-model-stacking-explained-and-automated-1b54e4357916)在一起，生成最终的预测。模型堆叠是将多个模型的预测结果作为输入，传递给一个最终的元学习器，这通常是一个非常简单的模型，负责将结果结合在一起，决定每个模型的权重。
 - en: 'Implementing stacking for our example in scikit-learn requires yet another
     metaestimator: the `[StackingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingRegressor.html)`.
     A DAG however can handle this pattern natively, so we simply need to include our
     stacking logic in the graph definition:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 scikit-learn 中实现堆叠需要另一个元估计器：`[StackingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingRegressor.html)`。然而，DAG
+    可以原生处理这种模式，所以我们只需在图定义中包含我们的堆叠逻辑：
 - en: '![Graphs as Scikit-Learn Metaestimators](../Images/45ceeba4bffda243f7bdf80c6136b5aa.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![Graphs as Scikit-Learn Metaestimators](../Images/45ceeba4bffda243f7bdf80c6136b5aa.png)'
 - en: DAG for the stacked model. Note that unlike pipelines, **skdag** does not have
     any restriction on predictors appearing mid-workflow.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠模型的 DAG。注意，与管道不同，**skdag** 对预测变量在工作流程中出现没有任何限制。
 - en: By adding a couple of simple, readable steps we have constructed a DAG that
     would be complex and difficult to maintain using only scikit-learn’s linear components.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过添加几个简单且易读的步骤，我们构建了一个 DAG，而仅使用 scikit-learn 的线性组件则会变得复杂且难以维护。
 - en: Hopefully this small demo shows you the benefits of using DAGs instead of pipelines
     to create manageable, maintainable machine learning workflows — and that *skdag* will
     become another useful member of your toolkit!
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望这个小演示能向你展示使用 DAG 而非管道创建可管理、可维护的机器学习工作流的好处——并且*skdag* 将成为你工具包中的另一个有用成员！
 - en: '[Original](https://medium.com/@big-o/graphs-as-scikit-learn-metaestimators-d05b3300c102).
     Reposted with permission.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/@big-o/graphs-as-scikit-learn-metaestimators-d05b3300c102)。经许可转载。'
 - en: '**[Big O](https://medium.com/@big-o)** is a machine learning engineer and author
     of skdag. Big O works in the tech industry implementing machine learning solutions,
     specialising in human-machine interactions and recommender systems.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Big O](https://medium.com/@big-o)** 是一名机器学习工程师和 skdag 的作者。Big O 在技术行业实施机器学习解决方案，专注于人机交互和推荐系统。'
 - en: '* * *'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Graphs: The natural way to understand data](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图形：理解数据的自然方式](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)'
 - en: '[SQL for Data Visualization: How to Prepare Data for Charts and Graphs](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 数据可视化：如何为图表和图形准备数据](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
 - en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
 - en: '[Simple NLP Pipelines with HuggingFace Transformers](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用HuggingFace Transformers构建简单的NLP管道](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
 - en: '[Unify Batch and ML Systems with Feature/Training/Inference Pipelines](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过特征/训练/推理管道统一批处理和机器学习系统](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
 - en: '[Building Data Science Pipelines Using Pandas](https://www.kdnuggets.com/building-data-science-pipelines-using-pandas)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Pandas构建数据科学管道](https://www.kdnuggets.com/building-data-science-pipelines-using-pandas)'
