@@ -1,695 +1,1080 @@
 - en: 'SHAP: Explain Any Machine Learning Model in Python'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'SHAP: 用 Python 解释任何机器学习模型'
 - en: 原文：[https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
 - en: Motivation
+  id: totrans-2
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 动机
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Imagine you are trying to train a machine learning model to predict whether
     an ad is clicked by a particular person. After receiving some information about
     a person, the model predicts that a person will not click on an ad.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你正在训练一个机器学习模型，预测某个人是否会点击广告。在接收到有关某个人的一些信息后，模型预测该人不会点击广告。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/3b30d440cb417081f0bb238bf94a000c.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/3b30d440cb417081f0bb238bf94a000c.png)'
 - en: Image by Author
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: But why does the model predict that? How much does each feature contribute to
     the prediction? Wouldn’t it be nice if you can see a plot indicating how much
     each feature contributes to the prediction like below?
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 但为什么模型会有这样的预测？每个特征对预测的贡献有多大？如果能看到一个图示，展示每个特征对预测的贡献情况，会不会很不错呢？
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/4b1a6818bd977e96f5dc0c6b454656c1.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/4b1a6818bd977e96f5dc0c6b454656c1.png)'
 - en: Image by Author
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: That is when Shapley value comes in handy.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这时 Shapley 值就派上用场了。
 - en: What is Shapley Value?
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是 Shapley 值？
 - en: The Shapley value is a method used in game theory that involves fairly distributing
     both gains and costs to actors working in a coalition.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Shapley 值是一种游戏理论方法，涉及在联盟中公平地分配收益和成本。
 - en: Since each actor contributes differently to the coalition, the Shapley value
     makes sure that each actor **gets a fair share depending on how much they contribute**.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于每个参与者对联盟的贡献不同，Shapley 值确保每个参与者**根据他们的贡献获得公平的份额**。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/3e9bf83ef146048b60cbf1886bafde1e.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/3e9bf83ef146048b60cbf1886bafde1e.png)'
 - en: Image by Author
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: A Simple Example
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个简单的例子
 - en: Shapley value is used for a wide range of problems that question the contribution
     of each worker/feature in a group. To understand how Shapley value works, let’s
     imagine that your company has just done A/B testing, where they test different
     combinations of advertisement strategies.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: Shapley 值用于解决各种问题，涉及对每个工作者/特征在一个小组中的贡献进行质疑。为了理解 Shapley 值如何工作，假设你的公司刚刚进行了 A/B
+    测试，测试了不同的广告策略组合。
 - en: 'The revenues for each strategy in a specific month are:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 每种策略在特定月份的收入如下：
 - en: 'no ad: $150'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 无广告：$150
 - en: 'social media: $300'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 社交媒体：$300
 - en: 'Google advertisement: $200'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 谷歌广告：$200
 - en: 'email marketing: $350'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 邮件营销：$350
 - en: social media and Google advertisement $320
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 社交媒体和谷歌广告 $320
 - en: 'social media and email marketing: $400'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 社交媒体和邮件营销：$400
 - en: 'Google advertisement and email marketing: $350'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 谷歌广告和邮件营销：$350
 - en: 'email marketing, Google advertisement, and social media: $450'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 邮件营销、谷歌广告和社交媒体：$450
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/449d824635515d27a596cf0b37eb620e.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/449d824635515d27a596cf0b37eb620e.png)'
 - en: Image by Author
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: The difference in revenues between using three ads and using no ad is $300. **How
     much does each ad contribute to this difference?**
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用三种广告与不使用广告之间的收入差为 $300。**每种广告对这一差异的贡献有多少？**
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/6b4b9968cef63b06a607e3a4c92eacd7.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/6b4b9968cef63b06a607e3a4c92eacd7.png)'
 - en: Image by Author
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: We can figure that out by calculating the Shapley value for each type of advertisement. [This
     article](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30) provides
     an excellent way to calculate the Shap value. I will summarize it here.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过计算每种广告类型的 Shapley 值来找出结果。[这篇文章](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30)提供了一种出色的计算
+    Shap 值的方法。我将在这里总结。
 - en: 'We start by calculating the total contribution of Google advertisements to
     the company’s revenue. The total contribution of Google advertisement could be
     calculated by the formula:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先计算 Google 广告对公司收入的总贡献。Google 广告的总贡献可以通过以下公式计算：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/cc602f3fd670a9e28005d002e8543cc8.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/cc602f3fd670a9e28005d002e8543cc8.png)'
 - en: Image by Author
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Let’s find the marginal contribution of Google advertisement and its weights.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们找出 Google 广告的边际贡献及其权重。
 - en: Find Marginal Contribution of Google Advertisement
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查找 Google 广告的边际贡献
 - en: 'First, we will find the marginal contribution of Google advertisement to the
     following groups:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将找到 Google 广告对以下组合的边际贡献：
 - en: no advertisement
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 无广告
 - en: Google advertisement + social media
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Google 广告 + 社交媒体
 - en: Google advertisement + email marketing
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Google 广告 + 邮件营销
 - en: Google advertisement + email marketing + social media
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Google 广告 + 邮件营销 + 社交媒体
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/400acda745fee657d1d12d91e0a7223d.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/400acda745fee657d1d12d91e0a7223d.png)'
 - en: Image by Author
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: 'The marginal contribution of Google advertisement to no advertisement is:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: Google 广告对无广告的边际贡献是：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/4cdc3cdd36e65e573ef6c2aa9d40cafd.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/4cdc3cdd36e65e573ef6c2aa9d40cafd.png)'
 - en: Image by Author
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: 'The marginal contribution of Google advertisement to the Google advertisement
     and social media group is:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: Google 广告对 Google 广告和社交媒体组合的边际贡献是：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/a7a5a6a05f437b8228620bf44b6cf4ce.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/a7a5a6a05f437b8228620bf44b6cf4ce.png)'
 - en: Image by Author
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: 'The marginal contribution of Google advertisement to the Google advertisement
     and email marketing group is:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: Google 广告对 Google 广告和邮件营销组合的边际贡献是：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/00d32e8e7b834e04bc0d42b778eb1208.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/00d32e8e7b834e04bc0d42b778eb1208.png)'
 - en: Image by Author
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: 'The marginal contribution of Google advertisement to the Google advertisement,
     email marketing, and social media group is:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: Google 广告对 Google 广告、邮件营销和社交媒体组合的边际贡献是：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/09edb469c85e8a6d4c8cdf7b13b096bf.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/09edb469c85e8a6d4c8cdf7b13b096bf.png)'
 - en: Image by Author
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Find Weights
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查找权重
 - en: To find the weights, we will organize the combinations of different advertisement
     strategies into multiple levels like below. Each level corresponds to the number
     of advertisement strategies in each combination.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了找到权重，我们将不同广告策略的组合组织成如下多个层级。每个层级对应每个组合中的广告策略数量。
 - en: 'Then we will assign weights based on the number of edges in each level. We
     saw that:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将根据每个层级中的边数分配权重。我们看到：
 - en: The first level contains **3 edges** so the weight of each edge will be **1/3**
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一层包含**3条边**，所以每条边的权重将是**1/3**
 - en: The second level contains** 6 edges** so the weight of each edge will be **1/6**
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二层包含**6条边**，所以每条边的权重将是**1/6**
 - en: The third level contains **3 edges **so the weight of each edge will be **1/3**
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第三层包含**3条边**，所以每条边的权重将是**1/3**
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/9c86a68002fb59152d2014f2a6979ef3.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/9c86a68002fb59152d2014f2a6979ef3.png)'
 - en: Image by Author
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Find the Total Contribution of Google Advertisement
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查找 Google 广告的总贡献
 - en: Now we are ready to find Google advertisement’s total contribution based on
     the weights and marginal contribution we found earlier!
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备好根据之前找到的权重和边际贡献来找出 Google 广告的总贡献！
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/a5a128331e8948d95ede48cda6815deb.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/a5a128331e8948d95ede48cda6815deb.png)'
 - en: Image by Author
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/c865e74919223dd7a960cd4fbd8d8d87.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 库](../Images/c865e74919223dd7a960cd4fbd8d8d87.png)'
 - en: Image by Author
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Cool! So Google advertisement contributes $36.67 to the total difference in
     revenues between using 3 advertisement strategies and using no advertisement.
     36.67 is the Shapey value for Google advertisement.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 太棒了！所以 Google 广告对使用三种广告策略和不使用广告之间的总收入差异贡献了 $36.67。36.67 是 Google 广告的 Shapley
+    值。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/4cde13a07089c1fa9093fec319eda42e.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 库](../Images/4cde13a07089c1fa9093fec319eda42e.png)'
 - en: Image by Author
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: 'Repeat the steps above for two other advertisement strategies, we can see that:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 对另外两种广告策略重复上述步骤，我们可以看到：
 - en: Email marketing contributes $151.67
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 电子邮件营销贡献了 $151.67
 - en: Social media contributes $111.67
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 社交媒体贡献了 $111.67
 - en: Google advertisement contributes $36.67
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Google 广告贡献了 $36.67
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/27526b46d60f4e9395c71581c8cceb97.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 库](../Images/27526b46d60f4e9395c71581c8cceb97.png)'
 - en: Image by Author
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Together they contribute $300 to the difference between using 3 different types
     of advertisement and using no advertisement! Pretty cool, isn’t it?
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们总共贡献了 $300，来说明使用三种不同广告类型和不使用广告之间的差异！很酷，对吧？
 - en: Now that we understand the Shapley value, let’s see how we can use it to interpret
     a machine learning model.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们了解了 Shapley 值，让我们看看如何使用它来解释机器学习模型。
 - en: SHAP — Explain Any Machine Learning Models in Python
+  id: totrans-87
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SHAP — 在 Python 中解释任何机器学习模型
 - en: '[SHAP](https://github.com/slundberg/shap) is a Python library that uses Shapley
     values to explain the output of any machine learning model.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '[SHAP](https://github.com/slundberg/shap) 是一个使用 Shapley 值来解释任何机器学习模型输出的 Python
+    库。'
 - en: 'To install SHAP, type:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 要安装 SHAP，请输入：
 - en: '[PRE0]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Train a Model
+  id: totrans-91
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 训练模型
 - en: 'To understand how SHAP works, we will experiment with an [advertising dataset](https://drive.google.com/file/d/1oMUOmXf67DxPe5CV6YJTiEm9TeozKK5H/view?usp=sharing):'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了理解 SHAP 的工作原理，我们将使用一个 [广告数据集](https://drive.google.com/file/d/1oMUOmXf67DxPe5CV6YJTiEm9TeozKK5H/view?usp=sharing)
+    进行实验：
 - en: We will build a machine learning model to predict whether a user clicked on
     an ad based on some information about that person.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将构建一个机器学习模型来预测用户是否点击了广告，基于关于该用户的一些信息。
 - en: 'We will use [Patsy](https://towardsdatascience.com/patsy-build-powerful-features-with-arbitrary-python-code-bb4bb98db67a#3be4-4bcff97738cd) to
     turn the DataFrame into an array of features and an array of target values:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 [Patsy](https://towardsdatascience.com/patsy-build-powerful-features-with-arbitrary-python-code-bb4bb98db67a#3be4-4bcff97738cd)
+    将 DataFrame 转换为特征数组和目标值数组：
 - en: 'Split the data into train and test sets:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 将数据分成训练集和测试集：
 - en: 'Next, we will use XGBoost to build a model and make predictions:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将使用 XGBoost 构建一个模型并进行预测：
 - en: 'To see how well the model performs, we will use the F1 score:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了查看模型的表现，我们将使用 F1 分数：
 - en: '[PRE1]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Pretty good!
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 非常好！
 - en: Interpret the Model
+  id: totrans-100
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 解释模型
 - en: The model did a good job of predicting whether a user clicked an ad. But how
     did it come up with such predictions? **How much did each feature contribute to
     the difference between the final prediction and the average prediction?**
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型在预测用户是否点击了广告方面表现良好。但它是如何得出这些预测的？ **每个特征对最终预测和平均预测之间的差异贡献了多少？**
 - en: Note that this problem is very similar to the problem we addressed at the beginning
     of the article.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这个问题与我们在文章开头讨论的问题非常相似。
 - en: 'That is why finding the Shapley value of each feature can help us determine
     their contribution. The steps to get the importance of the feature i, where i
     is the index of features, is similar to before:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么找出每个特征的 Shapley 值可以帮助我们确定它们的贡献。获得特征 i 重要性的步骤，与之前类似，其中 i 是特征的索引。
 - en: Get all subsets that don’t contain the feature i
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取所有不包含特征 i 的子集
 - en: Find the marginal contribution of the feature i to each of these subsets
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 找出特征 i 对每个子集的边际贡献
 - en: Aggregate all marginal contributions to compute the contributions of the feature
     i
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 聚合所有边际贡献以计算特征 i 的贡献
 - en: 'To find the Shapley values using SHAP, simply insert your trained model to `shap.Explainer` :'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用 SHAP 找到 Shapley 值，只需将训练好的模型插入到 `shap.Explainer` 中：
 - en: SHAP Waterfall Plot
+  id: totrans-108
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SHAP 瀑布图
 - en: 'Visualize the first prediction’s explanation:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化第一次预测的解释：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/bd7178c7376b4a180d961773567aceef.png)'
+  id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 库](../Images/bd7178c7376b4a180d961773567aceef.png)'
 - en: Image by Author
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: 'Aha! Now we know the contribution of each feature to the first prediction.
     Explanations for the graph above:'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 哦！现在我们知道了每个特征对第一次预测的贡献。以上图表的解释如下：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/238b3e7f3c8a917a6b2a6ba6ef6b4e0b.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 实现](../Images/238b3e7f3c8a917a6b2a6ba6ef6b4e0b.png)'
 - en: Image by Author
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: The blue bar shows how much a particular feature decreases the value of the
     prediction.
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 蓝色条形图显示了某个特征降低预测值的程度。
 - en: The red bar shows how much a particular feature increases the value of the prediction.
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 红色条形图显示了某一特征对预测值的影响程度。
 - en: Negative values imply probabilities of less than 0.5 that the person clicked
     the ad
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 负值表示点击广告的概率小于 0.5
 - en: For each of these subsets, SHAP doesn’t remove a feature then retrain the model
     but replaces that feature with the average value of that feature, then generates
     the predictions.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这些子集，SHAP 不会移除某个特征再重新训练模型，而是将该特征替换为该特征的平均值，然后生成预测。
 - en: 'We should expect the total contribution to be equal to the difference between
     the prediction and the mean prediction. Let’s check that:'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们应当期望总贡献等于预测与均值预测之间的差值。让我们来检查一下：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/643dc5338b0e7fe8c2ea0652ea9c61bb.png)'
+  id: totrans-120
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 实现](../Images/643dc5338b0e7fe8c2ea0652ea9c61bb.png)'
 - en: Image by Author
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Cool! They’re equal.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 太棒了！它们是相等的。
 - en: 'Visualize the second prediction’s explanation:'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化第二次预测的解释：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/1aa86245f98e416efa7c029b8b04611b.png)'
+  id: totrans-124
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 实现](../Images/1aa86245f98e416efa7c029b8b04611b.png)'
 - en: Image by Author
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: SHAP Summary Plot
+  id: totrans-126
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SHAP 总结图
 - en: 'Instead of looking at each individual instance, we can visualize the overall
     impact of these features across multiple instances using SHAP summary plot:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 SHAP 总结图可视化这些特征在多个实例中的整体影响，而不是查看每个个体实例。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/22ca7fd9b6cebe3fc38f23a61b9d117a.png)'
+  id: totrans-128
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 实现](../Images/22ca7fd9b6cebe3fc38f23a61b9d117a.png)'
 - en: Image by Author
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: The SHAP summary plot tells us the most important features and their range of
     effects over the dataset.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 - en: 'From the plot above, we can gain some interesting insights into the model’s
     predictions:'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上图中，我们可以获得一些关于模型预测的有趣见解：
 - en: The daily internet usage of a user has the strongest effect on whether that
     user clicked on an ad.
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用户的每日互联网使用对是否点击广告有最强的影响。
 - en: As the **daily internet usage** **increases,** a user is **less likely** to
     click on an ad**.**
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随着**每日互联网使用**的**增加，**用户**不太可能**点击广告**。
 - en: As the **daily time spent on the site increases, **a user is **less likely** to
     click on an ad**.**
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随着**每日网站使用时间的增加，**用户**不太可能**点击广告**。**
 - en: As the** area income increases, **a user is **less likely** to click on an ad**.**
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随着**区域收入的增加，**用户**不太可能**点击广告**。**
 - en: As the age **increases, **a user is **more likely** to click on an ad**.**
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随着年龄**增加，**用户**更可能**点击广告**。**
 - en: If a user is** a male**, that user is **less likely** to click on an ad**.**
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果用户**是男性**，那么该用户**不太可能**点击广告**。**
 - en: SHAP Bar Plot
+  id: totrans-138
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SHAP 条形图
 - en: We can also get a global feature importance plot using the SHAP bar plot.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以使用 SHAP 条形图获取全局特征重要性图。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/a9d0566b64a4029dcf31f0ea63934b37.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 实现](../Images/a9d0566b64a4029dcf31f0ea63934b37.png)'
 - en: Image by Author
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: SHAP Dependence Scatter Plot
+  id: totrans-142
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SHAP 依赖散点图
 - en: We can observe the effect of a single feature on all predictions made by the
     model using the SHAP dependence scatter plot.
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 SHAP 依赖散点图观察单个特征对所有模型预测的影响。
 - en: Daily Internet Usage
+  id: totrans-144
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 每日互联网使用时间
 - en: 'Scatter plot of the daily internet usage feature:'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 每日互联网使用特征的散点图：
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/fbc15be0826789197d67b3d116e2c1d1.png)'
+  id: totrans-146
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 解释任何机器学习模型的 Python 实现](../Images/fbc15be0826789197d67b3d116e2c1d1.png)'
 - en: Image by Author
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: From the plot above, we can see that as the daily internet usage increases,
     the SHAP value for the daily internet usage decreases. This confirms what we saw
     in the earlier plot.
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上图中，我们可以看到，随着每日互联网使用时间的增加，SHAP 值下降。这验证了我们在之前图中看到的情况。
 - en: We can also observe the interaction between the daily internet usage feature
     with other features in the same plot by adding `color=shap_values` .
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以通过在同一图中添加 `color=shap_values` 来观察每日互联网使用特征与其他特征之间的交互。
 - en: The scatter plot will attempt to pick out the feature column with the strongest
     interaction with daily internet usage, which is daily time spent on site.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 散点图将尝试挑选出与每日互联网使用最强交互的特征列，即每日网站使用时间。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/520b6d842131e2570085e3a9298cc8b6.png)'
+  id: totrans-151
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/520b6d842131e2570085e3a9298cc8b6.png)'
 - en: Image by Author
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Cool! From the plot above, we can see that a person who uses the internet for
     150 minutes per day and spends a small amount of time on the website per day is
     more likely to click the ad.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 酷！从上面的图表中，我们可以看到，使用互联网每天 150 分钟且每天在网站上花费时间较少的人更有可能点击广告。
 - en: 'Let’s look at the scatter plots of some other features:'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看其他特征的散点图：
 - en: Daily Time Spent on Site
+  id: totrans-155
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 每日网站使用时间
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/b57a8a8fb5e97ab2050fcd8b726c0c3f.png)'
+  id: totrans-156
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/b57a8a8fb5e97ab2050fcd8b726c0c3f.png)'
 - en: Image by Author
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Area Income
+  id: totrans-158
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 区域收入
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/7b03af5d34caf7a20f509044dd2c22ee.png)'
+  id: totrans-159
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/7b03af5d34caf7a20f509044dd2c22ee.png)'
 - en: Image by Author
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Age
+  id: totrans-161
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 年龄
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/e15a46c55b39439f040ff894113590c0.png)'
+  id: totrans-162
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/e15a46c55b39439f040ff894113590c0.png)'
 - en: Image by Author
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Gender
+  id: totrans-164
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 性别
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/332c51197f0fe98e3c9c3224de04cb12.png)'
+  id: totrans-165
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/332c51197f0fe98e3c9c3224de04cb12.png)'
 - en: Image by Author
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: SHAP Interaction Plot
+  id: totrans-167
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SHAP 交互图
 - en: You can also observe the matrix of **interactions between features** with the
     SHAP interaction value summary plot. In this plot, the main effects are on the
     diagonal and the interaction effects are off the diagonal.
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以通过 SHAP 交互值汇总图观察**特征之间的交互矩阵**。在这个图中，主要效应位于对角线上，而交互效应则位于对角线之外。
 - en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/eb70796205fff65c237132a5dfb3c8e3.png)'
+  id: totrans-169
   prefs: []
   type: TYPE_IMG
+  zh: '![SHAP: 用 Python 解释任何机器学习模型](../Images/eb70796205fff65c237132a5dfb3c8e3.png)'
 - en: Image by Author
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Pretty cool!
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 非常酷！
 - en: Conclusion
+  id: totrans-172
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Congratulations! You have just learned about Shapey value and how to use it
     to interpret a machine learning model. I hope this article will give you the essential
     knowledge to interpret your own machine learning model using Python.
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 恭喜！你刚刚学习了 Shapey 值以及如何使用它来解释机器学习模型。希望这篇文章能为你提供必要的知识，以便用 Python 解释你自己的机器学习模型。
 - en: I recommend checking out [SHAP’s documentation](https://shap.readthedocs.io/en/latest/overviews.html) to
     learn more about other applications of SHAP.
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 我建议查看[SHAP 的文档](https://shap.readthedocs.io/en/latest/overviews.html)，以了解 SHAP
+    的其他应用。
 - en: Feel free to play with the source code in [this interactive notebook](https://deepnote.com/project/Data-science-hxlyJpi-QrKFJziQgoMSmQ/%2FData-science%2Fdata_science_tools%2Fshapey_values%2Fshapey_values.ipynb)
     or fork my [repository](https://github.com/khuyentran1401/Data-science/blob/master/data_science_tools/shapey_values/shapey_values.ipynb).
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: 随意查看[这个交互式笔记本](https://deepnote.com/project/Data-science-hxlyJpi-QrKFJziQgoMSmQ/%2FData-science%2Fdata_science_tools%2Fshapey_values%2Fshapey_values.ipynb)中的源代码或克隆我的[代码库](https://github.com/khuyentran1401/Data-science/blob/master/data_science_tools/shapey_values/shapey_values.ipynb)。
 - en: Reference
+  id: totrans-176
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考
 - en: Mazzanti, S. (2021, April 21). *SHAP explained the way I wish someone explained
     it to me*. Medium. Retrieved September 23, 2021, from [https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.)
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: Mazzanti, S. (2021年4月21日)。*SHAP 以我希望有人向我解释的方式进行了说明*。Medium。于2021年9月23日获取，来源：[https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.)
 - en: '**[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** is a prolific
     data science writer, and has written [an impressive collection of useful data
     science topics along with code and articles](https://github.com/khuyentran1401/Data-science).
     Khuyne is currently looking for a machine learning engineer role, a data scientist
     role, or a developer advocate role in Bay Area after May 2022, so please reach
     out if you are looking for someone with her set of skills.'
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** 是一位高产的数据科学作家，撰写了[一系列令人印象深刻的有用数据科学主题以及代码和文章](https://github.com/khuyentran1401/Data-science)。Khuyen
+    目前正在寻找 Bay Area 的机器学习工程师角色、数据科学家角色或开发者推广者角色，预计从 2022 年 5 月开始，如果你在寻找具备她技能的人才，请联系她。'
 - en: '[Original](https://towardsdatascience.com/shap-explain-any-machine-learning-model-in-python-24207127cad7).
     Reposted with permission.'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/shap-explain-any-machine-learning-model-in-python-24207127cad7)。经许可转载。'
 - en: More On This Topic
+  id: totrans-180
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  id: totrans-181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NExT-GPT介绍：全方位多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
 - en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  id: totrans-182
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用SHAP值进行机器学习模型解释](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
 - en: '[Explain NLP Models with LIME](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)'
+  id: totrans-183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用LIME解释NLP模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)'
 - en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在没有工作经验的情况下找到你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
 - en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在你参加任何免费的数据科学课程之前，请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
 - en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Segment Anything模型：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
