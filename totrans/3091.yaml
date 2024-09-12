@@ -1,45 +1,70 @@
 - en: Receiver Operating Characteristic Curves Demystified (in Python)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 接收者操作特征曲线解密（Python中）
 - en: 原文：[https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html](https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html](https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/), Analytic Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/)，分析科学家**'
 - en: '![Image](../Images/02f70f95e8cbdccd75cab6f2efaf86c9.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/02f70f95e8cbdccd75cab6f2efaf86c9.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在IT领域'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In Data Science, evaluating model performance is very important and the most
     commonly used performance metric is the classification score. However, when dealing
     with fraud datasets with heavy class imbalance, a classification score does not
@@ -49,185 +74,278 @@
     under the ROC curve (or AUC). The best possible AUC is 1 while the worst is 0.5
     (the 45 degrees random line). Any value less than 0.5 means we can simply do the
     exact opposite of what the model recommends to get the value back above 0.5.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据科学中，评估模型性能非常重要，最常用的性能指标是分类得分。然而，当处理具有严重类别不平衡的欺诈数据集时，分类得分并没有多大意义。相反，接收者操作特征（ROC）曲线提供了更好的替代方案。ROC是信号（真正率）与噪声（假正率）的图。模型性能通过查看ROC曲线下的面积（或AUC）来确定。最佳可能的AUC是1，而最差的是0.5（45度随机线）。任何低于0.5的值意味着我们可以简单地做与模型建议相反的事情，将值提高到0.5以上。
 - en: While ROC curves are common, there aren’t that many pedagogical resources out
     there explaining how it is calculated or derived. In this blog, I will reveal,
     step by step, how to plot an ROC curve using Python. After that, I will explain
     the characteristics of a basic ROC curve.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然ROC曲线很常见，但并没有很多教学资源解释如何计算或推导它。在这篇博客中，我将逐步展示如何使用Python绘制ROC曲线。之后，我将解释基本ROC曲线的特征。
 - en: Probability Distribution of Classes
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 类别的概率分布
 - en: First off, let us assume that our hypothetical model produced some probabilities
     for predicting the class of each record. As with most binary fraud models, let’s
     assume our classes are ‘good’ and ‘bad’ and the model produced probabilities of
     P(X=’bad’). To create this, probability distribution, we plot a Gaussian distribution
     with different mean values for each class. For more information on Gaussian distribution,
     read [this blog](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们假设我们的假设模型为每个记录的类别预测生成了一些概率。与大多数二元欺诈模型一样，我们假设我们的类别是‘好’和‘坏’，模型生成了P(X=’bad’)的概率。为了创建这个概率分布，我们绘制了具有不同均值的高斯分布。有关高斯分布的更多信息，请阅读 [this
+    blog](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2)。
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Now that we have the distribution, let’s create a function to plot the distributions.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了分布，让我们创建一个函数来绘制这些分布。
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Now let’s use this **plot_pdf** function to generate the plot:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用这个**plot_pdf**函数生成图：
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/7a9921ab52c894aab2fe18cf002ba628.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7a9921ab52c894aab2fe18cf002ba628.png)'
 - en: Now we have the probability distribution of the binary classes, we can now use
     this distribution to derive the ROC curve.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了二元类别的概率分布，我们可以使用这个分布来推导ROC曲线。
 - en: Deriving ROC Curve
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导出ROC曲线
 - en: To derive the ROC curve from the probability distribution, we need to calculate
     the True Positive Rate (TPR) and False Positive Rate (FPR). For a simple example,
     let’s assume the threshold is at P(X=’bad’)=0.6 .
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 要从概率分布中导出ROC曲线，我们需要计算真正率（TPR）和假正率（FPR）。以一个简单的例子，我们假设阈值为P(X=’bad’)=0.6。
 - en: '![](../Images/86ee109313664de02f85d6b4c2bb54fc.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/86ee109313664de02f85d6b4c2bb54fc.png)'
 - en: 'True positive is the area designated as “bad” on the right side of the threshold.
     False positive denotes the area designated as “good” on the right of the threshold.
     Total positive is the total area under the “bad” curve while total negative is
     the total area under the “good” curve. We divide the value as shown in the diagram
     to derive TPR and FPR. We derive the TPR and FPR different threshold values to
     get the ROC curve. Using this knowledge, we create the ROC plot function:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 真正率是阈值右侧被标记为“坏”的区域。假正率是阈值右侧被标记为“好”的区域。总正例是“坏”曲线下的总面积，而总负例是“好”曲线下的总面积。我们按图示的方式划分这些值以导出TPR和FPR。我们通过不同的阈值来导出TPR和FPR，以获取ROC曲线。利用这些知识，我们创建ROC绘图函数：
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now let’s use this **plot_roc** function to generate the plot:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用这个**plot_roc**函数来生成图表：
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/3473fd9e1c1159c53781c36a04da17e5.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3473fd9e1c1159c53781c36a04da17e5.png)'
 - en: 'Now plotting the probability distribution and the ROC next to eachother for
     visual comparison:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，将概率分布和ROC曲线并排绘制，以便进行视觉比较：
 - en: '[PRE5]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/02f70f95e8cbdccd75cab6f2efaf86c9.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/02f70f95e8cbdccd75cab6f2efaf86c9.png)'
 - en: Effect of Class Separation
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 类别分离的影响
 - en: Now that we can derive both plots, let’s see how the ROC curve changes as the
     class separation (i.e. the model performance) improves. We do this by altering
     the mean value of the Gaussian in the probability distributions.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以导出两个图，看看ROC曲线如何随着类别分离（即模型性能）的改善而变化。我们通过改变概率分布中的高斯均值来实现这一点。
 - en: '[PRE6]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/20818e7120759fbec5979733f40c7320.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/20818e7120759fbec5979733f40c7320.png)'
 - en: As you can see, the AUC increases as we increase the separation between the
     classes.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，随着类别之间分离的增加，AUC值也在增加。
 - en: Looking Beyond The AUC
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 超越AUC
 - en: Beyond AUC, the ROC curve can also help debug a model. By looking at the shape
     of the ROC curve, we can evaluate what the model is misclassifying. For example,
     if the bottom left corner of the curve is closer to the random line, it implies
     that the model is misclassifying at X=0\. Whereas, if it is random on the top
     right, it implies the errors are occurring at X=1\. Also, if there are spikes
     on the curve (as opposed to being smooth), it implies the model is not stable.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了AUC，ROC曲线还可以帮助调试模型。通过查看ROC曲线的形状，我们可以评估模型的误分类情况。例如，如果曲线的左下角接近随机线，则表示模型在X=0时误分类。而如果它在右上方是随机的，则表示错误发生在X=1。同时，如果曲线上有尖峰（而不是平滑的），则表示模型不稳定。
 - en: '**Additional Information**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**附加信息**'
 - en: '[**Data Science Interview Guide**](https://towardsdatascience.com/data-science-interview-guide-4ee9f5dc778)
     - Data Science is quite a large and diverse field. As a result, it is really difficult
     to be a jack of all trades...'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**数据科学面试指南**](https://towardsdatascience.com/data-science-interview-guide-4ee9f5dc778)
+    - 数据科学是一个相当大且多样化的领域。因此，成为全才确实非常困难...'
 - en: '[**Fraud Detection Under Extreme Class Imbalance**](https://towardsdatascience.com/fraud-detection-under-extreme-class-imbalance-c241854e60c)
     - A popular field in data science is fraud analytics. This might include credit/debit
     card fraud, anti-money laundering...'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**极端类别不平衡下的欺诈检测**](https://towardsdatascience.com/fraud-detection-under-extreme-class-imbalance-c241854e60c)
+    - 数据科学中的一个热门领域是欺诈分析。这可能包括信用卡/借记卡欺诈、反洗钱...'
 - en: '**Bio: [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/)** is using
     Machine Learning to catch cyber and financial criminals by day... and writing
     cool blogs by night.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/)** 正在使用机器学习来捕捉网络和金融犯罪分子，白天...晚上则撰写有趣的博客。'
 - en: '[Original](https://towardsdatascience.com/receiver-operating-characteristic-curves-demystified-in-python-bd531a4364d0).
     Reposted with permission.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/receiver-operating-characteristic-curves-demystified-in-python-bd531a4364d0)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Learning Curves for Machine Learning](/2018/01/learning-curves-machine-learning.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的学习曲线](/2018/01/learning-curves-machine-learning.html)'
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 1](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择评估机器学习模型的正确度量标准 – 第1部分](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models — Part 2](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择正确的度量标准评估机器学习模型——第 2 部分](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入了解 Python 性能分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 枚举：如何在 Python 中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
 - en: '[Top 38 Python Libraries for Data Science, Data Visualization &…](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学、数据可视化和…的 38 个顶级 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
