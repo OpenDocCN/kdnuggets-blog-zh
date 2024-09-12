@@ -1,129 +1,185 @@
 - en: Fraud through the eyes of a machine
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从机器的视角看欺诈
 - en: 原文：[https://www.kdnuggets.com/2020/11/fraud-eyes-machine.html](https://www.kdnuggets.com/2020/11/fraud-eyes-machine.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/11/fraud-eyes-machine.html](https://www.kdnuggets.com/2020/11/fraud-eyes-machine.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Jakub Karczewski](https://www.linkedin.com/in/jakub-karczewski-97833b137/),
     Machine Learning Engineer**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Jakub Karczewski](https://www.linkedin.com/in/jakub-karczewski-97833b137/)，机器学习工程师**。'
 - en: '![](../Images/493fb3175a3905942d5640f4862a766f.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/493fb3175a3905942d5640f4862a766f.png)'
 - en: Context
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 背景
 - en: There are many approaches to determining whether a particular transaction is
     fraudulent. From rule-based systems to machine learning models - each method tends
     to work best under certain conditions. Successful anti-fraud systems should reap
     the benefits of all the approaches and utilize them where they fit the problem
     best.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 确定某笔交易是否存在欺诈行为的方法有很多种。从基于规则的系统到机器学习模型——每种方法在特定条件下通常效果最佳。成功的反欺诈系统应当充分利用所有这些方法，并在最适合解决问题的地方加以应用。
 - en: The notion of networks and connection analysis in the world of anti-fraud systems
     is paramount since it helps uncover hidden characteristics of transactions that
     are not retrievable any other way. In this blog post, we will try to shed some
     light on the way networks are created and then used to detect fraudulent transactions.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在反欺诈系统中，网络和连接分析的概念至关重要，因为它有助于揭示通过其他方式无法获得的交易隐藏特征。在这篇博客文章中，我们将尝试揭示如何创建网络，然后利用它们来检测欺诈交易。
 - en: Networks in fraud detection
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 欺诈检测中的网络
 - en: 'Let’s consider a transaction - one of the basic entities in the world of online
     payments. Each transaction can be described by a set of attributes. In Nethone,
     we gather over 5,000 data points per transaction, but for the sake of simplicity,
     let’s focus on a few common ones like:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑一个交易——这是在线支付世界中的基本实体之一。每个交易可以通过一组属性来描述。在 Nethone，我们每笔交易收集超过 5000 个数据点，但为了简单起见，我们将重点关注几个常见的属性，例如：
 - en: what are the characteristics of the payment (amount, card token),
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支付的特征是什么（金额、卡片令牌），
 - en: who initiated the transaction (name, email),
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 谁发起了交易（姓名、电子邮件），
 - en: on which device (IP address, device OS, browser cookies)
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用了哪种设备（IP 地址、设备操作系统、浏览器 Cookie）
 - en: 'Having those exemplary transaction attributes in mind, we can now pass on to
     the stage of network building. The network (or graph) is a set of nodes (“dots”)
     connected by edges (“lines”). In the world of online payments, the nodes can be
     either transactions or specific values of transactions’ attributes. The edges
     can represent various relations but in this case, let’s focus on the most common
     one: sharing the attribute value. Let’s use this simple network as an example:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住这些示例交易属性，我们现在可以进入网络构建阶段。网络（或图）是一组通过边（“线”）连接的节点（“点”）。在在线支付的世界里，节点可以是交易或交易属性的特定值。边可以表示各种关系，但在这种情况下，我们将重点关注最常见的一种：共享属性值。让我们以这个简单的网络为例：
 - en: '![](../Images/3dff1d6249563442459aba5b5d7effbc.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3dff1d6249563442459aba5b5d7effbc.png)'
 - en: '*Fig. 1 - Simple network.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 1 - 简单网络。*'
 - en: 'We can see that the processed transaction (“dot with halo”) shares an IP address
     (green node), email address (purple node), and cookie (orange node) value with
     several other transactions (black nodes). The procedure for creating such a network
     is pretty simple:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，处理过的交易（“带光环的点”）与其他几个交易（黑色节点）共享了 IP 地址（绿色节点）、电子邮件地址（紫色节点）和 Cookie（橙色节点）的值。创建这样一个网络的过程相当简单：
 - en: Extract values of attributes of the processed transaction (like IP address,
     cookie, email, etc.).
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 提取处理过的交易的属性值（如 IP 地址、Cookie、电子邮件等）。
 - en: Find other transactions that share some of the attributes’ values.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找其他共享某些属性值的交易。
 - en: Plot them and connect to the processed transaction via intermediary nodes representing
     particular attribute values.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 绘制这些数据并通过代表特定属性值的中介节点连接到处理过的交易。
 - en: In short, it’s all about connecting transactions using some attribute as a matching
     key. This approach, although simple in principle, provides valuable context.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，这一切都是关于使用某些属性作为匹配键来连接交易。这种方法虽然在原则上简单，却提供了有价值的背景信息。
 - en: Once the graph is created, we can query it for various properties. We can check
     what the longest path is or how many nodes connect to a particular node representing,
     for example, IP address. After extracting the network's features, we can then
     feed them to rule-based systems or ML models - as mentioned in the beginning -
     as a hybrid approach works best.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦图形创建完成，我们可以查询其各种属性。我们可以检查最长路径是什么，或者有多少节点连接到某个特定节点，例如IP地址。提取网络特征后，我们可以将其输入规则基础系统或机器学习模型中——如开头所述——混合方法效果最佳。
 - en: Visualization of fraud attack
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 欺诈攻击的可视化
 - en: '![](../Images/b3512d0b620a6cfba23882850cdab62d.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b3512d0b620a6cfba23882850cdab62d.png)'
 - en: '*Fig. 2 - Extended network - carding scheme.*'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 2 - 扩展网络 - 卡片诈骗方案。*'
 - en: This network was constructed using a different seed transaction and expanded
     with an increased depth parameter. It means that now we can connect transactions
     related to the processed one - taking an analogy from the world of social interactions,
     we can analyze “friends of friends of friends… etc.” so transactions related to
     different related transactions. This way, we can broaden our scope and gather
     more insight. Let’s zoom in and look into some of the clusters.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 该网络是使用不同的种子交易构建的，并通过增加深度参数进行扩展。这意味着我们现在可以连接与处理过的交易相关的交易——借用社交互动的类比，我们可以分析“朋友的朋友的朋友……等”，即与不同相关交易相关的交易。这样，我们可以扩展范围，获取更多洞察。让我们深入观察一些集群。
 - en: '![](../Images/e4f41401082eaafb642477fc7f54465d.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e4f41401082eaafb642477fc7f54465d.png)'
 - en: '*Fig. 3 - Suspicious connections via card token.*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 3 - 通过卡片令牌的可疑连接。*'
 - en: At first glance, we can see that one email and IP address (red and green nodes)
     are connected to many different credit card tokens (blue nodes). Since it’s quite
     rare for people to possess a great number of credit cards, this type of network
@@ -134,20 +190,26 @@
     encountering a risky pattern, we can add suspicious attribute values to blacklists.
     This way, if they are ever encountered by our system, transactions will be automatically
     flagged as risky.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 初看，我们可以看到一个电子邮件和IP地址（红色和绿色节点）连接到许多不同的信用卡令牌（蓝色节点）。由于人们拥有大量信用卡的情况相当少见，这种类型的网络可能是卡片诈骗的一个例子。在这种攻击中，欺诈者使用盗取的信用卡凭证执行大量交易。当数据结构化为网络时，我们可以轻松区分正常流量和卡片诈骗模式（少数人，多张卡片和交易）。在查询图形并遇到风险模式后，我们可以将可疑属性值添加到黑名单中。这样，如果系统遇到这些值，交易将自动标记为有风险。
 - en: Benefits and challenges of connection analysis
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 连接分析的好处和挑战
 - en: We can extract a lot of insight from connection analysis, but they don’t come
     for free - there are additional challenges as well. On the one hand, studying
     connections in networks built from transactional, tabular data might help us uncover
     relationships that are hard to extract when keeping the data flat. The structure
     of a network and how it changes in time can be a very rich source of information,
     as well as a human-friendly interface to our data.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以从连接分析中提取大量洞察，但这并非毫无代价——还存在额外的挑战。一方面，从事务性、表格数据构建的网络中研究连接可能有助于揭示在保持数据平铺时难以提取的关系。网络的结构及其随时间变化可以是一个非常丰富的信息来源，以及一个对人类友好的数据界面。
 - en: On the other hand, there are no hard rules about what is and is not fraudulent
     behavior. If we can see multiple transactions coming out of a common IP address,
     then it can mean a fraud attack, but it can also mean employees using their corporate,
@@ -157,80 +219,124 @@
     someone making a 10th transaction on the same **day** and cleaning browser cookies
     after each one will look exactly the same as a legitimate user making a 10th purchase
     in the same **year**, whose cookies naturally expire between consequent transactions.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，对于什么行为属于欺诈行为没有严格的规则。如果我们看到多个交易来自同一个IP地址，这可能意味着欺诈攻击，但也可能是员工利用他们的公司代理网络进行购买。重要的是尽可能考虑多个因素——忽视某些因素可能会严重扭曲我们通过网络感知数据的方式。一个关键因素的好例子是**时间**——在同一天进行第10次交易并在每次交易后清除浏览器
+    cookies 的情况与一个合法用户在同一年进行第10次购买（其 cookies 在连续交易之间自然过期）的情况看起来完全相同。
 - en: Context is everything.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 背景是关键。
 - en: '[Original](https://nethone.com/blog/fraud-through-the-eyes-of-a-machine). Reposted
     with permission.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://nethone.com/blog/fraud-through-the-eyes-of-a-machine). 经许可转载。'
 - en: '**Related:**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Knowing Your Neighbours: Machine Learning on Graphs](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[认识你的邻居：图上的机器学习](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)'
 - en: '[Graphs Are The Next Frontier In Data Science](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图是数据科学的下一前沿](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
 - en: '[Scalable graph machine learning: a mountain we can climb?](https://www.kdnuggets.com/2019/12/scalable-graph-machine-learning.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可扩展图形机器学习：我们能攀登的高峰？](https://www.kdnuggets.com/2019/12/scalable-graph-machine-learning.html)'
 - en: '* * *'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 支持'
 - en: '* * *'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How Data Science Fuels Fraud Prevention](https://www.kdnuggets.com/2022/09/data-science-fuels-fraud-prevention.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学如何推动欺诈预防](https://www.kdnuggets.com/2022/09/data-science-fuels-fraud-prevention.html)'
 - en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 AI 对抗 AI：深度伪造应用的欺诈监测](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
 - en: '[Exploring Tree of Thought Prompting: How AI Can Learn to Reason…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索思维树提示：AI 如何学会推理…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)'
 - en: '[Data storytelling - the art of telling stories through data](https://www.kdnuggets.com/2023/07/manning-data-storytelling-the-art-telling-stories-data.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据故事讲述——通过数据讲述故事的艺术](https://www.kdnuggets.com/2023/07/manning-data-storytelling-the-art-telling-stories-data.html)'
 - en: '[Scaling Data Management Through Apache Gobblin](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Apache Gobblin 扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
 - en: '[Unlocking Reliable Generations through Chain-of-Verification: A…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过验证链解锁可靠生成：一个…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
