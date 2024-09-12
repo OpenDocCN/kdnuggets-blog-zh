@@ -1,217 +1,321 @@
 - en: How to squeeze the most from your training data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何从训练数据中榨取最大价值
 - en: 原文：[https://www.kdnuggets.com/2017/07/squeeze-most-from-training-data.html](https://www.kdnuggets.com/2017/07/squeeze-most-from-training-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/07/squeeze-most-from-training-data.html](https://www.kdnuggets.com/2017/07/squeeze-most-from-training-data.html)
 - en: '**By [David Bishop](https://www.linkedin.com/in/davbis93/?ppe=1), CTO Love
     the Sales.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [David Bishop](https://www.linkedin.com/in/davbis93/?ppe=1)，Love the Sales
+    的 CTO。**'
 - en: In many cases, the acquisition of well-labelled training data is a huge hurdle
     for developing accurate prediction systems with supervised learning. At [Love
     the Sales](https://www.lovethesales.com/), we had the requirement to apply classification
     to the textual metadata of 2 million products (mostly fashion and homewares) into
     1,000+ different categories – represented in a hierarchy.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在许多情况下，获取良好标注的训练数据是开发准确预测系统的巨大障碍。在 [Love the Sales](https://www.lovethesales.com/)
+    ，我们需要将 200 万个产品（主要是时尚和家居用品）的文本元数据分类到 1000 多个不同的类别中——这些类别以层级形式呈现。
 - en: In order to achieve this, we have architected a hierarchical tree of chained
     2-class linear (Positive vs Negative) Support Vector Machines (LibSVM), each responsible
     for binary document classification of each hierarchical class.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现这一点，我们构建了一个层级树，由链式的 2 类线性（正面与负面）支持向量机（LibSVM）组成，每个 SVM 负责每个层级类的二元文档分类。
 - en: '**Data structures**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据结构**'
 - en: 'A key learning, is that the way in which these SVM’s are structured can actually
     have a significant impact on how much training data has to be applied, for example,
     a naive approach would have been as follows:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个关键的学习点是，这些 SVM 的结构实际上会对需要应用多少训练数据产生重大影响，例如，一个幼稚的方法可能是：
 - en: '![](../Images/7562cef405029ebc5d9de69a454d8ce7.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7562cef405029ebc5d9de69a454d8ce7.png)'
 - en: This approach requires that for every additional sub-category, two new SVM’s
     be trained – for example, the addition of a new class for ‘Swimwear’ would require
     an additional SVM under Men’s and Women’s – not to mention the potential complexity
     of adding a ‘Unisex’ class at the top level. Overall, deep hierarchical structures
     can be too rigid to work with.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法要求对于每个额外的子类别，都要训练两个新的 SVM——例如，新增一个“泳装”类别将需要在男性和女性类别下分别增加一个 SVM——更不用说在顶级添加“中性”类别的潜在复杂性。总体而言，深层次的层级结构可能过于僵化，难以处理。
 - en: 'We were able to avoid a great deal of labelling& training work, by flattening
     our data structures into many sub-trees like so:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将我们的数据结构展平成多个子树，我们能够避免大量的标注和训练工作，如下所示：
 - en: '![](../Images/cd837a93f49684b9b9e5403fa77d843c.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cd837a93f49684b9b9e5403fa77d843c.png)'
 - en: 'By decoupling our classification structure from the final hierarchy, it is
     possible to generate the final classification by traversing the SVM hierarchy
     with each document, and interrogating the results with simple set-based logic
     such as:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将我们的分类结构与最终层级解耦，可以通过遍历 SVM 层级和使用简单的基于集合的逻辑来生成最终分类，如：
 - en: '*Mens Slim-fit jeans = (Mens and Jeans and Slim Fit) and not Womens*'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*男士修身牛仔裤 = (男士 和 牛仔裤 和 修身版) 而不是女士*'
 - en: This approach vastly reduces the number of SVM’s required to classify documents,
     as the resultant sets can be intersected to represent the final classification.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法大大减少了分类文档所需的 SVM 数量，因为结果集可以交集以表示最终分类。
 - en: '![](../Images/54f8839c7ff414fb5494f3d80d4db388.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/54f8839c7ff414fb5494f3d80d4db388.png)'
 - en: 'It should also now be evident that adding new classes opens up an exponentially
     increasing number of final categories. For example – adding a top-level ‘Children’s’
     class – would immediately allow the creation of an entire dimension of new Children’s
     categories (children’s jeans, shirts, underwear, etc), with minimal additional
     training data (Only one additional SVM):'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在也应该显而易见，添加新类别会使最终类别的数量呈指数级增长。例如——添加一个顶级的“儿童”类别——会立即允许创建一个新的儿童类别维度（儿童牛仔裤、衬衫、内衣等），只需少量额外的训练数据（仅需一个额外的
+    SVM）：
 - en: '![](../Images/d7d28e3d47aec3bdd6724666d8685fbb.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d7d28e3d47aec3bdd6724666d8685fbb.png)'
 - en: '**Data reuse**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据重用**'
 - en: Because of the structure we chose, one key insight that we were able to leverage,
     was that of re-using training data, via linked data relationships. Linking data
     enabled us to re-use our training data by an overall factor of 9x – thus massively
     reducing the cost and increasing the accuracy of predictions.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们选择的结构，一个关键的洞察是可以通过链接数据关系重用训练数据。数据链接使我们能够将训练数据重用总因子提高到 9 倍，从而大大降低了成本并提高了预测的准确性。
 - en: For each individual class, we obviously want as many training-data examples
     as possible, covering both possible outcomes. Even though we built some excellent
     internal tooling to help with manually labelling training data in bulk – labelling
     thousands of examples of each kind of product can be laborious, costly and error-prone.
     We determined the best way to circumvent these issues was to attempt to reuse
     as much training data as we could, across classes.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个单独的类别，我们显然希望拥有尽可能多的训练数据示例，涵盖所有可能的结果。尽管我们构建了一些出色的内部工具来帮助批量手动标注训练数据——标注每种产品的数千个示例可能既费时又昂贵且容易出错。我们确定解决这些问题的最佳方法是尽可能重用不同类别的训练数据。
 - en: For example, given some basic domain knowledge of the categories – we know for
     certain that ‘Washing machines’ can *never* be ‘Carpet cleaners’
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，考虑到对类别的基本领域知识——我们可以确定‘洗衣机’*永远*不能是‘地毯清洗机’
 - en: '![](../Images/a9c4d64294b93b49877d18b6b7673fbf.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a9c4d64294b93b49877d18b6b7673fbf.png)'
 - en: By adding the ability to link ‘Exclude data’, we can heavily bolster the amount
     ‘Negative’ training examples for the ‘Washing machines’ SVM by adding to it the
     *‘Positive’* training data from ‘Carpet cleaners’ SVM. Put more simply, given
     that we know “Carpet cleaners can *never* be washing machines” – we may as well
     re-use that data.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过添加‘排除数据’的功能，我们可以通过将‘地毯清洗机’SVM的*‘正面’*训练数据添加到‘洗衣机’SVM，从而大大增加‘负面’训练示例的数量。更简单地说，既然我们知道“地毯清洗机*永远*不能是洗衣机”——我们不妨重用这些数据。
 - en: This approach has a nice uptick, in that whenever the need arises to add some
     additional training data to improve the ‘Carpet Cleaners’ SVM – it inadvertently
     improves the ‘Washing machines’ class, via linked negative data.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法有一个不错的优势，即每当需要添加一些额外的训练数据以改善‘地毯清洗机’的SVM时——它通过链接的负面数据无意中改善了‘洗衣机’类别。
 - en: 'Finally, another chance for reuse, that is apparent when considering a hierarchy,
     is that the positive training data for any child nodes, is also *always* positive
     training data for its parent. For example: ‘Jeans’ are *always* ‘Clothing’.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，当考虑层次结构时，另一个明显的重用机会是任何子节点的正面训练数据，也*总是*是其父节点的正面训练数据。例如：‘牛仔裤’*总是*‘服装’。
 - en: '![](../Images/bb832675df7325f3290ebb03f6e8cc19.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bb832675df7325f3290ebb03f6e8cc19.png)'
 - en: This means that for every positive example of training data added to the ‘Jeans’
     SVM – an additional positive example is also added to the ‘Clothing’ SVM via the
     link.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着每当向‘牛仔裤’SVM添加一个正面示例时——通过链接，也会向‘服装’SVM添加一个额外的正面示例。
 - en: Adding links is far more efficient than manually labelling 1000’s of examples.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加链接比手动标注成千上万的例子要高效得多。
 - en: '![](../Images/ee21075a626c84e1c9563aa5b91802e2.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ee21075a626c84e1c9563aa5b91802e2.png)'
 - en: When it comes to hierarchical classification systems, decoupling the classification
     component from the resulting hierarchy, flattening the data structure and enabling
     the reuse or training data will all be beneficial in gaining as much efficiency
     as possible. The approaches outlined above have not only helped reduce the amount
     of training data we needed to label, it has also given us greater flexibility
     overall.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 当涉及到层次分类系统时，将分类组件与结果层次结构解耦，扁平化数据结构并启用重用或训练数据将有助于尽可能提高效率。上述方法不仅有助于减少我们需要标注的训练数据量，还使我们总体上获得了更大的灵活性。
 - en: 'Reference: LibSVM –[https://www.csie.ntu.edu.tw/~cjlin/libsvm/](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 参考资料：LibSVM –[https://www.csie.ntu.edu.tw/~cjlin/libsvm/](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 - en: '**Bio: **[David Bishop](https://www.linkedin.com/in/davbis93/?ppe=1)**** is
     CTO at LovetheSales.com – a retail sales aggregator that enables consumers to
     find and compare every product on sale, from 100s of retailers, to find the best
     prices on the brands and products they want. Founded in 2013, it is by far the
     biggest sale in the world, with over 1,000,000 sale items on the site across all
     of its regions.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：**[David Bishop](https://www.linkedin.com/in/davbis93/?ppe=1)**** 是LovetheSales.com的首席技术官——一个零售销售聚合平台，使消费者能够从数百家零售商那里找到和比较所有销售中的产品，以找到他们想要的品牌和产品的最佳价格。该网站成立于2013年，是全球最大的销售平台，覆盖所有区域，提供超过1,000,000件销售商品。'
 - en: '**Related:**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[What is a Support Vector Machine, and Why Would I Use it?](/2017/02/yhat-support-vector-machine.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是支持向量机，为什么我会使用它？](/2017/02/yhat-support-vector-machine.html)'
 - en: '[7 Ways to Get High-Quality Labeled Training Data at Low Cost](/2017/06/acquiring-quality-labeled-training-data.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7种低成本获取高质量标注训练数据的方法](/2017/06/acquiring-quality-labeled-training-data.html)'
 - en: '[Building Regression Models in R using Support Vector Regression](/2017/03/building-regression-models-support-vector-regression.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用支持向量回归在 R 中构建回归模型](/2017/03/building-regression-models-support-vector-regression.html)'
 - en: '* * *'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你在 IT 领域的组织'
 - en: '* * *'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用合成数据克服机器学习模型训练中的数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
 - en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中训练数据和测试数据的区别](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
 - en: '[New From Anaconda! Data Science Training and Cloud Hosted Notebooks](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[来自 Anaconda 的新课程！数据科学培训和云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
 - en: '[Online Training and Workshops with Nvidia](https://www.kdnuggets.com/2022/07/online-training-workshops-nvidia.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Nvidia 的在线培训和研讨会](https://www.kdnuggets.com/2022/07/online-training-workshops-nvidia.html)'
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
