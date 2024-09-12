@@ -3,61 +3,76 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使你的机器学习模型对离群值具有鲁棒性
 - en: 原文：[https://www.kdnuggets.com/2018/08/make-machine-learning-models-robust-outliers.html](https://www.kdnuggets.com/2018/08/make-machine-learning-models-robust-outliers.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/08/make-machine-learning-models-robust-outliers.html](https://www.kdnuggets.com/2018/08/make-machine-learning-models-robust-outliers.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin), University
     of San Francisco**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)，旧金山大学**'
 - en: '*“So unexpected was the hole that for several years computers analyzing ozone
     data had systematically thrown out the readings that should have pointed to its
     growth.” — New Scientist 31st March 1988*'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*“这个漏洞的出现如此出乎意料，以至于数年间分析臭氧数据的计算机系统性地抛弃了本应指向臭氧增长的读数。” — 《新科学家》1988年3月31日*'
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/ca8bc703d91679f1bf69ba9a882e35e8.png)'
   id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ca8bc703d91679f1bf69ba9a882e35e8.png)'
 - en: According to Wikipedia, an **outlier** is an observation point that is distant
     from other observations. This definition is vague because it doesn’t quantify
     the word “distant”. In this blog, we’ll try to understand the different interpretations
@@ -66,6 +81,7 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据维基百科，**离群值**是指与其他观测值相距较远的观测点。这个定义模糊，因为它没有量化“远离”这个词。在本博客中，我们将尝试理解这个“远离”概念的不同解释。我们还将探讨离群值检测和处理技术，同时观察它们对不同类型的机器学习模型的影响。
 - en: Outliers arise due to changes in system behavior, fraudulent behavior, human
     error, instrument error, or simply through natural deviations in populations.
     A sample may have been contaminated with elements from outside the population
@@ -73,6 +89,7 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 离群值的产生可能是由于系统行为的变化、欺诈行为、人为错误、仪器误差，或仅仅是自然偏差。样本可能被外部因素污染。
 - en: Many machine learning models, like linear & logistic regression, are easily
     impacted by the outliers in the training data. Models like AdaBoost increase the
     weights of misclassified points on every iteration and therefore might put high
@@ -82,6 +99,7 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多机器学习模型，如线性回归和逻辑回归，容易受到训练数据中离群值的影响。像AdaBoost这样的模型在每次迭代中增加被误分类点的权重，因此可能对这些离群值施加较高的权重，因为它们通常被误分类。如果这些离群值是某种错误，或者如果我们希望模型具有良好的泛化能力而不关注极端值，这可能会成为一个问题。
 - en: To overcome this issue, we can either change the model or metric, or we can
     make some changes in the data and use the same models. For the analysis, we will
     look into [House Prices Kaggle Data](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data).
@@ -89,25 +107,31 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了克服这个问题，我们可以更改模型或度量标准，或者对数据进行一些修改并使用相同的模型。在分析中，我们将查看 [House Prices Kaggle Data](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data)。所有绘图和实施的代码可以在这个 [Github
+    仓库](https://github.com/aswalin/Outlier-Impact-Treatment)中找到。
 - en: What do we mean by outliers?
   id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们所说的离群值是什么意思？
 - en: Extreme values can be present in both dependent & independent variables, in
     the case of supervised learning methods.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 极端值可能出现在依赖变量和自变量中，特别是在监督学习方法的情况下。
 - en: These extreme values need not necessarily impact the model performance or accuracy,
     but when they do they are called **“Influential”** points.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些极端值不一定会影响模型的性能或准确性，但当它们确实会影响时，它们被称为**“影响点”**。
 - en: '**Extreme Values in Independent Variables**'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**自变量中的极端值**'
 - en: These are called points of **“high leverage**”. With a single predictor, an
     extreme value is simply one that is particularly high or low. With multiple predictors,
     extreme values may be particularly high or low for one or more predictors ***(univariate
@@ -116,33 +140,40 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些被称为**“高杠杆点”**。对于单一预测变量，极端值只是特别高或低的值。对于多个预测变量，极端值可能是一个或多个预测变量特别高或低的值***(单变量分析——逐一分析变量)***，也可能是预测变量值的“异常”组合***(多变量分析)***。
 - en: In the following figure, all the points on the right-hand side of the orange
     line are leverage points.
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下图中，所有在橙色线右侧的点都是杠杆点。
 - en: '![](../Images/bbae8ec73abd7b973af9ee6fbb6a0530.png)'
   id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bbae8ec73abd7b973af9ee6fbb6a0530.png)'
 - en: '**Extreme Values in Target Variables**'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**因变量中的极端值**'
 - en: Regression — these extreme values are termed as **“outliers”**. They may or
     may not be influential points, which we will see later. In the following figure,
     all the points above the orange line can be classified as outliers.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 回归——这些极端值被称为**“异常值”**。它们可能是也可能不是影响点，我们稍后会看到。在下图中，所有在橙色线以上的点都可以被归类为异常值。
 - en: '![](../Images/c961bfd28e0dcc433ac9aae8652589a4.png)'
   id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c961bfd28e0dcc433ac9aae8652589a4.png)'
 - en: 'Classification: Here, we have two types of extreme values:'
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类：这里我们有两种类型的极端值：
 - en: '**1\. Outliers:** For example, in an image classification problem in which
     we’re trying to identify dogs/cats, one of the images in the training set has
     a gorilla (or any other category not part of the goal of the problem) by mistake.
@@ -152,6 +183,7 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1\. 异常值：**例如，在一个图像分类问题中，我们试图识别狗/猫，但训练集中有一张错误地包含猩猩（或其他不属于问题目标类别的类别）的图像。在这里，猩猩图像显然是噪声。在这里检测异常值没有意义，因为我们已经知道要关注哪些类别以及要丢弃哪些类别。'
 - en: '**2\. Novelties:** Many times we’re dealing with novelties, and the problem
     is often called **supervised anomaly detection**. In this case, the goal is not
     to remove outliers or reduce their impact, but we are interested in detecting
@@ -161,20 +193,24 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2\. 新颖性：**很多时候我们处理的是新颖性，这个问题通常被称为**监督异常检测**。在这种情况下，目标不是去除异常值或减少其影响，而是我们关注的是检测新观察中的异常。因此我们不会在此帖子中讨论它。它特别用于信用卡交易中的欺诈检测、虚假电话等。'
 - en: All the points we have discussed above, including influential points, will become
     very clear once we visualize the following figure.
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们之前讨论的所有点，包括影响点，一旦我们可视化以下图形，就会变得非常清晰。
 - en: '![](../Images/14108c138f5fba84c8c2a082b76127f5.png)'
   id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/14108c138f5fba84c8c2a082b76127f5.png)'
 - en: '***Inference***'
   id: totrans-31
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '***推断***'
 - en: ''
   id: totrans-32
   prefs:
@@ -185,33 +221,39 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*- Q1中的点：异常值'
 - en: '- Points in Q3: Leverage Points'
   id: totrans-34
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '- Q3中的点：杠杆点'
 - en: '- Points in Q2: Both outliers & leverage but non-influential points'
   id: totrans-35
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '- Q2中的点：既是异常值也是杠杆点，但不是影响点'
 - en: '- Circled points: Example of Influential Points. There can be more but these
     are the prominent ones*'
   id: totrans-36
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '- 圈出的点：影响点的示例。可能还有更多，但这些是显著的*'
 - en: Our major focus will be outliers (extreme values in **target variable** for
     further investigation and treatment). We’ll see the impact of these extreme values
     on the model’s performance.
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的主要关注点将是异常值（**因变量中的极端值**，以进一步调查和处理）。我们将看到这些极端值对模型性能的影响。
 - en: Common Methods for Detecting Outliers
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 检测异常值的常用方法
 - en: When detecting outliers, we are either doing univariate analysis or multivariate
     analysis. When your linear model has a single predictor, then you can use univariate
     analysis. However, it can give misleading results if you use it for multiple predictors.
@@ -221,10 +263,13 @@
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在检测离群值时，我们要么进行单变量分析，要么进行多变量分析。当你的线性模型只有一个预测变量时，你可以使用单变量分析。然而，如果你对多个预测变量使用它，它可能会给出误导性的结果。执行离群值检测的一种常见方法是**假设常规数据来自已知分布**（例如，数据呈高斯分布）。这一假设在下面的
+    Z-Score 方法部分进行了讨论。
 - en: '**Box-Plot**'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**箱形图**'
 - en: The quickest and easiest way to identify outliers is by visualizing them using
     plots. If your dataset is not huge (approx. up to 10k observations & 100 features),
     I would highly recommend you build scatter plots & box-plots of variables. If
@@ -235,41 +280,50 @@
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 识别离群值最快最简单的方法是通过可视化图形。如果你的数据集不是很庞大（大约最多10k个观察值和100个特征），我强烈推荐你绘制变量的散点图和箱形图。如果没有离群值，你仍然可以获得其他见解，比如相关性、变异性，或如世界大战/经济衰退对经济因素的影响等外部因素。然而，这种方法不适用于高维数据，因为可视化的效果会减弱。
 - en: '![](../Images/904c4cc6a14a732e8bc0c880b86e4eb1.png)'
   id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/904c4cc6a14a732e8bc0c880b86e4eb1.png)'
 - en: The box plot uses inter-quartile range to detect outliers. Here, we first determine
     the quartiles *Q*1 and *Q*3.
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 箱形图使用四分位距来检测离群值。在这里，我们首先确定四分位数 *Q*1 和 *Q*3。
 - en: Interquartile range is given by, IQR = Q3 — Q1
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 四分位距由以下公式给出：IQR = Q3 — Q1
 - en: Upper limit = Q3+1.5*IQR
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 上限 = Q3 + 1.5 * IQR
 - en: Lower limit = Q1–1.5*IQR
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 下限 = Q1 – 1.5 * IQR
 - en: Anything below the lower limit and above the upper limit is considered an outlier
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 低于下限和高于上限的任何值都被认为是离群值
 - en: '**Cook’s Distance**'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**库克距离**'
 - en: This is a multivariate approach for finding influential points. These points
     may or may not be outliers as explained above, but they have the power to influence
     the regression model. We will see their impact in the later part of the blog.
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种用于寻找影响点的多变量方法。这些点可能是也可能不是离群值，如上所述，但它们有能力影响回归模型。我们将在博客的后面部分看到它们的影响。
 - en: This method is used only for linear regression and therefore has a limited application. [Cook’s
     distance](https://en.wikipedia.org/wiki/Cook%27s_distance) measures the effect
     of deleting a given observation. It’s represents the sum of all the changes in
@@ -277,10 +331,13 @@
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法仅用于线性回归，因此应用有限。**[库克距离](https://en.wikipedia.org/wiki/Cook%27s_distance)**
+    衡量删除某个观察值的效果。它表示当观察值**“i”** 从回归模型中移除时，模型中所有变化的总和。
 - en: '![](../Images/94ec5a5de878c7c218c2559f4c373b87.png)'
   id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/94ec5a5de878c7c218c2559f4c373b87.png)'
 - en: Here, p is the number of predictors and s² is the mean squared error of the
     regression model. There are different views regarding the cut-off values to use
     for spotting highly influential points. A rule of thumb is that D(i) > 4/n, can
@@ -288,6 +345,7 @@
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，p 是预测变量的数量，s² 是回归模型的均方误差。关于用来识别高度影响点的截断值有不同的观点。经验法则是 D(i) > 4/n，可以作为影响点的良好截断值。
 - en: R has the [car](http://cran.r-project.org/web/packages/car/index.html) (Companion
     to Applied Regression) package where you can directly find outliers using Cook’s
     distance. Implementation is provided in this [R-Tutorial](https://www.statmethods.net/stats/rdiagnostics.html).
@@ -295,33 +353,42 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: R 有一个 [car](http://cran.r-project.org/web/packages/car/index.html)（应用回归的伴侣）包，你可以直接使用库克距离来查找离群值。实现可以在这个
+    [R-Tutorial](https://www.statmethods.net/stats/rdiagnostics.html) 中找到。另一种类似的方法是**DFFITS**，你可以在
+    [这里](https://newonlinecourses.science.psu.edu/stat501/node/340/) 查看详细信息。
 - en: '**Z-Score**'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Z-Score**'
 - en: 'This method assumes that the variable has a Gaussian distribution. It represents
     the number of standard deviations an observation is away from the mean:'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法假设变量具有高斯分布。它表示一个观察值离均值的标准差数：
 - en: '![](../Images/ad6a2aa9b983c21b2338ac776f387956.png)'
   id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad6a2aa9b983c21b2338ac776f387956.png)'
 - en: Here, we normally define outliers as points whose modulus of z-score is greater
     than a threshold value. This threshold value is usually greater than 2 (3 is a
     common value).
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们通常将离群点定义为 z-score 的模值大于某个阈值的点。这个阈值通常大于 2（3 是一个常见值）。
 - en: '![](../Images/ba1d948b9d61a31c9a51d38584223a55.png)'
   id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ba1d948b9d61a31c9a51d38584223a55.png)'
 - en: Reference: [http://slideplayer.com/slide/6394283/](http://slideplayer.com/slide/6394283/)
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '参考: [http://slideplayer.com/slide/6394283/](http://slideplayer.com/slide/6394283/)'
 - en: 'All the above methods are good for initial analysis of data, but they don’t
     have much value in multivariate settings or with high dimensional data. For such
     datasets, we have to use advanced methods like **PCA, LOF (Local Outlier Factor)
@@ -329,6 +396,8 @@
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '上述所有方法适用于数据的初步分析，但在多变量设置或高维数据中它们的价值有限。对于这样的数据集，我们需要使用像**主成分分析（PCA）、局部离群因子（LOF）和
+    HiCS: 高对比度子空间用于基于密度的离群点排序**等高级方法。'
 - en: We won’t be discussing these methods in this blog, as they are beyond its scope.
     Our focus here is to see how various outlier treatment techniques affect the performance
     of models. You can read [this blog](https://www.datasciencecentral.com/profiles/blogs/introduction-to-outlier-detection-methods) for
@@ -336,11 +405,13 @@
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们不会在这篇博客中讨论这些方法，因为它们超出了博客的范围。我们在这里的重点是看看各种离群点处理技术如何影响模型的性能。有关这些方法的详细信息，你可以阅读[这篇博客](https://www.datasciencecentral.com/profiles/blogs/introduction-to-outlier-detection-methods)。
 - en: Impact & Treatment of Outliers
   id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 离群点的影响与处理
 - en: The impact of outliers can be seen not only in predictive modeling but also
     in statistical tests where it reduces the power of tests. Most parametric statistics,
     like means, standard deviations, and correlations, and every statistic based on
@@ -349,10 +420,12 @@
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 离群点的影响不仅可以在预测建模中看到，还可以在统计测试中看到，它会降低测试的效能。大多数参数统计，如均值、标准差和相关性，以及基于这些的每个统计量，都对离群点高度敏感。但在这篇文章中，我们只关注离群点在预测建模中的影响。
 - en: '**To Drop or Not to Drop**'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**是否删除**'
 - en: I believe dropping data is always a harsh step and should be taken only in extreme
     conditions when we’re very sure that the **outlier is a measurement error**, which
     we generally do not know. The data collection process is rarely provided. When
@@ -362,24 +435,29 @@
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 我认为删除数据始终是一个严厉的步骤，只应在极端条件下进行，当我们非常确定**离群点是测量误差**时，这种情况我们通常并不了解。数据收集过程很少提供。当我们删除数据时，我们会失去关于数据变异性的的信息。当观察值过多且**离群点较少**时，我们可以考虑删除这些观察值。
 - en: In the following example we can see that the slope of the regression line changes
     a lot in the presence of the extreme values at the top. Hence, it is reasonable
     to drop them and get a better fit & more general solution.
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 在以下示例中，我们可以看到回归线的斜率在顶部的极端值存在时变化很大。因此，删除这些极端值以获得更好的拟合和更通用的解决方案是合理的。
 - en: '![](../Images/4b438ba5062992edf7fec92efa705863.png)'
   id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4b438ba5062992edf7fec92efa705863.png)'
 - en: Source: [https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/](https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/)
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/](https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/)'
 - en: '**Other Data-Based Methods**'
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**其他基于数据的方法**'
 - en: '**Winsorizing:** This method involves setting the extreme values of an attribute
     to some specified value. For example, for a 90% Winsorization, the bottom 5% of
     values are set equal to the minimum value in the 5th percentile, while the upper
@@ -389,6 +467,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Winsorizing（温索化）：** 这种方法涉及将属性的极端值设置为某个指定的值。例如，对于 90% 的 Winsorization，底部 5%
+    的值被设置为第 5 百分位的最小值，而顶部 5% 的值被设置为第 95 百分位的最大值。这比仅仅排除极端值的修剪方法要更高级。'
 - en: '**Log-Scale Transformation:** This method is often used to reduce the variability
     of data including outlying observation. Here, the y value is changed to log(y).
     It’s often preferred when the response variable follows **exponential distribution
@@ -397,6 +477,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对数尺度变换：** 这种方法通常用于减少包括离群观察在内的数据的变异性。在这里，y 值被更改为 log(y)。当响应变量遵循**指数分布或右偏分布**时，这种方法通常更受欢迎。'
 - en: However, it’s a controversial step and **does not necessarily reduce** the variance.
     For example, this [answer](https://stats.stackexchange.com/questions/130262/why-not-log-transform-all-variables-that-are-not-of-main-interest) beautifully
     captures all those cases.
@@ -404,19 +485,23 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然而，这是一种有争议的步骤，并**不一定减少**方差。例如，这个[答案](https://stats.stackexchange.com/questions/130262/why-not-log-transform-all-variables-that-are-not-of-main-interest)很好地捕捉了所有这些情况。
 - en: Poor example of transformation -
   id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 变换的糟糕示例 -
 - en: '![](../Images/e2468faf6084a5caa01132b1362535f7.png)'
   id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e2468faf6084a5caa01132b1362535f7.png)'
 - en: An initially left skewed distribution becomes more skewed after log-transform
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始左偏的分布在对数变换后变得更加偏斜
 - en: '**Binning:** This refers to dividing a list of continuous variables into groups.
     We do this to discover sets of patterns in continuous variables, which are difficult
     to analyze otherwise. But, it also leads to **loss of information** and loss of
@@ -425,10 +510,12 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**分箱：** 这指的是将一组连续变量划分为多个组。我们这样做是为了发现连续变量中的模式集合，这些模式在其他情况下难以分析。然而，它也会导致**信息丢失**和能力损失。'
 - en: '**Model-Based Methods**'
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基于模型的方法**'
 - en: 'Use a different model: Instead of linear models, we can use tree-based methods
     like Random Forests and Gradient Boosting techniques, which are less impacted
     by outliers. This [answer](https://www.quora.com/Why-are-tree-based-models-robust-to-outliers) clearly
@@ -437,28 +524,34 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用不同的模型：与线性模型不同，我们可以使用像随机森林和梯度提升技术这样的树基方法，这些方法不容易受到异常值的影响。这个[答案](https://www.quora.com/Why-are-tree-based-models-robust-to-outliers)清楚地解释了为什么树基方法对异常值具有鲁棒性。
 - en: 'Metrics: Use MAE instead of RMSE as a loss function. We can also use truncated
     loss:'
   id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指标：使用 MAE 代替 RMSE 作为损失函数。我们还可以使用截断损失：
 - en: '![](../Images/a8cea1cdbc0e7c7c64ad00737262313b.png)'
   id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a8cea1cdbc0e7c7c64ad00737262313b.png)'
 - en: '![](../Images/4861c12aa4071584356511d58534e65b.png)'
   id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4861c12aa4071584356511d58534e65b.png)'
 - en: Source: [https://eranraviv.com/outliers-and-loss-functions/](https://eranraviv.com/outliers-and-loss-functions/)
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[https://eranraviv.com/outliers-and-loss-functions/](https://eranraviv.com/outliers-and-loss-functions/)
 - en: '**Case Study Comparison**'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**案例研究比较**'
 - en: For this comparison, I chose only four important predictors (Overall Quality,
     MSubClass, Total Basement Area, Ground living area) out of total 80 predictors
     and tried to predict Sales Price using these predictors. The idea is to see how
@@ -466,14 +559,17 @@
   id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个比较中，我仅选择了四个重要预测变量（总体质量、MSubClass、总地下室面积、地面生活面积），从总共 80 个预测变量中进行预测。目的是看看异常值如何影响线性和树基方法。
 - en: '![](../Images/d5bfc8c5458b0fd7a6fcd3e12f3f4647.png)'
   id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d5bfc8c5458b0fd7a6fcd3e12f3f4647.png)'
 - en: '**End Notes**'
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结束注释**'
 - en: Since there are only 1400 total observation in the dataset, the impact of outliers
     is considerable on a linear regression model, as we can see from the RMSE scores
     of “**With outliers**” (0.93) and “**Without outliers**” (0.18) — a significant
@@ -482,6 +578,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于数据集中只有 1400 个观察值，异常值对线性回归模型的影响相当大，正如我们从“**有异常值**”（0.93）和“**无异常值**”（0.18）的
+    RMSE 分数中可以看到——显著下降。
 - en: For this dataset, the target variable is right skewed. Because of this, log-transformation
     works better than removing outliers. Hence we should always try to transform the
     data first rather than remove it. However, winsorizing is not as effective as
@@ -491,6 +589,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于这个数据集，目标变量右偏。因此，对数变换比去除异常值效果更好。因此，我们应始终尝试先转换数据而不是去除它。然而，温莎化效果不如去除异常值。这可能是因为通过硬性替换，我们在数据中引入了某些不准确性。
 - en: 'Clearly, Random Forest is not affected by outliers because after removing the
     outliers, RMSE increased. This might be the reason why changing the criteria from
     MSE to MAE did not help much (from 0.188 to 0.186). Even for this case, log-transformation
@@ -501,6 +600,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 显然，随机森林不受异常值影响，因为在去除异常值后，RMSE 增加了。这可能是将标准从 MSE 更改为 MAE 并没有太大帮助的原因（从 0.188 到
+    0.186）。即使在这种情况下，对数变换也被证明是赢家：原因在于目标变量的偏斜特性。经过变换后，数据变得更均匀，随机森林中的分裂也变得更好。
 - en: From the above results, we can conclude that transformation techniques generally
     works better than dropping for improving the predictive accuracy of both linear
     & tree-based models. It is very important to treat outliers by either dropping
@@ -508,68 +609,82 @@
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 从以上结果可以得出结论，变换技术通常比丢弃技术更有效于提高线性模型和基于树的模型的预测准确性。如果你使用的是线性回归模型，处理异常值（无论是丢弃还是变换）都非常重要。
 - en: If I have missed any important techniques for outliers treatment, I would love
     to hear about them in comments. Thank you for reading.
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我遗漏了任何关于异常值处理的重要技术，欢迎在评论中告诉我。感谢阅读。
 - en: '**About Me:** Graduated with Masters in Data Science at USF. Interested in
     working with cross-functional groups to derive insights from data, and apply Machine
     Learning knowledge to solve complicated data science problems. [https://alviraswalin.wixsite.com/alvira](https://alviraswalin.wixsite.com/alvira)'
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '**关于我：** 研究生毕业于USF的数据科学专业。对与跨职能团队合作以从数据中提取见解以及将机器学习知识应用于解决复杂的数据科学问题感兴趣。 [https://alviraswalin.wixsite.com/alvira](https://alviraswalin.wixsite.com/alvira)'
 - en: Check out my other blogs [here](https://medium.com/@aswalin)!
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看我的其他博客 [这里](https://medium.com/@aswalin)！
 - en: '**LinkedIn: **[**www.linkedin.com/in/alvira-swalin**](http://www.linkedin.com/in/alvira-swalin)'
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**LinkedIn: **[**www.linkedin.com/in/alvira-swalin**](http://www.linkedin.com/in/alvira-swalin)'
 - en: '**References:**'
   id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考资料：**'
 - en: The treatment methods have been taught by [Yannet Interian at USF](https://www.usfca.edu/faculty/yannet-interian)
   id: totrans-96
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 治疗方法由 [雅内特·因特里安（Yannet Interian）在USF教授](https://www.usfca.edu/faculty/yannet-interian)。
 - en: '[Github Repo for Codes](https://github.com/aswalin/Outlier-Impact-Treatment)'
   id: totrans-97
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[代码的Github仓库](https://github.com/aswalin/Outlier-Impact-Treatment)'
 - en: '[Data For House Price Analysis](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data)'
   id: totrans-98
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[房价分析数据](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data)'
 - en: '[Lesson on Distinction Between Outliers and High Leverage Observations](https://newonlinecourses.science.psu.edu/stat462/node/170/)'
   id: totrans-99
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[关于异常值与高杠杆观测值区分的课程](https://newonlinecourses.science.psu.edu/stat462/node/170/)'
 - en: '[Introduction to Outlier Detection Methods](https://www.datasciencecentral.com/profiles/blogs/introduction-to-outlier-detection-methods)'
   id: totrans-100
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[异常值检测方法介绍](https://www.datasciencecentral.com/profiles/blogs/introduction-to-outlier-detection-methods)'
 - en: '[A Comprehensive Guide to Data Exploration](https://www.analyticsvidhya.com/blog/2016/01/guide-data-exploration/)'
   id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[数据探索全面指南](https://www.analyticsvidhya.com/blog/2016/01/guide-data-exploration/)'
 - en: '[Cook’s D Implementation in R](https://www.statmethods.net/stats/rdiagnostics.html)'
   id: totrans-102
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[R中的Cook’s D实现](https://www.statmethods.net/stats/rdiagnostics.html)'
 - en: '**Discuss this post on **[**Hacker News**](https://news.ycombinator.com/item?id=17197027)**.**'
   id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在 **[**Hacker News**](https://news.ycombinator.com/item?id=17197027)** 上讨论此帖子。**'
 - en: '**Bio: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
     is currently pursuing Master''s in Data Science at USF, and is particularly interested
     in Machine Learning & Predictive Modeling. She is a Data Science Intern at Price
@@ -577,46 +692,57 @@
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[阿尔维拉·斯瓦林（Alvira Swalin）](https://www.linkedin.com/in/alvira-swalin)**
+    ([**Medium**](https://medium.com/@aswalin)) 目前在USF攻读数据科学硕士学位，特别关注机器学习与预测建模。她是Price
+    (Fx) 的数据科学实习生。'
 - en: '[Original](https://heartbeat.fritz.ai/how-to-make-your-machine-learning-models-robust-to-outliers-44d404067d07).
     Reposted with permission.'
   id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/how-to-make-your-machine-learning-models-robust-to-outliers-44d404067d07)。已获许可转载。'
 - en: '**Related:**'
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[CatBoost vs. Light GBM vs. XGBoost](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
   id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CatBoost vs. Light GBM vs. XGBoost](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models  –  Part
     1](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
   id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择正确的度量标准评估机器学习模型  –  第1部分](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 2](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
   id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择正确的度量标准评估机器学习模型 – 第2部分](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
 - en: More On This Topic
   id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题
 - en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
   id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python中的标准差移除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
 - en: '[How to Handle Outliers in Dataset with Pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
   id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Pandas处理数据集中的异常值](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
 - en: '[How to Make Large Language Models Play Nice with Your Software…](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)'
   id: totrans-113
   prefs:
