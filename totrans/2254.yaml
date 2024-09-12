@@ -1,696 +1,1095 @@
 - en: 'Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 烂番茄电影评分预测数据科学项目：第二种方法
 - en: 原文：[https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
 - en: This data science project has been used as a take-home assignment in the recruitment
     process at Meta (Facebook). In this take-home assignment, we will discover how
     Rotten Tomatoes is making labeling as ‘Rotten’, ‘Fresh’ or  ‘Certified Fresh’.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据科学项目曾在Meta（Facebook）的招聘过程中作为家庭作业使用。在这个家庭作业中，我们将发现烂番茄如何进行“烂片”、“新鲜”或“认证新鲜”的标签。
 - en: 'Link to this data science project: [https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction](https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学项目链接：[https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction](https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: To do that, we will develop two different approaches.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们将开发两种不同的方法。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/d79afba4c7ed2b547c017515ca1b08f0.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/d79afba4c7ed2b547c017515ca1b08f0.png)'
 - en: Image by Author
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Throughout our exploration, we will discuss data preprocessing, various classifiers,
     and potential improvements to enhance the performance of our models.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的探索过程中，我们将讨论数据预处理、各种分类器，以及可能的改进以增强我们模型的性能。
 - en: By the end of this post, you will have gained an understanding of how machine
     learning can be employed to predict movie success and how this knowledge can be
     applied in the entertainment industry.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 到本帖结束时，你将了解如何使用机器学习预测电影成功，以及这些知识如何应用于娱乐行业。
 - en: But before going deeper, let’s discover the data we will work on.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在深入之前，让我们先了解一下我们将处理的数据。
 - en: 'Second Approach: Predicting Movie Status Based on Review Sentiment'
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 第二种方法：基于评论情感预测电影状态
 - en: In the second approach, we plan to predict the movie's success by assessing
     the sentiment of its reviews. We will specifically apply sentiment analysis to
     evaluate the overall sentiment of the review and classify the film as 'Fresh'
     or 'Rotten' based on this sentiment.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第二种方法中，我们计划通过评估评论的情感来预测电影的成功。我们将特别应用情感分析来评估评论的整体情感，并根据这种情感将电影分类为“新鲜”或“烂片”。
 - en: Yet, before we start the sentiment analysis, we must first prepare our dataset.
     In contrast to the preceding strategy, this one entails dealing with text data
     (reviews) rather of numerical and categorical variables. For this challenge, we
     will continue to employ the Random Forest model. Let's take a closer look at our
     data before we go on.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，在开始情感分析之前，我们必须先准备我们的数据集。与之前的策略不同，这种方法涉及处理文本数据（评论），而不是数值和分类变量。对于这个挑战，我们将继续使用随机森林模型。让我们在继续之前，仔细查看一下我们的数据。
 - en: First, let’s read the data.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们读取数据。
 - en: Here's the code.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here is the output.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/749cb085c1d57e200b7a99de6fa6e80e.png)![Data
     Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/3f049646d350b280b0e4cce693543493.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/749cb085c1d57e200b7a99de6fa6e80e.png)![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/3f049646d350b280b0e4cce693543493.png)'
 - en: Image by Author
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者图片
 - en: Great, let’s start with the Data Preprocessing.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，让我们开始数据预处理。
 - en: Data Preprocessing
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据预处理
 - en: In this dataset, we do not have the movie names and corresponding statuses.
     For this dataset, we have review_content and review_type variables.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个数据集中，我们没有电影名称和相应的状态。对于这个数据集，我们有 review_content 和 review_type 变量。
 - en: That’s why we will merge this dataset with our previous one, on rotten_tomatoes_link,
     and select the necessary features with index bracketing as follows.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么我们将把这个数据集与之前的数据集在 rotten_tomatoes_link 上合并，并选择必要的特征进行索引括起来，如下所示。
 - en: 'Here''s the code:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码：
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Here is the output.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/819de42e235cdfb7eeea13722a570404.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/819de42e235cdfb7eeea13722a570404.png)'
 - en: In this approach, we will use only the review_content column as the input feature
     and review_type as the ground truth label.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种方法中，我们将只使用 review_content 列作为输入特征，将 review_type 作为真实标签。
 - en: To ensure that the data is usable, we need to filter out any missing values
     in the review_content column since empty reviews cannot be used in the sentiment
     analysis.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了确保数据可用，我们需要过滤掉 review_content 列中的任何缺失值，因为空评论不能用于情感分析。
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After filtering out missing values, we will visualize the distribution of review_type
     to gain a better understanding of the distribution of data.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 过滤掉缺失值后，我们将可视化 review_type 的分布，以便更好地理解数据的分布。
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: This visualization will help us determine whether there are any class imbalances
     in the data and will guide us in selecting an appropriate evaluation metric for
     our model.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个可视化将帮助我们确定数据中是否存在类别不平衡，并指导我们选择适合的模型评估指标。
 - en: 'Here''s the whole code:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是完整的代码：
 - en: '[PRE4]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Here is the output.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/696df7516e1530102fb86bbcabe412ab.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/696df7516e1530102fb86bbcabe412ab.png)'
 - en: It looks like we have an imbalance problem between our features.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来我们在特征之间存在不平衡问题。
 - en: And also, we have too many data points, which might decrease our speed.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 而且，我们的数据点也太多了，这可能会降低我们的速度。
 - en: So, we will pick 5000 entries from the original dataset first.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我们将首先从原始数据集中挑选5000条记录。
 - en: '[PRE5]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Then we will do the ordinal encoding.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将进行有序编码。
 - en: '[PRE6]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Finally, we will create a data frame, that contains the encoded labels with
     review content by using the concat() method in Python and view the first 5 rows
     by using the head() method.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将创建一个数据框，包含使用 Python 的 concat() 方法编码的标签和评论内容，并通过使用 head() 方法查看前5行。
 - en: '[PRE7]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Here's the whole code.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是完整的代码。
 - en: '[PRE8]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Here is the output.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/4546f8377d91a7bbad2aadab16a6ad20.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/4546f8377d91a7bbad2aadab16a6ad20.png)'
 - en: Great, now as a final step for this section, let’s split our dataset into trainset
     and test set.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，现在作为这一部分的最终步骤，让我们将数据集分成训练集和测试集。
 - en: '[PRE9]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Default Random Forest
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 默认随机森林
 - en: To use the text reviews in our DataFrame for machine learning methods, we must
     transform them into a format that can be processed. In Natural Language Processing,
     this is known as tokenization, where we translate text or words into n-dimensional
     vectors and then use these vector representations as training data for our machine
     learning algorithm.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在机器学习方法中使用 DataFrame 中的文本评论，我们必须将其转换为可处理的格式。在自然语言处理（NLP）中，这被称为标记化，我们将文本或单词转换为
+    n 维向量，然后使用这些向量表示作为机器学习算法的训练数据。
 - en: To do this, we are going to use scikit-learn's CountVectorizer class to turn
     the text reviews into a matrix of token counts. We begin by creating a dictionary
     of unique terms from the input text.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们将使用 scikit-learn 的 CountVectorizer 类将文本评论转换为标记计数矩阵。我们首先通过创建输入文本的唯一术语字典开始。
 - en: For example, based on the two reviews "This movie is good" and "The movie is
     bad," the algorithm would create a dictionary of unique phrases such as ;
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，根据两个评论"This movie is good"和"The movie is bad"，算法将创建一个唯一短语的字典，如；
 - en: Then, based on the input text, we calculate the number of times of each word
     in the dictionary.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，根据输入文本，我们计算字典中每个单词出现的次数。
 - en: '["this", "movie", "is", "a", "good", "the", "bad"].'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '["this", "movie", "is", "a", "good", "the", "bad"]。'
 - en: For instance, the input "This movie is a good movie" would result in a vector
     of [1, 2, 1, 1, 1, 0, 0]
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，输入"This movie is a good movie"将生成一个向量[1, 2, 1, 1, 1, 0, 0]
 - en: Finally, we input the generated vector into our Random Forest model.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将生成的向量输入到我们的 Random Forest 模型中。
 - en: We can predict the sentiment of the reviews and classify the movie as 'Fresh'
     or 'Rotten' by training our Random Forest classifier on the vectorized text data.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过在向量化文本数据上训练我们的 Random Forest 分类器来预测评论的情感，并将电影分类为“新鲜”或“腐烂”。
 - en: The following code instantiates a CountVectorizer class that transforms text
     data into numerical vectors, and specifies that a word must appear in at least
     one document to be included in the vocabulary.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码实例化一个 CountVectorizer 类，将文本数据转换为数值向量，并指定一个单词必须出现在至少一个文档中才能包含在词汇表中。
 - en: '[PRE10]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Next, we are going to transform the training data into vectors using the instantiated
     CountVectorizer object.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将使用实例化的 CountVectorizer 对象将训练数据转换为向量。
 - en: '[PRE11]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Then, we instantiate a RandomForestClassifier object with a specified random
     state and fit the random forest model using the training data.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们实例化一个具有指定随机状态的 RandomForestClassifier 对象，并使用训练数据拟合随机森林模型。
 - en: '[PRE12]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Now it is time to predict by using the trained model and transformed test data.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候使用训练好的模型和转换后的测试数据进行预测了。
 - en: Then we will print out the classification report that contains evaluation metrics
     such as precision, recall, and f1-score.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将打印出包含评估指标如精确度、召回率和 f1-score 的分类报告。
 - en: '[PRE13]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Finally, let’s create a new figure with a specified size for the confusion matrix
     plot and plot the confusion matrix.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们创建一个指定大小的新图形来绘制混淆矩阵，并绘制混淆矩阵。
 - en: '[PRE14]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Here is the whole code.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是完整代码。
 - en: '[PRE15]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Here is the output.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/5f1de493df13d2aeaf572daaedffcc82.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/5f1de493df13d2aeaf572daaedffcc82.png)'
 - en: Weighted Random Forest
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 加权随机森林
 - en: As we can see from our latest confusion matrix, the performance of our model
     is not good enough.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 从我们最新的混淆矩阵可以看出，我们模型的表现还不够好。
 - en: Yet, this might be expected due to working with a limited number of data points.(5000
     instead of 100000).
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，由于处理的数据点数量有限（5000而非100000），这可能是预期中的结果。
 - en: Let’s see if we can increase the performance by solving the imbalance issue
     with class weights.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看是否可以通过解决类别不平衡问题来提高性能。
 - en: Here's the code.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE16]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Here is the output.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/24cfa8796c7db9e130b3a194681aa333.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/24cfa8796c7db9e130b3a194681aa333.png)'
 - en: We now train our Random Forest classifier on the vectorized text input, but
     this time including the class weight information to increase the evaluation metrics.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在在向量化的文本输入上训练我们的 Random Forest 分类器，但这次包括了类权重信息，以提高评估指标。
 - en: We first create the CountVectorizer class and, like previously, turn our text
     input into vectors.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先创建 CountVectorizer 类，并像之前一样将文本输入转换为向量。
 - en: And transform our text data into a vector.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 并将我们的文本数据转换为向量。
 - en: '[PRE17]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Then we will define a random forest with calculated class weight and train it.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将定义一个具有计算类权重的随机森林并进行训练。
 - en: '[PRE18]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Now it is time to make a prediction by using test data and printing out the
     classification report.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候通过使用测试数据进行预测并打印出分类报告了。
 - en: '[PRE19]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: In final step, we set the figure size and plot the confusion matrix.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一步，我们设置图形大小并绘制混淆矩阵。
 - en: '[PRE20]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: Here is the whole code.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是完整代码。
 - en: '[PRE21]'
+  id: totrans-100
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: Here is the output.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/add1c22409040bb1eb38f42b80aa6b02.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/add1c22409040bb1eb38f42b80aa6b02.png)'
 - en: Now our model’s accuracy is slightly better than the one without class weights.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们模型的准确性略高于没有类权重的模型。
 - en: Furthermore, because the weight of class 0 ('Rotten') is greater than the weight
     of class 1 ('Fresh,' the model now performs better in predicting 'Rotten' movie
     reviews but worse in predicting 'Fresh' movie reviews.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，由于类 0（'Rotten'）的权重大于类 1（'Fresh'）的权重，模型现在在预测 'Rotten' 电影评论方面表现更好，但在预测 'Fresh'
+    电影评论方面表现较差。
 - en: This is because the model pays more attention to the data classed as 'Rotten'.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为模型更关注被分类为 'Rotten' 的数据。
 - en: Movie Status Prediction
+  id: totrans-106
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 电影状态预测
 - en: 'Let''s use our Random Forest model to predict movie status now that we''ve
     trained it to predict the sentiment of a movie review. We''ll go through the following
     stages to determine a movie''s status:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经训练了模型来预测电影评论的情感，让我们使用随机森林模型来预测电影状态。我们将通过以下阶段来确定电影的状态：
 - en: Collect all of the reviews for a certain film.
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 收集某部电影的所有评论。
 - en: Make use of our Random Forest model to estimate the state of each review (for
     example, 'Fresh' or 'Rotten').
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 利用我们的随机森林模型来估计每个评论的状态（例如，'Fresh' 或 'Rotten'）。
 - en: To classify the final status of a movie based on the total review status, use
     the rule-based approach given on the Rotten Tomatoes website.
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据总的评论状态来分类电影的最终状态，使用 Rotten Tomatoes 网站上给出的基于规则的方法。
 - en: Here in the following code, we first create a function name predict_movie_statust,
     which take a prediction as an argument.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 在以下代码中，我们首先创建一个名为 predict_movie_statust 的函数，它接受一个预测作为参数。
 - en: Then, depending on the positive_percentage value, we identify the movie status,
     assigning either 'Fresh' or 'Rotten' to the prediction variable.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，根据 positive_percentage 值，我们确定电影状态，将 'Fresh' 或 'Rotten' 分配给预测变量。
 - en: Finally, it will output the positive review percentage with the movie status.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，它将输出带有电影状态的正面评论百分比。
 - en: Here is the code.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE22]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: 'In this example, we''ll predict the status of three films: Body of Lies, Angel
     Heart, and The Duchess. Let us begin with Body of Lies.'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，我们将预测三部电影的状态：Body of Lies、Angel Heart 和 The Duchess。让我们从 Body of Lies
+    开始。
 - en: '''Body of Lies'' Prediction'
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '''Body of Lies'' 预测'
 - en: Now as it stated above, first let’s collect all of the reviews of Body of Lies
     movie.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，首先收集 Body of Lies 电影的所有评论。
 - en: Here is the code.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE23]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: Here is the output.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/997a30ce9ecd213bf0d9b65717f229bd.png)'
+  id: totrans-122
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/997a30ce9ecd213bf0d9b65717f229bd.png)'
 - en: Great, at this stage let’s apply a weighted random forest algorithm to predict
     status. Then we use this in the custom function we defined earlier, which takes
     a prediction as an argument.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 太好了，在这个阶段，我们应用加权随机森林算法来预测状态。然后我们在之前定义的自定义函数中使用它，该函数接受一个预测作为参数。
 - en: Here is the code.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE24]'
+  id: totrans-125
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: Here is the output.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/18908c0362d7de3784801139be380238.png)'
+  id: totrans-127
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/18908c0362d7de3784801139be380238.png)'
 - en: And here is our result, let’s check our result whether it is valid or not by
     comparing it with ground_truth status.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们的结果，让我们通过与 ground_truth 状态进行比较来检查结果是否有效。
 - en: Here is the code.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE25]'
+  id: totrans-130
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: Here is the output.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/d681f9bdd39e3cd79513d900d693a6a4.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/d681f9bdd39e3cd79513d900d693a6a4.png)'
 - en: It looks like our prediction is pretty valid because the status of this movie
     is Rotten as we predict.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来我们的预测非常有效，因为我们预测的电影状态是 Rotten。
 - en: '''Angel Heart'' Prediction'
+  id: totrans-134
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '''Angel Heart'' 预测'
 - en: Here we will repeat all steps.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们将重复所有步骤。
 - en: Gather all of the reviews
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 收集所有评论
 - en: Make prediction
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 进行预测
 - en: Comparing
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 比较
 - en: Let’s first gather all of the reviews for Anna Karenina's movie.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，收集 Anna Karenina 电影的所有评论。
 - en: Here is the code.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE26]'
+  id: totrans-141
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: Here is the output.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/50a607e97a05bfe7228b92d989082558.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/50a607e97a05bfe7228b92d989082558.png)'
 - en: Now it is time to make a prediction by using random forest and our custom function.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候使用随机森林和我们的自定义函数进行预测了。
 - en: Here is the code.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE27]'
+  id: totrans-146
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: Here is the output.
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/c43d69b0d86a15ef24d7f635f836a1a5.png)'
+  id: totrans-148
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/c43d69b0d86a15ef24d7f635f836a1a5.png)'
 - en: Let’s make a comparison.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们进行比较。
 - en: Here is the code.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是代码。
 - en: '[PRE28]'
+  id: totrans-151
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: Here is the output.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/d681f9bdd39e3cd79513d900d693a6a4.png)'
+  id: totrans-153
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/d681f9bdd39e3cd79513d900d693a6a4.png)'
 - en: Our model predicts correct again.
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的模型再次预测正确。
 - en: Now let’s try one more time.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在再试一次。
 - en: '''The Duchess'' Prediction'
+  id: totrans-156
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '''The Duchess'' 预测'
 - en: First let’s collect all reviews.
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们收集所有评论。
 - en: Here is the code.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是代码。
 - en: '[PRE29]'
+  id: totrans-159
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: Here is the output.
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/ab6cc352f6fa8be8df43e19b58ee2563.png)'
+  id: totrans-161
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/ab6cc352f6fa8be8df43e19b58ee2563.png)'
 - en: Then now it is time to make a prediction.
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候进行预测了。
 - en: Here is the code.
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是代码。
 - en: '[PRE30]'
+  id: totrans-164
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: Here is the output.
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/4afdc0278cd0b83d3149c868ec77513c.png)'
+  id: totrans-166
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/4afdc0278cd0b83d3149c868ec77513c.png)'
 - en: Let’s compare our prediction with the ground truth.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将预测结果与实际情况进行比较。
 - en: Here is the code.
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是代码。
 - en: '[PRE31]'
+  id: totrans-169
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: Here is the output.
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果。
 - en: '![Data Science Project of Rotten Tomatoes Movie Rating Prediction: Second Approach](../Images/68020877ddebd9867658c3fdf8f1cb5b.png)'
+  id: totrans-171
   prefs: []
   type: TYPE_IMG
+  zh: '![烂番茄电影评分预测数据科学项目：第二种方法](../Images/68020877ddebd9867658c3fdf8f1cb5b.png)'
 - en: And the movie's ground-truth label is 'Fresh,' indicating that our model's forecast
     is incorrect.
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 电影的实际标签是 '新鲜'，这表明我们模型的预测是错误的。
 - en: Yet, it can be noticed that our model's predicted is very close to the 60% threshold,
     indicating that a minor tweak to the model might alter its prediction from 'Rotten'
     to 'Fresh'.
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 但可以注意到，我们模型的预测值非常接近60%的阈值，这表明对模型进行微调可能会将预测结果从 '烂' 改变为 '新鲜'。
 - en: Obviously, the Random Forest model that we trained above is not the best model,
     since there is still potential for improvement. In the next part, we will provide
     many suggestions for improving the performance of our model.
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，我们上面训练的随机森林模型并不是最佳模型，因为仍有改进的潜力。在下一部分，我们将提供许多建议，以提高我们模型的性能。
 - en: Suggestions for Performance Improvement
+  id: totrans-175
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 性能改进建议
 - en: Increase the amount of data you have.
+  id: totrans-176
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 增加你拥有的数据量。
 - en: Set different hyperparameters of the random forest model.
+  id: totrans-177
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 设置随机森林模型的不同超参数。
 - en: Apply different machine learning models to find the best.
+  id: totrans-178
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 应用不同的机器学习模型以找到最佳模型。
 - en: Adjust the method used to represent the text data.
+  id: totrans-179
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 调整用于表示文本数据的方法。
 - en: Conclusion
+  id: totrans-180
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, we explored two different approaches to predict movie status
     based on numerical and categorical features.
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们探索了两种不同的方法来根据数值和分类特征预测电影状态。
 - en: We first performed data preprocessing and then applied a decision tree classifier
     and random forest classifier to train our model.
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先进行了数据预处理，然后应用决策树分类器和随机森林分类器来训练我们的模型。
 - en: We also experimented with feature selection and a weighted random forest classifier.
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还尝试了特征选择和加权随机森林分类器。
 - en: In the second approach, we used the default random forest and weighted random
     forest to predict the movie status of three different films.
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第二种方法中，我们使用了默认的随机森林和加权随机森林来预测三部不同电影的状态。
 - en: We provided suggestions for improving the performance of our models. We hope
     this article has been informative and helpful.
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们提供了改进模型性能的建议。希望本文对您有所帮助。
 - en: If you want some beginner level projects, check out our post “[Data Science
     Project Ideas for Beginners](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)”.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想要一些初学者级别的项目，可以查看我们的帖子 “[数据科学项目想法（适合初学者）](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)”。
 - en: '**[Nate Rosidi](https://www.stratascratch.com)** is a data scientist and in
     product strategy. He''s also an adjunct professor teaching analytics, and is the
     founder of [StrataScratch](https://www.stratascratch.com/), a platform helping
     data scientists prepare for their interviews with real interview questions from
     top companies. Connect with him on [Twitter: StrataScratch](https://twitter.com/StrataScratch)
     or [LinkedIn](https://www.linkedin.com/in/nathanrosidi/).'
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Nate Rosidi](https://www.stratascratch.com)** 是一位数据科学家，专注于产品策略。他还是一位兼职教授，教授分析课程，并且是
+    [StrataScratch](https://www.stratascratch.com/)、一个帮助数据科学家准备面试的在线平台的创始人。可以在 [Twitter:
+    StrataScratch](https://twitter.com/StrataScratch) 或 [LinkedIn](https://www.linkedin.com/in/nathanrosidi/)
+    与他联系。'
 - en: More On This Topic
+  id: totrans-188
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关信息
 - en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
+  id: totrans-189
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学项目：Rotten Tomatoes 电影评分预测：…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
 - en: '[KDnuggets News, July 5: A Rotten Data Science Project • 10 AI…](https://www.kdnuggets.com/2023/n24.html)'
+  id: totrans-190
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，7月5日：一个烂数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)'
 - en: '[311 Call Centre Performance: Rating Service Levels](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
+  id: totrans-191
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[311 呼叫中心表现：服务水平评分](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
 - en: '[Kubernetes In Action: Second Edition](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
+  id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes 实战：第二版](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
 - en: '[Deep Learning with Python: Second Edition by François Chollet](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)'
+  id: totrans-193
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 深度学习：第二版，作者 François Chollet](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)'
 - en: '[How to Digest 15 Billion Logs Per Day and Keep Big Queries Within 1 Second](https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second)'
+  id: totrans-194
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理每日 150 亿条日志，并将大查询保持在 1 秒内](https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second)'
