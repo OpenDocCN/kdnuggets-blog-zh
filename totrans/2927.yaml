@@ -1,111 +1,169 @@
 - en: Overview of Different Approaches to Deploying Machine Learning Models in Production
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习模型生产部署的不同方法概述
 - en: 原文：[https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Julien Kervizic,](https://www.linkedin.com/in/julienkervizic/) Senior
     Enterprise Data Architect at GrandVision NV**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)，GrandVision
+    NV 高级企业数据架构师**'
 - en: '![Overview](../Images/ce0a597f4c1c6e1fb4ae387d6727da48.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![概述](../Images/ce0a597f4c1c6e1fb4ae387d6727da48.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: There are different approaches to putting models into productions, with benefits
     that can vary dependent on the specific use case. Take for example the use case
     of churn prediction, there is value in having a static value already that can
     easily be looked up when someone call a customer service, but there is some extra
     value that could be gained if for specific events, the model could be re-run with
     the newly acquired information.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 将模型投入生产有不同的方法，具体用例会影响其优缺点。例如，在流失预测的用例中，拥有一个静态值可以在有人拨打客服电话时轻松查找，但如果在特定事件发生时，模型能够用新获得的信息重新运行，将会带来额外的价值。
 - en: 'There is generally different ways to both train and server models into production:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常有不同的方式将模型训练和投入生产：
 - en: '**Train**: one off, batch and real-time/online training'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**训练**：一次性、批量和实时/在线训练'
 - en: '**Serve:** Batch, Realtime (Database Trigger, Pub/Sub, web-service, inApp)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**服务**：批量、实时（数据库触发器、Pub/Sub、网络服务、应用内）'
 - en: Each approach having its own set of benefits and tradeoffs that need to be considered.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 每种方法都有其自身的优点和权衡，需要考虑。
 - en: One off Training
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一次性训练
 - en: Models don’t necessarily need to be continuously trained in order to be pushed
     to production. Quite often a model can be just trained ad-hoc by a data-scientist,
     and pushed to production until its performance deteriorates enough that they are
     called upon to refresh it.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型不一定需要持续训练才能投入生产。通常，数据科学家可以通过临时训练一个模型，并将其投入生产，直到其性能下降到需要刷新为止。
 - en: '![](../Images/f86924f2ec8ad58a1101e565195c5c47.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f86924f2ec8ad58a1101e565195c5c47.png)'
 - en: '**From Jupyter to Production**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**从 Jupyter 到生产**'
 - en: Data Scientists prototyping and doing machine learning tend to operate in their
     environment of choice [Jupyter](https://jupyter.org/) Notebooks. Essentially an
     advanced GUI on a [repl](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop),
     that allows you to save both code and command outputs.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学家在原型设计和进行机器学习时，通常会在他们选择的环境中操作，即[Jupyter](https://jupyter.org/) Notebooks。这本质上是一个先进的
+    GUI，在一个 [repl](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
+    上，允许你保存代码和命令输出。
 - en: Using that approach it is more than feasible to push an ad-hoc trained model
     from some piece of code in Jupyter to production. Different types of libraries
     and other notebook providers help further tie the link between the data-scientist
     workbench and production.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这种方法，将从 Jupyter 中的某段代码临时训练的模型推送到生产中是完全可行的。不同类型的库和其他笔记本提供商进一步帮助将数据科学家的工作台与生产连接起来。
 - en: '**Model Format**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型格式**'
 - en: '[Pickle](https://docs.python.org/3/library/pickle.html) converts a python object
     to to a bitstream and allows it to be stored to disk and reloaded at a later time.
     It is provides a good format to store machine learning models provided that their
     intended applications is also built in python.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Pickle](https://docs.python.org/3/library/pickle.html) 将 Python 对象转换为比特流，并允许将其存储到磁盘上，并在以后重新加载。它提供了一种良好的格式来存储机器学习模型，前提是其预期应用程序也是用
+    Python 构建的。'
 - en: '[ONNX](https://github.com/onnx) the Open Neural Network Exchange format, is
     an open format that supports the storing and porting of predictive model across
     libraries and languages. Most deep learning libraries support it and sklearn also
     has a library extension to convert their model to [ONNX’s format](https://github.com/onnx/sklearn-onnx/blob/master/docs/tutorial.rst).'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[ONNX](https://github.com/onnx) 开放神经网络交换格式，是一种开放格式，支持在库和语言之间存储和移植预测模型。大多数深度学习库支持它，sklearn
+    也有一个库扩展，用于将其模型转换为 [ONNX 格式](https://github.com/onnx/sklearn-onnx/blob/master/docs/tutorial.rst)。'
 - en: '[PMML](https://en.wikipedia.org/wiki/Predictive_Model_Markup_Language) or Predictive
     model markup language, is another interchange format for predictive models. Like
     for ONNX sklearn also has another library extension for converting the models
@@ -115,123 +173,177 @@
     such as [SAP](https://archive.sap.com/kmuuid2/a07faefd-61d7-2c10-bba6-89ac5ffc302c/Integrating%20Real-time%20Predictive%20Analytics%20into%20SAP%20Applications.pdf)
     for instance is able to leverage certain versions of the PMML standard, likewise
     for CRM applications such as [PEGA](https://community.pega.com/knowledgebase/supported-pmml-model-types).'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PMML](https://en.wikipedia.org/wiki/Predictive_Model_Markup_Language) 或预测模型标记语言，是另一种预测模型的交换格式。与
+    ONNX 类似，sklearn 也有一个库扩展，用于将模型转换为 [PMML 格式](https://github.com/jpmml/sklearn2pmml)。然而，它的缺点是仅支持某些类型的预测模型。PMML
+    自 1997 年以来就存在，因此有大量应用程序利用该格式。例如，[SAP](https://archive.sap.com/kmuuid2/a07faefd-61d7-2c10-bba6-89ac5ffc302c/Integrating%20Real-time%20Predictive%20Analytics%20into%20SAP%20Applications.pdf)
+    能够利用某些版本的 PMML 标准，类似地，CRM 应用程序如 [PEGA](https://community.pega.com/knowledgebase/supported-pmml-model-types)
+    也是如此。'
 - en: '[POJO and MOJO](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/productionizing.html#about-pojos-and-mojos)
     are [H2O.ai](https://www.h2o.ai/)’s export format, that intendeds to offers an
     easily embeddable model into java application. They are however very specific
     to using the H2O’s platform.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[POJO 和 MOJO](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/productionizing.html#about-pojos-and-mojos)
+    是 [H2O.ai](https://www.h2o.ai/) 的导出格式，旨在提供一个易于嵌入到 Java 应用程序中的模型。然而，它们非常特定于使用 H2O
+    的平台。'
 - en: '**Training**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练**'
 - en: 'For one off training of models, the model can either be trained and fine tune
     ad hoc by a data-scientists or training through AutoML libraries. Having an easily
     reproducible setup, however helps pushing into the next stage of productionalization,
     ie: batch training.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于一次性的模型训练，模型可以由数据科学家即时训练和微调，或通过 AutoML 库进行训练。然而，拥有一个易于复现的设置有助于推进到生产化的下一个阶段，即：批量训练。
 - en: Batch Training
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 批量训练
 - en: While not fully necessary to implement a model in production, batch training
     allows to have a constantly refreshed version of your model based on the latest
     train.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然在生产中实现模型并非完全必要，但批量训练允许根据最新的训练不断刷新模型的版本。
 - en: Batch training can benefit a-lot from AutoML type of frameworks, AutoML enables
     you to perform/automate activities such as feature processing, feature selection,
     model selections and parameter optimization. Their recent performance has been
     on par or bested the most diligent data-scientists.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 批量训练可以从 AutoML 类型的框架中受益，AutoML 使您能够执行/自动化活动，如特征处理、特征选择、模型选择和参数优化。它们最近的表现已达到或超越了最勤奋的数据科学家。
 - en: '![Figure](../Images/55b92ce5dd110284bdb0b317125b48f9.png)[LinkedIn post](https://www.linkedin.com/pulse/future-data-science-one-image-charles-givre/?fbclid=IwAR0zVvLTmiDT4ReAqe59HjCXym_pNXW6AvC2RgeC-zY5sEESnhKHYI_TfT8)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/55b92ce5dd110284bdb0b317125b48f9.png)[LinkedIn 帖子](https://www.linkedin.com/pulse/future-data-science-one-image-charles-givre/?fbclid=IwAR0zVvLTmiDT4ReAqe59HjCXym_pNXW6AvC2RgeC-zY5sEESnhKHYI_TfT8)'
 - en: 'Using them allows for a more comprehensive model training than what was typically
     done prior to their ascent: simply retraining the model weights.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用它们允许比传统的模型训练方法更全面的模型训练：仅仅是重新训练模型权重。
 - en: Different technologies exists that are made to support this continuous batch
     training, these could for instance be setup through a mix of [airflow](https://medium.com/analytics-and-data/airflow-the-easy-way-f1c26859ee21)
     to manage the different workflow and an AutoML library such as [tpot](https://epistasislab.github.io/tpot/),
     Different cloud providers offer their solutions for AutoML that can be put in
     a data workflow. Azure for instance integrates machine learning prediction and
     model training with their [data factory offering](https://azure.microsoft.com/es-es/blog/retraining-and-updating-azure-machine-learning-models-with-azure-data-factory/).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 存在不同的技术支持这种连续批量训练，这些技术可以通过混合使用[airflow](https://medium.com/analytics-and-data/airflow-the-easy-way-f1c26859ee21)来管理不同的工作流和类似[tpot](https://epistasislab.github.io/tpot/)的AutoML库来设置。不同的云服务提供商提供他们的AutoML解决方案，可以纳入数据工作流。例如，Azure
+    将机器学习预测和模型训练与他们的[数据工厂服务](https://azure.microsoft.com/es-es/blog/retraining-and-updating-azure-machine-learning-models-with-azure-data-factory/)集成。
 - en: Real time training
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实时训练
 - en: Real-time training is possible with ‘Online Machine Learning’ models, algorithms
     supporting this method of training includes K-means (through mini-batch), Linear
     and Logistic Regression (through Stochastic Gradient Descent) as well as Naive
     Bayes classifier.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 实时训练可以通过‘在线机器学习’模型实现，支持这种训练方法的算法包括 K-means（通过小批量）、线性回归和逻辑回归（通过随机梯度下降）以及朴素贝叶斯分类器。
 - en: 'Spark has StreamingLinearAlgorithm/StreamingLinearRegressionWithSGD to perform
     these operations, sklearn has SGDRegressor and SGDClassifier that can be incrementally
     trained. In sklearn, the incremental training is done through the partial_fit
     method as shown below:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: Spark 提供了 StreamingLinearAlgorithm/StreamingLinearRegressionWithSGD 来执行这些操作，sklearn
+    提供了 SGDRegressor 和 SGDClassifier 可进行增量训练。在 sklearn 中，增量训练通过 partial_fit 方法进行，如下所示：
 - en: '[PRE0]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: When deploying this type of models there needs to be serious operational support
     and monitoring as the model can be sensitive to new data and noise, and model
     performance needs to be monitored on the fly. In offline training, you can filter
     points of [high leverage](https://en.wikipedia.org/wiki/Leverage_%28statistics%29)
     and correct for this type of incoming data. This is much harder to do when you
     are constantly updating your model training based on a stream of new data points.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署这种类型的模型时，需要认真考虑操作支持和监控，因为模型可能对新数据和噪音敏感，模型性能需要实时监控。在离线训练中，你可以筛选[高杠杆点](https://en.wikipedia.org/wiki/Leverage_%28statistics%29)并纠正这种类型的输入数据。而当你基于新数据点不断更新模型训练时，这种操作会变得更加困难。
 - en: Another challenge that occurs with training online model is that they don’t
     decay historical information. This means that, on case there are structural changes
     in your datasets, the model will need to be anyway re-trained and that there will
     be a big onus in model lifecycle management.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练在线模型时出现的另一个挑战是它们不会衰减历史信息。这意味着，如果数据集发生结构性变化，模型仍需重新训练，并且模型生命周期管理将承担很大负担。
 - en: Batch vs. Real-time Prediction
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 批量预测与实时预测
 - en: When looking at whether to setup a batch or real-time prediction, it is important
     to get an understanding of why doing real-time prediction would be important.
     It can potentially be for getting a new score when significant event happen, for
     instance what would be the churn score of customer when they call a contact center.
     These benefits needs to be weighted against the complexity and cost implications
     that arise from doing real-time predictions.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在决定设置批量还是实时预测时，了解为什么实时预测很重要是很有必要的。这可能是为了在重要事件发生时获取新的评分，例如客户拨打客服电话时的流失评分。这些好处需要与实时预测带来的复杂性和成本影响进行权衡。
 - en: '**Load implications**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**负载影响**'
 - en: Catering to real time prediction, requires a way to handle peak load. Depending
     on the approach taken and how the prediction ends up being used, choosing a real-time
     approach, might also require to have machine with extra computing power available
     in order to provide a prediction within a certain SLA. This contrasts with a batch
     approach where the predictions computing can be spread out throughout the day
     based on available capacity.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 实时预测需要处理峰值负载。根据所采取的方法以及预测的使用方式，选择实时方法可能还需要额外的计算能力，以便在某个SLA内提供预测。这与批量方法形成对比，后者的预测计算可以根据可用容量分散到一天中。
 - en: '**Infrastructure Implications**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基础设施影响**'
 - en: Going for real-time, put a much higher operational responsibility. People need
     to be able to monitor how the system is working, be alerted when there is issue
     as well as take some consideration with respect to failover responsibility. For
     batch prediction, the operational obligation is much lower, some monitoring is
     definitely needed, and altering is desired but the need to be able to know of
     issues arising directly is much lower.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行实时预测需要承担更高的运营责任。人们需要能够监控系统的工作情况，遇到问题时得到警报，并考虑故障转移责任。对于批量预测，运营义务要低得多，虽然需要一些监控，并且希望有警报，但对直接了解问题的需求要低得多。
 - en: '**Cost Implications**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**成本影响**'
 - en: Going for real-time predictions also has costs implications, going for more
     computing power, not being able to spread the load throughout the day can force
     into purchasing more computing capacity than you would need or to pay for spot
@@ -241,11 +353,15 @@
     for real time predictions. One potential caveat there is where the choice is made
     to rely on in app prediction, for that specific scenario the cost might actually
     end up being cheaper than going for a batch approach.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行实时预测也会有成本影响，需要更多的计算能力，无法在一天内分散负载可能会迫使你购买比实际需要更多的计算容量，或支付价格上涨的费用。根据采取的方法和要求，可能还会因为需要更强大的计算能力以满足服务水平协议（SLA）而产生额外费用。此外，选择实时预测时，基础设施的足迹往往更大。一个潜在的注意事项是，在特定场景下，选择依赖于应用内预测的成本可能实际上会比批量方法更便宜。
 - en: '**Evaluation Implications**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**评估影响**'
 - en: Evaluating the prediction performance in real-time manner can be more challenging
     than for batch predictions. How do you evaluate performance when you are faced
     with a succession of actions in a short burst producing multiple predictions for
@@ -253,12 +369,16 @@
     are significantly more complex to manage. They also require a log collection mechanism
     that allows to both collect the different predictions and features that yielded
     the score for further evaluation.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 实时评估预测性能可能比批量预测更具挑战性。例如，当你面临一系列连续操作，短时间内为某个客户产生多个预测时，你如何评估性能？实时预测模型的评估和调试管理要复杂得多。这些模型还需要一个日志收集机制，用于收集不同的预测和产生分数的特征，以便进行进一步评估。
 - en: Batch Prediction Integration
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 批量预测集成
 - en: Batch predictions rely on two different set of information, one is the predictive
     model and the other one is the features that we will feed the model. In most type
     of batch prediction architecture, ETL is performed to either fetch pre-calculated
@@ -266,12 +386,16 @@
     transformation across multiple datasets to provide the input to the prediction
     model. The prediction model then iterates over all the rows in the datasets providing
     the different score.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 批量预测依赖于两种不同的信息，一种是预测模型，另一种是我们将提供给模型的特征。在大多数批量预测架构中，ETL操作用于从特定的数据存储（特征存储）中提取预计算的特征，或在多个数据集之间执行某种类型的转换，以提供预测模型的输入。然后，预测模型在数据集中的所有行上进行迭代，提供不同的分数。
 - en: '![Figure](../Images/60d22376a65ac66c24b3e0dc68902dcf.png)example flow to model
     serving for batch prediction'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '![图示](../Images/60d22376a65ac66c24b3e0dc68902dcf.png)批量预测模型服务的示例流程'
 - en: Once all the predictions have been computed, we can then “serve” the score to
     the different systems wanting to consume the information. This can be done in
     different manner depending on thee use case for which we want to consume the score,
@@ -280,19 +404,28 @@
     that we can offer milliseconds responses, while for certain use cases such as
     the creation of an email journey, we might just be relying on a CSV SFTP export
     or a data load to a more traditional RDBMS.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦所有预测计算完成，我们可以将分数“服务”到不同的系统中。这可以根据我们想要使用分数的用例以不同的方式完成，例如，如果我们想在前端应用程序中使用分数，我们可能会将数据推送到“缓存”或NoSQL数据库，如Redis，以提供毫秒级的响应。而对于某些用例，例如创建电子邮件旅程，我们可能会依赖CSV
+    SFTP导出或数据加载到更传统的RDBMS中。
 - en: '**Real-time Prediction integration**'
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**实时预测集成**'
 - en: Being able to push model into production for real-time applications require
     3 base components. A customer/user profile, a set of triggers and predictive models.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 将模型推送到生产环境以用于实时应用需要 3 个基本组件：客户/用户概况、一组触发器和预测模型。
 - en: '![](../Images/a92fec2b10f8928597a646450dd5dde4.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a92fec2b10f8928597a646450dd5dde4.png)'
 - en: '**Profile:** The customer profile contains all the related attribute to the
     customer as well as the different attributes (eg: counters) necessary in order
     to make a given prediction. This is required for customer level prediction in
@@ -300,208 +433,301 @@
     well as to simplify the integration of machine learning models in productions.
     In most cases a similar type of data store would be needed in order to effectively
     fetch the data needed to power the prediction model.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**概况：** 客户概况包含与客户相关的所有属性以及进行预测所需的不同属性（例如：计数器）。这是进行客户级别预测所必需的，以减少从多个地方提取信息的延迟，并简化机器学习模型在生产中的集成。在大多数情况下，需要类似类型的数据存储，以有效地提取驱动预测模型所需的数据。'
 - en: '**Triggers:** Triggers are events causing the initiation of process, they can
     be for churn for instance, call to a customer service center, checking information
     within your order history, etc …'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**触发器：** 触发器是引发过程启动的事件，例如客户流失、拨打客户服务中心电话、检查订单历史信息等。'
 - en: '**Models:** models need to have been pre-trained and typically exported to
     one of the 3 formats previously mentioned (pickle, ONNX or PMML) to be something
     that we could easily port to production.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型：** 模型需要经过预训练，并通常导出为之前提到的 3 种格式之一（pickle、ONNX 或 PMML），以便能够轻松地迁移到生产环境中。'
 - en: 'There are quite a few different approach to putting models for scoring purpose
     in production:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 将模型用于评分目的的生产有几种不同的方法：
 - en: '*Relying on in Database integration:* a lot of database vendors have made a
     significant effort to tie up advanced analytics use cases within the database.
     Be it by direct integration of Python or R code, to the import of PMML model.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*依赖数据库集成：* 许多数据库供应商已经付出了显著的努力，将高级分析用例集成到数据库中。无论是通过直接集成 Python 或 R 代码，还是通过导入
+    PMML 模型。'
 - en: '*Exploiting a Pub/Sub model*: The prediction model is essentially an application
     feeding of a data-stream and performing certain operations, such as pulling customer
     profile information.'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*利用发布/订阅模型：* 预测模型本质上是一个应用程序，依赖数据流并执行某些操作，例如提取客户概况信息。'
 - en: '*Webservice:* Setting up an API wrapper around the model prediction and deploying
     it as a web-service. Depending on the way the web-service is setup it might or
     might not do the pull or data needed to power the model.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Web服务：* 在模型预测周围设置 API 包装器，并将其部署为 Web 服务。根据 Web 服务的设置方式，它可能会或可能不会提取驱动模型所需的数据。'
 - en: '*inApp:* it is also possible to deploy the model directly into a native or
     web application and have the model be run on local or external datasources.'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*应用内：* 还可以将模型直接部署到本地或 Web 应用程序中，并让模型在本地或外部数据源上运行。'
 - en: '***Database integrations***'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '***数据库集成***'
 - en: If the overall size of your database is fairly small (< 1M user profile) and
     the update frequency is occasional it can make sense to integrate some of the
     real-time update process directly within the database.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数据库的总体规模相对较小（< 1M 用户概况）且更新频率较低，将一些实时更新过程直接集成到数据库中是有意义的。
 - en: Postgres possess an integration that allows to run Python code as functions
     or stored procedure called [PL/Python](http://PL/Python). This implementation
     has access to all the libraries that are part of the **PYTHONPATH**, and as such
     are able to use libraries such as Pandas and SKlearn to run some operations.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: Postgres 具有一个集成，允许将 Python 代码作为函数或存储过程运行，称为[PL/Python](http://PL/Python)。该实现可以访问所有属于**PYTHONPATH**的库，因此能够使用如
+    Pandas 和 SKlearn 等库来执行一些操作。
 - en: This can be coupled with Postgres’ [Triggers](https://www.tutorialspoint.com/postgresql/postgresql_triggers.htm)
     Mechanism to perform a run of the database and update the churn score. For instance
     if a new entry is made to a complaint table, it would be valuable to have the
     model be re-run in real-time.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以与 Postgres 的[触发器](https://www.tutorialspoint.com/postgresql/postgresql_triggers.htm)机制结合使用，执行数据库运行并更新流失评分。例如，如果在投诉表中添加了新条目，则实时重新运行模型将非常有价值。
 - en: '![](../Images/28b9641a71155fe9744fd6bd06c66070.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/28b9641a71155fe9744fd6bd06c66070.png)'
 - en: '**Sequence flow**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**序列流**'
 - en: 'The flow could be setup in the following way:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 流程可以按以下方式设置：
 - en: '*New Event:* When a new row is inserted in the complain table, an event trigger
     is generated.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '*新事件:* 当投诉表中插入新行时，会生成一个事件触发器。'
 - en: '*Trigger:* The trigger function would update the number of complaint made by
     this customer in the customer profile table and fetch the updated record for the
     customer.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '*触发器:* 触发器函数会更新客户档案表中该客户的投诉次数，并获取该客户的更新记录。'
 - en: '*Prediction Request:* Based on that it would re-run the churn model through
     PL/Python and retrieve the prediction.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '*预测请求:* 基于此，将通过 PL/Python 重新运行流失模型并获取预测结果。'
 - en: '*Customer Profile Update:* It can then re-update the customer profile with
     the updated prediction. Downstream flows can then happen upon checking if the
     customer profile has been updated with new churn prediction value.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '*客户档案更新:* 然后可以使用更新后的预测重新更新客户档案。下游流程可以在检查客户档案是否已更新为新的流失预测值后发生。'
 - en: '**Technologies**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**技术**'
 - en: Different databases are able to support the running of Python script, this is
     the case of PostGres which has a native Python integration as previously mentioned,
     but also of Ms SQL Server through its’ [Machine Learning Service (in Database)](https://www.sqlshack.com/how-to-use-python-in-sql-server-2017-to-obtain-advanced-data-analytics/),
     other databases such as Teradata, are able to run R/Python script through an external
     script command. While Oracle supports [PMML model](https://docs.oracle.com/database/121/DMPRG/GUID-55C6ADBF-DA64-48B6-A424-5F0A59CD406D.htm#DMPRG701)
     through its data mining extension.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同的数据库能够支持 Python 脚本的运行，例如之前提到的 PostGres 有本地的 Python 集成，但 Ms SQL Server 也可以通过其
+    [数据库中的机器学习服务](https://www.sqlshack.com/how-to-use-python-in-sql-server-2017-to-obtain-advanced-data-analytics/)
+    支持，而 Teradata 等其他数据库能够通过外部脚本命令运行 R/Python 脚本。Oracle 通过其数据挖掘扩展支持 [PMML 模型](https://docs.oracle.com/database/121/DMPRG/GUID-55C6ADBF-DA64-48B6-A424-5F0A59CD406D.htm#DMPRG701)。
 - en: '**Pub/Sub**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**发布/订阅**'
 - en: Implementing real-time prediction through a pub/sub model allows to be able
     to properly handle the load through throttling. For engineers, it also means that
     they can just feed the event data through a single “logging” feed, to which different
     application can subscribe.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过发布/订阅模型实现实时预测可以有效地通过节流处理负载。对于工程师而言，这也意味着他们可以通过一个“日志”数据流提供事件数据，多个应用程序可以订阅这个流。
 - en: 'An example, of how this could be setup is shown below:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个如何设置的示例如下：
 - en: '![](../Images/473338fb8960a92196c2b0b5106e85fb.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/473338fb8960a92196c2b0b5106e85fb.png)'
 - en: The page view event is fired to a specific event topic, on which two application
     subscribe a page view counter, and a prediction. Both of these application filter
     out specific relevant event from the topic for their purpose and consume the different
     messages in the topics. The page view counter app, provides data to power a dashboard,
     while the prediction app, updates the customer profile.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 页面视图事件被触发到一个特定的事件主题上，在这个主题上有两个应用程序，一个订阅页面视图计数器，另一个订阅预测。这两个应用程序从主题中过滤出特定相关的事件以满足各自的目的，并消费主题中的不同消息。页面视图计数器应用提供数据以支持仪表板，而预测应用则更新客户档案。
 - en: '![](../Images/ec05d3e486382ceeb9a2616bb6aff4ab.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ec05d3e486382ceeb9a2616bb6aff4ab.png)'
 - en: '**Sequence flow:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**序列流：**'
 - en: Event messages are pushed to the pub/sub topic as they occur, the prediction
     app poll the topic for new messages. When a new message is retrieved by the prediction
     app, it will request and retrieve the customer profile and use the message and
     the profile information to make a prediction. which it will ultimately push back
     to the customer profile for further use.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 事件消息在发生时被推送到发布/订阅主题，预测应用轮询该主题以获取新消息。当预测应用检索到新消息时，它将请求并获取客户档案，并使用消息和档案信息进行预测。然后，它将最终将预测结果推送回客户档案以供进一步使用。
 - en: A slightly different flow can be setup where the data is first consumed by an
     “enrichment app” that adds the profile information to the message and then pushes
     it back to a new topic to finally be consumed by the prediction app and pushed
     onto the customer profile.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以设置一个略有不同的流程，其中数据首先被一个“增强应用”消费，该应用将档案信息添加到消息中，然后将其推送回新的主题，最终由预测应用消费并推送到客户档案中。
 - en: '**Technologies:**'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**技术：**'
 - en: The typical open source combination that you would find that support this kind
     of use case in the data ecosystem is a combination of Kafka and Spark streaming,
     but a different setup is possible on the cloud. On google notably a google pub-sub/dataflow
     (Beam) provides a good alternative to that combination, on azure a combination
     of Azure-Service Bus or Eventhub and Azure Functions can serve as a good way to
     consume the messages and generate these predictions.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据生态系统中，支持这种用例的典型开源组合是Kafka和Spark流处理，但在云上也可以进行不同的设置。在Google上，Google Pub/Sub/数据流（Beam）提供了一个不错的替代组合；在Azure上，Azure-Service
+    Bus或Eventhub与Azure Functions的组合可以很好地处理消息并生成这些预测。
 - en: '*Web Service*'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Web服务*'
 - en: We can implement models into productions as web-services. Implementing predictions
     model as web-services are particularly useful in engineering teams that are fragmented
     and that need to handle multiple different interfaces such as web, desktop and
     mobile.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将模型实施为Web服务。将预测模型实现为Web服务特别适用于工程团队的分散情况，并且需要处理多个不同的接口，如Web、桌面和移动。
 - en: 'Interfacing with the web-service could be setup in different way:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 与Web服务的接口可以以不同方式设置：
 - en: Either providing an identifier and having the web-service pull the required
     information, compute the prediction and return its’ value
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过提供标识符，让Web服务拉取所需信息，计算预测并返回其值。
 - en: Or by accepting a payload, converting it to a data-frame, making the prediction
     and returning its’ value.
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或者接受一个有效负载，将其转换为数据框，进行预测并返回其值。
 - en: The second approach is usually recommended in cases, when there is a lot of
     interaction happening and a local cache is used to essentially buffer the synchronization
     with the backend systems, or when needing to make prediction at a different grain
     than a customer id, for instance when doing session based predictions.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二种方法通常建议在有大量交互发生并且使用本地缓存以缓冲与后端系统同步时，或在需要基于不同粒度（例如会话预测）进行预测时使用。
 - en: The systems making use of local storage, tend to have a reducer function, which
     role is to calculate what would be the customer profile, should the event in local
     storage be integrated back. As such it provides an approximation of the customer
     profile based on local data.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用本地存储的系统，通常有一个还原函数，其作用是计算如果将本地存储中的事件重新集成，会形成什么样的客户档案。因此，它提供了基于本地数据的客户档案近似值。
 - en: '![](../Images/715d2d6161321c99fcf2cec609365c2f.png)'
+  id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/715d2d6161321c99fcf2cec609365c2f.png)'
 - en: '**Sequence Flow**'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '**序列流程**'
 - en: The flow for handling the prediction using a mobile app, with local storage
     can be described in 4 phases.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理使用移动应用进行预测的流程，可以分为4个阶段。
 - en: '*Application Initialization (1 to 3)****:*** The application initializes, and
     makes a request to the customer profile, and retrieve its initial value back,
     and initialize the profile in local storage.'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '*应用初始化（1到3）****：*** 应用程序初始化，向客户档案发出请求，检索其初始值，并在本地存储中初始化档案。'
 - en: '*Applications (4):* The application stores the different events happening with
     the application into an array in local storage.'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '*应用程序（4）：* 应用程序将发生在应用程序中的不同事件存储到本地存储中的一个数组里。'
 - en: '*Prediction Preparation (5 to 8)****:*** The application wants to retrieve
     a new churn prediction, and therefore needs to prepare the information it needs
     to provide to the Churn Web-service. For that, it makes an initial request to
@@ -509,169 +735,255 @@
     has stored. Once they are retrieve, it makes a request to a reducer function providing
     these values as arguments, the reducer function outputs an updated* profile with
     the local events incorporated back into this profile.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '*预测准备（5到8）****：*** 应用程序希望检索新的流失预测，因此需要准备提供给流失Web服务的信息。为此，它向本地存储发出初始请求，以检索档案的值和已存储的事件数组。一旦检索到这些数据，它会向还原函数发出请求，将这些值作为参数提供，还原函数输出一个更新的档案，将本地事件重新集成到档案中。'
 - en: '*Web-service Prediction (9 to 10):* The application makes a request to the
     churn prediction web-service, providing the different the updated*/reduced customer
     profile from step 8 as part of the payload. The web-service can then used the
     information provided by the payload to generate the prediction and output its
     value, back to the application.'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Web 服务预测 (9 到 10)：* 应用程序向流失预测 Web 服务发出请求，提供从第 8 步更新的*/减少的客户档案作为有效负载的一部分。Web
+    服务可以使用有效负载提供的信息生成预测并将其值输出回应用程序。'
 - en: '**Technologies**'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**技术**'
 - en: 'There are quite a few technologies that can be used to power a prediction web-service:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 有许多技术可以用来提供预测 Web 服务：
 - en: '*Functions*'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '*函数*'
 - en: AWS Lambda functions, Google Cloud functions and Microsoft Azure Functions (although
     Python support is currently in Beta) offer an easy to setup interface to easily
     deploy scalable web-services.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS Lambda 函数、Google Cloud 函数和 Microsoft Azure Functions（尽管 Python 支持目前处于 Beta
+    阶段）提供了一个简单的接口，便于部署可扩展的 Web 服务。
 - en: 'For instance on Azure a prediction web-service could be implemented through
     a function looking roughly like this:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在 Azure 上，可以通过一个大致如下的函数来实现预测 Web 服务：
 - en: '[PRE1]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '*Container*'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '*容器*'
 - en: An alternative to functions, is to deploy a flask or django application through
     a docker container (Amazon ECS, Azure Container Instance or Google Kubernetes
     Engine). Azure for instance provides an easy way to setup prediction containers
     through its’ [Azure Machine Learning service](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where).
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种替代函数的方法是通过 Docker 容器（Amazon ECS、Azure Container Instance 或 Google Kubernetes
+    Engine）部署 Flask 或 Django 应用程序。例如，Azure 提供了通过其 [Azure 机器学习服务](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where)
+    设置预测容器的简单方法。
 - en: '*Notebooks*'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '*笔记本*'
 - en: Different notebooks providers such as [databricks](https://docs.databricks.com/applications/mlflow/models.html)
     and [dataiku](https://www.dataiku.com/dss/features/model-deployment/) have notably
     worked on simplifying the model deployment from their environments. These have
     the feature of setting up a web service to a local environment or deploying to
     external systems such as Azure ML Service, Kubernetes engine etc…
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同的笔记本提供商，如 [databricks](https://docs.databricks.com/applications/mlflow/models.html)
+    和 [dataiku](https://www.dataiku.com/dss/features/model-deployment/)，已显著致力于简化其环境中的模型部署。这些提供了将
+    Web 服务设置到本地环境或部署到外部系统（如 Azure ML 服务、Kubernetes 引擎等）的功能。
 - en: '**In App**'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '**应用内**'
 - en: In certain situations when there are legal or privacy requirements that do not
     allow for data to be stored outside of an application, or there exists constraints
     such as having to upload a large amount of files, leveraging a model within the
     application tend to be the right approach.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 在某些情况下，如果存在法律或隐私要求，不允许将数据存储在应用程序外部，或者存在上传大量文件的限制，则在应用程序中使用模型往往是正确的方法。
 - en: Android-ML Kit or the likes of Caffe2 allows to leverage models within native
     applications, while [Tensorflow.js](https://www.tensorflow.org/js) and [ONNXJS](https://github.com/Microsoft/onnxjs)
     allow for running models directly in the browser or in apps leveraging javascripts.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: Android-ML Kit 或类似的 Caffe2 允许在本地应用程序中使用模型，而 [Tensorflow.js](https://www.tensorflow.org/js)
+    和 [ONNXJS](https://github.com/Microsoft/onnxjs) 允许直接在浏览器或利用 JavaScript 的应用程序中运行模型。
 - en: Considerations
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 考虑因素
 - en: Beside the method of deployments of the models, they are quite a few important
     considerations to have when deploying to production.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了模型的部署方法外，在部署到生产环境时还有一些重要的考虑因素。
 - en: '**Model Complexity**'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型复杂性**'
 - en: The complexity of the model itself, is the first considerations to have. Models
     such as a linear regressions and logistic regression are fairly easy to apply
     and do not usually take much space to store. Using more complex model such as
     a neural network or complex ensemble decision tree, will end up taking more time
     to compute, more time to load into memory on cold start and will prove more expensive
     to run.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型本身的复杂性是第一个要考虑的因素。线性回归和逻辑回归等模型相对容易应用，通常占用的存储空间不多。使用更复杂的模型，如神经网络或复杂的集成决策树，会导致计算时间更长，冷启动时加载到内存中所需时间更长，并且运行成本更高。
 - en: '**Data Sources**'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据来源**'
 - en: It is important to consider the difference that could occur between the datasource
     in productions and the one used for training. While it is important for the data
     used for the training to be in sync with the context it would be used for in production,
     it is often impractical to recalculate every value so that it becomes perfectly
     in-sync.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是要考虑生产环境中的数据源与训练中使用的数据源之间可能发生的差异。虽然用于训练的数据需要与生产中将要使用的上下文保持一致，但通常重新计算每个值以实现完全同步是不切实际的。
 - en: '**Experimentation framework**'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实验框架**'
 - en: Setting up an experimentation framework, A/B testing the performance of different
     models versus objective metrics. And ensuring that there is sufficient tracking
     to accurately debug and evaluate models performance a posteriori.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 建立实验框架，进行A/B测试以评估不同模型的性能与客观指标的对比。同时确保有足够的跟踪以准确调试和评估模型的后期性能。
 - en: Wrapping Up
+  id: totrans-125
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: Choosing how to deploy a predictive models into production is quite a complex
     affair, there are different way to handle the lifecycle management of the predictive
     models, different formats to stores them, multiple ways to deploy them and very
     vast technical landscape to pick from.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择如何将预测模型部署到生产环境中是一个相当复杂的事务，处理预测模型生命周期管理的方式有很多种，存储模型的格式也各不相同，部署方式多种多样，技术领域非常广泛。
 - en: Understanding specific use cases, the team’s technical and analytics maturity,
     the overall organization structure and its’ interactions, help come to the the
     right approach for deploying predictive models to production.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解特定用例、团队的技术和分析成熟度、整体组织结构及其互动，有助于找到将预测模型部署到生产环境中的正确方法。
 - en: '**Bio: [Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)** is
     a Senior Enterprise Data Architect at GrandVision NV.'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)** 是GrandVision
+    NV的高级企业数据架构师。'
 - en: '[Original](https://medium.com/analytics-and-data/overview-of-the-different-approaches-to-putting-machinelearning-ml-models-in-production-c699b34abf86).
     Reposted with permission.'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/analytics-and-data/overview-of-the-different-approaches-to-putting-machinelearning-ml-models-in-production-c699b34abf86)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to build an API for a machine learning model in 5 minutes using Flask](/2019/01/build-api-machine-learning-model-using-flask.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在5分钟内使用Flask为机器学习模型构建API](/2019/01/build-api-machine-learning-model-using-flask.html)'
 - en: '[Manage your Machine Learning Lifecycle with MLflow  –  Part 1](/2018/07/manage-machine-learning-lifecycle-mlflow.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[管理你的机器学习生命周期与MLflow  –  第一部分](/2018/07/manage-machine-learning-lifecycle-mlflow.html)'
 - en: '[Putting Machine Learning in Production](/2017/09/putting-machine-learning-production.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习投入生产](/2017/09/putting-machine-learning-production.html)'
 - en: More On This Topic
+  id: totrans-134
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Automated Machine Learning with Python: A Comparison of Different…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)'
 - en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feature Store Summit 2023：部署机器学习模型的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
 - en: '[AI-Generated Sports Highlights: Different Approaches](https://www.kdnuggets.com/2022/03/aigenerated-sports-highlights-different-approaches.html)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI生成的体育亮点：不同的方法](https://www.kdnuggets.com/2022/03/aigenerated-sports-highlights-different-approaches.html)'
 - en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将你的机器学习模型部署到云中的生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
 - en: '[Data Labeling for Machine Learning: Market Overview, Approaches, and Tools](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的数据标注：市场概述、方法和工具](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
 - en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本总结方法概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
