@@ -1,295 +1,447 @@
 - en: A Gentle Introduction to Support Vector Machines
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 支持向量机的温柔介绍
 - en: 原文：[https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/7b00a41551917bcba47147dd6d0ffce5.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温柔介绍](../Images/7b00a41551917bcba47147dd6d0ffce5.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Support vector machines, commonly called SVM, are a class of simple yet powerful
     machine learning algorithms used in both classification and regression tasks.
     In this discussion, we’ll focus on the use of support vector machines for classification.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持向量机，通常称为SVM，是一类简单但强大的机器学习算法，用于分类和回归任务。在本讨论中，我们将重点介绍支持向量机在分类中的应用。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: We’ll start by looking at the basics of classification and hyperplanes that
     separate classes. We’ll then go over maximum margin classifiers, gradually building
     up to support vector machines and the scikit-learn implementation of the algorithm.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从分类的基础知识和分隔类别的超平面开始。然后，我们将讨论最大间隔分类器，逐步构建到支持向量机及其在scikit-learn中的实现。
 - en: Classification Problem and Separating Hyperplanes
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 分类问题与分隔超平面
 - en: Classification is a supervised learning problem where we have labeled data points
     and the goal of the machine learning algorithm is to predict the label of a new
     data point.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类是一个监督学习问题，我们有标记的数据点，机器学习算法的目标是预测新数据点的标签。
 - en: For simplicity, let's take a binary classification problem with two classes,
     namely, class A and class B. And we need to find a hyperplane that separates these
     two classes.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了简化，我们考虑一个二分类问题，其中有两个类别，即类别A和类别B。我们需要找到一个超平面来分隔这两个类别。
 - en: Mathematically, a [hyperplane](https://en.wikipedia.org/wiki/Hyperplane) is
     a subspace whose dimension is one less than the ambient space. Meaning if the
     ambient space is a line, the hyperplane is a point. And if the ambient space is
     a two-dimensional plane, the hyperplane is a line, and so on.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数学上讲，[超平面](https://en.wikipedia.org/wiki/Hyperplane)是一个维度比环境空间少一个的子空间。也就是说，如果环境空间是直线，超平面就是一个点。如果环境空间是二维平面，则超平面是一个线，依此类推。
 - en: So when we have a hyperplane separating the two classes, the data points belonging
     to class A lie on one side of the hyperplane. And those belonging to class B lie
     on the other side.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，当我们有一个分隔两个类别的超平面时，属于类别A的数据点位于超平面的一侧。而属于类别B的数据点则位于另一侧。
 - en: 'Therefore, in one-dimensional space, the separating hyperplane is a point:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在一维空间中，分隔超平面是一个点：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/46cbe06565d915dd36c4116902288e01.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温柔介绍](../Images/46cbe06565d915dd36c4116902288e01.png)'
 - en: Separating Hyperplane in 1D (A Point) | Image by Author
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 一维中的分隔超平面（一个点）| 图片由作者提供
 - en: 'In two dimensions, the hyperplane that separates class A and class B is a line:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在二维空间中，分隔类别A和类别B的超平面是一个线：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/53c25e614feb8f18306b077bd5d6a383.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温柔介绍](../Images/53c25e614feb8f18306b077bd5d6a383.png)'
 - en: Separating Hyperplane in 2D (A Line) | Image by Author
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 二维中的分隔超平面（一个线）| 图片由作者提供
 - en: 'And in three dimensions, the separating hyperplane is a plane:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在三维空间中，分隔超平面是一个平面：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/abec17eadf00b1deae963c1c056ad508.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温柔介绍](../Images/abec17eadf00b1deae963c1c056ad508.png)'
 - en: Separating Hyperplane in 3D (A Plane) | Image by Author
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 三维中的分隔超平面（一个平面）| 图片由作者提供
 - en: Similarly in N dimensions the separating hyperplane will be an (N-1)-dimensional
     subspace.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似地，在N维空间中，分隔超平面将是一个(N-1)维子空间。
 - en: 'If you take a closer look, for the two dimensional space example, each of the
     following is a valid hyperplane that separates the classes A and B:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你仔细观察，对于二维空间示例，以下每一个都是有效的超平面，可以分隔类别A和类别B：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/c1b4f9a708b0738ea32aacb8da482837.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![温和的支持向量机介绍](../Images/c1b4f9a708b0738ea32aacb8da482837.png)'
 - en: Separating Hyperplanes | Image by Author
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 分隔超平面 | 图片作者
 - en: So how do we decide which hyperplane is the most optimal? Enter **maximum margin
     classifier**.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们如何决定哪个超平面是最优的？引入**最大边际分类器**。
 - en: Maximum Margin Classifier
+  id: totrans-31
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 最大边际分类器
 - en: The optimal hyperplane is the one that separates the two classes while *maximizing*
     the margin between them. And a classifier that functions thus is called a maximum
     margin classifier.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 最优超平面是那个在*最大化*两个类别之间的边际的同时分隔这两个类别的超平面。这样功能的分类器称为最大边际分类器。
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/854cf0d37c606519be7c5de5409f4797.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![温和的支持向量机介绍](../Images/854cf0d37c606519be7c5de5409f4797.png)'
 - en: Maximum Margin Classifier | Image by Author
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 最大边际分类器 | 图片作者
 - en: Hard and Soft Margins
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 硬边际和软边际
 - en: We considered a super simplified example where the classes were perfectly separable
     *and* the maximum margin classifier was a good choice.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们考虑了一个超级简化的例子，其中类别是完美可分的*并且*最大边际分类器是一个好的选择。
 - en: 'But what if your data points were distributed like this? The classes are still
     perfectly separable by a hyperplane, and the hyperplane that maximizes the margin
     will look like this:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，如果你的数据点分布是这样的呢？这些类别仍然可以通过超平面完美分隔，而最大化边际的超平面将会是这样的：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/857788e5e96b8f33ce6f9bfd6f670c1f.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![温和的支持向量机介绍](../Images/857788e5e96b8f33ce6f9bfd6f670c1f.png)'
 - en: Is the Maximum Margin Classifier Optimal? | Image by Author
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 最大边际分类器是否最优？ | 图片作者
 - en: '**But do you see the problem with this approach?** Well, it still achieves
     class separation. However, this is a high variance model that is, perhaps, trying
     to fit the class A points too well.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**但你看到这个方法的问题了吗？** 嗯，它仍然实现了类别分隔。然而，这是一种高变异性的模型，可能是尝试过于完美地拟合类别A的点。'
 - en: Notice, however, that the margin does not have any misclassified data point.
     Such a classifier is called a *hard margin* classifier.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过注意，边际内没有任何误分类的数据点。这样的分类器被称为*硬边际*分类器。
 - en: Take a look at this classifier instead. Won't such a classifier perform better?
     This is a substantially lower variance model that would do reasonably well on
     classifying both points from class A and class B.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 不妨看看这个分类器。这样的分类器表现会更好吗？这是一个变异性更低的模型，它在对分类A和分类B的点进行分类时表现得相当好。
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/ab1f86099e9db0fa4f2094a582054a97.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![温和的支持向量机介绍](../Images/ab1f86099e9db0fa4f2094a582054a97.png)'
 - en: Linear Support Vector Classifier | Image by Author
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性支持向量分类器 | 图片作者
 - en: Notice that we have a misclassified data point inside the margin. Such a classifier
     that allows minimal misclassifications is a *soft margin* classifier.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到我们有一个在边际内被误分类的数据点。允许最小误分类的分类器是一种*软边际*分类器。
 - en: Support Vector Classifier
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 支持向量分类器
 - en: The soft margin classifier we have is a linear support vector classifier. The
     points are separable by a line (or a linear equation). If you’ve been following
     along so far, it should be clear *what* **support vectors** are and *why* they
     are called so.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的软边际分类器是一个线性支持向量分类器。点可以通过一条直线（或线性方程）分隔开。如果你到目前为止一直在跟随，那么应该清楚*支持向量*是什么，以及*为什么*它们被称为支持向量。
 - en: Each data point is a vector in the feature space. The data points that are closest
     to the separating hyperplane are called support vectors because they *support*
     or aid the classification.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个数据点都是特征空间中的一个向量。最接近分隔超平面的数据点被称为支持向量，因为它们*支持*或辅助分类。
 - en: It's also interesting to note that if you remove a single data point or a subset
     of data points that are *not* support vectors, the separating hyperplane does
     not change. But, if you remove one or more support vectors, the hyperplane changes.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样有趣的是，如果你移除一个或一组*非*支持向量的数据点，分隔超平面不会改变。但是，如果你移除一个或多个支持向量，超平面会改变。
 - en: In the examples so far, the data points were linearly separable. So we could
     fit a soft margin classifier with the least possible error. But what if the data
     points were distributed like this?
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在迄今为止的示例中，数据点是线性可分的。因此，我们可以拟合一个具有最小误差的软边际分类器。但如果数据点像这样分布呢？
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/25775bd8bd2e29efd3a71c137a5e0ff7.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温和介绍](../Images/25775bd8bd2e29efd3a71c137a5e0ff7.png)'
 - en: Non-linearly Separable Data | Image by Author
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 非线性可分的数据 | 图片作者
 - en: In this example, the data points are *not* linearly separable. Even if we have
     a soft margin classifier that allows for misclassification, we will *not* be able
     to find a line (separating hyperplane) that achieves good performance on these
     two classes.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个示例中，数据点*不可*线性可分。即使我们有一个允许误分类的软边际分类器，我们也*无法*找到一条（分隔超平面）能在这两个类别上取得良好表现的直线。
 - en: So what do we do now?
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 那我们现在该怎么办？
 - en: Support Vector Machines and the Kernel Trick
+  id: totrans-55
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 支持向量机与核技巧
 - en: 'Here’s a summary of what we’d do:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们将要做的总结：
 - en: '**Problem**: The data points are not linearly separable in the original feature
     space.'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**问题**：数据点在原始特征空间中不可线性分隔。'
 - en: '**Solution**: Project the points onto a higher dimensional space where they
     are linearly separable.'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**解决方案**：将点投影到更高维空间，在该空间中它们是线性可分的。'
 - en: But projecting the points onto a higher dimensional features space requires
     us to *map the data points* from the original feature space to the higher dimensional
     space.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 但将点投影到更高维特征空间要求我们*将数据点映射* 从原始特征空间到更高维空间。
 - en: This recomputation comes with non-negligible overhead, especially when the space
     that we want to project onto is of much higher dimensions than the original feature
     space. Here's where the kernel trick comes into play.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种重新计算带来了不可忽视的开销，特别是当我们要投影到的空间比原始特征空间的维度高得多时。这里是核技巧发挥作用的地方。
 - en: 'Mathematically, the support vector classifier you can be represented by the
     following equation [1]:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数学上讲，你可以用以下方程来表示支持向量分类器 [1]：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/9aca69ff10aec36da8e052f7fc1467ea.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温和介绍](../Images/9aca69ff10aec36da8e052f7fc1467ea.png)'
 - en: Here, ![Equation](../Images/2c347378f2ee2bc697f446c3ba7bacb8.png) is a constant,
     and ![Equation](../Images/23ebc3d72025ed5d4573ed6871057c1e.png) indicates that
     we sum over the set of indices corresponding to the support points.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，![Equation](../Images/2c347378f2ee2bc697f446c3ba7bacb8.png) 是一个常量，![Equation](../Images/23ebc3d72025ed5d4573ed6871057c1e.png)
+    表示我们对对应于支持点的索引集求和。
 - en: '![Equation](../Images/007ad425101defc9bc1d798ba51cac2c.png) is the inner product
     between the points ![Equation](../Images/1dbc38918833301a90090733151a713f.png)
     and ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png). The inner product
     between any two vectors a and b is given by:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Equation](../Images/007ad425101defc9bc1d798ba51cac2c.png) 是点 ![Equation](../Images/1dbc38918833301a90090733151a713f.png)
+    和 ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png) 之间的内积。两个向量 a 和 b
+    之间的内积由以下公式给出：'
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/7e703e73635506306343d94cbd90ad20.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温和介绍](../Images/7e703e73635506306343d94cbd90ad20.png)'
 - en: 'The kernel function K(.) allows to generalize the linear support vector classifier
     to non-linear cases. We replace the inner product with the kernel function:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 核函数 K(.) 使线性支持向量分类器能够推广到非线性情况。我们用核函数替换内积：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/94e016d8687c25956b6b2e0323337b1d.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温和介绍](../Images/94e016d8687c25956b6b2e0323337b1d.png)'
 - en: The kernel function accounts for the non-linearity. And also allows for computations
     to be performed—on the data points in the original features space—without having
     to recompute them in the higher dimensional space.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 核函数处理非线性问题。它还允许在原始特征空间的数据点上执行计算，而无需在更高维空间中重新计算它们。
 - en: 'For the linear support vector classifier, the kernel function is simply the
     inner product and takes the following form:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于线性支持向量分类器，核函数只是内积，形式如下：
 - en: '![A Gentle Introduction to Support Vector Machines](../Images/30bf58066461aa90a1853b6dbec8b8b3.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![支持向量机的温和介绍](../Images/30bf58066461aa90a1853b6dbec8b8b3.png)'
 - en: Support Vector Machines in Scikit-Learn
+  id: totrans-71
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Scikit-Learn 中的支持向量机
 - en: Now that we understand the intuition behind support vector machines, let's code
     a quick example using the scikit-learn library.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们理解了支持向量机的直觉原理，让我们使用 scikit-learn 库编写一个简单的示例。
 - en: The [svm module](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.svm)
     in the scikit-learn library comes with implementations of classes like [Linear
     SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC),
@@ -297,132 +449,204 @@
     and [NuSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC).
     These classes can be used for both binary and multiclass classification. Scikit-learn’s
     extended docs lists the [supported kernels](https://scikit-learn.org/stable/modules/svm.html#svm-kernels).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   [svm 模块](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.svm)在
+    scikit-learn 库中包含了 [Linear SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC)、[SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC)
+    和 [NuSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC)
+    等类的实现。这些类可用于二分类和多分类问题。Scikit-learn 的扩展文档列出了 [支持的核函数](https://scikit-learn.org/stable/modules/svm.html#svm-kernels)。'
 - en: 'We’ll use the [built-in wine dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html).
     It’s a classification problem where the features of wine are used to predict the
     output label which is one of the three classes: 0, 1, or 2\. It’s a small dataset
     with about 178 records and 13 features.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我们将使用 [内置的葡萄酒数据集](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html)。这是一个分类问题，其中葡萄酒的特征用于预测输出标签，该标签是三类中的一个：0、1
+    或 2。数据集较小，大约有 178 条记录和 13 个特征。'
 - en: 'Here, we’ll only focus on:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   在这里，我们将仅关注：'
 - en: loading and preprocessing the data and
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '-   加载和预处理数据以及'
 - en: fitting the classifier to the dataset
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将分类器适配到数据集
 - en: Step 1 – Import the Necessary Libraries and Load the Dataset
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   步骤 1 – 导入必要的库并加载数据集'
 - en: 'First, let’s load the wine dataset available in scikit-learn’s datasets module:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   首先，让我们加载 scikit-learn 数据集模块中可用的葡萄酒数据集：'
 - en: '[PRE0]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Step 2 – Split the Dataset Into Training and Test Datasets
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   步骤 2 – 将数据集拆分为训练集和测试集'
 - en: 'Let’s split the dataset into train and test sets. Here, we use an 80:20 split
     where 80% and 20% of the data points go into the train and test datasets, respectively:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我们将数据集拆分为训练集和测试集。在这里，我们使用 80:20 的拆分比例，其中 80% 的数据点用于训练集，20% 的数据点用于测试集：'
 - en: '[PRE1]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Step 3 – Preprocess the Dataset
+  id: totrans-84
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   步骤 3 – 预处理数据集'
 - en: 'Next, we preprocess the dataset. We use a `StandardScaler` to transform the
     data points such that they follow a distribution with zero mean and unit variance:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   接下来，我们预处理数据集。我们使用 `StandardScaler` 将数据点转换为均值为零和方差为一的分布：'
 - en: '[PRE2]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Remember not to use `fit_transform` on the test dataset as it would lead to
     the subtle problem of data leakage.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   记得不要在测试数据集上使用 `fit_transform`，因为这会导致数据泄漏的问题。'
 - en: Step 4 – Instantiate an SVM Classifier and Fit it to the Training Data
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   步骤 4 – 实例化一个 SVM 分类器并将其适配到训练数据上'
 - en: 'We’ll use `SVC` for this example. We instantiate `svm`, an SVC object, and
     fit it to the training data:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我们将使用 `SVC` 作为示例。我们实例化了 `svm`，一个 SVC 对象，并将其适配到训练数据上：'
 - en: '[PRE3]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Step 5 – Predict the Labels for the Test Samples
+  id: totrans-91
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   步骤 5 – 预测测试样本的标签'
 - en: 'To predict the class labels for the test data, we can call the `predict` method
     on the `svm` object:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   要预测测试数据的类别标签，我们可以在 `svm` 对象上调用 `predict` 方法：'
 - en: '[PRE4]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Step 6 – Evaluate the Accuracy of the Model
+  id: totrans-94
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '-   步骤 6 – 评估模型的准确性'
 - en: To wrap up the discussion, we’ll only compute the accuracy score. But we can
     also get a much detailed classification report and confusion matrix.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   总结讨论，我们将只计算准确率。但我们也可以获得更详细的分类报告和混淆矩阵。'
 - en: '[PRE5]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Here’s the complete code:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   以下是完整的代码：'
 - en: '[PRE7]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: We have a simple support vector classifier. There are hyperparameters that you
     can tune to improve the performance of the support vector classifier. Commonly
     tuned hyperparameters include the regularization constant C and the gamma value.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我们有一个简单的支持向量分类器。你可以调整超参数以提高支持向量分类器的性能。常调的超参数包括正则化常数 C 和 gamma 值。'
 - en: Conclusion
+  id: totrans-101
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '-   结论'
 - en: I hope you found this introductory guide to support vector machines helpful.
     We covered just enough intuition and concepts to understand how support vector
     machines work. If you’re interested in diving deeper, you can check the references
     linked to below. Keep learning!
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   希望你觉得这份介绍性支持向量机的指南有用。我们涵盖了足够的直觉和概念，以理解支持向量机的工作原理。如果你有兴趣深入了解，可以查看下面的参考资料。继续学习！'
 - en: References and Learning Resources
+  id: totrans-103
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '-   参考资料和学习资源'
 - en: '[1] Chapter on Support Vector Machines, [An Introduction to Statistical Learning
     (ISLR)](https://www.statlearning.com/)'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   [1] 支持向量机章节，[《统计学习简介（ISLR）》](https://www.statlearning.com/)'
 - en: '[2] Chapter on Kernel Machines, [Introduction to Machine Learning](https://mitpress.mit.edu/9780262043793/introduction-to-machine-learning/)'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '[关于核机器的章节，[机器学习介绍](https://mitpress.mit.edu/9780262043793/introduction-to-machine-learning/)]'
 - en: '[3] Support Vector Machines, [scikit-learn docs](https://scikit-learn.org/stable/modules/svm.html)'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '[支持向量机，[scikit-learn 文档](https://scikit-learn.org/stable/modules/svm.html)]'
 - en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
     and technical writer from India. She likes working at the intersection of math,
     programming, data science, and content creation. Her areas of interest and expertise
@@ -430,33 +654,50 @@
     writing, coding, and coffee! Currently, she''s working on learning and sharing
     her knowledge with the developer community by authoring tutorials, how-to guides,
     opinion pieces, and more.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术写作者。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括
+    DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。'
 - en: More On This Topic
+  id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机：直观的方法](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
 - en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义向量搜索如何改变客户支持互动](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
 - en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理的温和介绍](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
 - en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 向量数据库和向量索引：构建 LLM 应用](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
 - en: '[The Ethics of AI: Navigating the Future of Intelligent Machines](https://www.kdnuggets.com/2023/04/ethics-ai-navigating-future-intelligent-machines.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能伦理：导航智能机器的未来](https://www.kdnuggets.com/2023/04/ethics-ai-navigating-future-intelligent-machines.html)'
 - en: '[AI for Ukraine is a new educational project from AI HOUSE to…](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI for Ukraine 是 AI HOUSE 推出的一个新的教育项目，以支持乌克兰科技社区……](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)'
