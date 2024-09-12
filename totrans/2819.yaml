@@ -1,62 +1,89 @@
 - en: What Does it Mean to Deploy a Machine Learning Model?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 部署机器学习模型意味着什么？
 - en: 原文：[https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Luigi Patruno](https://mlinproduction.com/about/), Data Scientist and
     the founder of ML in Production**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Luigi Patruno](https://mlinproduction.com/about/)，数据科学家和 ML in Production
+    的创始人**'
 - en: I recently asked the [Twitter community](https://twitter.com/MLinProduction/status/1211359661980626945) about
     their biggest machine learning pain points and what work their teams plan to focus
     on in 2020\. One of the most frequently mentioned pain points was deploying machine
     learning models. More specifically, **“How do you deploy machine learning models
     in an automated, reproducible, and auditable manner?”**
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最近向[Twitter 社区](https://twitter.com/MLinProduction/status/1211359661980626945)询问了他们在机器学习方面的最大痛点以及他们的团队在
+    2020 年计划专注的工作。最常被提到的痛点之一是部署机器学习模型。更具体地说，**“你如何以自动化、可重复和可审计的方式部署机器学习模型？”**
 - en: '![](../Images/5759b6c72706b494901df2657ae4c751.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5759b6c72706b494901df2657ae4c751.png)'
 - en: Good question!
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 好问题！
 - en: The topic of ML deployment is rarely discussed when machine learning is taught.
     Boot camps, data science graduate programs, and online courses tend to focus on
     training algorithms and neural network architectures because these are "core"
     machine learning ideas. I don’t disagree with that, but I’d argue that if a data
     scientist can’t deploy a model, he won’t be able to add much, if any, value to
     a business.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在教授机器学习时，ML 部署的话题很少被讨论。训练营、数据科学研究生课程和在线课程往往侧重于训练算法和神经网络架构，因为这些是“核心”的机器学习理念。我对此并不反对，但我认为如果一个数据科学家不能部署模型，他就无法为企业带来多少价值。
 - en: If you search for resources on how to deploy a model, you’ll find plenty of
     blog posts about writing Flask APIs. Many of these are well done, but not all
     ML models need to be deployed behind a Flask API. In fact, sometimes, this is
     counterproductive. These posts rarely discuss what factors to consider when deploying
     a model, the variety of tools that can be used, and other important ideas. These
     topics are extensive and a single blog post wouldn’t do them justice.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你搜索关于如何部署模型的资源，你会发现许多关于编写 Flask API 的博客帖子。虽然这些帖子中的许多做得很好，但并不是所有的 ML 模型都需要在
+    Flask API 背后进行部署。事实上，有时这样做反而适得其反。这些帖子很少讨论在部署模型时需要考虑的因素、可用的工具多样性以及其他重要的概念。这些话题内容广泛，一篇博客帖子无法充分涵盖。
 - en: That’s why I’m writing a multi-part blog series on deploying machine learning
     models. This series will discuss what it means to deploy an ML model, what factors
     to consider when deploying models, what software development tactics to use, and
     the tools and frameworks to utilize. If you’d like to be alerted when each of
     these posts is published, leave me your email address!
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么我写了一个关于部署机器学习模型的多部分博客系列。这个系列将讨论部署 ML 模型的含义、部署模型时需要考虑的因素、使用的软件开发策略以及要利用的工具和框架。如果你希望在这些帖子发布时收到通知，请留下你的电子邮件地址！
 - en: 'Before discussing any tools, let’s begin by asking: what does it mean to deploy
     a model?'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在讨论任何工具之前，让我们首先来问一个问题：部署一个模型意味着什么？
 - en: What does it mean to deploy a Machine Learning Model?
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 部署机器学习模型意味着什么？
 - en: Before you think about what tools to use to deploy your model, you need to have
     a firm grasp on what deployment means. To attain that understanding, it’s helpful
     to put yourself in the shoes of a software engineer. How does a software engineer
@@ -64,124 +91,175 @@
     to the domain of machine learning? Thinking about deployment as a software engineer
     rather than as a data scientist will dramatically simplify what it means to deploy
     a model.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在考虑使用什么工具来部署模型之前，你需要对部署的含义有一个明确的理解。为了获得这种理解，将自己置身于软件工程师的角色是有帮助的。软件工程师如何看待“部署”代码？代码部署的概念如何转移到机器学习领域？将部署视为软件工程师而不是数据科学家将大大简化部署模型的含义。
 - en: To understand what it means to deploy an ML model, let’s briefly discuss the
     lifecycle of an ML project. Hypothetically, a product manager (PM) will discover
     some user need and determine that machine learning can be used to solve this problem.
     This will involve creating a new product or augmenting an existing product with
     machine learning capabilities, typically in the form of a supervised learning
     model.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 要理解部署机器学习模型的含义，我们需要简要讨论机器学习项目的生命周期。假设一个产品经理（PM）发现了一些用户需求，并确定可以利用机器学习来解决这个问题。这将涉及创建一个新产品或在现有产品中增加机器学习能力，通常以监督学习模型的形式呈现。
 - en: The PM will meet with an ML team lead to plan the project by defining project
     goals, choosing a metric, and setting up the codebase. If appropriate training
     and validation data exist, the project will be handed off to data scientists or
     ML engineers to handle the iterative process of feature engineering and model
     selection.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 产品经理将与机器学习团队负责人会面，通过定义项目目标、选择指标和设置代码库来规划项目。如果存在适当的训练和验证数据，项目将交给数据科学家或机器学习工程师处理特征工程和模型选择的迭代过程。
 - en: '**The goal at this stage** is to build a model with a level of predictive performance
     that meets or exceeds the goals set during the planning stage. Throughout these
     initial stages, the users’ needs that motivated this project are still unmet.
     These needs won’t be satisfied even when a model exists that achieves the minimum
     required levels of predictive performance.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**此阶段的目标**是构建一个预测性能达到或超过规划阶段设定目标的模型。在这些初始阶段，推动该项目的用户需求仍然没有得到满足。即使存在一个达到最低预测性能水平的模型，这些需求也不会得到满足。'
 - en: '![](../Images/266944f1f97e3f77c84bc654c67932b0.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/266944f1f97e3f77c84bc654c67932b0.png)'
 - en: '*[Setting Up Machine Learning Projects. Full Stack Deep Learning](https://full-stack-deep-learning.aerobaticapp.com/e372_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_2_projects.pdf)*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[设置机器学习项目。全栈深度学习](https://full-stack-deep-learning.aerobaticapp.com/e372_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_2_projects.pdf)*'
 - en: A machine learning model can only begin to add value to an organization when
     that model’s insights routinely become available to the users for which it was
     built. The process of taking a trained ML model and making its predictions available
     to users or other systems is known as **deployment**. Deployment is entirely distinct
     from routine machine learning tasks like feature engineering, model selection,
     or model evaluation.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型只有在这些模型的洞察力定期对其构建的用户可用时，才能开始为组织创造价值。将训练好的机器学习模型并使其预测对用户或其他系统可用的过程称为**部署**。部署与常规机器学习任务如特征工程、模型选择或模型评估完全不同。
 - en: As such, deployment is not very well understood amongst data scientists and
     ML engineers who lack backgrounds in software engineering or DevOps. But luckily
     these skills aren’t very difficult. With practice, any data scientist can learn
     how to deploy their models to production.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，部署在缺乏软件工程或DevOps背景的数据科学家和机器学习工程师中并不完全理解。但幸运的是，这些技能并不难。通过实践，任何数据科学家都可以学会如何将模型部署到生产环境中。
 - en: How do you decide how to deploy?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你如何决定如何部署？
 - en: To decide *how* to deploy a model, you need to understand how end-users should
     interact with the model’s predictions. This is best understood through a few examples.
     We’ll work our way up in complexity, beginning with a very simple use case.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 要决定*如何*部署模型，你需要了解最终用户应如何与模型的预测进行交互。这最好通过几个示例来理解。我们将从一个非常简单的用例开始，逐步增加复杂性。
 - en: '**Deployment Example 1: Deploying a Lead Scoring Model**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**部署示例 1：部署潜在客户评分模型**'
 - en: Suppose a data scientist has built a lead scoring model for a group of technical
     analysts who are well versed in SQL. The analysts seek to group new leads into
     buckets based on their likelihood of converting into customers.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设一个数据科学家为一组精通SQL的技术分析师构建了一个潜在客户评分模型。这些分析师希望将新的潜在客户根据其转化为客户的可能性进行分组。
 - en: Each morning they would like to use data from the database to create/update
     dashboards they maintain in a BI tool.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 每天早晨，他们希望利用数据库中的数据来创建/更新他们在BI工具中维护的仪表盘。
 - en: Since the analysts know SQL and expect model scores to be stored in the database,
     "deploying" the lead scoring model means generating daily lead scores for new
     leads and storing these in the analysts’ database.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于分析师熟悉SQL，并且期望模型得分存储在数据库中，“部署”潜在客户评分模型意味着为新的潜在客户生成每日评分，并将这些评分存储在分析师的数据库中。
 - en: The key aspects of this deployment are
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 此部署的关键方面是
 - en: predictions can be generated on a group of new leads,
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 预测可以在一组新潜在客户中生成，
 - en: these predictions need to be made available each day, and
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这些预测需要每天提供，并且
 - en: the predictions need to be stored in a database. The deployment process needs
     to satisfy these three constraints in order for the ML model to add value to the
     business.
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 预测需要存储在数据库中。部署过程需要满足这三个约束条件，以便机器学习模型能为业务增加价值。
 - en: '**Consider a slightly more complex situation.**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**考虑一个稍微复杂一点的情况。**'
 - en: The head of Sales finds out about the model and wants to make the model’s insights
     available to his account executives. Naturally and much to our chagrin, the account
     execs don’t know SQL, so storing the predictions in a database isn’t enough in
     this case.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 销售主管了解到模型后，想要让他的客户经理使用模型的洞察。自然地，我们很遗憾，客户经理不懂 SQL，因此在这种情况下，将预测存储在数据库中还不够。
 - en: The Product Manager determines that lead scores need to be visible in the CRM
     tool the account executives use in order to add business value.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 产品经理确定，潜在客户评分需要在客户经理使用的 CRM 工具中可见，以便增加商业价值。
 - en: Deployment aspects 1 and 2 from the previous example (generating predictions
     for a group of leads and doing so once a day) are still valid, but aspect 3 is
     not. Deployment involves having the scores flow from the database into the CRM
     tool. This will involve setting up additional ETLs.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 前一个示例中的部署方面 1 和 2（为一组潜在客户生成预测并每天进行一次）仍然有效，但方面 3 不再适用。部署涉及将评分从数据库流入 CRM 工具。这将涉及设置额外的
+    ETL。
 - en: '![](../Images/b1e21f1c0ce21536fc93739a638013b9.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b1e21f1c0ce21536fc93739a638013b9.png)'
 - en: '**Deployment Example 2: Deploying a Recommender System**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**部署示例 2：部署推荐系统**'
 - en: For our final example, let’s consider how a recommender system, a popular application
     of machine learning, might be deployed. Suppose that we work for an e-commerce
     company that wishes to show users recommendations of products to purchase. We’ll
     consider two variations of deployment.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的最后一个示例中，让我们考虑一下推荐系统——这是机器学习的一个热门应用——可能如何部署。假设我们为一家电子商务公司工作，希望向用户展示购买产品的推荐。我们将考虑两种部署变体。
 - en: 'Scenario 1: The company wishes to display product recommendations to users
     after they login to either the web or mobile application. Predictions need to
     be *available* upon request, which can be at any time of day. This places a latency
@@ -190,8 +268,10 @@
     beforehand. The deployment must make the model’s predictions available to both
     the mobile and web applications. Thus separating our deployment from either of
     these applications is desirable.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 场景 1：公司希望在用户登录到网页或移动应用后显示产品推荐。预测需要在请求时*可用*，这可能发生在一天中的任何时间。这对我们的部署施加了延迟约束，这会影响我们是否可以在用户登录时实时生成预测，或者是否需要提前生成和缓存预测。部署必须使模型的预测对移动和网页应用程序都可用。因此，将我们的部署与这些应用程序分开是理想的。
 - en: 'Scenario 2: The company wishes to add 5 recommendations to its marketing emails
     to existing customers. These emails are sent to users twice a week; one email
     goes out Monday afternoon and another goes out Friday morning. In this case, recommendations
@@ -200,45 +280,64 @@
     in a database is sufficient. The process for generating the emails can look up
     the user’s recommendations in this database and add the top 5 to the personalized
     emails.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 场景 2：公司希望在发给现有客户的营销邮件中添加 5 条推荐。这些邮件每周发送两次；一封邮件在周一下午发送，另一封邮件在周五早上发送。在这种情况下，可以同时计算所有用户的推荐并进行缓存。与之前的场景相比，延迟要求要宽松得多。将这些推荐存储在数据库中即可。生成邮件的过程可以在数据库中查找用户的推荐，并将前
+    5 条添加到个性化邮件中。
 - en: 'As we see from each of these examples, there are multiple factors to consider
     when determining how to deploy a machine learning model. These factors include:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这些示例中可以看出，在确定如何部署机器学习模型时，有多个因素需要考虑。这些因素包括：
 - en: how frequently predictions should be generated
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预测生成的频率
 - en: whether predictions should be generated for a single instance at a time or a
     batch of instances
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预测是一次为单个实例生成，还是为一批实例生成
 - en: the number of applications that will access the model
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 访问模型的应用程序数量
 - en: the latency requirements of these applications
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这些应用程序的延迟要求
 - en: Conclusion
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Automated deployment of machine learning models is one of the biggest pain points
     facing data scientists and ML engineers in 2020\. Since models can only add value
     to an organization when insights are regularly available to end-users, it's imperative
     that ML practitioners understand how to deploy their models as simply and efficiently
     as possible. The first step in determining how to deploy a model is understanding
     how end users should interact with that model’s predictions.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型的自动化部署是2020年数据科学家和机器学习工程师面临的最大痛点之一。由于模型只有在洞察定期提供给最终用户时才能为组织增值，因此机器学习从业者必须了解如何尽可能简单和高效地部署他们的模型。确定如何部署模型的第一步是了解最终用户应如何与该模型的预测进行互动。
 - en: '[Original](https://mlinproduction.com/what-does-it-mean-to-deploy-a-machine-learning-model-deployment-series-01/).
     Reposted with permission.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://mlinproduction.com/what-does-it-mean-to-deploy-a-machine-learning-model-deployment-series-01/)。转载已获许可。'
 - en: '**Bio: **[Luigi Patruno](https://twitter.com/MLinProduction) is a data scientist
     and machine learning consultant. He is currently the Director of Data Science
     at 2U, where he leads a team of data scientists responsible for building machine
@@ -247,73 +346,112 @@
     initiatives. He founded [MLinProduction.com](http://mlinproduction.com/) to collect
     and share best practices for operationalizing machine learning and he''s taught
     graduate courses in statistics, data analysis, and big data engineering.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：**[Luigi Patruno](https://twitter.com/MLinProduction)是一名数据科学家和机器学习顾问。他目前是2U的数据科学总监，领导一个负责构建机器学习模型和基础设施的数据科学团队。作为顾问，Luigi帮助公司通过应用现代数据科学方法来实现战略业务和产品目标。他创办了[MLinProduction.com](http://mlinproduction.com/)来收集和分享机器学习操作的最佳实践，并教授过统计学、数据分析和大数据工程的研究生课程。'
 - en: '**Related:**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Why are Machine Learning Projects so Hard to Manage?](https://www.kdnuggets.com/2020/02/machine-learning-projects-manage.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么机器学习项目如此难以管理？](https://www.kdnuggets.com/2020/02/machine-learning-projects-manage.html)'
 - en: '[Deployment of Machine learning models using Flask](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Flask部署机器学习模型](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)'
 - en: '[Why is Machine Learning Deployment Hard?](https://www.kdnuggets.com/2019/10/machine-learning-deployment-hard.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么机器学习部署如此困难？](https://www.kdnuggets.com/2019/10/machine-learning-deployment-hard.html)'
 - en: '* * *'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Heroku部署机器学习网络应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
 - en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
 - en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何成功部署数据科学项目](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
 - en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习如何设计和部署负责任的AI系统](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
 - en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习如何设计和部署负责任的AI系统](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)'
 - en: '[What Can AI-Powered RPA and IA Mean For Businesses?](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI 驱动的 RPA 和 IA 对企业意味着什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)'
