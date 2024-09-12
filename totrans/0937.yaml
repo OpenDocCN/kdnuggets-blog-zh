@@ -1,307 +1,451 @@
 - en: What are Moment-Generating Functions?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是矩生成函数？
 - en: 原文：[https://www.kdnuggets.com/2022/12/momentgenerating-functions.html](https://www.kdnuggets.com/2022/12/momentgenerating-functions.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/12/momentgenerating-functions.html](https://www.kdnuggets.com/2022/12/momentgenerating-functions.html)
 - en: Data science is a multidisciplinary field. As such, it often favors polyglots
     and polymaths. It requires an understanding of computational and applied maths,
     which can be off-putting for aspirational data scientists from a purely coding
     background. However, having a grasp of mathematical statistics is important, especially
     if you plan to create algorithms and data models for forecasting outcomes.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学是一个多学科领域。因此，它通常更倾向于多语种和多才多艺的人。它需要对计算和应用数学的理解，这可能会让纯编码背景的数据科学家感到望而却步。然而，掌握数学统计学是重要的，特别是如果你计划为预测结果创建算法和数据模型的话。
 - en: In most cases, the best way to learn anything is to break it down into concepts.
     This goes for concepts in [probability and statistics](/2022/06/statistics-probability-data-science.html)
     too. Moment-generating functions (MGF) are one of these concepts all data scientists
     should know. The following guide will answer what they are and how you can implement
     them programmatically.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数情况下，学习任何东西的最佳方法是将其分解成概念。这也适用于[概率与统计](/2022/06/statistics-probability-data-science.html)中的概念。矩生成函数（MGF）就是所有数据科学家都应了解的概念之一。以下指南将回答它们是什么以及如何在编程中实现它们。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What are Moments in Probability and Statistics?
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在概率和统计中，什么是矩？
 - en: If you take the term moment-generating functions literally, what you can see
     is that MGFs are functions that generate moments. But what are moments? In statistics,
     we use what is known as a **distribution** to illustrate how values are spread
     in a field, i.e., which values are common and which ones are rare.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你字面理解矩生成函数，你会发现MGF是生成矩的函数。但什么是矩？在统计学中，我们使用所谓的**分布**来说明值在一个领域中的分布情况，即哪些值是常见的，哪些是稀有的。
 - en: Data scientists and statisticians use **moments** to measure distributions.
     Fundamentally, [moments are parameters of the distribution](https://www.statistics.com/glossary/moments/),
     and they can be used to determine or describe its shape, allowing you to extract
     information (metadata) about your data. We’ll look at the four most common moments
     below.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学家和统计学家使用**矩**来测量分布。从根本上说，[矩是分布的参数](https://www.statistics.com/glossary/moments/)，它们可以用来确定或描述其形状，允许你提取有关数据的信息（元数据）。我们将下文介绍四种最常见的矩。
 - en: The Mean E(X)
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 均值 E(X)
 - en: 'The mean is the **first moment**. It describes the central location/position/tendency
     of a distribution. Additionally, it is the initial expected value and is also
     referred to as a (mathematical) expectation or average. In the cases where results
     have a joint probability of occurrence, we use the arithmetic mean formula:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 均值是**第一矩**。它描述了分布的中心位置/位置/倾向。此外，它是初始期望值，也称为（数学）期望或平均值。在结果具有联合发生概率的情况下，我们使用算术平均公式：
 - en: '![Equation](../Images/e4211fe5aa15fb3575e9f82169a281d7.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![公式](../Images/e4211fe5aa15fb3575e9f82169a281d7.png)'
 - en: In simpler terms, the sum of all variable values can be divided by the number
     of values [(Sum of values)÷(Total numbers of Values)].
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，所有变量值的总和可以除以值的数量 [(值的总和)÷(值的总数)]。
 - en: However, if the results do not share the same probability of occurrence, you
     must calculate the outcome of each probability, sum up the values for the variable
     and then multiply it by the corresponding outcome/probability.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，如果结果的发生概率不同，你必须计算每个概率的结果，将这些值加总，然后乘以相应的结果/概率。
 - en: The mean formula is [one of the most popular ways](https://statistics.laerd.com/statistical-guides/measures-central-tendency-mean-mode-median.php)
     to measure the average or central tendency. It can also be represented as the
     median (middle value) or mode (the most likely value).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 均值公式是[最受欢迎的方法之一](https://statistics.laerd.com/statistical-guides/measures-central-tendency-mean-mode-median.php)来测量平均值或中心趋势。它也可以表示为中位数（中间值）或众数（最可能的值）。
 - en: The Variance E(X^2)
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 方差 E(X^2)
 - en: The variance is the second moment. It indicates the width or spread of the distribution
     – how far the values are from the average or norm. This moment is ultimately used
     to illustrate or find any deviations in the distribution or data set. We typically
     use the standard deviation, which is represented by the square root of the variance
     [E(X^3)].
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 方差是第二个矩。它表示分布的宽度或扩散程度——值与平均值或标准的偏离程度。这个矩最终用于说明或查找分布或数据集中的任何偏差。我们通常使用标准差，它由方差的平方根表示[E(X^3)]。
 - en: The Skewness E(X^3)
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 偏度 E(X^3)
 - en: 'The skewness is the third moment. It indicates the asymmetry of the distribution
     or its lop-sidedness in relation to the distribution’s mean. The skewness affects
     the relationship between the mean median and mode. A distribution’s skewness can
     be represented in one of three categories:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 偏度是第三个矩。它表示分布的非对称性或相对于分布均值的偏斜程度。偏度影响均值、中位数和众数之间的关系。一个分布的偏度可以分为三类：
 - en: '**Symmetrical Distribution:** Where both sides/tails of the distribution are
     symmetrical. In this category, the value of the skewness is 0\. The mean, median,
     and mode are the same in a perfectly symmetrical (unimodal) distribution.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对称分布：** 分布的两侧/尾部对称。在这个类别中，偏度的值为0。在一个完全对称（单峰）分布中，均值、中位数和众数是相同的。'
 - en: '**Positively Skewed**: Where the right side/tail of the distribution is longer
     than the left. This is used to [identify and represent outliers](/2020/06/how-prepare-your-data.html)
     with values greater than the mean. This category may also be referred to as skewed
     to the right, right-tailed, or right-skewed. Generally, the mean is greater than
     the median, which is greater than the mode (mode < median < mean).'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**正偏**：分布的右侧/尾部比左侧长。这用于[识别和表示异常值](/2020/06/how-prepare-your-data.html)，这些值大于均值。这个类别也可以称为右偏、右尾或右偏分布。通常，均值大于中位数，中位数大于众数（众数
+    < 中位数 < 均值）。'
 - en: '**Negatively Skewed**: Where the left side/tail of the distribution is longer
     than the right. We use it to identify and represent outliers whose values are
     lesser than the mean. This category can also be referred to as skewed to the left,
     left-skewed, or left-tailed. Generally, the mode is greater than the median, which
     is greater than the mean (mode > median > mean).'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**负偏**：分布的左侧/尾部比右侧长。我们用它来识别和表示值小于均值的异常值。这个类别也可以称为左偏、左尾或左偏分布。通常，众数大于中位数，中位数大于均值（众数
+    > 中位数 > 均值）。'
 - en: 'You can also use the following simple formulas to find the skewness:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以使用以下简单公式来找出偏度：
 - en: '![Equation](../Images/22bc6026dd0e2e4448f7ca1a288d36f2.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![方程式](../Images/22bc6026dd0e2e4448f7ca1a288d36f2.png)'
 - en: or
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 或
 - en: '![Equation](../Images/8721ba390a42a0da1fb1164e925b69a5.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![方程式](../Images/8721ba390a42a0da1fb1164e925b69a5.png)'
 - en: '![What are Moment-Generating Functions?](../Images/51bef907ae5fefe7a52ebbb3407475ae.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![什么是矩生成函数？](../Images/51bef907ae5fefe7a52ebbb3407475ae.png)'
 - en: 'Source: [Creative Commons](https://commons.wikimedia.org/wiki/File:Relationship_between_mean_and_median_under_different_skewness.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[Creative Commons](https://commons.wikimedia.org/wiki/File:Relationship_between_mean_and_median_under_different_skewness.png)
 - en: Kurtosis E(X^4)
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 峰度 E(X^4)
 - en: Kurtosis is the fourth moment. We use it to measure and indicate the occurrence
     of outliers by using the “tailedness” of the distribution. Thus, kurtosis is most
     concerned with the tails of the distribution. It helps us ascertain if the distribution
     is normal or filled with extreme values.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 峰度是第四个矩。我们用它来通过分布的“尾部”来测量和指示异常值的出现。因此，峰度最关注分布的尾部。它帮助我们确定分布是否正常或充满极端值。
 - en: Generally, normal distributions have a kurtosis value of 3 or an excess kurtosis
     of 0\. Distributions with this type of kurtosis are referred to as **mesokurtic**.
     A distribution with lighter tails and a kurtosis value lesser than three (K <
     3) is referred to as having **negative kurtosis**. In these cases, the [distribution
     is typically broad](/2021/01/comprehensive-guide-normal-distribution.html) and
     flat and referred to as **platykurtic**.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，正态分布的峰度值为 3 或超额峰度为 0。具有这种类型峰度的分布称为**中峰度型**。具有较轻尾部和峰度值小于三（K < 3）的分布称为**负峰度**。在这些情况下，[分布通常较宽](/2021/01/comprehensive-guide-normal-distribution.html)且较平坦，称为**平峰型**。
 - en: On the other hand, a distribution with heavier tails and a kurtosis value greater
     than three (K > 3) is referred to as having a **positive kurtosis**. In these
     cases, the distribution is thin, has a pointed or high peak, and is referred to
     as **leptokurtic**. High kurtosis indicates that the distribution contains outliers.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，具有较重尾部和峰度值大于三（K > 3）的分布称为具有**正峰度**。在这些情况下，分布较窄，具有尖锐或高峰，称为**尖峰型**。高峰度表明分布包含异常值。
 - en: '![What are Moment-Generating Functions?](../Images/507ddf19ed743edee2ff80a8ddfc6edd.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![什么是矩生成函数？](../Images/507ddf19ed743edee2ff80a8ddfc6edd.png)'
 - en: Now that we’ve covered what moments are, we can discuss moment-generating functions
     (MGF).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经涵盖了什么是矩，我们可以讨论矩生成函数（MGF）。
 - en: What are Moment Generating Functions (MGF)?
+  id: totrans-38
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是矩生成函数（MGF）？
 - en: 'Moment-generating functions are ultimately functions that allow you to generate
     moments. In the case where *X* is a random variable with a cumulative distribution
     function *Fx* and where the expected variable of *t* is in close proximity to
     some neighborhood of zero, the MGF of X is defined as:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 矩生成函数最终是允许你生成矩的函数。在 *X* 是一个具有累积分布函数 *Fx* 的随机变量且 *t* 的期望值接近于零的某个邻域的情况下，X 的 MGF
+    定义为：
 - en: '![Equation](../Images/a7aa44d163158f002142e388bc374e8a.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/a7aa44d163158f002142e388bc374e8a.png)'
 - en: 'Where *X* is discrete, and pi represents the probability mass function (PMF),
     the definition will be:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 *X* 是离散的，pi 代表概率质量函数（PMF），其定义为：
 - en: '![Equation](../Images/92180555e63f320956468b8d9d229d30.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/92180555e63f320956468b8d9d229d30.png)'
 - en: 'Where *X* is continuous and f(X) represents the [probability density function](https://www.investopedia.com/terms/p/pdf.asp)
     (PDF), the definition will look like this:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 *X* 是连续的，f(X) 代表[概率密度函数](https://www.investopedia.com/terms/p/pdf.asp)（PDF），其定义如下：
 - en: '![Equation](../Images/b65ccfd9ed842640bd3627816fbec6ea.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/b65ccfd9ed842640bd3627816fbec6ea.png)'
 - en: 'In cases where we’re trying to find the raw moment, we must find the value
     of E[xn]. This involves using the nth derivative of E[etx]. We also simplify it
     by plugging in 0 as the value of t (t = 0):'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们尝试找到原矩的情况下，我们必须找到 E[xn] 的值。这涉及使用 E[etx] 的 nth 导数。我们还通过将 t (t = 0) 作为值来简化它：
 - en: '![Equation](../Images/46acccf91ce4b9bfc85e9ddf6ceecd2d.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/46acccf91ce4b9bfc85e9ddf6ceecd2d.png)'
 - en: 'Thus, finding the first raw moment (mean) using the MGF with t as 0 looks like
     this:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，使用 MGF 找到第一阶原矩（均值）时，将 t 设为 0 看起来如下：
 - en: '![Equation](../Images/6bc10cb19dfcba3527f817a2f202df84.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/6bc10cb19dfcba3527f817a2f202df84.png)'
 - en: '![Equation](../Images/0d6d7c22a276769ff41122f42fa33020.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/0d6d7c22a276769ff41122f42fa33020.png)'
 - en: 'You can find the second raw moment using the same approach:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用相同的方法找到第二阶原矩：
 - en: '![Equation](../Images/6a8974ad997b291a502ab8465efd0689.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/6a8974ad997b291a502ab8465efd0689.png)'
 - en: '![Equation](../Images/c5984bde54a69690dd53a9da9c80bb8d.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/c5984bde54a69690dd53a9da9c80bb8d.png)'
 - en: You can use Taylor’s Expansion (ex=1+x1!+x22!+x33!+…, -∞<x to="" prove="" that=""
     the="" n-th="" derivative="" of="" mgf="" is="" moment.="" ultimately="">t is
     used as a helper variable. You can use it to find different derivatives in an
     MGF. </x>
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用泰勒展开式（ex=1+x1!+x22!+x33!+…，-∞<x to="" prove="" that="" the="" n-th="" derivative=""
+    of="" mgf="" is="" moment.="" ultimately="">t 作为辅助变量使用。你可以用它来找到 MGF 中的不同导数。
 - en: Why are Moment-Generating Functions Necessary?
+  id: totrans-54
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为什么矩生成函数是必要的？
 - en: MGF offers an alternative to integrating the PDF in a continuous probability
     distribution to find its moments. In programming, searching for the right integration
     makes algorithms far more complex and requires more computing resources, increasing
     the load or run-time of the program. MGFs and their derivations are far more efficient
     at finding moments.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: MGF 提供了一种替代方案，用于在连续概率分布中积分 PDF 以找到其矩。在编程中，寻找正确的积分使算法变得更加复杂，需要更多的计算资源，增加了程序的负载或运行时间。MGF
+    和其衍生方法在找到矩时更为高效。
 - en: Conclusion
+  id: totrans-56
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Finding the moments of a distribution without using an MGF is possible but calculating
     higher-order moments without using MGF gets complicated. Python’s built-in statistic
     module comes with a sufficient list of functions that can be used to calculate
     moments from a dataset. However, this isn’t the only option for [working with
     statistical functions](/2022/10/statistical-functions-python.html) in Python.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在不使用 MGF 的情况下找到分布的矩是可能的，但计算高阶矩而不使用 MGF 会变得复杂。Python 的内置统计模块提供了一系列足够的函数，可用于从数据集中计算矩。然而，这并不是在
+    Python 中[使用统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)的唯一选项。
 - en: The above guide provides a basic exploration of moments and moment-generating
     functions. As a programmer or data scientist, you may never have to manually calculate
     raw moments or try to derive central moments manually. In all likelihood, there
     are a variety of modules and libraries that do that for you. However, it’s always
     important to understand what goes on in the background.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述指南提供了对矩和矩生成函数的基本探讨。作为程序员或数据科学家，你可能从未需要手动计算原始矩或尝试手动推导中心矩。很可能，有多种模块和库可以为你完成这些任务。然而，了解后台发生的过程始终是重要的。
 - en: '**[Nahla Davies](http://nahlawrites.com/)** is a software developer and tech
     writer. Before devoting her work full time to technical writing, she managed —
     among other intriguing things — to serve as a lead programmer at an Inc. 5,000
     experiential branding organization whose clients include Samsung, Time Warner,
     Netflix, and Sony.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发者和技术作家。在全职从事技术写作之前，她管理了——除了其他有趣的工作——担任过
+    Inc. 5,000 实验性品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Top Five SQL Window Functions You Should Know For Data Science Interviews](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学面试中你应该知道的五种 SQL 窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)'
 - en: '[Loss Functions: An Explainer](https://www.kdnuggets.com/2022/03/loss-functions-explainer.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[损失函数：解释者](https://www.kdnuggets.com/2022/03/loss-functions-explainer.html)'
 - en: '[SQL Window Functions](https://www.kdnuggets.com/2022/04/sql-window-functions.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 窗口函数](https://www.kdnuggets.com/2022/04/sql-window-functions.html)'
 - en: '[KDnuggets™ News 22:n03, Jan 19: A Deep Look Into 13 Data…](https://www.kdnuggets.com/2022/n03.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n03，1 月 19 日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)'
 - en: '[How Activation Functions Work in Deep Learning](https://www.kdnuggets.com/2022/06/activation-functions-work-deep-learning.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习中激活函数的工作原理](https://www.kdnuggets.com/2022/06/activation-functions-work-deep-learning.html)'
 - en: '[Understanding Functions for Data Science](https://www.kdnuggets.com/2022/06/understanding-functions-data-science.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的函数理解](https://www.kdnuggets.com/2022/06/understanding-functions-data-science.html)'

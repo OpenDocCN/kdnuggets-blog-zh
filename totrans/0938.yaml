@@ -1,260 +1,378 @@
 - en: A Brief Introduction to Kalman Filters
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器简要介绍
 - en: 原文：[https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)
 - en: Introduction
+  id: totrans-2
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Can you measure the temperature inside the core of a nuclear reactor to make
     sure the nuclear reaction is controlled? It certainly is too hot for any thermostat
     manufactured to date. So what’s our best bet? The closest one can go is to measure
     the temperature of a surface close to the core and estimate the temperature inside
     it.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 你能测量核反应堆核心内部的温度以确保核反应受控吗？这肯定对任何目前制造的温度计来说都过于炎热。那么我们最好的选择是什么？最接近的是测量靠近核心的表面温度，并估算内部温度。
 - en: '![A Brief Introduction to Kalman Filters](../Images/8e91c8673f1e8a5e5d80e0e27f9783c1.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简要介绍](../Images/8e91c8673f1e8a5e5d80e0e27f9783c1.png)'
 - en: '[Image by snowing on Freepik](https://www.freepik.com/free-photo/business-finance-man-calculating-budget-numbers-invoices-financial-adviser-working_1202400.htm#query=estimation&position=22&from_view=search&track=sph)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图片由 snowing 提供，来自 Freepik](https://www.freepik.com/free-photo/business-finance-man-calculating-budget-numbers-invoices-financial-adviser-working_1202400.htm#query=estimation&position=22&from_view=search&track=sph)'
 - en: Let us consider another example to internalize this concept where direct measurement
     of a phenomenon is not possible – can you measure the exact position of a flying
     object using radar technology considering variable air density, wind direction,
     and wind speed? What if the wind changed direction? Has the empirical error associated
     with the radar device been accommodated?
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑另一个例子来内化这一概念：如果无法直接测量一个现象——例如，使用雷达技术测量飞行物体的确切位置时，考虑到空气密度、风向和风速的变化，你能做到吗？如果风向发生变化呢？与雷达设备相关的经验误差是否被考虑在内？
 - en: The environment impacts the accuracy of these measurements – if the environment
     isn’t controlled, you tend to get noisy readings. Therefore you would need a methodology
     that can filter the noise of these measurements and provide a near-accurate estimate,
     and the answer lies in Kalman Filter.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 环境影响这些测量的准确性——如果环境没有控制，你会得到噪声较大的读数。因此，你需要一种能够滤除这些测量噪声并提供接近准确估计的方法，答案就在于卡尔曼滤波器。
 - en: What is the Need for Kalman Filter?
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为什么需要卡尔曼滤波器？
 - en: You must be wondering your work is not directly related to the examples and
     the applications shared above. So, why is there a need for you to understand and
     learn the Kalman Filters?
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能在想，你的工作与上述示例和应用并不直接相关。那么，为什么你需要理解和学习卡尔曼滤波器呢？
 - en: Well, maybe you don’t work with nuclear reactors or radars for that matter,
     but what if you want to measure the position of your car moving east on a long
     straight road? Of course, GPS technology is what people use to measure the position
     of anything on this planet. But, GPS signals get impacted by a slight change in
     the position of the satellite, thermal noise, clouds, dust, etc.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，也许你不直接处理核反应堆或雷达，但如果你想测量你车在一条长直路上向东移动的位置呢？当然，人们使用GPS技术来测量地球上任何物体的位置。然而，GPS信号会受到卫星位置微小变化、热噪声、云层、尘土等影响。
 - en: What about the odometer, can it be used instead of GPS? Adding the odometer
     readings to the last known position is a simple way to know your current position.
     But, it turns out that the odometer readings are impacted by the size of the wheel,
     the tire air pressure, etc. Thus, the readings from the odometer are not that
     helpful to find the exact location.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 里程表怎么样？它可以代替GPS吗？将里程表读数添加到最后已知的位置是一种简单的方法来了解当前位置。但事实证明，里程表读数受到车轮大小、轮胎气压等因素的影响。因此，里程表的读数对找到确切位置帮助不大。
 - en: You can also measure the acceleration of the car using IMU (Inertial Measurement
     Unit) and double integrate it to get the distance but it is accompanied by the
     device and mathematical errors.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以使用IMU（惯性测量单元）测量汽车的加速度，并通过双重积分得到距离，但这伴随有设备和数学误差。
 - en: Hence, there is a need for Kalman Filters that make use of the readings from
     all these sources to get a near-perfect estimate of position.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，需要使用来自所有这些来源的读数来获得近乎完美的位置估计的卡尔曼滤波器。
 - en: Understanding the Kalman Filter Algorithm
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理解卡尔曼滤波器算法
 - en: A strong grasp of concepts like state and observation is necessary to understand
     the internals of the Kalman filter algorithm. So, let's first define what is a
     state.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解卡尔曼滤波器算法的内部需要对状态和观测等概念有深入了解。所以，让我们首先定义什么是状态。
 - en: '[The state of a system](https://en.wikipedia.org/wiki/State_variable) “describes
     enough about the system to determine its future behavior in the absence of any
     external forces affecting the system”. For example, the actual position of the
     car is a state which is always hidden. So, the observation i.e. odometer reading
     is used to estimate this state.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[系统状态](https://en.wikipedia.org/wiki/State_variable) “描述了足够的信息来确定系统在没有任何外部力量影响系统的情况下的未来行为”。例如，汽车的实际位置是一个状态，它始终是隐藏的。因此，观测值，即里程表读数，用于估计这个状态。'
 - en: With that in mind, let’s intuitively understand the Kalman Filter using an example
     of a car moving with a constant velocity in a straight line. Note that we can
     only observe the velocity through a speedometer, which can be noisy. Let’s say
     the velocity is 10x+10y which means 10m/s in the x-direction and 10m/s in the
     y-direction. Say, there is a gaussian noise added to it which the Kalman Filter
     doesn’t know.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这一点，让我们通过一个在直线中以恒定速度移动的汽车的例子来直观理解卡尔曼滤波器。注意，我们只能通过速度计观察到速度，而速度计可能会有噪声。假设速度是10x+10y，这意味着在x方向上10m/s，在y方向上10m/s。假设有高斯噪声添加到其中，卡尔曼滤波器不知道这一点。
 - en: Two-Step Process
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 两步过程
 - en: 'A Kalman filter for estimation would broadly involve two steps:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器的估计通常涉及两个步骤：
 - en: '**Prediction:** It involves predicting the quantity (position of the car) and
     the error covariance for the next step.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**预测：** 它涉及预测下一步的数量（汽车的位置）和误差协方差。'
 - en: '**Correction:** The correction step involves computing the Kalman Gain using
     the previous prediction along with the error between the prediction and the observation
     to update the estimate and the error covariance.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**修正：** 修正步骤涉及使用先前的预测计算卡尔曼增益，并结合预测和观测之间的误差来更新估计值和误差协方差。'
 - en: 'An overview of the process explained above is mathematically depicted in this
     illustration:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述过程的概述在此图示中以数学方式描述：
 - en: '![A Brief Introduction to Kalman Filters](../Images/0e8fec3c0e8f27a72edaa4065cc82368.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简介](../Images/0e8fec3c0e8f27a72edaa4065cc82368.png)'
 - en: Two-Step Process by [balzer82 / Kalman](https://github.com/balzer82/Kalman)
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 两步过程由 [balzer82 / Kalman](https://github.com/balzer82/Kalman)
 - en: 'The two steps are repeated for all the measurements or until the Kalman Gain
     stabilizes, as shown below:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个步骤对所有测量进行重复，直到卡尔曼增益稳定，如下所示：
 - en: '![A Brief Introduction to Kalman Filters](../Images/9779aeff68b42bbd559925a6eacdcc34.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简介](../Images/9779aeff68b42bbd559925a6eacdcc34.png)'
 - en: Image from [ResearchGate](https://www.researchgate.net/publication/267424725_Human_Motion_Tracking_and_Orientation_Estimation_using_inertial_sensors_and_RSSI_measurements)
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [ResearchGate](https://www.researchgate.net/publication/267424725_Human_Motion_Tracking_and_Orientation_Estimation_using_inertial_sensors_and_RSSI_measurements)
 - en: Estimation
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 估计
 - en: The first step to solving an estimation problem is to model the problem i.e.
     defining the state vector that Kalman Filter would estimate. Note that we need
     to estimate the position as well as velocity, hence the state vector (xk) would
     include both. Since the distance traveled is equal to the velocity in the direction
     and the time elapsed, the state at time k+1 (xk+1) is defined below.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 解决估计问题的第一步是对问题进行建模，即定义卡尔曼滤波器将要估计的状态向量。请注意，我们需要估计位置和速度，因此状态向量（xk）将包括这两个部分。由于行进距离等于方向上的速度和经过的时间，因此时间
+    k+1（xk+1）的状态定义如下。
 - en: '![A Brief Introduction to Kalman Filters](../Images/cc04613b9090df6e8cd2bc96b3dd9a37.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简要介绍](../Images/cc04613b9090df6e8cd2bc96b3dd9a37.png)'
 - en: A state transition matrix A (Dynamic matrix in Kalman terms) transforms the
     current state of the object to the next state i.e., it defines how a state is
     transitioned. The second component is the observation, defined by a matrix H called
     the observation matrix. Because you are only observing the constant velocity and
     not the position, only the (1,3) and (2,4) cell of the matrix has a non-zero value.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 状态转移矩阵 A（在卡尔曼术语中称为动态矩阵）将对象的当前状态转换为下一个状态，即它定义了状态如何转移。第二个组成部分是观察，由一个称为观察矩阵的矩阵
+    H 定义。因为你只观察恒定速度而不是位置，所以矩阵中只有 (1,3) 和 (2,4) 单元格的值为非零。
 - en: '![A Brief Introduction to Kalman Filters](../Images/2ce09490d547378ae1f028e35f24bfe7.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简要介绍](../Images/2ce09490d547378ae1f028e35f24bfe7.png)'
 - en: Minimizing Noise
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 降低噪声
 - en: Kalman seeks to minimize noise terms which are depicted by P0, Q, and R in the
     two-step process. The matrix P0 captures the initial uncertainty with respect
     to the position and velocity. The matrix Q captures the noise to the system pertaining
     to environmental factors such as wind or bumpy roads, etc. The matrix R absorbs
     the measurement noise or errors in measurement.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 卡尔曼试图最小化噪声项，这些项在两步过程中由 P0、Q 和 R 表示。矩阵 P0 捕获与位置和速度相关的初始不确定性。矩阵 Q 捕获与环境因素如风或颠簸道路等相关的系统噪声。矩阵
+    R 吸收测量噪声或测量误差。
 - en: '![A Brief Introduction to Kalman Filters](../Images/808486da03ccb706e35b76fa45eb8bd2.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简要介绍](../Images/808486da03ccb706e35b76fa45eb8bd2.png)'
 - en: Based on the iterative updates from the prediction and correction process, the
     Kalman Filter removes noise from a constant velocity model (the top graph) and
     appears like the one shown in the bottom right image. Notably, the variance in
     the output velocity estimate has decreased over time.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于预测和校正过程的迭代更新，卡尔曼滤波器从恒定速度模型中去除噪声（上图），并呈现出右下图所示的效果。值得注意的是，输出速度估计的方差随时间减少。
 - en: '![A Brief Introduction to Kalman Filters](../Images/03b064ebe52128bf988db27618970b3e.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![卡尔曼滤波器简要介绍](../Images/03b064ebe52128bf988db27618970b3e.png)'
 - en: 'Source: [The Kalman filter simply explained [Part 2]](https://www.cbcity.de/das-kalman-filter-einfach-erklaert-teil-2)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[卡尔曼滤波器简单解释 [第2部分]](https://www.cbcity.de/das-kalman-filter-einfach-erklaert-teil-2)
 - en: This depicts how Kalman Filter removes noise from a constant velocity model
     where only one source of observation i.e. velocity is available. It works even
     better if there are multiple noisy sources of observation. For example, if you
     have the noisy odometer readings along with the velocity readings the results
     would have been even better.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这描绘了卡尔曼滤波器如何从只有一个观察源，即速度的恒定速度模型中去除噪声。如果有多个噪声观察源，它的效果会更好。例如，如果你有噪声的里程计读数和速度读数，结果会更好。
 - en: Summary
+  id: totrans-46
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结
 - en: Kalman Filter highlights the need for estimation and is used in some of the
     applications where noise is introduced through various sources. The article explained
     the internal working of the Kalman Filter through an example of 2D motion to filter
     this noise.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器突出了估计的必要性，并用于一些噪声通过各种来源引入的应用中。文章通过一个二维运动的例子解释了卡尔曼滤波器的内部工作原理，以过滤这些噪声。
 - en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
     a digital transformation leader working at the intersection of product, sciences,
     and engineering to build scalable machine learning systems. She is an award-winning
     innovation leader, an author, and an international speaker. She is on a mission
     to democratize machine learning and break the jargon for everyone to be a part
     of this transformation.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位人工智能战略家和数字化转型领导者，致力于在产品、科学和工程的交汇点上构建可扩展的机器学习系统。她是一位屡获殊荣的创新领导者、作者和国际演讲者。她的使命是使机器学习民主化，并打破术语，使每个人都能参与这一变革。'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[A Brief Introduction to Papers With Code](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于 Papers With Code 的简要介绍](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)'
 - en: '[KDnuggets News, April 27: A Brief Introduction to Papers With Code;…](https://www.kdnuggets.com/2022/n17.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，4月27日：关于 Papers With Code 的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)'
 - en: '[A Brief History of the Neural Networks](https://www.kdnuggets.com/a-brief-history-of-the-neural-networks)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络的简要历史](https://www.kdnuggets.com/a-brief-history-of-the-neural-networks)'
 - en: '[Everything You Need to Know About MLOps: A KDnuggets Tech Brief](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于 MLOps 的一切你需要知道的：KDnuggets 技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)'
 - en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyCaret 的二分类介绍](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
 - en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyCaret 进行 Python 聚类的介绍](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
