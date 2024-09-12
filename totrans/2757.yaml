@@ -1,263 +1,388 @@
 - en: Model Evaluation Metrics in Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习中的模型评估指标
 - en: 原文：[https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html](https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html](https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Predictive models have become a trusted advisor to many businesses and for a
     good reason. These models can “foresee the future”, and there are many different
     methods available, meaning any industry can find one that fits their particular
     challenges.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测模型已成为许多企业值得信赖的顾问，并且有充分的理由。这些模型可以“预见未来”，并且有许多不同的方法可用，这意味着任何行业都可以找到适合其特定挑战的方法。
 - en: 'When we talk about predictive models, we are talking either about a **regression
     model** (continuous output) or a **classification model** (nominal or binary output).
     In classification problems, we use two types of algorithms (dependent on the kind
     of output it creates):'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们谈论预测模型时，我们在谈论**回归模型**（连续输出）或**分类模型**（名义或二元输出）。在分类问题中，我们使用两种类型的算法（依赖于它生成的输出类型）：
 - en: '**Class output**: Algorithms like SVM and KNN create a class output. For instance,
     in a binary classification problem, the outputs will be either 0 or 1\. However,
     today we have algorithms that can convert these class outputs to probability.'
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**类输出**：像 SVM 和 KNN 这样的算法生成类输出。例如，在二元分类问题中，输出将是 0 或 1。然而，今天我们有算法可以将这些类输出转换为概率。'
 - en: '**Probability output**: Algorithms like Logistic Regression, Random Forest,
     Gradient Boosting, Adaboost, etc. give probability outputs. Converting probability
     outputs to class output is just a matter of creating a threshold probability.'
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**概率输出**：像逻辑回归、随机森林、梯度提升、Adaboost 等算法给出概率输出。将概率输出转换为类输出只是创建一个阈值概率的问题。'
 - en: '* * *'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Introduction
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: While data preparation and training a machine learning model is a key step in
     the machine learning pipeline, it’s equally important to measure the performance
     of this trained model. How well the model generalizes on the unseen data is what
     defines adaptive vs non-adaptive machine learning models.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然数据准备和训练机器学习模型是机器学习流程中的关键步骤，但同样重要的是衡量这个训练好的模型的性能。模型在未见数据上的泛化能力定义了自适应与非自适应机器学习模型。
 - en: By using different metrics for performance evaluation, we should be in a position
     to improve the overall predictive power of our model before we roll it out for
     production on unseen data.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用不同的性能评估指标，我们应能在将模型投入生产之前提升模型的整体预测能力。
 - en: Without doing a proper evaluation of the ML model using different metrics, and
     depending only on accuracy, it can lead to a problem when the respective model
     is deployed on unseen data and can result in poor predictions.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果不使用不同的指标对机器学习模型进行适当评估，而仅依赖准确率，可能会导致在将模型部署到未见数据上时出现问题，并且可能导致预测效果不佳。
 - en: This happens because, in cases like these, our models don’t learn but instead
     memorize;hence, they cannot generalize well on unseen data.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 之所以会这样，是因为在这种情况下，我们的模型并没有学习，而是记住了；因此，它们无法对未见数据进行良好的泛化。
 - en: Model Evaluation Metrics
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型评估指标
 - en: Let us now define the evaluation metrics for evaluating the performance of a
     machine learning model, which is an integral component of any data science project.
     It aims to estimate the generalization accuracy of a model on the future (unseen/out-of-sample)
     data.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们定义用于评估机器学习模型性能的评估指标，这是任何数据科学项目的一个重要组成部分。其目的是估计模型在未来（未见/样本外）数据上的泛化准确性。
 - en: Confusion Matrix
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 混淆矩阵
 - en: A confusion matrix is a matrix representation of the prediction results of any
     binary testing that is often used to **describe the performance of the classification
     model** (or “classifier”) on a set of test data for which the true values are
     known.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 混淆矩阵是对任何二元测试预测结果的矩阵表示，常用于**描述分类模型**（或“分类器”）在一组已知真实值的测试数据上的性能。
 - en: The confusion matrix itself is relatively simple to understand, but the related
     terminology can be confusing.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 混淆矩阵本身相对简单易懂，但相关术语可能会令人困惑。
 - en: '![Figure](../Images/238722baa8343d76a6f5ae4014af4dbe.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/238722baa8343d76a6f5ae4014af4dbe.png)'
 - en: Confusion matrix with 2 class labels.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有两个类别标签的混淆矩阵。
 - en: 'Each prediction can be one of the four outcomes, based on how it matches up
     to the actual value:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个预测可以是四种结果之一，基于它与实际值的匹配程度：
 - en: '**True Positive (TP): **Predicted True and True in reality.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**真阳性（TP）：** 预测为真实，实际上也是真的。'
 - en: '**True Negative (TN): **Predicted False and False in reality.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**真阴性（TN）：** 预测为假，实际上也是假的。'
 - en: '**False Positive (FP):** Predicted True and False in reality.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**假阳性（FP）：** 预测为真实，但实际上是假的。'
 - en: '**False Negative (FN):** Predicted False and True in reality.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**假阴性（FN）：** 预测为假，实际上是真的。'
 - en: Now let us understand this concept using hypothesis testing.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们通过假设检验来理解这个概念。
 - en: A **Hypothesis** is speculation or theory based on insufficient evidence that
     lends itself to further testing and experimentation. With further testing, a hypothesis
     can usually be proven true or false.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个**假设**是基于不足证据的猜测或理论，可以通过进一步测试和实验来验证。通过进一步测试，假设通常可以被证明为真或假。
 - en: A **Null Hypothesis** is a hypothesis that says there is no statistical significance
     between the two variables in the hypothesis. It is the hypothesis that the researcher
     is trying to disprove.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个**零假设**是一个假设，表明假设中的两个变量之间没有统计学上的显著性。它是研究者试图驳斥的假设。
 - en: We would always reject the null hypothesis when it is false, and we would accept
     the null hypothesis when it is indeed true.
+  id: totrans-33
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 当零假设错误时，我们总是会拒绝零假设，而当零假设确实正确时，我们会接受零假设。
 - en: Even though hypothesis tests are meant to be reliable, **there are two types
     of errors that can occur.**
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管假设检验旨在可靠，但**可能会发生两种类型的错误**。
 - en: These errors are known as **Type 1 and Type II errors.**
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些错误被称为**一类错误和二类错误**。
 - en: For example, when examining the effectiveness of a drug, the null hypothesis
     would be that the drug does not affect a disease.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在检验药物的有效性时，零假设是药物不影响疾病。
 - en: '**Type I Error:- **equivalent to False Positives(FP).'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一类错误：** 等同于假阳性（FP）。'
 - en: The first kind of error that is possible involves the rejection of a null hypothesis
     that is true.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一种可能的错误涉及拒绝一个真实的零假设。
 - en: Let’s go back to the example of a drug being used to treat a disease. If we
     reject the null hypothesis in this situation, then we claim that the drug does
     have some effect on a disease. But if the null hypothesis is true, then, in reality,
     the drug does not combat the disease at all. The drug is falsely claimed to have
     a positive effect on a disease.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回到药物用于治疗疾病的例子。如果我们在这种情况下拒绝零假设，那么我们声称药物对疾病有一定的效果。但如果零假设是正确的，那么实际上药物对疾病没有任何作用。药物被错误地宣称对疾病有正面效果。
 - en: '**Type II Error:- **equivalent to False Negatives(FN).'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**二类错误：** 等同于假阴性（FN）。'
 - en: The other kind of error that occurs when we accept a false null hypothesis.
     This sort of error is called a type II error and is also referred to as an error
     of the second kind.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种错误是当我们接受一个虚假的零假设时发生的。这种错误称为二类错误，也被称为第二类错误。
 - en: If we think back again to the scenario in which we are testing a drug, what
     would a type II error look like? A type II error would occur if we accepted that
     the drug hs no effect on disease, but in reality, it did.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们回顾一下测试药物的场景，那么二类错误会是什么样的呢？如果我们接受药物对疾病没有影响的假设，但实际上药物有影响，这就是二类错误。
 - en: A sample python implementation of the Confusion matrix.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 混淆矩阵的一个示例Python实现。
 - en: '![Figure](../Images/32ef98a849a9bf9dadcf60b17ff8df47.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/32ef98a849a9bf9dadcf60b17ff8df47.png)'
 - en: Confusion matrix with 3 class labels.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有三个类别标签的混淆矩阵。
 - en: The diagonal elements represent the number of points for which the predicted
     label is equal to the true label, while anything off the diagonal was mislabeled
     by the classifier. Therefore, the higher the diagonal values of the confusion
     matrix the better, indicating many correct predictions.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 对角线元素表示预测标签与真实标签相同的点的数量，而对角线外的元素则是分类器标记错误的点。因此，混淆矩阵中对角线的值越高越好，表示正确预测的数量多。
 - en: In our case, the classifier predicted all the 13 setosa and 18 virginica plants
     in the test data perfectly. However, it incorrectly classified 4 of the versicolor
     plants as virginica.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，分类器在测试数据中完美地预测了所有 13 个山鸢尾和 18 个维吉尼亚鸢尾植物。然而，它错误地将 4 朵变色鸢尾植物分类为维吉尼亚鸢尾。
 - en: 'There is also a list of rates that are often computed from a confusion matrix
     for a binary classifier:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一系列常从混淆矩阵中计算出的二分类器指标：
 - en: 1\. Accuracy
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 准确率
 - en: Overall, how often is the classifier correct?
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体上，分类器的正确频率是多少？
 - en: Accuracy = (TP+TN)/total
+  id: totrans-51
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 准确率 = (TP+TN)/total
 - en: When our classes are roughly equal in size, we can use accuracy**, **which will
     give us correctly classified values.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们的类别大小大致相等时，我们可以使用准确率**，**这将给出正确分类的值。
 - en: Accuracy is a common evaluation metric for classification problems. It’s the
     number of correct predictions made as a ratio of all predictions made.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 准确率是分类问题中常用的评估指标。它是正确预测的数量与所有预测数量的比率。
 - en: '**Misclassification Rate(Error Rate):** Overall, how often is it wrong. Since
     accuracy is the percent we correctly classified (success rate), it follows that
     our error rate (the percentage we got wrong) can be calculated as follows:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**错误分类率（误差率）：** 总体上，它错误的频率是多少。由于准确率是我们正确分类的百分比（成功率），因此我们的错误率（错误的百分比）可以按如下方式计算：'
 - en: Misclassification Rate = (FP+FN)/total
+  id: totrans-55
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 错误分类率 = (FP+FN)/total
 - en: We use the sklearn module to compute the accuracy of a classification task,
     as shown below.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用 sklearn 模块来计算分类任务的准确率，如下所示。
 - en: The classification accuracy is **88%** on the validation set.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类准确率在验证集上为**88%**。
 - en: 2\. Precision
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 精确度
 - en: When it predicts yes, how often is it correct?
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 当它预测“是”时，它的准确性有多高？
 - en: Precision=TP/predicted yes
+  id: totrans-60
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 精确度 = TP/预测的“是”
 - en: When we have a class imbalance, accuracy can become an unreliable metric for
     measuring our performance. For instance, if we had a 99/1 split between two classes,
     A and B, where the rare event, B, is our positive class, we could build a model
@@ -265,394 +390,591 @@
     we shouldn’t bother building a model if it doesn’t do anything to identify class
     B; thus, we need different metrics that will discourage this behavior. For this,
     we use precision and recall instead of accuracy.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们有类别不平衡时，准确率可能会成为测量我们性能的不可靠指标。例如，如果我们在两个类别 A 和 B 之间有 99/1 的划分，其中稀有事件 B 是我们的正类，我们可以建立一个
+    99% 准确的模型，通过简单地将所有内容归为类别 A。显然，如果模型不能识别类别 B，我们就不应该费心去建立它；因此，我们需要不同的指标来抑制这种行为。为此，我们使用精确度和召回率代替准确率。
 - en: 3\. Recall or Sensitivity
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 召回率或灵敏度
 - en: When it’s actually yes, how often does it predict yes?
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 当实际为“是”时，它预测“是”的频率是多少？
 - en: True Positive Rate = TP/actual yes
+  id: totrans-64
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 真正率 = TP/实际的“是”
 - en: Recall gives us the **true positive rate** (**TPR**), which is the ratio of
     true positives to everything positive.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 召回率给出了**真正率** (**TPR**)，即真正例与所有正例的比率。
 - en: In the case of the 99/1 split between classes A and B, the model that classifies
     everything as A would have a recall of 0% for the positive class, B (precision
     would be undefined — 0/0). Precision and recall provide a better way of evaluating
     model performance in the face of a class imbalance. They will correctly tell us
     that the model has little value for our use case.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 在类 A 和 B 之间有 99/1 的划分情况下，模型如果将所有内容都归为 A，则对正类 B 的召回率为 0%（精确度将不定义——0/0）。精确度和召回率提供了在类别不平衡情况下评估模型性能的更好方法。它们会正确地告诉我们模型对我们的用例几乎没有价值。
 - en: 'Just like accuracy, both precision and recall are easy to compute and understand
     but require thresholds. Besides, precision and recall only consider half of the
     confusion matrix:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 和准确率一样，精确度和召回率都容易计算和理解，但需要阈值。此外，精确度和召回率仅考虑混淆矩阵的一半：
 - en: '![](../Images/91ec868e492267fb92b1daed648438bf.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/91ec868e492267fb92b1daed648438bf.png)'
 - en: 4\. F1 Score
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. F1 分数
 - en: The F1 score is the [harmonic mean](https://en.wikipedia.org/wiki/Harmonic_mean) of
     the [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall),
     where an F1 score reaches its best value at 1 (perfect precision and recall) and
     worst at 0.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: F1分数是[调和平均数](https://en.wikipedia.org/wiki/Harmonic_mean) 和[精确率与召回率](https://en.wikipedia.org/wiki/Precision_and_recall)的调和平均数，其中F1分数在1（完美的精确率和召回率）时达到最佳值，在0时达到最差值。
 - en: '![](../Images/77f68629d1a37e25bca6efa9b7204007.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/77f68629d1a37e25bca6efa9b7204007.png)'
 - en: '***Why harmonic mean?*** Since the harmonic mean of a list of numbers skews
     strongly toward the least elements of the list, it tends (compared to the arithmetic
     mean) to mitigate the impact of large outliers and aggravate the impact of small
     ones.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '***为什么用调和平均数？*** 因为列表中调和平均数会强烈偏向列表中最小的元素，它（相比于算术平均数）通常会减轻大离群值的影响，并加重小离群值的影响。'
 - en: 'An F1 score punishes extreme values more. Ideally, an F1 Score could be an
     effective evaluation metric in the following classification scenarios:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: F1分数对极端值的惩罚更多。理想情况下，F1分数可以在以下分类场景中作为有效的评估指标：
 - en: '*When FP and FN are equally costly — meaning they miss on true positives or
     find false positives — both impact the model almost the same way, as in our cancer
     detection classification example*'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*当假阳性（FP）和假阴性（FN）的代价相等时——即它们漏掉了真正的正例或找到了虚假的正例——两者对模型的影响几乎相同，就像我们在癌症检测分类的例子中一样*'
 - en: '*Adding more data doesn’t effectively change the outcome effectively*'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*添加更多的数据不会有效地改变结果*'
 - en: '*TN is high (like with flood predictions, cancer predictions, etc.)*'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*TN很高（例如在洪水预测、癌症预测等中）*'
 - en: A sample python implementation of the F1 score.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个F1分数的Python示例实现。
 - en: '![](../Images/0386367949b03779167d8b46213b15b8.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0386367949b03779167d8b46213b15b8.png)'
 - en: 5\. Specificity
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5\. 特异性
 - en: When it’s no, how often does it predict no?
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 当它的答案是否时，它预测“否”的频率如何？
 - en: True Negative Rate=TN/actual no
+  id: totrans-81
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 真负率=TN/实际负数
 - en: It is the **true negative rate** or the proportion of true negatives to everything
     that should have been classified as negative.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是**真正负率** 或真正负例占所有应被分类为负例的比例。
 - en: 'Note that, together, specificity and sensitivity consider the full confusion
     matrix:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，特异性和灵敏度一起考虑了整个混淆矩阵：
 - en: '![](../Images/c1fa5a1519c294b00d3fe48bfcbf3574.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c1fa5a1519c294b00d3fe48bfcbf3574.png)'
 - en: 6\. Receiver Operating Characteristics (ROC) Curve
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 6\. 接收者操作特征（ROC）曲线
 - en: Measuring the area under the ROC curve is also a very useful method for evaluating
     a model. By plotting the true positive rate (sensitivity) versus the false-positive
     rate (1 — specificity), we get the **Receiver Operating Characteristic** (**ROC**) **curve**.
     This curve allows us to visualize the trade-off between the true positive rate
     and the false positive rate.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 测量ROC曲线下的面积也是评估模型非常有用的方法。通过绘制真正阳性率（灵敏度）与假阳性率（1 — 特异性）的关系，我们得到**接收者操作特征** (**ROC**)
+    **曲线**。这个曲线让我们可以可视化真正阳性率与假阳性率之间的权衡。
 - en: 'The following are examples of good ROC curves. The dashed line would be random
     guessing (no predictive value) and is used as a baseline; anything below that
     is considered worse than guessing. We want to be toward the top-left corner:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是良好ROC曲线的示例。虚线表示随机猜测（没有预测价值），作为基线；任何低于此的情况都被认为比猜测更差。我们希望靠近左上角：
 - en: '![](../Images/d04f5b222c9909d1cb36c50e47631161.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d04f5b222c9909d1cb36c50e47631161.png)'
 - en: A sample python implementation of the ROC curves.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个ROC曲线的Python示例实现。
 - en: '![](../Images/beff968a8224e5e7c16acd4fe6153e37.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/beff968a8224e5e7c16acd4fe6153e37.png)'
 - en: In the example above, the AUC is relatively close to 1 and greater than 0.5\.
     A perfect classifier will have the ROC curve go along the Y-axis and then along
     the X-axis.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上面的例子中，AUC相对接近1且大于0.5。一个完美的分类器的ROC曲线将沿Y轴走，然后沿X轴走。
 - en: Log Loss
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对数损失
 - en: Log Loss is the most important classification metric based on probabilities.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 对数损失是基于概率的最重要的分类指标。
 - en: '![Figure](../Images/4525d39c13e7dc150aed104370ae1e9e.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4525d39c13e7dc150aed104370ae1e9e.png)'
 - en: As the **predicted probability** of the **true class** gets **closer to zero**,
     the **loss increases exponentially**
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着**预测概率** 的**真实类别** 越来越**接近零**，**损失呈指数增加**
 - en: It measures the performance of a classification model where the prediction input
     is a probability value between 0 and 1\. Log loss increases as the predicted probability
     diverge from the actual label. The goal of any machine learning model is to minimize
     this value. As such, smaller log loss is better, with a perfect model having a
     log loss of 0.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 它衡量分类模型的表现，其中预测输入是介于 0 和 1 之间的概率值。Log Loss 随着预测概率与实际标签的偏离而增加。任何机器学习模型的目标都是最小化这个值。因此，较小的
+    log loss 更好，完美模型的 log loss 为 0。
 - en: A sample python implementation of the Log Loss.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: Log Loss 的 Python 示例实现。
 - en: '[PRE0]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Jaccard Index
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Jaccard 指数
 - en: Jaccard Index is one of the simplest ways to calculate and find out the accuracy
     of a classification ML model. Let’s understand it with an example. Suppose we
     have a labeled test set, with labels as –
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: Jaccard 指数是计算和找出分类 ML 模型准确性最简单的方法之一。让我们通过一个例子来理解它。假设我们有一个标记的测试集，标签如下 –
 - en: '[PRE1]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And our model has predicted the labels as –
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的模型预测的标签如下 –
 - en: '[PRE2]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/667302f21a8d59e942ab7771b3436eb0.png)'
+  id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/667302f21a8d59e942ab7771b3436eb0.png)'
 - en: The above Venn diagram shows us the labels of the test set and the labels of
     the predictions, and their intersection and union.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述 Venn 图展示了测试集的标签、预测标签及其交集和并集。
 - en: Jaccard Index or Jaccard similarity coefficient is a statistic used in understanding
     the similarities between sample sets. The measurement emphasizes the similarity
     between finite sample sets and is formally defined as the size of the intersection
     divided by the size of the union of the two labeled sets, with formula as –
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: Jaccard 指数或 Jaccard 相似系数是一种用于理解样本集合之间相似性的统计量。该测量强调有限样本集合之间的相似性，正式定义为交集大小与两个标记集合的并集大小之比，公式如下
+    –
 - en: '![](../Images/ed169e327c593c70f7820fcb39920d2b.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ed169e327c593c70f7820fcb39920d2b.png)'
 - en: '![Figure](../Images/c2d7428abbdb789e23a8de8841b4db80.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c2d7428abbdb789e23a8de8841b4db80.png)'
 - en: '[Jaccard Index or Intersection over Union(IoU)](https://commons.wikimedia.org/wiki/File:Intersection_over_Union_-_visual_equation.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Jaccard 指数或交集与并集（IoU）](https://commons.wikimedia.org/wiki/File:Intersection_over_Union_-_visual_equation.png)'
 - en: So, for our example, we can see that the intersection of the two sets is equal
     to 8 (since eight values are predicted correctly) and the union is **10 + 10–8
     = 12**. So, the Jaccard index gives us the accuracy as –
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，对于我们的例子，我们可以看到两个集合的交集为 8（因为正确预测了八个值），并且并集为**10 + 10–8 = 12**。因此，Jaccard 指数给出的准确性为
+    –
 - en: '![](../Images/948566c9337719113a09c9a1547bce4b.png)'
+  id: totrans-111
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/948566c9337719113a09c9a1547bce4b.png)'
 - en: So, the accuracy of our model, according to **Jaccard Index**, becomes 0.66,
     or 66%.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，按照**Jaccard 指数**，我们的模型准确性为 0.66，即 66%。
 - en: Higher the Jaccard index higher the accuracy of the classifier.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: Jaccard 指数越高，分类器的准确性越高。
 - en: A sample python implementation of the Jaccard index.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: Jaccard 指数的 Python 示例实现。
 - en: '[PRE3]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Kolomogorov Smirnov chart
+  id: totrans-116
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Kolmogorov-Smirnov 图表
 - en: K-S or Kolmogorov-Smirnov chart measures the performance of classification models.
     More accurately, K-S is a measure of the degree of separation between positive
     and negative distributions.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: K-S 或 Kolmogorov-Smirnov 图表衡量分类模型的性能。更准确地说，K-S 是衡量正例和负例分布之间分离程度的指标。
 - en: '![Figure](../Images/4f71119b16403ed7cdcec55d961cede5.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4f71119b16403ed7cdcec55d961cede5.png)'
 - en: '[The cumulative frequency for the observed and hypothesized distributions is
     plotted against the ordered frequencies. The vertical double arrow indicates the
     maximal vertical difference](https://www.sciencedirect.com/topics/medicine-and-dentistry/kolmogorov-smirnov-test).'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '[观察到的和假设分布的累积频率与有序频率绘制图。垂直双箭头表示最大垂直差异](https://www.sciencedirect.com/topics/medicine-and-dentistry/kolmogorov-smirnov-test)。'
 - en: The `K-S is 100` if the scores partition the population into two separate groups
     in which one group contains all the positives and the other all the negatives.
     On the other hand, If the model cannot differentiate between positives and negatives,
     then it is as if the model selects cases randomly from the population. The `K-S
     would be 0`.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果分数将总体划分为两个独立的组，其中一个组包含所有正例，另一个组包含所有负例，则 `K-S is 100`。另一方面，如果模型无法区分正例和负例，那么模型就像是从总体中随机选择案例一样。此时，`K-S
+    would be 0`。
 - en: In most classification models the K-S will fall between 0 and 100, and that
     the higher the value the better the model is at separating the positive from negative
     cases.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数分类模型中，K-S 值会在 0 和 100 之间变化，值越高，模型在分离正例和负例方面越好。
 - en: The K-S may also be used to test whether two underlying one-dimensional probability
     distributions differ. It is a very efficient way to determine if two samples are
     significantly different from each other.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: K-S检验也可以用来测试两个一维概率分布是否有差异。这是一种非常有效的方式来判断两个样本是否显著不同。
 - en: A sample python implementation of the Kolmogorov-Smirnov.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: Kolmogorov-Smirnov的一个Python实现示例。
 - en: '![](../Images/d6746fe34f97779b5ade9c549dd64480.png)'
+  id: totrans-124
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d6746fe34f97779b5ade9c549dd64480.png)'
 - en: The Null hypothesis used here assumes that the numbers follow the normal distribution.
     It returns statistics and p-value. If the **p-value is < alpha**, we reject the
     Null hypothesis.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 此处使用的零假设假设数据服从正态分布。它返回统计数据和p值。如果**p值 < alpha**，我们将拒绝零假设。
 - en: '*Alpha is defined as the probability of rejecting the null hypothesis given
     the null hypothesis(H*0*) is true. For most of the practical applications, alpha
     is chosen as 0.05.*'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Alpha被定义为在零假设（H*0*）为真的情况下拒绝零假设的概率。在大多数实际应用中，alpha选择为0.05。*'
 - en: Gain and Lift Chart
+  id: totrans-127
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增益和提升图
 - en: Gain or Lift is a measure of the effectiveness of a classification model calculated
     as the ratio between the results obtained with and without the model. Gain and
     lift charts are visual aids for evaluating the performance of classification models.
     However, in contrast to the confusion matrix that evaluates models on the whole
     population gain or lift chart evaluates model performance in a portion of the
     population.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 增益或提升是分类模型效果的度量，计算为有模型和无模型的结果之比。增益和提升图是评估分类模型性能的视觉工具。然而，与评估全体数据的混淆矩阵不同，增益或提升图评估的是数据的一部分。
 - en: The higher the lift (i.e. the further up it is from the baseline), the better
     the model.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 提升值越高（即离基线越远），模型越好。
 - en: The following gains chart, run on a validation set, shows that with 50% of the
     data, the model contains 90% of targets, Adding more data adds a negligible increase
     in the percentage of targets included in the model.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下增益图表在验证集上运行，显示使用50%的数据时，模型包含了90%的目标，增加更多的数据对模型中包含的目标百分比的增加几乎没有影响。
 - en: '![Figure](../Images/dddcc35be3fae9094d555ba1d1e2cf8a.png)'
+  id: totrans-131
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/dddcc35be3fae9094d555ba1d1e2cf8a.png)'
 - en: '[Gain/lift chart](https://www.datasciencecentral.com/profiles/blogs/comparing-model-evaluation-techniques-part-2)'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '[增益/提升图](https://www.datasciencecentral.com/profiles/blogs/comparing-model-evaluation-techniques-part-2)'
 - en: Lift charts are often shown as a **cumulative lift chart**, which is also known
     as a **gains chart**. Therefore, gains charts are sometimes (perhaps confusingly)
     called “lift charts”, but they are more accurately *cumulative *lift charts.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 提升图通常显示为**累计提升图**，也称为**增益图**。因此，增益图有时（可能令人困惑地）被称为“提升图”，但它们更准确地是*累计提升图*。
 - en: It is one of their most common uses is in marketing, to decide if a prospective
     client is worth calling.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 其最常见的用途之一是在营销中，以决定一个潜在客户是否值得联系。
 - en: Gini Coefficient
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基尼系数
 - en: The Gini coefficient or Gini Index is a popular metric for imbalanced class
     values. The coefficient ranges from 0 to 1 where 0 represents perfect equality
     and 1 represents perfect inequality. Here, if the value of an index is higher,
     then the data will be more dispersed.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 基尼系数或基尼指数是用于不平衡类值的流行度量。该系数范围从0到1，其中0表示完全平等，1表示完全不平等。在这里，如果指数值更高，则数据会更分散。
 - en: 'Gini coefficient can be computed from the area under the ROC curve using the
     following formula:'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 基尼系数可以通过以下公式从ROC曲线下面积计算得出：
 - en: Gini Coefficient = (2 * ROC_curve) — 1
+  id: totrans-138
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 基尼系数 = (2 * ROC_curve) — 1
 - en: Conclusion
+  id: totrans-139
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Understanding how well a machine learning model is going to perform on unseen
     data is the ultimate purpose behind working with these evaluation metrics. Metrics
     like accuracy, precision, recall are good ways to evaluate classification models
     for balanced datasets, but if the data is imbalanced and there’s a class disparity,
     then other methods like ROC/AUC, Gini coefficient perform better in evaluating
     the model performance.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解机器学习模型在未见数据上表现如何是使用这些评估指标的终极目的。像准确率、精确率、召回率这样的指标适用于平衡数据集的分类模型评估，但如果数据不平衡且存在类别差异，则ROC/AUC、基尼系数等方法在评估模型性能方面表现更佳。
 - en: Well, this concludes this article**. **I hope you guys have enjoyed reading
     it, feel free to share your comments/thoughts/feedback in the comment section.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，这篇文章到此结束**。**希望你们阅读愉快，欢迎在评论区分享你们的评论/想法/反馈。
 - en: '**Thanks for reading !!!**'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '**感谢阅读 !!!**'
 - en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
     is a Big data developer at CirrusLabs. He has over 4 years of working experience
     in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
     in various Big data components.'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[纳戈什·辛格·乔汉](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    是CirrusLabs的一个大数据开发人员。他在电信、分析、销售、数据科学等多个领域拥有超过4年的工作经验，专注于各种大数据组件。'
 - en: '[Original](https://levelup.gitconnected.com/model-evaluation-metrics-in-machine-learning-8988739236fc).
     Reposted with permission.'
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://levelup.gitconnected.com/model-evaluation-metrics-in-machine-learning-8988739236fc)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Dimensionality Reduction with Principal Component Analysis (PCA)](/2020/05/dimensionality-reduction-principal-component-analysis.html)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[主成分分析（PCA）降维](/2020/05/dimensionality-reduction-principal-component-analysis.html)'
 - en: '[Hyperparameter Optimization for Machine Learning Models](/2020/05/hyperparameter-optimization-machine-learning-models.html)'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的超参数优化](/2020/05/hyperparameter-optimization-machine-learning-models.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的DBSCAN聚类算法](/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
 - en: More On This Topic
+  id: totrans-149
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主题拓展
 - en: '[Machine Learning Evaluation Metrics: Theory and Overview](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习评估指标：理论与概述](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的AI失败案例，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'

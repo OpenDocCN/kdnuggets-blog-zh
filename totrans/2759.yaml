@@ -1,324 +1,485 @@
 - en: Faster machine learning on larger graphs with NumPy and Pandas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 NumPy 和 Pandas 在更大图上的更快机器学习
 - en: 原文：[https://www.kdnuggets.com/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html](https://www.kdnuggets.com/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html](https://www.kdnuggets.com/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Huon Wilson](https://www.linkedin.com/in/huon-wilson/), CSIRO Data61**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Huon Wilson](https://www.linkedin.com/in/huon-wilson/)，CSIRO Data61**'
 - en: '![Figure](../Images/8343010b59fe5f31170c9880fdf0aceb.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8343010b59fe5f31170c9880fdf0aceb.png)'
 - en: Photo by [Hassan Amra](https://unsplash.com/@hassan02?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/cheetah?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Hassan Amra](https://unsplash.com/@hassan02?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    于 [Unsplash](https://unsplash.com/s/photos/cheetah?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: This week, [StellarGraph released a new version](https://medium.com/stellargraph/stellargraph-1-0-taking-graph-machine-learning-to-a-new-level-2bd6a04fbc77) of
     its open source library for machine learning on graphs. One of the most exciting
     features of [StellarGraph 1.0](https://github.com/stellargraph/stellargraph/releases/) is
     a new graph data structure — built using NumPy and Pandas — that results in significantly
     lower memory usage and faster construction times.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本周，[StellarGraph 发布了一个新版本](https://medium.com/stellargraph/stellargraph-1-0-taking-graph-machine-learning-to-a-new-level-2bd6a04fbc77)的开源图机器学习库。最令人兴奋的特性之一是
+    [StellarGraph 1.0](https://github.com/stellargraph/stellargraph/releases/) 引入了一种新的图数据结构——使用
+    NumPy 和 Pandas 构建——这使得内存使用显著降低，构建时间也大大缩短。
 - en: Consider that [a graph created from Reddit](http://snap.stanford.edu/graphsage/),
     with more than 200 thousand nodes and 11 million edges, required almost 7GB of
     memory with previous iterations of the library’s graph data structure. It also
     took 2.5 minutes to construct.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下，[一个来自 Reddit 的图](http://snap.stanford.edu/graphsage/)，拥有超过 20 万个节点和 1100
+    万条边，使用之前版本的库的图数据结构时需要近 7GB 的内存，构建时间也长达 2.5 分钟。
 - en: 'In the new StellarGraph class’s minimal form, that same Reddit graph now uses
     approximately 174MB. And this isn’t even a classic ‘memory versus time’ balance:
     the new form takes only 0.9 seconds to construct.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在新 StellarGraph 类的最小形式中，相同的 Reddit 图现在大约使用 174MB 的内存。这甚至不是经典的‘内存与时间’平衡：新形式的构建时间仅为
+    0.9 秒。
 - en: That is, the new StellarGraph class is **40 times smaller** to store and **hundreds
     of times faster** to construct than the old StellarGraph.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 即，新版 StellarGraph 类在存储上比旧版 StellarGraph **小 40 倍**，构建速度则比旧版**快数百倍**。
 - en: In this article, we’ll explore how a careful focus on *what works best *for
     graph machine learning — in this case replacing StellarGraph’s graph data structure
     from one built on NetworkX to one built using NumPy and Pandas — led to big performance
     enhancements in the StellarGraph class.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将探讨如何通过仔细关注*对图机器学习最有效的方案*——在这种情况下，将 StellarGraph 的图数据结构从基于 NetworkX 替换为基于
+    NumPy 和 Pandas 的结构——从而在 StellarGraph 类中实现显著的性能提升。
 - en: A class above
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更高一层
 - en: The StellarGraph library is an open source, user-friendly library for graph
     machine learning. A [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) is
     a collection of nodes and the edges between them, where the edges represent some
     connection or relationship between the nodes.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: StellarGraph 库是一个开源、用户友好的图机器学习库。一个 [图](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics))
+    是一组节点及其之间的边，其中边表示节点之间的某种连接或关系。
 - en: The core abstraction in the library is [the StellarGraph class](https://stellargraph.readthedocs.io/en/stable/api.html#stellargraph.StellarGraph),
     which is a graph data structure that manages all the information about the graph
     or graphs being used for machine learning.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 库中的核心抽象是 [StellarGraph 类](https://stellargraph.readthedocs.io/en/stable/api.html#stellargraph.StellarGraph)，这是一个图数据结构，用于管理所有关于图或图组的信息，以用于机器学习。
 - en: Previous versions of the StellarGraph class were backed by [NetworkX](https://networkx.github.io/),
     which allowed for quick and effective development of many graph machine learning
     algorithms because of its convenient and flexible API, built using nested dictionaries.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 以前版本的 StellarGraph 类依赖于 [NetworkX](https://networkx.github.io/)，因为其便捷灵活的 API
+    和使用嵌套字典构建的特性，允许快速有效地开发许多图机器学习算法。
 - en: 'However, this flexibility meant it wasn’t optimised for graph machine learning:
     NetworkX has different trade-offs than those best for machine learning, the most
     notable being the amount of memory required to store a graph.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这种灵活性意味着它没有针对图机器学习进行优化：NetworkX的权衡与机器学习所需的最佳权衡不同，其中最显著的是存储图所需的内存量。
 - en: So, over the releases leading up to 1.0, the NetworkX-backed graph data structure
     was replaced with a new one built using NumPy and Pandas.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在1.0版本之前的更新中，基于NetworkX的图数据结构被用一个基于NumPy和Pandas的新数据结构所替代。
 - en: How does it work?
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 它是如何工作的？
 - en: 'There are three key parts to the new StellarGraph class:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的StellarGraph类有三个关键部分：
 - en: Efficient storage of edges
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 高效的边存储
 - en: Keeping node features available for quick indexing
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保持节点特征以便快速索引
 - en: Support for arbitrary node IDs.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持任意节点ID。
 - en: Efficient storage of edges
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 高效的边存储
 - en: The new StellarGraph class stores most of its data using NumPy arrays.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的StellarGraph类使用NumPy数组存储大部分数据。
 - en: '![Figure](../Images/4ecbc88a336032dfbdc848e744997c23.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/4ecbc88a336032dfbdc848e744997c23.png)'
 - en: '*A NumPy array can consist of a single chunk of memory with values stored inline.
     A Python list stores pointers to other Python objects, and each of these has extra
     metadata overhead, dramatically increasing the cost over NumPy.*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*NumPy数组可以由单一块内存组成，值内联存储。Python列表存储指向其他Python对象的指针，每个指针都有额外的元数据开销，大大增加了与NumPy相比的成本。*'
 - en: These arrays [lay data out contiguously in memory](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.ndarray.html#internal-memory-layout-of-an-ndarray),
     so that an array of four byte integers (like the *numpy.int32* type) requires
     only four bytes per element. This is different to a Python list of the same integers,
     which requires ten times more memory, at 43 bytes per element.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些数组 [将数据连续存储在内存中](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.ndarray.html#internal-memory-layout-of-an-ndarray)，以至于一个四字节整数的数组（如 *numpy.int32* 类型）每个元素仅需四个字节。这与同样整数的
+    Python 列表不同，后者每个元素需要十倍的内存，即每个元素43个字节。
 - en: The edges of the graph are conceptually pairs of a source node ID and a target
     node ID, representing the connection between the two nodes. In the new StellarGraph
     class, the edges are stored as NumPy arrays containing the source and targets
     in a [“structure of arrays”](https://en.wikipedia.org/wiki/AoS_and_SoA) style.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 图的边在概念上是源节点ID和目标节点ID的对，表示两个节点之间的连接。在新的StellarGraph类中，边被存储为NumPy数组，其中包含源节点和目标节点，采用[“结构化数组”](https://en.wikipedia.org/wiki/AoS_and_SoA)的样式。
 - en: This explains a significant fraction of the reduction in memory use for the
     Reddit graph. The edge information can be placed contiguously in memory with no
     overhead from Python objects. By using NumPy natively, we also get to easily leverage
     the efficient [sparse matrix](https://docs.scipy.org/doc/scipy/reference/sparse.html) and [graph
     algorithms](https://docs.scipy.org/doc/scipy/reference/sparse.csgraph.html) provided
     by [the SciPy library](https://www.scipy.org/).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这解释了Reddit图形内存使用减少的一个重要原因。边信息可以在内存中连续存储，不会有Python对象的开销。通过本地使用NumPy，我们还可以轻松利用由[SciPy库](https://www.scipy.org/)提供的高效的 [稀疏矩阵](https://docs.scipy.org/doc/scipy/reference/sparse.html) 和 [图算法](https://docs.scipy.org/doc/scipy/reference/sparse.csgraph.html)。
 - en: Keeping node features available for quick indexing
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 保持节点特征以便快速索引
 - en: NumPy arrays are also used for node features. StellarGraph is optimised for
     machine learning, which typically means working with vectors of “features”, or
     lists of numbers that encode information about each entity. Any StellarGraph graph
     can have nodes of multiple types, with a different number of features associated
     with every node of each type.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: NumPy数组也用于节点特征。StellarGraph针对机器学习进行了优化，这通常意味着处理“特征”向量或编码每个实体信息的数字列表。任何StellarGraph图形可以有多种类型的节点，每种类型的每个节点都有不同数量的特征。
 - en: '![Figure](../Images/78dc086f6273cd69cdf766ea0170ad41.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/78dc086f6273cd69cdf766ea0170ad41.png)'
 - en: '*The graph on the left has two node types; “white background” and “black background”,
     along with some feature vectors of numbers for each. These get transformed into
     2D NumPy arrays on the right, matching the order of the nodes.*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*左侧的图有两种节点类型；“白色背景”和“黑色背景”，每种类型还有一些特征向量。这些被转换为右侧的2D NumPy数组，匹配节点的顺序。*'
 - en: 'The new StellarGraph class stores the node features by having a large rectangular
     2D NumPy array for each node type: for a particular node type, the first row of
     the array represents the features for the first node of that type, similarly for
     the second row, and so on.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的 StellarGraph 类通过为每种节点类型拥有一个大型矩形 2D NumPy 数组来存储节点特征：对于特定的节点类型，数组的第一行表示该类型第一个节点的特征，第二行表示第二个节点的特征，以此类推。
 - en: This encoding is very memory efficient, since numeric features can be all laid
     out with no overhead from Python objects, just like edges. It is also fast, because
     queries about the features of nodes at given locations in the array can be answered
     by slicing out rows from the array, which is implemented as native C code in the
     NumPy library.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种编码方式非常节省内存，因为数字特征可以全部布局而不会有来自 Python 对象的开销，就像边缘一样。它也很快，因为关于数组中给定位置节点特征的查询可以通过从数组中切片来回答，这在
+    NumPy 库中是通过原生 C 代码实现的。
 - en: Support for arbitrary node IDs
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对任意节点 ID 的支持
 - en: Querying this data structure requires some tricks. It is great for storage,
     but actually getting the features of a node requires knowing its location; whether
     it’s the first or tenth or hundredth node of its type.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 查询这个数据结构需要一些技巧。它在存储方面非常出色，但实际上获取节点的特征需要知道它的位置；无论它是该类型的第一个、第二个还是第几百个节点。
 - en: One approach is to just require that all node IDs are sequential integers, starting
     from 0, so all graphs with three nodes have IDs 0, 1, 2\. However, this makes
     the library hard to use with real world datasets where the IDs might be [UUIDs](https://en.wikipedia.org/wiki/Universally_unique_identifier),
     random values, or some other non-trivial encoding. It quickly gets more complicated
     in heterogeneous graphs, with more than one type of node.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种方法是要求所有节点 ID 都是从 0 开始的顺序整数，因此所有具有三个节点的图的 ID 为 0、1、2。然而，这使得该库在实际数据集中（其中 ID
+    可能是 [UUIDs](https://en.wikipedia.org/wiki/Universally_unique_identifier)、随机值或其他非平凡编码）使用起来困难。在异构图中，情况变得更加复杂，因为有多种节点类型。
 - en: '![Figure](../Images/b30aa01484b452b355d5ea92abcf912a.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/b30aa01484b452b355d5ea92abcf912a.png)'
 - en: '*Nodes can be keyed with any ID values, by using a pandas.Index as a translation
     layer into numeric IDs, or ilocs. These ilocs can then be used in the NumPy arrays
     above.*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*节点可以使用任何 ID 值进行键控，通过使用 pandas.Index 作为到数字 ID 或 ilocs 的转换层。这些 ilocs 然后可以在上述
+    NumPy 数组中使用。*'
 - en: Thus, the final key piece of the new StellarGraph class is using the [pandas.Index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Index.html) types
     to provide a translation between convenient and conventional node IDs and the
     sequential integers so that any node ID values can work, and the users of the
     class don’t have to think about doing their own translation or management.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，新 StellarGraph 类的关键部分是使用 [pandas.Index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Index.html) 类型在方便的和传统的节点
+    ID 之间提供转换，以便任何节点 ID 值都可以使用，类的用户无需考虑自己进行转换或管理。
 - en: The Pandas Index types are being used as a time- and memory-efficient dictionary,
     mapping IDs to sequential integers (which both StellarGraph and Pandas call “ilocs”,
     meaning integer locations). It leverages Pandas’ optimised C and [Cython](https://cython.org/) native
     code.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas Index 类型被用作高效的时间和内存字典，将 ID 映射到顺序整数（StellarGraph 和 Pandas 都称之为“ilocs”，即整数位置）。它利用了
+    Pandas 优化的 C 和 [Cython](https://cython.org/) 原生代码。
 - en: These ilocs are used as part of the edge storage discussed above. The ilocs
     are small integers, and so the contiguous layout of a NumPy array ensures our
     edges are always stored efficiently. Many of StellarGraph’s algorithms work directly
     with these ilocs, and so see no overhead due to the “fancy” IDs.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些 ilocs 用作上述边缘存储的一部分。ilocs 是小整数，因此 NumPy 数组的连续布局确保我们的边缘始终高效存储。许多 StellarGraph
+    的算法直接使用这些 ilocs，因此不会因为“花哨”的 ID 而产生额外开销。
 - en: '*There are some additional details here. For example, the nodes are actually
     numbered globally in the index, not per type, so the graph above would have A
     → 2, B → 3, …, but most of these are shielded from the user.*'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这里还有一些额外的细节。例如，节点实际上在索引中是全局编号的，而不是按类型编号，因此上述图中的 A → 2，B → 3，…，但大多数这些细节对用户是隐藏的。*'
 - en: In summary —
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结来说 —
 - en: StellarGraph is easy to install and easy to use because it builds on the shoulders
     of giants.By using NumPy and Pandas we get most of the benefits of optimised native
     code without having to write the low-level code ourselves — which would require
     careful optimisation and risk serious memory-corruption bugs — or be concerned
     with having to carefully distribute it for every platform.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: StellarGraph 易于安装和使用，因为它建立在巨人的肩膀上。通过使用 NumPy 和 Pandas，我们获得了优化的本地代码的大部分好处，而不必自己编写底层代码——这需要仔细优化，并且可能导致严重的内存损坏错误——也无需担心为每个平台精心分发。
 - en: The new StellarGraph class delivered in 1.0 uses NumPy and Pandas to reduce
     memory use and improve speed through careful selection of the moving parts, and
     by focusing on *just what is required* for graph machine learning. Building on
     existing libraries gives us the benefits of native code without the problems.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 新版 StellarGraph 类在 1.0 版本中通过仔细选择移动部件和专注于*仅所需*的图机器学习，使用 NumPy 和 Pandas 来减少内存使用和提高速度。基于现有库为我们提供了本地代码的好处而没有问题。
 - en: To get started with graph machine learning with the new StellarGraph class in [the
     StellarGraph library](https://github.com/stellargraph/stellargraph), *pip install
     stellargraph*, and then create a new optimised graph object with your data with *StellarGraph(nodes,
     edges)*. There are [demos with all the details](https://stellargraph.readthedocs.io/en/v1.0.0/demos/basics/loading-pandas.html).
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始使用图机器学习与新版 StellarGraph 类，首先在 [StellarGraph 库](https://github.com/stellargraph/stellargraph)中*pip
+    install stellargraph*，然后使用*StellarGraph(nodes, edges)* 创建一个新的优化图对象。可以查看 [所有细节的演示](https://stellargraph.readthedocs.io/en/v1.0.0/demos/basics/loading-pandas.html)。
 - en: '*This work involved major contributions, research and code from *[*Andrew Docherty*](https://github.com/adocherty)*, *[*Geoff
     Jarrad*](https://github.com/geoffj-d61), [*Huon Wilson*](https://github.com/huonw)* and *[*Kieran
     Ricardo*](https://github.com/kieranricardo)*. We’re working on even more improvements
     top of this optimised base, that should improve memory use and speed even further,
     such as *[*#718*](https://github.com/stellargraph/stellargraph/issues/718)*.*'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这项工作涉及了来自*[*Andrew Docherty*](https://github.com/adocherty)*、*[*Geoff Jarrad*](https://github.com/geoffj-d61)*、*[*Huon
+    Wilson*](https://github.com/huonw)* 以及 *[*Kieran Ricardo*](https://github.com/kieranricardo)*
+    的重要贡献、研究和代码。我们正在基于这个优化基础进行更多改进，这些改进应该会进一步提升内存使用和速度，例如*[*#718*](https://github.com/stellargraph/stellargraph/issues/718)*。*'
 - en: '*This work is supported by CSIRO’s Data61, Australia’s leading digital research
     network.*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这项工作得到 CSIRO Data61 的支持，这是澳大利亚领先的数字研究网络。*'
 - en: '**Bio: [Huon Wilson](https://www.linkedin.com/in/huon-wilson/)** is a software
     engineer with a strong background in mathematics and statistics, with significant
     experience in low-level systems programming fields like compilers, and languages
     like C++, C as well as more exotic ones like Rust. At a higher level, he has experience
     with numerical programming in R and Python, and with most language paradigms and
     many other areas of software engineering.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Huon Wilson](https://www.linkedin.com/in/huon-wilson/)** 是一名软件工程师，具有扎实的数学和统计学背景，拥有在编译器等低级系统编程领域的丰富经验，精通
+    C++、C 以及更为独特的 Rust 等语言。在更高层面，他有 R 和 Python 中的数值编程经验，以及大多数语言范式和许多其他软件工程领域的经验。'
 - en: '[Original](https://medium.com/stellargraph/faster-machine-learning-on-larger-graphs-how-numpy-and-pandas-slashed-memory-and-time-in-79b6c63870ef).
     Reposted with permission.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/stellargraph/faster-machine-learning-on-larger-graphs-how-numpy-and-pandas-slashed-memory-and-time-in-79b6c63870ef)
+    已获授权转载。'
 - en: '**Related:**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Graph Neural Network model calibration for trusted predictions](/2020/03/graph-neural-network-model-calibration-trusted-predictions.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图神经网络模型校准以获得可信预测](/2020/03/graph-neural-network-model-calibration-trusted-predictions.html)'
 - en: '[Scalable graph machine learning: a mountain we can climb?](/2019/12/scalable-graph-machine-learning.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可扩展图机器学习：我们能攀登的高山？](/2019/12/scalable-graph-machine-learning.html)'
 - en: '[Graph Machine Learning Meets UX: An uncharted love affair](/2020/01/graph-machine-learning-ux.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图神经网络与用户体验：一段未曾探索的恋情](/2020/01/graph-machine-learning-ux.html)'
 - en: '* * *'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT需求'
 - en: '* * *'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关话题
 - en: '[SQL for Data Visualization: How to Prepare Data for Charts and Graphs](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据可视化中的SQL：如何为图表和图形准备数据](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
 - en: '[Beyond Pipelines: Graphs as Scikit-Learn Metaestimators](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越管道：图表作为Scikit-Learn的元估计器](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
 - en: '[Graphs: The natural way to understand data](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图表：理解数据的自然方式](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参与比赛将机器学习的学习速度提高4倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7种方法让ChatGPT帮助你更快更好地编程](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
 - en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何优化SQL查询以加快数据检索速度](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
