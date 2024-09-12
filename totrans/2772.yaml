@@ -1,161 +1,237 @@
 - en: Getting Started with Spectral Clustering
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 谱聚类入门
 - en: 原文：[https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html](https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html](https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/), Mathematician
     & Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)，数学家 & 数据科学家**'
 - en: 'In this post I want to explore the ideas behind [spectral clustering](https://en.wikipedia.org/wiki/Spectral_clustering).
     I do not intend to develop the theory. Instead, I will unravel a practical example
     to illustrate and motivate the intuition behind each step of the spectral clustering
     algorithm. I particularly recommend two references:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我想探讨 [谱聚类](https://en.wikipedia.org/wiki/Spectral_clustering) 背后的思想。我不打算发展理论。相反，我将揭示一个实际示例，以说明和激发每一步谱聚类算法背后的直觉。我特别推荐两个参考资料：
 - en: For an introduction/overview on the theory, see the lecture notes [A Tutorial
     on Spectral Clustering](http://www.tml.cs.uni-tuebingen.de/team/luxburg/publications/Luxburg07_tutorial.pdf) by [Prof. Dr. Ulrike
     von Luxburg](http://www.tml.cs.uni-tuebingen.de/team/luxburg/index.php).
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要了解该理论的介绍/概述，请参见 [谱聚类教程](http://www.tml.cs.uni-tuebingen.de/team/luxburg/publications/Luxburg07_tutorial.pdf)
+    由 [Ulrike von Luxburg 教授](http://www.tml.cs.uni-tuebingen.de/team/luxburg/index.php)
+    提供。
 - en: For a concrete application of this clustering method you can see the PyData’s
     talk: [Extracting relevant Metrics with Spectral Clustering](https://www.youtube.com/watch?v=3heWpR6dC8k) by
     Dr. Evelyn Trautmann.
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '关于这种聚类方法的具体应用，您可以查看 PyData 的讲座: [使用谱聚类提取相关指标](https://www.youtube.com/watch?v=3heWpR6dC8k)
+    由 Dr. Evelyn Trautmann 主讲。'
 - en: '* * *'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的IT'
 - en: '* * *'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Prepare Notebook
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准备笔记本
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Generate Sample Data
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 生成示例数据
 - en: 'Let us generate some sample data. As we will see, spectral clustering is very
     effective for non-convex clusters. In this example, we consider concentric circles:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们生成一些示例数据。如我们所见，谱聚类对于非凸簇非常有效。在这个例子中，我们考虑同心圆：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Let us plot some examples to see how the parameters affect the data structure
     and clusters.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘制一些示例，以观察参数如何影响数据结构和簇。
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![png](../Images/c8894108718ff5a45081a704ad65bf04.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/c8894108718ff5a45081a704ad65bf04.png)'
 - en: The first two plots show 33 clear clusters. For the last one the cluster structure
     is less clear.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 前两个图显示了 33 个清晰的簇。对于最后一个，簇结构不那么清晰。
 - en: Spectral Clustering Algorithm
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 谱聚类算法
 - en: Even though we are not going to give all the theoretical details, we are still
     going to motivate the logic behind the spectral clustering algorithm.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然我们不会提供所有的理论细节，但我们仍将激发谱聚类算法背后的逻辑。
 - en: The Graph Laplacian
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 图拉普拉斯
 - en: 'One of the key concepts of spectral clustering is the [graph Laplacian](https://en.wikipedia.org/wiki/Laplacian_matrix).
     Let us describe its construction¹:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 谱聚类的一个关键概念是 [图拉普拉斯](https://en.wikipedia.org/wiki/Laplacian_matrix)。让我们描述它的构造¹：
 - en: Let us assume we are given a data set of points
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 假设我们有一个点的数据集
 - en: '![Equation](../Images/628675573c23169f3faa55b59ce2e594.png).'
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '![方程式](../Images/628675573c23169f3faa55b59ce2e594.png)。'
 - en: To this data set *X* we associate a (weighted) graph *G* which encodes how close
     the data points are. Concretely,
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于这个数据集 *X*，我们关联一个（加权）图 *G*，它编码了数据点之间的接近程度。具体来说，
 - en: The nodes of *G* are given by each data point
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*G* 的节点由每个数据点给出'
 - en: '![Equation](../Images/db373d731ded926a6199712cd8295a29.png).'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '![方程式](../Images/db373d731ded926a6199712cd8295a29.png)。'
 - en: Two nodes ![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) and ![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) are
     connected by an edge if they are *close*. The notion of *closeness* depends on
     the distance we want to encode. There are two common choices.
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果两个节点![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png)和![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png)是*接近*的，它们之间就会有一条边。*接近*的概念取决于我们希望编码的距离。有两种常见选择。
 - en: (Euclidean Distance) Given
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: （欧几里得距离）给定
 - en: '![Equation](../Images/81f088809e21d1638e66b0261198fa0f.png) ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png) and ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png) are
     joint by and edge if ![Equation](../Images/da6f736c1fb8e5463247e2198341bbea.png).
     For some applications an edge might have a weight of the form ![Equation](../Images/eb417e0b46304c6674fcdc1be311a4e2.png).'
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '![Equation](../Images/81f088809e21d1638e66b0261198fa0f.png)![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png)和![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png)由一条边连接，如果![Equation](../Images/da6f736c1fb8e5463247e2198341bbea.png)。对于一些应用，边可能具有形式为![Equation](../Images/eb417e0b46304c6674fcdc1be311a4e2.png)的权重。'
 - en: (Nearest Neighbors) ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png) and ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png) are
     joint by and edge if ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png) is
     a k-nearest neighbor of ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png).
+  id: totrans-34
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: （最近邻）![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png)和![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png)由一条边连接，如果![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png)是![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png)的k-最近邻。
 - en: Once the graph is constructed we can consider its associated [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) ![Equation](../Images/22fc3a5df44a891d66abe7740209bb57.png) which
     has a non-zero value in the ![Equation](../Images/d8d974867821c70d67c0b36b26fdb70c.png) entry
     if ![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) and ![Equation](../Images/4d4150c9b2a5a30fb031eeec94194cdf.png) are
@@ -167,496 +243,777 @@
     theorem](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/)) that
     all its eigenvalues are real and non-negative. [Here](https://juanitorduz.github.io/documents/orduz_pydata2018.pdf) you
     can find more details on the graph Laplacian’s definition and properties.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦图构建完成，我们可以考虑其相关的[邻接矩阵](https://en.wikipedia.org/wiki/Adjacency_matrix)![Equation](../Images/22fc3a5df44a891d66abe7740209bb57.png)，如果![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png)和![Equation](../Images/4d4150c9b2a5a30fb031eeec94194cdf.png)由一条边连接，则该矩阵在![Equation](../Images/d8d974867821c70d67c0b36b26fdb70c.png)条目中具有非零值。另一方面，设![Equation](../Images/ad0c74480cf07e40fcd0d89db4843165.png)表示图的[度矩阵](https://en.wikipedia.org/wiki/Degree_matrix)，这是一个对角矩阵，包含每个节点的度数。然后，图的拉普拉斯矩阵![Equation](../Images/d1acf57e680b35fda6ce8a1d54c1809c.png)定义为差![Equation](../Images/36bf73978d86cfa96b0e79619e028eed.png)。该矩阵是对称的和半正定的，这意味着（由[谱定理](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/)）其所有特征值都是实数且非负的。[这里](https://juanitorduz.github.io/documents/orduz_pydata2018.pdf)你可以找到更多关于图拉普拉斯矩阵定义和性质的细节。
 - en: The Motivation
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 动机
 - en: Why is the graph Laplacian relevant for detecting clusters? Let us start with
     an easy case on which the data *X* has two clusters ![Equation](../Images/394c56d673b3a944a22dfd064b7b1b2d.png), ![Equation](../Images/58f1efbbcaec2f9ce8b58c6f443c7e4e.png) so
     spread apart that they correspond to the [connected components](https://en.wikipedia.org/wiki/Component_(graph_theory)) ![Equation](../Images/70daf2b4cc119e119b330d34b719091f.png), ![Equation](../Images/3563c17713e7c121b642fa4d6d6deef8.png) of
     the associated graph ![Equation](../Images/e3f936b28e6b566fa65492a69c8d19d9.png).
     Observe, from the pure definition of the graph Laplacian, that we can reorder
     the points in such a way that the graph Laplacian decomposes as
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么图拉普拉斯矩阵对检测聚类很重要？让我们从一个简单的案例开始，其中数据*X*有两个聚类![Equation](../Images/394c56d673b3a944a22dfd064b7b1b2d.png)，![Equation](../Images/58f1efbbcaec2f9ce8b58c6f443c7e4e.png)，这两个聚类如此分开，以至于它们对应于[连通分量](https://en.wikipedia.org/wiki/Component_(graph_theory))![Equation](../Images/70daf2b4cc119e119b330d34b719091f.png)，![Equation](../Images/3563c17713e7c121b642fa4d6d6deef8.png)的关联图![Equation](../Images/e3f936b28e6b566fa65492a69c8d19d9.png)。从图拉普拉斯矩阵的纯定义中观察，我们可以重新排列点，使得图拉普拉斯矩阵分解为
 - en: '![Equation](../Images/9e1a00f1cbf8f5e76f26beaf7769c9e6.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/9e1a00f1cbf8f5e76f26beaf7769c9e6.png)'
 - en: where ![Equation](../Images/0cbf0ffdfb63ef726502c6218bd180b9.png) and ![Equation](../Images/d0733378c3834ee62c808977704e49e1.png) are
     the graph Laplacians of ![Equation](../Images/70daf2b4cc119e119b330d34b719091f.png) and ![Equation](../Images/3563c17713e7c121b642fa4d6d6deef8.png) respectively.
     One can show that the kernel (eigenspace of the zero eigenvalue) has dimension 22 and
     it is generated by the pair of orthogonal eigenvectors ![Equation](../Images/99ad52ec914e0013f46613d30a94228e.png) and ![Equation](../Images/578eeb5f2e21c06953ba290515bc798f.png).
     This argument is easy to generalize for many connected components.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 ![方程](../Images/0cbf0ffdfb63ef726502c6218bd180b9.png) 和 ![方程](../Images/d0733378c3834ee62c808977704e49e1.png)
+    分别是 ![方程](../Images/70daf2b4cc119e119b330d34b719091f.png) 和 ![方程](../Images/3563c17713e7c121b642fa4d6d6deef8.png)
+    的图拉普拉斯。可以证明，零特征值的核（特征空间）的维度为 22，由一对正交特征向量 ![方程](../Images/99ad52ec914e0013f46613d30a94228e.png)
+    和 ![方程](../Images/578eeb5f2e21c06953ba290515bc798f.png) 生成。这一论点可以很容易地推广到许多连通组件。
 - en: In summary, the key property is that
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结，关键属性是
 - en: '*The number of connected components of the associated graph can be obtained
     by calculating the dimension of the kernel of the corresponding graph Laplacian.*'
+  id: totrans-41
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*可以通过计算相应图拉普拉斯矩阵的核的维度来获得关联图的连通组件数量。*'
 - en: What if the associated graph of the data set is connected but we still want
     to detect clusters? Well, the approach above remains somehow stable (in certain
     sense) under small perturbations and one can detect clusters by running k-means
     on the rows of the matrix of eigenvectors of the small eigenvalues of the graph
     Laplacian. Again, please refer to the lecture notes suggested above to get the
     details.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数据集的关联图是连通的，但我们仍然想检测簇怎么办？上述方法在小的扰动下仍然保持稳定（在某种意义上），并且可以通过在图拉普拉斯的小特征值的特征向量矩阵的行上运行
+    k-means 来检测簇。再次，请参考上面建议的讲义以获取详细信息。
 - en: The Algorithm
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 算法
 - en: Here are the steps for the (unnormalized) spectral clustering². The step should
     now sound reasonable based on the discussion above.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是（未归一化的）谱聚类的步骤²。基于上述讨论，这些步骤现在应该听起来合理。
 - en: '*Input:* Similarity matrix ![Equation](../Images/c0e21230b0f47a4d142b1e63b751b5a3.png) (i.e. choice
     of distance), number *k* of clusters to construct.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*输入：* 相似性矩阵 ![方程](../Images/c0e21230b0f47a4d142b1e63b751b5a3.png)（即距离选择）、构造的簇数量
+    *k*。'
 - en: '*Steps:*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*步骤：*'
 - en: Let *W* be the (weighted) adjacency matrix of the corresponding graph.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设 *W* 为相应图的（加权）邻接矩阵。
 - en: Compute the (unnormalized) Laplacian *L*.
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算（未归一化的）拉普拉斯矩阵 *L*。
 - en: Compute the first *k* eigenvectors ![Equation](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png) of *L*.
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算 *L* 的前 *k* 个特征向量 ![方程](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png)。
 - en: Let ![Equation](../Images/287f7668a0c2dca27024ea343b202992.png) be the matrix
     containing the vectors ![Equation](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png) as
     columns.
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设 ![方程](../Images/287f7668a0c2dca27024ea343b202992.png) 为包含特征向量 ![方程](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png)
+    的矩阵。
 - en: For ![Equation](../Images/95ed894fa54521bff2c75a83dd08aea0.png) let ![Equation](../Images/2c527f8105d1c5242fee69dc31707f29.png) be
     the vector corresponding to the *i*-th row of *U*.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于 ![方程](../Images/95ed894fa54521bff2c75a83dd08aea0.png)，设 ![方程](../Images/2c527f8105d1c5242fee69dc31707f29.png)
+    为与 *U* 的第 *i* 行对应的向量。
 - en: Cluster the points ![Equation](../Images/2c527f8105d1c5242fee69dc31707f29.png) with
     the *k*-means algorithm into clusters ![Equation](../Images/477b4ba9f8acdbd306b0f6d105825c18.png)
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 *k*-means 算法将点 ![方程](../Images/2c527f8105d1c5242fee69dc31707f29.png) 聚类为簇
+    ![方程](../Images/477b4ba9f8acdbd306b0f6d105825c18.png)。
 - en: '![Figure](../Images/9bc86f62df7589ebf0ebd687c7e37f5e.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/9bc86f62df7589ebf0ebd687c7e37f5e.png)'
 - en: Let us reproduce these steps on an example to get a better feeling on why this
     algorithm works.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在一个例子中重现这些步骤，以便更好地理解为什么这个算法有效。
 - en: 'Example 1: Well-defined Clusters'
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例 1：定义明确的簇
 - en: We consider sample data with the parameters defined above with `sigma` = 0.1\.
     Note from the plots above that in this case the clusters separate well.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们考虑具有上述参数的样本数据，`sigma` = 0.1。注意到上述图中，在这种情况下簇分离良好。
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![png](../Images/f97a4611ce6beab8594af5917ecacced.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/f97a4611ce6beab8594af5917ecacced.png)'
 - en: K - Means
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: K - Means
 - en: Let us begin by running a k-means algorithm to try to get some clusters. We
     select the number of cluster using the elbow method by considering the inertia
     (sum of squared distances of samples to their closest cluster center) as a function
     of the number of clusters.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始运行k-means算法尝试获取一些聚类。我们使用肘部法则选择聚类数量，通过考虑惯性（样本到其最近聚类中心的平方距离之和）作为聚类数量的函数。
 - en: '[PRE4]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![png](../Images/b019d8bcb460805d2d043e1ed1dcb3a6.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/b019d8bcb460805d2d043e1ed1dcb3a6.png)'
 - en: From this plot we see that ![Equation](../Images/84d09e70b54382413998df3c984dfc85.png) is
     a good choice. Let us get the clusters.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这个图中我们可以看到![Equation](../Images/84d09e70b54382413998df3c984dfc85.png)是一个不错的选择。让我们获取聚类。
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![png](../Images/e3059a9e5cf46b505f23fa4c429ff056.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/e3059a9e5cf46b505f23fa4c429ff056.png)'
 - en: The result is not very surprising since *k*-means generates convex clusters.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果并不令人惊讶，因为*k*-means生成凸聚类。
 - en: 'Step 1: Compute Graph Laplacian'
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第1步：计算图拉普拉斯算子
 - en: In this first step we compute the graph Laplacian. We are going to use nearest
     neighbors to generate the graph to model our data set.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一步中，我们计算图拉普拉斯算子。我们将使用最近邻来生成图，以建模我们的数据集。
 - en: '[PRE6]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![png](../Images/d0d9e2e88c1f3cb09b84bfe253ede257.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/d0d9e2e88c1f3cb09b84bfe253ede257.png)'
 - en: 'Step 2: Compute Spectrum of the Graph Laplacian'
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第2步：计算图拉普拉斯算子的谱
 - en: Next, we compute the eigenvalues and eigenvectors of the graph Laplacian.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们计算图拉普拉斯算子的特征值和特征向量。
 - en: '[PRE7]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The eigenvalues are represented by complex numbers. Since the graph Laplacian
     is a symmetric matrix, we know by the [spectral theorem](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/) that
     all the eigenvalues must be real. Let us verify this:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征值由复数表示。由于图拉普拉斯算子是对称矩阵，我们知道根据[spectral theorem](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/)所有特征值必须是实数。让我们验证一下：
 - en: '[PRE8]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: We now compute the ![Equation](../Images/ebbe6af529c5d2cb7495acd213460fb7.png)-norms
     of the eigenvectors.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在计算![Equation](../Images/ebbe6af529c5d2cb7495acd213460fb7.png)-范数的特征向量。
 - en: '[PRE11]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '[PRE12]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Hence, all of the eigenvectors have length ~ 1.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，所有特征向量的长度约为1。
 - en: We then sort the eigenvalues in ascending order.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们按升序对特征值进行排序。
 - en: '[PRE13]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Let us plot the sorted eigenvalues.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘制排序后的特征值。
 - en: '[PRE14]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![png](../Images/f67cfa86f3804094977d27bc0e351c09.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/f67cfa86f3804094977d27bc0e351c09.png)'
 - en: 'Step 3: Find the Small Eigenvalues'
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第3步：寻找小特征值
 - en: Let us zoom in into small eigenvalues.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们放大小特征值。
 - en: '[PRE15]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![png](../Images/afcad65549982c9e2bef1011d50cad25.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/afcad65549982c9e2bef1011d50cad25.png)'
 - en: From the plot we see see that the first 33 eigenvalues (sorted) are essentially
     zero.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图中我们可以看到前33个特征值（已排序）本质上为零。
 - en: '[PRE16]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '[PRE17]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: For these small eigenvalues, we consider their corresponding eigenvectors.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这些小特征值，我们考虑其对应的特征向量。
 - en: '[PRE18]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '|  | v_0 | v_1 | v_2 |'
+  id: totrans-96
   prefs: []
   type: TYPE_TB
+  zh: '|  | v_0 | v_1 | v_2 |'
 - en: '| --- | --- | --- | --- |'
+  id: totrans-97
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- |'
 - en: '| 0 | 0.031623 | 0.0 | 0.0 |'
+  id: totrans-98
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 0.031623 | 0.0 | 0.0 |'
 - en: '| 1 | 0.031623 | 0.0 | 0.0 |'
+  id: totrans-99
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 0.031623 | 0.0 | 0.0 |'
 - en: '| 2 | 0.031623 | 0.0 | 0.0 |'
+  id: totrans-100
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 0.031623 | 0.0 | 0.0 |'
 - en: '| 3 | 0.031623 | 0.0 | 0.0 |'
+  id: totrans-101
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 0.031623 | 0.0 | 0.0 |'
 - en: '| 4 | 0.031623 | 0.0 | 0.0 |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 0.031623 | 0.0 | 0.0 |'
 - en: 'Let us visualize this data frame as a heat map:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将这个数据框可视化为热图：
 - en: '[PRE19]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '![png](../Images/ea0131165b6c60930073f8634160c703.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/ea0131165b6c60930073f8634160c703.png)'
 - en: We can clearly see a block structure (representing the connected components).
     In general, finding zero eigenvalues, or the spectral gap happens, is to restrictive
     when the clusters are not isolated connected components. Hence, we simply choose
     the number of clusters we want to find.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以清楚地看到一个块状结构（表示连接的组件）。通常，当聚类不是孤立的连接组件时，找到零特征值或谱间隙可能会过于严格。因此，我们简单地选择我们想要找到的聚类数量。
 - en: '[PRE20]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'Step 4: Run K-Means Clustering'
+  id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第4步：运行K均值聚类
 - en: To select the number of clusters (which from the plot above we already suspect
     is ![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png)) we run k-means
     for various cluster values and plot the associated inertia (sum of squared distances
     of samples to their closest cluster center).
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了选择聚类数量（从上图中我们已经怀疑是![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png)），我们对各种聚类值运行k-means，并绘制相关的惯性（样本到其最近聚类中心的平方距离之和）。
 - en: '[PRE21]'
+  id: totrans-110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '[PRE22]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: '![png](../Images/c77f9787b4fe915c608ee99ed5748e1e.png)From this plot we see
     that the optimal number of clusters is ![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png).'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '![png](../Images/c77f9787b4fe915c608ee99ed5748e1e.png)从这个图中我们可以看到，最佳的聚类数量是![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png)。'
 - en: '[PRE23]'
+  id: totrans-113
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: '[PRE24]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: '![png](../Images/7ed923e9d74d2a7f774a2643e7021446.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/7ed923e9d74d2a7f774a2643e7021446.png)'
 - en: 'Step 5: Assign Cluster Tag'
+  id: totrans-116
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第5步：分配聚类标签
 - en: Finally we add the cluster tag to each point.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们为每个点添加聚类标签。
 - en: '[PRE25]'
+  id: totrans-118
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: '![png](../Images/864ee35d3fb1cfc6b0d007936166eb3e.png)'
+  id: totrans-119
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/864ee35d3fb1cfc6b0d007936166eb3e.png)'
 - en: Note that via spectral clustering we can get non-convex clusters.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，通过谱聚类我们可以获得非凸簇。
 - en: Summary
+  id: totrans-121
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: To wrap up the algorithm steps we summarize them in a function.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了总结算法步骤，我们将其汇总到一个函数中。
 - en: '[PRE26]'
+  id: totrans-123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: Example 2
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例 2
 - en: 'Let us consider the data which has more noise:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑更多噪声的数据：
 - en: 3 Clusters
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 3 个簇
 - en: '[PRE27]'
+  id: totrans-127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: '![png](../Images/fc7734aa4b32d1d89239b44fd816fcaf.png)'
+  id: totrans-128
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/fc7734aa4b32d1d89239b44fd816fcaf.png)'
 - en: 2 Clusters
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2 个簇
 - en: '[PRE28]'
+  id: totrans-130
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: '![png](../Images/c30b2867ebc3f8be68cfd44b96cefd9f.png)'
+  id: totrans-131
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/c30b2867ebc3f8be68cfd44b96cefd9f.png)'
 - en: Example 3
+  id: totrans-132
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例 3
 - en: For the last data set, we essentially find the same as we would with k-means.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于最后一个数据集，我们基本上发现与使用 k-means 时相同的结果。
 - en: '[PRE29]'
+  id: totrans-134
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: '![png](../Images/e238deb3594f39f8d89fc3515a6cf9f6.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/e238deb3594f39f8d89fc3515a6cf9f6.png)'
 - en: SpectralClustering (Scikit-Learn)
+  id: totrans-136
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SpectralClustering (Scikit-Learn)
 - en: As expected, [scikit-learn](https://scikit-learn.org/stable/) already has a [spectral
     clustering implementation](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html).
     Let us compare with the results above.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如预期的，[scikit-learn](https://scikit-learn.org/stable/) 已经有一个 [谱聚类实现](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html)。让我们与上面的结果进行比较。
 - en: Example 2 (Revisited)
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例 2（回顾）
 - en: '[PRE30]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: '![png](../Images/a42093418da0e5f4e1143431af8f8640.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/a42093418da0e5f4e1143431af8f8640.png)'
 - en: Example 3 (Revisited)
+  id: totrans-141
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例 3（回顾）
 - en: '[PRE31]'
+  id: totrans-142
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: '![png](../Images/b9b745d9dd22b0ff3eb7568bb6d20cef.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/b9b745d9dd22b0ff3eb7568bb6d20cef.png)'
 - en: Final Remark
+  id: totrans-144
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终备注
 - en: 'In concrete applications is sometimes hard to evaluate which clustering algorithm
     to choose. I often prefer to do some feature engineering (from intuition/domain
     knowledge) and proceed, if possible, with k-means. For the example above we see
     a rotationally symmetric data set, which suggest to use the radius as a new feature:'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 在具体应用中，有时很难评估选择哪个聚类算法。我通常更喜欢进行一些特征工程（基于直觉/领域知识），并尽可能地使用 k-means。对于上述示例，我们看到一个旋转对称的数据集，这建议使用半径作为新特征：
 - en: '[PRE32]'
+  id: totrans-146
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: Let us plot the radius feature (it is one-dimensional but we project it to the
     (diagonal) line x=yx=y).
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘制半径特征（它是一维的，但我们将其投影到 (对角线 ) x=yx=y 线上）。
 - en: '[PRE33]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: '![png](../Images/89ccb4ff837b01003f2969aeed5544cb.png)Then, we can just run
     k-means.'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: '![png](../Images/89ccb4ff837b01003f2969aeed5544cb.png)然后，我们可以直接运行 k-means。'
 - en: '[PRE34]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: '![png](../Images/bc7398233baa7d80bd3c690a174d3e2d.png)'
+  id: totrans-151
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/bc7398233baa7d80bd3c690a174d3e2d.png)'
 - en: '[PRE35]'
+  id: totrans-152
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: '![png](../Images/d19bc17d0ca6564929915d30c216ba3b.png)Finally, we visualize
     the original data with the corresponding clusters.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '![png](../Images/d19bc17d0ca6564929915d30c216ba3b.png)最后，我们将原始数据与相应的簇进行可视化。'
 - en: '[PRE36]'
+  id: totrans-154
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: '![png](../Images/e131f8312c09746af8345d37cb6e2c60.png)'
+  id: totrans-155
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/e131f8312c09746af8345d37cb6e2c60.png)'
 - en: '[Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NC_03.pdf)'
+  id: totrans-156
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[用于降维和数据表示的拉普拉斯特征图](http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NC_03.pdf)'
 - en: '[A Tutorial on Spectral Clustering](http://www.tml.cs.uni-tuebingen.de/team/luxburg/publications/Luxburg07_tutorial.pdf)'
+  id: totrans-157
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[谱聚类教程](http://www.tml.cs.uni-tuebingen.de/team/luxburg/publications/Luxburg07_tutorial.pdf)'
 - en: '**Bio: [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)** ([@juanitorduz](https://twitter.com/juanitorduz))
     in a Berlin based mathematician & data scientist.'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)** ([@juanitorduz](https://twitter.com/juanitorduz))
+    是一位驻柏林的数学家和数据科学家。'
 - en: '[Original](https://juanitorduz.github.io/spectral_clustering/). Reposted with
     permission.'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://juanitorduz.github.io/spectral_clustering/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The 5 Clustering Algorithms Data Scientists Need to Know](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家需要了解的 5 种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)'
 - en: '[Clustering Key Terms, Explained](/2016/10/clustering-key-terms-explained.html)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类关键术语解释](/2016/10/clustering-key-terms-explained.html)'
 - en: '[Iterative Initial Centroid Search via Sampling for k-Means Clustering](/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过采样进行的 k-means 聚类初始质心迭代搜索](/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)'
 - en: More On This Topic
+  id: totrans-164
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类解锁：理解 K-Means 聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
 - en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
 - en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyCaret 进行 Python 聚类入门](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
 - en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为您的数据集选择合适的聚类算法](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
 - en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是 K-Means 聚类以及它的算法是如何工作的？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
