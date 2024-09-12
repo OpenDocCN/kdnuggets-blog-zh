@@ -1,44 +1,55 @@
 - en: How to Build a Streaming Semi-structured Analytics Platform on Snowflake
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![How to Build a Streaming Semi-structured Analytics Platform on Snowflake](../Images/0a41ce35c69079e4de0a6381e75f2dbb.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: Image by Editor
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Snowflake is a SaaS, i.e., software as a service that is well suited for running
@@ -47,9 +58,11 @@
     ever-increasing datasets. This article will go through the components of creating
     a streaming semi-structured analytics platform on Snowflake for healthcare data.
     We will also go through some key considerations during this phase.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Context
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
@@ -63,113 +76,138 @@
     were diagnosed with cancer, etc. Let’s go with the assumption that all such JSON
     files are pushed on AWS S3 (or any other public cloud storage) every 15 minutes
     through different AWS services or end API endpoints.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: Architectural Design
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: '![How to Build a Streaming Semi-structured Analytics Platform on Snowflake](../Images/62bc8cb5a28e2c4ab13d65099ab2f1da.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
 - en: Architectural Components
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: '**AWS S3 to Snowflake RAW zone:**'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Data needs to be continuously streamed from AWS S3 into the RAW zone of Snowflake.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Snowflake offers Snowpipe managed service, which can read JSON files from S3
     in a continuous streaming way.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: A table with a variant column needs to be created in the Snowflake RAW zone
     to hold the JSON data in the native format.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Snowflake RAW Zone to Streams:**'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Streams is managed change data capture service which will essentially be able
     to capture all the new incoming JSON documents into Snowflake RAW zone
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Streams would be pointed to the Snowflake RAW Zone table and should be set to
     append=true
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Streams are just like any table and easily queryable.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Snowflake Task 1:**'
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Snowflake Task is an object that is similar to a scheduler. Queries or stored
     procedures can be scheduled to run using cron job notations
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: In this architecture, we create Task 1 to fetch the data from Streams and ingest
     them into a staging table. This layer would be truncated and reload
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: This is done to ensure new JSON documents are processed every 15 minutes
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Snowflake Task 2:**'
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: This layer will convert the raw JSON document into reporting tables that the
     analytics team can easily query.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: To convert JSON documents into structured format, the lateral flatten feature
     of Snowflake can be used.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Lateral flatten is an easy-to-use function that explodes the nested array elements
     and can be easily extracted using the ‘:’ notation.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Key Considerations
+  id: totrans-33
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: Snowpipe is recommended to be used with a few large files. The cost may go high
     if small files on external storage aren’t clubbed together
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: In a production environment, ensure automated processes are created to monitor
     streams since once they go stale, data can’t be recovered from them
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: The maximum allowed size of a single JSON document is 16MB compressed that can
     be loaded into Snowflake. If you have huge JSON documents that exceed these size
     limits, ensure you have a process to split them before ingesting them into Snowflake
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Conclusion
+  id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
@@ -178,6 +216,7 @@
     increase of the volume of incoming data before designing the final reporting layer.
     This article aims to demonstrate how easy it is to build a streaming pipeline
     with semi-structured data.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '**[Milind Chaudhari](https://www.linkedin.com/in/milind-chaudhari/)** is a
@@ -185,33 +224,42 @@
     data lakes/lakehouses using a variety of conventional & modern tools. He is extremely
     passionate about data streaming architecture and is also a technical reviewer
     with Packt & O''Reilly.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Data Warehousing with Snowflake for Beginners](https://www.kdnuggets.com/2022/02/data-warehousing-snowflake-beginners.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Top 6 Tools to Improve Your Productivity on Snowflake](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Introduction to Streaming-LLM: LLMs for Infinite-Length Inputs](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[流式 LLM 介绍：适用于无限长度输入的 LLM](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
