@@ -1,88 +1,136 @@
 - en: Speeding up Scikit-Learn Model Training
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 加速 Scikit-Learn 模型训练
 - en: 原文：[https://www.kdnuggets.com/2021/03/speed-up-scikit-learn-model-training.html](https://www.kdnuggets.com/2021/03/speed-up-scikit-learn-model-training.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/speed-up-scikit-learn-model-training.html](https://www.kdnuggets.com/2021/03/speed-up-scikit-learn-model-training.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Developer
     Relations at Anyscale**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，Anyscale
+    的开发者关系**。'
 - en: '![](../Images/0880921729473edb53c8bd453524c2b4.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0880921729473edb53c8bd453524c2b4.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'Scikit-Learn is an easy-to-use Python library for machine learning. However,
     sometimes scikit-learn models can take a long time to train. The question becomes,
     how do you create the best scikit-learn model in the least amount of time? There
     are quite a few approaches to solving this problem like:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-Learn 是一个易于使用的 Python 机器学习库。然而，有时 scikit-learn 模型的训练可能需要很长时间。问题变成了，如何在最短的时间内创建最佳的
+    scikit-learn 模型？解决这个问题的方法有很多，比如：
 - en: Changing your optimization function (solver).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改你的优化函数（求解器）。
 - en: Using different hyperparameter optimization techniques (grid search, random
     search, early stopping).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用不同的超参数优化技术（网格搜索、随机搜索、早停）。
 - en: Parallelize or distribute your training with [joblib](https://joblib.readthedocs.io/en/latest/)
     and [Ray](https://docs.ray.io/en/master/index.html).
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 [joblib](https://joblib.readthedocs.io/en/latest/) 和 [Ray](https://docs.ray.io/en/master/index.html)
+    并行化或分布式训练。
 - en: This post gives an overview of each approach, discusses some limitations, and
     offers resources to speed up your machine learning workflow!
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文概述了每种方法，讨论了一些限制，并提供了加速机器学习工作流程的资源！
 - en: Changing your optimization algorithm (solver)
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更改你的优化算法（求解器）
 - en: '![](../Images/19367bf8a043ef3807153be9613249a4.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/19367bf8a043ef3807153be9613249a4.png)'
 - en: '*Some solvers can take longer to converge. Image from [Gaël Varoquaux’s talk](https://youtu.be/1s8RzWwMdqg?t=671).*'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*一些求解器可能需要更长时间才能收敛。图片来自 [Gaël Varoquaux 的讲座](https://youtu.be/1s8RzWwMdqg?t=671)。*'
 - en: Better algorithms allow you to make better use of the same hardware. With a
     more efficient algorithm, you can produce an optimal model faster. One way to
     do this is to change your optimization algorithm (solver). For example, [scikit-learn’s
     logistic regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html),
     allows you to choose between solvers like ‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’,
     and ‘saga’.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 更好的算法使你能够更好地利用相同的硬件。通过更高效的算法，你可以更快地生成一个优化的模型。实现这一目标的一种方法是更改你的优化算法（求解器）。例如， [scikit-learn
+    的逻辑回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+    允许你选择不同的求解器，如‘newton-cg’，‘lbfgs’，‘liblinear’，‘sag’和‘saga’。
 - en: To understand how different solvers work, I encourage you to watch a talk by
     scikit-learn core contributor [Gaël Varoquaux](https://youtu.be/1s8RzWwMdqg?t=671).
     To paraphrase part of his talk, a full gradient algorithm (liblinear) converges
@@ -93,23 +141,34 @@
     the algorithm converges rapidly because of a variance reduction technique. It
     is important to note that [quick convergence doesn’t always matter in practice](https://leon.bottou.org/publications/pdf/nips-2007.pdf),
     and different solvers suit different problems.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了了解不同求解器的工作原理，我鼓励你观看 scikit-learn 核心贡献者[Gaël Varoquaux](https://youtu.be/1s8RzWwMdqg?t=671)的演讲。借用他演讲中的一部分内容，一个完全的梯度算法（liblinear）收敛迅速，但每次迭代（显示为白色的
+    +）可能代价高昂，因为它需要使用所有数据。在一个子采样方法中，每次迭代的计算成本低，但收敛速度可能会更慢。一些算法如‘saga’则实现了两者的最佳结合。每次迭代计算便宜，而且由于方差减少技术，算法收敛迅速。值得注意的是，[快速收敛在实践中并不总是重要的](https://leon.bottou.org/publications/pdf/nips-2007.pdf)，不同的求解器适合不同的问题。
 - en: '![](../Images/3a3223bcb84a94bbaa46963bcc7718c3.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3a3223bcb84a94bbaa46963bcc7718c3.png)'
 - en: '*Choosing the right solver for a problem can save a lot of time ([code example](https://gist.github.com/mGalarnyk/f42f434fc162be108a3bb5bc36464a59)).*'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为问题选择合适的求解器可以节省大量时间（[代码示例](https://gist.github.com/mGalarnyk/f42f434fc162be108a3bb5bc36464a59)）。*'
 - en: To determine which solver is right for your problem, you can check out the [documentation](https://scikit-learn.org/stable/modules/linear_model.html) to
     learn more.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 要确定哪个求解器适合你的问题，你可以查看[文档](https://scikit-learn.org/stable/modules/linear_model.html)以了解更多信息。
 - en: Different hyperparameter optimization techniques (grid search, random search,
     early stopping)
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不同的超参数优化技术（网格搜索、随机搜索、早停法）
 - en: To achieve high performance for most scikit-learn algorithms, you need to tune
     a model’s hyperparameters. Hyperparameters are the parameters of a model which
     are not updated during training. They can be used to configure the model or training
@@ -121,156 +180,237 @@
     distribution. Recently, scikit-learn added the experimental hyperparameter search
     estimators called halving grid search ([HalvingGridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV))
     and halving random search ([HalvingRandomSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingRandomSearchCV.html#sklearn.model_selection.HalvingRandomSearchCV)).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现大多数 scikit-learn 算法的高性能，你需要调整模型的超参数。超参数是模型的参数，在训练过程中不会更新。它们可以用于配置模型或训练函数。Scikit-Learn
+    本身包含了几种超参数调整技术，例如网格搜索（[GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV)），它会全面考虑所有参数组合，和[随机搜索](https://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf)（[RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV)），它从具有指定分布的参数空间中抽样出给定数量的候选者。最近，scikit-learn
+    添加了实验性的超参数搜索估算器，如 halving grid search（[HalvingGridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV)）和
+    halving random search（[HalvingRandomSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingRandomSearchCV.html#sklearn.model_selection.HalvingRandomSearchCV)）。
 - en: '![](../Images/1dab55e91d1defae7c5c2b9a74802396.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1dab55e91d1defae7c5c2b9a74802396.png)'
 - en: '*Successive halving is an experimental new feature in scikit-learn version
     0.24.1 (January 2021). Image from [documentation](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving).*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*连续折半是 scikit-learn 版本 0.24.1（2021年1月）中的一项实验性新功能。图片来自 [文档](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving)。*'
 - en: These techniques can be used to search the parameter space using [successive
     halving](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving).
     The image above shows that all hyperparameter candidates are evaluated with a
     small number of resources at the first iteration, and the more promising candidates
     are selected and given more resources during each successive iteration.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些技术可以用于通过 [连续折半](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving)
+    搜索参数空间。上图显示了所有超参数候选者在第一次迭代中都使用少量资源进行评估，之后更有前景的候选者在每次迭代中会获得更多资源。
 - en: While these new techniques are exciting, there is a library called [Tune-sklearn](https://github.com/ray-project/tune-sklearn) that
     provides cutting-edge hyperparameter tuning techniques (Bayesian optimization,
     early stopping, and distributed execution) that can provide significant speedups
     over grid search and random search.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这些新技术令人兴奋，但有一个名为 [Tune-sklearn](https://github.com/ray-project/tune-sklearn)
+    的库提供了最前沿的超参数调优技术（贝叶斯优化、早期停止和分布式执行），可以显著提高速度，优于网格搜索和随机搜索。
 - en: '![](../Images/4a706fdaf9b9d4214f9acca52f133fae.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4a706fdaf9b9d4214f9acca52f133fae.png)'
 - en: '*Early stopping in action. Hyperparameter set 2 is a set of unpromising hyperparameters
     that would be detected by Tune-sklearn’s early stopping mechanisms and stopped
     early to avoid wasting time and resources. Image from [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf).*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*早期停止的实际应用。超参数集 2 是一组前景不佳的超参数，Tune-sklearn 的早期停止机制会检测到这些参数并提前停止，以避免浪费时间和资源。图片来自
+    [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf)。*'
 - en: 'Features of [Tune-sklearn](https://github.com/ray-project/tune-sklearn) include:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Tune-sklearn](https://github.com/ray-project/tune-sklearn) 的特点包括：'
 - en: 'Consistency with the scikit-learn API: You usually only need to change a couple
     of lines of code to use Tune-sklearn ([example](https://github.com/ray-project/tune-sklearn/blob/master/examples/random_forest.py)).'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与 scikit-learn API 的一致性：你通常只需更改几行代码即可使用 Tune-sklearn ([示例](https://github.com/ray-project/tune-sklearn/blob/master/examples/random_forest.py))。
 - en: 'Accessibility to modern hyperparameter tuning techniques: It is easy to change
     your code to utilize techniques like Bayesian optimization, early stopping, and
     distributed execution.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现代超参数调优技术的可达性：你可以轻松修改代码以利用贝叶斯优化、早期停止和分布式执行等技术。
 - en: 'Framework support: There is not only support for scikit-learn models, but other
     scikit-learn wrappers such as [Skorch (PyTorch)](https://github.com/ray-project/tune-sklearn/blob/master/examples/torch_nn.py), [KerasClassifiers
     (Keras)](https://github.com/ray-project/tune-sklearn/blob/master/examples/keras_example.py),
     and [XGBoostClassifiers (XGBoost)](https://github.com/ray-project/tune-sklearn/blob/master/examples/xgbclassifier.py).'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 框架支持：不仅支持 scikit-learn 模型，还支持其他 scikit-learn 包装器，如 [Skorch (PyTorch)](https://github.com/ray-project/tune-sklearn/blob/master/examples/torch_nn.py)、[KerasClassifiers
+    (Keras)](https://github.com/ray-project/tune-sklearn/blob/master/examples/keras_example.py)
+    和 [XGBoostClassifiers (XGBoost)](https://github.com/ray-project/tune-sklearn/blob/master/examples/xgbclassifier.py)。
 - en: 'Scalability: The library leverages [Ray Tune](https://docs.ray.io/en/master/tune/index.html),
     a library for distributed hyperparameter tuning, to efficiently and transparently
     parallelize cross-validation on multiple cores and even multiple machines.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 扩展性：该库利用了 [Ray Tune](https://docs.ray.io/en/master/tune/index.html)，一个用于分布式超参数调优的库，以高效且透明地在多个核心甚至多台机器上并行交叉验证。
 - en: Perhaps most importantly, tune-sklearn is fast, as you can see in the image
     below.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许最重要的是，tune-sklearn 速度很快，如下图所示。
 - en: '![](../Images/ca1e4b4f8739b88145941d913ea39e5d.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ca1e4b4f8739b88145941d913ea39e5d.png)'
 - en: '*You can see significant performance differences on an average laptop using
     tune-sklearn. Image from [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf).*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*你可以在普通笔记本电脑上看到使用 tune-sklearn 的显著性能差异。图片来自 [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf)。*'
 - en: If you would like to learn more about tune-sklearn, you should check out this [blog
     post](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于 tune-sklearn 的信息，你应该查看这篇 [博客文章](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf)。
 - en: Parallelize or distribute your training with joblib and Ray
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 joblib 和 Ray 并行化或分布你的训练
 - en: '![](../Images/0880921729473edb53c8bd453524c2b4.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0880921729473edb53c8bd453524c2b4.png)'
 - en: '*Resources (dark blue) that scikit-learn can utilize for single core (A), multicore
     (B), and multinode training (C).*'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '*scikit-learn 可用于单核心（A）、多核心（B）和多节点训练（C）的资源（深蓝色）。*'
 - en: Another way to increase your model building speed is to parallelize or distribute
     your training with [joblib](https://joblib.readthedocs.io/en/latest/) and [Ray](https://docs.ray.io/en/master/index.html).
     By default, scikit-learn trains a model using a single core. It is important to
     note that virtually all computers today have multiple cores.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 提高模型构建速度的另一种方法是使用 [joblib](https://joblib.readthedocs.io/en/latest/) 和 [Ray](https://docs.ray.io/en/master/index.html)
+    并行化或分布你的训练。默认情况下，scikit-learn 使用单个核心训练模型。值得注意的是，几乎所有现代计算机都拥有多个核心。
 - en: '![](../Images/011f12d2c03de2fa5567a99c1befe607.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/011f12d2c03de2fa5567a99c1befe607.png)'
 - en: '*For the purpose of this blog, you can think of the MacBook above as a single
     node with 4 cores.*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为了本博客的目的，你可以将上面的 MacBook 看作是一个拥有 4 个核心的单节点。*'
 - en: Consequently, there are many opportunities to speed up the training of your
     model by utilizing all the cores on your computer. This is especially true if
     your model has a high degree of parallelism, like a random decision forest.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，通过利用计算机上的所有核心，有很多机会加速模型训练。如果你的模型具有高并行度，比如随机决策森林，这一点尤其重要。
 - en: '![](../Images/9e332dc737433e9eec4d41b6ca34b3ca.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9e332dc737433e9eec4d41b6ca34b3ca.png)'
 - en: '*A random decision forest is an easy type of model to parallelize as each decision
     tree is independent of the others.*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*随机决策森林是一种容易并行化的模型类型，因为每个决策树彼此独立。*'
 - en: 'Scikit-Learn can parallelize training on a single node with [joblib, which
     by default uses the ‘loky’ backend](https://joblib.readthedocs.io/en/latest/parallel.html).
     Joblib allows you to choose between backends like ‘loky’, ‘multiprocessing’, ‘dask’,
     and ‘ray’. This is a great feature as the ‘loky’ backend is [optimized for a single
     node and not for running distributed (multinode) applications](https://scikit-learn.org/stable/modules/generated/sklearn.utils.parallel_backend.html).
     Running distributed applications can introduce a host of complexities like:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-Learn 可以使用 [joblib，在单节点上进行并行训练，默认使用 ‘loky’ 后端](https://joblib.readthedocs.io/en/latest/parallel.html)。Joblib
+    允许你在 ‘loky’、‘multiprocessing’、‘dask’ 和 ‘ray’ 等后端之间进行选择。这是一个很好的功能，因为 ‘loky’ 后端
+    [针对单节点进行了优化，而不是用于运行分布式（多节点）应用](https://scikit-learn.org/stable/modules/generated/sklearn.utils.parallel_backend.html)。运行分布式应用可能会引入一系列复杂性，例如：
 - en: Scheduling tasks across multiple machines.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在多台机器之间调度任务。
 - en: Transferring data efficiently.
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 高效传输数据。
 - en: Recovering from machine failures.
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从机器故障中恢复。
 - en: Fortunately, the [‘ray’ backend](https://docs.ray.io/en/master/joblib.html) can
     handle these details for you, keep things simple, and give you better performance.
     The image below shows the normalized speedup in terms of the execution time of
     Ray, Multiprocessing, and Dask relative to the default ‘loky’ backend.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，[‘ray’ 后端](https://docs.ray.io/en/master/joblib.html) 可以为你处理这些细节，使事情保持简单，并提供更好的性能。下面的图像展示了
+    Ray、Multiprocessing 和 Dask 相对于默认 ‘loky’ 后端的执行时间归一化加速比。
 - en: '![](../Images/6d92f8e9af515fbd9f2943ae9bfc5cda.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6d92f8e9af515fbd9f2943ae9bfc5cda.png)'
 - en: '*The performance was measured on one, five, and ten m5.8xlarge nodes with 32
     cores each. The performance of Loky and Multiprocessing does not depend on the
     number of machines because they run on a single machine. [Image source](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33).*'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '*性能是在一个、五个和十个每个拥有 32 核心的 m5.8xlarge 节点上测量的。Loky 和 Multiprocessing 的性能不依赖于机器数量，因为它们运行在单台机器上。
+    [图像来源](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33)。*'
 - en: If you would like to learn about how to quickly parallelize or distribute your
     scikit-learn training, you can check out this [blog post](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33).
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解如何快速并行化或分布你的 scikit-learn 训练，你可以查看这篇 [博客文章](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33)。
 - en: Conclusion
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: This post went over a couple of ways you can build the best scikit-learn model
     possible in the least amount of time. There are some ways that are native to scikit-learn,
     like changing your optimization function (solver) or by utilizing experimental
@@ -278,57 +418,92 @@
     There are also libraries that you can use as plugins like [Tune-sklearn](https://github.com/ray-project/tune-sklearn) and [Ray](https://github.com/ray-project/ray) to
     further speed up your model building. If you have any questions or thoughts about
     Tune-sklearn and Ray, please feel free to join our community through [Discourse](https://discuss.ray.io/) or [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍了一些方法，可以在最短时间内构建最佳的 scikit-learn 模型。包括一些原生 scikit-learn 方法，如更改优化函数（求解器）或利用实验性的超参数优化技术，如
+    [HalvingGridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV)
+    或 [HalvingRandomSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingRandomSearchCV.html#sklearn.model_selection.HalvingRandomSearchCV)。还有一些库可以作为插件使用，如
+    [Tune-sklearn](https://github.com/ray-project/tune-sklearn) 和 [Ray](https://github.com/ray-project/ray)
+    以进一步加速模型构建。如果你对 Tune-sklearn 和 Ray 有任何问题或想法，请随时通过 [Discourse](https://discuss.ray.io/)
+    或 [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform)
+    加入我们的社区。
 - en: '[Original](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1).
     Reposted with permission.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1)。已获转载许可。'
 - en: '**Bio:** Michael Galarnyk works in Developer Relations at Anyscale. You can
     find him on [Twitter](https://twitter.com/GalarnykMichael), [Medium](https://medium.com/@GalarnykMichael),
     and [GitHub](https://github.com/mGalarnyk).'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** Michael Galarnyk 在 Anyscale 从事开发者关系工作。你可以在 [Twitter](https://twitter.com/GalarnykMichael)、[Medium](https://medium.com/@GalarnykMichael)
+    和 [GitHub](https://github.com/mGalarnyk) 找到他。'
 - en: '**Related:**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Speed up Scikit-Learn Model Training](https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 Scikit-Learn 模型训练](https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html)'
 - en: '[The Ultimate Scikit-Learn Machine Learning Cheatsheet](https://www.kdnuggets.com/2021/01/ultimate-scikit-learn-machine-learning-cheatsheet.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极 Scikit-Learn 机器学习备忘单](https://www.kdnuggets.com/2021/01/ultimate-scikit-learn-machine-learning-cheatsheet.html)'
 - en: '[10 Things You Didn’t Know About Scikit-Learn](https://www.kdnuggets.com/2020/09/10-things-know-scikit-learn.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于 Scikit-Learn 的 10 件你不知道的事](https://www.kdnuggets.com/2020/09/10-things-know-scikit-learn.html)'
 - en: More On This Topic
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Speeding Up Your Python Code with NumPy](https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 NumPy 加速你的 Python 代码](https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy)'
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用合成数据克服机器学习模型训练中的数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
 - en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Segment Anything Model：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
 - en: '[Online Training and Workshops with Nvidia](https://www.kdnuggets.com/2022/07/online-training-workshops-nvidia.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Nvidia 在线培训和研讨会](https://www.kdnuggets.com/2022/07/online-training-workshops-nvidia.html)'
 - en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中训练数据与测试数据的区别](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
