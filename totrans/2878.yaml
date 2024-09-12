@@ -1,348 +1,527 @@
 - en: Automate Hyperparameter Tuning for Your Models
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自动化您的模型超参数调整
 - en: 原文：[https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html](https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html](https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html)
 - en: '[comments](#comments)![Figure](../Images/200b7b1476e3bfd5eb1b787f0bf77e0c.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/200b7b1476e3bfd5eb1b787f0bf77e0c.png)'
 - en: Photo by [Marcin Nowak](https://unsplash.com/@marcin?utm_source=medium&utm_medium=referral)
     on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由[Marcin Nowak](https://unsplash.com/@marcin?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。
 - en: When we create our machine learning models, a common task that falls on us is
     how to tune them.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们创建机器学习模型时，一个常见的任务就是如何调整它们。
 - en: People end up taking different manual approaches. Some of them work, and some
     don’t, and a lot of time is spent in anticipation and running the code again and
     again.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们最终采用不同的手动方法。一些有效，一些无效，很多时间都花在了期待和反复运行代码上。
 - en: '***So that brings us to the quintessential question: Can we automate this process?***'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '***所以这就引出了终极问题：我们能否自动化这个过程？***'
 - en: A while back, I was working on an in-class competition from the [**“How to win
     a data science competition”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera
     course. Learned a lot of new things, one among them being Hyperopt — A bayesian
     Parameter Tuning Framework.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 不久前，我在[**“如何赢得数据科学竞赛”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)Coursera课程中的一次课堂竞赛中工作。学到了很多新东西，其中之一就是Hyperopt——一个贝叶斯参数调整框架。
 - en: And I was amazed. I left my Mac with hyperopt in the night. And in the morning
     I had my results. It was awesome, and I did avoid a lot of hit and trial.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我感到惊讶。我把Mac和Hyperopt留在了晚上，早晨醒来时得到了结果。这太棒了，我避免了很多尝试和错误。
 - en: '***This post is about automating hyperparameter tuning because our time is
     more important than the machine.***'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '***这篇文章关于自动化超参数调整，因为我们的时间比机器更重要。***'
 - en: So, What is Hyperopt?
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那么，Hyperopt是什么？
 - en: '![](../Images/07b5068358f10c44c9bb605f14d5de08.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/07b5068358f10c44c9bb605f14d5de08.png)'
 - en: 'From the Hyperopt site:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自Hyperopt网站：
 - en: '*Hyperopt is a Python library for serial and parallel optimization over awkward
     search spaces, which may include real-valued, discrete, and conditional dimensions*'
+  id: totrans-13
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*Hyperopt是一个用于在尴尬搜索空间上进行串行和并行优化的Python库，这些空间可能包括实值、离散和条件维度*'
 - en: '***In simple terms, this means that we get an optimizer that could minimize/maximize
     any function for us.*** For example, we can use this to minimize the log loss
     or maximize accuracy.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '***简单来说，这意味着我们得到一个优化器，它可以为我们最小化/最大化任何函数。*** 例如，我们可以用它来最小化对数损失或最大化准确率。'
 - en: All of us know how grid search or random-grid search works.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们都知道网格搜索或随机网格搜索的工作原理。
 - en: A grid search goes through the parameters one by one, while a random search
     goes through the parameters randomly.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 网格搜索逐个检查参数，而随机搜索随机检查参数。
 - en: '***Hyperopt takes as an input space of hyperparameters in which it will search
     and moves according to the result of past trials.***'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '***Hyperopt以一组超参数作为输入空间，在其中进行搜索，并根据过去试验的结果进行移动。***'
 - en: Thus, Hyperopt aims to search the parameter space in an informed way.
+  id: totrans-18
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 因此，Hyperopt的目标是以一种有信息的方式搜索参数空间。
 - en: I won’t go in the details. But if you want to know more about how it works,
     take a look at this [**paper**](https://conference.scipy.org/proceedings/scipy2013/pdfs/bergstra_hyperopt.pdf) by
     J Bergstra. Here is the [**documentation**](https://github.com/hyperopt/hyperopt/wiki/FMin) from
     Github.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会详细讲解。但如果你想了解更多关于它的工作原理，可以看看J Bergstra的[**论文**](https://conference.scipy.org/proceedings/scipy2013/pdfs/bergstra_hyperopt.pdf)。这是Github上的[**文档**](https://github.com/hyperopt/hyperopt/wiki/FMin)。
 - en: Our Dataset
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们的数据集
 - en: To explain how hyperopt works, I will be working on the [heart dataset](https://www.kaggle.com/ronitf/heart-disease-uci) from
     UCI precisely because it is a simple dataset. And why not do some good using Data
     Science apart from just generating profits?
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明Hyperopt的工作原理，我将使用[heart dataset](https://www.kaggle.com/ronitf/heart-disease-uci)来自UCI，因为它是一个简单的数据集。为什么不利用数据科学做一些有益的事情，而不仅仅是创造利润呢？
 - en: This dataset predicts the presence of a heart disease given some variables.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集根据一些变量预测心脏病的存在。
 - en: 'This is a snapshot of the dataset :'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是数据集的快照：
 - en: '![](../Images/057cd48bf889d086004ebb786b499a86.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/057cd48bf889d086004ebb786b499a86.png)'
 - en: 'This is how the target distribution looks like:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是目标分布的样子：
 - en: '![](../Images/6f1c997ab22f29cc5774fceb761f2579.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6f1c997ab22f29cc5774fceb761f2579.png)'
 - en: Hyperopt Step by Step
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Hyperopt 分步指南
 - en: '![](../Images/ab215cfc8f835d6a47aca674397034eb.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab215cfc8f835d6a47aca674397034eb.png)'
 - en: 'So, while trying to run hyperopt, we will need to create two Python objects:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，在尝试运行 hyperopt 时，我们需要创建两个 Python 对象：
 - en: '***An Objective function: ***The objective function takes the hyperparameter
     space as the input and returns the loss. Here we call our objective function `objective`'
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '***目标函数：*** 目标函数以超参数空间作为输入，并返回损失。在这里我们称我们的目标函数为 `objective`'
 - en: '***A dictionary of hyperparams:*** We will define a hyperparam space by using
     the variable `space` which is actually just a dictionary. We could choose different
     distributions for different hyperparameter values.'
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '***超参数字典：*** 我们将通过使用变量 `space` 来定义一个超参数空间，这实际上只是一个字典。我们可以为不同的超参数值选择不同的分布。'
 - en: In the end, we will use the `fmin` function from the hyperopt package to minimize
     our `objective` through the `space`.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将使用 hyperopt 包中的 `fmin` 函数通过 `space` 最小化我们的 `objective`。
 - en: You can follow along with the code in this [Kaggle Kernel](https://www.kaggle.com/mlwhiz/how-to-use-hyperopt?scriptVersionId=20362799).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这个 [Kaggle Kernel](https://www.kaggle.com/mlwhiz/how-to-use-hyperopt?scriptVersionId=20362799)
+    中跟随代码。
 - en: 1\. Create the objective function
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 创建目标函数
 - en: 'Here we create an objective function which takes as input a hyperparameter
     space:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们创建一个目标函数，它以超参数空间作为输入：
 - en: We first define a classifier, in this case, XGBoost. Just try to see how we
     access the parameters from the space. For example `space[‘max_depth’]`
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先我们定义一个分类器，在这个例子中是 XGBoost。试着查看我们如何从空间中访问参数。例如 `space[‘max_depth’]`
 - en: We fit the classifier to the train data and then predict on the cross-validation
     set.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们将分类器拟合到训练数据上，然后在交叉验证集上进行预测。
 - en: We calculate the required metric we want to maximize or minimize.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们计算所需的度量，我们希望最大化或最小化。
 - en: Since we only minimize using `fmin` in hyperopt, if we want to minimize `logloss` we
     just send our metric as is. If we want to maximize accuracy we will try to minimize `-accuracy`
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于我们在 hyperopt 中只使用 `fmin` 进行最小化，如果我们想最小化 `logloss`，我们只需按原样传递我们的度量。如果我们想最大化准确性，我们将尝试最小化
+    `-accuracy`
 - en: 2\. Create the Space for your classifier
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 为你的分类器创建空间
 - en: '![](../Images/b52692275b5b808df484cd14136ac7f2.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b52692275b5b808df484cd14136ac7f2.png)'
 - en: Now, we ***create the search space for hyperparameters*** for our classifier.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们 ***为我们的分类器创建超参数搜索空间***
 - en: To do this, we end up using many of hyperopt built-in functions which define
     various distributions.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们将使用许多 hyperopt 内置的函数来定义各种分布。
 - en: As you can see in the code below, we use uniform distribution between 0.7 and
     1 for our `subsample` hyperparameter. We also give a label for the subsample parameter`x_subsample`.
     You need to provide different labels for each hyperparam you define. I generally
     add a `x_` before my parameter name to create this label.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如下面的代码所示，我们为我们的 `subsample` 超参数使用 0.7 到 1 之间的均匀分布。我们还为 subsample 参数 `x_subsample`
+    赋予了一个标签。你需要为你定义的每个超参数提供不同的标签。我通常在我的参数名称前加上 `x_` 来创建这个标签。
 - en: 'You can also define a lot of other distributions too. Some of the most useful
     stochastic expressions currently recognized by hyperopt’s optimization algorithms
     are:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以定义很多其他的分布。目前 hyperopt 的优化算法认可的一些最有用的随机表达式包括：
 - en: '`hp.choice(label, options)` — Returns one of the options, which should be a
     list or tuple.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hp.choice(label, options)` — 返回选项中的一个，选项应该是一个列表或元组。'
 - en: '`hp.randint(label, upper)` — Returns a random integer in the range [0, upper).'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hp.randint(label, upper)` — 返回范围 [0, upper) 内的随机整数。'
 - en: '`hp.uniform(label, low, high)` — Returns a value uniformly between `low` and `high`.'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hp.uniform(label, low, high)` — 返回一个均匀分布在 `low` 和 `high` 之间的值。'
 - en: '`hp.quniform(label, low, high, q)` — Returns a value like round(uniform(low,
     high) / q) * q'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hp.quniform(label, low, high, q)` — 返回类似 round(uniform(low, high) / q) * q
+    的值'
 - en: '`hp.normal(label, mu, sigma)` — Returns a real value that’s normally-distributed
     with mean mu and standard deviation sigma.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hp.normal(label, mu, sigma)` — 返回一个以均值 mu 和标准差 sigma 正态分布的实数值。'
 - en: There are a lot of other distributions. You can check them out [here](https://github.com/hyperopt/hyperopt/wiki/FMin).
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有很多其他的分布。你可以在[这里](https://github.com/hyperopt/hyperopt/wiki/FMin)查看它们。
 - en: 3\. And finally, Run Hyperopt
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 最后，运行 Hyperopt
 - en: '![](../Images/55ef6dc9486792af8b3673d1003e49ec.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/55ef6dc9486792af8b3673d1003e49ec.png)'
 - en: Once we run this, we get the best parameters for our model. Turns out we achieved
     an accuracy of 90% by just doing this on the problem.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们运行这个，就能得到我们模型的最佳参数。结果显示，我们通过这样做达到了90%的准确率。
 - en: '[![](../Images/5abf6661a5d63b7b4a5ec8d44a2669cd.png)](https://miro.medium.com/max/2544/1*1cYghbkmt3-pBqv8LNcwhQ.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/5abf6661a5d63b7b4a5ec8d44a2669cd.png)](https://miro.medium.com/max/2544/1*1cYghbkmt3-pBqv8LNcwhQ.png)'
 - en: '***Now we can retrain our XGboost algorithm with these best params, and we
     are done.***'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '***现在我们可以用这些最佳参数重新训练我们的 XGboost 算法，然后就完成了。***'
 - en: Conclusion
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Running the above gives us pretty good hyperparams for our learning algorithm.
     And that saves me a lot of time to think about various other hypotheses and testing
     them.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行上述步骤给了我们相当好的超参数用于我们的学习算法。这为我节省了大量时间来思考各种其他假设并进行测试。
 - en: I tend to use this a lot while tuning my models. ***From my experience, the
     most crucial part in this whole procedure is setting up the hyperparameter space,
     and that comes by experience as well as knowledge about the models.***
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在调整模型时经常使用这个。***根据我的经验，这整个过程中的关键部分是设置超参数空间，而这需要经验和对模型的了解。***
 - en: So, Hyperopt is an awesome tool to have in your repository but never neglect
     to understand what your models does. It will be very helpful in the long run.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，Hyperopt 是一个非常棒的工具，但千万不要忽视理解你的模型是如何工作的。这在长远中会非常有帮助。
 - en: You can get the full code in this [Kaggle Kernel](https://www.kaggle.com/mlwhiz/how-to-use-hyperopt?scriptVersionId=20362799).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这个 [Kaggle Kernel](https://www.kaggle.com/mlwhiz/how-to-use-hyperopt?scriptVersionId=20362799) 中获得完整的代码。
 - en: Continue Learning
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 继续学习
 - en: If you want to learn more about practical data science, do take a look at the [**“How
     to win a data science competition”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera
     course. Learned a lot of new things from this course taught by one of the most
     prolific Kaggler.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于实用数据科学的内容，可以看看 [**“如何赢得数据科学比赛”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera课程。从这门由一位最富盛名的
+    Kaggle 竞赛选手讲授的课程中学到了很多新东西。
 - en: Thanks for the read. I am going to be writing more beginner-friendly posts in
     the future too. Follow me up at [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) or
     Subscribe to my [**blog**](http://eepurl.com/dbQnuX?source=post_page---------------------------) to
     be informed about them. As always, I welcome feedback and constructive criticism
     and can be reached on Twitter [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------).
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读。我将来也会写更多面向初学者的文章。请在 [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) 关注我，或订阅我的 [**博客**](http://eepurl.com/dbQnuX?source=post_page---------------------------) 以获取最新信息。一直以来，我欢迎反馈和建设性的批评，可以通过
+    Twitter 联系我 [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------)。
 - en: Also, a small disclaimer - There might be some affiliate links in this post
     to relevant resources as sharing knowledge is never a bad idea.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，小小的免责声明 - 这篇文章中可能包含一些关联链接，因为分享知识从来都不是坏事。
 - en: '**Bio: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** is a Data
     Scientist at Walmart Labs.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是沃尔玛实验室的数据科学家。'
 - en: '[Original](https://towardsdatascience.com/automate-hyperparameter-tuning-for-your-models-71b18f819604).
     Reposted with permission.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/automate-hyperparameter-tuning-for-your-models-71b18f819604)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[How to Automate Hyperparameter Optimization](/2019/06/automate-hyperparameter-optimization.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何自动化超参数优化](/2019/06/automate-hyperparameter-optimization.html)'
 - en: '[Keras Hyperparameter Tuning in Google Colab Using Hyperas](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Google Colab中使用Hyperas进行Keras超参数调优](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
 - en: '[Automated Machine Learning: Just How Much?](/2019/09/automated-machine-learning-just-how-much.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习: 到底有多少？](/2019/09/automated-machine-learning-just-how-much.html)'
 - en: '* * *'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-73
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关话题
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索在 Python 中调整超参数](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数调整：GridSearchCV 和 RandomizedSearchCV 解析](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
 - en: '[Automate Your Codebase with Promptr and GPT](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Promptr 和 GPT 自动化你的代码库](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
 - en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 自动化的 5 个任务](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
 - en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化 Microsoft Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
 - en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 GPT-4 和 Python 自动化枯燥的工作](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
