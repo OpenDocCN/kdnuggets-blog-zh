@@ -1,238 +1,359 @@
 - en: Leveraging XGBoost for Time-Series Forecasting
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 利用 XGBoost 进行时间序列预测
 - en: 原文：[https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)
 - en: '[XGBoost](https://xgboost.readthedocs.io/en/stable/) (eXtreme Gradient Boosting)
     is an open-source algorithm that implements [gradient-boosting](https://en.wikipedia.org/wiki/Gradient_boosting)
     trees with additional improvement for better performance and speed. The algorithm''s
     quick ability to make accurate predictions makes the model a go-to model for many
     competitions, such as the Kaggle competition.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[XGBoost](https://xgboost.readthedocs.io/en/stable/)（极端梯度提升）是一种开源算法，实施了 [梯度提升](https://en.wikipedia.org/wiki/Gradient_boosting)
+    树，并进行了额外改进以提高性能和速度。该算法快速准确的预测能力使其成为许多竞赛的首选模型，如 Kaggle 竞赛。'
 - en: The common cases for the XGBoost applications are for classification prediction,
     such as fraud detection, or regression prediction, such as house pricing prediction.
     However, extending the XGBoost algorithm to forecast time-series data is also
     possible. How is it works? Let’s explore this further.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost 应用的常见案例包括分类预测，如欺诈检测，或回归预测，如房价预测。然而，将 XGBoost 算法扩展到预测时间序列数据也是可能的。它是如何工作的？让我们进一步探讨。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Time-Series Forecasting
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 时间序列预测
 - en: Forecasting in data science and machine learning is a technique used to predict
     future numerical values based on historical data collected over time, either in
     regular or irregular intervals.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学和机器学习中的预测是一种基于随时间收集的历史数据来预测未来数值的方法，可以是规则的或不规则的间隔。
 - en: Unlike common machine learning training data where each observation is independent
     of the other, data for time-series forecasts must be in successive order and related
     to each data point. For example, time-series data could include monthly stock,
     weekly weather, daily sales, etc.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 与常见的机器学习训练数据中每个观察值相互独立不同，时间序列预测的数据必须按连续顺序排列，并与每个数据点相关。例如，时间序列数据可以包括每月的股票、每周的天气、每日销售等。
 - en: Let’s look at the example time-series data [Daily Climate data from Kaggle](https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看示例时间序列数据 [Kaggle 的每日气候数据](https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data)。
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/4e0dd5dff273c953c21ee1096c65b841.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![利用 XGBoost 进行时间序列预测](../Images/4e0dd5dff273c953c21ee1096c65b841.png)'
 - en: If we look at the dataframe above, every feature is recorded daily. The date
     column signifies when the data is observed, and each observation is related.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们查看上述数据框，每个特征都被记录为每日数据。日期列表示数据被观察的时间，每个观察值之间是相关的。
 - en: Time-Series forecast often incorporate trend, seasonal, and other patterns from
     the data to create forecasting. One easy way to look at the pattern is by visualizing
     them. For example, I would visualize the mean temperature data from our example
     dataset.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测通常结合数据中的趋势、季节性和其他模式进行预测。查看这些模式的一种简单方法是通过可视化。例如，我会可视化我们示例数据集中的平均温度数据。
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/a2782ba56cab9368ccae9e34f8651cff.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![利用 XGBoost 进行时间序列预测](../Images/a2782ba56cab9368ccae9e34f8651cff.png)'
 - en: It’s easy for us to see in the graph above that each year has a common seasonality
     pattern. By incorporating this information, we can understand how our data work
     and decide which model might suit our forecast model.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以在上面的图表中很容易地看到每年都有一个共同的季节性模式。通过结合这些信息，我们可以理解数据如何工作，并决定哪个模型可能适合我们的预测模型。
 - en: Typical forecast models include ARIMA, Vector AutoRegression, Exponential Smoothing,
     and Prophet. However, we can also utilize XGBoost to provide the forecasting.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 典型的预测模型包括ARIMA、向量自回归、指数平滑和Prophet。然而，我们也可以利用XGBoost来提供预测。
 - en: XGBoost Forecasting
+  id: totrans-22
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: XGBoost预测
 - en: Before preparing to forecast using XGBoost, we must install the package first.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在准备使用XGBoost进行预测之前，我们必须首先安装该软件包。
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After the installation, we would prepare the data for our model training. In
     theory, XGBoost Forecasting would implement the Regression model based on the
     singular or multiple features to predict future numerical values. That is why
     the data training must also be in the numerical values. Also, to incorporate the
     motion of time within our XGBoost model, we would transform the time data into
     multiple numerical features.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装完成后，我们将准备数据以进行模型训练。理论上，XGBoost预测将基于单一或多个特征实现回归模型，以预测未来的数值。这就是为什么数据训练也必须是数值的原因。此外，为了将时间的变化融入我们的XGBoost模型，我们将把时间数据转化为多个数值特征。
 - en: Let’s start by creating a function to create the numerical features from the
     date.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从创建一个函数开始，将日期转换为数值特征。
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Next, we would apply this function to the training and test data.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将把这个函数应用于训练数据和测试数据。
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/7c6787342de50ffbcacd0fcd0a7781a8.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![利用XGBoost进行时间序列预测](../Images/7c6787342de50ffbcacd0fcd0a7781a8.png)'
 - en: The required information is now all available. Next, we would define what we
     want to predict. In this example, we would forecast the mean temperature and make
     the training data based on the data above.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 所需的信息现在都已经准备好。接下来，我们将定义我们想要预测的内容。在这个例子中，我们将预测平均温度，并基于上述数据制作训练数据。
 - en: '[PRE5]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: I would still use the other information, such as humidity, to show that XGBoost
     can also forecast values using multivariate approaches. However, in practice,
     we only incorporate data that we know exists when we try to forecast.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我仍然会使用其他信息，如湿度，以展示XGBoost也可以通过多变量方法进行预测。然而，在实际应用中，我们只会纳入我们知道存在的数据来进行预测。
 - en: Let’s start the training process by fitting the data into the model. For the
     current example, we would not do much hyperparameter optimization other than the
     number of trees.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过将数据拟合到模型中开始训练过程。对于当前的示例，我们不会做太多超参数优化，除了树的数量。
 - en: '[PRE6]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After the training process, let’s see the feature importance of the model.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练过程结束后，让我们查看模型的特征重要性。
 - en: '[PRE7]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/56f73cb22289b976d58c6bcda992ca86.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![利用XGBoost进行时间序列预测](../Images/56f73cb22289b976d58c6bcda992ca86.png)'
 - en: The three initial features are not surprisingly helpful for forecasting, but
     the time features also contribute to the prediction. Let’s try to have the prediction
     on the test data and visualize them.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 三个初始特征在预测中非常有用，但时间特征也有助于预测。让我们尝试在测试数据上进行预测并进行可视化。
 - en: '[PRE8]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/e387e31500c6ac8f829ffbe7d16c36aa.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![利用XGBoost进行时间序列预测](../Images/e387e31500c6ac8f829ffbe7d16c36aa.png)'
 - en: As we can see from the graph above, the prediction might seem slightly off but
     still follow the overall trend. Let’s try to evaluate the model based on the error
     metrics.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上面的图表中，我们可以看到，预测可能看起来稍有偏差，但仍然遵循总体趋势。让我们尝试根据误差指标来评估模型。
 - en: '[PRE9]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: RMSE:  11.514
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 'RMSE: 11.514'
 - en: MAE:  2.655
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 'MAE: 2.655'
 - en: MAPE:  0.133
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 'MAPE: 0.133'
 - en: The result shows that our prediction may have an error of around 13%, and the
     RMSE also shows a slight error in the forecast. The model can be improved using
     hyperparameter optimization, but we have learned how XGBoost can be used for the
     forecast.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果表明，我们的预测可能有约13%的误差，而RMSE也显示预测有轻微误差。模型可以通过超参数优化来改进，但我们已经了解了XGBoost如何用于预测。
 - en: Conclusion
+  id: totrans-48
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: XGBoost is an open-source algorithm often used for many data science cases and
     in the Kaggle competition. Often the use cases are common classification cases
     such as fraud detection or regression cases such as house price prediction, but
     XGBoost can also be extended into time-series forecasting. By using the XGBoost
     Regressor, we can create a model that can predict future numerical values.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost 是一种开源算法，通常用于许多数据科学案例以及Kaggle竞赛中。使用案例通常包括常见的分类任务，如欺诈检测，或回归任务，如房价预测，但XGBoost也可以扩展到时间序列预测中。通过使用XGBoost回归器，我们可以创建一个能够预测未来数值的模型。
 - en: '**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**
     is a data science assistant manager and data writer. While working full-time at
     Allianz Indonesia, he loves to share Python and Data tips via social media and
     writing media.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**
+    是一位数据科学助理经理和数据撰稿人。他在全职工作于Allianz Indonesia的同时，喜欢通过社交媒体和撰写媒体分享Python和数据技巧。'
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速XGBoost模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
 - en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整XGBoost超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
 - en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GBM和XGBoost之间到底有什么区别？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
 - en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习现代预测技术以帮助预测未来业务结果…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用最先进的深度学习进行可解释预测和即时预测…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
