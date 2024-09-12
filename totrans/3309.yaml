@@ -3,19 +3,23 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据版本控制：迭代机器学习
 - en: 原文：[https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html](https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html](https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)'
 - en: '**By Dmitry Petrov, [@FullStackML](https://twitter.com/fullstackml)**.'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Dmitry Petrov，[Twitter](https://twitter.com/fullstackml)**'
 - en: It is hardly possible in real life to develop a good machine learning model
     in a single pass. ML modeling is an iterative process and it is extremely important
     to keep track of your steps, dependencies between the steps, dependencies between
@@ -25,10 +29,12 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在现实生活中，几乎不可能一次性开发出一个好的机器学习模型。ML建模是一个迭代过程，跟踪你的步骤、步骤之间的依赖关系、代码和数据文件之间的依赖关系以及所有代码运行参数极为重要。在团队环境中，这变得更加重要和复杂，因为数据科学家的协作占据了团队的大部分精力。
 - en: '![data-version-control](../Images/d94170a17e22b183d6db453a8b004034.png)'
   id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![data-version-control](../Images/d94170a17e22b183d6db453a8b004034.png)'
 - en: 'Today, we are pleased to announce the beta version release of new open source
     tool — [data version control](https://dataversioncontrol.com/) or DVC. DVC is
     designed to help data scientists keep track of their ML processes and file dependencies
@@ -38,6 +44,8 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天，我们很高兴地宣布新开源工具[data version control](https://dataversioncontrol.com/)或DVC的beta版本发布。DVC旨在帮助数据科学家跟踪他们的ML过程和文件依赖，形式类似于git命令：“**dvc
+    run python train_model.py data/train_matrix.p data/model.p**”。无论使用哪种编程语言或工具，你现有的ML过程都可以轻松转化为可重现的DVC管道。
 - en: 'This blog post walks you through an iterative process of building a machine
     learning model with DVC using [stackoverflow posts dataset](https://archive.org/details/stackexchange).
     First, you should initialize a Git repository and download a modeling source code
@@ -45,156 +53,197 @@
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇博客文章引导你通过一个迭代过程，使用DVC构建机器学习模型，数据集为[stackoverflow posts dataset](https://archive.org/details/stackexchange)。首先，你需要初始化一个Git仓库，并下载我们将用来展示DVC的建模源代码：
 - en: '*$ mkdir myrepo*'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ mkdir myrepo*'
 - en: '*$ cd myrepo*'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ cd myrepo*'
 - en: '*$ mkdir code*'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ mkdir code*'
 - en: '*$ wget -nv -P code/ https://s3-us-west-2.amazonaws.com/dvc-share/so/code/featurization.py
     \*'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ wget -nv -P code/ https://s3-us-west-2.amazonaws.com/dvc-share/so/code/featurization.py
+    \*'
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/evaluate.py \*'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/evaluate.py \*'
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/train_model.py \*'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/train_model.py \*'
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/split_train_test.py \*'
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/split_train_test.py \*'
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/xml_to_tsv.py \*'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/xml_to_tsv.py \*'
 - en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/requirements.txt*'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/requirements.txt*'
 - en: '*$ pip install -r code/requirements.txt*'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ pip install -r code/requirements.txt*'
 - en: '*$ git init*'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git init*'
 - en: '*$ git add code/*'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git add code/*'
 - en: '*$ git commit -m ‘Download code’*'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git commit -m ‘下载代码’*'
 - en: The full pipeline could be built by running the bash code below. If you use
     Python version 3, please replace python to python3 and pip to pip3.
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过运行下面的bash代码来构建完整的管道。如果你使用的是Python 3，请将python替换为python3，将pip替换为pip3。
 - en: '*# Install DVC*'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 安装DVC*'
 - en: '*$ pip install dvc*'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ pip install dvc*'
 - en: '*# Initialize DVC repository*'
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 初始化DVC仓库*'
 - en: '*$ dvc init*'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc init*'
 - en: '*# Download a file and put to data/ directory.*'
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 下载文件并放入data/目录中。*'
 - en: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/25K/Posts.xml.tgz
     data/*'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/25K/Posts.xml.tgz
+    data/*'
 - en: '*# Extract XML from the archive.*'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 从归档中提取XML文件。*'
 - en: '*$ dvc run tar zxf data/Posts.xml.tgz -C data/*'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc run tar zxf data/Posts.xml.tgz -C data/*'
 - en: '*# Prepare data.*'
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 准备数据。*'
 - en: '*$ dvc run python code/xml_to_tsv.py data/Posts.xml data/Posts.tsv python*'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc run python code/xml_to_tsv.py data/Posts.xml data/Posts.tsv python*'
 - en: '*# Split training and testing dataset. Two output files.*'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 切分训练和测试数据集。两个输出文件。*'
 - en: '*# 0.33 is the test dataset splitting ratio. 20170426 is a seed for randomization.*'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 0.33是测试数据集分割比例。20170426是随机化的种子。*'
 - en: '*$ dvc run python code/split_train_test.py data/Posts.tsv 0.33 20170426 data/Posts-train.tsv
     data/Posts-test.tsv*'
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc run python code/split_train_test.py data/Posts.tsv 0.33 20170426 data/Posts-train.tsv
+    data/Posts-test.tsv*'
 - en: '*# Extract features from text data. Two TSV inputs and two pickle matrixes
     outputs.*'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 从文本数据中提取特征。两个 TSV 输入和两个 pickle 矩阵输出。*'
 - en: '*$ dvc run python code/featurization.py data/Posts-train.tsv data/Posts-test.tsv
     data/matrix-train.p data/matrix-test.p*'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc run python code/featurization.py data/Posts-train.tsv data/Posts-test.tsv
+    data/matrix-train.p data/matrix-test.p*'
 - en: '*# Train ML model out of the training dataset. 20170426 is another seed value.*'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 从训练数据集中训练 ML 模型。20170426 是另一个种子值。*'
 - en: '*$ dvc run python code/train_model.py data/matrix-train.p 20170426 data/model.p*'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc run python code/train_model.py data/matrix-train.p 20170426 data/model.p*'
 - en: '*# Evaluate the model by the testing dataset.*'
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 通过测试数据集评估模型。*'
 - en: '*$ dvc run python code/evaluate.py data/model.p data/matrix-test.p data/evaluation.txt*'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc run python code/evaluate.py data/model.p data/matrix-test.p data/evaluation.txt*'
 - en: '*# The result.*'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 结果。*'
 - en: '*$ cat data/evaluation.txt*'
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ cat data/evaluation.txt*'
 - en: '*AUC: 0.596182*'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '*AUC: 0.596182*'
 - en: 'The one thing to wrap your head around is that DVC automatically derives the
     dependencies between the steps and builds the dependency graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph))
     transparently to the user. This graph is used for reproducing parts of your pipeline
@@ -204,137 +253,178 @@
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要理解的一点是，DVC 会自动推导步骤之间的依赖关系，并透明地构建依赖图（[DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)）。这个图用于重现受到近期更改影响的流水线部分。在下一个代码示例中，我们将更改流水线中的特征提取步骤，并重现最终结果。DVC
+    推导出七个步骤中只有三个需要重新构建，并运行这些步骤：
 - en: '*# Improve feature extraction step.*'
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 改进特征提取步骤。*'
 - en: '*$ vi code/featurization.py*'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ vi code/featurization.py*'
 - en: '*# Commit all the changes.*'
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 提交所有更改。*'
 - en: '*$ git commit -am “Add bigram features”*'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git commit -am “添加二元特征”*'
 - en: '*[master 50b5a2a] Add bigram features*'
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[master 50b5a2a] 添加二元特征*'
 - en: '*1 file changed, 5 insertion(+), 2 deletion(-)*'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '*1 个文件更改，5 行插入（+），2 行删除（-）*'
 - en: '*# Reproduce all required steps to get our target metrics file.*'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 生成所有必需的步骤以获得我们的目标指标文件。*'
 - en: '*$ dvc repro data/evaluation.txt*'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc repro data/evaluation.txt*'
 - en: '*Reproducing run command for data item data/matrix-train.p. Args: python code/featurization.py
     data/Posts-train.tsv data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为数据项 data/matrix-train.p 生成重现运行命令。参数：python code/featurization.py data/Posts-train.tsv
+    data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
 - en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
     data/matrix-train.p 20170426 data/model.p*'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为数据项 data/model.p 生成重现运行命令。参数：python code/train_model.py data/matrix-train.p
+    20170426 data/model.p*'
 - en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
     data/model.p data/matrix-test.p data/evaluation.txt*'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为数据项 data/evaluation.txt 生成重现运行命令。参数：python code/evaluate.py data/model.p
+    data/matrix-test.p data/evaluation.txt*'
 - en: '*Data item “data/evaluation.txt” was reproduced.*'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '*数据项“data/evaluation.txt”已被重新生成。*'
 - en: '*# Take a look at the target metric improvement.*'
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 查看目标指标的改进。*'
 - en: '*$ cat data/evaluation.txt*'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ cat data/evaluation.txt*'
 - en: '*AUC: 0.627196*'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*AUC: 0.627196*'
 - en: If you replace the input file that affects all the steps, then the entire pipeline
     will be reproduced.
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你替换了影响所有步骤的输入文件，那么整个流水线将被重新生成。
 - en: '*# Replace small input dataset (25K items) to a bigger one (100K).*'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 将小型输入数据集（25K 项）替换为较大的数据集（100K）。*'
 - en: '*$ dvc remove data/Posts.xml.tgz*'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc remove data/Posts.xml.tgz*'
 - en: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/100K/Posts.xml.tgz
     data/*'
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/100K/Posts.xml.tgz
+    data/*'
 - en: '*# Reproduce the metric file.*'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 生成指标文件。*'
 - en: '*$ dvc repro data/evaluation.txt*'
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc repro data/evaluation.txt*'
 - en: '*Reproducing run command for data item data/Posts.xml. Args: tar zxf data/Posts.xml.tgz
     -C data*'
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为数据项 data/Posts.xml 生成重现运行命令。参数：tar zxf data/Posts.xml.tgz -C data*'
 - en: '*Reproducing run command for data item data/Posts.tsv. Args: python code/xml_to_tsv.py
     data/Posts.xml data/Posts.tsv python*'
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为数据项 data/Posts.tsv 生成重现运行命令。参数：python code/xml_to_tsv.py data/Posts.xml data/Posts.tsv
+    python*'
 - en: '*Reproducing run command for data item data/Posts-train.tsv. Args: python code/split_train_test.py
     data/Posts.tsv 0.33 20170426 data/Posts-train.tsv data/Posts-test.tsv*'
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为数据项 data/Posts-train.tsv 生成重现运行命令。参数：python code/split_train_test.py data/Posts.tsv
+    0.33 20170426 data/Posts-train.tsv data/Posts-test.tsv*'
 - en: '*Reproducing run command for data item data/matrix-train.p. Args: python code/featurization.py
     data/Posts-train.tsv data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '*重现数据项 data/matrix-train.p 的运行命令。参数：python code/featurization.py data/Posts-train.tsv
+    data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
 - en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
     data/matrix-train.p 20170426 data/model.p*'
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '*重现数据项 data/model.p 的运行命令。参数：python code/train_model.py data/matrix-train.p
+    20170426 data/model.p*'
 - en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
     data/model.p data/matrix-test.p data/evaluation.txt*'
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '*重现数据项 data/evaluation.txt 的运行命令。参数：python code/evaluate.py data/model.p data/matrix-test.p
+    data/evaluation.txt*'
 - en: '*Data item “data/evaluation.txt” was reproduced.*'
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '*数据项“data/evaluation.txt”已重现。*'
 - en: '*$ cat data/evaluation.txt*'
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ cat data/evaluation.txt*'
 - en: '*AUC: 0.633541*'
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '*AUC: 0.633541*'
 - en: Not only can DVC streamline your work into a single, reproducible environment,
     it also makes it easy to share this environment by Git including the dependencies
     (DAG) — an exciting collaboration feature which gives the ability to reproduce
@@ -344,71 +434,89 @@
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通过 Git 包含依赖项（DAG）轻松共享该环境——这是一个令人兴奋的协作功能，能够在不同的计算机上重现研究结果。此外，你可以通过像
+    AWS S3 或 GCP Storage 这样的云存储服务共享数据文件，因为 DVC 不会将数据文件推送到 Git 仓库中。
 - en: '![data-git](../Images/e992418268b6a645a274161e612fc858.png)'
   id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![data-git](../Images/e992418268b6a645a274161e612fc858.png)'
 - en: 'The code below shows how to share your code and DAG through the Git and data
     files through S3:'
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码展示了如何通过 Git 分享你的代码和 DAG，以及通过 S3 分享数据文件：
 - en: '*# Setup cloud settings. Example: Cloud = AWS, StoragePath=/dvc-share/projects/tag_classifier*'
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 设置云设置。例如：Cloud = AWS, StoragePath=/dvc-share/projects/tag_classifier*'
 - en: '*$ vi dvc.conf*'
   id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ vi dvc.conf*'
 - en: '*$ git commit -am “Set up AWS path”*'
   id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git commit -am “设置 AWS 路径”*'
 - en: '*[master ec994b6] Set up AWS path*'
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[master ec994b6] 设置 AWS 路径*'
 - en: '*1 file changed, 1 insertion(+), 1 deletion(-)*'
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '*1 个文件已更改，1 次插入(+)，1 次删除(-)*'
 - en: '*# Share the repository with the pipeline and the cloud settings.*'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 与管道和云设置一起分享仓库。*'
 - en: '*$ git remote add origin https://github.com/dmpetrov/tag_classifier.git*'
   id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git remote add origin https://github.com/dmpetrov/tag_classifier.git*'
 - en: '*$ git push -u origin master*'
   id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git push -u origin master*'
 - en: '*# Share the most important data files.*'
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 分享最重要的数据文件。*'
 - en: '*$ dvc sync data/matrix-train.p data/matrix-test.p*'
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc sync data/matrix-train.p data/matrix-test.p*'
 - en: '*Uploading cache file “.cache/matrix-train.p_1fa3a9b” to S3 “projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上传缓存文件“.cache/matrix-train.p_1fa3a9b”到S3“projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
 - en: '*Uploading completed*'
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上传完成*'
 - en: '*Uploading cache file “.cache/matrix-test.p_1fa3a9b” to S3 “projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上传缓存文件“.cache/matrix-test.p_1fa3a9b”到S3“projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
 - en: '*Uploading completed*'
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上传完成*'
 - en: Now, another data scientist can use this repository and reproduce the data files
     the same way you just did. If she doesn’t want (or has not enough computational
     resources) to reproduce everything, she can sync and lock shared data files. After
@@ -416,229 +524,286 @@
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，另一个数据科学家可以使用这个仓库，并以你刚刚使用的方法重现数据文件。如果她不想（或没有足够的计算资源）重现所有内容，她可以同步并锁定共享的数据文件。之后，只会重现机器学习过程的最后几个步骤。
 - en: '*# Get the repository.*'
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 获取仓库。*'
 - en: '*$ git clone https://github.com/dmpetrov/tag_classifier.git*'
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git clone https://github.com/dmpetrov/tag_classifier.git*'
 - en: '*# Sync the data files from S3.*'
   id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 从 S3 同步数据文件。*'
 - en: '*$ dvc sync data/*'
   id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc sync data/*'
 - en: '*Uploading cache file “.cache/empty_0000000” to S3 “projects/tag_classifier/.cache/empty_0000000”*'
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上传缓存文件“.cache/empty_0000000”到S3“projects/tag_classifier/.cache/empty_0000000”*'
 - en: '*Uploading completed*'
   id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上传完成*'
 - en: '*Downloading cache file from S3 “dvc-share/projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
   id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '*从 S3 “dvc-share/projects/tag_classifier/.cache/matrix-test.p_1fa3a9b” 下载缓存文件*'
 - en: '*Downloading completed*'
   id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '*下载完成*'
 - en: '*Downloading cache file from S3 “dvc-share/projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
   id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '*从 S3 “dvc-share/projects/tag_classifier/.cache/matrix-train.p_1fa3a9b” 下载缓存文件*'
 - en: '*Downloading completed*'
   id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '*下载完成*'
 - en: '*# Lock the reproduction process in the feature extraction step*'
   id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 锁定特征提取步骤中的重现过程*'
 - en: '*# since these data files were synced.*'
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 因为这些数据文件已同步。*'
 - en: '*$ dvc lock data/matrix-t**'
   id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc lock data/matrix-t**'
 - en: '*Data item data/matrix-test.p was locked*'
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '*数据项 data/matrix-test.p 已锁定*'
 - en: '*Data item data/matrix-train.p was locked*'
   id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '*数据项 data/matrix-train.p 已锁定*'
 - en: '*# Improve the model.*'
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 改进模型。*'
 - en: '*$ vi code/train_model.py*'
   id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ vi code/train_model.py*'
 - en: '*$ git commit -am “Tune the model”*'
   id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ git commit -am “调整模型”*'
 - en: '*[master 77e2943] Tune the model*'
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[master 77e2943] 调整模型*'
 - en: '*1 file changed, 1 insertion(+), 1 deletion(-)*'
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '*1 个文件更改，1 次插入（+），1 次删除（-）*'
 - en: '*# Reproduce required steps of the pipeline.*'
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '*# 重现管道所需的步骤。*'
 - en: '*$ dvc repro data/evaluation.txt*'
   id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ dvc repro data/evaluation.txt*'
 - en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
     data/matrix-train.p 20170426 data/model.p*'
   id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '*重现数据项 data/model.p 的运行命令。参数： python code/train_model.py data/matrix-train.p
+    20170426 data/model.p*'
 - en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
     data/model.p data/matrix-test.p data/evaluation.txt*'
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '*重现数据项 data/evaluation.txt 的运行命令。参数： python code/evaluate.py data/model.p data/matrix-test.p
+    data/evaluation.txt*'
 - en: '*Data item “data/evaluation.txt” was reproduced.*'
   id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '*数据项“data/evaluation.txt”已被重现。*'
 - en: '*$ cat data/evaluation.txt*'
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '*$ cat data/evaluation.txt*'
 - en: '*AUC: 0.670531*'
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '*AUC: 0.670531*'
 - en: 'The steps that were reproduced (red):'
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 已重现的步骤（红色）：
 - en: '![data-mining](../Images/6d2e0ad482fb831ad427aa29277f20e1.png)'
   id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![数据挖掘](../Images/6d2e0ad482fb831ad427aa29277f20e1.png)'
 - en: Conclusion
   id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Thus, the model can be improved iteratively and DVC simplifies the iterative
     ML process and aids collaboration between data scientists.
   id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，模型可以迭代改进，而 DVC 简化了迭代机器学习过程，并有助于数据科学家的协作。
 - en: We are very interested in your opinion and feedback. Please post your comments
     here or contact us in twitter — [FullStackML](https://twitter.com/FullStackML).
   id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们非常感兴趣您的意见和反馈。请在这里发表评论或通过 Twitter 联系我们 — [FullStackML](https://twitter.com/FullStackML)。
 - en: If you found this tool useful, **please “star” the** [**DVC Github repository**](https://github.com/dataversioncontrol/dvc).
   id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您觉得这个工具有用，**请“加星”** [**DVC Github 仓库**](https://github.com/dataversioncontrol/dvc)。
 - en: '[Original](https://blog.dataversioncontrol.com/data-version-control-beta-release-iterative-machine-learning-a7faf7c8be67).
     Reposted with permission.'
   id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.dataversioncontrol.com/data-version-control-beta-release-iterative-machine-learning-a7faf7c8be67)。经许可转载。'
 - en: '**Bio: [Dmitry Petrov](https://blog.dataversioncontrol.com/@fullstackml)**
     is building the future of data science tooling DataVersionControl. Ex-Data Scientist
     at Microsoft. Ex-Researcher. PhD in CS.'
   id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [德米特里·佩特罗夫](https://blog.dataversioncontrol.com/@fullstackml)** 正在构建数据科学工具的未来
+    DataVersionControl。前微软数据科学家。前研究员。计算机科学博士。'
 - en: '**Related:**'
   id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Fixing Deployment and Iteration Problems in CRISP-DM](/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)'
   id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[修复 CRISP-DM 中的部署和迭代问题](/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)'
 - en: '[Data Science Automation: Debunking Misconceptions](/2016/08/data-science-automation-debunking-misconceptions.html)'
   id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学自动化：揭穿误解](/2016/08/data-science-automation-debunking-misconceptions.html)'
 - en: '[RCloud – DevOps for Data Science](/2016/11/rcloud-devops-data-science.html)'
   id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RCloud – 数据科学的 DevOps](/2016/11/rcloud-devops-data-science.html)'
 - en: '* * *'
   id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-133
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
   id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Python Basics: Syntax, Data Types, and Control Structures](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
   id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 基础知识：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
 - en: '[Python Control Flow Cheat Sheet](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)'
   id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 控制流备忘单](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)'
 - en: '[Nota AI releases beta version of NetPresso Model Search, their…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
   id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Nota AI 发布了 NetPresso 模型搜索的测试版，…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
   id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个机器学习工程师都应该掌握的 5 种机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
   id: totrans-143
   prefs:
