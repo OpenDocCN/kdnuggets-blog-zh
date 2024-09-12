@@ -1,812 +1,1271 @@
 - en: 'Hands-on Reinforcement Learning Course Part 3: SARSA'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实践强化学习课程第3部分：SARSA
 - en: 原文：[https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/30748c058f5a536beb5706b08cffa316.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程第3部分：SARSA](../Images/30748c058f5a536beb5706b08cffa316.png)'
 - en: '**Welcome to my reinforcement learning course ❤️**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**欢迎来到我的强化学习课程❤️**'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在IT方面'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This is part 3 of my hands-on course on reinforcement learning, which takes
     you from zero to HERO ????‍♂️. Today we will learn about SARSA, a powerful RL
     algorithm.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我实践强化学习课程的第3部分，该课程将你从零带到HERO ????‍♂️。今天我们将学习SARSA，这是一种强大的RL算法。
 - en: We are still at the beginning of the journey, solving relatively easy problems.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们仍然处于旅程的起点，解决相对简单的问题。
 - en: In [**part 2**](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)
     we implemented discrete Q-learning to train an agent in the `Taxi-v3` environment.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [**第2部分**](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)
+    中，我们实现了离散Q学习来训练`Taxi-v3`环境中的一个代理。
 - en: Today, we are going one step further to solve the `MountainCar` environment
     ???? using SARSA algorithm.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天，我们将更进一步，使用SARSA算法解决`MountainCar`环境????。
 - en: Let’s help this poor car win the battle against gravity!
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们帮助这辆可怜的车赢得与重力的战斗！
 - en: All the code for this lesson is in [**this Github repo**](https://github.com/Paulescu/hands-on-rl)**.**
     Git clone it to follow along with today’s problem.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本课的所有代码都在 [**这个Github仓库**](https://github.com/Paulescu/hands-on-rl)**。** 克隆它以跟随今天的问题。
 - en: '[![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/5a7273317f4e2bc8225fd4e3f167146b.png)](https://github.com/Paulescu/hands-on-rl)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![实践强化学习课程第3部分：SARSA](../Images/5a7273317f4e2bc8225fd4e3f167146b.png)](https://github.com/Paulescu/hands-on-rl)'
 - en: 1\. The Mountain car problem ????
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. Mountain Car问题????
 - en: The Mountain Car problem is an environment where gravity exists (what a surprise)
     and the goal is to help a poor car win the battle against it.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: Mountain Car问题是一个存在重力的环境（多么惊人），目标是帮助一辆可怜的车赢得这场与重力的战斗。
 - en: The car needs to escape the valley where it got stuck. The car’s engine is not
     powerful enough to climb up the mountain in a single pass, so the only way to
     make it is to drive back and forth and build sufficient momentum.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这辆车需要逃离被困的山谷。车的引擎没有足够的动力一次性爬上山，因此唯一的方法就是来回驾驶，积累足够的动量。
 - en: 'Let’s see it in action:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看实际效果：
 - en: Sarsa Agent in action!
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Sarsa Agent 实际效果！
 - en: The video you just saw corresponds to the `SarsaAgent` we will build today.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你刚才看到的视频对应于我们今天将要构建的`SarsaAgent`。
 - en: Fun, isn’t it?
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣，不是吗？
 - en: You might be wondering.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能在想。
 - en: '*This looks cool, but why did you choose this problem in the first place?*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这看起来很酷，但你为什么最初选择这个问题呢？*'
 - en: '**Why this problem?**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为什么是这个问题？**'
 - en: The philosophy of this course is to progressively add complexity. Step-by-step.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个课程的哲学是逐步增加复杂性。一步一步来。
 - en: Today’s environment represents a small but relevant increase in complexity when
     compared to the`Taxi-v3` environment from part 2.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天的环境相比第2部分的`Taxi-v3`环境代表了一个小但相关的复杂性增加。
 - en: But, *what exactly is harder here?*
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，*这里到底难在哪里呢？*
 - en: As we saw in **[part 2](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)**,
     the difficulty of a reinforcement learning problem is directly related to the
     size of
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在**[第2部分](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)**中看到的，强化学习问题的难度与
 - en: 'the action space: *how many actions can the agent choose from at each step?*'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 动作空间：*智能体在每一步可以选择多少种动作？*
 - en: 'the state space: *in how many different environment configurations can the
     agent find itself?*'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 状态空间：*智能体可以在多少种不同的环境配置中找到自己？*
 - en: For *small environments* with a finite (and small) number of actions and states,
     we have strong guarantees that algorithms like Q-learning will work well. These
     are called **tabular or discrete environments**.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于*小环境*，其动作和状态数量有限且较少，我们有很强的保证，像 Q-learning 这样的算法会表现良好。这些环境被称为**表格或离散环境**。
 - en: Q-functions are essentially matrices with as many rows as states and columns
     as actions. In these *small* worlds, our agents can easily explore the states
     and build effective policies. As the state space and (especially) the action space
     becomes larger, the RL problem becomes harder to solve.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: Q 函数本质上是一个矩阵，行数等于状态数，列数等于动作数。在这些*小*世界中，我们的智能体可以轻松探索状态并构建有效的策略。随着状态空间和（特别是）动作空间的增大，RL
+    问题变得更难解决。
 - en: Today’s environment is **NOT** tabular. However, we will use a discretization
     “trick” to transform it into a tabular one, and then solve it.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天的环境**不是**表格型的。然而，我们将使用离散化“技巧”将其转换为表格型环境，然后解决它。
 - en: Let’s first get familiar with the environment!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先熟悉环境！
 - en: 2\. Environment, actions, states, rewards
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2. 环境、动作、状态、奖励
 - en: '**[???????? notebooks/00_environment.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/00_environment.ipynb)**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[???????? notebooks/00_environment.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/00_environment.ipynb)**'
 - en: 'Let’s load the environment:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们加载环境：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/b83d04fba09a39066cf90d2b622b248b.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程 第3部分：SARSA](../Images/b83d04fba09a39066cf90d2b622b248b.png)'
 - en: 'And plot one frame:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 并绘制一个帧：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/e13755e2f902e1032dea4b03b8415391.png)![Hands-on
     Reinforcement Learning Course Part 3: SARSA](../Images/07c85dba5cf0d6bd13e8798117845c00.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程 第3部分：SARSA](../Images/e13755e2f902e1032dea4b03b8415391.png)![动手强化学习课程
+    第3部分：SARSA](../Images/07c85dba5cf0d6bd13e8798117845c00.png)'
 - en: 'Two numbers determine the **state** of the car:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个数字决定了汽车的**状态**：
 - en: Its position, which ranges from **-1.2** to **0.6**
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它的位置范围是**-1.2** 到 **0.6**
 - en: Its speed, which ranges from **-0.07** to **0.07**.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它的速度范围是**-0.07** 到 **0.07**。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/22fe4c7604415a9d20c8db6f4196a93a.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程 第3部分：SARSA](../Images/22fe4c7604415a9d20c8db6f4196a93a.png)'
 - en: The state is given by 2 continuous numbers. This is a remarkable difference
     with respect to the `Taxi-v3` environment from [part 2](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b).
     We will later see how to handle this.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 状态由 2 个连续数字给出。这与 [第2部分](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b)
+    的 `Taxi-v3` 环境有显著不同。我们稍后将看到如何处理这个问题。
 - en: What are the **actions**?
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 什么是**动作**？
 - en: 'There are 3 possible actions:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 有 3 种可能的动作：
 - en: '`0` Accelerate to the left'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`0` 向左加速'
 - en: '`1` Do nothing'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`1` 什么都不做'
 - en: '`2` Accelerate to the right'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`2` 向右加速'
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/c2f912ce54c18b93315418e9a0f8594b.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程 第3部分：SARSA](../Images/c2f912ce54c18b93315418e9a0f8594b.png)'
 - en: And the **rewards**?
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 那**奖励**呢？
 - en: A reward of -1 is awarded if the position of the car is less than 0.5.
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果汽车的位置小于 0.5，则奖励为 -1。
 - en: 'The episode ends once the car’s position is above 0.5, or the max number of
     steps has been reached: `n_steps >= env._max_episode_steps`'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一旦汽车的位置高于 0.5 或达到最大步骤数时，剧集结束：`n_steps >= env._max_episode_steps`
 - en: A default negative reward of -1 encourages the car to escape the valley as fast
     as possible.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认负奖励 -1 鼓励汽车尽快脱离山谷。
 - en: In general, I recommend you check [Open AI Gym environments’](https://github.com/openai/gym/tree/master/gym/envs)
     implementations directly in Github to understand states, actions, and rewards.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，我建议你直接在 [Open AI Gym environments’](https://github.com/openai/gym/tree/master/gym/envs)
+    GitHub 上查看实现，以了解状态、动作和奖励。
 - en: The code is well documented and can help you quickly understand everything you
     need to start working on your RL agents. `MountainCar` ‘s implementation is [here](https://github.com/openai/gym/blob/master/gym/envs/classic_control/mountain_car.py),
     for example.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码文档齐全，可以帮助你快速理解开始使用 RL 代理所需的一切。例如，`MountainCar` 的实现可以在 [这里](https://github.com/openai/gym/blob/master/gym/envs/classic_control/mountain_car.py)
+    找到。
 - en: Good. We got familiar with the environment.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，我们对环境有了了解。
 - en: Let’s build a baseline agent for this problem!
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们为这个问题构建一个基线代理！
 - en: 3\. Random agent baseline ????????
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3. 随机代理基线 ????????
 - en: '**[???????? notebooks/01_random_agent_baseline.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/01_random_agent_baseline.ipynb)**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[???????? notebooks/01_random_agent_baseline.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/01_random_agent_baseline.ipynb)**'
 - en: Reinforcement learning problems can grow in complexity pretty easily. Well-structured
     code is your best ally to keep complexity under control.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 强化学习问题可能很容易变得复杂。结构良好的代码是你保持复杂性受控的最佳盟友。
 - en: Today we are going to level up our Python skills and use a `BaseAgent` class
     for all our agents. From this `BaseAgent` class, we will derive our `RandomAgent`
     and `SarsaAgent` classes.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天我们将提升我们的 Python 技能，并为所有代理使用 `BaseAgent` 类。从这个 `BaseAgent` 类，我们将派生出 `RandomAgent`
+    和 `SarsaAgent` 类。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/97f7073609a002ece390eef9d20f5aff.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第3部分: SARSA](../Images/97f7073609a002ece390eef9d20f5aff.png)'
 - en: '`BaseAgent` is an **abstract class** we define in `[src/base_agent.py](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/src/base_agent.py)`'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '`BaseAgent` 是我们在 `[src/base_agent.py](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/src/base_agent.py)`
+    中定义的**抽象类**。'
 - en: It has 4 methods.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 它有 4 个方法。
 - en: Two of its methods are abstract, which means we are forced to implement them
     when we derived our `RandomAgent` and `SarsaAgent` from the `BaseAgent:`
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 它的两个方法是抽象的，这意味着我们在从 `BaseAgent` 派生 `RandomAgent` 和 `SarsaAgent` 时被迫实现它们：
 - en: '`get_action(self, state)` → returns the action to perform, depending on the
     state.'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`get_action(self, state)` → 根据状态返回要执行的动作。'
 - en: '`update_parameters(self, state, action, reward, next_state)` → adjusts agent
     parameters using experience. Here we will implement the SARSA formula.'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`update_parameters(self, state, action, reward, next_state)` → 使用经验来调整代理参数。在这里，我们将实现
+    SARSA 公式。'
 - en: The other two methods let us save/load the trained agent to/from the disk.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外两个方法让我们能够将训练好的代理保存到磁盘或从磁盘加载。
 - en: '`save_to_disk(self, path)`'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`save_to_disk(self, path)`'
 - en: '`load_from_disk(cls, path)`'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`load_from_disk(cls, path)`'
 - en: As we start implementing more complex models and training times increase, it
     is going to be a great idea to save checkpoints during training.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着我们开始实现更复杂的模型和训练时间的增加，在训练过程中保存检查点将是一个很好的主意。
 - en: 'Here is the complete code for our `BaseAgent` class:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们 `BaseAgent` 类的完整代码：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/121260f614782f3b0541ffec3920a03b.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第3部分: SARSA](../Images/121260f614782f3b0541ffec3920a03b.png)'
 - en: 'From this `BaseAgent` class, we can define the `RandomAgent` as follows:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这个 `BaseAgent` 类，我们可以定义 `RandomAgent` 如下：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/724e1d2baf07028b161c42a4c63ce38e.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第3部分: SARSA](../Images/724e1d2baf07028b161c42a4c63ce38e.png)'
 - en: 'Let’s evaluate this `RandomAgent` over `n_episodes = 100` to see how well it
     fares:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们对这个 `RandomAgent` 进行 `n_episodes = 100` 次评估，看看它的表现如何：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/46caf646c57a884bd3d0aa4a8c3a3939.png)![Hands-on
     Reinforcement Learning Course Part 3: SARSA](../Images/f5e247010acc481fa782c1b72fdc6bc5.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第3部分: SARSA](../Images/46caf646c57a884bd3d0aa4a8c3a3939.png)![实践强化学习课程
+    第3部分: SARSA](../Images/f5e247010acc481fa782c1b72fdc6bc5.png)'
 - en: And the success rate of our `RandomAgent`is…
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 而我们 `RandomAgent` 的成功率是…
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/c5c2451995329a41fb26bb883b16244d.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第3部分: SARSA](../Images/c5c2451995329a41fb26bb883b16244d.png)'
 - en: 0% ????…
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 0% ????…
 - en: 'We can see how far the agent got in each episode with the following histogram:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过以下直方图查看代理在每个回合中的表现：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/ff47391459ccea26e6f14f03e335fb59.png)![Hands-on
     Reinforcement Learning Course Part 3: SARSA](../Images/35f6ba7e5565b8feaf6567872decc31b.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第3部分: SARSA](../Images/ff47391459ccea26e6f14f03e335fb59.png)![实践强化学习课程
+    第3部分: SARSA](../Images/35f6ba7e5565b8feaf6567872decc31b.png)'
 - en: In these `100` runs our `RandomAgent`did not cross the **0.5** mark. Not a single
     time.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这 `100` 次运行中，我们的 `RandomAgent` 没有突破**0.5**的标记。一时间都没有。
 - en: '*When you run this code on your local machine you will get slightly different
     results, but the percentage of completed episodes above 0.5 will be very far from
     100% in any case.*'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '*当你在本地机器上运行这段代码时，你会得到略微不同的结果，但完成率超过 0.5 的百分比在任何情况下都远未达到 100%。*'
 - en: You can watch our miserable `RandomAgent` in action using the nice `show_video`
     function in `[**src/viz.py**](https://github.com/Paulescu/hands-on-rl/blob/37fbac23d580a44d46d4187525191b324afa5722/02_mountain_car/src/viz.py#L52-L61)`
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用漂亮的 `show_video` 函数观看我们痛苦的 `RandomAgent` 的操作，函数位于 `[**src/viz.py**](https://github.com/Paulescu/hands-on-rl/blob/37fbac23d580a44d46d4187525191b324afa5722/02_mountain_car/src/viz.py#L52-L61)`
 - en: A random agent is not enough to solve this environment.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个随机代理不足以解决这个环境。
 - en: Let’s try something smarter ????…
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试一些更聪明的东西 ????…
 - en: 4\. SARSA agent ????????
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. SARSA 代理 ????????
 - en: '**[???????? notebooks/02_sarsa_agent.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/02_sarsa_agent.ipynb)**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[???????? notebooks/02_sarsa_agent.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/02_sarsa_agent.ipynb)**'
 - en: '[**SARSA**](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.17.2539&rep=rep1&type=pdf)
     (by Rummery and Niranjan) is an algorithm to train reinforcement learning agents
     by learning the optimal q-value function.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**SARSA**](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.17.2539&rep=rep1&type=pdf)（由
+    Rummery 和 Niranjan 提出）是一种通过学习最优 q 值函数来训练强化学习代理的算法。'
 - en: It was published in 1994, two years after [**Q-learning**](https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf)
     (by Chris Walkins and Peter Dayan).
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 它在 1994 年发布，比 [**Q-learning**](https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf)（由
+    Chris Watkins 和 Peter Dayan 提出）晚两年。
 - en: SARSA stands for **S**tate **A**ction **R**eward **S**tate **A**ction.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: SARSA 代表 **S**tate **A**ction **R**eward **S**tate **A**ction。
 - en: Both SARSA and Q-learning exploit the Bellman equation to iteratively find better
     approximations to the optimal q-value function **Q*(s, a)**
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: SARSA 和 Q-learning 都利用贝尔曼方程来迭代地寻找更好的最优 q 值函数 **Q*(s, a)**
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/2eab3dbcb1f4e5f188efee35f0a488a2.png)'
+  id: totrans-98
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/2eab3dbcb1f4e5f188efee35f0a488a2.png)'
 - en: If you remember from part 2, the update formula for Q-learning is
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你记得第2部分，Q-learning 的更新公式是
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/8ea0dd53fcb0b32c31128e0c1319bbf8.png)'
+  id: totrans-100
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/8ea0dd53fcb0b32c31128e0c1319bbf8.png)'
 - en: This formula is a way to compute a new estimate of the q-value that is closer
     to
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个公式是一种计算新的 q 值估计的方法，它更接近于
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/10c9f1d1a6ca78e20fc96351401cf53c.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/10c9f1d1a6ca78e20fc96351401cf53c.png)'
 - en: This quantity is a *target* ???? we want to correct our old estimate towards.
     It’s an *estimation* of the optimal q-value we should aim at, that changes as
     we train the agent and our q-value matrix gets updated.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个量是一个 *目标* ???? 我们想要将旧估计值校正到这个目标。这是我们应该瞄准的最优 q 值的 *估计*，它会随着我们训练代理和 q 值矩阵的更新而变化。
 - en: Reinforcement learning problems often look like supervised ML problems with
     ***moving* targets** ???? ????
+  id: totrans-104
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 强化学习问题通常看起来像带有 ***移动目标*** 的监督学习问题 ???? ????
 - en: SARSA has a similar update formula but with a different *target*
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: SARSA 有一个类似的更新公式，但目标不同
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/4b749da798bc061e5706df3750558c37.png)'
+  id: totrans-106
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/4b749da798bc061e5706df3750558c37.png)'
 - en: SARSA’s target
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: SARSA 的目标
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/3610db26defe49e792b600720dcf46de.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/3610db26defe49e792b600720dcf46de.png)'
 - en: depends also on the action **a’** the agent will take in the next state **s’.**
     This is the final **A** in SARS**A’**s name.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 还取决于代理在下一个状态 **s’** 中将采取的动作 **a’**。这就是 SARS**A’** 名称中的最终 **A**。
 - en: If you explore enough the state space and update your q-matrices with SARSA
     you will get to an optimal policy. Great!
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你足够探索状态空间并使用 SARSA 更新你的 q 矩阵，你将得到一个最优策略。太棒了！
 - en: You might be thinking…
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能在想……
 - en: '***Q-learning and SARSA look almost identical to me. What are the differences?*
     ????**'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '***Q-learning 和 SARSA 看起来几乎一样。有什么不同？* ????**'
 - en: On-policy vs Off-policy algorithms
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线策略与离线策略算法
 - en: 'There is one key difference between SARSA and Q-learning:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: SARSA 和 Q-learning 之间有一个关键的区别：
 - en: ???? SARSA’s update depends on the next action **a’,** and hence on the current
     policy. As you train and the q-value (and associated policy) get updated the new
     policy might produce a different next action **a’’** for the same state **s’**.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: ???? SARSA 的更新依赖于下一个动作 **a’**，因此依赖于当前策略。随着训练的进行，q 值（及相关策略）得到更新，新策略可能会对同一状态 **s’**
+    产生不同的下一个动作 **a’’**。
 - en: You cannot use past experiences **(s, a, r, s’, a’)** to improve your estimates.
     Instead, you use each experience once to update the q-values and then throw it
     away.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 你不能使用过去的经验 **(s, a, r, s’, a’)** 来改进你的估计。相反，你需要利用每个经验来更新 q 值，然后将其丢弃。
 - en: Because of this, SARSA is called an **on-policy** method
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 正因为如此，SARSA 被称为**在线策略**方法。
 - en: ???? In Q-learning, the update formula does not depend on the next action **a’,**
     but only on **(s, a, r, s’).** You can reuse past experiences **(s, a, r, s’),**
     collected with an old version of the policy, to improve the q-values of the current
     policy.Q-learning is an **off-policy** method.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: ???? 在 Q 学习中，更新公式不依赖于下一个动作**a’**，而仅依赖于**(s, a, r, s’)**。你可以重用以前的经验**(s, a, r,
+    s’)**，这些经验是用旧版本策略收集的，以改进当前策略的 q 值。Q 学习是一种**离策略**方法。
 - en: Off-policy methods need less experience to learn than on-policy methods because
     you can re-use past experiences several times to improve your estimates. They
     are more **sample efficient**.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 离策略方法比在线策略方法需要更少的经验进行学习，因为你可以多次重用过去的经验来改进你的估计。它们更**样本高效**。
 - en: However, off-policy methods have issues converging to the optimal q-value function
     Q*(s, a) when the state, action spaces grow. They can be tricky and **unstable**.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，离策略方法在状态和动作空间扩展时，收敛到最优 q 值函数 Q*(s, a) 可能会出现问题。它们可能很棘手且**不稳定**。
 - en: We will encounter these trade-offs later in the course when we enter the Deep
     RL territory ????.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在课程后面遇到这些权衡问题，当我们进入深度强化学习领域 ???? 时。
 - en: Going back to our problem…
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到我们的问题……
 - en: In the `MountainCar` environment, the state is not discrete, but a pair of continuous
     values (position `s1`, velocity `s2`).
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `MountainCar` 环境中，状态不是离散的，而是一对连续值（位置 `s1`，速度 `s2`）。
 - en: '*Continuous* essentially means *infinite possible values* in this context.
     If there are infinite possible states, it is impossible to visit them all to guarantee
     that SARSA will converge.'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '*连续*在这个背景下基本上意味着*无限可能的值*。如果有无限可能的状态，就不可能访问所有状态来保证 SARSA 会收敛。'
 - en: To fix that we can use a trick.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，我们可以使用一个技巧。
 - en: Let’s discretize the state vector into a finite set of values. Essentially,
     we are not changing the environment, but the representation of the state the agent
     uses to choose its actions.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将状态向量离散化为有限的值集合。本质上，我们没有改变环境，而是改变了代理用来选择动作的状态表示。
 - en: Our `SarsaAgent` discretizes the state `(s1, s2)` from continuous to discrete,
     by rounding the position `[-1.2 … 0.6]`to the closest `0.1` mark, and the velocity
     `[-0.07 ...0.07]` to the closest `0.01` mark.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 `SarsaAgent` 将状态 `(s1, s2)` 从连续转换为离散，通过将位置 `[-1.2 … 0.6]` 四舍五入到最接近的 `0.1`
+    标记，将速度 `[-0.07 … 0.07]` 四舍五入到最接近的 `0.01` 标记。
 - en: 'This function does exactly that, translate continuous into discrete states:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个函数正是这样做的，将连续状态转换为离散状态：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/0fda14d9637f91b534e2d1ad2493d6b6.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/0fda14d9637f91b534e2d1ad2493d6b6.png)'
 - en: Once the agent uses a discretized state, we can use the SARSA update formula
     from above, and as we keep on iterating we will get closer to an optimal q-value.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦代理使用离散化的状态，我们可以使用上述的 SARSA 更新公式，随着迭代的进行，我们会越来越接近最优 q 值。
 - en: This is the whole implementation of the `SarsaAgent`
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是 `SarsaAgent` 的完整实现。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/5115d60823b807644f2be72a5a485eaf.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/5115d60823b807644f2be72a5a485eaf.png)'
 - en: 'Note ???? that the q-value function is a matrix with 3 dimensions: 2 for the
     state (position, velocity) and 1 for the action.'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意 ???? q 值函数是一个三维矩阵：2 个用于状态（位置、速度），1 个用于动作。
 - en: Let’s choose sensible hyper-parameters and train this`SarsaAgent` for `n_episodes
     = 10,000`
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们选择合理的超参数，并将这个 `SarsaAgent` 训练 `n_episodes = 10,000` 次。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/30d4886cfc816b5449c7ce86ce34f678.png)![Hands-on
     Reinforcement Learning Course Part 3: SARSA](../Images/1be80c6b85e074e60a1f949506d3ada1.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/30d4886cfc816b5449c7ce86ce34f678.png)![动手强化学习课程第3部分：SARSA](../Images/1be80c6b85e074e60a1f949506d3ada1.png)'
 - en: Let’s plot `rewards` and `max_positions` (blue lines) with their 50-episode
     moving averages (orange lines)
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘制 `rewards` 和 `max_positions`（蓝色线条）以及它们的 50 次迭代移动平均线（橙色线条）。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/d2701bf7bf100ca95a5276ef8d013642.png)![Hands-on
     Reinforcement Learning Course Part 3: SARSA](../Images/05874c4c72e14310237e160a9eceb2a9.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![动手强化学习课程第3部分：SARSA](../Images/d2701bf7bf100ca95a5276ef8d013642.png)![动手强化学习课程第3部分：SARSA](../Images/05874c4c72e14310237e160a9eceb2a9.png)'
 - en: Super! It looks like our `SarsaAgent` is learning.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 太棒了！看起来我们的 `SarsaAgent` 正在学习。
 - en: 'Here you can see it in action:'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到它的实际应用：
 - en: If you observe the `max_position` chart above you will realize that the car
     occasionally fails to climb the mountain.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你观察上面的`max_position`图表，你会发现汽车偶尔会失败爬山。
 - en: 'How often does that happen? Let’s evaluate the agent on `1,000` random episodes:'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 这发生的频率是多少？让我们在`1,000`个随机回合中评估一下智能体：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/5c690f4e9a6f9e4d1f5d7287c1313493.png)'
+  id: totrans-142
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/5c690f4e9a6f9e4d1f5d7287c1313493.png)'
 - en: 'And compute the success rate:'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 并计算成功率：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/51dbbd94b417b19993f904d9a00795c6.png)'
+  id: totrans-144
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/51dbbd94b417b19993f904d9a00795c6.png)'
 - en: '**95.2%** is pretty good. Still, not perfect. Put a pin on this, we will come
     back later in the course.'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**95.2%**的表现相当不错，但仍然不完美。记住这一点，我们将在课程后面再回来讨论。'
 - en: '**Note:** When you run this code on your end you will get slightly different
     results, but I bet you won’t get a 100% performance.'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 当你在本地运行此代码时，你将得到略微不同的结果，但我敢打赌你不会得到100%的表现。'
 - en: Great job! We implemented a `SarsaAgent` that learns ????
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 做得好！我们实现了一个`SarsaAgent`，它能够学习????
 - en: It is a good moment to take a pause…
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是一个很好的时机来暂停一下……
 - en: 5\. Take a pause and breath ⏸????
+  id: totrans-149
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5\. 暂停一下，深呼吸 ⏸????
 - en: '**[???????? notebooks/03_momentum_agent_baseline.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/03_momentum_agent_baseline.ipynb)**'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[???????? notebooks/03_momentum_agent_baseline.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/03_momentum_agent_baseline.ipynb)**'
 - en: What if I told you that the `MountainCar` environment has a much simpler solution…
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我告诉你`MountainCar`环境有一个更简单的解决方案呢……
 - en: that works 100% of the time? ????
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 这辆车100%的时间都能正常工作？ ????
 - en: The best policy to follow is simple.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 最好的策略是简单的。
 - en: '*Just follow the momentum*:'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '*只需跟随动量*：'
 - en: accelerate right, when the car is moving to the right `velocity > 0`
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当汽车向右移动时，`velocity > 0`加速向右
 - en: accelerate left, when the car is moving to the left `velocity <= 0`
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当汽车向左移动时，`velocity <= 0`加速向左
 - en: 'Visually this policy looks like this:'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 从视觉上看，这种策略如下：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/26889061f1c4db0ed1802e70bcfd8797.png)'
+  id: totrans-158
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/26889061f1c4db0ed1802e70bcfd8797.png)'
 - en: 'This is how you write this `MomentumAgent` in Python:'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是如何在Python中编写`MomentumAgent`：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/593d3214eeec9f93aa99bb76f46d4c7f.png)'
+  id: totrans-160
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/593d3214eeec9f93aa99bb76f46d4c7f.png)'
 - en: You can double-check it completes every single episode. 100% success rate.
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以再次检查它是否完成了每一集。100%的成功率。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/f31f46328e106eceb1c181f8e963f3a0.png)![Hands-on
     Reinforcement Learning Course Part 3: SARSA](../Images/6ecc1050677bbc69346f4dd8e3b48152.png)'
+  id: totrans-162
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/f31f46328e106eceb1c181f8e963f3a0.png)![实践强化学习课程
+    第三部分：SARSA](../Images/6ecc1050677bbc69346f4dd8e3b48152.png)'
 - en: 'If you plot the trained`SarsaAgent` ‘s policy, on the other hand, you will
     see something like this:'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你绘制训练后的`SarsaAgent`的策略，你会看到如下图：
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/f99251db39d0582f83b48560483d751f.png)'
+  id: totrans-164
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/f99251db39d0582f83b48560483d751f.png)'
 - en: Which has a 50% overlap with the perfect `MomentumAgent` policy
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 这与完美的`MomentumAgent`策略有50%的重叠
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/673958d367ba2427a0d8c059a3acf000.png)'
+  id: totrans-166
   prefs: []
   type: TYPE_IMG
+  zh: '![实践强化学习课程 第三部分：SARSA](../Images/673958d367ba2427a0d8c059a3acf000.png)'
 - en: This means our `SarsaAgent` is right *only* 50% of the time.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着我们的`SarsaAgent`的正确率*仅为*50%。
 - en: This is interesting…
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很有趣……
 - en: '**Why is the `SarsaAgent` wrong so often but still achieves good performance?**'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为什么`SarsaAgent`错误这么频繁但仍能取得良好表现？**'
 - en: This is because the `MountainCar` is still a small environment, so taking wrong
     decisions 50% of the time is not so critical. For larger problems, being wrong
     so often is not enough to build intelligent agents.
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为`MountainCar`仍然是一个较小的环境，因此在50%的时间里做出错误决定并不那么关键。对于更大的问题，频繁的错误不足以建立智能体。
 - en: '*Would you buy a self-driving car that is right 95% of the time? ????*'
+  id: totrans-171
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*你会买一辆95%时间正确的自动驾驶汽车吗？ ????*'
 - en: Also, do you remember the *discretization trick* we used to apply SARSA? That
     was a trick that helped us a lot but also introduced an error/bias to our solution.
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，你还记得我们用来应用SARSA的*离散化技巧*吗？那是一个对我们帮助很大的技巧，但也给我们的解决方案带来了误差/偏差。
 - en: '**Why don’t we increase the resolution of the discretization for the state
     and velocity, to get a better solution?**'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为什么我们不提高状态和速度的离散化分辨率，以获得更好的解决方案？**'
 - en: The problem of doing this is the exponential growth in the number of states,
     also called the **curse of dimensionality**. As you increase the resolution of
     each state component, the total number of states grows exponentially. The state-space
     grows too fast for the SARSA agent to converge to the optimal policy in a reasonable
     amount of time.
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 做到这一点的问题在于状态数量的指数增长，也称为**维度诅咒**。随着每个状态组件分辨率的提高，总状态数量呈指数增长。状态空间增长速度太快，SARSA 智能体无法在合理时间内收敛到最优策略。
 - en: '**Ok, but are there any other RL algorithms that can solve this problem perfectly?**'
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: '**好的，但是否有其他强化学习算法可以完美解决这个问题？**'
 - en: Yes, there are. And we will cover them in upcoming lectures. In general, there
     is no one-size-fits-all when it comes to RL algorithms, so you need to try several
     of them for your problem to see what works best.
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，有的。我们将在接下来的讲座中介绍这些。在强化学习算法方面，没有一种适合所有问题的通用方案，因此你需要尝试几种算法来找到最适合你问题的方案。
 - en: In the `MountainCar` environment, the perfect policy looks so simple that we
     can try to learn it directly, without the need to compute complicated q-value
     matrices. A **policy optimization** method will probably work best.
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `MountainCar` 环境中，完美的策略看起来非常简单，我们可以尝试直接学习它，而无需计算复杂的 q 值矩阵。**策略优化** 方法可能会效果最佳。
 - en: But we are not going to do this today. If you want to solve this environment
     perfectly using RL, follow along with the course.
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 但我们今天不会做这个。如果你想用强化学习完美解决这个环境，请跟随课程学习。
 - en: Enjoy what you’ve accomplished today.
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 享受你今天所取得的成就。
 - en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/210f53a985969df08d72258294b59fb3.png)Who
     is having fun?'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: '![动手强化学习课程第 3 部分：SARSA](../Images/210f53a985969df08d72258294b59fb3.png)谁在玩得开心？'
 - en: 6\. Recap ✨
+  id: totrans-181
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 6\. 回顾 ✨
 - en: Wow! We covered a lot of things today.
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇！我们今天覆盖了很多内容。
 - en: 'These are the 5 takeaways:'
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是 5 个要点：
 - en: SARSA is an on-policy algorithm you can use in tabular environments.
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SARSA 是一种你可以在表格环境中使用的策略算法。
 - en: Small continuous environments can be treated as tabular, using a discretization
     of the state, and then solved with tabular SARSA or tabular Q-learning.
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 小型连续环境可以视为表格形式，通过离散化状态，然后使用表格 SARSA 或表格 Q 学习解决。
 - en: Larger environments cannot be discretized and solved because of the curse of
     dimensionality.
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 较大的环境由于维度诅咒无法被离散化和解决。
 - en: For more complex environments than `MountainCar`we will need more advanced RL
     solutions.
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于比 `MountainCar` 更复杂的环境，我们将需要更先进的强化学习解决方案。
 - en: '**Sometimes RL is not the best solution**. Keep that in mind when you try to
     solve the problems you care about. Do not marry your tools (in this case RL),
     instead focus on finding a good solution. Do not miss the forest for the trees
     ????????????.'
+  id: totrans-188
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**有时候强化学习不是最好的解决方案**。当你尝试解决你关心的问题时，请记住这一点。不要过于依赖你的工具（在这种情况下是强化学习），而是专注于找到一个好的解决方案。不要因为树木而看不到森林
+    ????????????。'
 - en: 7\. Homework ????
+  id: totrans-189
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 7\. 作业 ????
 - en: '[**???????? notebooks/04_homework.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/04_homework.ipynb)'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**???????? notebooks/04_homework.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/04_homework.ipynb)'
 - en: 'This is what I want you to do:'
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我希望你做的：
 - en: '[**Git clone**](https://github.com/Paulescu/hands-on-rl) the repo to your local
     machine.'
+  id: totrans-192
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[**Git 克隆**](https://github.com/Paulescu/hands-on-rl) 该库到本地计算机。'
 - en: '[**Setup**](https://github.com/Paulescu/hands-on-rl/tree/main/02_mountain_car#quick-setup)
     the environment for this lesson `02_mountain_car`'
+  id: totrans-193
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[**设置**](https://github.com/Paulescu/hands-on-rl/tree/main/02_mountain_car#quick-setup)
+    本课程的环境 `02_mountain_car`'
 - en: Open `[02_mountain_car/notebooks/04_homework.ipynb](http://02_mountain_car/notebooks/04_homework.ipynb)`and
     try completing the 2 challenges.
+  id: totrans-194
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 打开 `[02_mountain_car/notebooks/04_homework.ipynb](http://02_mountain_car/notebooks/04_homework.ipynb)`
+    并尝试完成两个挑战。
 - en: In the first challenge, I ask you to tune the SARSA hyper-parameters `alpha`
     (learning rate) and `gamma` (discount factor) to speed up training. You can get
     inspiration from [part 2](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b).
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一个挑战中，我要求你调整 SARSA 超参数 `alpha`（学习率）和 `gamma`（折扣因子）以加快训练速度。你可以从 [part 2](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b)
+    中获得灵感。
 - en: In the second challenge, try to increase the resolution of the discretization
     and learn the q-value function with tabular SARSA. As we did today.
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第二个挑战中，尝试提高离散化的分辨率，并使用表格 SARSA 学习 q 值函数。就像我们今天做的那样。
 - en: Let me know if you build an agent that achieves 99% performance.
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你构建了一个达到 99% 性能的智能体，请告诉我。
 - en: 8\. What’s next? ❤️
+  id: totrans-198
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 8\. 下一步是什么？ ❤️
 - en: In the next lesson, we are going to enter a territory where Reinforcement Learning
     and Supervised Machine Learning intersect ????.
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一课中，我们将进入一个强化学习与监督机器学习交汇的领域 ????。
 - en: It is going to be pretty cool, I promise.
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将会非常酷，我保证。
 - en: Until then,
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之前，
 - en: Enjoy one more day on this amazing planet called Earth ????
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: 享受在这个神奇的地球上的一天 ????
 - en: Love ❤️
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: 爱 ❤️
 - en: And keep on learning ????
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续学习 ????
 - en: If you like the course, please share it with friends and colleagues.
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这个课程，请与朋友和同事分享。
 - en: You can reach me under `plabartabajo@gmail.com` . I would love to connect.
+  id: totrans-206
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过`plabartabajo@gmail.com`联系我。我很乐意与您交流。
 - en: See you soon!
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: 很快见！
 - en: '**Bio: [Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)**
     ([**@paulabartabajo_**](https://twitter.com/paulabartabajo_)) is a mathematician
     and AI/ML freelancer and speaker, with over 10 years of experience crunching numbers
     and models for different problems, including financial trading, mobile gaming,
     online shopping, and healthcare.'
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)**
+    ([**@paulabartabajo_**](https://twitter.com/paulabartabajo_)) 是一名数学家和AI/ML自由职业者及演讲者，拥有超过10年的经验，处理各种问题的数字和模型，包括金融交易、移动游戏、在线购物和医疗保健。'
 - en: '[Original](http://datamachines.xyz/2021/12/17/hands-on-reinforcement-learning-course-part-3-sarsa/).
     Reposted with permission.'
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://datamachines.xyz/2021/12/17/hands-on-reinforcement-learning-course-part-3-sarsa/)。经授权转载。'
 - en: More On This Topic
+  id: totrans-210
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  id: totrans-211
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
 - en: '[Hands-On Reinforcement Learning Course, Part 2](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
+  id: totrans-212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程，第2部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
 - en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  id: totrans-213
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingFace推出了免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
 - en: '[Hands-On with Supervised Learning: Linear Regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手学习监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
 - en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手学习无监督学习：K均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
 - en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  id: totrans-216
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用大型语言模型的生成性AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
