@@ -1,380 +1,570 @@
 - en: Hyperparameter Tuning Using Grid Search and Random Search in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用网格搜索和随机搜索进行超参数调优
 - en: 原文：[https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 - en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/0209199f770a3f9c2a8349dc5ca5f3c8.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用网格搜索和随机搜索进行超参数调优](../Images/0209199f770a3f9c2a8349dc5ca5f3c8.png)'
 - en: Image by Editor
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由编辑提供
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 方面的工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: All machine learning models have a set of hyperparameters or arguments that
     must be specified by the practitioner.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有机器学习模型都有一组超参数或参数，这些参数必须由从业者指定。
 - en: For example, a logistic regression model has different solvers that are used
     to find coefficients that can give us the best possible output. Each solver uses
     a different algorithm to find an optimal result, and none of these algorithms
     are strictly better than the other. It is difficult to tell which solver will
     perform the best on your dataset unless you try all of them.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，一个逻辑回归模型有不同的求解器用于找到可以给出最佳输出的系数。每个求解器使用不同的算法来找到最佳结果，并且这些算法没有哪个严格优于其他算法。除非你尝试所有的求解器，否则很难判断哪个求解器在你的数据集上表现最好。
 - en: The best hyperparameter is subjective and differs for every dataset. The [Scikit-Learn](https://scikit-learn.org/stable/)
     library in Python has a set of default hyperparameters that perform reasonably
     well on all models, but these are not necessarily the best for every problem.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 最佳超参数是主观的，并且对于每个数据集都不同。Python 中的 [Scikit-Learn](https://scikit-learn.org/stable/)
+    库提供了一组默认的超参数，这些超参数在所有模型上表现都还算不错，但它们不一定适用于每个问题。
 - en: The only way to find the best possible hyperparameters for your dataset is by
     trial and error, which is the main concept behind **hyperparameter optimization**.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 找到数据集的最佳超参数的唯一方法是通过试验和错误，这也是 **超参数优化** 的主要概念。
 - en: In simple words, hyperparameter optimization is a technique that involves searching
     through a range of values to find a subset of results that achieve the best performance
     on a given dataset.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单来说，超参数优化是一种技术，涉及在一系列值中搜索，以找到一组能够在给定数据集上实现最佳性能的结果。
 - en: There are two popular techniques used to perform hyperparameter optimization
     - grid and random search.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两种流行的技术用于进行超参数优化——网格搜索和随机搜索。
 - en: Grid Search
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 网格搜索
 - en: When performing hyperparameter optimization, we first need to define a **parameter
     space** or **parameter grid**, where we include a set of possible hyperparameter
     values that can be used to build the model.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行超参数优化时，我们首先需要定义一个 **参数空间** 或 **参数网格**，其中包含一组可以用于构建模型的可能超参数值。
 - en: The grid search technique is then used to place these hyperparameters in a matrix-like
     structure, and the model is trained on every combination of hyperparameter values.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 网格搜索技术将这些超参数放置在类似矩阵的结构中，然后在每个超参数值的组合上训练模型。
 - en: The model with the best performance is then selected.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后选择表现最佳的模型。
 - en: Random Search
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 随机搜索
 - en: While grid search looks at every possible combination of hyperparameters to
     find the best model, random search only selects and tests a random combination
     of hyperparameters.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然网格搜索会查看所有可能的超参数组合以找到最佳模型，但随机搜索只会选择并测试一个随机的超参数组合。
 - en: This technique randomly samples from a grid of hyperparameters instead of conducting
     an exhaustive search.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术从超参数网格中随机抽样，而不是进行详尽的搜索。
 - en: We can specify the number of total runs the random search should try before
     returning the best model.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以指定随机搜索应该尝试的总运行次数，然后再返回最佳模型。
 - en: Now that you have a basic understanding of how random search and grid search
     work, I will show you how to implement these techniques using the Scikit-Learn
     library.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你对随机搜索和网格搜索的基本原理有了了解，我将向你展示如何使用Scikit-Learn库实现这些技术。
 - en: Optimizing a Random Forest Classifier Using Grid Search and Random Search
+  id: totrans-26
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用网格搜索和随机搜索优化随机森林分类器
 - en: 'Step 1: Loading the Dataset'
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第1步：加载数据集
 - en: 'Download the [Wine Quality](https://www.kaggle.com/datasets/rajyellow46/wine-quality)
     dataset on Kaggle and type the following lines of code to read it using the [Pandas](https://pandas.pydata.org/)
     library:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Kaggle上下载[酒质数据集](https://www.kaggle.com/datasets/rajyellow46/wine-quality)，然后输入以下代码行，使用[Pandas](https://pandas.pydata.org/)库读取数据：
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The head of the dataframe looks like this:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据框的头部如下所示：
 - en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/cb924c16c04680333424a19f249a9ab4.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![使用网格搜索和随机搜索进行超参数调优](../Images/cb924c16c04680333424a19f249a9ab4.png)'
 - en: 'Step 2: Data Preprocessing'
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第2步：数据预处理
 - en: The target variable “quality” contains values ranging between 1 and 10.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标变量“quality”包含范围在1到10之间的值。
 - en: 'We will turn this into a binary classification task by assigning a value of
     0 to all data points with a quality value of less than or equal to 5, and a value
     of 1 to the remaining observations:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过将所有质量值小于或等于5的数据点分配为0，将其余观察值分配为1，将其转化为二分类任务：
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Let’s split the dependent and independent variables in this dataframe:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将数据框中的因变量和自变量分开：
 - en: '[PRE2]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Step 3: Building the Model'
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第3步：构建模型
 - en: 'Now, let’s instantiate a random forest classifier. We will be tuning the hyperparameters
     of this model to create the best algorithm for our dataset:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们实例化一个随机森林分类器。我们将调整该模型的超参数，以创建适合我们数据集的最佳算法：
 - en: '[PRE3]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Step 4: Implementing Grid Search with Scikit-Learn'
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第4步：使用Scikit-Learn实现网格搜索
 - en: Defining the Hyperparameter Space
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 定义超参数空间
 - en: 'We will now try adjusting the following set of hyperparameters of this model:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将尝试调整该模型的以下超参数集合：
 - en: '**“Max_depth”**: This hyperparameter represents the maximum level of each tree
     in the random forest model. A deeper tree performs well and captures a lot of
     information about the training data, but will not generalize well to test data.
     By default, this value is set to “None” in the Scikit-Learn library, which means
     that the trees are left to expand completely.'
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**“Max_depth”**：该超参数表示随机森林模型中每棵树的最大层级。较深的树可以很好地捕捉训练数据中的大量信息，但对测试数据的泛化能力较差。默认情况下，Scikit-Learn库中的该值设置为“None”，这意味着树会完全扩展。'
 - en: '**“Max_features”**: The maximum number of features that the random forest model
     is allowed to try at each split. By default in Scikit-Learn, this value is set
     to the square root of the total number of variables in the dataset.'
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**“Max_features”**：随机森林模型在每次分裂时允许尝试的最大特征数量。Scikit-Learn中的默认值设置为数据集中变量总数的平方根。'
 - en: '**“N_estimators”**: The number of decision trees in the forest. The default
     number of estimators in Scikit-Learn is 10.'
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**“N_estimators”**：森林中决策树的数量。Scikit-Learn中的默认估计器数量为10。'
 - en: '“Min_samples_leaf”: The minimum number of samples required to be at the leaf
     node of each tree. The default value is 1 in Scikit-Learn.'
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: “Min_samples_leaf”：每棵树的叶节点所需的最小样本数。Scikit-Learn中的默认值为1。
 - en: '**“Min_samples_split”**: The minimum number of samples required to split an
     internal node of each tree. The default value is 2 in Scikit-Learn.'
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**“Min_samples_split”**：每棵树内部节点分裂所需的最小样本数。Scikit-Learn中的默认值为2。'
 - en: 'We will now create a dictionary of multiple possible values for all the above
     hyperparameters. This is also called the **hyperparameter space**, and will be
     searched through to find the best combination of arguments:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将创建一个包含所有上述超参数的多个可能值的字典。这也叫做**超参数空间**，将会通过它来寻找最佳的参数组合：
 - en: '[PRE4]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Running Grid Search
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运行网格搜索
 - en: 'Now, we need to perform the search to find the best hyperparameter combination
     for the model:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们需要进行搜索以找到模型的最佳超参数组合：
 - en: '[PRE5]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Evaluating Model Results
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 评估模型结果
 - en: 'Finally, let’s print out the best model accuracy, along with the set of hyperparameters
     that yielded this score:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让我们输出最佳模型的准确性，并附上产生该分数的超参数集合：
 - en: '[PRE6]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The best model rendered an accuracy score of approximately 0.74, and its hyperparameters
     are as follows:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 最佳模型的准确率约为 0.74，其超参数如下：
 - en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/6d3aac2ac36e11b8123c41c55a83a71c.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![使用网格搜索和随机搜索进行超参数调优](../Images/6d3aac2ac36e11b8123c41c55a83a71c.png)'
 - en: Now, let’s use random search on the same dataset to see if we get similar results.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们在相同的数据集上使用随机搜索，看看是否能得到类似的结果。
 - en: 'Step 5: Implementing Random Search Using Scikit-Learn'
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 步骤 5：使用 Scikit-Learn 实现随机搜索
 - en: Defining the Hyperparameter Space
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 定义超参数空间
 - en: Now, let’s define the hyperparameter space to implement random search. This
     parameter space can have a bigger range of values than the one we built for grid
     search, since random search does not try out every single combination of hyperparameters.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们定义超参数空间以实现随机搜索。这个参数空间可以比我们为网格搜索构建的范围更大，因为随机搜索不会尝试每一种超参数组合。
 - en: It randomly samples hyperparameters to find the best ones, which means that
     unlike grid search, random search can look through a large number of values quickly.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 它随机抽样超参数以找到最佳参数，这意味着与网格搜索不同，随机搜索可以快速浏览大量值。
 - en: '[PRE7]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Running Random Search
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运行随机搜索
 - en: 'Run the following lines of code to run random search on the model: (Note that
     we have specified *n_iter=500*, which means that the random search will run 500
     times before choosing the best model. You can experiment with a different number
     of iterations to see which one gives you optimal results. Keep in mind that a
     large number of iterations will result in better performance but is time-consuming).'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行以下代码行以在模型上执行随机搜索：（注意，我们已指定 *n_iter=500*，这意味着随机搜索将在选择最佳模型之前运行 500 次。你可以尝试不同的迭代次数以查看哪种给你最优的结果。请记住，较大的迭代次数将带来更好的性能，但也更耗时。）
 - en: '[PRE8]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Evaluating Model Results
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 评估模型结果
 - en: 'Now, run the following lines of code to print the best hyperparameters found
     by random search, along with the highest accuracy of the best model:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，运行以下代码行以打印随机搜索找到的最佳超参数及最佳模型的最高准确率：
 - en: '[PRE9]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The best hyperparameters found by random search are as follows:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机搜索找到的最佳超参数如下：
 - en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/734136ba652922a356c39a64f55a9c84.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![使用网格搜索和随机搜索进行超参数调优](../Images/734136ba652922a356c39a64f55a9c84.png)'
 - en: The highest accuracy of all the models built is approximately 0.74 as well.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有构建的模型的最高准确率也大约为 0.74。
 - en: Observe that both grid search and random search performed reasonably well on
     the dataset. Keep in mind that if you were to run a random search on the same
     code, your results may end up being very different from what I’ve displayed above.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 观察到网格搜索和随机搜索在数据集上表现都相当不错。请记住，如果你在相同的代码上运行随机搜索，你的结果可能会与我上面展示的结果大相径庭。
 - en: This is because it is searching through a very large parameter grid using random
     initialization, which can render results that vary dramatically each time you
     use the technique.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为它通过随机初始化搜索非常大的参数网格，这可能导致每次使用该技术时结果变化剧烈。
 - en: Complete Code
+  id: totrans-76
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 完整代码
 - en: 'Here is the complete code used in the tutorial:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是教程中使用的完整代码：
 - en: '[PRE10]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Grid Search vs Random Search - Which One To Use?
+  id: totrans-79
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 网格搜索 vs 随机搜索 - 该使用哪一个？
 - en: 'If you ever find yourself trying to choose between grid search and random search,
     here are some pointers to help you decide which one to use:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在选择网格搜索和随机搜索之间犹豫，以下是一些帮助你决定使用哪一个的提示：
 - en: Use grid search if you already have a ballpark range of known hyperparameter
     values that will perform well. Make sure to keep your parameter space small, because
     grid search can be extremely time-consuming.
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你已经有一个大致的已知超参数值范围，并且这些值表现良好，就使用网格搜索。确保保持参数空间小，因为网格搜索可能非常耗时。
 - en: Use random search on a broad range of values if you don’t already have an idea
     of the parameters that will perform well on your model. Random search is faster
     than grid search and should always be used when you have a large parameter space.
+  id: totrans-82
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你还不清楚哪些参数在你的模型上表现良好，可以在广泛的值范围上使用随机搜索。随机搜索比网格搜索更快，并且在参数空间很大时应始终使用。
 - en: It is also a good idea to use both random search and grid search to get the
     best possible results.
+  id: totrans-83
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 同时使用随机搜索和网格搜索也是一个好主意，以获得最佳结果。
 - en: You can use random search first with a large parameter space since it is faster.
     Then, use the best hyperparameters found by random search to narrow down the parameter
     grid, and feed a smaller range of values to grid search.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以先使用随机搜索，特别是在参数空间很大的情况下，因为它更快。然后，使用随机搜索找到的最佳超参数来缩小参数网格，并将更小范围的值提供给网格搜索。
 - en: '**[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** is a self-taught
     data scientist with a passion for writing. You can connect with her on [LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/).'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** 是一位自学成才的数据科学家，对写作充满热情。你可以通过[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系。'
 - en: More On This Topic
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数调优：GridSearchCV 和 RandomizedSearchCV 解释](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
 - en: '[Tuning Random Forest Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整随机森林的超参数](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
 - en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习技术：使用 Python 中的随机森林进行详细讲解](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Uplimit 的“机器学习搜索”课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
