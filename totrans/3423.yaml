@@ -1,119 +1,178 @@
 - en: The Gentlest Introduction to Tensorflow – Part 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 《Tensorflow的最温和介绍 – 第二部分》
 - en: 原文：[https://www.kdnuggets.com/2016/08/gentlest-introduction-tensorflow-part-2.html](https://www.kdnuggets.com/2016/08/gentlest-introduction-tensorflow-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/08/gentlest-introduction-tensorflow-part-2.html](https://www.kdnuggets.com/2016/08/gentlest-introduction-tensorflow-part-2.html)
 - en: '**By Soon Hin Khor, Co-organizer for Tokyo Tensorflow Meetup**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Soon Hin Khor，东京Tensorflow Meetup的联合组织者**。'
 - en: '**Editor''s note**: You may want to check out [part 1 of this tutorial](/2016/08/gentlest-introduction-tensorflow-part-1.html)
     before proceeding.'
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑说明**：您可能希望在继续之前查看一下[本教程的第1部分](/2016/08/gentlest-introduction-tensorflow-part-1.html)。'
 - en: Quick Review
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速回顾
 - en: In the [previous article](https://medium.com/@khor/the-gentlest-introduction-to-tensorflow-248dc871a224),
     we used Tensorflow (TF) to build and learn a linear regression model with a single
     feature so that given a feature value (house size/sqm), we can predict the outcome
     (house price/$).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[上一篇文章](https://medium.com/@khor/the-gentlest-introduction-to-tensorflow-248dc871a224)中，我们使用Tensorflow
+    (TF) 构建并学习了一个具有单一特征的线性回归模型，以便给定特征值（房屋大小/平方米），我们可以预测结果（房屋价格/美元）。
 - en: 'Here is the review with illustration below:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是带有插图的回顾：
 - en: We have some data of house sizes & house prices (the gray round points)
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们有一些房屋大小和房屋价格的数据（灰色圆点）。
 - en: We model the data using linear regression (the red dash line)
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们使用线性回归（红色虚线）来建模数据。
 - en: We find the ‘best’ model by training W, and b (of the linear regression model)
     to minimize the ‘cost’ (the sum of the length of vertical blue lines, which represent
     the differences between predictions and actual outcomes)
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们通过训练W和b（线性回归模型的参数）来找到‘最佳’模型，以最小化‘成本’（垂直蓝线的长度总和，代表预测和实际结果之间的差异）。
 - en: Given any house size, we can use the linear model to predict the house size
     (the dotted blue lines with arrows)
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 给定任何房屋大小，我们可以使用线性模型来预测房屋大小（带箭头的虚线蓝色线）。
 - en: '![Image](../Images/db33e4c8945294c495957b1316e0b4f3.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/db33e4c8945294c495957b1316e0b4f3.png)'
 - en: '*Linear regression explained in a single diagram*'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*线性回归在一个图中解释*'
 - en: In machine learning (ML) literature, we come across the term ‘training’ very
     often, let us literally look at what that means in TF.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习（ML）文献中，我们经常遇到‘训练’这个术语，让我们字面上看一下它在TF中的含义。
 - en: Linear Regression Modeling
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 线性回归建模
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The goal in linear regression is to find W, b, such that given any feature value
     (x), we can find the prediction (y) by substituting W, x, b values into the model.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归的目标是找到W和b，使得给定任何特征值(x)，我们可以通过将W、x、b值代入模型中来找到预测值(y)。
 - en: However to find W, b that can give accurate predictions, we need to ‘train’
     the model using available data (the multiple pairs of actual feature (x), and
     actual outcome (y_), note the *underscore*).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，要找到可以提供准确预测的W和b，我们需要使用可用的数据（实际特征(x)和实际结果(y_)的多个对），注意*下划线*。
 - en: ‘Training’ Illustrated
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ‘训练’说明
 - en: To find the best W, b values, we can initially start with any W, b values. We
     also need to define a cost function, which is a measure of the *difference*between
     the prediction (y) for given a feature value (x), and the actual outcome (y_)
     for that same feature value (x). For simplicity, we use least[minimum squared
     error](https://en.wikipedia.org/wiki/Mean_squared_error) (MSE) as our cost function.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了找到最佳的W和b值，我们可以从任何W和b值开始。我们还需要定义一个成本函数，它是*预测*（y）与给定特征值(x)的*实际结果*（y_）之间的*difference*的度量。为了简单起见，我们使用最小[均方误差](https://en.wikipedia.org/wiki/Mean_squared_error)（MSE）作为我们的成本函数。
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: By minimizing the cost function, we can arrive at good W, b values.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过最小化成本函数，我们可以得到良好的W和b值。
 - en: Our code to do training is actually very simple and it is labelled with [A,
     B, C, D], which we will refer to later on. The full source is on [Github](https://github.com/nethsix/gentle_tensorflow/blob/master/code/linear_regression_one_feature_using_mini_batch_with_tensorboard.py).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们用于训练的代码实际上非常简单，并且标记为[A, B, C, D]，我们稍后将会提到。完整的源代码在[Github](https://github.com/nethsix/gentle_tensorflow/blob/master/code/linear_regression_one_feature_using_mini_batch_with_tensorboard.py)上。
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Our linear model and cost function equations [A] can be represented as TF graph
     as shown:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的线性模型和成本函数方程[A]可以表示为TF图，如下所示：
 - en: '![Image](../Images/f9f78830d98e6364ce143e3d87f069fb.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/f9f78830d98e6364ce143e3d87f069fb.png)'
 - en: '*Create a TF Graph with model & cost, and initialize W, b with some values*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*创建一个包含模型和成本的TF图，并用一些值初始化W和b*'
 - en: Next, we select a datapoint (x, y_) [C], and feed [D] it into the TF Graph to
     get the prediction (y) as well as the cost.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们选择一个数据点(x, y_) [C]，并将其输入TF图以获取预测值(y)以及成本。
 - en: '![Image](../Images/859098e2b745c3e05afe434678fb3f81.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
 - en: '*Calculate prediction (y) & cost using a single datapoint*'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: 'To get better W, b, we perform gradient descent using TF’s*tf.train.GradientDescentOptimizer* [B]
@@ -121,40 +180,51 @@
     on the graph of how cost varies with other variables (namely W, b), the optimizer
     will perform small tweaks (increments/decrements) to W, b so that our prediction
     becomes better for*that single datapoint*.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '![Image](../Images/1c5d01665352d94dd475d64cd4a1d1a9.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
 - en: '*Based on current cost, determine how to tweak W, b to improve prediction (y)
     and reduce cost*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: The final step in the training cycle is to update the W, b after tweaking them.
     Note that ‘cycle’ is also referred to as ‘epoch’ in ML literature.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '![Image](../Images/b79b5679f1ceeb28278aaab148182ea2.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
 - en: '*Update W, b after tweaking them, and before iterating through the next training
     epoch*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: In the next training epoch, repeat the steps, but use a different datapoint!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '![Image](../Images/ddc1f1f3b8fb9cf5fb1faee426bfea52.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
 - en: '*Training using different datapoints*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: 'Using a variety of datapoints generalizes our model, i.e., it learns W, b values
     that can be used to predict *any* feature value. Note that:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: In most cases, the more datapoints, the better your model can learn and generalize
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -163,63 +233,81 @@
     cost (calculated from the datapoint, with W, b values of that epoch) to tweak
     W, b; the optimizer may have seen that datapoint before, but not with the same
     cost, thus it will learn something new, and tweak W, b differently.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: You can train the model a fixed number of epochs or until it reaches a cost
     threshold that is satisfactory.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Free TensorFlow 2.0 Complete Course](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 TensorFlow 2.0 完整课程](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'

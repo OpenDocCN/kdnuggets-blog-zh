@@ -1,41 +1,59 @@
 - en: Urban Sound Classification with Neural Networks in Tensorflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Tensorflow 进行城市声音分类
 - en: 原文：[https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html/2](https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html/2](https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html/2)
 - en: Feature Extraction
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征提取
 - en: 'To extract the useful features from sound data, we will use *Librosa* library.
     It provides several methods to extract different features from the sound clips.
     We are going to use below mentioned methods to extract various features:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了从声音数据中提取有用的特征，我们将使用*Librosa*库。它提供了几种方法来从声音片段中提取不同的特征。我们将使用以下提到的方法来提取各种特征：
 - en: '*melspectrogram*: Compute a Mel-scaled power spectrogram'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*melspectrogram*: 计算 Mel 标度功率谱图'
 - en: '*mfcc*: Mel-frequency cepstral coefficients'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*mfcc*: Mel 频率倒谱系数'
 - en: '*chorma-stft*: Compute a chromagram from a waveform or power spectrogram'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*chorma-stft*: 从波形或功率谱图中计算色度图'
 - en: '*spectral_contrast*: Compute spectral contrast, using method defined in [[1](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1035731)]'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*spectral_contrast*: 计算光谱对比度，使用[[1](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1035731)]中定义的方法'
 - en: '*tonnetz*: Computes the tonal centroid features (tonnetz), following the method
     of [[2](http://dl.acm.org/citation.cfm?id=1178727)]'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*tonnetz*: 计算音调质心特征（tonnetz），遵循[[2](http://dl.acm.org/citation.cfm?id=1178727)]的方法'
 - en: To make the process of feature extraction from sound clips easy, two helper
     methods are defined. First *parse_audio_files* which takes parent directory name,
     subdirectories within parent directory and file extension (default is .wav) as
@@ -48,135 +66,198 @@
     name. For example, if the file name is *108041-9-0-4.wav* then the class label
     will be 9\. Doing string split by – and taking the second item of the array will
     give us the class label.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了简化从声音片段中提取特征的过程，定义了两个辅助方法。首先是*parse_audio_files*，它接受父目录名、父目录中的子目录和文件扩展名（默认为.wav）作为输入。然后，它会遍历所有子目录中的文件，并调用第二个辅助函数*extract_feature*。它接受文件路径作为输入，通过调用*librosa.load*方法读取文件，提取并返回上述讨论的特征。这两个方法是将原始声音片段转换为可直接输入分类器的信息特征（以及每个声音片段的类别标签）所需的全部内容。请记住，每个声音片段的类别标签在文件名中。例如，如果文件名是*108041-9-0-4.wav*，那么类别标签将是9。通过按“-”拆分字符串并取数组的第二项即可得到类别标签。
 - en: Classification using Multilayer Neural Network
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多层神经网络的分类
 - en: '*Note: If you want to use scikit-learn or any other library for training classifier,
     feel free to use that. The goal of this tutorial is to provide an implementation
     of the neural network in Tensorflow for classification tasks.*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：如果你想使用 scikit-learn 或任何其他库来训练分类器，随意使用。此教程的目标是提供 Tensorflow 中的神经网络实现用于分类任务。*'
 - en: Now we have our dataset ready, let’s implement two layers neural network in
     Tensorflow to classify each sound clip into a different category. But before starting
     with that, let’s encode class labels into one hot vector using the method *one_hot_encode*
     and divide the dataset into a train and test sets by using following code.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们的数据集已经准备好了，让我们在 Tensorflow 中实现一个两层神经网络，将每个声音片段分类到不同的类别中。但在开始之前，让我们使用*one_hot_encode*方法将类别标签编码为独热向量，并通过以下代码将数据集划分为训练集和测试集。
 - en: The code provided below defines configuration parameters required by neural
     network model. Such as training epochs, a number of neurones in each hidden layer
     and learning rate.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码定义了神经网络模型所需的配置参数，例如训练周期、每个隐藏层中的神经元数量以及学习率。
 - en: Now define placeholders for features and class labels, which tensor flow will
     fill with the data at runtime. Furthermore, define weights and biases for hidden
     and output layers of the network. For non-linearity, we use the sigmoid function
     in the first hidden layer and tanh in the second hidden layer. The output layer
     has softmax as non-linearity as we are dealing with multiclass classification
     problem.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在定义特征和类别标签的占位符，TensorFlow将在运行时用数据填充这些占位符。此外，为网络的隐藏层和输出层定义权重和偏置。为了引入非线性，我们在第一个隐藏层中使用sigmoid函数，在第二个隐藏层中使用tanh函数。由于我们处理的是多分类问题，因此输出层使用softmax作为非线性函数。
 - en: The cross-entropy cost function will be minimised using gradient descent optimizer,
     the code provided below initialize cost function and optimizer. Also, define and
     initialize variables for accuracy calculation of the prediction by model.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 交叉熵成本函数将通过梯度下降优化器进行最小化，下面提供的代码初始化了成本函数和优化器。此外，定义并初始化变量以计算模型的预测准确率。
 - en: 'We have all the required pieces in place. Now let’s train neural network model,
     visualise whether cost is decreasing with each epoch and make prediction on the
     test set, using following code:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经准备好了所有必要的部分。现在，让我们训练神经网络模型，视觉化每个周期是否有下降的成本，并使用以下代码对测试集进行预测：
 - en: '![NN Cost Per Epoch](../Images/2a6c1c3b2ea1bec3aa6b6405f1e01422.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![NN Cost Per Epoch](../Images/2a6c1c3b2ea1bec3aa6b6405f1e01422.png)'
 - en: In this tutorial, we saw how to extract features from a sound dataset and train
     a two layer neural network model in Tensorflow to categories sounds, without much
     tuning the above NN architecture achieved around **82%** accuracy on fold1 of
     the Urban8K dataset. I would encourage you to check the documentation of Librosa
     and experiment with different neural network configurations i.e. by changing number
     of neurons, number of hidden layers and introducing dropout etc.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们学习了如何从声音数据集中提取特征，并在Tensorflow中训练一个两层神经网络模型以对声音进行分类。在没有过多调优的情况下，上述神经网络架构在Urban8K数据集的fold1上达到了约**82%**的准确率。我鼓励你查看Librosa的文档，并尝试不同的神经网络配置，比如更改神经元数量、隐藏层数量以及引入dropout等。
 - en: '![Author](../Images/f9c21800dc7ef2fdf98de5b260d7c466.png)The python notebook
     is available at the following **[link](https://github.com/aqibsaeed/Urban-Sound-Classification)**.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '![作者](../Images/f9c21800dc7ef2fdf98de5b260d7c466.png) Python笔记本可以在以下**[链接](https://github.com/aqibsaeed/Urban-Sound-Classification)**中找到。'
 - en: '**Bio: [Aaqib Saeed](http://aqibsaeed.github.io/)** is a graduate student of
     Computer Science (specializing in Data Science and Smart Services) at University
     of Twente (The Netherlands).'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Aaqib Saeed](http://aqibsaeed.github.io/)** 是荷兰Twente大学计算机科学（专注于数据科学和智能服务）专业的研究生。'
 - en: '[Original](http://aqibsaeed.github.io/2016-09-03-urban-sound-classification-part-1/).
     Reposted with permission.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始链接](http://aqibsaeed.github.io/2016-09-03-urban-sound-classification-part-1/)。转载已获许可。'
 - en: '**Related:**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[The Gentlest Introduction to Tensorflow – Part 1](/2016/08/gentlest-introduction-tensorflow-part-1.html)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最温和的Tensorflow入门指南 – 第1部分](/2016/08/gentlest-introduction-tensorflow-part-1.html)'
 - en: '[Deep Learning Reading Group: Deep Networks with Stochastic Depth](/2016/09/deep-learning-reading-group-stochastic-depth-networks.html)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习阅读组：带有随机深度的深度网络](/2016/09/deep-learning-reading-group-stochastic-depth-networks.html)'
 - en: '[Up to Speed on Deep Learning: July Update](/2016/08/deep-learning-july-update.html)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[跟上深度学习的步伐：7月更新](/2016/08/deep-learning-july-update.html)'
 - en: '* * *'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT需求'
 - en: '* * *'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卷积神经网络（CNNs）进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建并训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在尝试神经网络之前的 10 个简单步骤](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
 - en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释的 PyTorch 神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会引领我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
