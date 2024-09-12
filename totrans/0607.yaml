@@ -1,48 +1,73 @@
 - en: 'Building a Visual Search Engine – Part 2: The Search Engine'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建视觉搜索引擎 – 第二部分：搜索引擎
 - en: 原文：[https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 - en: '**Editor''s note**: You can find part one of this article [here](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html).'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑注**：你可以在[这里](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)找到本文的第一部分。'
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT工作'
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Task**: The task is to generate a ranked list of images which are semantically
     similar to the query image.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**任务**：任务是生成一个图像的排名列表，这些图像在语义上与查询图像相似。'
 - en: '****Dataset****'
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '****数据集****'
 - en: 'We will split our dataset into two parts: training and evaluation. From each
     class, we will randomly sample 20 images and create an evaluation set out of it.
     The remaining images will be part of the training set. We further split the evaluation
@@ -50,90 +75,138 @@
     class of the evaluation set and make it part of the query set and the remaining
     images in the evaluation set are part of the candidate set. This is done to calculate
     the evaluation metric.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将数据集分成两部分：训练集和评估集。从每个类别中，我们将随机抽取20张图像，并创建一个评估集。其余图像将作为训练集的一部分。我们进一步将评估集拆分为两个部分，查询集和候选集。我们将从评估集的每个类别中取5张图像作为查询集，其余图像则作为候选集。这是为了计算评估指标。
 - en: For each query set image, the system generates a ranked list of images from
     the evaluation set. Then the metric defined below is used to evaluate the performance
     of the system.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个查询集图像，系统从评估集中生成一个图像排名列表。然后使用下面定义的指标来评估系统的性能。
 - en: '****Metrics****'
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '****指标****'
 - en: We use the Precision @ K metric to measure the performance of the system.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用Precision @ K指标来衡量系统的性能。
 - en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/ecacb2ddf40649eab21e8273b7d8223b.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第二部分：搜索引擎](../Images/ecacb2ddf40649eab21e8273b7d8223b.png)'
 - en: This metric does not focus on the rank of the entries and only focuses on the
     number of relevant entries. To capture the ranking factor of the system, we also
     present Average Precision(AP) on the dataset.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 该指标不关注条目的排名，只关注相关条目的数量。为了捕捉系统的排名因素，我们还在数据集上展示了平均精度（AP）。
 - en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/f5f2afbb8c8477b3e700bc1ca5aa5e8d.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第二部分：搜索引擎](../Images/f5f2afbb8c8477b3e700bc1ca5aa5e8d.png)'
 - en: '****Methods****'
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '****方法****'
 - en: For this exercise, we present two baselines.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个练习，我们展示了两个基准。
 - en: '**Baseline 1**: In this method, we randomly take 10 samples from the candidate
     set across all classes. We do this for each query and calculate the metric.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基准 1**：在这种方法中，我们从候选集中的所有类别随机选择10个样本。我们对每个查询执行此操作并计算指标。'
 - en: '**Baseline 2**: In this method, we use the embeddings generated from MobileNetV2
     model and use cosine distance as similarity metric to rank candidate entries.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基准 2**：在这种方法中，我们使用从MobileNetV2模型生成的嵌入，并使用余弦距离作为相似度度量来对候选条目进行排名。'
 - en: 'Note: We are aware that both of these methods make no use of the training split.
     These methods only present baselines for the system'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：我们知道这两种方法都没有使用训练集。这些方法仅为系统提供基准。
 - en: '****Results****'
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '****结果****'
 - en: '**Quantitative Results**'
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**定量结果**'
 - en: We use the method defined in the dataset section to calculate evaluation metrics.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用数据集部分定义的方法来计算评估指标。
 - en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/6edafdc0fa801e4dc637b81754fe8838.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第2部分：搜索引擎](../Images/6edafdc0fa801e4dc637b81754fe8838.png)'
 - en: '**Qualitative Results**'
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**定性结果**'
 - en: The results below are presented for baseline 2 method (cosine similarity)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下结果呈现了基准2方法（余弦相似度）的结果
 - en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/2983ecf874ba04552889d5a01297adfd.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第2部分：搜索引擎](../Images/2983ecf874ba04552889d5a01297adfd.png)'
 - en: Sample search results
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例搜索结果
 - en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/0923dfe0a1cc2646e27ea9398c492a33.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第2部分：搜索引擎](../Images/0923dfe0a1cc2646e27ea9398c492a33.png)'
 - en: Sample search results
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例搜索结果
 - en: Please find the code to reproduce the metrics and results [here](https://github.com/muditbac/caltech-search).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 请在[此处](https://github.com/muditbac/caltech-search)找到重现指标和结果的代码。
 - en: Future Scope
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 未来展望
 - en: '**Data Collection and Labelling:** To create a full-fledged image search engine,
     we need to revisit our requirements for this system. Does this system need to
     work on certain types of images? Should it work on all real life objects? Should
@@ -142,103 +215,148 @@
     data requirements. To create a full-fledged search engine, we need to collect
     millions of images from the web and maintain an index for it. After collecting
     the data, we need to define our task and start labelling the data for this task.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据收集和标注：** 为了创建一个完整的图像搜索引擎，我们需要重新审视该系统的需求。该系统是否需要处理某些类型的图像？是否应该处理所有现实生活中的物体？搜索应该集中在图像中的语义对象上，还是类似颜色和纹理的图像就足够了？这些需求将有助于明确数据需求。要创建一个完整的搜索引擎，我们需要从网络上收集数百万张图像并维护索引。收集数据后，我们需要定义任务并开始对数据进行标注。'
 - en: '** Error Analysis**: We can analyse the error occurred in the cosine similarity
     results. We can go through the search results which were included in the top 10
     results but belonged to another class. This may reveal errors like results from
     similar classes and results from noise class.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '** 错误分析：** 我们可以分析余弦相似度结果中出现的错误。我们可以检查那些虽然被包含在前10结果中但属于其他类别的搜索结果。这可能揭示出类似类别的结果和噪声类别的结果等错误。'
 - en: '**Methods:** The existing method uses knowledge from the pre-trained MobileNetV2
     model. Going forward, we can train our own model using triplet loss or contrastive
     loss on similar and dissimilar images. The aim here is to create an embedder which
     can capture the object/s in the image.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**方法：** 现有方法使用了预训练的MobileNetV2模型的知识。未来，我们可以使用三元组损失或对比损失在相似和不相似的图像上训练自己的模型。目标是创建一个能够捕捉图像中物体的嵌入器。'
 - en: '** Deployment**: Building a full fledged search engine will require building
     multiple components.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '** 部署：** 建立一个完整的搜索引擎将需要构建多个组件。'
 - en: '**Image Crawler**: This component will crawl images for model training and
     validation'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**图像爬虫：** 该组件将爬取用于模型训练和验证的图像。'
 - en: '**Data Labeller**: This component will be used by the human labeller to label
     and clean the collected data. The data will be collected and cleaned in multiple
     requirements. The data for training and validation will be processed with different
     pipelines.'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据标注器：** 该组件将由人工标注员使用，以标注和清理收集的数据。数据将根据多个要求进行收集和清理。训练和验证数据将通过不同的管道处理。'
 - en: '**Model Training**: This component will take the labelled data and generate
     model artifacts that can be used for inference.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型训练**：该组件将使用标注数据生成可用于推断的模型工件。'
 - en: '**Model Evaluation**: The component will generate the report on improvement
     on the model. Any change in the system should be visible in this report and changes
     should be driven by keeping this mind. This system should also generate failure
     cases to focus on.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型评估：** 该组件将生成关于模型改进的报告。系统的任何变化都应该在该报告中可见，变化应该以此为依据。该系统还应生成关注的失败案例。'
 - en: '**Embedding Pre-computation:** Once a model is trained and validated, it should
     be used to generate the embedding for all the deployment data. The embedding should
     be precomputed for faster retrieval during request time.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**嵌入预计算：** 一旦模型经过训练和验证，应该利用该模型生成所有部署数据的嵌入。嵌入应预先计算以便于在请求时快速检索。'
 - en: '**Real time serving and application interface**: The component contains the
     frontend and backend for processing and generating the request'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**实时服务和应用接口**：该组件包含用于处理和生成请求的前端和后端。'
 - en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/2ef582305ff797e5e409c939a606dcce.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第2部分：搜索引擎](../Images/2ef582305ff797e5e409c939a606dcce.png)'
 - en: References
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Caltech 101, [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Caltech 101, [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)'
 - en: '[2] Mean Average Precision (MAP) For Recommender Systems, [https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.htm](https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.html)l'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] 推荐系统的平均精度均值（MAP）， [https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.htm](https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.html)'
 - en: '**[Mudit Bachhawat](https://www.linkedin.com/in/muditbac/?originalSubdomain=in)**
     works as a machine learning engineer at Google, and has more than 5 years of experience
     in data science, deep learning, computer vision, multi-modal information retrieval,
     and optimization. Feel free to drop any comments or questions.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Mudit Bachhawat](https://www.linkedin.com/in/muditbac/?originalSubdomain=in)**
+    在Google担任机器学习工程师，拥有超过5年的数据科学、深度学习、计算机视觉、多模态信息检索和优化的经验。欢迎随时留言或提问。'
 - en: More On This Topic
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过Uplimit的机器学习课程提升您的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
 - en: '[Qdrant: Open-Source Vector Search Engine with Managed Cloud Platform](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Qdrant：具有托管云平台的开源向量搜索引擎](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)'
 - en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Google Earth Engine构建Python地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调优（Python版）](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学必备数学：奇异值分解的视觉介绍…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
