@@ -1,46 +1,64 @@
 - en: Beyond Word2Vec Usage For Only Words
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 超越 Word2Vec 仅限于词汇的使用
 - en: 原文：[https://www.kdnuggets.com/2018/01/beyond-word2vec-for-words.html](https://www.kdnuggets.com/2018/01/beyond-word2vec-for-words.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/01/beyond-word2vec-for-words.html](https://www.kdnuggets.com/2018/01/beyond-word2vec-for-words.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Stanko Kuveljic, [SmartCat](https://www.smartcat.io/)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Stanko Kuveljic，[SmartCat](https://www.smartcat.io/)**'
 - en: '![](../Images/cc9f4803f9fa84fabd43d2a236f7880d.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cc9f4803f9fa84fabd43d2a236f7880d.png)'
 - en: Making a machine learning model usually takes a lot of crying, pain, feature
     engineering, suffering, training, debugging, validation, desperation, testing
     and a little bit of agony due to the infinite pain. After all that, we deploy
     the model and use it to make predictions for future data. We can run our little
     devil on a batch of data once in an hour, day, week, month or on the fly depending
     on the situation and use case.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建一个机器学习模型通常需要经历大量的哭泣、痛苦、特征工程、折磨、训练、调试、验证、绝望、测试以及因无尽的痛苦而带来的一点点痛苦。经历了这些之后，我们部署模型并使用它来对未来的数据进行预测。我们可以根据情况和用例每小时、每天、每周、每月或者即时运行一次我们的“小恶魔”模型。
 - en: Let’s take a look at an example related to an online sport betting recommender
     engine. The goal of that engine is to predict whether the user will play a particular
     selection on a game or not (e.g. final score - home win, goals - 3 or more goals,
     etc). These predictions are based on user history, and those predictions are used
     to construct a ticket that will be recommended to the user.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看一个与在线体育博彩推荐引擎相关的例子。该引擎的目标是预测用户是否会在某场比赛中选择特定的选项（例如，最终得分 - 主队获胜，进球 - 3个或更多进球等）。这些预测基于用户历史记录，这些预测用于构建一个推荐给用户的投注单。
 - en: To achieve fast recommendation in real time, we can calculate everything before
     the user even appears. This use case allows us to fantasize with feature extraction,
     we can literally play with features in order to make a more accurate model without
     hurting the performance of the application. Some toy pipeline and prediction is
     presented in the image below. So basically, our application will fast serve predictions,
     and our satan rituals can run safely in the background.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现实时快速推荐，我们可以在用户出现之前就计算所有内容。这种用例允许我们对特征提取进行幻想，我们可以尽情玩弄特征，以便构建一个更准确的模型，而不会影响应用程序的性能。下图展示了一些玩具管道和预测。因此，基本上，我们的应用程序将快速提供预测，而我们的“撒旦仪式”可以安全地在后台运行。
 - en: '![](../Images/af64730f421f7d50e458fde86a46d9e8.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/af64730f421f7d50e458fde86a46d9e8.png)'
 - en: Awwww, there are even unicorns in the picture. But, what about us not having
     a predefined set of data and having to do everything on the fly? Our unicorns
     won’t be happy :( Let’s go back to our good old example of online sports betting.
@@ -56,19 +74,28 @@
     worked on a similar problem and we tried to approach word2vector, but in our case
     it is bet2vector. For a general explanation of word2vector, visit [one](https://www.smartcat.io/blog/2017/word2vec-the-world-of-word-vectors/)
     of our latest blogs.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇哦，图片中甚至还有独角兽。但是，考虑到我们没有预定义的数据集，所有工作都需要即时处理，那怎么办呢？我们的独角兽可不会开心的 :( 让我们回到那个老生常谈的在线体育博彩例子。我们可以为尚未开始的比赛准备预测，但对于那些在比赛进行中下注的用户，也就是所谓的实时投注呢？我们的复杂特征工程和模型评分流程可能在实时为成千上万的用户提供服务时会遇到困难。一场体育比赛每隔几秒钟就可能发生变化，因此实时预测确实是我们所期待的。更糟糕的是，我们可能会对一场比赛的信息有限，从而无法提取所需的特征。可以尝试优化一个在尚未开始的比赛中表现非常好的模型，并尝试用更少的特征构建一个新模型。但是，我们总可以尝试一些新方法，从不同的角度看待问题。我们曾经处理过类似的问题，并尝试了word2vector，但在我们的情况下是bet2vector。有关word2vector的一般解释，请访问我们最新的博客之一
+    [one](https://www.smartcat.io/blog/2017/word2vec-the-world-of-word-vectors/)。
 - en: '**Everything2Vector**'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Everything2Vector**'
 - en: 'So everything2vector is where the fun begins. It is possible to make a vector
     representation for each user based only on its user id and ids of templates in
     the past. Let’s look at the following data sample:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以 everything2vector 就是乐趣开始的地方。可以仅基于用户 ID 和过去模板的 IDs 为每个用户创建向量表示。我们来看以下数据样本：
 - en: '![](../Images/8d26b05c8b776380950da0f115cf88ba.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8d26b05c8b776380950da0f115cf88ba.png)'
 - en: 'From the data we can see that Darth Vader likes to bet on tennis matches, but
     his son Luke likes to bet on English Premier League football. So how to make magic
     and learn from IDs only? First of all, we need to squash our information about
@@ -76,57 +103,82 @@
     on some similar features. In this case, templates are made in such a way to group
     similar games - football games from the same league, same game type and similar
     quota are grouped in the same template. For example:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数据中我们可以看到，达斯·维德喜欢投注网球比赛，但他的儿子卢克则喜欢投注英超足球比赛。那么如何通过仅仅依靠 IDs 来实现魔法并进行学习呢？首先，我们需要进一步压缩关于比赛的信息，以便获取模板。这些模板可以根据一些相似特征对数据进行分组。在这种情况下，模板的创建方式是将相似的比赛——来自同一联赛的足球比赛、相同的比赛类型和类似的配额——分组到同一模板中。例如：
 - en: 'Template 1 - Tennis : US Open : Wins Break : 1 : quota_range (1.5 - 2.1)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '模板 1 - 网球 : 美国公开赛 : 赢得破发 : 1 : 配额范围 (1.5 - 2.1)'
 - en: 'Template 2 - Tennis : US Open : Final Score : 2 : quota_range (1.8 - 2.6)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '模板 2 - 网球 : 美国公开赛 : 决赛得分 : 2 : 配额范围 (1.8 - 2.6)'
 - en: 'Template 3 - Football : English Premier : Goals : 0-2 : quota_range (1.5 -
     2.0)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '模板 3 - 足球 : 英超 : 进球数 : 0-2 : 配额范围 (1.5 - 2.0)'
 - en: 'Template 4 - Football : Spain 1 : Final Score : 1 : quota_range (1.8 - 2.4)'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '模板 4 - 足球 : 西甲 1 : 决赛得分 : 1 : 配额范围 (1.8 - 2.4)'
 - en: ………………..
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ………………..
 - en: 'Template 1000 - Basketball : NBA : Total Score : >200 : quota_range (1.5 -
     2.0)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '模板 1000 - 篮球 : NBA : 总分 : >200 : 配额范围 (1.5 - 2.0)'
 - en: 'These rules for determining templates can be calculated from data statistics,
     or defined with some domain knowledge. But, most importantly, these rules run
     very fast when it comes to determining template ID. This is everything we need
     from a feature engineering task. When we convert the previous data into a template
     we get:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 确定模板的这些规则可以从数据统计中计算出来，也可以通过一些领域知识来定义。但最重要的是，这些规则在确定模板 ID 时运行非常快。这就是我们在特征工程任务中所需的一切。当我们将之前的数据转换为模板时，我们得到：
 - en: '![](../Images/cef9c83970ed44acabe5a0760015ff52.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cef9c83970ed44acabe5a0760015ff52.png)'
 - en: 'Please note that skip-gram uses sentences like “Luke, I am your father” to
     determine what words are similar to each other. To make something like this, we
     need to group all history in sessions for every user. In this way we can obtain
     sentences representing user history, and user ID is now close to templates that
     he played in the past, like this:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，skip-gram 使用诸如“卢克，我是你父亲”这样的句子来确定哪些词是相似的。要实现类似的功能，我们需要将所有历史数据按会话分组。通过这种方式，我们可以获得表示用户历史的句子，并且用户
+    ID 现在接近他过去玩过的模板，如下所示：
 - en: '![](../Images/16b2fedf1f889cec59cc4d429845371e.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/16b2fedf1f889cec59cc4d429845371e.png)'
 - en: '**Results**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结果**'
 - en: Let’s see how vector representation is learned during training. When an algorithm
     sees that a user has played some game template, it pushes the vectors representation
     of the user and played template close to each other in vector space. At the same
@@ -134,19 +186,25 @@
     non played game template vectors away from each other in vector space. In the
     image below, we can see how our “vectors” lay in space. There is a happy unicorn
     in the image again because it likes this solution.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看向量表示在训练过程中是如何学习的。当一个算法看到一个用户玩了某个比赛模板时，它会将用户的向量表示和已玩模板的向量表示在向量空间中推得很近。同时（使用负采样技术），它将玩家向量和未玩的比赛模板向量在向量空间中推得远离彼此。在下图中，我们可以看到我们的“向量”在空间中的分布。图像中再次出现了一只快乐的独角兽，因为它喜欢这个解决方案。
 - en: '![](../Images/e30e94d16f89d2ddde3966d283cbe91b.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e30e94d16f89d2ddde3966d283cbe91b.png)'
 - en: We see that Darth Vader is close to templates that represent tennis matches
     because he likes to play tennis. Luke is away from his father, because he doesn’t
     like tennis, but he is into football and he would be closer to vectors representing
     football games. There is also Yoda who plays football but in a different league.
     But he is closer to Luke than to Darth because football templates are more similar
     than football and tennis templates.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们看到达斯·维达接近那些代表网球比赛的模板，因为他喜欢打网球。卢克远离他的父亲，因为他不喜欢网球，但他喜欢足球，他会更接近那些代表足球比赛的向量。还有尤达，他也踢足球，但在不同的联赛中。但他比达斯更接近卢克，因为足球模板比足球和网球模板更相似。
 - en: The output of algorithm is a vector both for user IDs and template IDs that
     can be stored somewhere. Now, in prediction time where data changes every few
     seconds, we can always calculate predictions in real time. We just need to lookup
@@ -160,80 +218,124 @@
     item IDs to train vectors out of it. Based on trained vectors, we can recommend
     the most similar items to each user. By the most similar, we mean items that often
     occur together.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 算法的输出是用户ID和模板ID的向量，可以存储在某处。在预测时，数据每几秒钟变化一次，我们可以实时计算预测结果。我们只需要查找当前可用的模板向量，并与用户向量计算余弦相似度，以获取用户和模板之间的相似度分数。除了尝试有趣之外，这种技术在数据集上取得了良好的结果，并且实现了对大量用户和模板的快速预测，这些用户和模板经常发生变化。最重要的是，这种技术可以应用到任何地方，并且效果很好。例如，如果我们有关于历史交易的信息[user
+    ID - 购买 - item ID]，我们可以仅使用用户ID和物品ID来训练向量。基于训练得到的向量，我们可以向每个用户推荐最相似的物品。所谓最相似的，是指那些经常一起出现的物品。
 - en: Merry Christmas and may the Force Vectors be with ya mon.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 圣诞快乐，愿力量向量与你同在。
 - en: '[Original](https://www.smartcat.io/blog/2017/beyond-word2vec-usage-for-only-words/).
     Reposted with permission.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.smartcat.io/blog/2017/beyond-word2vec-usage-for-only-words/)。经许可转载。'
 - en: '**Related**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容**'
 - en: '[**Regularization in Machine Learning**](https://www.kdnuggets.com/2018/01/regularization-machine-learning.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**机器学习中的正则化**](https://www.kdnuggets.com/2018/01/regularization-machine-learning.html)'
 - en: '[**How to win Kaggle competition based on NLP task, if you are not an NLP expert**](https://www.kdnuggets.com/2017/09/win-kaggle-nlp-not-expert.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**如果你不是NLP专家，如何在Kaggle比赛中获胜**](https://www.kdnuggets.com/2017/09/win-kaggle-nlp-not-expert.html)'
 - en: '[**Top 10 TED Talks for Data Scientists and Machine Learning Engineers**](https://www.kdnuggets.com/2018/01/top-10-ted-talks-data-scientists-machine-learning.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**数据科学家和机器学习工程师的十大TED演讲**](https://www.kdnuggets.com/2018/01/top-10-ted-talks-data-scientists-machine-learning.html)'
 - en: '* * *'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启你的网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
 - en: '[The Only Free Course You Need To Become a Professional Data Engineer](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)'
 - en: '[The Only Interview Prep Course You Need for Deep Learning](https://www.kdnuggets.com/the-only-interview-prep-course-you-need-for-deep-learning)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习面试准备课程](https://www.kdnuggets.com/the-only-interview-prep-course-you-need-for-deep-learning)'
 - en: '[The Only Free Course You Need To Become a MLOps Engineer](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为MLOps工程师的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)'
 - en: '[The Only Course You Need to Smash Your Data Analyst Career](https://www.kdnuggets.com/the-only-course-you-need-to-smash-your-data-analyst-career)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[让你数据分析师职业一飞冲天的唯一课程](https://www.kdnuggets.com/the-only-course-you-need-to-smash-your-data-analyst-career)'
 - en: '[The Only Prompting Framework for Every Use](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[适用于所有场景的唯一提示框架](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)'
