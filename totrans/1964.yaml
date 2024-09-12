@@ -1,223 +1,332 @@
 - en: How To Leverage Docker Cache for Optimizing Build Speeds
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何利用 Docker 缓存优化构建速度
 - en: 原文：[https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds](https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds](https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds)
 - en: '![How To Leverage Docker Cache for Optimizing Build Speeds](../Images/ae994ea03b207d5b88fa192f562e5e06.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何利用 Docker 缓存优化构建速度](../Images/ae994ea03b207d5b88fa192f562e5e06.png)'
 - en: Image by Editor | Midjourney & Canva
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由编辑提供 | Midjourney & Canva
 - en: Leveraging Docker cache can significantly speed up your builds by reusing layers
     from previous builds. Let’s learn how to optimize a Dockerfile to make the best
     use of Docker's layer caching mechanism.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用 Docker 缓存可以显著加快构建速度，通过重用之前构建的层来实现。让我们深入了解如何优化 Dockerfile，以便充分利用 Docker 的层缓存机制。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在 IT 领域'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Prerequisites
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 前提条件
 - en: 'Before you start:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始之前：
 - en: You should have Docker installed. [Get Docker](https://docs.docker.com/get-docker/)
     if you haven’t already.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你应该已经安装了 Docker。如果还没有，[获取 Docker](https://docs.docker.com/get-docker/)。
 - en: You should be familiar with basic Docker concepts, creating Dockerfiles, and
     common Docker commands.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你应该对基本的 Docker 概念、创建 Dockerfile 和常用的 Docker 命令有所了解。
 - en: How the Docker Build Cache Works
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Docker 构建缓存如何工作
 - en: Docker images are built in layers, where each instruction in the Dockerfile
     creates a new layer. For example, instructions like `FROM`, `RUN`, `COPY`, and
     `ADD` each create a new layer in the resulting image.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker 镜像是分层构建的，其中 Dockerfile 中的每条指令都会创建一个新层。例如，`FROM`、`RUN`、`COPY` 和 `ADD`
+    等指令都会在生成的镜像中创建一个新层。
 - en: Docker uses a content-addressable storage mechanism to manage image layers.
     Each layer is **identified by a unique hash** that Docker calculates based on
     the contents of the layer. Docker compares these hashes to determine if it can
     reuse a layer from the cache.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker 使用内容可寻址存储机制来管理镜像层。每一层都由 Docker 根据层的内容计算出的**唯一哈希**来标识。Docker 比较这些哈希值，以确定是否可以从缓存中重用某一层。
 - en: '![build-cache-1](../Images/379ad70193c5f463402fac9847b40323.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![build-cache-1](../Images/379ad70193c5f463402fac9847b40323.png)'
 - en: Building a Docker Image | Image by Author
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建 Docker 镜像 | 图片由作者提供
 - en: When Docker builds an image, it goes through each instruction in the Dockerfile
     and performs a cache lookup to see if it can reuse a previously built layer.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 Docker 构建镜像时，它会遍历 Dockerfile 中的每条指令，并执行缓存查找以查看是否可以重用之前构建的层。
 - en: '![build-cache-2](../Images/2eb3be10a48670946130a610c06515b6.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![build-cache-2](../Images/2eb3be10a48670946130a610c06515b6.png)'
 - en: To reuse or build from scratch | Image by Author
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新使用或从头开始构建 | 图片由作者提供
 - en: 'The decision to use the cache is based on several factors:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用缓存的决策基于多个因素：
 - en: '**Base image**: If the base image (`FROM` instruction) has changed, Docker
     will invalidate the cache for all subsequent layers.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**基础镜像**：如果基础镜像（`FROM` 指令）发生了变化，Docker 将使所有后续层的缓存失效。'
 - en: '**Instructions**: Docker checks the exact content of each instruction. If the
     instruction is the same as a previously executed one, the cache can be used.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**指令**：Docker 检查每条指令的确切内容。如果指令与之前执行过的相同，可以使用缓存。'
 - en: '**Files and directories**: For instructions that involve files, like `COPY`
     and `ADD`, Docker checks the contents of the files. If the files haven’t changed,
     the cache can be used.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**文件和目录**：对于涉及文件的指令，如 `COPY` 和 `ADD`，Docker 会检查文件的内容。如果文件没有变化，可以使用缓存。'
 - en: '**Build context**: Docker also considers the build context (the files and directories
     sent to the Docker daemon) when deciding to use the cache.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构建上下文**：Docker 在决定是否使用缓存时，还会考虑构建上下文（发送到 Docker 守护进程的文件和目录）。'
 - en: Understanding Cache Invalidation
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 理解缓存失效
 - en: 'Certain changes can invalidate the cache, causing Docker to rebuild the layer
     from scratch:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 某些更改可能会使缓存失效，导致 Docker 从头开始重建该层：
 - en: '**Modification in the Dockerfile**: If an instruction in the Dockerfile changes,
     Docker invalidates the cache for that instruction and all subsequent instructions.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Dockerfile 的修改**：如果 Dockerfile 中的指令发生变化，Docker 会使该指令及所有后续指令的缓存失效。'
 - en: '**Changes in source files**: If files or directories involved in `COPY` or
     `ADD` instructions change, **Docker invalidates the cache for these layers and
     subsequent layers**.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**源文件的更改**：如果涉及到 `COPY` 或 `ADD` 指令的文件或目录发生变化，**Docker 会使这些层和后续层的缓存失效**。'
 - en: 'To sum up, here’s what you need to know about docker build cache:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，这里是你需要知道的关于 Docker 构建缓存的信息：
 - en: Docker builds images layer by layer. If a layer hasn’t changed, Docker can reuse
     the cached version of that layer.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Docker 逐层构建镜像。如果某一层没有变化，Docker 可以重用该层的缓存版本。
 - en: If a layer changes, all subsequent layers are rebuilt. Therefore, putting instructions
     that do not change often (such as the base image, dependency installations, initialization
     scripts) much earlier in the Dockerfile can help maximize cache hits.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果某层发生变化，所有后续层都会重建。因此，将不常更改的指令（如基础镜像、依赖安装、初始化脚本）放在 Dockerfile 中较早的位置可以帮助最大化缓存命中。
 - en: Best Practices to Leverage Docker’s Build Cache
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 利用 Docker 构建缓存的最佳实践
 - en: 'To take advantage of the Docker build cache, you can structure your Dockerfile
     in a way that maximizes cache hits. Here are some tips:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了利用 Docker 构建缓存，你可以以最大化缓存命中的方式构建你的 Dockerfile。以下是一些提示：
 - en: '**Order instructions by frequency of change**: Place instructions that change
     less frequently higher up in the Dockerfile. And place frequently changing instructions,
     such as `COPY` or `ADD` of application code towards the end of the Dockerfile.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**按更改频率排序指令**：将不常更改的指令放在 Dockerfile 的更高位置。将经常更改的指令，例如 `COPY` 或 `ADD` 应用代码的指令放在
+    Dockerfile 的末尾。'
 - en: '**Separate dependencies from application code**: Separate instructions that
     install dependencies from those that copy the source code. This way, dependencies
     are only reinstalled if they change.'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**将依赖与应用代码分开**：将安装依赖的指令与复制源代码的指令分开。这样，只有在依赖发生变化时才会重新安装依赖。'
 - en: Next, let’s take a couple of examples.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们来看几个例子。
 - en: 'Examples: Dockerfiles That Leverage the Build Cache'
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例：利用构建缓存的 Dockerfile
 - en: '1\. Here’s an example Dockerfile for setting up a PostgreSQL instance with
     some initial setup scripts. The example focuses on optimizing layer caching:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 1. 这是一个用于设置 PostgreSQL 实例并包含一些初始化脚本的 Dockerfile 示例。此示例侧重于优化层缓存：
 - en: '[PRE0]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The base image layer often doesn’t change frequently. Environment variables
     are unlikely to change often, so setting them early helps reuse the cache for
     subsequent layers. Note that we copy the initialization scripts before the application
     code. This is because copying files that don’t change frequently before those
     that do helps in leveraging the cache.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 基础镜像层通常不常更改。环境变量不太可能经常更改，因此尽早设置它们有助于重用后续层的缓存。注意，我们在应用代码之前复制初始化脚本。这是因为在经常更改的文件之前复制不常更改的文件有助于利用缓存。
 - en: '2\. Here’s another example of a Dockerfile for containerizing a Python app:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 2. 这是另一个容器化 Python 应用的 Dockerfile 示例：
 - en: '[PRE1]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Copying the rest of the application code after installing dependencies ensures
     that changes to the application code do not invalidate the cache for the dependencies
     layer. This maximizes the reuse of cached layers, leading to faster builds.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在安装依赖后复制其余的应用代码可以确保应用代码的更改不会使依赖层的缓存失效。这最大化了缓存层的重用，从而加快了构建速度。
 - en: By understanding and leveraging Docker's caching mechanism, you can structure
     your Dockerfiles for faster builds and more efficient image creation.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过理解和利用 Docker 的缓存机制，你可以为更快的构建和更高效的镜像创建构建你的 Dockerfile。
 - en: Additional Resources
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 附加资源
 - en: 'Learn more about caching at the following links:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过以下链接了解更多关于缓存的信息：
 - en: '[Docker build cache](https://docs.docker.com/build/cache/)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Docker 构建缓存](https://docs.docker.com/build/cache/)'
 - en: '[Using the build cache](https://docs.docker.com/guides/docker-concepts/building-images/using-the-build-cache/)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用构建缓存](https://docs.docker.com/guides/docker-concepts/building-images/using-the-build-cache/)'
 - en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
     is a developer and technical writer from India. She likes working at the intersection
     of math, programming, data science, and content creation. Her areas of interest
@@ -226,33 +335,51 @@
     and sharing her knowledge with the developer community by authoring tutorials,
     how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
     and coding tutorials.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享她的知识。Bala
+    还创建了引人入胜的资源概述和编码教程。'
 - en: More On This Topic
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Better Leverage Data Science for Business Growth](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何更好地利用数据科学促进业务增长](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
 - en: '[Optimizing Genes with a Genetic Algorithm](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用遗传算法优化基因](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入了解 Python 性能分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Optimizing Data Storage: Exploring Data Types and Normalization in SQL](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化数据存储：探索 SQL 中的数据类型和规范化](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
 - en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化数据分析：在 Databricks 中集成 GitHub Copilot](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
