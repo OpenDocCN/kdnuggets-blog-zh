@@ -1,233 +1,340 @@
 - en: 'Data Science Basics: An Introduction to Ensemble Learners'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据科学基础：集成学习器简介
 - en: 原文：[https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html](https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html](https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html)
 - en: Algorithm selection can be challenging for machine learning newcomers. Often
     when building classifiers, especially for beginners, an approach is adopted to
     problem solving which considers single instances of single algorithms.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 算法选择对机器学习新手来说可能具有挑战性。构建分类器时，尤其是对初学者来说，通常采用考虑单一算法实例的解决方案方法。
 - en: However, in a given scenario, it may prove more useful to chain or group classifiers
     together, using the techniques of voting, weighting, and combination to pursue
     the most accurate classifier possible. Ensemble learners are classifiers which
     provide this functionality in a variety of ways.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，在特定情况下，将分类器链式或分组使用，利用投票、加权和组合技术以追求最准确的分类器，可能会更有用。集成学习器就是提供这种功能的分类器，它们以多种方式实现这一功能。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This post will provide an overview of bagging, boosting, and stacking, arguably
     the most used and well-known of the basic ensemble methods. They are not, however,
     the **only** options. [Random Forests](/tag/random-forests) is another example
     of an ensemble learner, which uses numerous decision trees in a single predictive
     model, and which is often overlooked and treated as a "regular" algorithm. There
     are other approaches to selecting effective algorithms as well, treated below.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将提供自助聚合、提升和堆叠的概述，这些方法可以说是最常用和最知名的基本集成方法。然而，它们并不是**唯一**的选项。[随机森林](/tag/random-forests)是另一种集成学习器的例子，它在单一预测模型中使用大量决策树，通常被忽视并被视为一种“常规”算法。还有其他选择有效算法的方法，下面会介绍。
 - en: '**Bagging**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**自助聚合**'
 - en: 'Bagging operates by simple concept: build a number of models, observe the results
     of these models, and settle on the majority result. I recently had an issue with
     the rear axle assembly in my car: I wasn''t sold on the diagnosis of the dealership,
     and so I took it to 2 other garages, both of which agreed the issue was something
     different than the dealership suggested. *Voila*. Bagging in action.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 自助聚合的运作概念非常简单：建立多个模型，观察这些模型的结果，然后确定大多数结果。我最近在我的车的后轴组件上遇到了问题：我对经销商的诊断不太信服，因此我将车送到另外两个车库，他们都同意问题与经销商所建议的不同。*瞧*。自助聚合的实际应用。
 - en: I only visited 3 garages in my example, but you could imagine that accuracy
     would likely increase if I had visited tens or hundreds of garages, especially
     if my car's problem was one of a very complex nature. This holds true for bagging,
     and the bagged classifier often is significantly more accurate than single constituent
     classifiers. Also note that the type of constituent classifier used are inconsequential;
     the resulting model can be made up of any single classifier type.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在这个例子中只访问了3个车库，但你可以想象如果我访问了几十个或几百个车库，准确性可能会提高，尤其是当我的车的问题非常复杂时。这对于自助聚合也适用，自助聚合的分类器通常比单一的组成分类器更准确。同时请注意，所使用的组成分类器类型并不重要；结果模型可以由任何单一分类器类型组成。
 - en: Bagging is short for *bootstrap aggregation*, so named because it takes a number
     of samples from the dataset, with each sample set being regarded as a bootstrap
     sample. The results of these bootstrap samples are then aggregated.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 自助聚合是*bootstrap aggregation*的缩写，之所以这样命名是因为它从数据集中抽取多个样本，每个样本集被视为一个自助样本。这些自助样本的结果随后被聚合。
 - en: 'Bagging TL;DR:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '自助聚合 TL;DR:'
 - en: Operates via equal weighting of models
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过模型的等权重来操作
 - en: Settles on result using majority voting
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过多数投票来确定结果
 - en: Employs multiple instances of same classifier for one dataset
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于一个数据集使用相同分类器的多个实例
 - en: Builds models of smaller datasets by sampling with replacement
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过带替换的抽样构建较小数据集的模型
 - en: Works best when classifier is unstable (decision trees, for example), as this
     instability creates models of differing accuracy and results to draw majority
     from
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当分类器不稳定时（例如决策树），效果最佳，因为这种不稳定性产生了具有不同准确度的模型，并从中得出多数结果
 - en: Bagging can hurt stable model by introducing artificial variability from which
     to draw inaccurate conclusions
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Bagging 通过引入人为的变异性来可能损害稳定模型，从而得出不准确的结论
 - en: '![Bagging](../Images/da14f46784242ccf6a49c3d7ea114504.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![Bagging](../Images/da14f46784242ccf6a49c3d7ea114504.png)'
 - en: '**Boosting**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Boosting**'
 - en: Boosting is similar to bagging, but with one conceptual modification. Instead
     of assigning equal weighting to models, boosting assigns varying weights to classifiers,
     and derives its ultimate result based on weighted voting.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: Boosting 类似于 bagging，但有一个概念上的修改。与将模型赋予相等权重不同，boosting 为分类器分配不同的权重，并根据加权投票得出最终结果。
 - en: Thinking again of my car problem, perhaps I had been to one particular garage
     numerous times in the past, and trusted their diagnosis slightly more than others.
     Also suppose that I was not a fan of previous interactions with the dealership,
     and that I trusted their insight less. The weights I assigned would be reflective.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 再考虑一下我的汽车问题，也许我过去去过某个特定的车库很多次，并且稍微比其他车库更信任他们的诊断。此外，假设我不喜欢之前与经销商的互动，并且对他们的见解信任度较低。我分配的权重将会反映这一点。
 - en: 'Boosting TL;DR:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: Boosting 简而言之：
 - en: Operates via weighted voting
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过加权投票来操作
 - en: Algorithm proceeds iteratively; new models are influenced by previous ones
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 算法以迭代方式进行；新模型受到之前模型的影响
 - en: New models become experts for instances classified incorrectly by earlier models
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新模型成为对早期模型分类错误的实例的专家
 - en: '**Can** be used without weights by using resampling, with probability determined
     by weights'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**可以**通过使用重采样而无需权重，概率由权重决定'
 - en: Works well if classifiers are not too complex
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果分类器不是太复杂，则效果很好
 - en: Also works well with weak learners
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 也适用于弱学习者
 - en: '[AdaBoost](https://en.wikipedia.org/wiki/AdaBoost) (Adaptive Boosting) is a
     popular boosting algorithm'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AdaBoost](https://en.wikipedia.org/wiki/AdaBoost)（自适应提升）是一种流行的提升算法'
 - en: '[LogitBoost](https://en.wikipedia.org/wiki/LogitBoost) (derived from AdaBoost)
     is another, which uses additive logistic regression, and handles multi-class problems'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LogitBoost](https://en.wikipedia.org/wiki/LogitBoost)（源自 AdaBoost）是另一种方法，它使用加性逻辑回归，并处理多类问题'
 - en: '![Boosting](../Images/658f99083c93080b92c1f86c7f94ecf7.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![Boosting](../Images/658f99083c93080b92c1f86c7f94ecf7.png)'
 - en: '**Stacking**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Stacking**'
 - en: Stacking is a bit different from the previous 2 techniques as it trains multiple
     single classifiers, as opposed to various incarnations of the same learner. While
     bagging and boosting would use numerous models built using various instances of
     the same classification algorithm (eg. decision tree), stacking builds its models
     using different classification algorithms (perhaps decision trees, logistic regression,
     an ANNs, or some other combination).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: Stacking 与之前的两种技术略有不同，因为它训练多个单一分类器，而不是同一个学习者的不同版本。与 bagging 和 boosting 使用多种模型构建的同一分类算法（例如决策树）不同，stacking
+    使用不同的分类算法（可能是决策树、逻辑回归、人工神经网络或其他组合）来构建模型。
 - en: A combiner algorithm is then trained to make ultimate predictions using the
     predictions of other algorithms. This combiner can be any ensemble technique,
     but logistic regression is often found to be an adequate and simple algorithm
     to perform this combining. Along with classification, stacking can also be employed
     in unsupervised learning tasks such as density estimation.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后训练一个组合器算法，通过其他算法的预测来进行最终预测。这个组合器可以是任何集成技术，但逻辑回归通常被认为是执行这种组合的足够简单的算法。除了分类之外，stacking
+    还可以用于无监督学习任务，例如密度估计。
 - en: 'Stacking TL;DR:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: Stacking 简而言之：
 - en: Trains multiple learners (as opposed to bagging/boosting which train a single
     learner)
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练多个学习者（与训练单个学习者的bagging/boosting相对）
 - en: Each learner uses a subset of data
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个学习者使用数据的子集
 - en: A "combiner" is trained on a validation segment
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个“组合器”在验证段上进行训练
 - en: Stacking uses a meta learner (as opposed to bagging/boosting which use voting
     schemes)
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Stacking 使用元学习者（与使用投票方案的 bagging/boosting 相对）
 - en: Difficult to analyze theoretically ("black magic")
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 理论上难以分析（“黑魔法”）
 - en: Level-1 → meta learner
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Level-1 → 元学习者
 - en: Level-0 → base classifiers
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Level-0 → 基本分类器
 - en: Can also be used for numeric prediction (regression)
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 也可以用于数值预测（回归）
 - en: The best algorithms to use for base models are smooth, global learners
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于基本模型的最佳算法是平滑的全局学习者
 - en: '![Stacking](../Images/2f18adb49b096f6887425f5b3aa4d528.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![堆叠](../Images/2f18adb49b096f6887425f5b3aa4d528.png)'
 - en: While the above ensemble learners are likely the most well-known and -utilized,
     numerous other options exist. Besides stacking, a variety of other meta learners
     exist as well.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然上述集成学习者可能是最知名和最常用的，但还有许多其他选项。除了堆叠，还有各种其他的元学习者。
 - en: An easy mistake for data science newcomers to make is to underestimate the complexity
     of the algorithm landscape, thinking that a decision tree is a decision tree,
     a neural network is a neural network, etc. Besides overlooking the fact that there
@@ -238,48 +345,72 @@
     accuracy in a given task, or even to tackle tasks which, alone, would not be solvable,
     does not even register. Any form of recent "artificial intelligence" you can think
     of takes this approach. But that's a different conversation completely.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学新手容易犯的一个错误是低估算法领域的复杂性，以为决策树就是决策树，神经网络就是神经网络等。除了忽视算法家族的各种特定实现之间存在显著差异（查看过去几年神经网络领域的大量研究作为明确证据），还未意识到各种算法可以通过集成或介入的元学习者协同使用，从而在给定任务中实现更高的准确性，甚至解决单独无法解决的任务。任何你能想到的最新“人工智能”形式都采用了这种方法。不过，这是完全不同的话题。
 - en: '**Related**:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Data Science Basics: Data Mining vs. Statistics](/2016/09/data-science-basics-data-mining-statistics.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学基础：数据挖掘与统计学](/2016/09/data-science-basics-data-mining-statistics.html)'
 - en: '[Data Science Basics: 3 Insights for Beginners](/2016/09/data-science-basics-3-insights-beginners.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学基础：初学者的3个见解](/2016/09/data-science-basics-3-insights-beginners.html)'
 - en: '[Machine Learning Key Terms, Explained](/2016/05/machine-learning-key-terms-explained.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习关键术语解释](/2016/05/machine-learning-key-terms-explained.html)'
 - en: More On This Topic
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[何时选择集成技术是明智的？](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
 - en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习示例](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
 - en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习技术：Python中随机森林的详细讲解](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
 - en: '[Back to Basics Week 3: Introduction to Machine Learning](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基础回顾第3周：机器学习介绍](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)'
 - en: '[Back to Basics Week 1: Python Programming & Data Science Foundations](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基础回顾第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)'
 - en: '[Mastering Python for Data Science: Beyond the Basics](https://www.kdnuggets.com/mastering-python-for-data-science-beyond-the-basics)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据科学中的Python：超越基础](https://www.kdnuggets.com/mastering-python-for-data-science-beyond-the-basics)'
