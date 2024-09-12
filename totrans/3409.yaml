@@ -1,58 +1,78 @@
 - en: 'MLDB: The Machine Learning Database'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MLDB：机器学习数据库
 - en: 原文：[https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html](https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html](https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html)
 - en: '**By François Maillet, MLDB.ai**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由François Maillet，MLDB.ai**。'
 - en: In this post, we’ll show how easy it is to use MLDB to build your own real­time
     image classification service. We will use different brand of cars in this example,
     but you can adapt what we show to train a model on any image dataset you want.
     We will be using a TensorFlow deep convolutional neural network, transfer learning,
     and everything will run off MLDB.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将展示使用MLDB构建自己的实时图像分类服务有多么简单。我们将在这个示例中使用不同品牌的汽车，但你可以根据我们展示的内容来训练任何图像数据集上的模型。我们将使用一个TensorFlow深度卷积神经网络、迁移学习，所有这些都将由MLDB运行。
 - en: Transfer learning with the Inception model
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用Inception模型的迁移学习
 - en: At a high level, transfer learning allows us to take a model that was trained
     on one task and use its learned knowledge on another task. We use the [Inception-­v3
     model](http://arxiv.org/abs/1512.00567), a deep convolutional neural network,
     that was trained on the [ImageNet](http://image-net.org/) Large Visual Recognition
     Challenge dataset. The task of that challenge was to classify images into a varied
     set of 1000 classes, like *badger, freight car* or *cheeseburger*.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 从高层次来看，迁移学习允许我们使用在一个任务上训练的模型，将其学到的知识应用到另一个任务上。我们使用了[Inception-v3模型](http://arxiv.org/abs/1512.00567)，这是一个深度卷积神经网络，已经在[ImageNet](http://image-net.org/)大规模视觉识别挑战数据集上进行了训练。该挑战的任务是将图像分类为多达1000个类别，如*獾、货车*或*汉堡包*。
 - en: The Inception model was openly released as a trained TensorFlow graph. [TensorFlow](https://www.tensorflow.org/)
     is a deep learning library that Google open­-sourced last year, and MLDB has a
     built-­in integration for it. As you’ll see, MLDB makes it extremely simple to
     run TensorFlow models directly in SQL.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: Inception模型作为训练好的TensorFlow图形公开发布。[TensorFlow](https://www.tensorflow.org/)是Google去年开源的深度学习库，MLDB有一个内置的集成。正如你将看到的，MLDB使得直接在SQL中运行TensorFlow模型变得极其简单。
 - en: When solving any machine learning problem, one critical step is picking and
     designing feature extractors. They are used to take the thing we want to classify,
     be it an image, a song or a news article, and transform it into a numerical representation,
     called a feature vector, that can be given to a classifier. Traditionally, the
     selection of feature extractors was done by hand. One of the really exciting things
     about deep neural networks is that they can learn feature extractors themselves.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在解决任何机器学习问题时，一个关键步骤是选择和设计特征提取器。它们用于将我们想要分类的对象——无论是图像、歌曲还是新闻文章——转换为可以提供给分类器的数值表示，称为特征向量。传统上，特征提取器的选择是手动完成的。深度神经网络一个真正令人兴奋的方面是它们能够自我学习特征提取器。
 - en: Below is the architecture of the Inception model, where images go in from the
     left and predictions come out to the right. The very last layer will be of size
     1000 and give a probability for each of the classes. However, the layers that
     come before are transformations over the raw image learned by the network because
     they were the most useful to solve the image classification task. Some layers
     are for example edge detectors.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是Inception模型的架构，图像从左侧输入，预测从右侧输出。最后一层的大小将是1000，并为每个类别提供一个概率。然而，之前的层是网络对原始图像的变换，因为这些层在解决图像分类任务时最有用。例如，一些层是边缘检测器。
 - en: '[![MLDB CNN](../Images/a4a00cd0af2e77a5b216fcbc7af524b3.png)](https://4.bp.blogspot.com/-TMOLlkJBxms/Vt3HQXpE2cI/AAAAAAAAA8E/7X7XRFOY6Xo/s1600/image03.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![MLDB CNN](../Images/a4a00cd0af2e77a5b216fcbc7af524b3.png)](https://4.bp.blogspot.com/-TMOLlkJBxms/Vt3HQXpE2cI/AAAAAAAAA8E/7X7XRFOY6Xo/s1600/image03.png)'
 - en: So the idea will be to run images through the network, but instead of getting
     the output of the last layer, that is specialised to the ImageNet task, getting
     the second to last, which will give us a conceptual numerical representation of
@@ -62,16 +82,22 @@
     can efficiently operate. We are leveraging hundreds of hours of GPU compute-­time
     that went into training the Inception model, but applying it to a completely new
     task.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以我们的想法是将图像传递到网络中，但不是获取最后一层的输出，而是获取倒数第二层，这将给我们一个图像的概念性数值表示。我们可以将该表示作为特征，提供给一个新的分类器，并在我们自己的任务上进行训练。因此，你可以将Inception模型视为从图像到特征向量的方式，新分类器可以高效地对其进行操作。我们利用了数百小时的GPU计算时间来训练Inception模型，但将其应用于完全新的任务。
 - en: Inception on MLDB
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MLDB上的Inception
 - en: Let’s get started! The code below uses our pymldb library. You can read more
     about it on the [MLDB Documentation](https://docs.mldb.ai/ipy/notebooks/_tutorials/_latest/Using%20pymldb%20Tutorial.html).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始吧！下面的代码使用了我们的pymldb库。你可以在[MLDB文档](https://docs.mldb.ai/ipy/notebooks/_tutorials/_latest/Using%20pymldb%20Tutorial.html)中了解更多信息。
 - en: What did we do here? We made a simple PUT call using pymldb to create the ​`inception`
     function, of type *[tensorflow.graph](https://docs.mldb.ai/doc/#/v1/plugins/tensorflow/doc/TensorflowGraph.md.html)*.
     It is parameterized using a JSON blob. The function loads a trained instance of
@@ -82,90 +108,133 @@
     to last layer. Using the *pool_3* layer will give us high level features, while
     the last layer called *softmax* is the one that is specialized to the ImageNet
     task.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里做了什么？我们使用pymldb进行了一个简单的PUT调用，创建了类型为*[tensorflow.graph](https://docs.mldb.ai/doc/#/v1/plugins/tensorflow/doc/TensorflowGraph.md.html)*的​`inception`函数。它使用JSON
+    blob进行参数化。该函数加载了一个训练好的Inception模型实例（请注意，MLDB可以透明地加载远程资源，以及压缩档案中的文件；[更多内容在这里](https://docs.mldb.ai/ipy/notebooks/_tutorials/_latest/Loading%20Data%20From%20An%20HTTP%20Server%20Tutorial.html)）。我们指定模型的输入将是位于*url*的远程资源，输出将是模型的​*pool_3*
+    层，即倒数第二层。使用*pool_3* 层将提供高级特征，而最后一层*softmax*是专门用于ImageNet任务的。
 - en: 'Now that the ​ inception function is created, it is available in SQL and as
     a REST endpoint. We can then run an image through the network with a simple SQL
     query. Here we’ll run Inception on the KDNuggets logo, and what we’ll get is the
     numerical representation of that image. Those 2048 numbers are what we can use
     as our feature vector:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在创建了​ inception 函数后，它可以在SQL中使用，也可以作为REST端点。然后，我们可以通过简单的SQL查询将图像传递到网络中。这里我们将Inception应用于KDNuggets徽标，得到的是该图像的数值表示。这2048个数字是我们可以用作特征向量的内容。
 - en: Preparing a training dataset with SQL
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用SQL准备训练数据集
 - en: 'Now we can import our data for training. We have a CSV file containing about
     200 links to car images from 3 popular brands: Audi, BMW and Tesla. It’s important
     to remember that although we are using a car dataset, you could replace it with
     your own images of anything you want.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以导入训练数据。我们有一个包含大约200个汽车图像链接的CSV文件，这些图像来自3个流行品牌：奥迪、宝马和特斯拉。重要的是要记住，尽管我们使用的是汽车数据集，但你可以用任何你想要的图像替代它。
 - en: 'We can import the CSV file in a dataset by running an ​[*import.text* procedure](https://docs.mldb.ai/doc/#builtin/procedures/importtextprocedure.md.html):'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过运行一个​[*import.text* 程序](https://docs.mldb.ai/doc/#builtin/procedures/importtextprocedure.md.html)来将CSV文件导入数据集。
 - en: 'We can generate some quick stats with SQL:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用SQL生成一些快速统计数据：
 - en: '![SQL results](../Images/40d084d116b38b185d2f5807714f7388.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL结果](../Images/40d084d116b38b185d2f5807714f7388.png)'
 - en: We can now use a procedure of type [transform](https://docs.mldb.ai/doc/#builtin/procedures/TransformDataset.md.html)
     to apply the ​*Inception* model over all images and store the results in another
     dataset. A transform procedure simply executes an SQL query and saves the result
     in a new dataset. Running the code below is essentially doing feature extraction
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以使用一种类型为[transform](https://docs.mldb.ai/doc/#builtin/procedures/TransformDataset.md.html)的过程来对所有图像应用*Inception*模型，并将结果存储在另一个数据集中。转换过程只是执行一个SQL查询，并将结果保存到一个新数据集中。运行下面的代码本质上就是进行特征提取。
 - en: over our image dataset.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 对我们的图像数据集进行处理。
 - en: Training a specialized model
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练一个专用模型
 - en: Now that we have features for all of our images, we use a procedure of type
     *[classifier.experiment](https://docs.mldb.ai/doc/#builtin/procedures/ExperimentProcedure.md.html)*
     to train and test a random forest classifier. The dataset will be split 50/50
     between train and test by default.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们已经为所有图像准备了特征，我们就使用一种类型为*[classifier.experiment](https://docs.mldb.ai/doc/#builtin/procedures/ExperimentProcedure.md.html)*的过程来训练和测试随机森林分类器。默认情况下，数据集会在训练和测试之间50/50地拆分。
 - en: Notice the contents of the ​`inputData` key, that specifies what data to use
     for training and testing, is SQL. The `{* EXCLUDING(label)}` is a good example
     of MLDB’s row expression syntax that is meant to work with sparse datasets with
     millions of columns.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意`inputData`键的内容，它指定了用于训练和测试的数据是SQL格式。`{* EXCLUDING(label)}`是MLDB行表达式语法的一个好例子，旨在处理具有数百万列的稀疏数据集。
 - en: 'Looking at the performance on the test set, this model is doing a pretty good
     job:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 从测试集的表现来看，这个模型的表现相当不错：
 - en: '![MLDB Out[10]](../Images/abd4814eadc1bdcae9850bd76368b649.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![MLDB Out[10]](../Images/abd4814eadc1bdcae9850bd76368b649.png)'
 - en: '![MLDB Out[11]](../Images/859c33d6a895df6860ea564c1e4483e5.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![MLDB Out[11]](../Images/859c33d6a895df6860ea564c1e4483e5.png)'
 - en: Doing real­time predictions
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实时预测
 - en: 'Now that we have a trained model, how do we use it to score new images? There
     are two things we need to do for this: extract the features from the image and
     then run that in our newly trained classifier. This is essentially our scoring
     pipeline.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了一个训练好的模型，我们如何用它来对新图像进行评分呢？我们需要做两件事：从图像中提取特征，然后将这些特征输入到我们新训练的分类器中。这本质上就是我们的评分管道。
 - en: What we do is create a function called *brand_predictor* of type [sql.expression](https://docs.mldb.ai/doc/#builtin/functions/SqlQueryFunction.md.html).
     This allows us to persist an SQL expression as a function that we can then call
     many times. When we trained our classifier above, the training procedure created
     a *car_brand_cls_scorer_0* automatically, available in the usual SQL/Rest, that
     will run the model. It will be expecting an input column named ​*features*.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们所做的是创建一个名为*brand_predictor*的函数，类型为[sql.expression](https://docs.mldb.ai/doc/#builtin/functions/SqlQueryFunction.md.html)。这允许我们将SQL表达式持久化为一个可以多次调用的函数。当我们上面训练分类器时，训练过程会自动创建一个*car_brand_cls_scorer_0*，可以在常规SQL/Rest中使用，该函数会运行模型。它会期望一个名为*features*的输入列。
 - en: 'And just like that we’re now ready to score new images off the internet:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样，我们现在已经准备好从互联网中对新图像进行评分了：
 - en: '[PRE0] {    "output": {      "scores": [        [          "\"audi\"",           [            -8,             "2016-05-05T04:18:03Z"          ]        ],         [          "\"bmw\"",           [            -7.333333492279053,             "2016-05-05T04:18:03Z"          ]        ],         [          "\"tesla\"",           [            0.2666666805744171,             "2016-05-05T04:18:03Z"          ]        ]      ]    }  }
     [PRE1]`'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE0] {    "output": {      "scores": [        [          "\"audi\"",           [            -8,             "2016-05-05T04:18:03Z"          ]        ],         [          "\"bmw\"",           [            -7.333333492279053,             "2016-05-05T04:18:03Z"          ]        ],         [          "\"tesla\"",           [            0.2666666805744171,             "2016-05-05T04:18:03Z"          ]        ]      ]    }  }
+    [PRE1]`'
