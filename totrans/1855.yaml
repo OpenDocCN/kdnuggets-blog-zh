@@ -1,53 +1,80 @@
 - en: A Tutorial on the Expectation Maximization (EM) Algorithm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 关于期望最大化（EM）算法的教程
 - en: 原文：[https://www.kdnuggets.com/2016/08/tutorial-expectation-maximization-algorithm.html](https://www.kdnuggets.com/2016/08/tutorial-expectation-maximization-algorithm.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/08/tutorial-expectation-maximization-algorithm.html](https://www.kdnuggets.com/2016/08/tutorial-expectation-maximization-algorithm.html)
 - en: '**By Elena Sharova, [codefying](https://codefying.wordpress.com/)**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Elena Sharova，[codefying](https://codefying.wordpress.com/)**。'
 - en: We are presented with some unlabelled data and we are told that it comes from
     a multi-variate Gaussian distribution. Our task is to come up with the hypothesis
     for the means and the variances of each distribution. For example, Figure 1 shows
     (labelled) data drawn from two Gaussians. We need to estimate the means and variances
     of the x’s and the y’s of the blue and red distribution. How are we going to do
     this?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到一些未标记的数据，并被告知这些数据来自多变量高斯分布。我们的任务是提出每个分布的均值和方差的假设。例如，图1展示了（标记的）来自两个高斯分布的数据。我们需要估计蓝色和红色分布的x值和y值的均值和方差。我们将如何做到这一点？
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![2-dimensional data](../Images/dcef432ff52338018c8ea9f7fd6872b5.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![二维数据](../Images/dcef432ff52338018c8ea9f7fd6872b5.png)'
 - en: '*Figure 1\. 2-dimensional data drawn from 2 normal distributions.*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1\. 从2个正态分布中抽取的二维数据。*'
 - en: Well, we can plot the data of each dimension and estimate the means by looking
     at the plots. For example, we could use a histogram plot to estimate that the
     mean of the x’s of the blue distribution is about 0.6 and the mean of the x’s
@@ -57,14 +84,21 @@
     distribution was drawn from *N(0.6, 0.003)* for blue and *N(0.02, 0.03)* for red.
     Can we do better than looking at the plots? Can we come up with a good estimates
     for the means and the variances in a more robust way?
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以绘制每个维度的数据，并通过查看图表来估计均值。例如，我们可以使用直方图来估计蓝色分布的x均值大约为0.6，红色分布的x均值大约为0.0。通过观察每个簇的扩展，我们可以估计蓝色x的方差较小，可能是0.0，而红色x的方差大约是0.025。这将是一个相当好的猜测，因为实际分布是从*
+    N(0.6, 0.003)*（蓝色）和* N(0.02, 0.03)*（红色）中抽取的。我们能比查看图表做得更好吗？我们能否用更稳健的方法得出均值和方差的良好估计？
 - en: '![Histogram](../Images/62aedaeff8b79ae24e91181d2c63b113.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![直方图](../Images/62aedaeff8b79ae24e91181d2c63b113.png)'
 - en: '*Figure 2\. Histogram of (unlabelled) data drawn from 2 normal distributions.*'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图2\. 从2个正态分布中抽取的（未标记）数据的直方图。*'
 - en: The **Expectation Maximization (EM)** algorithm can be used to generate the
     best hypothesis for the distributional parameters of some multi-modal data. Note
     that we say ‘the best’ hypothesis. But what is ‘the best’? The best hypothesis
@@ -72,19 +106,25 @@
     that maximizes the probability that this data we are looking at comes from K distributions,
     each with a mean m[k] and variance sigma[k]². In this tutorial we are assuming
     that we are dealing with K normal distributions.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**期望最大化（EM）**算法可以用来生成一些多模态数据的最佳分布参数假设。注意我们说的是“最佳”假设。但什么是“最佳”？最佳的分布参数假设是最大似然假设——即最大化我们看到的数据来自K个分布的概率，每个分布具有均值m[k]和方差sigma[k]²。在本教程中，我们假设我们处理的是K个正态分布。'
 - en: 'In a single modal normal distribution this hypothesis *h* is estimated directly
     from the data as:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在单模态正态分布中，这个假设 *h* 是直接从数据中估计出来的：
 - en: '`estimated m = ­m~ = sum(x[i])/N`*Equation 1*`estimated sigma2= sigma2~= sum(xi-
     m~)^2/N`*Equation 2*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Which are simply the trusted arithmetic average and variance. In a multi-modal
     distribution we need to estimate `h = [ m[1],m[2],...,m[K]; sigma[1]²,sigma[2]²,...,sigma[K]²
     ]`. The EM algorithm is going to help us to do this. Let’s see how.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'We begin with some initial estimate for each m[k]~ and sigma[k]²~. We will
@@ -98,11 +138,13 @@
     is the probability that a data point x[i], i=1,...N, was drawn from N(m[1]~, sigma[1]²~)
     and what is the probability that it was drawn from N(m[2]~, sigma[2]²~). By the
     normal density function we get:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '`P(x[i] belongs to N(m[1]~ , sigma[1]²~))=1/sqrt(2*pi* sigma[1]²~) * exp(-(x[i]-
     m[1]~)^2/(2*sigma[1]²~))`*Equation 3*`P(x[i] belongs to N(m[2]~ , sigma[2]²~))=1/sqrt(2*pi*
     sigma[2]²~) * exp(-(x[i]- m[2]~)^2/(2*sigma[2]²~))`*Equation 4*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: 'The individual probabilities only tell us half of the story because we still
@@ -111,10 +153,12 @@
     of each distribution for each data point. In a classification task this responsibility
     can be expressed as the probability that a data point x[i] belongs to some class
     c[k]:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '`P(x[i] belongs to c[k]) = omega[k]~ * P(x[i] belongs to N(m[1]~ , sigma[1]²~))
     / sum(omega[k]~ * P(x[i] belongs to N(m[1]~ , sigma[1]²~)))`*Equation 5*'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: 'In Equation 5 we introduce a new parameter omega[k]~ which is the probability
@@ -122,16 +166,19 @@
     each of our two clusters are equally likely to be picked. But like with m[k]~
     and sigma[k]²~ we do not really know the value for this parameter. Therefore we
     need to guess it and it is a part of our hypothesis:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '`h = [ m[1], m[2], ..., m[K]; sigma[1]², sigma[2]², ..., sigma[K]²; omega[1]~,
     omega[2~], ..., omega[K]~ ]`'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: You could be asking yourself where the denominator in Equation 5 comes from.
     The denominator is the sum of probabilities of observing x[i] in each cluster
     weighted by that cluster’s probability. Essentially, it is the total probability
     of observing x[i] in our data.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: 'If we are making hard cluster assignments, we will take the maximum P(x[i]
@@ -141,69 +188,103 @@
     *h* to *h''*. These two steps of estimating the distributional parameters and
     updating them after probabilistic data assignments to clusters is repeated until
     convergences to *h**. In summary, the two steps of the EM algorithm are:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们进行硬性集群分配，我们将取最大P(x[i] 属于 c[k])并将数据点分配到该集群。我们对每个数据点重复这种概率分配。最终，这将给我们第一个数据的‘重新洗牌’到K个集群。我们现在可以更新初始估计值
+    *h* 到 *h'*。这两个步骤：估计分布参数和在概率数据分配到集群后更新这些参数，将重复直到收敛到 *h*。总之，EM算法的两个步骤是：
 - en: 'E-step: perform probabilistic assignments of each data point to some class
     based on the current hypothesis *h* for the distributional class parameters;'
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: E步：基于当前假设 *h* 对每个数据点进行概率分配到某个类别；
 - en: 'M-step: update the hypothesis *h* for the distributional class parameters based
     on the new data assignments.'
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: M步：基于新的数据分配更新假设 *h* 对分布类别参数。
 - en: During the E-step we are calculating the expected value of cluster assignments.
     During the M-step we are calculating a new maximum likelihood for our hypothesis.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在E步中，我们计算集群分配的期望值。在M步中，我们计算我们假设的新最大似然。
 - en: '![Elena Sharova](../Images/4909e3d37b8462429b19e2f7b6ddc14a.png)**Bio: [Elena
     Sharova](https://codefying.wordpress.com/)** is a data scientist, financial risk
     analyst and software developer. She holds an MSc in Machine Learning and Data
     Mining from University of Bristol.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Elena Sharova](../Images/4909e3d37b8462429b19e2f7b6ddc14a.png)**简介: [Elena
+    Sharova](https://codefying.wordpress.com/)** 是一名数据科学家、金融风险分析师和软件开发人员。她拥有布里斯托大学的机器学习和数据挖掘硕士学位。'
 - en: '**Related**:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[A comparison between PCA and hierarchical clustering](/2016/02/qlucore-comparison-pca-hierarchical-clustering.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PCA与层次聚类的比较](/2016/02/qlucore-comparison-pca-hierarchical-clustering.html)'
 - en: '[6 crazy things Deep Learning and Topological Data Analysis can do with your
     data](/2015/11/crazy-deep-learning-topological-data-analysis.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习和拓扑数据分析能用你的数据做的6件疯狂的事情](/2015/11/crazy-deep-learning-topological-data-analysis.html)'
 - en: '[Data Science 102: K-means clustering is not a free lunch](/2015/01/data-science-102-kmeans-clustering-not-free-lunch.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学102：K-means聚类不是免费的午餐](/2015/01/data-science-102-kmeans-clustering-not-free-lunch.html)'
 - en: More On This Topic
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[遗传算法关键术语解析](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
 - en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树算法解析](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
 - en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习算法完整的端到端部署…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
 - en: '[Unlock the Secrets to Choosing the Perfect Machine Learning Algorithm!](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭示选择完美机器学习算法的秘密！](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
 - en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为你的数据集选择正确的聚类算法](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的DBSCAN聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
