@@ -1,746 +1,1137 @@
 - en: Gradient Boosted Decision Trees – A Conceptual Explanation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 梯度提升决策树——概念性解释
 - en: 原文：[https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html](https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html](https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Gradient boosted decision trees have proven to outperform other models. It’s
     because boosting involves implementing several models and aggregating their results.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度提升决策树已被证明优于其他模型。这是因为提升涉及实现多个模型并汇总它们的结果。
 - en: Gradient boosted models have recently become popular thanks to their performance
     in machine learning competitions on Kaggle.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度提升模型最近因在 Kaggle 机器学习竞赛中的表现而变得流行。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this article, we’ll see what gradient boosted decision trees are all about.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将深入探讨梯度提升决策树的全部内容。
 - en: Gradient boosting
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度提升
 - en: In [gradient boosting](https://en.wikipedia.org/wiki/Gradient_boosting#:~:text=Gradient%20boosting%20is%20a%20machine,prediction%20models%2C%20typically%20decision%20trees.),
     an ensemble of weak learners is used to improve the performance of a machine learning
     model. The weak learners are usually decision trees. Combined, their output results
     in better models.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [梯度提升](https://en.wikipedia.org/wiki/Gradient_boosting#:~:text=Gradient%20boosting%20is%20a%20machine,prediction%20models%2C%20typically%20decision%20trees.)
+    中，使用一组弱学习器来提升机器学习模型的性能。这些弱学习器通常是决策树。它们的组合输出结果更佳。
 - en: In case of regression, the final result is generated from the average of all
     weak learners. With classification, the final result can be computed as the class
     with the majority of votes from weak learners.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回归的情况下，最终结果是从所有弱学习器的平均值中生成的。在分类的情况下，最终结果可以计算为弱学习器中投票最多的类别。
 - en: In gradient boosting, weak learners work sequentially. Each model tries to improve
     on the error from the previous model. This is different from the bagging technique,
     where several models are fitted on subsets of the data in a parallel manner. These
     subsets are usually drawn randomly with replacement. A great example of bagging
     is in Random Forests®.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在梯度提升中，弱学习器按顺序工作。每个模型尝试改进上一个模型的错误。这与并行方式在数据子集上拟合多个模型的袋装技术不同。这些子集通常是随机抽取的。袋装技术的一个很好的例子是随机森林®。
 - en: '**The boosting process looks like this**:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提升过程如下**：'
 - en: Build an initial model with the data,
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用数据构建初始模型，
 - en: Run predictions on the whole data set,
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对整个数据集进行预测，
 - en: Calculate the error using the predictions and the actual values,
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用预测值和实际值计算误差，
 - en: Assign more weight to the incorrect predictions,
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为错误的预测分配更多的权重，
 - en: Create another model that attempts to fix errors from the last model,
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建另一个模型，尝试修正上一模型的错误，
 - en: Run predictions on the entire dataset with the new model,
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用新模型对整个数据集进行预测，
 - en: Create several models with each model aiming at correcting the errors generated
     by the previous one,
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建多个模型，每个模型旨在纠正前一个模型生成的错误，
 - en: Obtain the final model by weighting the mean of all the models.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过对所有模型的均值加权来获得最终模型。
 - en: Boosting algorithms in machine learning
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 机器学习中的提升算法
 - en: Let’s take a look at boosting algorithms in machine learning.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看看机器学习中的提升算法。
 - en: AdaBoost
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AdaBoost
 - en: AdaBoost fits a sequence of weak learners to the data. It then assigns more
     weight to incorrect predictions, and less weight to correct ones. This way the
     algorithm focuses more on observations that are harder to predict. The final result
     is obtained from the majority vote in classification, or the average in regression.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 将一系列弱学习器拟合到数据上。然后，它对错误预测赋予更多的权重，对正确预测赋予较少的权重。这样，算法就更加关注那些难以预测的观察结果。最终结果通过分类中的多数投票或回归中的平均值获得。
 - en: You can implement this algorithm using Scikit-learn. The `n_estimators` argument
     can be passed to it to indicate the number of weak learners needed. You can control
     the contribution of each weak learner using the `learning_rate` argument.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 Scikit-learn 实现这个算法。可以传递 `n_estimators` 参数来指示所需的弱学习器数量。你可以使用 `learning_rate`
+    参数控制每个弱学习器的贡献。
 - en: The algorithm uses decision trees as the base estimators by default. The base
     estimators and the parameters of the decision trees can be tuned to improve the
     performance of the model. By default, decision trees in AdaBoost have a single
     split.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法默认使用决策树作为基础估计器。可以调整基础估计器和决策树的参数，以提高模型的性能。默认情况下，AdaBoost 中的决策树只有一个分裂。
 - en: '**Classification using AdaBoost**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 AdaBoost 进行分类**'
 - en: You can use the `AdaBoostClassifier` from Scikit-learn to implement the AdaBoost
     model for classification problems. As you can see below, the parameters of the
     base estimator can be tuned to your preference. The classifier also accepts the
     number of estimators you want. This is the number of decision trees you need for
     the model.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 Scikit-learn 中的 `AdaBoostClassifier` 来实现用于分类问题的 AdaBoost 模型。正如下面所示，基础估计器的参数可以根据你的需要进行调整。分类器还接受你想要的估计器数量。这是你模型所需的决策树数量。
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Regression using AdaBoost**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 AdaBoost 进行回归**'
 - en: Applying AdaBoost to regression problems is similar to the classification process,
     with just a few cosmetic changes. First, you have to import the `AdaBoostRegressor`.
     Then, for the base estimator, you can use the `DecisionTreeRegressor`. Just like
     the previous one, you can tune the parameters of the decision tree regressor.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 AdaBoost 应用于回归问题类似于分类过程，只是有一些外观上的变化。首先，你需要导入 `AdaBoostRegressor`。然后，对于基础估计器，你可以使用
+    `DecisionTreeRegressor`。和之前一样，你可以调整决策树回归器的参数。
 - en: '[PRE1]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Scikit-learn gradient boosting estimator
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Scikit-learn 梯度提升估计器
 - en: Gradient boosting is different from AdaBoost, because the loss function optimization
     is done via gradient descent. Like AdaBoost, it also uses decision trees as weak
     learners. It also sequentially fits the trees. When adding subsequent trees, loss
     is minimized using gradient descent.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度提升与 AdaBoost 不同，因为损失函数优化是通过梯度下降来完成的。和 AdaBoost 一样，它也使用决策树作为弱学习器，并且它按顺序拟合这些树。当添加后续树时，通过梯度下降最小化损失。
 - en: In the Scikit-learn implementation, you can specify the number of trees. This
     is a parameter that should be looked at keenly, because specifying too many trees
     can lead to overfitting. On the other hand, specifying a very small number of
     trees can lead to underfitting.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Scikit-learn 的实现中，你可以指定树木的数量。这是一个需要仔细考虑的参数，因为指定过多的树木可能会导致过拟合。另一方面，指定的树木数量过少可能会导致欠拟合。
 - en: The algorithm lets you specify the learning rate. This dictates how fast the
     model will learn. A low learning rate will often require more trees in the model.
     This means more training time.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法允许你指定学习率。这决定了模型学习的速度。较低的学习率通常需要更多的树木，这意味着需要更多的训练时间。
 - en: Let’s now take a look at the implementation of gradient boosted trees in Scikit-learn.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来看看在 Scikit-learn 中梯度提升树的实现。
 - en: '**Classification with the Scikit-learn gradient boosting estimator**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Scikit-learn 梯度提升估计器进行分类**'
 - en: 'This is implemented using the `GradientBoostingClassifier`. Some of the parameters
     expected by this algorithm include:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这通过 `GradientBoostingClassifier` 实现。该算法预期的一些参数包括：
 - en: '`loss` defining the loss function to be optimized'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`loss` 定义了要优化的损失函数'
 - en: '`learning_rate` that determines the contribution of each tree'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`learning_rate` 决定了每棵树的贡献'
 - en: '`n_estimatorst` dictates the number of decision trees'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_estimators` 决定了决策树的数量'
 - en: '`max_depth` is the maximum depth of each estimator'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_depth` 是每个估计器的最大深度'
 - en: '[PRE2]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After fitting the classifier, you can obtain the importance of the features
     using the `feauture_importances_` attribute. This is usually referred to as the
     Gini importance.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 拟合分类器后，你可以使用 `feature_importances_` 属性来获得特征的重要性。这通常被称为基尼重要性。
 - en: '[PRE3]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Gradient boosted decision tree feature import](../Images/9ad0e30669cda02fa3b7eb4daa2ad64b.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![梯度提升决策树特征重要性图](../Images/9ad0e30669cda02fa3b7eb4daa2ad64b.png)'
 - en: The higher the value, the more important the feature is. The values in the obtained
     array will sum to 1.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 值越高，特征越重要。获得的数组中的值将总和为 1。
 - en: 'Note: Impurity-based importances are not always accurate, especially when there
     are too many features. In that case, you should consider using [permutation-based
     importances](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance).'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：基于不纯度的重要性并不总是准确的，特别是当特征过多时。在这种情况下，你应该考虑使用 [基于置换的重要性](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance)。
 - en: '**Regression with the Scikit-learn gradient boosting estimator**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Scikit-learn 梯度提升估计器进行回归**'
 - en: 'The Scikit-learn gradient boosting estimator can be implemented for regression
     using `GradientBoostingRegressor`. It takes parameters that are similar to the
     classification one:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-learn 梯度提升估计器可以使用 `GradientBoostingRegressor` 实现回归。它接受的参数类似于分类模型：
 - en: loss,
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 损失函数，
 - en: number of estimators,
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 估计器的数量，
 - en: maximum depth of the trees,
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 树的最大深度，
 - en: learning rate…
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 学习率…
 - en: …just to mention a few.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: …只是举几个例子。
 - en: '[PRE4]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Like the classification model, you can also obtain the feature importances for
     the regression algorithm.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 与分类模型类似，你也可以获得回归算法的特征重要性。
 - en: '[PRE5]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: XGBoost
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: XGBoost
 - en: '[XGBoost](https://neptune.ai/blog/how-to-organize-your-xgboost-machine-learning-ml-model-development-process) is
     a gradient boosting library supported for Java, Python, Java and C++, R, and Julia.
     It also uses an ensemble of weak decision trees.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[XGBoost](https://neptune.ai/blog/how-to-organize-your-xgboost-machine-learning-ml-model-development-process)
+    是一个支持 Java、Python、Java 和 C++、R 以及 Julia 的梯度提升库。它还使用了一个弱决策树的集合。'
 - en: 'It’s a linear model that does tree learning through parallel computations.
     The algorithm also ships with features for performing cross-validation, and showing
     the feature’s importance. The main features of this model are:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个通过并行计算进行树学习的线性模型。该算法还提供了进行交叉验证和显示特征重要性的功能。该模型的主要特点是：
 - en: accepts sparse input for tree booster and linear booster,
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接受稀疏输入用于树提升器和线性提升器，
 - en: supports custom evaluation and objective functions,
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持自定义评估和目标函数，
 - en: '`Dmatrix`, its optimized data structure improves its performance.'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Dmatrix`，其优化的数据结构提高了性能。'
 - en: 'Let’s take a look at how you can apply XGBoost in Python. The parameters accepted
     by the algorithm include:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下如何在 Python 中应用 XGBoost。该算法接受的参数包括：
 - en: '`objective` to define the type of task, say regression or classification;'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`objective` 用于定义任务类型，比如回归或分类；'
 - en: '`colsample_bytree` the subsample ratio of columns when constructing each tree.
     Subsampling happens once in every iteration. This number is usually a value between
     0 and 1;'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`colsample_bytree` 构建每棵树时的列子样本比例。子样本化在每次迭代中发生。这个值通常在 0 和 1 之间；'
 - en: '`learning_rate` that determines how fast or slow the model will learn;'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`learning_rate` 决定了模型学习的速度；'
 - en: '`max_depth` indicates the maximum depth for each tree. The more the trees,
     the greater model complexity, and the higher chances of overfitting;'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_depth` 指示每棵树的最大深度。树的数量越多，模型的复杂度越高，过拟合的可能性也越大；'
 - en: '`alpha` is the [L1 regularization](https://en.wikipedia.org/wiki/Regularization_(mathematics)) on
     weights;'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`alpha` 是 [L1 正则化](https://en.wikipedia.org/wiki/Regularization_(mathematics))
+    权重；'
 - en: '`n_estimators` is the number of decision trees to fit.'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_estimators` 是要拟合的决策树的数量。'
 - en: '**Classification with XGBoost**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**XGBoost 分类**'
 - en: 'After importing the algorithm, you define the parameters that you would like
     to use. Since this is a classification problem, the `binary: logistic` objective
     function is used. The next step is to use the `XGBClassifier` and unpack the defined
     parameters. You can tune these parameters until you obtain the ones that are optimal
     for your problem.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '在导入算法后，你定义希望使用的参数。由于这是一个分类问题，所以使用了 `binary: logistic` 目标函数。下一步是使用 `XGBClassifier`
+    并展开定义的参数。你可以调整这些参数，直到获得对你的问题最优的参数。'
 - en: '[PRE6]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Regression with XGBoost**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 XGBoost 进行回归**'
 - en: In regression, the `XGBRegressor` is used instead. The objective function, in
     this case, will be the `reg:squarederror`.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回归中，使用的是 `XGBRegressor`。在这种情况下，目标函数将是 `reg:squarederror`。
 - en: '[PRE7]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The XGBoost models also allow you to obtain the feature importances via the
     `feature_importances_` attribute.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost 模型还允许你通过 `feature_importances_` 属性获取特征的重要性。
 - en: '[PRE8]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Regressor feature import](../Images/5fcc6666d29f1ad8c2ae319bd0f2c8e8.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![回归器特征导入](../Images/5fcc6666d29f1ad8c2ae319bd0f2c8e8.png)'
 - en: You can easily visualize them using Matplotlib. This is done using the `plot_importance`
     function from XGBoost.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 Matplotlib 轻松可视化它们。这是通过 XGBoost 的 `plot_importance` 函数完成的。
 - en: '[PRE9]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Gradient boosted feature-importance](../Images/516c097cd9cb492a799b06e9c75c25d4.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![梯度提升特征重要性](../Images/516c097cd9cb492a799b06e9c75c25d4.png)'
 - en: The `save_model` function can be used for saving your model. You can then send
     this model to your model registry.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '`save_model` 函数可用于保存你的模型。然后你可以将这个模型发送到你的模型注册中心。'
 - en: '[PRE10]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Check Neptune docs about integration with [XGBoost](https://docs.neptune.ai/essentials/integrations/machine-learning-frameworks/xgboost) and
     with [matplotlib](https://docs.neptune.ai/essentials/integrations/visualization-libraries/matplotlib).
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看 Neptune 文档关于与 [XGBoost](https://docs.neptune.ai/essentials/integrations/machine-learning-frameworks/xgboost)
+    和 [matplotlib](https://docs.neptune.ai/essentials/integrations/visualization-libraries/matplotlib)
+    的集成。
 - en: LightGBM
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LightGBM
 - en: '[LightGBM](https://neptune.ai/blog/how-to-organize-your-lightgbm-ml-model-development-process-examples-of-best-practices)
     is different from other gradient boosting frameworks because it uses a leaf-wise
     tree growth algorithm. Leaf-wise tree growth algorithms are known to converge
     faster than depth-wise growth algorithms. However, they’re more prone to overfitting.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '[LightGBM](https://neptune.ai/blog/how-to-organize-your-lightgbm-ml-model-development-process-examples-of-best-practices)
+    与其他梯度提升框架不同，因为它使用叶子优先的树生长算法。叶子优先的树生长算法已知比深度优先算法收敛更快。然而，它们更容易过拟合。'
 - en: '![Leaf wise tree growth](../Images/3cb421772a8f89c5b77b76605f11036d.png)[*Source*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![按叶子生长的树](../Images/3cb421772a8f89c5b77b76605f11036d.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)'
 - en: The algorithm is [histogram-based](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html),
     so it places continuous values into discrete bins. This leads to faster training
     and efficient memory utilization.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法是 [基于直方图](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)
+    的，因此它将连续值放入离散箱中。这可以导致更快的训练和高效的内存利用。
 - en: 'Other notable features from this algorithm include:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法的其他显著特性包括：
 - en: support for GPU training,
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持 GPU 训练，
 - en: native support for categorical features,
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 原生支持类别特征，
 - en: ability to handle large-scale data,
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理大规模数据的能力，
 - en: handles missing values by default.
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认处理缺失值。
 - en: 'Let’s take a look at some of the main parameters of this algorithm:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看看该算法的一些主要参数：
 - en: '`max_depth` the maximum depth of each tree;'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_depth` 每棵树的最大深度；'
 - en: '`objective` which defaults to regression;'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`objective` 默认为回归；'
 - en: '`learning_rate` the boosting learning rate;'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`learning_rate` 提升学习率；'
 - en: '`n_estimators` the number of decision trees to fit;'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_estimators` 拟合的决策树数量；'
 - en: '`device_type` whether you’re working on a CPU or GPU.'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`device_type` 指你是在 CPU 还是 GPU 上工作。'
 - en: '**Classification with LightGBM**'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 LightGBM 进行分类**'
 - en: Training a binary classification model can be done by setting `binary` as the
     objective. If it’s a multi-classification problem, the `multiclass` objective
     is used.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将 `binary` 设置为目标，可以训练一个二分类模型。如果是多分类问题，则使用 `multiclass` 目标。
 - en: The dataset is also converted to LightGBM’s `Dataset` format. Training the model
     is then done using the `train` function. You can also pass the validation datasets
     using the `valid_sets` parameter.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集还被转换为 LightGBM 的 `Dataset` 格式。然后使用 `train` 函数训练模型。你也可以通过 `valid_sets` 参数传递验证数据集。
 - en: '[PRE11]'
+  id: totrans-110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '**Regression with LightGBM**'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 LightGBM 进行回归**'
 - en: For regression with LightGBM, you just need to change the objective to `regression`.
     The boosting type is Gradient Boosting Decision Tree by default.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于使用 LightGBM 进行回归，你只需将目标更改为 `regression`。默认的提升类型是梯度提升决策树。
 - en: If you like, you can change this to the random forest algorithm, `dart` — Dropouts
     meet Multiple Additive Regression Trees, or  `goss` — Gradient-based One-Side
     Sampling.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你愿意，你可以将其更改为随机森林算法，`dart` —— Dropouts meet Multiple Additive Regression Trees，或
+    `goss` —— Gradient-based One-Side Sampling。
 - en: '[PRE12]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: You can also use LightGBM to plot the model’s feature importance.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以使用 LightGBM 绘制模型的特征重要性。
 - en: '[PRE13]'
+  id: totrans-116
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![lgb.plot_importance](../Images/98b83d78b753c41c28f904a42ece95f7.png)'
+  id: totrans-117
   prefs: []
   type: TYPE_IMG
+  zh: '![lgb.plot_importance](../Images/98b83d78b753c41c28f904a42ece95f7.png)'
 - en: LightGBM also has a built-in function for saving the model. That function is
     `save_model`.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 还内置了一个保存模型的功能。这个功能是 `save_model`。
 - en: '[PRE14]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: CatBoost
+  id: totrans-120
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CatBoost
 - en: '[CatBoost](https://github.com/catboost) is a depth-wise gradient boosting library
     developed by Yandex. The algorithm grows a balanced tree using oblivious decision
     trees.'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '[CatBoost](https://github.com/catboost) 是 Yandex 开发的深度优先梯度提升库。该算法使用无知决策树生长平衡树。'
 - en: It uses the same features to make the right and left split at each level of
     the tree.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 它在树的每个级别使用相同的特征进行左右拆分。
 - en: For example in the image below, you can see that `297,value>0.5` is used through
     that level.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如在下面的图像中，你可以看到 `297,value>0.5` 是在那个级别使用的。
 - en: '![Gradient-boosting-catboost](../Images/c464403bbb3b7dff15de9e6324cf0ac7.png)'
+  id: totrans-124
   prefs: []
   type: TYPE_IMG
+  zh: '![梯度提升 CatBoost](../Images/c464403bbb3b7dff15de9e6324cf0ac7.png)'
 - en: 'Other notable features of [CatBoost](https://catboost.ai/news/catboost-enables-fast-gradient-boosting-on-decision-trees-using-gpus) include:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '[CatBoost](https://catboost.ai/news/catboost-enables-fast-gradient-boosting-on-decision-trees-using-gpus)
+    的其他显著特性包括：'
 - en: native support for categorical features,
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 原生支持类别特征，
 - en: supports training on multiple GPUs,
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持在多个 GPU 上进行训练，
 - en: results in good performance with the default parameters,
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用默认参数可获得良好的性能，
 - en: fast prediction via CatBoost’s model applier,
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 CatBoost 的模型应用程序实现快速预测，
 - en: handles missing values natively,
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 原生处理缺失值，
 - en: support for regression and classification problems.
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持回归和分类问题。
 - en: 'Let’s now mention a couple of training parameters from CatBoost:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们提及一些 CatBoost 的训练参数：
 - en: '`loss_function` the loss to be used for classification or regression;'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`loss_function` 分类或回归时使用的损失函数；'
 - en: '`eval_metric` the model’s evaluation metric;'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`eval_metric` 模型的评估指标；'
 - en: '`n_estimators` the maximum number of decision trees;'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_estimators` 决策树的最大数量；'
 - en: '`learning_rate` determines how fast or slow the model will learn;'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`learning_rate` 决定模型学习的快慢；'
 - en: '`depth` the maximum depth for each tree;'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`depth` 每棵树的最大深度；'
 - en: '`ignored_features` determines the features that should be ignored during training;'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ignored_features` 决定训练过程中应该忽略的特征；'
 - en: '`nan_mode` the method that will be used to deal with missing values;'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nan_mode` 处理缺失值的方法；'
 - en: '`cat_features` an array of categorical columns;'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cat_features` 一个包含类别列的数组；'
 - en: '`text_features` for declaring text-based columns.'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`text_features` 用于声明基于文本的列。'
 - en: '**Classification with CatBoost**'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 CatBoost 进行分类**'
 - en: For classification problems,`CatBoostClassifier` is used. Setting `plot=True`
     during the training process will visualize the model.
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于分类问题，使用`CatBoostClassifier`。在训练过程中设置 `plot=True` 将可视化模型。
 - en: '[PRE15]'
+  id: totrans-144
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![CatBoostClassifier](../Images/cb4a66e7e6430508805ac7c92fea9abd.png)'
+  id: totrans-145
   prefs: []
   type: TYPE_IMG
+  zh: '![CatBoostClassifier](../Images/cb4a66e7e6430508805ac7c92fea9abd.png)'
 - en: '**Regression with CatBoost**'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 CatBoost 进行回归**'
 - en: In the case of regression, the `CatBoostRegressor` is used.
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回归的情况下，使用 `CatBoostRegressor`。
 - en: '[PRE16]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: You can also use the `feature_importances_` to obtain the ranking of the features
     by their importance.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以使用 `feature_importances_` 来获取特征按重要性排名。
 - en: '[PRE17]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '![model.feature_importances_](../Images/1f751bb52e8a8b3b02715d3037fa158f.png)'
+  id: totrans-151
   prefs: []
   type: TYPE_IMG
+  zh: '![model.feature_importances_](../Images/1f751bb52e8a8b3b02715d3037fa158f.png)'
 - en: The algorithm also provides support for performing cross-validation. This is
     done using the `cv` function while passing the required parameters.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法还提供了交叉验证支持。这是通过使用 `cv` 函数并传递所需参数来完成的。
 - en: Passing `plot=”True”` will visualize the cross-validation process. The `cv`
     function expects the dataset to be in CatBoost’s `Pool` format.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 传递 `plot=”True”` 将可视化交叉验证过程。`cv` 函数期望数据集为 CatBoost 的 `Pool` 格式。
 - en: '[PRE18]'
+  id: totrans-154
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: You can also use CatBoost to perform a grid search. This is done using the `grid_search`
     function. After searching, CatBoost trains on the best parameters.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以使用 CatBoost 进行网格搜索。通过 `grid_search` 函数完成此操作。搜索后，CatBoost 在最佳参数上进行训练。
 - en: You should not have fitted the model before this process. Passing the `plot=True`
     parameter will visualize the grid search process.
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此过程之前，你不应已拟合模型。传递 `plot=True` 参数将可视化网格搜索过程。
 - en: '[PRE19]'
+  id: totrans-157
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: CatBoost also enables you to visualize a single tree in the model. This is done
     using the `plot_tree` function and passing the index of the tree you would like
     to visualize.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: CatBoost 还允许你可视化模型中的单棵树。使用 `plot_tree` 函数并传递要可视化的树的索引来实现。
 - en: '[PRE20]'
+  id: totrans-159
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '![Regression with catboost](../Images/6cd1b451f8b3d417236c758f41979021.png)'
+  id: totrans-160
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 CatBoost 进行回归](../Images/6cd1b451f8b3d417236c758f41979021.png)'
 - en: Advantages of gradient boosting trees
+  id: totrans-161
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度提升树的优点
 - en: 'There are several reasons as to why you would consider using gradient boosting
     tree algorithms:'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: 有几个理由可以考虑使用梯度提升树算法：
 - en: generally more accurate compare to other modes,
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与其他模型相比通常更准确，
 - en: train faster especially on larger datasets,
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在较大数据集上训练更快，
 - en: most of them provide support handling categorical features,
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大多数算法支持处理分类特征，
 - en: some of them handle missing values natively.
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其中一些算法本身就能处理缺失值。
 - en: Disadvantages of gradient boosting trees
+  id: totrans-167
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度提升树的缺点
 - en: 'Let’s now address some of the challenges faced when using gradient boosted
     trees:'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们讨论使用梯度提升树时面临的一些挑战：
 - en: 'prone to overfitting: this can be solved by applying L1 and L2 regularization
     penalties. You can try a low learning rate as well;'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 易于过拟合：可以通过应用L1和L2正则化惩罚来解决这个问题。你也可以尝试较低的学习率；
 - en: models can be computationally expensive and take a long time to train, especially
     on CPUs;
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型可能计算开销大，训练时间长，尤其是在CPU上；
 - en: hard to interpret the final models.
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终模型难以解释。
 - en: Final thoughts
+  id: totrans-172
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, we explored how to implement gradient boosting decision trees
     in your machine learning problems. We also walked through various boosting-based
     algorithms that you can start using right away.
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们探讨了如何在机器学习问题中实现梯度提升决策树。我们还介绍了各种基于提升的算法，你可以立即开始使用。
 - en: 'Specifically, we’ve covered:'
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们特别涵盖了：
 - en: what is gradient boosting,
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是梯度提升，
 - en: how gradient boosting works,
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 梯度提升的工作原理，
 - en: various types of gradient boosting algorithms,
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 各种类型的梯度提升算法，
 - en: how to use gradient boosting algorithms for regression and classification problems,
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用梯度提升算法解决回归和分类问题，
 - en: the advantages of gradient boosting trees,
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 梯度提升树的优点，
 - en: disadvantages of gradient boosting trees,
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 梯度提升树的缺点，
 - en: …and so much more.
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: …还有更多内容。
 - en: You’re all set to start boosting your machine learning models.
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 你已准备好开始提升你的机器学习模型。
 - en: Resources
+  id: totrans-183
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 资源
 - en: '[Gradient boosting in TensorFlow](https://www.tensorflow.org/tutorials/estimator/boosted_trees_model_understanding)'
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow中的梯度提升](https://www.tensorflow.org/tutorials/estimator/boosted_trees_model_understanding)'
 - en: '[Histogram-based gradient boosting ](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于直方图的梯度提升](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)'
 - en: '[Classification notebook ](https://colab.research.google.com/drive/1O6ChgoMcnEdr4opf2d1Qgoltw_VMYzzn?usp=sharing)'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类笔记本](https://colab.research.google.com/drive/1O6ChgoMcnEdr4opf2d1Qgoltw_VMYzzn?usp=sharing)'
 - en: '[Regression notebook ](https://colab.research.google.com/drive/1LE0Hj0axWfjL7DqWP04NX_tb6gzLpk-t?usp=sharing)'
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归笔记本](https://colab.research.google.com/drive/1LE0Hj0axWfjL7DqWP04NX_tb6gzLpk-t?usp=sharing)'
 - en: '**Bio: [Derrick Mwiti](https://www.linkedin.com/in/mwitiderrick/)** is a data
     scientist who has a great passion for sharing knowledge. He is an avid contributor
     to the data science community via blogs such as Heartbeat, Towards Data Science,
@@ -749,52 +1140,80 @@
     He also trains and works with various institutions to implement data science solutions
     as well as to upskill their staff. You might want to check his [Complete Data
     Science & Machine Learning Bootcamp in Python course](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4).'
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [德里克·穆伊提](https://www.linkedin.com/in/mwitiderrick/)** 是一位对知识分享充满热情的数据科学家。他通过Heartbeat、Towards
+    Data Science、Datacamp、Neptune AI、KDnuggets等博客积极贡献于数据科学社区。他的内容在互联网上的浏览量已超过一百万次。德里克还是一位作者和在线讲师。他还与各种机构合作，实施数据科学解决方案以及提升其员工技能。你可以查看他的
+    [Python完整数据科学与机器学习训练营课程](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4)。'
 - en: '[Original](https://neptune.ai/blog/gradient-boosted-decision-trees-guide).
     Reposted with permission.'
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://neptune.ai/blog/gradient-boosted-decision-trees-guide)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[LightGBM: A Highly-Efficient Gradient Boosting Decision Tree](/2020/06/lightgbm-gradient-boosting-decision-tree.html)'
+  id: totrans-191
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LightGBM：一种高效的梯度提升决策树](/2020/06/lightgbm-gradient-boosting-decision-tree.html)'
 - en: '[The Best Machine Learning Frameworks & Extensions for Scikit-learn](/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html)'
+  id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最佳机器学习框架与Scikit-learn扩展](/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html)'
 - en: '[Fast Gradient Boosting with CatBoost](/2020/10/fast-gradient-boosting-catboost.html)'
+  id: totrans-193
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用CatBoost进行快速梯度提升](/2020/10/fast-gradient-boosting-catboost.html)'
 - en: More On This Topic
+  id: totrans-194
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  id: totrans-195
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从头开始学习机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
 - en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  id: totrans-196
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树与随机森林，解释](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-197
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[广义和可扩展的最优稀疏决策树（GOSDT）](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[Demystifying Decision Trees for the Real World](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)'
+  id: totrans-198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭示决策树在现实世界中的应用](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)'
 - en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  id: totrans-199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
 - en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  id: totrans-200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻 22:n12, 3月 23: 最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)'
