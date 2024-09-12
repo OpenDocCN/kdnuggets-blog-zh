@@ -1,15 +1,19 @@
 - en: Building a Recommendation System with Hugging Face Transformers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![Building a Recommendation System with Hugging Face Transformers](../Images/a61a757863330ab6619d9dd0c0bdd909.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '[Image by jcomp on Freepik](https://www.freepik.com/free-vector/man-who-thinks-idea-is-admired-by-thumbs-up_11879378.htm#fromView=search&page=1&position=31&uuid=f9d98eb0-c0b9-4681-a4df-3026685c1dea)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: We have relied on software in our phones and computers in the modern era. Many
@@ -17,37 +21,45 @@
     have changed how we live, as these applications make things easier. To make things
     even better, the business often provides features that allow recommendations from
     the data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: The basis of recommendation systems is to predict what the user might interested
     in based on the input. The system would provide the closest items based on either
     the similarity between the items (content-based filtering) or the behavior (collaborative
     filtering).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: With many approaches to the recommendation system architecture, we can use the
@@ -55,158 +67,227 @@
     package. If you didn’t know, Hugging Face Transformers is an open-source Python
     package that allows APIs to easily access all the pre-trained NLP models that
     support tasks such as text processing, generation, and many others.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: This article will use the Hugging Face Transformers package to develop a simple
     recommendation system based on embedding similarity. Let’s get started.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: Develop a Recommendation System with Hugging Face Transformers
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'Before we start the tutorial, we need to install the required packages. To
     do that, you can use the following code:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: You can select the suitable version for your environment via their website for
     the [Torch](https://pytorch.org/get-started/locally/) installation.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: As for the dataset example, we would use the Anime recommendation dataset example
     from [Kaggle](https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database?select=anime.csv).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: Once the environment and the dataset are ready, we will start the tutorial.
     First, we need to read the dataset and prepare them.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: In the code above, we read the dataset with Pandas and dropped all the missing
     data. Then, we create a feature called "description" that contains all the information
     from the available data, such as name, genre, type, and episode number. The new
     column would become our basis for the recommendation system. It would be better
     to have more complete information, such as the anime plot and summary, but let’s
     be content with this one for now.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述代码中，我们使用Pandas读取数据集并删除了所有缺失的数据。然后，我们创建了一个名为“description”的特征，其中包含了可用数据中的所有信息，如名称、类型、类别和集数。这个新列将成为我们推荐系统的基础。如果能有更完整的信息，例如动漫情节和概要，会更好，但我们暂时就用这个吧。
 - en: Next, we would use Hugging Face Transformers to load an embedding model and
     transform the text into a numerical vector. Specifically, we would use sentence
     embedding to transform the whole sentence.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将使用Hugging Face Transformers加载嵌入模型并将文本转换为数值向量。具体来说，我们将使用句子嵌入来转换整个句子。
 - en: The recommendation system would be based on the embedding from all the anime
     “description” we will perform soon. We would use the cosine similarity method,
     which measures the similarity of two vectors. By measuring the similarity between
     the anime “description” embedding and the user's query input embedding, we can
     get precise items to recommend.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 推荐系统将基于我们将要执行的所有动漫“描述”的嵌入。我们将使用余弦相似度方法，它衡量两个向量的相似度。通过测量动漫“描述”嵌入与用户查询输入嵌入之间的相似度，我们可以获得精准的推荐项目。
 - en: The embedding similarity approach sounds simple, but it can be powerful compared
     to the classic recommendation system model, as it can capture the semantic relationship
     between words and provide contextual meaning for the recommendation process.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 嵌入相似度方法听起来简单，但与经典的推荐系统模型相比，它可能更为强大，因为它能够捕捉词语之间的语义关系，为推荐过程提供上下文意义。
 - en: We would use the embedding model sentence transformers from the Hugging Face
     for this tutorial. To transform the sentence into embedding, we would use the
     following code.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用Hugging Face的嵌入模型句子变换器。为了将句子转换为嵌入，我们将使用以下代码。
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Try the embedding process and see the vector result with the following code.
     However, I would not show the output as it’s pretty long.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试嵌入过程，并用以下代码查看向量结果。不过，我不会展示输出，因为它相当长。
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: To make things easier, Hugging Face maintains a Python package for embedding
     sentence transformers, which would minimize the whole transformation process in
     3 lines of code. Install the necessary package using the code below.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了简化操作，Hugging Face 维护了一个用于嵌入句子变换器的Python包，这将把整个转换过程缩减到3行代码。请使用以下代码安装必要的包。
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Then, we can transform the whole anime “description” with the following code.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们可以用以下代码将整个动漫“描述”转换为嵌入。
 - en: '[PRE5]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: With the embedding database is ready, we would create a function to take user
     input and perform cosine similarity as a recommendation system.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 当嵌入数据库准备好后，我们会创建一个函数来接收用户输入并执行余弦相似度，以作为推荐系统。
 - en: '[PRE6]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Now that everything is ready, we can try the recommendation system. Here is
     an example of acquiring the top five anime recommendations from the user input
     query.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在一切准备就绪，我们可以尝试推荐系统。以下是从用户输入查询中获取前五个动漫推荐的示例。
 - en: '[PRE7]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The result is all of the comedy anime, as we want the funny anime. Most of them
     also include anime, which is suitable to watch with friends from the genre. Of
     course, the recommendation would be even better if we had more detailed information.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是所有的喜剧动漫，因为我们想要搞笑的动漫。它们大多数也包括了适合与朋友一起观看的类型。当然，如果我们有更详细的信息，推荐会更好。
 - en: Conclusion
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: A Recommendation System is a tool for predicting what users might be interested
     in based on the input. Using Hugging Face Transformers, we can build a recommendation
     system that uses the embedding and cosine similarity approach. The embedding approach
     is powerful as it can account for the text's semantic relationship and contextual
     meaning.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 推荐系统是一种根据输入预测用户可能感兴趣内容的工具。使用Hugging Face Transformers，我们可以构建一个利用嵌入和余弦相似度方法的推荐系统。嵌入方法非常强大，因为它能够考虑文本的语义关系和上下文意义。
 - en: '**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha
     Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** is a data science
     assistant manager and data writer. While working full-time at Allianz Indonesia,
     he loves to share Python and data tips via social media and writing media. Cornellius
     writes on a variety of AI and machine learning topics.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha
+    Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一名数据科学助理经理和数据撰稿人。在全职工作于
+    Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据的技巧。Cornellius 在各种 AI 和机器学习主题上进行撰写。'
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
 - en: '[How to Use GPT for Generating Creative Content with Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 GPT 生成创意内容与 Hugging Face](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 为亚马逊产品构建推荐系统](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
 - en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实施推荐系统的十个关键经验教训](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
 - en: '[How to Build a Real-Time Recommendation Engine Using Graph Databases](https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用图数据库构建实时推荐引擎](https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html)'
