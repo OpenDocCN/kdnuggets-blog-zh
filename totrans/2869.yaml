@@ -1,341 +1,508 @@
 - en: 'Feature Selection: Beyond feature importance?'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特征选择：超越特征重要性？
 - en: 原文：[https://www.kdnuggets.com/2019/10/feature-selection-beyond-feature-importance.html](https://www.kdnuggets.com/2019/10/feature-selection-beyond-feature-importance.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/10/feature-selection-beyond-feature-importance.html](https://www.kdnuggets.com/2019/10/feature-selection-beyond-feature-importance.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dor Amir](https://www.linkedin.com/in/dor-amir-07a35155/), Data Science
     Manager, [Guesty](https://www.guesty.com/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Dor Amir](https://www.linkedin.com/in/dor-amir-07a35155/)，数据科学经理，[Guesty](https://www.guesty.com/)**'
 - en: In machine learning, Feature Selection is the process of choosing features that
     are most useful for your prediction. Although it sounds simple it is one of the
     most complex problems in the work of creating a new machine learning model.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，特征选择是选择对预测最有用的特征的过程。虽然听起来简单，但它是创建新机器学习模型中最复杂的问题之一。
 - en: In this post, I will share with you some of the approaches that were researched
     during the last project I led at [Fiverr](https://www.fiverr.com/).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将与你分享一些在我最近主持的项目中研究过的方法，项目在 [Fiverr](https://www.fiverr.com/)。
 - en: You will get some ideas on the basic method I tried and also the more complex
     approach, which got the best results — removing over 60% of the features, while
     maintaining accuracy and achieving more stability for our model. I’ll also be
     sharing our improvement to this algorithm.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将了解到我尝试的基本方法以及更复杂的方法，这种方法取得了最佳结果——去除了超过60%的特征，同时保持准确性并为我们的模型实现了更高的稳定性。我还会分享我们对这一算法的改进。
 - en: '![](../Images/66bc31fee8dfdcfb378721021bd038cb.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/66bc31fee8dfdcfb378721021bd038cb.png)'
 - en: Why is it SO IMPORTANT to do Feature Selection?
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么特征选择如此重要？
 - en: If you build a machine learning model, you know how hard it is to identify which
     features are important and which are just noise.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你构建了一个机器学习模型，你会知道识别哪些特征重要、哪些只是噪声是多么困难。
 - en: Removing the noisy features will help with memory, computational cost and the
     accuracy of your model.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 去除噪声特征将有助于节省内存、降低计算成本并提高模型的准确性。
 - en: Also, by removing features you will help avoid the overfitting of your model.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，通过去除特征，你将有助于避免模型的过拟合。
 - en: Sometimes, you have a feature that makes business sense, but it doesn’t mean
     that this feature will help you with your prediction.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时候，你有一个在业务上有意义的特征，但这并不意味着这个特征会帮助你的预测。
 - en: You need to remember that features can be useful in one algorithm (say, a decision
     tree), and may go underrepresented in another (like a regression model) — not
     all features are born alike :)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要记住，特征在一个算法中（比如决策树）可能是有用的，而在另一个算法中（如回归模型）可能会被低估——并不是所有特征都是一样的 :)
 - en: Irrelevant or partially relevant features can negatively impact model performance.
     Feature Selection and Data Cleaning should be the first and most important step
     in designing your model.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 无关或部分相关的特征可能会对模型性能产生负面影响。特征选择和数据清洗应该是设计模型的第一步，也是最重要的一步。
 - en: 'Feature Selection Methods:'
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征选择方法：
 - en: Although there are a lot of techniques for Feature Selection, like backward
     elimination, lasso regression. In this post, I will share 3 methods that I have
     found to be most useful to do better Feature Selection, each method has its own
     advantages.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管有很多特征选择技术，如向后消除法、套索回归。在这篇文章中，我将分享我发现的三种最有用的特征选择方法，每种方法都有其优点。
 - en: “All But X”
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: “All But X”
 - en: The name “All But X” was given to this technique at Fiverr. This technique is
     simple, but useful.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: “All But X”这个名字是在Fiverr给这个技术起的。这个技术简单但有用。
 - en: You run your train and evaluation in iterations
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你在迭代中运行训练和评估
 - en: In each iteration, you remove a single feature.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在每次迭代中，你去除一个特征。
 - en: If you have a large number of features, you can remove a “family” of features
     — we, at Fiverr, usually aggregate features in different times, 30 days clicks,
     60 days clicks, etc. This is a family of features.
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果你有大量的特征，你可以去除一“组”特征——在Fiverr，我们通常将特征聚合在不同的时间段，比如30天点击、60天点击等。这是一组特征。
 - en: Check your evaluation metrics against the baseline.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检查你的评估指标与基线的对比。
 - en: The goal of this technique is to see which of the family of features don’t affect
     the evaluation, or if even removing it improves the evaluation.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种技术的目标是查看一组特征中的哪些不影响评估，或者是否甚至去除这些特征可以改善评估。
 - en: '![Figure](../Images/469721269482cc6e716fcab6b2c761a3.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/469721269482cc6e716fcab6b2c761a3.png)'
 - en: '*“All but X” diagram of running the full flow — after running all the iterations,
     we compared to check which one didn’t affect the model’s accuracy.*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*“所有X”图表显示完整流程——在运行所有迭代后，我们进行比较以检查哪个特征没有影响模型的准确性。*'
 - en: The problem with this method is that by removing one feature at a time, you
     don’t get the effect of features on each other (non-linear effect). Maybe the
     combination of feature X and feature Y is making the noise, and not only feature
     X.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个方法的问题在于，通过一次移除一个特征，你无法得到特征间相互作用的效果（非线性效果）。也许特征X和特征Y的组合在制造噪音，而不仅仅是特征X。
 - en: Feature Importance + Random Features
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征重要性 + 随机特征
 - en: Another approach we tried, is using the feature importance that most of the
     machine learning model APIs have.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们尝试的另一种方法是使用大多数机器学习模型 API 提供的特征重要性。
 - en: 'What we did, is not just taking the top N feature from the feature importance.
     We added 3 random features to our data:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们所做的，不仅仅是从特征重要性中取前N个特征。我们向数据中添加了3个随机特征：
 - en: Binary random feature ( 0 or 1)
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 二元随机特征（0或1）
 - en: Uniform between 0 to 1 random feature
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 0到1之间均匀分布的随机特征
 - en: Integer random feature
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 整数随机特征
 - en: After the feature important list, we only took the feature that was higher than
     the random features.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在特征重要性列表中，我们仅保留那些比随机特征重要的特征。
 - en: It is important to take different distributions of random features, as each
     distribution can have a different effect.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是使用不同分布的随机特征，因为每种分布可能会有不同的效果。
 - en: In trees, the model “prefers” continuous features (because of the splits), so
     those features will be located higher up in the hierarchy. That’s why you need
     to compare each feature to its equally distributed random feature.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在决策树中，模型“更偏爱”连续特征（因为分裂的原因），所以这些特征通常会位于层级的较高位置。这就是为什么你需要将每个特征与其等量分布的随机特征进行比较的原因。
 - en: Boruta
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Boruta
 - en: '[Boruta](http://feature%20selection%20with%20the%20boruta%20package%20-%20journal%20of%20...%20%20https//www.jstatsoft.org%20%E2%80%BA%20article%20%E2%80%BA%20view) is
     a feature ranking and selection algorithm that was developed at the University
     of Warsaw. This algorithm is based on random forests, but can be used on XGBoost
     and different tree algorithms as well.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Boruta](http://feature%20selection%20with%20the%20boruta%20package%20-%20journal%20of%20...%20%20https//www.jstatsoft.org%20%E2%80%BA%20article%20%E2%80%BA%20view)
+    是一种特征排名和选择算法，开发于华沙大学。这个算法基于随机森林，但也可以用于XGBoost和其他树算法。'
 - en: At Fiverr, I used this algorithm with some improvements to XGBoost ranking and
     classifier models that I will elaborate on briefly.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Fiverr，我对XGBoost排序和分类模型使用了这个算法，并进行了一些改进，我会简要说明。
 - en: This algorithm is a kind of combination of both approaches I mentioned above.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个算法是我上面提到的两种方法的结合。
 - en: Creating a “shadow” feature for each feature on our dataset, with the same feature
     values but only shuffled between the rows
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为数据集中的每个特征创建一个“影子”特征，具有相同的特征值，但仅在行之间进行洗牌。
 - en: 'Run in a loop, until one of the stopping conditions:'
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在循环中运行，直到满足其中一个停止条件：
 - en: 2.1\. We are not removing any more features
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 2.1\. 我们不再移除任何特征。
 - en: 2.2\. We removed enough features — we can say we want to remove 60% of our features
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 2.2\. 我们移除了足够的特征——我们可以说我们要移除60%的特征。
 - en: 2.3\. We ran N iterations — we limit the number of iterations to not get stuck
     in an infinite loop
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 2.3\. 我们运行了N次迭代——我们限制了迭代次数以避免陷入无限循环。
 - en: Run X iterations — we used 5, to remove the randomness of the mode
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行X次迭代——我们使用了5次，以消除模型的随机性。
 - en: 3.1\. Train the model with the regular features and the shadow features
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 3.1\. 用常规特征和影子特征训练模型。
 - en: 3.2\. Save the average feature importance score for each feature
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 3.2\. 保存每个特征的平均特征重要性分数。
 - en: 3.3 Remove all the features that are lower than their shadow feature
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 3.3 移除所有比其影子特征低的特征。
 - en: Boruta pseudo code![Figure](../Images/688d039fa22373013b935cf9e8b95df9.png)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: Boruta伪代码![图](../Images/688d039fa22373013b935cf9e8b95df9.png)
 - en: '*Boruta diagram of running flow from creating shadows — training — comparing
     — removing features and back again.*'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Boruta流程图，从创建影子特征——训练——比较——移除特征并重新开始。*'
 - en: Boruta 2.0
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Boruta 2.0
 - en: Here is the best part of this post, our improvement to the Boruta.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是本文的最佳部分，我们对Boruta的改进。
 - en: We ran the Boruta with a “short version” of our original model. By taking a
     sample of data and a smaller number of trees (we used XGBoost), we improved the
     runtime of the original Boruta, without reducing the accuracy.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们用“简化版”的原始模型运行了Boruta。通过取样数据和更少的树（我们使用了XGBoost），我们提高了原始Boruta的运行时间，而不降低准确性。
 - en: Another improvement, we ran the algorithm using the random features mentioned
     before. This is a good sanity or stopping condition, to see that we have removed
     all the random features from our dataset.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个改进是，我们使用之前提到的随机特征运行了算法。这是一个好的合理性检查或停止条件，以确保我们已经从数据集中移除了所有随机特征。
 - en: With the improvement, we didn’t see any change in model accuracy, but we saw
     improvement in runtime. By removing, we were able to shift from 200+ features
     to less than 70\. We saw the stability of the model on the number of trees and
     in different periods of training.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管有了改善，我们没有看到模型准确性的变化，但我们观察到了运行时间的改善。通过移除一些特征，我们将特征数量从200多个减少到了不到70个。我们还观察到了模型在树的数量和不同训练阶段的稳定性。
 - en: We also saw an improvement in the distance between the loss of the training
     and the validation set.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还观察到了训练集和验证集之间的损失距离有所改善。
 - en: The advantage of the improvement and the Boruta, is that you are running your
     model. In that case, the problematic features, which were found, are problematic
     to your model and not a different algorithm.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 改进和Boruta的优点在于，你正在运行自己的模型。在这种情况下，发现的问题特征对你的模型有问题，而不是其他算法。
 - en: Wrapping up
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: In this post, you saw 3 different techniques of how to do Feature Selection
     to your datasets and how to build an effective predictive model. You saw our implementation
     of Boruta, the improvements in runtime and adding random features to help with
     sanity checks.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，你看到了3种不同的特征选择技术以及如何构建有效的预测模型。你看到了我们对Boruta的实现、运行时间的改善以及添加随机特征以帮助进行合理性检查。
 - en: With these improvements, our model was able to run much faster, with more stability
     and maintained level of accuracy, with only 35% of the original features.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这些改进，我们的模型运行速度大大提高，稳定性增强，准确性保持在原有水平，同时特征数量仅为原来的35%。
 - en: Choose the technique that suits you best. Remember, Feature Selection can help
     improve accuracy, stability, and runtime, and avoid overfitting. More importantly,
     the debugging and explainability are easier with fewer features.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择最适合你的技术。请记住，特征选择可以帮助提高准确性、稳定性和运行时间，并避免过拟合。更重要的是，特征减少后调试和解释性变得更容易。
 - en: '**Bio: [Dor Amir](https://www.linkedin.com/in/dor-amir-07a35155/)** is Data
     Science Manager at [Guesty](https://www.guesty.com/).'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Dor Amir](https://www.linkedin.com/in/dor-amir-07a35155/)** 是 [Guesty](https://www.guesty.com/)
+    的数据科学经理。'
 - en: '[Original](https://medium.com/fiverr-engineering/feature-selection-beyond-feature-importance-9b97e5a842f).
     Reposted with permission.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/fiverr-engineering/feature-selection-beyond-feature-importance-9b97e5a842f)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Hitchhiker’s Guide to Feature Extraction](/2019/06/hitchhikers-guide-feature-extraction.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征提取指南](/2019/06/hitchhikers-guide-feature-extraction.html)'
 - en: '[Feature selection by random search in Python](/2019/08/feature-selection-random-search-python.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的随机搜索特征选择](/2019/08/feature-selection-random-search-python.html)'
 - en: '[Opening Black Boxes: How to leverage Explainable Machine Learning](/2019/08/open-black-boxes-explainable-machine-learning.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开黑箱：如何利用可解释的机器学习](/2019/08/open-black-boxes-explainable-machine-learning.html)'
 - en: '* * *'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Beyond Guesswork: Leveraging Bayesian Statistics for Effective…](https://www.kdnuggets.com/beyond-guesswork-leveraging-bayesian-statistics-for-effective-article-title-selection)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越猜测：利用贝叶斯统计进行有效的…](https://www.kdnuggets.com/beyond-guesswork-leveraging-bayesian-statistics-for-effective-article-title-selection)'
 - en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择：科学与艺术的交汇](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
 - en: '[Celebrating Awareness of the Importance of Data Privacy](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[庆祝对数据隐私重要性的认识](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)'
 - en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习不像你的大脑 第6部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'

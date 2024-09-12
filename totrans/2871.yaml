@@ -1,399 +1,605 @@
 - en: How to Easily Deploy Machine Learning Models Using Flask
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Flask 轻松部署机器学习模型
 - en: 原文：[https://www.kdnuggets.com/2019/10/easily-deploy-machine-learning-models-using-flask.html](https://www.kdnuggets.com/2019/10/easily-deploy-machine-learning-models-using-flask.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/10/easily-deploy-machine-learning-models-using-flask.html](https://www.kdnuggets.com/2019/10/easily-deploy-machine-learning-models-using-flask.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: When a data scientist/machine learning engineer develops a machine learning
     model using Scikit-Learn, TensorFlow, Keras, PyTorch etc, the ultimate goal is
     to make it available in production. Often times when working on a machine learning
     project, we focus a lot on Exploratory Data Analysis(EDA), Feature Engineering,
     tweaking with hyper-parameters etc. But we tend to forget our main goal, which
     is to extract real value from the model predictions.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 当数据科学家/机器学习工程师使用 Scikit-Learn、TensorFlow、Keras、PyTorch 等开发机器学习模型时，最终目标是将其投入生产。许多时候，在进行机器学习项目时，我们会过于关注探索性数据分析（EDA）、特征工程、调整超参数等。但我们往往会忽视我们的主要目标，即从模型预测中提取实际价值。
 - en: Deployment of machine learning models or putting models into production means
     making your models available to the end users or systems. However, there is complexity
     in the deployment of machine learning models. This post aims to make you get started
     with putting your trained machine learning models into production using Flask
     API.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型的部署或将模型投入生产意味着使你的模型对最终用户或系统可用。然而，机器学习模型的部署存在复杂性。本文旨在帮助你开始使用 Flask API
+    将训练好的机器学习模型投入生产。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: I will be using linear regression to predict the sales value in the third month
     using rate of interest and sales of the first two months.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将使用线性回归来预测第三个月的销售值，基于利率和前两个月的销售数据。
 - en: What is Linear Regression
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是线性回归
 - en: The objective of a linear regression model is to find a relationship between
     one or more features(independent variables) and a continuous target variable(dependent
     variable). When there is only feature it is called *Uni-variate* Linear Regression
     and if there are multiple features, it is called *Multi*ple Linear Regression.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归模型的目标是找到一个或多个特征（自变量）与一个连续目标变量（因变量）之间的关系。当只有一个特征时，称为*单变量*线性回归；如果有多个特征，则称为*多变量*线性回归。
 - en: Hypothesis of Linear Regression
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 线性回归的假设
 - en: The linear regression model can be represented by the following equation
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归模型可以用以下方程表示
 - en: '![](../Images/66b14abbd4776598a7ca2cd143fe394f.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/66b14abbd4776598a7ca2cd143fe394f.png)'
 - en: '*Y* is the predicted value'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Y* 是预测值'
 - en: '*θ*₀ is the bias term.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*θ*₀ 是偏置项。'
 - en: '*θ*₁,…,*θ*ₙ are the model parameters'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*θ*₁,…,*θ*ₙ 是模型参数。'
 - en: '*x*₁, *x*₂,…,*x*ₙ are the feature values.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*x*₁, *x*₂,…,*x*ₙ 是特征值。'
 - en: '![Figure](../Images/ea63a8d669e197d57be01f7ab93f9d2c.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/ea63a8d669e197d57be01f7ab93f9d2c.png)'
 - en: Linear regression illustrated
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归示例
 - en: Why Flask?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么选择 Flask？
 - en: Easy to use.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用简单。
 - en: Built in development server and debugger.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内置开发服务器和调试器。
 - en: Integrated unit testing support.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 集成单元测试支持。
 - en: RESTful request dispatching.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: RESTful 请求调度。
 - en: Extensively documented.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文档详尽。
 - en: Project Structure
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 项目结构
 - en: 'This project has four parts :'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 该项目分为四部分：
 - en: model.py — This contains code for the machine learning model to predict sales
     in the third month based on the sales in the first two months.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: model.py — 该文件包含用于基于前两个月的销售预测第三个月销售的机器学习模型代码。
 - en: app.py — This contains Flask APIs that receives sales details through GUI or
     API calls, computes the predicted value based on our model and returns it.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: app.py — 这个文件包含了 Flask API，这些 API 通过 GUI 或 API 调用接收销售详情，计算基于我们模型的预测值，并返回结果。
 - en: request.py — This uses requests module to call APIs defined in app.py and displays
     the returned value.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: request.py — 这个文件使用 requests 模块调用 app.py 中定义的 API，并显示返回的值。
 - en: HTML/CSS — This contains the HTML template and CSS styling to allow user to
     enter sales detail and displays the predicted sales in the third month.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: HTML/CSS — 这个部分包含 HTML 模板和 CSS 样式，使用户能够输入销售详情并显示第三个月的预测销售额。
 - en: '![Figure](../Images/381cfc742cb3bbfe4e2116fcd2a28c59.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/381cfc742cb3bbfe4e2116fcd2a28c59.png)'
 - en: Pipeline for deployment of a Machine Learning model
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型部署管道
 - en: Environment and tools
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 环境和工具
 - en: scikit-learn
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: scikit-learn
 - en: pandas
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: pandas
 - en: numpy
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: numpy
 - en: flask
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: flask
 - en: Where is the code?
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码在哪里？
 - en: Without much ado, let’s get started with the code. The complete project on github
     can be found [here](https://github.com/abhinavsagar/Machine-Learning-Deployment-Tutorials).
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 不废话，让我们开始编写代码。完整的项目可以在 [这里](https://github.com/abhinavsagar/Machine-Learning-Deployment-Tutorials)
+    找到。
 - en: Let’s get started with making the front end using HTML for the user to input
     the values. There are three fields which need to be filled by the user — rate
     of interest, sales in first month and sales in second month.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始使用 HTML 制作前端界面，以便用户输入值。用户需要填写三个字段——利率、第一月的销售额和第二月的销售额。
 - en: Next I did some styling using CSS for the input button, login buttons and the
     background.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我使用 CSS 对输入按钮、登录按钮和背景进行了样式设置。
 - en: '>'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '>'
 - en: I created a custom sales dataset for this project which has four columns — rate
     of interest, sales in first month, sales in second month and sales in third month.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我为这个项目创建了一个自定义的销售数据集，包含四列——利率、第一月的销售额、第二月的销售额和第三月的销售额。
 - en: Let’s now make a machine learning model to predict sales in the third month.
     First let’s deal with missing values using Pandas. Missing Data can occur when
     no information is provided for one or more items. I filled the rate column with
     zero and sales in first month with mean of that column if the value was not provided.
     I used linear regression as the machine learning algorithm.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们来创建一个机器学习模型，以预测第三个月的销售额。首先，我们用 Pandas 处理缺失值。缺失数据可能发生在一个或多个项目没有提供信息时。如果没有提供值，我将利率列填充为零，第一个月的销售额填充为该列的平均值。我使用了线性回归作为机器学习算法。
 - en: Serializing/De-Serializing
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 序列化/反序列化
 - en: In simple words serializing is a way to write a python object on the disk that
     can be transferred anywhere and later de-serialized (read) back by a python script.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，序列化是一种将 Python 对象写入磁盘的方式，这些对象可以被转移到任何地方，之后由 Python 脚本反序列化（读取）。
 - en: '![Figure](../Images/02f464ba1e9a94d360e1fd82db4793df.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/02f464ba1e9a94d360e1fd82db4793df.png)'
 - en: Serialization, De-Serialization
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 序列化，反序列化
 - en: I converted the model which is in the form of a python object into a character
     stream using pickling. The idea is that this character stream contains all the
     information necessary to reconstruct the object in another python script.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将模型从 Python 对象形式转换为字符流，使用了 pickling。这个字符流包含了在另一个 Python 脚本中重建对象所需的所有信息。
 - en: The next part was to make an API which receives sales details through GUI and
     computes the predicted sales value based on our model. For this I de- serialized
     the pickled model in the form of python object. I set the main page using `index.html`.
     On submitting the form values using POST request to `/predict`, we get the predicted
     sales value.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一部分是制作一个 API，接收通过 GUI 提交的销售详情，并根据我们的模型计算预测销售值。为此，我反序列化了 pickled 模型，形式为 Python
+    对象。我使用 `index.html` 设置了主页。通过 POST 请求提交表单值到 `/predict`，我们可以得到预测的销售额。
 - en: The results can be shown by making another POST request to `/results.` It receives
     JSON inputs, uses the trained model to make a prediction and returns that prediction
     in JSON format which can be accessed through the API endpoint.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过发起另一个 POST 请求到 `/results` 可以显示结果。它接收 JSON 输入，使用训练好的模型进行预测，并以 JSON 格式返回该预测值，可以通过
+    API 端点访问。
 - en: Finally I used requests module to call APIs defined in `app.py`. It displays
     the returned sales value in the third month.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我使用 requests 模块调用了 `app.py` 中定义的 API。它显示了第三个月的返回销售值。
 - en: Results
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: Run the web application using this command.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这个命令运行 web 应用程序。
 - en: '[PRE0]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/4827a216adfb49f733a532383308fef3.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4827a216adfb49f733a532383308fef3.png)'
 - en: Open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser, and
     the GUI as shown below should appear.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你的网络浏览器中打开 [http://127.0.0.1:5000/](http://127.0.0.1:5000/)，应出现如下所示的 GUI。
 - en: '![Figure](../Images/8a10541af2b2ffaa6337a61600c1f546.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8a10541af2b2ffaa6337a61600c1f546.png)'
 - en: Graphical user interface
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 图形用户界面
 - en: Conclusions
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: This article demonstrated a very simple way to deploy machine learning models.
     I used linear regression to predict sales value in the third month using rate
     of interest and sales in first two months. One can use the knowledge gained in
     this blog to make some cool models and take them into production so that others
     can appreciate their work.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文展示了一种非常简单的机器学习模型部署方式。我使用线性回归来预测第三个月的销售值，利用了利率和前两个月的销售数据。通过这篇博客获得的知识可以帮助你制作一些很酷的模型，并将其投入生产，让其他人欣赏你的成果。
 - en: References/Further Readings
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献/进一步阅读
 - en: '**[Writing a simple Flask Web Application in 80 lines](https://towardsdatascience.com/writing-a-simple-flask-web-application-in-80-lines-cb5c386b089a?source=post_page-----b95af8fe34d4----------------------)**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[用 80 行代码编写一个简单的 Flask Web 应用](https://towardsdatascience.com/writing-a-simple-flask-web-application-in-80-lines-cb5c386b089a?source=post_page-----b95af8fe34d4----------------------)**'
 - en: Sample tutorial for getting started with flask
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: Flask 入门教程示例
 - en: '[**Deploying Machine Learning Models | Coursera**](https://www.coursera.org/learn/deploying-machine-learning-models?source=post_page-----b95af8fe34d4----------------------)'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**部署机器学习模型 | Coursera**](https://www.coursera.org/learn/deploying-machine-learning-models?source=post_page-----b95af8fe34d4----------------------)'
 - en: Learn Deploying Machine Learning Models from University of California San Diego.
     In this course we will learn about…
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 从加州大学圣地亚哥分校学习部署机器学习模型。在这个课程中，我们将学习…
 - en: '**[**Simple way to deploy machine learning models to cloud**](https://towardsdatascience.com/simple-way-to-deploy-machine-learning-models-to-cloud-fd58b771fdcf?source=post_page-----b95af8fe34d4----------------------)**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[**将机器学习模型简单部署到云端的方式**](https://towardsdatascience.com/simple-way-to-deploy-machine-learning-models-to-cloud-fd58b771fdcf?source=post_page-----b95af8fe34d4----------------------)**'
 - en: Deploy your first ML model to production with a simple tech stack
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用简单的技术栈将你的第一个机器学习模型部署到生产环境
 - en: '[**Overview of Different Approaches to Deploying Machine Learning Models in
     Production - KDnuggets**](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html?source=post_page-----b95af8fe34d4----------------------)'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**机器学习模型生产部署的不同方法概述 - KDnuggets**](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html?source=post_page-----b95af8fe34d4----------------------)'
 - en: There are different approaches to putting models into productions, with benefits
     that can vary dependent on the…
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 有不同的方法将模型投入生产，所带来的好处可能会因具体情况而异…
 - en: Before You Go
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在你离开之前
 - en: The corresponding source code can be found here.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 对应的源代码可以在这里找到。
 - en: '**[abhinavsagar/Machine-Learning-Deployment-Tutorials](https://github.com/abhinavsagar/Machine-Learning-Deployment-Tutorials?source=post_page-----b95af8fe34d4----------------------)**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[abhinavsagar/Machine-Learning-Deployment-Tutorials](https://github.com/abhinavsagar/Machine-Learning-Deployment-Tutorials?source=post_page-----b95af8fe34d4----------------------)**'
 - en: Sample end to end projects from data collection to putting models into production
     …
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数据收集到将模型投入生产的完整项目示例…
 - en: Contacts
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 联系方式
 - en: 'If you want to keep updated with my latest articles and projects [follow me
     on Medium](https://medium.com/@abhinav.sagar). These are some of my contacts details:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想及时了解我的最新文章和项目，[请关注我在 Medium 的专栏](https://medium.com/@abhinav.sagar)。以下是我的一些联系方式：
 - en: '[Personal Website](https://abhinavsagar.github.io/)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[个人网站](https://abhinavsagar.github.io/)'
 - en: '[Linkedin](https://in.linkedin.com/in/abhinavsagar4)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Linkedin](https://in.linkedin.com/in/abhinavsagar4)'
 - en: '[Medium Profile](https://medium.com/@abhinav.sagar)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Medium 个人资料](https://medium.com/@abhinav.sagar)'
 - en: '[GitHub](https://github.com/abhinavsagar)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub](https://github.com/abhinavsagar)'
 - en: '[Kaggle](https://www.kaggle.com/abhinavsagar)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kaggle](https://www.kaggle.com/abhinavsagar)'
 - en: '**Bio: [Abhinav Sagar](https://www.linkedin.com/in/abhinavsagar4)** is a senior
     year undergrad at VIT Vellore. He is interested in data science, machine learning
     and their applications to real-world problems.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Abhinav Sagar](https://www.linkedin.com/in/abhinavsagar4)** 是 VIT
+    Vellore 的大四本科生。他对数据科学、机器学习及其在现实世界中的应用感兴趣。'
 - en: '[Original](https://towardsdatascience.com/how-to-easily-deploy-machine-learning-models-using-flask-b95af8fe34d4).
     Reposted with permission.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-easily-deploy-machine-learning-models-using-flask-b95af8fe34d4)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Building a Flask API to Automatically Extract Named Entities Using SpaCy](/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建一个Flask API以使用SpaCy自动提取命名实体](/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)'
 - en: '[Deploy your PyTorch model to Production](/2019/03/deploy-pytorch-model-production.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将您的PyTorch模型部署到生产环境](/2019/03/deploy-pytorch-model-production.html)'
 - en: '[The Hackathon Guide for Aspiring Data Scientists](/2019/07/hackathon-guide-aspiring-data-scientists.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[有志数据科学家的黑客松指南](/2019/07/hackathon-guide-aspiring-data-scientists.html)'
 - en: More On This Topic
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Scrape Images Easily from Websites in A No-Coding Way](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[无代码轻松从网站抓取图像](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)'
 - en: '[Explore LLMs Easily on Your Laptop with openplayground](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用openplayground轻松在笔记本电脑上探索LLMs](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)'
 - en: '[Easily Integrate LLMs into Your Scikit-learn Workflow with Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Scikit-LLM轻松将LLMs集成到您的Scikit-learn工作流中](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
 - en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Heroku部署机器学习Web应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
 - en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何成功部署数据科学项目](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
