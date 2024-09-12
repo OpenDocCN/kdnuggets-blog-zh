@@ -1,16 +1,22 @@
 - en: How to Identify Missing Data in Time-Series Datasets
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何识别时间序列数据集中的缺失数据
 - en: 原文：[https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)
 - en: Time-series data, collected nearly every second from a multiplicity of sources,
     is often subjected to [several data quality issues](https://towardsdatascience.com/how-to-do-an-eda-for-time-series-cbb92b3b1913),
     among which missing data.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列数据，几乎每秒钟从多个来源收集，通常会面临[若干数据质量问题](https://towardsdatascience.com/how-to-do-an-eda-for-time-series-cbb92b3b1913)，其中包括缺失数据。
 - en: In the context of sequential data, missing information can arise due to several
     reasons, namely errors occurring on acquisition systems (e.g. malfunction sensors),
     [errors during the transmission process](https://towardsdatascience.com/understand-your-data-in-real-time-1f6d9f6937e5)
@@ -18,263 +24,379 @@
     error during data logging). These situations often generate sporadic and explicit
     missing values in our datasets, corresponding to small gaps in the stream of collected
     data.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在序列数据的背景下，缺失信息可能由于多种原因产生，例如获取系统出现错误（如传感器故障）、[传输过程中的错误](https://towardsdatascience.com/understand-your-data-in-real-time-1f6d9f6937e5)（例如，网络连接故障）或数据收集中的错误（例如，数据记录中的人为错误）。这些情况通常会在我们的数据集中产生零散和明确的缺失值，形成数据流中的小间隙。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Additionally, [missing information](https://ydata.ai/resources/what-is-missing-data-in-machine-learning)
     can also arise naturally due to the characteristics of the domain itself, creating
     larger gaps in the data. For instance, a feature that stops being collected for
     a certain period of time, generating non-explicit missing data.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，[缺失信息](https://ydata.ai/resources/what-is-missing-data-in-machine-learning)也可能由于领域本身的特性自然产生，导致数据中的较大间隙。例如，一个特征在某段时间内停止收集，从而产生非显式的缺失数据。
 - en: Regardless of the underlying cause, having missing data in our time-series sequences
     is highly prejudicial for forecasting and predictive modeling and may have serious
     consequences for both individuals (e.g., misguided risk assessment) and business
     outcomes (e.g., biased business decisions, loss of revenue and opportunities).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论底层原因如何，时间序列数据中存在缺失数据对预测和建模都是极为不利的，并可能对个人（例如，误导性的风险评估）和商业结果（例如，偏颇的商业决策、收入和机会的损失）产生严重后果。
 - en: When preparing the data for modeling approaches, an important step is therefore
     being able to identify these patterns of unknown information, as they will help
     us decide on the [best approach to handle the data](https://ydata.ai/resources/understanding-the-structure-of-time-series-datasets)
     efficiently and improve its consistency, either through some form of alignment
     correction, data interpolation, data imputation, or in some cases, casewise deletion
     (i.e., omit cases with missing values for a feature used in a particular analysis).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在准备数据以进行建模时，一个重要步骤是能够识别这些未知信息的模式，因为它们将帮助我们决定[处理数据的最佳方法](https://ydata.ai/resources/understanding-the-structure-of-time-series-datasets)，无论是通过某种形式的对齐修正、数据插补、数据填补，还是在某些情况下，逐例删除（即，忽略在特定分析中使用的特征的缺失值所在的案例）。
 - en: For that reason, performing a thorough exploratory data analysis and data profiling
     is indispensable not only to understand the data characteristics but also to make
     informed decisions on how to best prepare the data for analysis.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，进行彻底的探索性数据分析和数据概况分析不仅对理解数据特征至关重要，而且对如何最佳准备数据以进行分析做出明智决策也不可或缺。
 - en: In this hands-on tutorial, we’ll explore how [ydata-profiling](https://github.com/ydataai/ydata-profiling)
     can help us sort out these issues with the features recently introduced in the
     new release. We’ll be using the [U.S. Pollution Dataset](https://data.world/data-society/us-air-pollution-data),
     available in [Kaggle](https://www.kaggle.com/datasets/sogun3/uspollution?resource=download)
     (License [DbCL v1.0](https://opendatacommons.org/licenses/dbcl/1-0/)), that details
     information regarding NO2, O3, SO2, and CO pollutants across U.S. states.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个实操教程中，我们将探索[ydata-profiling](https://github.com/ydataai/ydata-profiling)如何通过新版本中最近引入的功能帮助我们解决这些问题。我们将使用[美国污染数据集](https://data.world/data-society/us-air-pollution-data)，该数据集可在[Kaggle](https://www.kaggle.com/datasets/sogun3/uspollution?resource=download)（许可证[DbCL
+    v1.0](https://opendatacommons.org/licenses/dbcl/1-0/)）中获取，详细描述了美国各州NO2、O3、SO2和CO污染物的信息。
 - en: 'Hands-on Tutorial: Profiling the U.S. Pollution Dataset'
+  id: totrans-15
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实操教程：对美国污染数据集的分析
 - en: 'To kickstart our tutorial, we first need to install the latest version of ydata-profiling:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了启动我们的教程，我们首先需要安装ydata-profiling的最新版本：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Then, we can load the data, remove unnecessary features, and focus on what
     we aim to investigate. For the purpose of this example, we will focus on the particular
     behavior of air pollutants’ measurements taken at the station of Arizona, Maricopa,
     Scottsdale:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们可以加载数据，去除不必要的特征，集中关注我们要调查的内容。为了这个示例，我们将专注于亚利桑那州Maricopa Scottsdale站点的空气污染物测量的特定行为：
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Now, we’re ready to start profiling our dataset! Recall that, to use the time-series
     profiling, we need to pass the parameter `tsmode=True` so that ydata-profiling
     can identify time-dependent features:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们准备开始对数据集进行概况分析了！请记住，要使用时间序列分析，我们需要传递参数`tsmode=True`，以便ydata-profiling可以识别时间相关特征：
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Time-Series Overview
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 时间序列概览
 - en: 'The output report will be familiar to what we already know, but with an improved
     experience and new summary statistics for time-series data:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出报告将与我们已经了解的内容相似，但体验有所改进，并且为时间序列数据提供了新的总结统计数据：
 - en: '![XXXXX](../Images/8faa4792b0d13bde077357a8d7c6dd57.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/8faa4792b0d13bde077357a8d7c6dd57.png)'
 - en: 'Immediately from the overview, we can get an overall understanding of this
     dataset by looking at the presented summary statistics:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 从概览中，我们可以通过查看提供的总结统计数据对数据集有一个整体了解：
 - en: It contains 14 different time-series, each with 8674 recorded values;
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它包含14个不同的时间序列，每个序列有8674个记录值；
 - en: The dataset reports on 10 years of data from January 2000 to December 2010;
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集报告了从2000年1月到2010年12月的10年数据；
 - en: The average period of time sequences is 11 hours and (nearly) 7 minutes. This
     means that on average, we have measures being taken every 11 hours.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间序列的平均周期是11小时和（接近）7分钟。这意味着平均而言，我们每11小时进行一次测量。
 - en: 'We can also get an overview plot of all series in data, either in their original
     or scaled values: we can easily grasp the overall variation of the sequences,
     as well as the components (NO2, O3, SO2, CO) and characteristics (Mean, 1st Max
     Value, 1st Max Hour, AQI) being measured.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以获得数据中所有系列的概览图，无论是原始值还是缩放值：我们可以轻松把握序列的整体变化，以及被测量的组件（NO2、O3、SO2、CO）和特征（均值、首次最大值、首次最大小时、AQI）。
 - en: Inspecting Missing Data
+  id: totrans-30
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 检查缺失数据
 - en: After having an overall view of the data, we can focus on the specifics of each
     time sequence.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在对数据有一个整体了解后，我们可以关注每个时间序列的具体细节。
 - en: In the latest release of [ydata-profiling](https://github.com/ydataai/ydata-profiling),
     the profiling report was substantially improved with dedicated analysis for time-series
     data, namely reporting on the “Time Series” and “Gap Analysis”' metrics. The identification
     of trends and missing patterns is extremely facilitated by these new features,
     where specific summary statistics and detailed visualizations are now available.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[ydata-profiling](https://github.com/ydataai/ydata-profiling)的最新版本中，概况报告得到了实质性的改进，专门针对时间序列数据进行了分析，即报告“时间序列”和“缺口分析”指标。通过这些新功能，趋势和缺失模式的识别变得极为简便，现在提供了具体的总结统计数据和详细的可视化。
 - en: Something that stands out immediately is the flaky pattern that all time series
     present, where certain “jumps” seem to occur between consecutive measurements.
     This indicates the presence of missing data (“gaps” of missing information) that
     should be studied more closely. Let’s take a look at the `S02 Mean` as an example.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 一件立即显现的事情是所有时间序列都呈现的波动模式，其中某些“跳跃”似乎发生在连续的测量之间。这表明存在缺失数据（“缺失信息的差距”），需要更详细地研究。以`S02
+    Mean`为例。
 - en: '![XXXXX](../Images/d380f53de2d6d5aa0e954d88f9d0fa24.png)![XXXXX](../Images/7100b2379969401e5d718e4401ed80b6.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/d380f53de2d6d5aa0e954d88f9d0fa24.png)![XXXXX](../Images/7100b2379969401e5d718e4401ed80b6.png)'
 - en: When investigating the details given in the Gap Analysis, we get an informative
     description of the characteristics of the identified gaps. Overall, there are
     25 gaps in the time-series, with a minimum length of 4 days, a maximum of 32 weeks,
     and an average of 10 weeks.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在调查Gap Analysis中提供的细节时，我们得到了一些关于识别出差距特征的信息。总体来说，时间序列中存在25个差距，最短为4天，最长为32周，平均为10周。
 - en: From the visualization presented, we note somewhat “random” gaps represented
     by thinner stripes, and larger gaps which seem to follow a repetitive pattern.
     This indicates that we seem to have two different patterns of missing data in
     our dataset.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 从展示的可视化中，我们注意到一些“随机”的差距由较细的条纹表示，而较大的差距似乎遵循重复的模式。这表明我们似乎在数据集中有两种不同的缺失数据模式。
 - en: Smaller gaps correspond to sporadic events generating missing data, most likely
     occurring due to errors in the acquisition process, and can often be easily interpolated
     or deleted from the dataset. In turn, larger gaps are more complex and need to
     be analyzed in more detail, as they may reveal an underlying pattern that needs
     to be addressed more thoroughly.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 较小的差距对应于偶发事件生成的缺失数据，这些事件很可能是由于采集过程中的错误造成的，通常可以容易地插补或从数据集中删除。相反，较大的差距更为复杂，需要更详细地分析，因为它们可能揭示了需要更彻底解决的潜在模式。
 - en: 'In our example, if we were to investigate the larger gaps, we would in fact
     discover that they reflect a seasonal pattern:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，如果我们调查较大的差距，我们实际上会发现它们反映了一个季节性模式：
 - en: '[PRE3]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'As suspected, the time-series presents some large information gaps that seem
     to be repetitive, even seasonal: in most years, the data was not collected between
     May to August (months 5 to 8). This may have occurred due to unpredictable reasons,
     or known  business decisions, for example, related to cutting costs, or simply
     related to seasonal variations of pollutants associated with weather patterns,
     temperature, humidity, and atmospheric conditions.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如预期所示，时间序列中存在一些较大的信息差距，这些差距似乎是重复的，甚至是季节性的：在大多数年份中，数据在5月到8月（第5至8个月）之间未被收集。这可能是由于不可预测的原因，或已知的商业决策，例如与削减成本有关，或者只是与天气模式、温度、湿度和大气条件相关的污染物季节性变化有关。
 - en: Based on these findings, we could then investigate why this happened, if something
     should be done to prevent it in the future, and how to handle the data we currently
     have.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于这些发现，我们可以进一步调查为什么会发生这种情况，是否需要采取措施以防止未来发生类似情况，以及如何处理我们目前拥有的数据。
 - en: 'Final Thoughts: Impute, Delete, Realign?'
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 最终思考：插补、删除、重新对齐？
 - en: Throughout this tutorial, we’ve seen how important it is to understand the patterns
     of missing data in time-series and how an effective profiling can reveal the mysteries
     behind gaps of missing information. From telecom, healthcare, energy, and finance,
     all sectors collecting time-series data will face missing data at some point and
     will need to decide the best way to handle and extract all possible knowledge
     from them.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们了解了时间序列中缺失数据模式的重要性，以及有效的数据分析如何揭示缺失信息背后的奥秘。从电信、医疗保健、能源到金融，所有收集时间序列数据的行业都会面临缺失数据的问题，并需要决定最佳处理和提取所有可能知识的方法。
 - en: 'With a comprehensive data profiling, we can make an informed and efficient
     decision depending on the data characteristics at hand:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过全面的数据分析，我们可以根据手头的数据特征做出明智而有效的决策：
 - en: Gaps of information can be caused by sporadic events that derive from errors
     in acquisition, transmission, and collection. We can fix the issue to prevent
     it from happening again and interpolate or impute the missing gaps, depending
     on the length of the gap;
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信息差距可能由收集、传输和采集过程中的错误引起的偶发事件造成。我们可以修复问题以防止再次发生，并根据差距的长度进行插补或填充；
 - en: Gaps of information can also represent seasonal or repeated patterns. We may
     choose to restructure our pipeline to start collecting the missing information
     or replace the missing gaps with external information from other distributed systems.
     We can also identify if the process of retrieval was unsuccessful (maybe a fat-finger
     query on the data engineering side, we all have those days!).
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信息的缺口也可以代表季节性或重复模式。我们可以选择重构我们的流程，开始收集缺失的信息，或者用来自其他分布式系统的外部信息填补这些缺口。我们还可以识别检索过程是否失败（可能是数据工程方面的操作失误，我们都有过那样的日子！）。
 - en: I hope this tutorial has shed some light on how to identify and characterize
     missing data in your time-series data appropriately and I can’t wait to see what
     you’ll find in your own gap analysis! Drop me a line in the comments for any questions
     or suggestions or find me at the [Data-Centric AI Community](https://tiny.ydata.ai/dcai-medium)!
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这个教程能为你提供如何适当识别和描述时间序列数据中的缺失数据的一些见解，我迫不及待想看看你在自己的缺失分析中会发现什么！如果有任何问题或建议，请在评论中告诉我，或者在[数据驱动
+    AI 社区](https://tiny.ydata.ai/dcai-medium)找到我！
 - en: '**[Fabiana Clemente](https://www.linkedin.com/in/fabiana-clemente/)** is cofounder
     and CDO of YData, combining data understanding, causality, and privacy as her
     main fields of work and research, with the mission of making data actionable for
     organizations. As an enthusiastic data practitioner she hosts the podcast When
     Machine Learning Meets Privacy and is a guest speaker on the Datacast and Privacy
     Please podcasts. She also speaks at conferences such as ODSC and PyData.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Fabiana Clemente](https://www.linkedin.com/in/fabiana-clemente/)** 是 YData
+    的联合创始人和首席数据官，她将数据理解、因果关系和隐私作为主要的工作和研究领域，致力于使数据对组织具有可操作性。作为一位充满热情的数据从业者，她主持了播客《机器学习如何遇见隐私》，并在
+    Datacast 和 Privacy Please 播客中担任嘉宾讲者。她还在 ODSC 和 PyData 等会议上发言。'
 - en: More On This Topic
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[4 Factors to Identify Machine Learning Solvable Problems](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[识别机器学习可解问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)'
 - en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandas fillna() 输入缺失数据的最佳方式](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
 - en: '[7 Things Students Are Missing in a Data Science Resume](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学生在数据科学简历中缺少的 7 件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)'
 - en: '[How to Deal with Missing Data Using Interpolation Techniques in Pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 中的插值技术处理缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
 - en: '[Masked Arrays in NumPy to Handle Missing Data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 NumPy 中使用掩码数组处理缺失数据](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
 - en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
