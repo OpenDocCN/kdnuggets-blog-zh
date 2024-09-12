@@ -1,17 +1,23 @@
 - en: Tuning Adam Optimizer Parameters in PyTorch
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 PyTorch 中调整 Adam 优化器参数
 - en: 原文：[https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
 - en: With the rapidly expanding data universe and the ability of artificial neural
     networks to deliver high performance, the world is moving towards solving complex
     problems never tackled before. But wait, there is a catch -  building a robust
     neural network architecture is not a trivial task.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着数据宇宙的快速扩展和人工神经网络提供高性能的能力，世界正朝着解决以前从未解决过的复杂问题迈进。但是，等一下，有一个难点 - 构建一个稳健的神经网络架构不是一件简单的事。
 - en: Choosing the right optimizer to minimize the loss between the predictions and
     the ground truth is one of the crucial elements of designing neural networks.
     This loss minimization is performed in batches of the training data leading to
@@ -19,41 +25,62 @@
     movement in the parameter space that speeds up the model convergence and in turn
     lead to faster deployment. This is the reason a lot of emphasis has been put on
     developing high-performance optimizer algorithms.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择合适的优化器来最小化预测值与真实值之间的损失是设计神经网络的关键要素之一。这种损失最小化是在训练数据的批次中进行的，导致参数值的收敛速度较慢。优化器减少了参数空间中的横向移动，从而加速了模型的收敛，并进一步导致更快的部署。这就是为什么很多重视开发高性能优化器算法的原因。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The article will explain how Adam optimizer, one of the commonly used optimizers,
     works and demonstrate how to tune it using the PyTorch framework.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 文章将解释 Adam 优化器的工作原理，这是一种常用的优化器，并演示如何使用 PyTorch 框架对其进行调优。
 - en: The Adam Optimizer
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Adam 优化器
 - en: Adaptive Moment Estimation aka Adam optimizer is an optimization technique and
     a derivative of the gradient descent algorithm. When working with large data and
     dense neural network architecture, ADAM proves to be more efficient as compared
@@ -61,136 +88,206 @@
     the best of the ‘gradient descent with momentum’ algorithm and the ‘RMSProp’ algorithm.
     Let us first understand these two optimizers to build a natural progression to
     the Adam optimizer.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 自适应矩估计，即 Adam 优化器，是一种优化技术，是梯度下降算法的衍生算法。在处理大数据和密集神经网络架构时，与随机梯度下降或基于动量的算法相比，ADAM
+    更为高效。它本质上是‘带动量的梯度下降’算法和‘RMSProp’算法的最佳结合。让我们先了解这两种优化器，以便自然地过渡到 Adam 优化器。
 - en: Gradient Descent with Momentum
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 带动量的梯度下降
 - en: This algorithm accelerates convergence by factoring in the exponentially weighted
     average of the gradients in the last n steps. Mathematically,
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法通过考虑过去 n 步梯度的指数加权平均来加速收敛。从数学上讲，
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/c4012901373cbbec0fef27cb7953c706.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![在 PyTorch 中调整 Adam 优化器参数](../Images/c4012901373cbbec0fef27cb7953c706.png)'
 - en: Image by Author
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'Note that smaller? means small steps towards minima and large? means large
     steps. Similar to weight updation, bias is updated as shown in the equations below:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，较小的? 表示向最小值迈出小步，较大的? 表示迈出大步。类似于权重更新，偏差也按照下面的方程进行更新：
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/24eb07ea57acc20aab01b78318b7d0a2.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![在 PyTorch 中调整 Adam 优化器参数](../Images/24eb07ea57acc20aab01b78318b7d0a2.png)'
 - en: Momentum not only speeds up convergence but also has the ability to skip over
     local minimas.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 动量不仅加快了收敛速度，还有能力跳过局部最小值。
 - en: The figure below illustrates that the blue path (gradient descent with momentum)
     has less oscillations as compared to the red path (gradient descent only) thus
     converging faster towards the minima.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图说明了蓝色路径（具有动量的梯度下降）相比于红色路径（仅梯度下降）具有较少的振荡，因此更快地收敛到最小值。
 - en: '![](../Images/471040238fb6a2b40596c4598d9b64ea.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/471040238fb6a2b40596c4598d9b64ea.png)'
 - en: 'Source: [Gradient Descent Explained](https://towardsdatascience.com/gradient-descent-explained-9b953fc0d2c)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[梯度下降解释](https://towardsdatascience.com/gradient-descent-explained-9b953fc0d2c)
 - en: RMSProp
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: RMSProp
 - en: Root mean square propagation aka RMSprop is an adaptive learning algorithm that
     adjusts the oscillations according to the gradient magnitude. Unlike the momentum
     approach, it reduces the step size when the gradient increases.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 均方根传播，也称为 RMSprop，是一种自适应学习算法，根据梯度幅度调整振荡。与动量方法不同，当梯度增加时，它会减小步长。
 - en: A small value of epsilon is added to avoid dividing by zero error.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加一个小的 epsilon 值以避免除零错误。
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/12009e7722f2a1e04a55fa01b7bdd878.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![在 PyTorch 中调整 Adam 优化器参数](../Images/12009e7722f2a1e04a55fa01b7bdd878.png)'
 - en: Image by Author
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: Adam optimizer combines “gradient descent with momentum” and “RMSprop” algorithms.
     It gets the speed from “momentum” (gradient descent with momentum) and the ability
     to adapt gradients in different directions from RMSProp. The combination of the
     two makes it powerful. As shown in the below figure, the ADAM optimizer (yellow)
     converges faster than momentum (green) and RMSProp (purple) but combines the power
     of both.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: Adam 优化器结合了“具有动量的梯度下降”和“RMSprop”算法。它从“动量”（具有动量的梯度下降）中获得速度，从 RMSProp 中获得在不同方向上调整梯度的能力。这两者的结合使其功能强大。如下图所示，ADAM
+    优化器（黄色）比动量（绿色）和 RMSProp（紫色）收敛更快，但结合了两者的优势。
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/624e3086bbbe4afb71672c2e8f0a68ab.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![在 PyTorch 中调整 Adam 优化器参数](../Images/624e3086bbbe4afb71672c2e8f0a68ab.png)'
 - en: 'Source: [Paperspaceblog](https://blog.paperspace.com/intro-to-optimization-momentum-rmsprop-adam/)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[Paperspace 博客](https://blog.paperspace.com/intro-to-optimization-momentum-rmsprop-adam/)
 - en: Now that you have understood how an Adam optimizer works, let’s dive into the
     tuning of Adam hyperparameters using PyTorch.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经了解了 Adam 优化器的工作原理，我们来深入探讨如何使用 PyTorch 调整 Adam 超参数。
 - en: Tuning Adam Optimizer in PyTorch
+  id: totrans-32
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 PyTorch 中调整 Adam 优化器
 - en: ADAM optimizer has three parameters to tune to get the optimized values i.e.
     ? or learning rate, ? of momentum term and rmsprop term, and learning rate decay.
     Let us understand each one of them and discuss their impact on the convergence
     of the loss function.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: ADAM 优化器有三个参数需要调整以获得优化值，即 ? 或学习率、? 的动量项和 rmsprop 项，以及学习率衰减。让我们了解每一个，并讨论它们对损失函数收敛性的影响。
 - en: Learning Rate (alpha or Lr)
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 学习率（alpha 或 Lr）
 - en: Learning Rate, also referred to as the step size, is the ratio of parameter
     update to gradient/momentum/velocity depending on the optimization algorithm used.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习率，也称为步长，是参数更新与梯度/动量/速度的比率，具体取决于使用的优化算法。
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/42f469d3e2a6807217d1116aa507182f.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![在 PyTorch 中调整 Adam 优化器参数](../Images/42f469d3e2a6807217d1116aa507182f.png)'
 - en: 'Source: [CS231n Convolutional Neural Networks for Visual Recognition](https://cs231n.github.io/neural-networks-3/)'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[CS231n 视觉识别中的卷积神经网络](https://cs231n.github.io/neural-networks-3/)
 - en: A small learning rate would mean slower model training i.e. it would require
     many updates to the parameters to reach the point of minima. On the other hand,
     a large learning rate would mean large steps or drastic updates to the parameters
     thus often tends to divergence instead of  convergence.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 较小的学习率意味着模型训练较慢，即需要对参数进行许多更新才能达到最小值点。另一方面，较大的学习率意味着较大的步伐或剧烈的参数更新，从而往往倾向于发散而不是收敛。
 - en: An optimal learning rate value (default value 0.001) means that the optimizer
     would update the parameters just right to reach the local minima. Varying learning
     rate between 0.0001 and 0.01 is considered optimal in most of the cases.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个最佳的学习率值（默认值 0.001）意味着优化器会刚好更新参数以达到局部最小值。在大多数情况下，学习率在 0.0001 到 0.01 之间是最佳的。
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/f547d02cdeaf58fdbe70acfd749a422b.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![在 PyTorch 中调整 Adam 优化器参数](../Images/f547d02cdeaf58fdbe70acfd749a422b.png)'
 - en: 'Source: [Setting the learning rate of your neural network](https://www.jeremyjordan.me/nn-learning-rate/)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[设置神经网络的学习率](https://www.jeremyjordan.me/nn-learning-rate/)
 - en: Betas
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Betas
 - en: β1 is the exponential decay rate for the momentum term also called first moment
     estimates. It’s default value in PyTorch is 0.9\. The impact of different beta
     values on the momentum value is displayed in the image below.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: β1 是动量项的指数衰减率，也称为一阶矩估计。它在 PyTorch 中的默认值为 0.9。不同 beta 值对动量值的影响在下图中显示。
 - en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/3faa14a14add03cf90096d26e2caaa05.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![调整 PyTorch 中的 Adam 优化器参数](../Images/3faa14a14add03cf90096d26e2caaa05.png)'
 - en: 'Source: [Stochastic Gradient Descent with momentum](https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [带动量的随机梯度下降](https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d)'
 - en: β2 is the exponential decay rate for velocity term also called the second-moment
     estimates. The default value is 0.999 in the PyTorch implementation. This value
     should be set as close to 1.0 as possible on the issues pertaining to sparse gradient,
@@ -199,81 +296,119 @@
     gradient (even smaller square of gradient) leading to slow convergence. A high
     weightage to velocity term avoids this situation by moving in the general direction
     of minimizing a loss function.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: β2 是速度项的指数衰减率，也称为二阶矩估计。在 PyTorch 实现中，默认值为 0.999。对于稀疏梯度问题，尤其是在图像相关问题中，这个值应尽可能接近
+    1.0。由于大多数高分辨率图像的像素密度和颜色变化很小，这会导致微小的梯度（甚至更小的梯度平方），导致收敛缓慢。对速度项给予高权重可以通过朝着最小化损失函数的总体方向移动来避免这种情况。
 - en: Learning Rate Decay
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 学习率衰减
 - en: Learning rate decay decreases ? as the parameter values reach closer to the
     global optimal solution. This avoids overshooting the minima often resulting in
     faster convergence of the loss function. The PyTorch implementation refers to
     this as weight_decay with default value being zero.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习率衰减使参数值接近全局最优解时降低 ?。这可以避免过度跳过最小值，通常会导致损失函数的更快收敛。PyTorch 实现中将此称为 weight_decay，默认值为零。
 - en: Epsilon
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: ε
 - en: Although not a tuning hyperparameter, it is a very tiny number to avoid any
     division by zero error in the implementation. The default value is 1e-08.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然不是一个调整超参数，但它是一个非常小的数字，以避免实现中的除零错误。默认值为 1e-08。
 - en: The PyTorch code to initialize the optimizer with all the hyperparameters is
     shown below.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始化具有所有超参数的 PyTorch 代码如下所示。
 - en: '[PRE0]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The remaining hyperparameters such as maximize, amsgrad, etc can be referred
     to in the [official documentation](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 剩余的超参数如 maximize、amsgrad 等可以参考 [官方文档](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html)。
 - en: Summary
+  id: totrans-54
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结
 - en: In this article you learned the importance of optimizers, three different optimizers,
     and how Adam optimizer combines the best of momentum and RMSProp optimizer to
     lead the optimizer chart in performance. The post followed up on the internal
     working of the Adam optimizer and explained the various tunable hyperparameters
     and their impact on the speed of convergence.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，你了解了优化器的重要性、三种不同的优化器，以及 Adam 优化器如何将动量和 RMSProp 优化器的优点结合起来，在性能上领先于其他优化器。文章跟进了
+    Adam 优化器的内部工作，并解释了各种可调超参数及其对收敛速度的影响。
 - en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
     a digital transformation leader working at the intersection of product, sciences,
     and engineering to build scalable machine learning systems. She is an award-winning
     innovation leader, an author, and an international speaker. She is on a mission
     to democratize machine learning and break the jargon for everyone to be a part
     of this transformation.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位 AI 策略师和数字化转型领导者，致力于在产品、科学和工程交汇处构建可扩展的机器学习系统。她是一位获奖的创新领导者、作者和国际演讲者。她的使命是使机器学习民主化，并打破术语，让每个人都能参与这一转型。'
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 PyTorch 解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
 - en: '[The Complete Free PyTorch Course for Deep Learning](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[完整免费的 PyTorch 深度学习课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
 - en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
 - en: '[YOLOv5 PyTorch Tutorial](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[YOLOv5 PyTorch 教程](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
 - en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyTorch 的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
 - en: '[PyTorch Tips to Boost Your Productivity](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升 PyTorch 生产力的技巧](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)'
