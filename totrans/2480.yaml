@@ -1,21 +1,33 @@
 - en: Versioning Machine Learning Experiments vs Tracking Them
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 版本控制机器学习实验与跟踪实验
 - en: 原文：[https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)
 - en: '**By [Maria Khalusova](https://www.linkedin.com/in/maria-khalusova-a958aa14/?originalSubdomain=ca),
     Senior Developer Advocate at Iterative**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Maria Khalusova](https://www.linkedin.com/in/maria-khalusova-a958aa14/?originalSubdomain=ca)
+    撰写，Iterative 的高级开发者倡导者**'
 - en: '![Versioning Machine Learning Experiments vs Tracking Them](../Images/86ffbd4ee67e0886da4b36b7d3f226a0.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![版本控制机器学习实验与跟踪实验](../Images/86ffbd4ee67e0886da4b36b7d3f226a0.png)'
 - en: Photo by [Debby Hudson](https://unsplash.com/@hudsoncrafted?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 摄影： [Debby Hudson](https://unsplash.com/@hudsoncrafted?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)  在
+    [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: When working on a machine learning project it is common to run numerous experiments
     in search of a combination of an algorithm, parameters and data preprocessing
     steps that would yield the best model for the task at hand. To keep track of these
@@ -23,8 +35,11 @@
     a better option. However, being mostly manual, this approach had its downsides.
     To name a few, it was error-prone, inconvenient, slow, and completely detached
     from the actual experiments.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行机器学习项目时，通常会进行大量实验，以寻找一种算法、参数和数据预处理步骤的组合，从而产生最适合当前任务的模型。为了跟踪这些实验，数据科学家们曾经将其记录在
+    Excel 表格中，因为当时缺乏更好的选择。然而，由于主要是手动操作，这种方法存在一些缺点。比如，它容易出错、不方便、速度慢，并且与实际实验完全脱节。
 - en: Luckily, over the last few years experiment tracking has come a long way and
     we have seen a number of tools appear on the market that improve the way experiments
     can be tracked, e.g. Weights&Biases, MLflow, Neptune. Usually such tools offer
@@ -33,8 +48,11 @@
     With that, once you change your code, you no longer have to worry about forgetting
     to write the results down — that’s done automatically for you. The dashboards
     help with visualization and sharing.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，在过去几年中，实验跟踪技术取得了长足的进展，我们看到市场上出现了许多能够改善实验跟踪方式的工具，例如 Weights&Biases、MLflow
+    和 Neptune。通常，这些工具提供了一个 API，你可以从代码中调用以记录实验信息。然后，这些信息会存储在数据库中，你可以使用仪表盘进行可视化比较。一旦你更改了代码，就不再需要担心忘记记录结果——这会自动为你完成。仪表盘有助于可视化和共享。
 - en: This is a great improvement in keeping track of what has been done, but… Spotting
     an experiment that has produced the best metrics in a dashboard does not automatically
     translate into having that model ready for deployment. It’s likely that you need
@@ -43,242 +61,354 @@
     Thus, you still may need to semi-manually trace your steps back to stitch together
     the exact code, data and pipeline steps to reproduce the experiment. Could this
     be automated?
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是跟踪已完成工作的一个重大改进，但…… 在仪表盘上发现产生最佳指标的实验并不自动转化为准备好部署的模型。你可能需要首先重现最佳实验。然而，你直接观察到的跟踪仪表盘和表格与实际实验的连接较弱。因此，你仍然可能需要半自动地追踪你的步骤，拼接出准确的代码、数据和管道步骤来重现实验。这能自动化吗？
 - en: In this blog post I’d like to talk about versioning experiments instead of tracking
     them, and how this can result in easier reproducibility on top of the benefits
     of experiment tracking.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我想谈谈实验的版本控制，而不是跟踪实验，以及这如何在实验跟踪的好处基础上带来更容易的可重复性。
 - en: To achieve this I will be using [DVC](http://dvc.org/), an open source tool
     that is mostly known in the context of Data Versioning (after all it’s in the
     name). However, this tool can actually do a lot more. For instance, you can use
     DVC to define ML pipelines, run multiple experiments, and compare metrics. You
     can also version all the moving parts that contribute to an experiment.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现这一点，我将使用 [DVC](http://dvc.org/)，这是一款开源工具，主要以数据版本控制而闻名（毕竟这也是它名字的一部分）。然而，这款工具实际上可以做很多事情。例如，你可以使用
+    DVC 定义机器学习管道，运行多个实验，并比较指标。你还可以对所有参与实验的移动部分进行版本控制。
 - en: Experiment Versioning
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实验版本控制
 - en: To [start versioning](https://dvc.org/doc/command-reference/exp/init) experiments
     with DVC you’ll need to initialize it from any Git repo as shown below. Note,
     that DVC expects you to have your project structured in a certain logical way,
     and you may need to reorganize your folders a bit.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 要[开始版本控制](https://dvc.org/doc/command-reference/exp/init)实验，你需要从任何 Git 仓库初始化
+    DVC，如下所示。请注意，DVC 期望你的项目按照一定的逻辑结构组织，你可能需要稍微重新组织一下文件夹。
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: You may also notice that DVC assumes that you store parameters and metrics in
     files instead of logging them with an API. This means you’ll need to modify your
     code to read parameters from a YAML file and write metrics to a JSON file.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能还会注意到 DVC 假设你将参数和指标存储在文件中，而不是通过 API 进行日志记录。这意味着你需要修改代码以从 YAML 文件中读取参数，并将指标写入
+    JSON 文件。
 - en: Finally, when initializing, DVC automatically creates a basic pipeline and stores
     it in a dvc.yaml file. With that, your training code, pipeline, parameters, and
     metrics now live in files that can be versioned.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，在初始化时，DVC 自动创建一个基本流程并将其存储在 dvc.yaml 文件中。这样，你的训练代码、流程、参数和指标现在都保存在可以版本控制的文件中。
 - en: Benefits of Experiment-as-Code Approach
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实验即代码方法的好处
 - en: Clean code
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 干净的代码
 - en: When set up this way, your code no longer depends on an experiment tracking
     API. Instead of inserting tracking API calls in your code to save experiment information
     in a central database, you save it in readable files. These are always available
     in your repo, your code stays clean, and you have less dependencies. Even without
     DVC, you can read, save, and version your experiment parameters and metrics with
     Git, though using plain Git is not the most convenient way to compare ML experiments.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 以这种方式设置后，你的代码不再依赖于实验跟踪 API。你不需要在代码中插入跟踪 API 调用来将实验信息保存到中央数据库，而是将其保存在可读文件中。这些文件始终可以在你的仓库中找到，你的代码保持干净，依赖项减少。即使没有
+    DVC，你也可以通过 Git 阅读、保存和版本化实验参数和指标，尽管使用纯 Git 不是比较机器学习实验的最方便方式。
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Reproducibility
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 可复现性
 - en: Experiment tracking databases do not capture everything you need to reproduce
     an experiment. One important piece that is often missing is the pipeline to run
     the experiment end to end. Let’s take a look at the`dvc.yaml` file, the pipeline
     file that has been generated.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验跟踪数据库无法捕捉到你需要复现实验的所有信息。其中一个常常缺失的重要部分是运行实验所需的完整流程。让我们来看看`dvc.yaml`文件，它是生成的流程文件。
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This pipeline captures the command to run the experiment, parameters and other
     dependencies, metrics, plots, and other outputs. It has a single `default` stage,
     but you can add as many stages as you need. When treating all aspects of an experiment
     as code, including the pipeline, it becomes easier for anyone to reproduce the
     experiment.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个流程捕捉了运行实验的命令、参数和其他依赖项、指标、图表以及其他输出。它有一个单一的`default`阶段，但你可以根据需要添加任意多的阶段。当将实验的所有方面都视为代码时，包括流程，任何人都更容易复现实验。
 - en: Reduce noise
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 减少噪音
 - en: In a dashboard, you can see all of your experiments, and I mean ALL of them.
     At a certain point you will have so many experiments, you will have to sort, label,
     and filter them simply to keep up. With experiment versioning you have more flexibility
     in what you share and how you organize things.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在仪表盘中，你可以看到所有的实验，我指的是所有的实验。在某个时刻，你会有很多实验，你需要排序、标记和过滤它们以保持跟进。通过实验版本控制，你在共享和组织事情时有更多的灵活性。
 - en: For instance, you can try an experiment in a new Git branch. If something goes
     wrong or the results are uninspiring, you can choose not to push the branch. This
     way you can reduce some unnecessary clutter that you would otherwise encounter
     in an experiment tracking dashboard.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，你可以在一个新的 Git 分支中尝试一个实验。如果出现问题或结果不尽如人意，你可以选择不推送该分支。这样你可以减少在实验跟踪仪表盘中可能遇到的一些不必要的杂乱。
 - en: At the same time, if a particular experiment looks promising, you can push it
     to your repo along with your code so that the results stay in sync with the code
     and pipeline. The results are shared with the same people, and it’s already organized
     using your existing branch name. You can keep iterating on that branch, start
     a new one if an experiment diverges too much, or merge into your main branch to
     make it your primary model.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 同时，如果某个实验看起来有前景，你可以将它和你的代码一起推送到你的仓库，以保持结果与代码和流程的同步。结果与相同的人共享，并且已经按照你现有的分支名称进行了组织。你可以继续在该分支上迭代，如果实验差异过大，可以启动新的分支，或者合并到主分支，使其成为你的主要模型。
 - en: Why use DVC?
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么使用 DVC？
 - en: Even without DVC, you can change your code to read parameters from files and
     write metrics to other files, and track changes with Git. However, DVC adds a
     few ML-specific capabilities on top of Git that can simplify comparing and reproducing
     the experiments.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使没有DVC，你也可以将代码更改为从文件中读取参数，并将指标写入其他文件，并使用Git跟踪更改。然而，DVC在Git之上添加了一些特定于ML的功能，可以简化比较和复现实验的过程。
 - en: Large Data Versioning
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 大型数据版本控制
 - en: Large data and models aren’t easily tracked in Git, but with DVC you can track
     them using your own storage, yet they are Git-compatible. When initialized DVC
     starts tracking the `models` folder, making Git ignore it yet storing and versioning
     it so you can back up versions anywhere and check them out alongside your experiment
     code.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 大型数据和模型在Git中难以跟踪，但使用DVC，你可以使用自己的存储来跟踪它们，同时它们与Git兼容。当初始化DVC时，它开始跟踪`models`文件夹，使Git忽略它，但仍存储和版本控制它，以便你可以在任何地方备份版本，并与实验代码一起查看它们。
 - en: Single-command reproducibility
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 单命令可复现性
 - en: Codifying the entire experiment pipeline is a good first step towards reproducibility,
     but it still leaves it to the user to execute that pipeline. With DVC you can
     reproduce the entire experiment with a single command. Not only that, but it will
     check for cached inputs and outputs and skip recomputing data that’s been generated
     before which can be a massive time saver at times.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 编码整个实验管道是实现可复现性的良好第一步，但它仍然需要用户执行该管道。使用DVC，你可以通过单个命令复现整个实验。不仅如此，它还会检查缓存的输入和输出，并跳过重新计算之前生成的数据，这有时可以节省大量时间。
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Better branch organization
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 更好的分支组织
 - en: 'While Git branching is a flexible way to organize and manage experiments, there
     are often too many experiments to fit any Git branching workflow. DVC tracks experiments
     so you don’t need to create commits or branches for each one:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然Git分支是一种灵活的实验组织和管理方式，但通常实验太多而无法适应任何Git分支工作流。DVC跟踪实验，因此你不需要为每个实验创建提交或分支：
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Once you decide which of these experiments are worth sharing with the team,
     they can be converted into Git branches:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你决定哪些实验值得与团队分享，它们可以转换为Git分支：
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This way you will avoid creating a clutter of branches in your repo, and can
     focus on comparing only promising experiments.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样，你将避免在你的仓库中创建混乱的分支，并可以专注于仅比较有前途的实验。
 - en: Conclusion
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: To summarize, experiment versioning allows you to codify your experiments in
     such a way that your experiment logs are always connected to the exact data, code,
     and pipeline that went into the experiment. You have control over which experiments
     end up shared with your colleagues for comparison, and this can prevent clutter.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，实验版本控制允许你将实验以一种方式编码，使你的实验日志始终与进入实验的确切数据、代码和管道相关联。你可以控制哪些实验最终与同事共享以供比较，这可以防止混乱。
 - en: Finally, reproducing a versioned experiment becomes as easy as running a single
     command, and it can even take less time than initially, if some of the pipeline
     steps have cached outputs that are still relevant.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，复现一个版本化的实验变得像运行单个命令一样简单，如果某些管道步骤有缓存的输出仍然相关，甚至可能比最初的时间更短。
 - en: Thank you for staying with me until the end of the post! To learn more about
     managing experiments with DVC, [check out the docs](https://dvc.org/doc/user-guide/experiment-management)
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢你坚持看到文章的最后！要了解更多关于使用DVC管理实验的信息， [查看文档](https://dvc.org/doc/user-guide/experiment-management)
 - en: '**Bio: [Maria Khalusova](https://www.linkedin.com/in/maria-khalusova-a958aa14/?originalSubdomain=ca)**
     ([@mariaKhalusova](https://twitter.com/mariaKhalusova)) is a Senior Developer
     Advocate at Iterative. She works on open source MLOps tooling.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Maria Khalusova](https://www.linkedin.com/in/maria-khalusova-a958aa14/?originalSubdomain=ca)**
+    ([@mariaKhalusova](https://twitter.com/mariaKhalusova))是Iterative的高级开发者倡导者。她从事开源MLOps工具的工作。'
 - en: '[Original](https://towardsdatascience.com/versioning-machine-learning-experiments-vs-tracking-them-f3096a67faa1).
     Reposted with permission.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/versioning-machine-learning-experiments-vs-tracking-them-f3096a67faa1)。经许可转载。'
 - en: '* * *'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 事务'
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[7 Best Tools for Machine Learning Experiment Tracking](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 款最佳机器学习实验跟踪工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)'
 - en: '[Developing an Open Standard for Analytics Tracking](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为分析跟踪开发开放标准](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)'
 - en: '[Hydra Configs for Deep Learning Experiments](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于深度学习实验的 Hydra 配置](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)'
 - en: '[How to Design Experiments for Data Collection](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何为数据收集设计实验](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)'
 - en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习与大脑的不同第 6 部分：精确突触权重的重要性…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
 - en: '[Data Science Programming Languages and When To Use Them](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学编程语言及其应用时机](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)'
