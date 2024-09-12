@@ -1,172 +1,259 @@
 - en: Clearing air around “Boosting”
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 澄清“提升”相关问题
 - en: 原文：[https://www.kdnuggets.com/2019/06/clearing-air-around-boosting.html](https://www.kdnuggets.com/2019/06/clearing-air-around-boosting.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/clearing-air-around-boosting.html](https://www.kdnuggets.com/2019/06/clearing-air-around-boosting.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Puneet Grover](https://twitter.com/MLAIwithPuneet), Helping Machines
     Learn**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Puneet Grover](https://twitter.com/MLAIwithPuneet), 帮助机器学习**。'
 - en: '![](../Images/a2d3f0cb9086c51b46694d715d545ed7.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a2d3f0cb9086c51b46694d715d545ed7.png)'
 - en: '**Clearing Photo by [SpaceX](https://unsplash.com/@spacex?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**清除照片由 [SpaceX](https://unsplash.com/@spacex?utm_source=medium&utm_medium=referral)
+    在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供**'
 - en: '**Note: **Although this post is a little bit math oriented, still you can understand
     core working of Boosting and Gradient Boosting by only reading first two sections
     i.e. [Introduction ](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e#4b85)and [History](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e#a355).
     Sections after that are explanation of different Gradient Boosting algorithm’s
     papers.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 尽管这篇文章稍微偏重数学，但你仍然可以通过阅读前两节，即 [介绍](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e#4b85)
+    和 [历史](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e#a355)，理解提升和梯度提升的核心工作。之后的部分是对不同梯度提升算法论文的解释。'
 - en: This is one of the post from my posts from Concepts category, which can be found
     on my github repo [here](https://github.com/PuneetGrov3r/MediumPosts/tree/master/Concepts).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我Concepts类别中的一篇文章，可以在我的GitHub仓库 [这里](https://github.com/PuneetGrov3r/MediumPosts/tree/master/Concepts)
+    找到。
 - en: '**Index**'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**目录**'
 - en: Introduction
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 介绍
 - en: History (Bagging, Random Forest, Boosting and Gradient Boosting)
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 历史（袋装、随机森林、提升和梯度提升）
 - en: AdaBoost
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: AdaBoost
 - en: XGBoost
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: XGBoost
 - en: LightGBM
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: LightGBM
 - en: CatBoost
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: CatBoost
 - en: Further Reading
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 进一步阅读
 - en: References
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '***NOTE:*** This post goes along with ***Jupyter Notebook*** available in my
     Repo on Github:[[ClearingAirAroundBoosting](https://nbviewer.jupyter.org/github/PuneetGrov3r/MediumPosts/blob/master/Concepts/Boosting.ipynb)]'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '***注意：*** 本文配有在我GitHub仓库中的***Jupyter Notebook***：[[ClearingAirAroundBoosting](https://nbviewer.jupyter.org/github/PuneetGrov3r/MediumPosts/blob/master/Concepts/Boosting.ipynb)]'
 - en: '**1) Introduction **'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1) 介绍**'
 - en: '**Boosting** is an ensemble meta-algorithm primarily for reducing bias and
     variance in supervised learning.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提升** 是一种集成元算法，主要用于减少监督学习中的偏差和方差。'
 - en: Boosting algorithms, today, are one of the most used algorithms for getting
     state of the art results in a wide varieties of contexts/problems. And it has
     become a go to method for any machine learning problem or contest to get best
     results. Now,
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如今，提升算法是获得各种问题和情境下最先进结果的最常用算法之一。它已成为解决任何机器学习问题或竞赛的首选方法。现在，
 - en: What is the reason behind this massive success of Boosting Algorithms?
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这种提升算法的巨大成功背后的原因是什么？
 - en: How it came to be?
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它是如何产生的？
 - en: What can we expect in the future?
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们可以期待未来发生什么？
 - en: I will try to answer all these questions, and many more, through this post.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将通过这篇文章尝试回答所有这些问题以及更多问题。
 - en: '**2) History **[^](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e#bd3e)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2) 历史** [^](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e#bd3e)'
 - en: '![](../Images/9d58f26c18f4a21a99744aad6235b4b2.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9d58f26c18f4a21a99744aad6235b4b2.png)'
 - en: '**Photo by [Andrik Langfield](https://unsplash.com/@andriklangfield?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**照片来源 [Andrik Langfield](https://unsplash.com/@andriklangfield?utm_source=medium&utm_medium=referral)
+    在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
 - en: 'Boosting is based on the question posed by [Kearns](https://en.wikipedia.org/wiki/Michael_Kearns_%28computer_scientist%29) and [Valiant](https://en.wikipedia.org/wiki/Leslie_Valiant) (1988,
     1989): “Can a set of **weak learners** create a single **strong learner**?”.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 提升基于 [Kearns](https://en.wikipedia.org/wiki/Michael_Kearns_%28computer_scientist%29)
+    和 [Valiant](https://en.wikipedia.org/wiki/Leslie_Valiant)（1988, 1989）提出的问题：“一组
+    **弱学习器** 能否创建一个 **强学习器**？”
 - en: '[Robert Schapire](https://en.wikipedia.org/wiki/Robert_Schapire)’s affirmative
     answer in a 1990 [paper](https://en.wikipedia.org/wiki/Boosting_%28machine_learning%29#cite_note-Schapire90-5) to
     the question of Kearns and Valiant has had significant ramifications in machine
     learning and statistics, most notably leading to the development of boosting.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[罗伯特·沙皮雷](https://en.wikipedia.org/wiki/Robert_Schapire)在1990年[论文](https://en.wikipedia.org/wiki/Boosting_%28machine_learning%29#cite_note-Schapire90-5)中对凯恩斯和瓦利安特提出的问题的肯定回答在机器学习和统计学中产生了重大影响，最显著的是导致了Boosting的发展。'
 - en: 'With Bagging there are a few other ensemble methods which came around the same
     time and you can say they are subset of modern Gradient Boosting algorithms, which
     are:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Bagging方法中，还有一些其他集成方法在同一时期出现，可以说它们是现代梯度提升算法的子集，它们包括：
 - en: '**Bagging**(Bootstrap Aggregating): (i.e. [Bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29) +
     Aggregating)'
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Bagging**（Bootstrap Aggregating）：（即[自助采样](https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29)
+    + 聚合）'
 - en: Bagging is an ensemble meta-algorithm which helps in increasing stability and
     accuracy. It also helps in reducing variance and thus in reducing over-fitting.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Bagging是一种集成元算法，有助于提高稳定性和准确性。它还帮助减少方差，从而减少过拟合。
 - en: In bagging, if we have N data points and we want to make ‘m’ models, then we
     will take some **fraction of data** [mostly, (1–1/*e*)≈63.2%] from data ‘m’ times **and
     repeat some of the rows** in them to make their length equal to N data points
     (though some of them are redundant). Now, we will train those ‘m’ models on these
     ‘m’ datasets and then get ‘m’ set of predictions. Then we aggregate those predictions
     to get final prediction.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在bagging中，如果我们有N个数据点，并且我们想要生成‘m’个模型，那么我们将从数据中取出一些**数据的分数**[通常是(1–1/*e*)≈63.2%]，从数据中重复‘m’次**并重复一些行**，使其长度等于N个数据点（尽管其中一些是冗余的）。现在，我们将在这些‘m’个数据集上训练‘m’个模型，然后得到‘m’组预测。然后我们将这些预测进行汇总以获得最终预测。
 - en: It can be used with Neural Networks, Classification and Regression trees, and
     subset selection in Linear Regression.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 它可以与神经网络、分类和回归树以及线性回归中的子集选择一起使用。
 - en: '**Random Forest**:'
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**随机森林**：'
 - en: Random forests (or random decision forests) method is an ensemble learning method
     that operates by constructing a multitude of decision trees. It helps reduce overfitting
     which is common in Decision Tree models (with high depth value).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林（或随机决策森林）方法是一种集成学习方法，通过构建大量决策树来操作。它有助于减少在决策树模型（具有较高深度值）中常见的过拟合。
 - en: Random Forest combines “bagging” idea and random selection of features in order
     to construct a collection of Decision Trees to counter variance. As in bagging,
     we make **bootstrapped training sets** for decision trees, but now for each split
     that we make in tree generation process we only select **a fraction of total number
     of features** [mostly √n or log2(n)].
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林结合了“bagging”思想和特征的随机选择，以构建一个决策树集合来对抗方差。与bagging一样，我们为决策树创建**自助采样训练集**，但现在在树生成过程中每次进行分裂时，我们只选择**总特征数的一部分**[通常为√n或log2(n)]。
 - en: These methods, bootstrapping and subset selection, makes trees more ***uncorrelated ***with
     each other and helps reduce variance more, and thus reduces overfitting in more
     generalize-able manner.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些方法，自助采样和子集选择，使树之间更***不相关***，有助于更多地减少方差，因此以更具概括性的方法减少过拟合。
 - en: '**Boosting**:'
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Boosting**:'
 - en: 'Above methods were using averaging of mutually exclusive models in order to
     reduce variance. **Boosting **is a little bit different. Boosting is a *sequential
     ensemble* method. For ‘n’ number of total trees, we add trees predictions in a
@@ -176,61 +263,90 @@
     from the target values and then taking these values as target value we fit second
     model, and so on. We can see it as: new models trying to correct previous models/previous
     model’s mistakes. Boosting can be nearly summarized by one formula:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 以上方法使用了互斥模型的平均以减少方差。**Boosting**略有不同。Boosting 是一种*序列集成*方法。对于总数为‘n’的树，我们以序列方式添加树的预测（即我们添加第二棵树来提高第一棵树的性能，或者说尝试纠正第一棵树的错误，依此类推）。所以我们所做的是，从目标值中减去第一模型的预测值乘以常数（0<λ≤1），然后将这些值作为目标值来拟合第二模型，依此类推。我们可以将其视为：新模型尝试纠正之前模型/之前模型的错误。Boosting
+    可以通过一个公式来概括：
 - en: '![](../Images/faaea282eb685233a3610f902169d5d4.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/faaea282eb685233a3610f902169d5d4.png)'
 - en: '**Example: Predicting if someone will like computer games. [Source: XGBoost docs]**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例：预测某人是否会喜欢计算机游戏。[来源：XGBoost 文档]**'
 - en: I.e. final predictions are summation of predictions of all the models, each
     multiplied by a small constant (0<λ≤1). This is another way of looking at Boosting
     algorithm.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 即最终预测是所有模型预测的总和，每个预测乘以一个小常数（0<λ≤1）。这是一种观察提升算法的另一种方式。
 - en: 'So, actually we try to learn small amount of information about target from
     each learner (which are all **weak learners**) which are trying to improve upon
     previous models and then sum them all to get final predictions (this is possible
     because we are fitting only to residuals from previous models). So, each sequential
     learner is trying to predict:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我们尝试从每个学习器（这些都是**弱学习器**）中学习少量关于目标的信息，这些学习器试图改进先前的模型，然后将它们汇总以获得最终预测（这是可能的，因为我们只拟合先前模型的残差）。因此，每个顺序学习器试图预测：
 - en: (initial predictions) — (λ * sum_of_all_predictions_of_previous_learners)
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: （初始预测） — （λ * 前述学习器所有预测的总和）
 - en: Each tree predictor can also have different λ value based on their performance.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个树预测器也可以根据其表现具有不同的 λ 值。
 - en: '**Gradient Boosting: **'
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**梯度提升：**'
 - en: In gradient boosting, we take a *loss function* that is evaluated at every cycle
     of fitting (like in Deep Learning). First [paper](https://statweb.stanford.edu/~jhf/ftp/trebst.pdf) on
     Gradient Boosting by Jerome H. Friedman focused on additive expansion of the final
     function, similar to what we saw above.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在梯度提升中，我们使用一个*损失函数*，在每次拟合周期中进行评估（就像在深度学习中一样）。Jerome H. Friedman 首次提出的[论文](https://statweb.stanford.edu/~jhf/ftp/trebst.pdf)集中于最终函数的加性扩展，类似于我们上面看到的内容。
 - en: 'We first predict a target value (say, γ), a constant which gives least error
     (i.e. first prediction is F0 = γ). After that we calculate gradients for every
     point in our dataset w.r.t. our previous output. So, we calculate gradient of
     error function w.r.t. sum of all outputs of previous models, which in case of
     Square Error will be:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先预测一个目标值（例如，γ），这是一个给出最小误差的常数（即第一次预测是 F0 = γ）。之后我们计算数据集中每个点相对于我们之前输出的梯度。因此，我们计算误差函数相对于之前模型所有输出总和的梯度，在平方误差的情况下是：
 - en: '![](../Images/03e1609f1acdd50d7a8769206d5f4da3.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/03e1609f1acdd50d7a8769206d5f4da3.png)'
 - en: '**gradient w.r.t. sum of all values for that data point (i.e. ith gradient)**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相对于该数据点所有值之和的梯度（即第 i 个梯度）**'
 - en: By this we have gradients w.r.t. all outputs of previous models.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样我们就得到了相对于之前模型所有输出的梯度。
 - en: Why are we calculating gradients like this?
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为什么要这样计算梯度？
 - en: In Neural Networks it is straightforward to calculate gradients w.r.t. all the
     parameters (i.e. all neural nodes) because Neural Network is just linear (or some
     function whose gradient is easy to calculate) combination in all layers, so its
@@ -238,302 +354,439 @@
     updating them. But here we can’t calculate gradient of output w.r.t. any parameters
     of a Decision Tree (like depth, number of leaves, split point …), because its
     not straightforward (actually its abstract).
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在神经网络中，计算所有参数（即所有神经节点）梯度是很直接的，因为神经网络在所有层中只是线性（或某个梯度容易计算的函数）组合，因此通过*反向传播*（相对于所有参数）计算梯度并更新它们更为容易。但是在决策树中，我们无法计算输出相对于任何参数（如深度、叶子数量、分裂点等）的梯度，因为这并不直接（实际上是抽象的）。
 - en: H. Friedman used gradients of error (error function) w.r.t. every output and
     fitted model to those gradients.
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Friedman 使用每个输出的误差梯度（误差函数）并将模型拟合到这些梯度。
 - en: How can this help in getting a better model?
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这如何有助于获得更好的模型？
 - en: What gradient w.r.t. each output represents is in which direction we should
     move and by how much to get to a better outcome for that particular data point/row,
     converting a Tree Fitting problem into Optimization Problem. We can use any kind
     of Loss Function, which is differentiable and which can be tailored specific to
     our task at hand, which was not possible with normal Boosting. For example, we
     can use MSE for regression tasks and Log Loss for classification tasks.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个输出的梯度表示我们应该朝哪个方向移动以及移动多少，以获得该特定数据点/行的更好结果，将树拟合问题转化为优化问题。我们可以使用任何可微分且可以针对我们当前任务进行定制的损失函数，这在普通提升方法中是不可能的。例如，我们可以使用
+    MSE 进行回归任务，用 Log Loss 进行分类任务。
 - en: How are gradients used here to get better results?
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里梯度如何用于获得更好的结果？
 - en: Unlike in Boosting, where at ith iteration we learned some part of the output
     (target) and (i+1)th tree would try to predict what is left to be learned, i.e.
     we fitted to residuals, here in Gradient Boosting we calculate gradients w.r.t.
     all data points / rows, which tells us about the direction in which we want to
     move( negative gradients) and by how much (can be thought of as absolute value
     of gradient), and fit a tree on these gradients.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 与提升算法不同，在提升算法中，我们在第`i`次迭代时学习了一部分输出（目标），而第`(i+1)`棵树会尝试预测剩余的部分，即我们对残差进行拟合；而在梯度提升中，我们计算相对于所有数据点/行的梯度，这告诉我们要前进的方向（负梯度）以及前进的幅度（可以看作是梯度的绝对值），并在这些梯度上拟合一棵树。
 - en: These gradients, based on our loss function (chosen to optimize our problem
     better than others), reflect change we would want for our predictions. For example
     in convex loss functions we will get some multiple to some multiple of exponential
     increase in gradients with increase in residuals, whereas residuals increase linearly.
     Therefore getting better convergence time. Depends on loss function and optimization
     method.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些梯度基于我们的损失函数（选择以比其他方法更好地优化问题），反映了我们希望对预测进行的变化。例如，在凸损失函数中，我们会随着残差的增加而得到梯度的指数增加的倍数，而残差是线性增加的。因此，收敛时间更好。这取决于损失函数和优化方法。
 - en: These gives us regions of gradients of data points which will need similar updates
     as they will have similar gradients. Now we will find best value for that region
     which will give least error for that region. (i.e. Tree Fitting)
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这为数据点的梯度区域提供了类似的更新，因为它们将有相似的梯度。现在我们将找到该区域的最佳值，这将为该区域提供最小的误差。（即树拟合）
 - en: After this we add these predictions to our previous predictions to get this
     stage’s final prediction.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这之后，我们将这些预测添加到之前的预测中，以获得本阶段的最终预测。
 - en: '![](../Images/37f3a6bb2499947e29f2ecff2338f31d.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/37f3a6bb2499947e29f2ecff2338f31d.png)'
 - en: '**Where γjm is prediction for jth region for mth tree and Jm is number of regions
     for mth tree. So adding γ, for that region found by tree fitting, times identity,
     giving 1 iff that data point is in current region..**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**其中 γjm 是第 j 区域第 m 棵树的预测值，Jm 是第 m 棵树的区域数量。因此，为该区域添加 γ 乘以身份，若数据点在当前区域，则为 1。**'
 - en: Which gives us new predictions for every data point/row.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这为每个数据点/行提供了新的预测。
 - en: '*The basic difference between normal Boosting and GradientBoosting is that,
     in normal Boosting we fit our next model to residuals, whereas in GradientBoosting
     we fit our next model to gradients of residuals. Err… GradientBoosting actually
     uses a Loss Function, so we fit our next model to gradient of that loss function
     (where we find gradients by using previous predictions).*'
+  id: totrans-66
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*正常提升和梯度提升的基本区别在于，在正常提升中，我们将下一模型拟合到残差上，而在梯度提升中，我们将下一模型拟合到残差的梯度上。嗯……梯度提升实际上使用损失函数，因此我们将下一模型拟合到该损失函数的梯度（其中通过使用之前的预测找到梯度）。*'
 - en: '**NOTE BEGIN**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意开始**'
 - en: '**Further possible improvements to this:**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**进一步可能的改进：**'
 - en: 'Current Gradient Boosting libraries does much more than this, such as:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前的梯度提升库远不止这些，例如：
 - en: Tree Constraints (such as max_depth, or num_leavesetc)
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 树的约束（例如`max_depth`，或`num_leaves`等）
 - en: Shrinkage (i.e. learning_rate)
+  id: totrans-71
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 缩减（即`learning_rate`）
 - en: Random Sampling (Row subsampling, Column subsampling) [At both tree and leaf
     level]
+  id: totrans-72
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 随机采样（行采样，列采样）[在树和叶子级别]
 - en: Penalized Learning (L1regression, L2 regression etc) [which would need a modified
     loss function and couldn’t have been possible with normal Boosting]
+  id: totrans-73
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 惩罚学习（L1回归，L2回归等）[这需要修改的损失函数，正常提升无法实现]
 - en: And much more…
+  id: totrans-74
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 以及更多……
 - en: These methods (some of them) are implemented in Boosting algorithm called [*Stochastic
     Gradient Boosting*](https://en.wikipedia.org/wiki/Gradient_boosting#Stochastic_gradient_boosting).
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些方法（其中一些）在一种称为 [*随机梯度提升*](https://en.wikipedia.org/wiki/Gradient_boosting#Stochastic_gradient_boosting)的提升算法中实现。
 - en: '**NOTE END**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意结束**'
 - en: '**3) AdaBoost **'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3) AdaBoost**'
 - en: '![](../Images/a42e1fc95c169d8942beedac03beef95.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a42e1fc95c169d8942beedac03beef95.png)'
 - en: '**Photo by [Mehrshad Rajabi](https://unsplash.com/@mehrshadr?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**照片由 [Mehrshad Rajabi](https://unsplash.com/@mehrshadr?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
 - en: This is the first Boosting algorithm which made a huge mark in ML world. It
     was developed by Freund and Schapire (1997), and [here](http://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf) is
     the paper.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是第一个在机器学习领域留下巨大印记的提升算法。它由Freund和Schapire（1997）开发，[这里](http://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)是相关论文。
 - en: In addition to sequentially adding model’s predictions (i.e. Boosting) it adds
     weights to each prediction. It was originally designed for classification problems,
     where they increased weights of all miss-classified examples and reduced weights
     of all data points classified correctly (though it can be applied to [regression ](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.409.2861&rep=rep1&type=pdf)too).
     So, the next model will have to focus more on examples with more weight and less
     on examples with less weight.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了顺序地添加模型的预测（即提升）外，它还为每个预测添加权重。它最初是为分类问题设计的，其中它增加了所有错误分类样本的权重，并减少了所有正确分类样本的权重（虽然也可以应用于[回归](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.409.2861&rep=rep1&type=pdf)）。因此，下一个模型将更多地关注权重较大的样本，而较少关注权重较小的样本。
 - en: They also have a constant to shrink every tree’s predictions, whose values is
     calculated during fitting and depend on error they get after fitting. More the
     error less is the value of constant for that tree. This makes predictions more
     accurate as we are learning less from less accurate models and learning more from
     more accurate learners.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 他们还使用一个常数来缩小每棵树的预测值，这个常数的值是在拟合过程中计算得出的，并且取决于拟合后的误差。误差越大，该树的常数值就越小。这使得预测更准确，因为我们从不够准确的模型中学习较少，从更准确的学习器中学习更多。
 - en: 'It was originally for two class classification and chose outputs as {-1, +1},
     where:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 它最初用于两类分类，并选择输出为{-1, +1}，其中：
 - en: 'It starts with equal weight for every data point = 1/N (where, N: no. of data
     points),'
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它以每个数据点的权重相等= 1/N（其中，N：数据点数量）开始，
 - en: Then it fits first classification model, h_0(x), to the training data using
     initial weights (which are same initially),
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 然后，它使用初始权重（最初相同）拟合第一个分类模型 h_0(x)到训练数据上，
 - en: Then it calculates *total *error and based on that update weights for all data
     points (i.e. we increase weight of misclassified and decrease weight of those
     correctly classified). Total error also becomes useful in calculating *shrinkage
     constant*for predictions of that particular tree. (i.e. we calculate constant,
     say α, which is small for large errors and vice versa, and is used both in shrinkage
     and weight calculation)
+  id: totrans-86
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 然后计算*总误差*，并基于此更新所有数据点的权重（即增加错误分类的权重，减少正确分类的权重）。总误差在计算该特定树的*缩小常数*时也变得有用（即我们计算常数α，对于大误差较小，对于小误差较大，并用于缩小和权重计算）。
 - en: '![](../Images/838e46f3832ad2bb7b776510cd0d240d.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/838e46f3832ad2bb7b776510cd0d240d.png)'
 - en: 'Finally current round’s predictions are added to previous predictions after
     multiplying with α. As it was originally to classify as +1 or -1, it takes sign
     of predictions after last round as final prediction:'
+  id: totrans-88
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最终，当前轮次的预测结果会在与α相乘后加到之前的预测结果上。由于最初是分类为+1或-1，因此最终预测结果取最后一轮的预测符号：
 - en: '![](../Images/c7e521d092c56f6af29c5640d531ac9b.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c7e521d092c56f6af29c5640d531ac9b.png)'
 - en: '**where α_i is ith constant (prev. point) and h_i is ith model predictions**'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**其中 α_i 是第i个常数（前一位置），h_i 是第i个模型预测值**'
 - en: (AdaBoost is not Gradient based)
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: （AdaBoost不是基于梯度的）
 - en: 4) XGBoost
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4) XGBoost
 - en: '![](../Images/766e2a8c20d70fc71c0b222d5fb0670d.png)'
+  id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/766e2a8c20d70fc71c0b222d5fb0670d.png)'
 - en: '**Photo by [Viktor Theo](https://unsplash.com/@viktortheo?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**照片由 [Viktor Theo](https://unsplash.com/@viktortheo?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
 - en: XGBoost tries to improve upon previous Gradient Boosting algorithms, to give
     better, faster and more generalizable results.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost试图在先前的梯度提升算法基础上进行改进，以提供更好、更快和更具通用性的结果。
 - en: 'It uses some different and some new additions to Gradient Boosting, such as:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 它在梯度提升的基础上进行了一些不同的和新的改进，例如：
 - en: '**a) Regularized Learning Objective:**'
+  id: totrans-97
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**a) 正则化学习目标：**'
 - en: As in many other objective function’s implementations, here it proposes to add
     an extra function to the loss function to penalize complexity of the model(like
     in LASSO, Ridge, etc), known as the *regularization term*. This helps models not
     to overfit the data.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 与许多其他目标函数实现类似，这里建议向损失函数中添加一个额外的函数来惩罚模型的复杂性（如LASSO、Ridge等），称为*正则化项*。这有助于模型避免过拟合数据。
 - en: '![](../Images/3b5f24f6f99a6f98f51eb189de66b2da.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3b5f24f6f99a6f98f51eb189de66b2da.png)'
 - en: '**Some loss function + (Some regularization function to control complexity
     of model)**'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一些损失函数 + （一些正则化函数以控制模型的复杂性）**'
 - en: 'Now for Gradient Boosting, which is additive in nature, we can write our ‘t’
     th prediction as F_t(x) = F_t-1(x) + y_hat_t(x), i.e. this rounds predictions
     plus sum of all previous predictions. Loss Function:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，对于具有加法性质的梯度提升，我们可以将第‘t’次预测写作F_t(x) = F_t-1(x) + y_hat_t(x)，即此轮预测加上所有先前预测的总和。损失函数：
 - en: '![](../Images/1f8378bde1e34e481736bc508c3bdc04.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1f8378bde1e34e481736bc508c3bdc04.png)'
 - en: 'which after [**Taylor Series Approximation**](https://en.wikipedia.org/wiki/Taylor_series) can
     be written as:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过[**泰勒级数近似**](https://en.wikipedia.org/wiki/Taylor_series)后，可以写成：
 - en: '![](../Images/ef4de8dd38a889b50f8b69ef91fa215f.png)'
+  id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ef4de8dd38a889b50f8b69ef91fa215f.png)'
 - en: '**Where g_i and h_i are gradient and hessian of loss function. i.e. 1st order
     and 2nd order differentiation of loss function**'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '**其中 g_i 和 h_i 是损失函数的梯度和Hessian，即损失函数的一阶和二阶导数**'
 - en: Why till 2nd order?
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么到二阶？
 - en: Gradient Boosting with only first order gradient faces convergence issues (convergence
     only possible with small step sizes). And it is pretty good approximation of loss
     function, plus we don’t want to increase our computations.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅使用一阶梯度的梯度提升算法面临收敛问题（只有在步长较小的情况下才可能收敛）。而且它对损失函数的近似效果相当好，加上我们不希望增加计算量。
 - en: Then it finds *optimal value* of loss function by putting gradient of loss function
     equal to zero and thus finding a function via Loss Function for making a split.
     (i.e. function for change in loss after split)
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后通过将损失函数的梯度设置为零，从而找到损失函数的*最优值*，并通过损失函数找到用于分裂的函数。（即，分裂后损失的变化函数）
 - en: '![](../Images/98e15caee7f75b350e2d64ccb1029d00.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/98e15caee7f75b350e2d64ccb1029d00.png)'
 - en: '**Found by putting above formla’s differentiation equal to zero. [Optimal Change value]**'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '**通过将上述公式的导数设置为零来发现。[最优变化值]**'
 - en: '**b) Shrinkage and Column subsampling:**'
+  id: totrans-111
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**b) 收缩和列子采样：**'
 - en: It also adds shrinkage for every tree, to decrease influence of one particular
     tree, and subsampling of columns to combat overfitting and decrease variance as
     discussed in History section.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 它还为每棵树增加了收缩，以减少单棵树的影响，并对列进行子采样，以对抗过拟合并减少方差，如历史部分所讨论的。
 - en: '**c) Different split finding algorithm:**'
+  id: totrans-113
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**c) 不同的分裂查找算法：**'
 - en: Gradient Boosting algorithms goes through all possible splits to find the best
     split at that level. However, this can be a expensive bottleneck if our data is
     very large, so many algorithms use some kind of approximation or some other trick
     to find, not best but, a particularly good split. So, XGBoost looks at a particular
     feature’s distribution and selects some percentiles (or quantiles) as splitting
     points.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度提升算法遍历所有可能的分裂，以找到该级别的最佳分裂。然而，如果我们的数据非常庞大，这可能是一个昂贵的瓶颈，因此许多算法使用某种近似或其他技巧来寻找一个特别好的分裂，而不是最佳分裂。因此，XGBoost查看特定特征的分布，并选择一些百分位数（或分位数）作为分裂点。
 - en: '**Note:**'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：**'
 - en: 'For approximate split finding these methods are also used, instead of percentile
     method:'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了近似分裂的查找，这些方法也被使用，而不是百分位数方法：
 - en: 1) By constructing approximate histogram of gradient statistics.2) By using
     other variants of binning strategies.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 1) 通过构造梯度统计的近似直方图。2) 通过使用其他变体的分箱策略。
 - en: It proposes to selects a value, lets call it q, now from quantile range of [0,
     100] nearly every qth quantile value is selected as candidate split point for
     splitting. There will be roughly 100/q candidate points.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 它建议选择一个值，称之为q，现在从[0, 100]的分位数范围中，几乎每个q分位值都被选为分裂的候选点。将会大约有100/q个候选点。
 - en: It has also added *Sparsity Aware* split finding, which can be helpful in sparse
     BigData arrays.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 它还添加了*稀疏感知*分裂查找，这在稀疏的BigData数组中可能很有帮助。
 - en: '**d) For speed enhancement and space efficiency:**'
+  id: totrans-120
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**d) 为了提高速度和空间效率：**'
 - en: It proposes to divide data into **blocks**, in-memory blocks. Data in each block
     is stored in **Compressed Column (CSC)** format, in which each column is *stored *by
     corresponding feature value. So, a linear search of the column in block is sufficient
     to get all split points of that column, for that block.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 它建议将数据划分为**块**，内存中的块。每个块中的数据以**压缩列（CSC）**格式存储，其中每列按相应的特征值*存储*。因此，在块中对列进行线性搜索足以获取该列的所有分裂点。
 - en: Block format makes it easy to find all splits in linear time, but when it is
     turn to get gradient statistics for those points, it becomes a non-continuous
     fetches of gradient statistics (because gradients are still in previous format,
@@ -542,32 +795,47 @@
     In it, every thread is given an internal buffer. This buffer is used to get gradients
     in mini-batch manner and accumulate them, in contrast to accessing some gradient
     from here and then some gradient from there in order.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 块格式使得在线性时间内找到所有拆分变得容易，但当需要获取这些点的梯度统计时，它变成了非连续的梯度统计提取（因为梯度仍然以之前的格式存在，其中块值指向它们的梯度），这可能导致缓存缺失。为了解决这个问题，他们制定了**缓存感知**算法用于梯度累积。在这种算法中，每个线程都会获得一个内部缓冲区。这个缓冲区用于以小批量的方式获取梯度并进行累积，而不是按顺序从这里获取一些梯度，再从那里获取一些梯度。
 - en: Finding the best size of block is also a problem which can help use parallelism
     the best and reduces cache-misses the most.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 找到最佳块大小也是一个问题，它可以帮助最佳利用并行性并最大程度地减少缓存缺失。
 - en: It also proposes something called **Block Sharding. **It writes data on multiple
     disks alternatively (if you have those). So, when it wants to read some data,
     this setup can help read multiple blocks at the same time. For example if you
     have 4 disks, then those four disks can read 4 blocks in one unit time, giving
     4x speedup.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 它还提出了一个叫做**块分片**的方案。它在多个磁盘上交替写入数据（如果你有这些磁盘的话）。所以，当它想读取一些数据时，这种设置可以帮助同时读取多个块。例如，如果你有4个磁盘，这四个磁盘可以在一个单位时间内读取4个块，实现4倍的速度提升。
 - en: 5) LightGBM
+  id: totrans-125
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5) LightGBM
 - en: '![](../Images/9fc02af45f55ef9382689fc7ff770b14.png)'
+  id: totrans-126
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9fc02af45f55ef9382689fc7ff770b14.png)'
 - en: '**Photo by [Severin D.](https://unsplash.com/@sdmk?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '**照片由 [Severin D.](https://unsplash.com/@sdmk?utm_source=medium&utm_medium=referral)
+    提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**'
 - en: This paper has proposed two techniques to speed up the overall Boosting process.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇论文提出了两种技术来加速整体的Boosting过程。
 - en: For first one, it proposes a method in which they won’t have to use all data
     points for a particular model, without loosing much *information gain*. It’s named **Gradient
     Based One Side Sampling (GOSS). **In it, they calculate gradients of the loss
@@ -575,34 +843,48 @@
     that values having larger value of gradient contribute more to information gain,
     so it proposes to ignore many data points with low gradient for that particular
     model.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于第一个，它提出了一种方法，在这种方法中，他们不必为特定模型使用所有数据点，而不会损失太多的*信息增益*。它被称为**基于梯度的单侧采样（GOSS）**。在这种方法中，他们计算损失函数的梯度，然后按绝对值排序。它还有一个证明，证明梯度值较大的值对信息增益的贡献更大，因此它建议忽略许多梯度较低的数据点。
 - en: So, take some fraction of top gradients and a different fraction from remaining
     (randomly from remaining gradients) for a particular model, with some low weight
     applied to random set of gradients as they have lower value of gradients and should
     not contribute much to our current model.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为特定模型选择一部分顶部梯度和从其余部分中选择不同的部分（从剩余梯度中随机选择），对随机梯度集施加较低的权重，因为它们的梯度值较低，不应对当前模型贡献太多。
 - en: '![](../Images/4b436b834fade0ec18ee8e2775316b04.png)'
+  id: totrans-131
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4b436b834fade0ec18ee8e2775316b04.png)'
 - en: '**Get gradients of loss, sort them, take top gradient set and random from rest,
     reduce weight of random ones, and add this model to previous models’ set.**'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '**获取损失的梯度，排序，取顶部梯度集和其余的随机梯度，减少随机梯度的权重，然后将此模型添加到之前模型的集合中。**'
 - en: One thing to note here is that LightGBM uses histogram-based algorithms, which
     bucket continuous feature values into discrete bins. This speeds up training and
     reduces memory usage.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要注意的一点是，LightGBM使用基于直方图的算法，将连续特征值分成离散的箱子。这加速了训练并减少了内存使用。
 - en: Also, they use a different kind of Decision Tree which optimizes leaf wise instead
     of depth wise that normal Decision Tree does. (i.e. it enumerates all possible
     leaves and selects the one with least error)
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，他们使用了一种不同的决策树，它优化叶节点而不是普通决策树的深度（即，它枚举所有可能的叶子节点，并选择错误最少的一个）。
 - en: '![](../Images/874861e3d4b38a1e78eeefcf997e9bb0.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/874861e3d4b38a1e78eeefcf997e9bb0.png)'
 - en: For the second one, it proposes a method in which to combine many features to
     make *one* new feature, thus reducing dimentionality of the data without much
     information loss. This method is called **Exclusive Feature Bundling (EFB)**.
@@ -622,54 +904,81 @@
     three ranges for 3 features, equal to [0, 100), [100, 200) and [200, 300). And
     in tree based model this is acceptable, as it won’t affect information gain by
     splitting.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于第二种方法，它提出了一种将许多特征组合成*一个*新特征的方法，从而在减少数据维度的同时不会丢失太多信息。这种方法称为**独占特征捆绑（EFB）**。它表示，在高维数据的世界中，存在许多相互排斥的列。为什么？因为高维数据有许多高度稀疏的列，可能有许多列在同一时间内没有取任何值（即，通常只有其中一个取非零值，即相互排斥）。因此，他们建议将这些特征捆绑成一个，没有冲突超过某个预设值（即，它们在许多点上在相同数据点没有非零值，即它们并非完全相互排斥，但在某种程度上是相互排斥）。为了区分来自不同特征的每个值，它建议对来自不同特征的值添加不同的常数，这样来自一个特征的值会落在一个特定的范围内，而来自其他特征的值则不在该范围内。例如，假设我们有三个特征要组合，所有特征的范围是
+    0-100。因此，我们将对第二个特征加 100，对第三个特征加 200，以获得三个特征的三个范围，分别为 [0, 100)、[100, 200) 和 [200,
+    300)。在基于树的模型中，这种做法是可以接受的，因为它不会影响通过分裂获得的信息增益。
 - en: '![](../Images/bb8462bce72a5f5199f88e5bb76ed955.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bb8462bce72a5f5199f88e5bb76ed955.png)'
 - en: '**Find binRanges for all features to combine, make a new bin with values equal
     to bin_value + bin_range.**'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为所有特征找到 binRanges 进行组合，创建一个新 bin，其值等于 bin_value + bin_range。**'
 - en: Making these bundles is actually NP-Hard problem and is similar to *Graph Coloring* problem
     which is also NP-Hard. So, as in Graph Coloring problem, it has opted for a good
     approximation algorithm instead of an optimal solution.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 制作这些组合实际上是一个 NP-Hard 问题，类似于*图着色*问题，这也是 NP-Hard。因此，像图着色问题一样，它选择了一个好的近似算法而不是最优解。
 - en: Although these two methods were the main highlight of this paper, it also provide
     those improvements to Gradient Boosting algorithms, like sub-sampling, max_depth,
     learning_rate, num_leaves etc., which we discussed above, in their package.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这两种方法是本文的主要亮点，但它还提供了对梯度提升算法的改进，如子采样、max_depth、learning_rate、num_leaves 等，这些我们在上文中已讨论过。
 - en: Overall this one is a quite mathematical paper. If you are interested in proofs,
     you should look into this [paper](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf).
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，这是一篇相当数学化的论文。如果你对证明感兴趣，可以查看这篇[论文](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf)。
 - en: 6) CatBoost
+  id: totrans-142
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 6) CatBoost
 - en: '![](../Images/f87946622253a50dd3b3c3352ca21597.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f87946622253a50dd3b3c3352ca21597.png)'
 - en: Photo by [Alex Iby](https://unsplash.com/@alexiby?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Alex Iby](https://unsplash.com/@alexiby?utm_source=medium&utm_medium=referral)  于
+    [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: This paper focuses on one of the problem with Boosting suffers, i.e. leakage, *target
     leakage*. In Boosting, fitting of many models on training examples relies on target
     values (for calculating residuals). This leads to shift in target values in test
     set, i.e. **prediction shift**. So, it proposes a method to bypass this problem.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文着重于提升算法面临的一个问题，即泄漏，*目标泄漏*。在提升中，多个模型在训练示例上进行拟合依赖于目标值（用于计算残差）。这会导致测试集中目标值的偏移，即**预测偏移**。因此，它提出了一种绕过这个问题的方法。
 - en: Plus, it also proposes a method for converting **categorical features **into** target
     statistics (TS) **(which can lead to target leakage *if done wrong*).
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，它还提出了一种将**类别特征**转换为**目标统计量（TS）**的方法（如果处理不当可能会导致目标泄漏*如果做错了*）。
 - en: It has proposed an algorithm called *Ordered Boosting* which helps in preventing
     target leakage, and an algorithm for processing categorical features. Though both
     uses something called **Ordering Principle**.
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 提出了一个叫做*有序提升*的算法，帮助防止目标泄漏，以及一个处理分类特征的算法。虽然两者都使用了某种叫做**排序原则**的方法。
 - en: Firstly, for converting categorical features into **target statistics (TS)**.
     If you know about *mean encoding* or *target encoding* of categorical features,
     specially K-Fold mean encoding, it will be easy to understand as this is just
@@ -678,186 +987,277 @@
     it, in dataset, to get feature value for this element (i.e. if 7 elements are
     above i-th element, of same category as the i-th element, then they took mean
     of target for those values to get feature value for i-th element).
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，为了将分类特征转换为**目标统计（TS）**。如果你了解*均值编码*或*目标编码*的分类特征，特别是K折均值编码，这将很容易理解，因为这只是稍作调整。他们为了避免目标泄漏但仍能进行目标编码，是从数据集中获取第i个元素的(i-1)个元素，以获得该元素的特征值（即，如果第i个元素上方有7个相同类别的元素，则他们取这些值的目标均值来获得第i个元素的特征值）。
 - en: '![](../Images/06ed40fc45c75cf15f90117a90388558.png)'
+  id: totrans-149
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/06ed40fc45c75cf15f90117a90388558.png)'
 - en: '**Average target values if i,j belong to same category, only if in this iteration’s
     random permutation that element is above ith element (if condition in statement).
     ‘a’ and ‘p’ are parameters to save eq from underflowing.**'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '**如果i,j属于同一类别，则平均目标值仅在该元素在本次迭代的随机排列中位于第i个元素之上时才计算（如声明中的条件）。‘a’和‘p’是防止等式下溢的参数。**'
 - en: Secondly, for making algorithm *prediction shift* proof, it has proposed an
     algorithm which they named **Ordered Boosting**. At every iteration, it samples
     a new dataset D_t independently and obtain *unshifted residuals* (as this is sufficiently/somewhat(depends)
     different dataset) by applying current model to this dataset and fit a new model.
     Practically, they add new data points to previous points, so, it gives unshifted
     residuals atleast for the new data points which are added in current iteration.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 其次，为了使算法*预测偏移*稳健，它提出了一个称为**有序提升**的算法。在每次迭代中，它独立地抽取一个新的数据集D_t，并通过将当前模型应用于此数据集来获取*未偏移的残差*（因为这是一个不同的数据集），然后拟合一个新模型。实际上，他们将新数据点添加到之前的数据点中，从而为当前迭代中新添加的数据点提供至少未偏移的残差。
 - en: '![](../Images/6ae6923d29155cb157646d603d998ee1.png)'
+  id: totrans-152
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6ae6923d29155cb157646d603d998ee1.png)'
 - en: '**For i=1..n, from random permutation r`, compute avg(gradient if it belongs
     to same leaf) only if from permutation r` is that leaf point present above 2^(j+1)
     th point. [Update Model by adding new preds]**'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '**对于i=1..n，从随机排列r`中计算avg（如果它属于同一叶子节点的梯度），仅在排列r`中该叶子节点位于2^(j+1) th点之上时计算。[通过添加新预测更新模型]**'
 - en: With this algorithm we can make ’n’ models if there are ’n’ examples. But we
     only make log_2(n) models, for time considerations. So, by this, first model is
     fitted to 2 examples, then second is fitted to 4 and so on.
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用此算法，我们可以为'n'个示例制作’n’个模型。但由于时间考虑，我们只制作log_2(n)个模型。因此，第一个模型拟合2个示例，第二个模型拟合4个，以此类推。
 - en: CatBoost too uses a different kind of Decision Tree, called *Oblivious Trees*.
     In such trees the same splitting criterion is used across an entire level of the
     tree. Such trees are balanced and less prone to overfitting.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: CatBoost也使用一种不同的决策树，称为*盲树*。在这种树中，相同的分裂标准用于树的整个层级。这种树是平衡的，且不容易过拟合。
 - en: 'In oblivious trees each leaf index can be encoded as a binary vector with length
     equal to the depth of the tree. This fact is widely used in CatBoost model evaluator:
     it first binarizes all float features and all one-hot encoded features, and then
     uses these binary features to calculate model predictions. This helps in predicting
     at very fast speed.'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 在盲树中，每个叶子索引可以编码为长度等于树深度的二进制向量。这个事实在CatBoost模型评估器中被广泛使用：它首先将所有浮点特征和所有独热编码特征二值化，然后使用这些二进制特征来计算模型预测。这有助于以非常快的速度进行预测。
 - en: '**7) Further Reading **'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: '**7) 进一步阅读**'
 - en: 'Trevor Hastie; Robert Tibshirani; Jerome Friedman (2009). [*The Elements of
     Statistical Learning: Data Mining, Inference, and Prediction*](http://statweb.stanford.edu/~tibs/ElemStatLearn/download.html)(2nd
     ed.). New York: Springer. (ISBN 978–0–387–84858–7)'
+  id: totrans-158
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Trevor Hastie; Robert Tibshirani; Jerome Friedman (2009). [*统计学习的元素：数据挖掘、推断与预测*](http://statweb.stanford.edu/~tibs/ElemStatLearn/download.html)（第2版）。纽约：Springer。
+    (ISBN 978–0–387–84858–7)
 - en: All References
+  id: totrans-159
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 所有参考文献
 - en: '**8) References **'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '**8) 参考文献**'
 - en: '[Wikipedia — Boosting](https://en.wikipedia.org/wiki/Boosting_%28machine_learning%29)'
+  id: totrans-161
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[维基百科 — 提升方法](https://en.wikipedia.org/wiki/Boosting_%28machine_learning%29)'
 - en: 'Trevor Hastie; Robert Tibshirani; Jerome Friedman (2009). [*The Elements of
     Statistical Learning: Data Mining, Inference, and Prediction*](http://statweb.stanford.edu/~tibs/ElemStatLearn/download.html)(2nd
     ed.). New York: Springer. (ISBN 978–0–387–84858–7)'
+  id: totrans-162
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 'Trevor Hastie; Robert Tibshirani; Jerome Friedman (2009). [*统计学习的要素: 数据挖掘、推断与预测*](http://statweb.stanford.edu/~tibs/ElemStatLearn/download.html)(第2版)。纽约:
+    Springer. (ISBN 978–0–387–84858–7)'
 - en: Paper — [A Short Introduction to Boosting — Yoav Freund, Robert E. Schapire](http://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)(1999) — AdaBoost
+  id: totrans-163
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 论文 — [提升简介 — Yoav Freund, Robert E. Schapire](http://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)(1999) — AdaBoost
 - en: 'Paper — [XGBoost: A Scalable Tree Boosting System — Tianqi Chen, Carlos Guestrin
     (2016)](https://arxiv.org/pdf/1603.02754.pdf)'
+  id: totrans-164
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '论文 — [XGBoost: 一个可扩展的树提升系统 — 田忌 陈，卡洛斯·古斯特林 (2016)](https://arxiv.org/pdf/1603.02754.pdf)'
 - en: '[Stack Exchange — Need help understanding XGBoost’s appropriate split points
     proposal](https://datascience.stackexchange.com/questions/10997/need-help-understanding-xgboosts-approximate-split-points-proposal)'
+  id: totrans-165
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[Stack Exchange — 需要帮助理解XGBoost的合适分裂点提议](https://datascience.stackexchange.com/questions/10997/need-help-understanding-xgboosts-approximate-split-points-proposal)'
 - en: 'Paper — [LightGBM: A Highly Efficient Gradient Boosting Decision Tree — Ke,
     Meng et al.](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf)'
+  id: totrans-166
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '论文 — [LightGBM: 高效的梯度提升决策树 — Ke, Meng 等](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf)'
 - en: 'Paper — [CatBoost: unbiased boosting with categorical features — Prokhorenkova,
     Gusev et al.](https://arxiv.org/pdf/1706.09516.pdf) — v5 (2019)'
+  id: totrans-167
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '论文 — [CatBoost: 无偏提升与分类特征 — Prokhorenkova, Gusev 等](https://arxiv.org/pdf/1706.09516.pdf) — v5
+    (2019)'
 - en: 'Paper — [CatBoost: gradient boosting with categorical features support — Dorogush,
     Ershov, Gulin](http://learningsys.org/nips17/assets/papers/paper_11.pdf)'
+  id: totrans-168
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '论文 — [CatBoost: 支持分类特征的梯度提升 — 多罗戈什，厄尔肖夫，古林](http://learningsys.org/nips17/assets/papers/paper_11.pdf)'
 - en: Paper — [Enhancing LambdaMART Using Oblivious Trees — Modr´y, Ferov (2016)](https://arxiv.org/pdf/1609.05610.pdf)
+  id: totrans-169
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 论文 — [使用无知树增强LambdaMART — Modr´y，Ferov (2016)](https://arxiv.org/pdf/1609.05610.pdf)
 - en: YouTube — [CatBoost — the new generation of gradient boosting — Anna Veronika
     Dorogush](https://www.youtube.com/watch?v=8o0e-r0B5xQ)
+  id: totrans-170
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: YouTube — [CatBoost — 新一代梯度提升 — 安娜·维罗妮卡·多罗戈什](https://www.youtube.com/watch?v=8o0e-r0B5xQ)
 - en: '[Gentle Intro to Gradient Boosting Algos](https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/) — MachineLearningMastery'
+  id: totrans-171
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[渐进式介绍梯度提升算法](https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/) — MachineLearningMastery'
 - en: '[Original](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e).
     Reposted with permission.'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/clearing-air-around-boosting-28452bb63f9e).
+    经允许转载。'
 - en: '**Resources:**'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: '**资源:**'
 - en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
     education](https://www.kdnuggets.com/education/online.html)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在线及基于网络: 分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)'
 - en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析、数据科学、数据挖掘和机器学习的软件](https://www.kdnuggets.com/software/index.html)'
 - en: '**Related:**'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Ensemble Learning: 5 Main Approaches](https://www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html)'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习: 5种主要方法](https://www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html)'
 - en: '[Mastering The New Generation of Gradient Boosting](https://www.kdnuggets.com/2018/11/mastering-new-generation-gradient-boosting.html)'
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握新一代梯度提升](https://www.kdnuggets.com/2018/11/mastering-new-generation-gradient-boosting.html)'
 - en: '[The 10 Algorithms Machine Learning Engineers Need to Know](https://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html)'
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习工程师需要了解的10种算法](https://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html)'
 - en: '* * *'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-181
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT 方面的工作'
 - en: '* * *'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-186
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关信息
 - en: '[Where Collaboration Fails Around Data (And 4 Tips for Fixing It)](https://www.kdnuggets.com/2023/01/collaboration-fails-around-data-4-tips-fixing.html)'
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据协作失败的原因（及修复的 4 个建议）](https://www.kdnuggets.com/2023/01/collaboration-fails-around-data-4-tips-fixing.html)'
 - en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  id: totrans-188
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升机器学习算法：概述](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
 - en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  id: totrans-189
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握季节性并提升业务成果的终极指南](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
