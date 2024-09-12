@@ -1,201 +1,293 @@
 - en: The Explainable Boosting Machine
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 可解释的提升机器
 - en: 原文：[https://www.kdnuggets.com/2021/05/explainable-boosting-machine.html](https://www.kdnuggets.com/2021/05/explainable-boosting-machine.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/05/explainable-boosting-machine.html](https://www.kdnuggets.com/2021/05/explainable-boosting-machine.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dr. Robert Kübler](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/),
     Data Scientist at Publicis Media**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Dr. Robert Kübler](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)，Publicis
+    Media的数据科学家**'
 - en: The Interpretability-Accuracy Trade-Off
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 可解释性与准确性的权衡
 - en: 'In the machine learning community, I often hear and read about the notions
     of *interpretability* and *accuracy*, and how there is a trade-off between them.
     Usually, it is somewhat depicted like this:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习社区，我经常听到和阅读到*可解释性*和*准确性*的概念，以及它们之间的权衡。通常，它被描绘成这样：
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您在IT领域的组织'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/7d316b7ba448b3a56f39d7d40a268207.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7d316b7ba448b3a56f39d7d40a268207.png)'
 - en: Image by the author.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: 'You can read it as follows: Linear regression and decision trees are quite
     simple models which are not that accurate in general. Neural networks are *black-box
     models*, i.e. they are hard to interpret but perform quite decently in general.
     Ensemble models like random forests and gradient boosting are also good, but hard
     to interpret.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以这样理解：线性回归和决策树是相当简单的模型，通常不太准确。神经网络是*黑箱模型*，即它们难以解释，但通常表现相当不错。像随机森林和梯度提升这样的集成模型也很优秀，但难以解释。
 - en: Interpretability
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 可解释性
 - en: But what is interpretability anyway? There is no clear mathematical definition
     for that. Some authors such as in [1] and [2] define interpretability as the property** that
     a human can understand and/or predict a model’s output**. It is a bit wishy-washy
     but we can still kind of categorize machine learning models according to this.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，什么是可解释性呢？对此没有明确的数学定义。一些作者，如在[1]和[2]中定义可解释性为**人类可以理解和/或预测模型的输出**的属性。这有点模糊，但我们仍然可以根据这个标准对机器学习模型进行分类。
 - en: Why is linear regression *y=ax+b+ɛ *interpretable? Because you can say something
     like “increasing *x* by one increases the outcome by *a*”. The model does not
     give you an unexpected output. The larger *x*, the larger *y*. The smaller *x* the
     smaller *y*. There are no inputs *x* that would let *y* wiggle around in a weird
     way.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么线性回归*y=ax+b+ɛ*是可解释的？因为你可以说“将*x*增加一个单位会增加*a*的结果”。模型不会给出意外的输出。*x*越大，*y*越大。*x*越小，*y*越小。没有输入*x*会让*y*以奇怪的方式波动。
 - en: Why are neural networks not interpretable? Well, try to guess the output of
     a 128 layer deep neural network without actually implementing it and without using
     pen and paper. Sure, the output is what it is according to some big formula, but
     even if I told you that for *x*=1 the output is *y*=10 and for *x*=3 the output
     is *y*=12, you would not be able to guess the output of *x*=2\. Might be 11, might
     be -420.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么神经网络不可解释？嗯，试着在不实际实现它并且不使用纸笔的情况下猜测一个128层深的神经网络的输出。确实，输出是根据某个大公式得出的，但即使我告诉你对于*x*=1输出是*y*=10，而对于*x*=3输出是*y*=12，你也无法猜测*x*=2的输出。可能是11，也可能是-420。
 - en: Accuracy
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准确性
 - en: That is what you are comfortable with — raw numbers. For regression, mean squared
     error, mean absolute error, mean absolute percentage error, you name it. For classification,
     F1, precision, recall, and, of course, the good old King Accuracy himself.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是你所熟悉的——原始数据。对于回归，均方误差、平均绝对误差、平均绝对百分比误差，任你选择。对于分类，F1、精确度、召回率，当然，还有老朋友准确性本身。
 - en: 'Let’s get back to the picture. While I agree with it as is, I want to stress
     the following:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到图中。虽然我同意现有的内容，但我想强调以下几点：
 - en: '**There is no inherent trade-off between interpretability and accuracy**. There
     are models that are both interpretable and accurate.'
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**可解释性与准确性之间没有固有的权衡**。有些模型既可解释又准确。'
 - en: So, don’t let this picture fool you. **Explainable Boosting Machines** will
     help us break out from the middle, downward-sloping line and reach the holy grail
     that is the top right corner of our diagram.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，不要让这张图迷惑你。**可解释的提升机器**将帮助我们突破中间的向下倾斜线，达到我们图表的右上角的终极目标。
 - en: '![](../Images/b62dbaea474711c0e96a6b73687242b3.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b62dbaea474711c0e96a6b73687242b3.png)'
 - en: Image by the author.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: '*(Of course, you can also create models that are both inaccurate and hard to
     interpret as well. This is an exercise you can do on your own.)*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(当然，你也可以创建既不准确又难以解释的模型。这是你可以自己完成的练习。)*'
 - en: After reading this article you will be able to
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 阅读完这篇文章后，你将能够
 - en: understand why interpretability matters,
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 理解为什么可解释性很重要，
 - en: explain the drawbacks of black-box explanations such as LIME and Shapley values,
     and
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解释黑箱解释方法如LIME和Shapley值的缺点，并
 - en: understand and use the Explainable Boosting Machine learner
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 理解并使用可解释的提升机器学习器
 - en: Importance of Interpretation
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解释的重要性
 - en: Being able to interpret models has several benefits. It can help you improve
     the model, sometimes it is even required from the business, plain and simple.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 能够解释模型具有多个好处。它可以帮助你改进模型，有时甚至是业务的要求，简单明了。
 - en: Model improvement
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型改进
 - en: '![](../Images/bd58eba22c706adaaa87b7e8a0881524.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bd58eba22c706adaaa87b7e8a0881524.png)'
 - en: Photo by [alevision.co](https://unsplash.com/@alevisionco?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于[alevision.co](https://unsplash.com/@alevisionco?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: Let’s imagine that you want to build a model to predict the price of a house. *Creative,
     right? *One of the input features is, among others, the **number of rooms**. Other
     features include the size, year build, and some measure of the quality of the
     neighborhood. After normalizing the features, you decided to use linear regression.
     The *r*² on the test set is nice and you deploy the model. At a later point, new
     house data comes in and you notice that your model is quite off. **What went wrong?**
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想建立一个预测房价的模型。*很有创意，对吧？*其中一个输入特征是**房间数量**。其他特征包括房屋大小、建造年份和一些对邻里质量的测量。在归一化特征后，你决定使用线性回归。测试集上的*r*²很不错，你部署了模型。后来，新房数据出现时，你发现你的模型有点偏差。**出什么问题了？**
 - en: 'Since linear regression is highly interpretable, you see the answer directly:
     the coefficient of the feature “number of rooms” is **negative**, although as
     a human you would expect it to be positive. The more rooms, the better, right?
     But the **model learned the opposite** for some reason.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于线性回归高度可解释，你可以直接看到答案：“房间数量”特征的系数是**负的**，尽管作为人类你会期望它是正的。房间越多越好，对吧？但**模型学到了相反的**，原因不明。
 - en: There could be many reasons for this. Maybe your train and test set was biased
     in the way that if a house had more rooms, it tended to be older. And if a house
     is older, it tends to be cheaper.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能有很多原因。也许你的训练集和测试集在某种程度上存在偏差，即如果一栋房子有更多房间，它往往较旧。而且，如果一栋房子较旧，它通常会便宜。
 - en: 'This is something that you were only able to spot because you could take a
     look at how the model works inside. And not only you can spot it, but also fix
     it: you could set the coefficient of “number of rooms” to zero, or you could also
     retrain the model and enforce the coefficient of “number of rooms” to be positive.
     This is something you can do with scikit-learns `LinearRegression` by setting
     the keyword `positive=True` .'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为你能查看模型内部的工作方式而发现的。而且你不仅可以发现它，还可以修复它：你可以将“房间数量”的系数设置为零，或者你也可以重新训练模型并强制“房间数量”的系数为正。这可以通过将`positive=True`关键字设置到scikit-learn的`LinearRegression`中来实现。
 - en: Note, however, that this sets **all** coefficients to be positive. You have
     to write your own linear regression, if you want complete control over the coefficients.
     You can check out [this article](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289) to
     get started.
+  id: totrans-40
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 不过请注意，这会将**所有**系数设置为正值。如果你想完全控制系数，你需要自己编写线性回归。你可以查看[这篇文章](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)来开始。
 - en: Business or regulatory requirement
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 商业或监管要求
 - en: '![](../Images/76c6cb61acdf73df59a925aafcca5380.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/76c6cb61acdf73df59a925aafcca5380.png)'
 - en: Photo by [Tingey Injury Law Firm](https://unsplash.com/@tingeyinjurylawfirm?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由[Tingey Injury Law Firm](https://unsplash.com/@tingeyinjurylawfirm?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: Often, stakeholders want to have at least some intuition on why things work,
     and you have to be able to explain it to them. While even the most non-technical
     people can agree on “I add together a bunch of numbers” (linear regression) or
@@ -206,401 +298,592 @@
     explanation on how things roughly work. Good luck explaining gradient boosting
     to your boss in such a way that he or she can pass on the knowledge to a higher
     instance without doing any major mistake.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，利益相关者希望对事情的运作至少有一些直观的理解，你必须能够向他们解释。即使是最非技术性的人也可以理解“我将一堆数字加在一起”（线性回归）或“我沿着一条路径走，根据某些简单条件向左或向右”（决策树），但对于神经网络或集成方法来说，解释起来要困难得多。*农夫不知道他就吃不到东西。*这也可以理解，因为这些利益相关者通常需要向其他人汇报，而这些人也希望了解事情的大致运作方式。祝你好运，向你的老板解释梯度提升方法，让他或她能够把知识传达给更高层次而不犯重大错误。
 - en: Besides that, interpretability may even be required by law. If you work for
     a bank and create a model that decides whether a person gets a loan or not, chances
     are that you are legally required to create an interpretable model, which might
     be logistic regression.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 除此之外，可解释性甚至可能是法律要求的。如果你为银行工作并创建一个决定某人是否获得贷款的模型，你可能会被法律要求创建一个可解释的模型，这可能是逻辑回归。
 - en: Before we cover the explainable boosting machine, let us take a look at some
     methods to interpret black-box models.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们讨论可解释增强机器之前，让我们先看看一些解释黑箱模型的方法。
 - en: Interpretations of Black-Box Models
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 黑箱模型的解释
 - en: '![](../Images/bd82e178d8b57f2375026ac103ad5e71.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bd82e178d8b57f2375026ac103ad5e71.png)'
 - en: Photo by [Laura Chouette](https://unsplash.com/@laurachouette?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由[Laura Chouette](https://unsplash.com/@laurachouette?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: There are several ways that try to explain the workings of black-box models.
     The advantages of all of these methods are that you can take your already trained
     model and **train some explainer on top of it. **These explainers make the model
     easier to understand.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 解释黑箱模型的工作原理的方法有很多。这些方法的优点是你可以在已经训练好的模型基础上**再训练一个解释器**。这些解释器使模型更容易理解。
 - en: Famous examples of such explainers are Local interpretable model-agnostic explanations
     (*LIME*) [3] and Shapley values [4]. Let us quickly shed some light on the shortcomings
     of both of these methods.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种解释器的著名例子有局部可解释模型无关解释（*LIME*）[3]和夏普利值[4]。让我们快速了解这两种方法的不足之处。
 - en: Shortcomings of LIME
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LIME的不足之处
 - en: In LIME, you try to explain a single prediction of your model at a time. Given
     a sample *x*, why is the label *y*? The assumption is that you can approximate
     your complicated black-box model with an interpretable model in a close region
     around *x. *This model is called a **surrogate model**, and often linear/logistic
     regressions or decision trees are chosen for this. However, if the approximation
     is bad, which you might not notice, the explanations become misleading.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在LIME中，你试图逐个解释模型的预测。给定一个样本*x*，为什么标签是*y*？假设你可以用一个可解释的模型来逼近你的复杂黑箱模型，在*x*附近的区域内。这种模型被称为**替代模型**，通常选择线性/逻辑回归或决策树。然而，如果逼近不准确，你可能没有注意到，那么解释会变得具有误导性。
 - en: It’s still a [sweet library](https://github.com/marcotcr/lime) that you should
     be aware of.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 这仍然是一个你应该关注的[sweet library](https://github.com/marcotcr/lime)。
 - en: Shapley values
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Shapley值
 - en: With Shapley values, each prediction can be broken down into individual contributions
     for every feature. As an example, if your model outputs a 50, with Shapley values
     you can say that feature 1 contributed 10, feature 2 contributed 60, feature 3
     contributed -20\. The sum of these 3 Shapley values is 10+60–20=50, the output
     of your model. This is great, but sadly, these values are extremely hard to calculate.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用Shapley值，每个预测可以分解为每个特征的个体贡献。例如，如果你的模型输出50，利用Shapley值你可以说特征1贡献了10，特征2贡献了60，特征3贡献了-20。这3个Shapley值的总和是10+60–20=50，即你的模型的输出。这很棒，但遗憾的是，这些值的计算非常困难。
 - en: For a general black-box model, the run-time for computing them is **exponential
     in the number of features**. If you have a few features, like 10, this might still
     be okay. But, depending on your hardware, for 20 it might be impossible already.
     To be fair, if your black-box model consists of trees, there are faster approximations
     to compute Shapley values, but it can still be slow.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于一般的黑箱模型，计算它们的运行时间是**在特征数量上的指数级**。如果你有少量特征，比如10个，这可能还可以接受。但是，根据你的硬件，20个特征可能已经不可能了。公平地说，如果你的黑箱模型由树构成，有更快的近似方法来计算Shapley值，但仍然可能很慢。
 - en: Still, there is the great [shap library](https://shap.readthedocs.io/en/latest/) for
     Python that can compute Shapley values, and that you should definitely check out!
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一个出色的[shap library](https://shap.readthedocs.io/en/latest/)可用于Python，它可以计算Shapley值，你一定要查看一下！
 - en: Don’t get me wrong. **Black-box explanations are much better than no explanation
     at all**, so use them, if you have to use a black-box model for some reason. But
     of course, it would be better if your model is performing well *and* is interpretable
     at the same time. It is finally time to move on to a representative of such methods.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 别误会我的意思。**黑箱解释比没有解释要好得多**，所以如果你必须使用黑箱模型，请使用它。但是，当然，如果你的模型表现良好*并且*同时是可解释的，那就更好了。现在是时候深入了解这种方法的代表了。
 - en: Explainable Boosting Machine
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 可解释增强机器
 - en: 'The fundamental idea of explainable boosting is nothing new at all. It started
     out with [additive models](https://en.wikipedia.org/wiki/Additive_model), pioneered
     by Jerome H. Friedman and Werner Stuetzle in 1981 already. Models of this kind
     have the following form:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 可解释增强的基本思想其实并不新鲜。它最早由Jerome H. Friedman和Werner Stuetzle于1981年提出的[加性模型](https://en.wikipedia.org/wiki/Additive_model)。这类模型具有以下形式：
 - en: '![](../Images/d5e78a72a8b74e8ea3dd495d5c72ed79.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d5e78a72a8b74e8ea3dd495d5c72ed79.png)'
 - en: Image by the author.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片。
 - en: where *y* is the prediction and *x*₁, …, *xₖ *are the input features.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中*y*是预测值，而*x*₁，…，*x*ₖ是输入特征。
 - en: An old friend
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个老朋友
 - en: 'I claim that all of you have stumbled across such a model already. Let’s say
     it out loud:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我声称你们中的每一个人已经遇到过这样的模型。让我们大声说出来：
 - en: Linear Regression!
+  id: totrans-67
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 线性回归！
 - en: Linear regression is nothing else but a special kind of additive model. Here,
     all functions *fᵢ* are just the identity, i.e*. f*ᵢ(*xᵢ*)=*xᵢ*. Easy, right? But
     you also know that linear regression might not be the best option in terms of
     accuracy if [its assumptions](https://en.wikipedia.org/wiki/Linear_regression#Assumptions),
     especially the **linearity assumption**, are violated.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归不过是一种特殊的加性模型。在这里，所有函数*fᵢ*只是身份，即*f*ᵢ(*xᵢ*)=*xᵢ*。简单，对吧？但你也知道，如果[其假设](https://en.wikipedia.org/wiki/Linear_regression#Assumptions)，尤其是**线性假设**，被违反，线性回归可能不是最好的选择。
 - en: 'What we need are more general functions that can capture more complicated correlations
     between input and output variables. An interesting example of how to do design
     such functions was presented by some people at Microsoft [5]. Even better: they
     have built a [comfortable package](https://github.com/interpretml/interpret) for
     Python and even R around this idea.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要的是更多通用的函数，它们能够捕捉输入和输出变量之间更复杂的关联。微软的一些人展示了如何设计这样的函数的一个有趣的例子[5]。更好的是，他们围绕这个想法为Python和R构建了一个[舒适的包](https://github.com/interpretml/interpret)。
 - en: Note that in the following I will only describe the explainable boosting **regressor**.
     Classifying works as well and is not much more complicated.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，下面我将只描述可解释的增强**回归器**。分类也适用，并且没有更复杂。
 - en: Interpretation
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解释
 - en: 'You might say:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会说：
 - en: With these functions f, this looks more complicated than linear regression.
     How is this easier to interpret?
+  id: totrans-73
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 有了这些函数 f，这看起来比线性回归更复杂。这如何更容易解释呢？
 - en: 'To illustrate this, assume that we have trained an additive model that looks
     like this:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这一点，假设我们训练了一个看起来像这样的加法模型：
 - en: '![](../Images/123d915bf2310d8629c21c1b6abcc483.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/123d915bf2310d8629c21c1b6abcc483.png)'
 - en: Image by the author.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: You can plug in (16, 2) into the model and receive 5+12–16=1 as an output. And
     this is the output of 1 broken down already — there is a *baseline* of 5, then
     feature 1 provides an additional 12, and feature 3 provides an additional -16.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以将(16, 2)插入模型，得到5+12–16=1作为输出。这已经是1的分解输出——有一个**基准**值5，然后特征1提供额外的12，特征3提供额外的-16。
 - en: The fact that all functions, even if they are complicated, are just composed
     by **simple addition** makes this model so easy to interpret.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有函数，即使它们很复杂，都是由**简单加法**组成的，这使得这个模型非常容易理解。
 - en: Let us now see how this model works.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们看看这个模型是如何工作的。
 - en: The idea
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 这个想法
 - en: The authors use small trees in a way that resembles gradient boosting. Please,
     refer to this great video if you don’t know how gradient boosting works.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者以类似梯度提升的方式使用小树。如果你不知道梯度提升如何工作，请参阅这个很棒的视频。
 - en: 'Now, instead of training each of the small trees on all features, the authors
     of the explainable boosting regressor propose training each small tree with **one
     feature at a time**. This creates a model that looks like this:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，解释性提升回归的作者提出的建议是，训练每棵小树时只使用**一个特征**。这会生成一个如下所示的模型：
 - en: '![](../Images/db4040f61264b10d3df80a6d6e5f13c2.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/db4040f61264b10d3df80a6d6e5f13c2.png)'
 - en: Image by the author.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: '**You can see the following here:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你可以看到以下内容：**'
 - en: Each *T* is a tree with a small depth.
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个*T*都是一棵小深度的树。
 - en: For each of the *k* features, *r* trees are trained. Therefore, you can see *k*r *differenttrees
     in the equation.
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于每个*k*特征，训练*r*棵树。因此，你可以在方程中看到*k*r*个不同的树。
 - en: For each feature, the sum of all of its trees is the aforementioned *f*.
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于每个特征，其所有树的总和就是前述的*f*。
 - en: This means that the functions *f *are composed of sums of small trees. As trees
     are quite versatile, many complicated functions can be modeled quite accurately.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着函数*f*是由小树的总和组成的。由于树的多功能性，许多复杂的函数可以被相当准确地建模。
 - en: 'Make also sure to check out this video for an alternative explanation:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，请务必查看这个视频，以获得另一种解释：
 - en: 'Alright, we have seen how it works and that you can interpret the outputs of
     explainable boosting machines easily. But are these models any good? Their paper
     [5] says the following:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了，我们已经看到了它的工作原理，以及如何轻松解释解释性提升机器的输出。但这些模型真的好吗？他们的论文[5]中说了以下内容：
 - en: '![](../Images/8536c9e9337f350e2da98bee0dcb8ead.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8536c9e9337f350e2da98bee0dcb8ead.png)'
 - en: Image is taken from [5]. EBM = Explainable Boosting Machine.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片摘自[5]。EBM = 可解释提升机。
 - en: Looks good to me! Of course, I also tested this algorithm, and it has been effective
     on my datasets as well. Speaking of testing, let us see how to actually use explainable
     boosting in Python.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 我觉得不错！当然，我也测试了这个算法，它在我的数据集上也有效。说到测试，让我们看看如何在Python中实际使用解释性提升。
 - en: Using explainable boosting in Python
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用Python中的解释性提升
 - en: 'Microsoft’s [interpret package](https://github.com/interpretml/interpret) makes
     using explainable boosting a breeze, as is it uses the scikit-learn API. Here
     is a small example:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 微软的[解释包](https://github.com/interpretml/interpret)使得使用解释性提升变得轻而易举，因为它使用了scikit-learn
+    API。这里是一个小示例：
 - en: '[PRE0]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Nothing surprising here. But the interpret package has much more to offer. I
     especially like the visualization tools.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里没有什么令人惊讶的。不过，解释包提供了更多功能。我特别喜欢可视化工具。
 - en: '[PRE1]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Among other things, the `show` method lets you even inspect the functions *f*.
     Here is the one for feature 4 (*NOX; nitric oxides concentration*) of the Boston
     housing dataset.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 除其他外，`show`方法允许你检查函数*f*。这是波士顿房价数据集中特征4（*NOX; 氮氧化物浓度*）的函数。
 - en: '![](../Images/25c008d499472f72d7af9cdfdbfc0ba3.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/25c008d499472f72d7af9cdfdbfc0ba3.png)'
 - en: Image by the author.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: Here, you can see that up to about 0.58, there is no influence of NOX on the
     house price. Starting from 0.58, the influence gets slightly positive, and NOX
     values around 0.62 have the highest positive influence on the house price. Then
     it dips again until the influence becomes **negative** for NOX values larger than
     0.66.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，你可以看到NOX对房价的影响在大约0.58之前没有影响。从0.58开始，影响变得稍微积极，NOX值在0.62左右对房价的正面影响最大。然后它再次下降，直到对NOX值大于0.66的影响变为**负面**。
 - en: Conclusion
+  id: totrans-104
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, we have seen that interpretability is a desirable property.
     If our models are not interpretable by default, we can still help ourselves with
     methods such as LIME and Shapley values. This is better than doing nothing, but
     also these methods have their shortcomings.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们看到了解释性是一个理想的属性。如果我们的模型默认不可解释，我们仍然可以借助如LIME和Shapley值等方法来帮助自己。这比什么都不做要好，但这些方法也有其不足之处。
 - en: We then introduced the explainable boosting machine, which has an accuracy that
     is comparable to gradient boosting algorithms such as XGBoost and LightGBM, but
     is interpretable as well. This shows that accuracy and interpretability as not
     mutually exclusive.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们随后介绍了可解释增强机器，它的准确性与梯度提升算法如XGBoost和LightGBM相当，但同样具有可解释性。这表明准确性和解释性并非相互排斥。
 - en: Using explainable boosting in production is not difficult, thanks to the interpret
     package.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用可解释增强在生产环境中并不困难，感谢interpret包。
 - en: Slight room for improvement
+  id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 有些许改进空间
 - en: 'It’s a great library that has only one major drawback at the moment: **It only
     supports trees as base learners**. This might be enough most of the time, but
     if you require *monotone* functions, for example, you are alone at the moment.
     However, I think it should be easy to implement this: The developers only have
     to add only two features:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个很棒的库，目前唯一的主要缺点是：**它只支持树作为基础学习器**。这在大多数情况下可能足够，但如果你需要*单调*函数，例如，目前你将面临困难。然而，我认为实现这一点应该很简单：开发者只需添加两个功能：
 - en: '**Support for general base learners.** Then we can use [isotonic regression](https://en.wikipedia.org/wiki/Isotonic_regression) to
     create monotone functions.'
+  id: totrans-110
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**对通用基础学习器的支持。** 然后我们可以使用[单调回归](https://en.wikipedia.org/wiki/Isotonic_regression)来创建单调函数。'
 - en: '**Support for different base learners for different features.** Because for
     some features you want your function *f* to be monotonically increasing, for others
     decreasing, and for some, you do not care.'
+  id: totrans-111
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**对不同特征使用不同基础学习器的支持。** 因为对于某些特征，你希望你的函数*f*是单调递增的，对于其他特征则是递减的，而对于某些特征，你不在乎。'
 - en: You can view the discussion [here](https://github.com/interpretml/interpret/issues/184).
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这里](https://github.com/interpretml/interpret/issues/184)查看讨论。
 - en: References
+  id: totrans-113
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Miller, T. (2019). [Explanation in artificial intelligence: Insights from
     the social sciences](https://arxiv.org/abs/1706.07269). *Artificial intelligence*, *267*,
     1–38.'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Miller, T. (2019). [人工智能中的解释：来自社会科学的见解](https://arxiv.org/abs/1706.07269)。*人工智能*,
+    *267*, 1–38。'
 - en: '[2] Kim, B., Koyejo, O., & Khanna, R. (2016, December). [Examples are not enough,
     learn to criticize! Criticism for Interpretability](https://papers.nips.cc/paper/2016/hash/5680522b8e2bb01943234bce7bf84534-Abstract.html).
     In *NIPS* (pp. 2280–2288).'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] Kim, B., Koyejo, O., & Khanna, R. (2016年12月). [示例不够，学会批评！解释性批评](https://papers.nips.cc/paper/2016/hash/5680522b8e2bb01943234bce7bf84534-Abstract.html)。在*NIPS*
+    (第2280–2288页)。'
 - en: '[3] Ribeiro, M. T., Singh, S., & Guestrin, C. (2016, August). [“Why should
     i trust you?” Explaining the predictions of any classifier](https://arxiv.org/abs/1602.04938).
     In *Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery
     and data mining* (pp. 1135–1144).'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] Ribeiro, M. T., Singh, S., & Guestrin, C. (2016年8月). [“我为什么要相信你？” 解释任何分类器的预测](https://arxiv.org/abs/1602.04938)。在*第22届ACM
+    SIGKDD国际知识发现与数据挖掘大会论文集* (第1135–1144页)。'
 - en: '[4] Lundberg, S., & Lee, S. I. (2017). [A unified approach to interpreting
     model predictions](https://arxiv.org/abs/1705.07874). *arXiv preprint arXiv:1705.07874*.'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] Lundberg, S., & Lee, S. I. (2017). [一种统一的模型预测解释方法](https://arxiv.org/abs/1705.07874)。*arXiv预印本arXiv:1705.07874*。'
 - en: '[5] Nori, H., Jenkins, S., Koch, P., & Caruana, R. (2019). [Interpretml: A
     unified framework for machine learning interpretability](https://arxiv.org/abs/1909.09223). *arXiv
     preprint arXiv:1909.09223*.'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5] Nori, H., Jenkins, S., Koch, P., & Caruana, R. (2019). [Interpretml：一个统一的机器学习解释框架](https://arxiv.org/abs/1909.09223)。*arXiv预印本arXiv:1909.09223*。'
 - en: Thanks to Patrick Bormann for his useful remarks!
+  id: totrans-119
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 感谢Patrick Bormann的有用建议！
 - en: I hope that I could teach you something useful.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望我能教你一些有用的东西。
 - en: '**Thanks for reading!**'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '**感谢阅读！**'
 - en: '*If you have any questions, write me on *[*LinkedIn*](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)*!*'
+  id: totrans-122
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*如果你有任何问题，可以在*[*LinkedIn*](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)*上给我写信！*'
 - en: Also, check out [my other articles](https://dr-robert-kuebler.medium.com/) on
     graspable machine learning topics.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，查看一下我在[这里](https://dr-robert-kuebler.medium.com/)的其他文章，了解易于掌握的机器学习主题。
 - en: '**Bio: [Dr. Robert Kübler](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)**
     is a Data Scientist at Publicis Media and Author at Towards Data Science.'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[罗伯特·库布勒博士](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)**
+    是Publicis Media的数据科学家，并在Towards Data Science上撰写文章。'
 - en: '[Original](https://towardsdatascience.com/the-explainable-boosting-machine-f24152509ebb).
     Reposted with permission.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/the-explainable-boosting-machine-f24152509ebb)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Gradient Boosted Decision Trees – A Conceptual Explanation](/2021/04/gradient-boosted-trees-conceptual-explanation.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[梯度提升决策树 – 概念解释](/2021/04/gradient-boosted-trees-conceptual-explanation.html)'
 - en: '[Shapash: Making Machine Learning Models Understandable](/2021/04/shapash-machine-learning-models-understandable.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Shapash：让机器学习模型易于理解](/2021/04/shapash-machine-learning-models-understandable.html)'
 - en: '[Interpretable Machine Learning: The Free eBook](/2021/04/interpretable-machine-learning-free-ebook.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释的机器学习：免费电子书](/2021/04/interpretable-machine-learning-free-ebook.html)'
 - en: More On This Topic
+  id: totrans-130
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升机器学习算法：概述](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
 - en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极指南：掌握季节性并提升业务结果](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
 - en: '[Closing the Gap Between Human Understanding and Machine Learning:…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[弥合人类理解与机器学习之间的差距：…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用最先进的深度学习进行可解释的预测和实时预测…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
 - en: '[Explaining Explainable AI for Conversations](https://www.kdnuggets.com/2022/10/explaining-explainable-ai-conversations.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解释对话中的可解释AI](https://www.kdnuggets.com/2022/10/explaining-explainable-ai-conversations.html)'
 - en: '[Explainable AI: 10 Python Libraries for Demystifying Your Model''s Decisions](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释的人工智能：10个用于揭示模型决策的Python库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)'
