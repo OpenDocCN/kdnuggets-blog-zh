@@ -1,17 +1,25 @@
 - en: How to Use the Hugging Face Tokenizers Library to Preprocess Text Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Hugging Face Tokenizers 库来预处理文本数据
 - en: 原文：[https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)
 - en: '![ Hugging Face Tokenizers Library](../Images/23c326950f8c1dfd30d486cd87509ab3.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![ Hugging Face Tokenizers Library](../Images/23c326950f8c1dfd30d486cd87509ab3.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: If you have studied NLP, you might have heard about the term "tokenization."
     It is an important step in text preprocessing, where we transform our textual
     data into something that machines can understand. It does so by breaking down
@@ -19,230 +27,356 @@
     subwords, or even characters, depending on the tokenization algorithm being used.
     In this article, we will see how to use the Hugging Face Tokenizers Library to
     preprocess our textual data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你学习过 NLP，你可能听说过“分词”这个术语。这是文本预处理中的一个重要步骤，我们通过将文本数据转换为机器可以理解的形式来完成。这是通过将句子拆分成更小的部分，称为标记。根据使用的分词算法，这些标记可以是单词、子词，甚至是字符。本文将探讨如何使用
+    Hugging Face Tokenizers 库来预处理我们的文本数据。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 管理'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Setting Up Hugging Face Tokenizers Library
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 设置 Hugging Face Tokenizers 库
 - en: 'To start using the Hugging Face Tokenizers library, you''ll need to install
     it first. You can do this using pip:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始使用 Hugging Face Tokenizers 库，你需要先安装它。你可以使用 pip 来完成这个操作：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The Hugging Face library supports various tokenization algorithms, but the
     three main types are:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Hugging Face 库支持多种分词算法，但主要有三种类型：
 - en: '**Byte-Pair Encoding (BPE):** Merges the most frequent pairs of characters
     or subwords iteratively, creating a compact vocabulary. It is used by models like
     GPT-2.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**字节对编码 (BPE)：** 迭代地合并最频繁的字符或子词对，创建一个紧凑的词汇表。GPT-2 等模型使用了这种方法。'
 - en: '**WordPiece:** Similar to BPE but focuses on probabilistic merges (doesn''t
     choose the pair that is the most frequent but the one that will maximize the likelihood
     of the corpus once merged), commonly used by models like BERT.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**WordPiece：** 类似于 BPE，但侧重于概率合并（不选择最频繁的对，而是选择合并后能最大化语料库概率的对），通常被 BERT 等模型使用。'
 - en: '**SentencePiece:** A more flexible tokenizer that can handle different languages
     and scripts, often used with models like ALBERT, XLNet, or the Marian framework.
     It treats spaces as characters rather than word separators.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**SentencePiece：** 一种更灵活的分词器，可以处理不同语言和脚本，通常与 ALBERT、XLNet 或 Marian 框架等模型一起使用。它将空格视为字符，而不是单词分隔符。'
 - en: The Hugging Face Transformers library provides an `AutoTokenizer` class that
     can automatically select the best tokenizer for a given pre-trained model. This
     is a convenient way to use the correct tokenizer for a specific model and can
     be imported from the `transformers` library. However, for the sake of our discussion
     regarding the Tokenizers library, we will not follow this approach.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: Hugging Face Transformers 库提供了一个`AutoTokenizer`类，可以自动选择适合给定预训练模型的最佳分词器。这是使用特定模型正确分词器的一种便捷方式，并且可以从`transformers`库中导入。然而，考虑到我们对
+    Tokenizers 库的讨论，我们将不采用这种方法。
 - en: 'We will use the pre-trained `BERT-base-uncased` tokenizer. This tokenizer was
     trained on the same data and using the same techniques as the `BERT-base-uncased`
     model, which means it can be used to preprocess text data compatible with BERT
     models:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用预训练的`BERT-base-uncased`分词器。这个分词器是基于与`BERT-base-uncased`模型相同的数据和技术训练的，这意味着它可以用来预处理与
+    BERT 模型兼容的文本数据：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Single Sentence Tokenization
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 单句分词
 - en: 'Now, let''s encode a simple sentence using this tokenizer:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们使用这个标记器对一个简单句子进行编码：
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Output:**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'To ensure correctness, let''s decode the tokenized input:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 为确保准确性，让我们解码标记化的输入：
 - en: '[PRE4]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '**Output:**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE5]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: In this output, you can see two special tokens. `[CLS]` marks the start of the
     input sequence, and `[SEP]` marks the end, indicating a single sequence of text.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个输出中，你可以看到两个特殊标记。`[CLS]` 标记输入序列的开始，`[SEP]` 标记结束，表示单个文本序列。
 - en: Batch Tokenization
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 批量标记化
 - en: 'Now, let''s tokenize a corpus of text instead of a single sentence using `batch_encode_plus`:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们使用 `batch_encode_plus` 对文本语料库进行标记化，而不是单个句子：
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Output:**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE7]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: For better understanding, let's decode the batch-encoded corpus as we did incase
     of single sentence. This will provide the original sentences, tokenized appropriately.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地理解，让我们像处理单句时那样解码批量编码的语料库。这将提供原始句子，标记化得当。
 - en: '[PRE8]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '**Output:**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE9]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Padding and Truncation
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 填充和截断
 - en: 'When preparing data for machine learning models, ensuring all input sequences
     have the same length is often necessary. Two methods to accomplish this are:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在为机器学习模型准备数据时，确保所有输入序列具有相同长度通常是必要的。实现这一点的两种方法是：
 - en: 1\. Padding
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 填充
 - en: 'Padding works by adding the special token `[PAD]` at the end of the shorter
     sequences to match the length of the longest sequence in the batch or max length
     supported by the model if `max_length` is defined. You can do this by:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 填充通过在较短序列的末尾添加特殊标记 `[PAD]`，以匹配批次中最长序列的长度或模型支持的最大长度（如果定义了 `max_length`）。你可以通过以下方式实现：
 - en: '[PRE10]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '**Output:**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE11]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Now, you can see that extra 0s are placed, but for better understanding, let''s
     decode to see where the tokenizer has placed the `[PAD]` tokens:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你可以看到额外的 0 被放置，但为了更好地理解，让我们解码以查看标记器放置 `[PAD]` 标记的位置：
 - en: '[PRE12]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '**Output:**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE13]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 2\. Truncation
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 截断
 - en: Many NLP models have a maximum input length sequence, and truncation works by
     chopping off the end of the longer sequence to meet this maximum length. It reduces
     memory usage and prevents the model from being overwhelmed by very large input
     sequences.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多 NLP 模型有最大输入长度序列，截断通过剪切较长序列的末尾来满足这个最大长度。它减少了内存使用，并防止模型被非常大的输入序列压垮。
 - en: '[PRE14]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '**Output:**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE15]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Now, you can also use the `batch_decode` method, but for better understanding,
     let''s print this information in a different way:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你还可以使用 `batch_decode` 方法，但为了更好地理解，让我们以不同的方式打印这些信息：
 - en: '[PRE16]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '**Output:**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE17]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'This article is part of our amazing series on Hugging Face. If you want to
     explore more about this topic, here are some references to help you out:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文是我们关于 Hugging Face 的精彩系列的一部分。如果你想更深入了解这个话题，这里有一些参考资料可以帮助你：
 - en: '[Hugging Face Tokenizer Documentation](https://huggingface.co/docs/transformers/main/en/main_classes/tokenizer#tokenizer)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face 标记器文档](https://huggingface.co/docs/transformers/main/en/main_classes/tokenizer#tokenizer)'
 - en: '[Hugging Face Transformers Course: Preprocessing Data](https://huggingface.co/docs/transformers/v4.14.1/en/preprocessing)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face Transformers 课程：数据预处理](https://huggingface.co/docs/transformers/v4.14.1/en/preprocessing)'
 - en: '[HuggingFace: Summary of Different Tokenizers](https://huggingface.co/docs/transformers/en/tokenizer_summary)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingFace: 各种标记器的总结](https://huggingface.co/docs/transformers/en/tokenizer_summary)'
 - en: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
     Kanwal is a machine learning engineer and a technical writer with a profound passion
     for data science and the intersection of AI with medicine. She co-authored the
@@ -251,33 +385,52 @@
     as a Teradata Diversity in Tech Scholar, Mitacs Globalink Research Scholar, and
     Harvard WeCode Scholar. Kanwal is an ardent advocate for change, having founded
     FEMCodes to empower women in STEM fields.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
+    Kanwal 是一位机器学习工程师和技术作家，对数据科学及人工智能与医学的交叉领域充满热情。她共同撰写了电子书《利用 ChatGPT 最大化生产力》。作为
+    2022 年亚太地区的 Google Generation 学者，她倡导多样性和学术卓越。她还被认可为 Teradata 多样性科技学者、Mitacs Globalink
+    研究学者和哈佛 WeCode 学者。Kanwal 是变革的积极倡导者，创立了 FEMCodes 以赋能女性在 STEM 领域的成长。'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Use Hugging Face’s Datasets Library for Efficient Data Loading](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face 的数据集库进行高效的数据加载](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face AutoTrain 微调 LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
 - en: '[How to Use GPT for Generating Creative Content with Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 GPT 生成创意内容与 Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
 - en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个社区正在开发用于客户数据建模的 Hugging Face](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
 - en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前十名机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
