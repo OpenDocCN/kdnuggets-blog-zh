@@ -1,11 +1,15 @@
 - en: How I Did Automatic Image Labeling Using Grounding DINO
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Grounding DINO 进行自动图像标注
 - en: 原文：[https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
 - en: As a Machine Learning developer, I personally feel image labeling is unexciting,
     time-consuming, and an expensive task. But thankfully, with recent developments
     in the computer vision domain, particularly the introduction of powerful zero-shot
@@ -13,43 +17,67 @@
     image labeling process for the majority of use cases. We can actually write a
     Python script that will do 95% of the work for us. Our only task is to review
     those annotations at the very end and possibly add or remove some bounding boxes.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一名机器学习开发者，我个人认为图像标注是乏味、耗时且昂贵的任务。但幸运的是，随着计算机视觉领域的最新进展，特别是像**Grounding DINO**这样强大的零样本目标检测器的出现，我们实际上可以自动化大部分图像标注过程，适用于大多数使用案例。我们可以编写一个
+    Python 脚本，完成95%的工作。我们的唯一任务是在最后审核这些标注，并可能添加或删除一些边界框。
 - en: '![How I Did Automatic Image Labeling Using Grounding DINO](../Images/ffad343eeb8ea2486f378e11fd6c4dd0.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用 Grounding DINO 进行自动图像标注](../Images/ffad343eeb8ea2486f378e11fd6c4dd0.png)'
 - en: Image by Author
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你在 IT 领域的工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*Before getting into Auto Image labeling we should know what is Grounding DINO
     ? and why are we using it ?*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在开始自动图像标注之前，我们应该了解什么是 Grounding DINO？我们为什么要使用它？*'
 - en: 'Grounding DINO can detect dominant objects with given prompt inputs such as
     category names or referring expressions. The primary solution to open set object
     detection is introducing language to a closed set detector. DINO for open set
@@ -59,53 +87,80 @@
     neck query initialization and head Grounding DINO includes a feature enhancer,
     language-guided query selection, and a cross-modality decoder for cross-modality
     fusion.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Grounding DINO 可以通过给定的提示输入（如类别名称或引用表达）检测主要对象。解决开放集目标检测的主要方法是将语言引入封闭集检测器中。DINO
+    用于开放集概念泛化：为了有效融合语言和视觉模态，我们将封闭集检测器概念上分为三个阶段：主干、颈部和头部。然后，我们提出了一种紧密融合的解决方案，通过在颈部查询初始化和头部融合语言信息，Grounding
+    DINO 包括特征增强器、语言引导查询选择和跨模态解码器以实现跨模态融合。
 - en: Grounding DINO achieves a 52.5 percentage AP(Average Precision) on the COCO
     dataset detection zero shot transfer benchmark that is without any training data
     from COCO dataset after fine-tuning on COCO dataset it achieves 63.0 AP. With
     a mean 26.1 AP, it establishes a new record on the OdinW zero shot benchmark.
     We also explore how to leverage pre-trained DINO by training language and fusion
     modules only. Grounding DINO from DINO converges much faster than baseline models.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Grounding DINO 在 COCO 数据集检测零样本转移基准上实现了 52.5 的平均精度（AP），该基准在 COCO 数据集上没有任何训练数据，在
+    COCO 数据集上微调后达到了 63.0 AP。它在 OdinW 零样本基准上以 26.1 的平均 AP 创下了新纪录。我们还探索了如何通过仅训练语言和融合模块来利用预训练的
+    DINO。与基线模型相比，Grounding DINO 从 DINO 收敛得更快。
 - en: our Grounding DINO can also collaborate with stable diffusion for image editing,
     for example we can detection the Green Mountain in the image and generate new
     images with a text prompt Red Mountain also it can modify the background of a
     person by first detecting a face we can also use GLIGEN for more detailed controls
     like assigning each box an object this is our model Grounding DINO for open set
     object detection.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 Grounding DINO 还可以与稳定扩散合作进行图像编辑，例如，我们可以检测图像中的绿山并生成带有文本提示的红山新图像，也可以通过首先检测面部来修改一个人的背景，我们还可以使用
+    GLIGEN 进行更详细的控制，如给每个框分配一个对象，这是我们的模型 Grounding DINO 用于开放集目标检测。
 - en: '*Okay, dive into the auto image labeling part, and here i’m* ***Google colab***
     *for high Computing Power.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*好的，深入自动图像标注部分，这里我使用的是* ***Google Colab*** *以获得高计算能力。*'
 - en: Let’s begin,
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 让我们开始，
 - en: Let’s make sure that we have GPU access. We can use the nvidia-smi command to
     check if the GPU is connected or not to check if the GPU is connected or not.
     In case you face any problems, navigate to Edit -> Notebook settings -> Hardware
     accelerator, set it to GPU, and then click Save. which will greatly shorten the
     time it takes for auto-labeling to be complete.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保我们可以访问 GPU。我们可以使用 nvidia-smi 命令检查 GPU 是否连接。如果遇到任何问题，请导航到 Edit -> Notebook
+    settings -> Hardware accelerator，设置为 GPU，然后点击 Save，这将大大缩短自动标注完成的时间。
 - en: nvidia-smi
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: nvidia-smi
 - en: Install Grounding DINO Model
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 安装 Grounding DINO 模型
 - en: Our project will use groundbreaking design?—?[Grounding DINO](https://github.com/IDEA-Research/GroundingDINO)
     for zero-shot detection. We have to install it first.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的项目将使用突破性的设计——[Grounding DINO](https://github.com/IDEA-Research/GroundingDINO)
+    来进行零样本检测。我们需要先安装它。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The [supervision](https://github.com/roboflow/supervision) python index package
     will help us process, filter, and visualize our detections as well as to save
     our dataset and will be the glue that holds all the pieces of our demo together.
@@ -113,147 +168,230 @@
     for this demonstration, we require the new features added in the most recent iterations.
     In order to install version “0.6.0,” we first uninstall the current “supervision”
     version.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[supervision](https://github.com/roboflow/supervision) python 索引包将帮助我们处理、过滤和可视化我们的检测结果，并保存我们的数据集，它将成为我们演示所有部分的粘合剂。与
+    Grounding DINO 一起安装了一个较小版本的“supervision”。但为了这次演示，我们需要最新版本中的新功能。为了安装版本“0.6.0”，我们首先需要卸载当前的“supervision”版本。'
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The Grounding DINO Model Weights Download
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Grounding DINO 模型权重下载
 - en: We require the configuration and model weights files in order to run Grounding
     DINO. We have already cloned the Grounding DINO repository, which contains the
     configuration file. On the other hand, we must download the weights file. We check
     to see if the paths are accurate and that the files are present on disc after
     writing the paths to both files to the variablesGROUNDING_DINO_CONFIG_PATHand
     GROUNDING_DINO_CHECKPOINT_PATH.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要配置文件和模型权重文件以运行 Grounding DINO。我们已经克隆了 Grounding DINO 仓库，其中包含配置文件。另一方面，我们必须下载权重文件。我们在将路径写入变量
+    GROUNDING_DINO_CONFIG_PATH 和 GROUNDING_DINO_CHECKPOINT_PATH 后，检查路径是否准确以及文件是否存在。
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Assuming you have already installed PyTorch, you can use the following command
     line to import torchand set the device to use for computation:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你已经安装了 PyTorch，你可以使用以下命令行导入 torch 并设置计算设备：
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Load Grounding DINO Model
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 加载 Grounding DINO 模型
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Dataset Preparation
+  id: totrans-31
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据集准备
 - en: Create a folder called data and move the unlabelled images to that folder.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个名为 data 的文件夹，并将未标注的图像移动到该文件夹中。
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Single Image Mask Auto Annotation
+  id: totrans-34
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 单图像掩膜自动标注
 - en: Before we automatically annotate the entire dataset let’s focus for a moment
     on a single image.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在自动标注整个数据集之前，让我们先关注单张图像。
 - en: '[PRE6]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Zero-Shot Object Detection with Grounding DINO
+  id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Grounding DINO 进行零样本目标检测
 - en: We will use the enhance_class_name function, which is described below, to use
     some prompt engineering to get better Grounding DINO detection.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用下面描述的 enhance_class_name 函数，通过一些提示工程来获得更好的 Grounding DINO 检测。
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![XXXXX](../Images/df7c2c4d3992db0607ce63ed07c568bc.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/df7c2c4d3992db0607ce63ed07c568bc.png)'
 - en: Full Dataset Mask Auto Annotation
+  id: totrans-41
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 全数据集掩膜自动标注
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Extract Labels from Images
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从图像中提取标签
 - en: '[PRE9]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Plotting the Results
+  id: totrans-45
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 绘制结果
 - en: '[PRE10]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![XXXXX](../Images/f1fe739133f9fb0f92645477361e5364.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/f1fe739133f9fb0f92645477361e5364.png)'
 - en: Save labels in Pascal VOC XML
+  id: totrans-48
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 以 Pascal VOC XML 格式保存标签
 - en: '[PRE11]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Thanks for reading !!!
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读 !!!
 - en: Here is a link for [entire colab fil](https://colab.research.google.com/drive/17yOBr8kVfbJPfEl3pZVbfJBEqlqqsHtM?usp=sharing)e.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是一个 [完整colab文件](https://colab.research.google.com/drive/17yOBr8kVfbJPfEl3pZVbfJBEqlqqsHtM?usp=sharing)
+    的链接。
 - en: Reference:[https://arxiv.org/abs/2303.05499](https://arxiv.org/abs/2303.05499)
     & [https://github.com/IDEA-Research/GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 参考资料：[https://arxiv.org/abs/2303.05499](https://arxiv.org/abs/2303.05499) 和
+    [https://github.com/IDEA-Research/GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - en: '**[Parthiban M](https://www.linkedin.com/in/parthibanma/)** currently lives
     in Chennai (India) and work at [SeeWise](https://www.seewise.ai/) . He is a ML
     Developer with wide experience in understanding the problems and providing solutions
     by developing ML models using Computer vision, TensorFlow and Deep learning.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Parthiban M](https://www.linkedin.com/in/parthibanma/)** 目前居住在印度钦奈，并在 [SeeWise](https://www.seewise.ai/)
+    工作。他是一名机器学习开发者，具有广泛的经验，能够通过使用计算机视觉、TensorFlow和深度学习来理解问题并提供解决方案。'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过使用自动EDA工具在数据科学评估测试中取得优异成绩](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
 - en: '[Data Labeling for Machine Learning: Market Overview, Approaches, and Tools](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的数据标注：市场概况、方法和工具](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Tensorflow训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[How to Convert an RGB Image to Grayscale](https://www.kdnuggets.com/2019/12/convert-rgb-image-grayscale.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将RGB图像转换为灰度图像](https://www.kdnuggets.com/2019/12/convert-rgb-image-grayscale.html)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用卷积神经网络（CNNs）进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
