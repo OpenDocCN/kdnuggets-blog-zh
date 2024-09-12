@@ -1,15 +1,21 @@
 - en: 'Building a Visual Search Engine – Part 1: Data Exploration'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建视觉搜索引擎 – 第1部分：数据探索
 - en: 原文：[https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 - en: Why?
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么？
 - en: Ever wonder how Google or Bing finds similar images to your image. The algorithms
     for generating text based 10 blue-links are very different from finding visually
     similar or related images. In this article, we will explain one such method to
@@ -17,129 +23,192 @@
     dataset which contains images of common objects used in daily life. We will only
     cover a prototype algorithm and discuss what will be required to develop a full
     scaled visual search engine.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 曾经想过Google或Bing如何找到与您的图像相似的图像吗？生成基于文本的10个蓝色链接的算法与寻找视觉上相似或相关的图像的算法是非常不同的。在本文中，我们将解释一种构建视觉搜索引擎的方法。我们将使用Caltech
+    [101](http://www.vision.caltech.edu/Image_Datasets/Caltech101/) 数据集，该数据集包含日常生活中常见物体的图像。我们将仅介绍一个原型算法，并讨论开发全面规模视觉搜索引擎所需的条件。
 - en: '****About dataset****'
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****关于数据集****'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Caltech 101 dataset contains 101 classes of objects like face, tick, knife,
     mobile, money, etc. It contains 40–200 images per class. In addition to 101 classes,
     it also contains a background class / noise class to test the model on negative
     images. The dataset contains 8677 images excluding 486 background images. Below
     is the frequency distribution of images in classes.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Caltech 101 数据集包含101个类别的物体，如面部、蜱、刀具、手机、货币等。每个类别包含40–200张图像。除了101个类别外，它还包含一个背景类别/噪声类别，以测试模型在负面图像上的表现。数据集包含8677张图像，不包括486张背景图像。以下是各类别图像的频率分布。
 - en: '![Building a Visual Search Engine - Part 1: Data Exploration](../Images/c40a016d818f5d778126ff31acb90d75.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![构建视觉搜索引擎 - 第1部分：数据探索](../Images/c40a016d818f5d778126ff31acb90d75.png)'
 - en: The number of images in each class follows long tail distribution. The most
     frequent class contains ~16x more images than the least frequent class. Approximately
     5% of classes (5 classes) contains ~30% of images. Approximately 90% of classes
     have less than 100 images.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个类别中的图像数量遵循长尾分布。最常见的类别包含的图像数量约为最少见类别的16倍。大约5%的类别（5个类别）包含约30%的图像。大约90%的类别有少于100张图像。
 - en: '**Note:** This imbalance in the dataset can lead to skewed batches when training
     the model.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 数据集中的这种不平衡可能导致模型训练时出现偏斜的批次。'
 - en: '****Exploratory Data Analysis****'
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****探索性数据分析****'
 - en: We take random images from randomly selected classes. Please find below some
     sample images.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从随机选择的类别中获取随机图像。请参见下面的一些样本图像。
 - en: '![XXXXX](../Images/7750a853db646a7f48ff576d682897a6.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/7750a853db646a7f48ff576d682897a6.png)'
 - en: '![XXXXX](../Images/b3fbcaf16f496cb4cd24d7f132afe9aa.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/b3fbcaf16f496cb4cd24d7f132afe9aa.png)'
 - en: '****Observations****'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '****观察结果****'
 - en: '**Aspect Ratio:** Images are of different aspect ratio but the maximum side
     of the image is resized to 300px. Additionally, we try to get the distribution
     of the aspect ratio to better understand the dataset. We found that most of the
     images have aspect ratio 0.5–0.8, i.e. the width is larger than height.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**纵横比：** 图像具有不同的纵横比，但图像的最大边被调整为300px。此外，我们尝试获取纵横比的分布，以更好地理解数据集。我们发现大多数图像的纵横比为0.5–0.8，即宽度大于高度。'
 - en: '![XXXXX](../Images/52cd93aca1c29e97bf80778ac30cf957.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/52cd93aca1c29e97bf80778ac30cf957.png)'
 - en: '**Color vs Grayscale**: We noticed that a lot of images in some directory were
     grayscale images. We implemented a grayscale images check and found that 411 images
     across 101 classes were greyscale. Next, we checked the class-wise distribution
     and found that the car-side class had only grayscale images. There are few other
     classes which contain greyscale images but all of them except the car-side contains
     color images too.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**彩色与灰度**：我们注意到某些目录中的许多图像是灰度图像。我们实现了一个灰度图像检查，发现 101 个类别中有 411 张图像是灰度图像。接下来，我们检查了每个类别的分布，发现
+    car-side 类只有灰度图像。还有一些其他类别包含灰度图像，但除了 car-side 类之外，所有类别都包含彩色图像。'
 - en: '![XXXXX](../Images/ce923a7690d00a2e72514f216cae9ab0.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/ce923a7690d00a2e72514f216cae9ab0.png)'
 - en: '**Data Biases:**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据偏差：**'
 - en: '***faces and faces_easy***: These classes contain images of faces and cropped
     faces respectively. But there are multiple images of the same person with slight
     perspective change. Additionally, the images are very similar in terms of occlusion,
     background and lighting.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***faces 和 faces_easy***：这些类别分别包含面部图像和裁剪的面部图像。但是，有多张同一人的图像具有轻微的视角变化。此外，这些图像在遮挡、背景和光照方面非常相似。'
 - en: '![XXXXX](../Images/d3f2a566d94cd377f13259197589ae6f.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/d3f2a566d94cd377f13259197589ae6f.png)'
 - en: '***flamingo and flamingo_head*****:** One class contains the whole body of
     flamingo and the other contains just the head part of it.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***flamingo 和 flamingo_head***：一个类别包含了整个火烈鸟的身体，另一个类别仅包含火烈鸟的头部。'
 - en: '![XXXXX](../Images/c92c1889215d34d2859f8e3764f120dd.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/c92c1889215d34d2859f8e3764f120dd.png)'
 - en: 'similar case: **chair** and **windsor_chair**'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 相似情况：**chair** 和 **windsor_chair**
 - en: '**accordion** — images are rotated 45 degrees with black padding'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**accordion** — 图像旋转了 45 度，并有黑色填充'
 - en: '**Animated images**: A lot of classes contain cartoon images. Cartoon images
     are semantically right but have different textures compared to real-life images.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**动画图像**：许多类别包含卡通图像。卡通图像在语义上是正确的，但与真实图像相比具有不同的纹理。'
 - en: '**Object Location and Scale**: We found out that the dataset is biased towards
     certain scale and location in the image. Object in focus is always in the center
     of the image and has a similar scale. Objects in the center might not be any problem
@@ -148,104 +217,152 @@
     on similar scale objects only. This will cause the model to fail on images with
     different scales, which generally occurs in real-life. We propose two solutions
     to this problem:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**对象位置与尺度**：我们发现数据集在图像中的尺度和位置上存在偏差。聚焦的对象总是位于图像的中心，并具有相似的尺度。图像中心的对象可能没有问题，因为
+    CNN 模型对平移不变（当使用最大池化或平均池化时）。但使用固定尺度训练模型可能会导致模型仅在类似尺度的对象上有效。这将导致模型在不同尺度的图像上失败，这通常发生在现实生活中。我们提出了两个解决方案：'
 - en: '**Two Stage Pipeline**: We can create a two stage pipeline, the first component
     predicts the bounding box of the object in focus and the second component predicts
     what the object is.'
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**两阶段管道**：我们可以创建一个两阶段的管道，第一个组件预测聚焦对象的边界框，第二个组件预测对象是什么。'
 - en: '**Resizing Objects using Data Augmentation**: We can apply data augmentation
     techniques to rescale the object in focus and train the model on that augmented
     dataset. This may require the model size to be increased, as it will now store
     more information (object recognition as multiple scales, because CNNs are not
     scale invariant)'
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使用数据增强调整对象大小**：我们可以应用数据增强技术来重新调整聚焦对象的大小，并在增强后的数据集上训练模型。这可能需要增加模型的大小，因为它现在将存储更多的信息（对象识别为多个尺度，因为
+    CNN 对尺度不变）。'
 - en: '**Occlusion and Background**: Majority of images in the dataset have a clean
     background and the object in focus is not occluded.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**遮挡与背景**：数据集中大多数图像有干净的背景，聚焦的物体没有被遮挡。'
 - en: '**Image Rasterisation:** Some classes have images that seem to be resized from
     smaller dimensions. Because of this images looks very rasterised'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图像栅格化**：一些类别的图像似乎是从较小尺寸的图像调整大小的。因此，这些图像看起来非常栅格化'
 - en: '****Embeddings Visualisation****'
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****嵌入可视化****'
 - en: In this section, we visualise images using the embeddings generated from pre-trained
     model. For this purpose, we used the MobileNetV2 model pre-trained on ImageNet
     with 2.2M parameters. We used the output of the global average pooling layer,
     which generates embedding of size 1280.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们使用从预训练模型生成的嵌入来可视化图像。为此，我们使用了在 ImageNet 上预训练的 MobileNetV2 模型，该模型具有 220
+    万个参数。我们使用了全局平均池化层的输出，该层生成的嵌入大小为 1280。
 - en: '![XXXXX](../Images/ddfd3ccad1caefd7835b3399d70f9793.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/ddfd3ccad1caefd7835b3399d70f9793.png)'
 - en: The two dimensional plot of the vector is not very intuitive. This is because
     the two dimensions combined explains only 8.5% of variance in the data. We also
     plot these embeddings in three dimensions using TF Projector. The 3D embedding
     plot explains ~15% of the variance in the data.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 该向量的二维图并不直观。这是因为这两个维度合在一起仅解释了数据中8.5%的方差。我们还使用TF Projector将这些嵌入图在三维中绘制。3D嵌入图解释了数据中约15%的方差。
 - en: '![XXXXX](../Images/64521ba4c2b75c4bea735ce724db9a21.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/64521ba4c2b75c4bea735ce724db9a21.png)'
 - en: We did not observe any clear cluster of objects from the graph above. But the
     cosine similarity between images was good representative of the images. For most
     cases, the images near to a certain image embedding were of the same class. This
     proves that the model we have used to generate embeddings, focuses on the right
     aspect of the image and is able to figure out the object of interest in the image.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们没有从上述图表中观察到任何明显的对象簇。但图像之间的余弦相似度很好地代表了这些图像。在大多数情况下，接近某一图像嵌入的图像属于同一类别。这证明了我们用于生成嵌入的模型，专注于图像的正确方面，并且能够识别图像中的兴趣对象。
 - en: The t-SNE visualisation of the embedding shows a lot of concentrated clusters
     of classes. Browsing through these visualisations also revealed some similar classes
     like schooner and ketch, helicopter and airplane, crayfish and lobster, etc.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: t-SNE嵌入的可视化显示了大量集中类簇。浏览这些可视化还揭示了一些相似的类，如帆船和双桅帆船、直升机和飞机、淡水龙虾和龙虾等。
 - en: '![XXXXX](../Images/b89dd0fb00657acb3ee36c18d14dcf9c.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/b89dd0fb00657acb3ee36c18d14dcf9c.png)'
 - en: '**Editor''s note:** Join us next week for the exciting conclusion of Building
     a Visual Search Engine, where we move on from data exploration to cover building
     the visual search engine itself.'
+  id: totrans-45
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑说明：** 请加入我们下周的精彩内容《构建视觉搜索引擎》，我们将从数据探索转向实际构建视觉搜索引擎。'
 - en: '**[Mudit Bachhawat](https://www.linkedin.com/in/muditbac/?originalSubdomain=in)**
     works as a machine learning engineer at Google, and has more than 5 years of experience
     in data science, deep learning, computer vision, multi-modal information retrieval,
     and optimization. Feel free to drop any comments or questions.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Mudit Bachhawat](https://www.linkedin.com/in/muditbac/?originalSubdomain=in)**
+    在谷歌担任机器学习工程师，拥有超过5年的数据科学、深度学习、计算机视觉、多模态信息检索和优化方面的经验。欢迎随时留言或提问。'
 - en: More On This Topic
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升你的搜索引擎技能，通过Uplimit的机器学习课程！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
 - en: '[Qdrant: Open-Source Vector Search Engine with Managed Cloud Platform](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Qdrant：开源向量搜索引擎与托管云平台](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)'
 - en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Google Earth构建Python地理空间应用程序……](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[ChatGPT-Powered Data Exploration: Unlock Hidden Insights in Your Dataset](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT驱动的数据探索：解锁数据集中隐藏的洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'

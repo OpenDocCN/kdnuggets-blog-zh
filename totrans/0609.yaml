@@ -1,362 +1,549 @@
 - en: TensorFlow for Computer Vision – Transfer Learning Made Easy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: TensorFlow 计算机视觉 – 迁移学习变得简单
 - en: 原文：[https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 - en: '**90+% accuracy? Made possible with Transfer Learning.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**90+% 准确率？通过迁移学习变得可能。**'
 - en: '[Last week](https://betterdatascience.com/tensorflow-for-computer-vision-how-to-increase-model-accuracy-with-data-augmentation/),
     you''ve seen how data augmentation can squeeze an extra couple of percent accuracy
     from your TensorFlow models. We only scratched the surface compared to what you''ll
     see today. We''ll finally get above 90% accuracy on the validation set with a
     pretty straightforward approach.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[上周](https://betterdatascience.com/tensorflow-for-computer-vision-how-to-increase-model-accuracy-with-data-augmentation/)，你已经看到数据增强如何使你的
+    TensorFlow 模型的准确率提高几个百分点。相比于你今天将看到的，我们仅仅触及了表面。我们将最终用一种相当简单的方法在验证集上超过 90% 的准确率。'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 在 IT 领域支持你的组织'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: You'll also see what happens to the validation accuracy if we scale down the
     amount of training data by a factor of 20\. Spoiler alert - it will remain unchanged.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还会看到如果我们将训练数据量缩小 20 倍，验证准确率会发生什么。剧透 - 它将保持不变。
 - en: 'Don''t feel like reading? Watch my video instead:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 不想阅读？请观看我的视频：
 - en: You can download the source code on [GitHub](https://github.com/better-data-science/TensorFlow).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [GitHub](https://github.com/better-data-science/TensorFlow) 上下载源代码。
 - en: What is Transfer Learning in TensorFlow?
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: TensorFlow 中的迁移学习是什么？
 - en: Writing neural network model architectures from scratch involves a lot of guesswork.
     How many layers? How many nodes per layer? What activation function to use? Regularization?
     You won't run out of questions any time soon.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 从头开始编写神经网络模型架构涉及大量的猜测工作。多少层？每层多少节点？使用什么激活函数？正则化？你不会很快用完问题。
 - en: Transfer learning takes a different approach. Instead of starting from scratch,
     you take an existing neural network model that has been trained by someone really
     smart on an enormous dataset with far superior hardware than you have at home.
     These networks can have hundreds of layers, unlike our [2-block CNN](https://betterdatascience.com/train-image-classifier-with-convolutional-neural-networks/) implemented
     weeks ago.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 迁移学习采用不同的方法。不是从头开始，而是利用一个已经由非常聪明的人在庞大的数据集上，用比你家里拥有的更高级的硬件训练过的现有神经网络模型。这些网络可能有数百层，这与我们几周前实现的
+    [2 层 CNN](https://betterdatascience.com/train-image-classifier-with-convolutional-neural-networks/)
+    大相径庭。
 - en: Long story short - the deeper you go into the network, the more sophisticated
     features you'll extract.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之 - 你深入网络的层数越多，你提取的特征就越复杂。
 - en: 'The entire transfer learning process boils down to 3 steps:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 整个迁移学习过程归结为 3 个步骤：
 - en: '**Take a pretrained network** - For example, take a VGG, ResNet, or EfficientNet
     architecture that''s been trained on millions of images to detect 1000 classes.'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使用预训练的网络** - 例如，使用一个已经在数百万张图像上训练过的 VGG、ResNet 或 EfficientNet 架构，用于检测 1000
+    个类别。'
 - en: '**Cut the head of the model** - Exclude the last few layers of a pretrained
     model and replace them with your own. For example, our [dogs vs. cats dataset](https://betterdatascience.com/top-3-prerequisites-for-deep-learning-projects/) has
     two classes, and the final classification layer needs to resemble that.'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**剪掉模型的头部** - 排除预训练模型的最后几层，并用你自己的层替换它们。例如，我们的 [狗与猫数据集](https://betterdatascience.com/top-3-prerequisites-for-deep-learning-projects/)
+    有两个类别，最终的分类层需要与之相符。'
 - en: '**Fine-tune the final layers** - Train the network on your dataset to adjust
     the classifier. Weights of the pretrained model are frozen, meaning they won''t
     update as you train the model.'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**微调最终层** - 在你的数据集上训练网络以调整分类器。预训练模型的权重被冻结，这意味着它们在你训练模型时不会更新。'
 - en: What all of this boils down to is that transfer learning allows you to get drastically
     better results with less data. Our custom 2-block architecture gave only 76% accuracy
     on the validation set. Transfer learning will skyrocket it to above 90%.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 归根结底，迁移学习使你可以用更少的数据获得显著更好的结果。我们的自定义2块架构在验证集上的准确率仅为76%。迁移学习将把它提高到90%以上。
 - en: Getting Started - Library and Dataset Imports
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 入门 - 库和数据集导入
 - en: 'We’ll use the [Dogs vs. Cats dataset](https://www.kaggle.com/pybear/cats-vs-dogs?select=PetImages) from
     Kaggle. It’s licensed under the Creative Commons License, which means you can
     use it for free:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用来自Kaggle的[狗与猫数据集](https://www.kaggle.com/pybear/cats-vs-dogs?select=PetImages)。它的许可证是创作共用许可证，这意味着你可以免费使用它：
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/81716bae384a67575544cf36f83e942d.png)*Image
     1 — Dogs vs. Cats dataset (image by author)*'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '![TensorFlow用于计算机视觉 - 轻松实现迁移学习](../Images/81716bae384a67575544cf36f83e942d.png)*图像1——狗与猫数据集（图像来源：作者）*'
 - en: 'The dataset is fairly large — 25,000 images distributed evenly between classes
     (12,500 dog images and 12,500 cat images). It should be big enough to train a
     decent image classifier. The only problem is — it’s not structured for deep learning
     out of the box. You can follow my previous article to create a proper directory
     structure, and split it into train, test, and validation sets:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集相当大——有25,000张图像，按类别均匀分布（12,500张狗图像和12,500张猫图像）。它应该足够大以训练一个不错的图像分类器。唯一的问题是——它的结构并不适合深度学习。你可以参考我之前的文章创建一个适当的目录结构，并将其拆分为训练集、测试集和验证集：
 - en: '**[TensorFlow for Image Classification — Top 3 Prerequisites for Deep Learning
     Projects | Better Data Science](https://betterdatascience.com/top-3-prerequisites-for-deep-learning-projects)**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[TensorFlow用于图像分类——深度学习项目的三个主要前提 | 更好的数据科学](https://betterdatascience.com/top-3-prerequisites-for-deep-learning-projects)**'
 - en: Do you want to train a neural network for image classification with TensorFlow?
     Make sure to do these three steps first.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你想用TensorFlow训练一个神经网络进行图像分类吗？确保首先完成这三步。
 - en: You should also delete the *train/cat/666.jpg *and *train/dog/11702.jpg* images
     as they’re corrupted, and your model will fail to train with them.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还应该删除*train/cat/666.jpg*和*train/dog/11702.jpg*图像，因为它们已损坏，模型将无法使用它们进行训练。
 - en: 'Once done, you can proceed with the library imports. We’ll only need Numpy
     and TensorFlow today. Other imports are here to get rid of unnecessary warning
     messages:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成后，你可以继续进行库的导入。我们今天只需要Numpy和TensorFlow。其他导入是为了消除不必要的警告信息：
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'We''ll have to load training and validation data from different directories
     throughout the article. The best practice is to declare a function for loading
     the images and [data augmentation](https://betterdatascience.com/tensorflow-for-computer-vision-how-to-increase-model-accuracy-with-data-augmentation/):'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在整篇文章中，我们将不得不从不同的目录加载训练和验证数据。最佳实践是声明一个用于加载图像和[数据增强](https://betterdatascience.com/tensorflow-for-computer-vision-how-to-increase-model-accuracy-with-data-augmentation/)的函数：
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Let''s now load our dogs and cats dataset:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们加载我们的狗和猫数据集：
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Here''s the output you should see:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是你应该看到的输出：
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/605b0afd68cc15a8c20c5ddd23bdf6f5.png)Image
     2 - Number of training and validation images (image by author)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![TensorFlow用于计算机视觉 - 轻松实现迁移学习](../Images/605b0afd68cc15a8c20c5ddd23bdf6f5.png)图像2
+    - 训练和验证图像的数量（图像来源：作者）'
 - en: Is 20K training images an overkill for transfer learning? Probably, but let's
     see how accurate of a model can we get.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 20K训练图像对于迁移学习来说是否过多？可能是，但让我们看看能获得多准确的模型。
 - en: Transfer Learning with TensorFlow in Action
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: TensorFlow中的迁移学习实践
 - en: With transfer learning, we're basically loading a huge pretrained model without
     the top classification layer. That way, we can freeze the learned weights and
     only add the output layer to match our dataset.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过迁移学习，我们基本上是加载一个巨大的预训练模型，但没有顶部的分类层。这样，我们可以冻结已学习的权重，只添加输出层以匹配我们的数据集。
 - en: For example, most pretrained models were trained on the *ImageNet* dataset which
     has 1000 classes. We only have two (cat and dog), so we'll need to specify that.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，大多数预训练模型是基于*ImageNet*数据集进行训练的，该数据集有1000个类别。我们只有两个（猫和狗），所以我们需要指定这点。
 - en: 'That''s where the `build_transfer_learning_model()` function comes into play.
     It has a single parameter - `base_model` - which represents the pretrained architecture.
     First, we''ll freeze all the layers in that model, and then build a `Sequential` model
     from it by adding a couple of custom layers. Finally, we''ll compile the model
     using the usual suspects:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是 `build_transfer_learning_model()` 函数的作用所在。它有一个参数 - `base_model` - 表示预训练的架构。首先，我们将冻结该模型中的所有层，然后通过添加几个自定义层来构建一个 `Sequential` 模型。最后，我们将使用常用的方法来编译模型：
 - en: '[PRE3]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now the fun part begins. Import the `VGG16` architecture from TensorFlow and
     specify it as a base model to our `build_transfer_learning_model()` function.
     The `include_top=False` parameter means we don''t want the top classification
     layer, as we''ve declared our own. Also, note how the `input_shape` was set to
     resemble the shapes of our images:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在有趣的部分开始了。从 TensorFlow 导入 `VGG16` 架构，并将其指定为我们 `build_transfer_learning_model()` 函数的基础模型。`include_top=False` 参数意味着我们不需要顶层分类层，因为我们已经声明了自己的分类层。此外，注意 `input_shape` 如何设置以类似于我们的图像形状：
 - en: '[PRE4]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Here''s the output after training the model for 10 epochs:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是训练模型 10 个周期后的输出：
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/39122c33fe19479e0d46ab9b105f2ce5.png)Image
     3 - VGG16 model on 20K training images after 10 epochs (image by author)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![TensorFlow for Computer Vision - 轻松实现迁移学习](../Images/39122c33fe19479e0d46ab9b105f2ce5.png)图像
+    3 - 在 20K 训练图像上经过 10 个周期的 VGG16 模型（图片由作者提供）'
 - en: Now that's something to write home about - 93% validation accuracy without even
     thinking about the mode architecture. The real beauty of transfer learning lies
     in the amount of data needed to train accurate models, which is much less than
     with custom architectures.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这真是值得一提 - 93% 的验证准确率，甚至不用考虑模型架构。迁移学习的真正优势在于训练准确模型所需的数据量，这比自定义架构所需的数据量要少得多。
 - en: '**How much less?** Let''s scale our dataset down 20 times to see what happens.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**减少了多少？** 让我们将数据集缩小 20 倍，看看会发生什么。'
 - en: Transfer Learning on a 20X Smaller Subset
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在一个缩小了 20 倍的子集上进行迁移学习
 - en: 'We want to see if reducing the dataset size negatively affects the predictive
     power. Create a new directory structure for training and validation images. Images
     will be stored inside the `data_small` folder, but feel free to rename it to anything
     else:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望看看减少数据集大小是否会对预测能力产生负面影响。为训练和验证图像创建新的目录结构。图像将存储在 `data_small` 文件夹中，但可以随意将其重命名为其他名称：
 - en: '[PRE5]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Here''s the command you can use to print the directory structure:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是你可以用来打印目录结构的命令：
 - en: '[PRE6]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/7ef0bece76f3a8a575292c59ee516fd6.png)Image
     4 - Directory structure (image by author)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![TensorFlow for Computer Vision - 轻松实现迁移学习](../Images/7ef0bece76f3a8a575292c59ee516fd6.png)图像
+    4 - 目录结构（图片由作者提供）'
 - en: 'Copy a sample of the images to the new folder. The `copy_sample()` function
     takes `n` images from the `src_folder` and copies them to the `tgt_folder`. By
     default, we''ll set `n` to 500:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 将一部分图像复制到新文件夹中。`copy_sample()` 函数从 `src_folder` 中提取 `n` 张图像并将它们复制到 `tgt_folder`。默认情况下，我们将 `n` 设置为
+    500：
 - en: '[PRE7]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Let''s now copy the training and validation images. For the validation set,
     we''ll copy only 100 images per class:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们复制训练和验证图像。对于验证集，我们将每类仅复制 100 张图像：
 - en: '[PRE8]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Use the following commands to print the number of images in each folder:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用以下命令打印每个文件夹中的图像数量：
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/24cb32aab7a80fcb2f3eb8fa75b1d405.png)Image
     5 - Number of training and validation images per class (image by author)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![TensorFlow for Computer Vision - 轻松实现迁移学习](../Images/24cb32aab7a80fcb2f3eb8fa75b1d405.png)图像
+    5 - 每类训练和验证图像的数量（图片由作者提供）'
 - en: 'Finally, call `init_data()` function to load images from the new source:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，调用 `init_data()` 函数从新源加载图像：
 - en: '[PRE9]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/8a1379ff83585f15d74157ed096f5e66.png)Image
     6 - Number of training and validation images in the smaller subset (image by author)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![TensorFlow for Computer Vision - 轻松实现迁移学习](../Images/8a1379ff83585f15d74157ed096f5e66.png)图像
+    6 - 缩小子集中的训练和验证图像数量（图片由作者提供）'
 - en: 'There are 1000 training images in total. It will be interesting to see if we
     can get a decent model out of a dataset this small. We''ll keep the model architecture
     identical, but train for more epochs just because the dataset is smaller. Also,
     we can afford to train for longer since the training time per epoch is reduced:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 总共有 1000 张训练图像。看看我们能否从如此小的数据集中获得一个不错的模型会很有趣。我们将保持模型架构不变，但由于数据集较小，将训练更多周期。此外，由于每个周期的训练时间减少，我们可以进行更长时间的训练：
 - en: '[PRE10]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/3e1a4d6b74130dba5838e26bd6f2b569.png)Image
     7 - Training results of the last 10 epochs (image by author)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/3e1a4d6b74130dba5838e26bd6f2b569.png)
+    图片 7 - 最后10个周期的训练结果（图片由作者提供）'
 - en: And would you look at that - we got roughly the same validation accuracy as
     with the model trained on 20K images, which is amazing.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 而且看看这个 - 我们获得了与在2万张图片上训练的模型大致相同的验证准确率，真是太棒了。
 - en: That's where the true power of transfer learning lies. You don't always have
     access to huge datasets, so it's amazing to see we can build something this accurate
     with such limited data.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是迁移学习的真正力量所在。你不总是可以获得庞大的数据集，因此看到我们能在如此有限的数据下建立如此精确的模型，真是令人惊叹。
 - en: Conclusion
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: To recap, transfer learning should be your go-to approach when building image
     classification models. You don't need to think about the architecture, as someone
     already did that for you. You don't need to have a huge dataset, as someone already
     trained a general-purpose model on millions of images. Finally, you don't need
     to worry about poor performance most of the time, unless your dataset is highly
     specialized.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，当构建图像分类模型时，迁移学习应成为你的首选方法。你无需考虑架构，因为有人已经为你做了这个工作。你无需拥有庞大的数据集，因为有人已经在数百万张图片上训练了通用模型。最后，大多数情况下，你也不需要担心性能差，除非你的数据集非常专业。
 - en: The only thing you need to do is to choose a pre-trained architecture. We opted
     for VGG16 today, but I encourage you to experiment with ResNet, MobileNet, EfficientNet,
     and others.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要做的唯一事情是选择一个预训练的架构。我们今天选择了VGG16，但我鼓励你尝试ResNet、MobileNet、EfficientNet等。
 - en: Here's another **homework assignment** you can do - use both models trained
     today to predict the entire test set. How do the accuracies compare? Please let
     me know.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是另一个**作业** - 使用今天训练的两个模型来预测整个测试集。准确率如何比较？请告知我。
 - en: '**Stay connected**'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**保持联系**'
 - en: Sign up for my [newsletter](https://mailchi.mp/46a3d2989d9b/bdssubscribe)
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 注册我的[通讯](https://mailchi.mp/46a3d2989d9b/bdssubscribe)
 - en: Subscribe on [YouTube](https://www.youtube.com/c/BetterDataScience)
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订阅[YouTube](https://www.youtube.com/c/BetterDataScience)
 - en: Connect on [LinkedIn](https://www.linkedin.com/in/darioradecic/)
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在[LinkedIn](https://www.linkedin.com/in/darioradecic/)上连接
 - en: '**[Dario Radečić](https://www.linkedin.com/in/darioradecic/)** is CEO and Founder
     at Deep Data Digital, and a Data Scientist and Tech Writer.'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Dario Radečić](https://www.linkedin.com/in/darioradecic/)** 是Deep Data Digital的首席执行官和创始人，同时也是数据科学家和技术作家。'
 - en: '[Original](https://betterdatascience.com/tensorflow-transfer-learning/). Reposted
     with permission.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://betterdatascience.com/tensorflow-transfer-learning/)。转载经许可。'
 - en: More On This Topic
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻 2022年3月9日：在5分钟内构建一个机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)'
 - en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你需要了解的数据管理的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
 - en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算机视觉的5个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
 - en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DINOv2: Meta AI的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
 - en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索计算机视觉的世界：介绍MLM的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
 - en: '[Machine Learning Made Simple for Data Analysts with BigQuery ML](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据分析师用BigQuery ML轻松搞定机器学习](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)'
