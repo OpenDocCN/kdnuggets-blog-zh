@@ -1,125 +1,185 @@
 - en: Machine Learning-driven Firewall
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习驱动的防火墙
 - en: 原文：[https://www.kdnuggets.com/2017/02/machine-learning-driven-firewall.html](https://www.kdnuggets.com/2017/02/machine-learning-driven-firewall.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/02/machine-learning-driven-firewall.html](https://www.kdnuggets.com/2017/02/machine-learning-driven-firewall.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)'
 - en: '**By Faizan Ahmad, CEO Fsecurify**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Faizan Ahmad，Fsecurify CEO**。'
 - en: Lately, I have been thinking of ways of applying machine learning to a security
     project that I can do and share with all of you. A few days ago, I happened to
     come across a website called [ZENEDGE](https://www.zenedge.com/) which is offering
     **AI driven web application firewall**. I liked the concept and thought of making
     something similar and sharing it with the community. So, lets make one.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近，我一直在思考将机器学习应用于我可以做的安全项目并与大家分享的方法。几天前，我偶然发现了一个叫做[ZENEDGE](https://www.zenedge.com/)的网站，提供**AI驱动的网络应用防火墙**。我喜欢这个概念，想做一些类似的东西并与社区分享。所以，让我们做一个吧。
 - en: fWaf – Machine learning driven Web Application Firewall
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: fWaf – 机器学习驱动的网络应用防火墙
 - en: 'Dataset:'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集：
 - en: The first thing to do was to find labelled data but the data I could find was
     quite old (2010). There is a website called [**SecRepo**](http://secrepo.com/)
     that has a lot of security related datasets. One of them was of http logs containing
     millions of queries. That was the dataset I wanted but it was not labelled. I
     used some heuristics and my previous knowledge of security to label the data set
     by writing a few scripts.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先需要做的是找到标记的数据，但我找到的数据相当旧（2010年）。有一个网站叫做[**SecRepo**](http://secrepo.com/)，提供了很多安全相关的数据集。其中之一是包含数百万个查询的http日志。这是我想要的数据集，但它没有标记。我使用了一些启发式方法和我以前的安全知识，通过编写几个脚本来标记数据集。
 - en: After pruning the data, I wanted to collect some more malicious queries. Therefore,
     I went on for [payloads](https://github.com/foospidy/payloads) and found some
     famous GitHub repositories containing Xss, SQL and other attack payloads and used
     all of them in my malicious queries dataset.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在修剪数据之后，我想收集更多的恶意查询。因此，我去找了[**payloads**](https://github.com/foospidy/payloads)，并找到了一些包含Xss、SQL及其他攻击负载的著名GitHub仓库，并将它们全部用于我的恶意查询数据集。
 - en: Now, we had two files; one containing clean web queries(1000000) and another
     one containing malicious web queries(50000). That’s all the data we need to train
     our classifier.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们有两个文件；一个包含干净的网络查询（1000000），另一个包含恶意的网络查询（50000）。这就是我们训练分类器所需的所有数据。
 - en: 'Training:'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练：
 - en: For training, I used **logistic regression** since it is fast and I wanted something
     fast. We can use SVM or Neural networks but they take a little more time than
     logistic regression. Our problem is a **binary classification problem** since
     we have to predict whether a query is malicious or not. We’ll  be using **ngrams**
     as our tokens. I read some research papers and using ngrams was a good idea for
     this sort of project. For this project, I used **n=3.**
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于训练，我使用了**逻辑回归**，因为它速度快，我需要快速的东西。我们可以使用SVM或神经网络，但它们比逻辑回归稍慢。我们的问题是**二分类问题**，因为我们需要预测一个查询是否恶意。我们将使用**ngrams**作为我们的标记。我阅读了一些研究论文，使用ngrams对于这种项目来说是一个好主意。对于这个项目，我使用了**n=3**。
 - en: Lets dive right into the code.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们直接进入代码部分。
 - en: Lets define our tokenizer function which will give 3 grams.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们定义我们的分词器函数，它将提供3个grams。
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Lets load the queries dataset.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们加载查询数据集。
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Now that we have the dataset loaded into good queries and bad queries. Lets
     try to visualize them. I used [**Principal component analysis**](https://en.wikipedia.org/wiki/Principal_component_analysis)
     to visualize the dataset. The read are the bad query ngrams and the blue are the
     good query ngrams.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经将数据集加载到好的查询和坏的查询中。让我们尝试可视化它们。我使用了[**主成分分析**](https://en.wikipedia.org/wiki/Principal_component_analysis)来可视化数据集。红色的是坏查询的ngrams，蓝色的是好查询的ngrams。
 - en: '![](../Images/8ee8424c78c60945e537f716ece59318.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8ee8424c78c60945e537f716ece59318.png)'
 - en: We can see that bad points and good points are indeed on coming out on different
     positions. Lets proceed further.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，坏点和好点确实在不同的位置出现。让我们继续深入。
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Lets now use **Tfidvectorizer** to convert the data into **tfidf values** and
     then use our classifier. We are using tfidf values since we want to assign weights
     to our ngrams e.g the ngram ‘<img’ should have large weight since a query containing
     this ngram is most likely to be malicious. You can read more about tfidf in this
     [link.](http://www.tfidf.com/)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用 **Tfidvectorizer** 将数据转换为 **tfidf 值**，然后使用我们的分类器。我们使用 tfidf 值是因为我们想给我们的
+    ngrams 赋予权重，例如 ngram ‘<img’ 应该有较大的权重，因为包含此 ngram 的查询很可能是恶意的。你可以在这个 [链接](http://www.tfidf.com/)
+    中了解更多关于 tfidf 的信息。
 - en: '[PRE3]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Now that we have everything set up, lets apply logistic regression.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们一切准备就绪，让我们应用逻辑回归。
 - en: '[PRE4]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: That’s it.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这些了。
 - en: '**Here’s the part everyone waits for**, you must be wanting to see the accuracy,
     right? The accuracy comes out to be **99%**. That’s pretty amazing right? But
     you won’t believe it until you see some proof. So, lets check some queries and
     see if the model detects them as malicious or not. Here are the results.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**这是大家都期待的部分**，你一定想看到准确度，对吧？准确度达到 **99%**。这非常惊人，对吧？但你不会相信，直到你看到一些证据。所以，让我们检查一些查询，看看模型是否将其检测为恶意的。这是结果。'
 - en: '[PRE5]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Looks good, doesn’t it? It can detect the malicious queries very well.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来不错，不是吗？它能很好地检测恶意查询。
 - en: '**What next?** This is a weekend project and there is a lot that can be done
     or added in it. We can do multi class classification to detect whether a malicious
     query is SQL Injection or Cross site scripting or any other injection. We can
@@ -127,87 +187,136 @@
     on it thus expanding the type of malicious queries it can detect. One can also
     save this model and use it with a web server. Let me know if you do any of the
     above.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**接下来呢？** 这是一个周末项目，还有很多可以做或添加的东西。我们可以进行多类分类，以检测恶意查询是 SQL 注入还是跨站脚本攻击或其他任何注入。我们可以拥有一个更大的数据集，包含所有类型的恶意查询，并在其上训练模型，从而扩展其检测的恶意查询类型。还可以将此模型保存并与
+    Web 服务器一起使用。如果你做了上述任何操作，请告诉我。'
 - en: '**Data and script:** [https://github.com/faizann24/F<wbr>waf-Machine-Learning-driven-We<wbr>b-Application-Firewall](https://github.com/faizann24/Fwaf-Machine-Learning-driven-Web-Application-Firewall)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据和脚本：** [https://github.com/faizann24/F<wbr>waf-Machine-Learning-driven-We<wbr>b-Application-Firewall](https://github.com/faizann24/Fwaf-Machine-Learning-driven-Web-Application-Firewall)'
 - en: I hope you liked the post. We believe in providing security resources for free
     to the community. Let me know about your comments and critique.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你喜欢这篇文章。我们致力于向社区免费提供安全资源。欢迎提出你的意见和批评。
 - en: Fsecurify
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Fsecurify
 - en: '**Bio: [**Faizan Ahmad**](https://www.linkedin.com/in/faizan-ahmad-015964118)**
     is Fulbright undergraduate currently studying in NUCES FAST, Lahore.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[**Faizan Ahmad**](https://www.linkedin.com/in/faizan-ahmad-015964118)**
+    是现任 Fulbright 本科生，正在拉合尔的 NUCES FAST 学习。'
 - en: '**Related:**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Machine Learning and Cyber Security Resources](/2017/01/machine-learning-cyber-security.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习与网络安全资源](/2017/01/machine-learning-cyber-security.html)'
 - en: '[Using Machine Learning to Detect Malicious URLs](/2016/10/machine-learning-detect-malicious-urls.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用机器学习检测恶意 URL](/2016/10/machine-learning-detect-malicious-urls.html)'
 - en: '[Achieving End-to-end Security for Apache Spark with Databricks](/2016/06/achieving-security-apache-spark-databricks.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Databricks 实现 Apache Spark 的端到端安全](/2016/06/achieving-security-apache-spark-databricks.html)'
 - en: '* * *'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个机器学习工程师都应掌握的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[Top 38 Python Libraries for Data Science, Data Visualization &…](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学、数据可视化及…的38个顶级Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TPOT优化机器学习流程](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
 - en: '[What Google Recommends You do Before Taking Their Machine Learning…](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[谷歌推荐你在参加机器学习课程之前做的事情…](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)'
