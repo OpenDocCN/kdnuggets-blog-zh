@@ -1,247 +1,372 @@
 - en: Implementing DBSCAN in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在Python中实现DBSCAN
 - en: 原文：[https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)
 - en: '![Implementing DBSCAN in Python](../Images/94e0605a1cccd911b0460aa70cfec065.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![在Python中实现DBSCAN](../Images/94e0605a1cccd911b0460aa70cfec065.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Clustering is applied on a dataset to group similar sets of data points. It
     looks for similarities and dissimilarities in data points and clutters them together.
     There are no labels in clustering. Clustering is an unsupervised learning to find
     the underlying structure of the dataset.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚类应用于数据集，以将相似的数据点分组。它查找数据点之间的相似性和差异性，并将它们聚集在一起。聚类没有标签。聚类是一种无监督学习，用于发现数据集的潜在结构。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Types of clustering algorithms:**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**聚类算法的类型：**'
 - en: Partition-based clustering
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于分区的聚类
 - en: Fuzzy clustering
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模糊聚类
 - en: Hierarchical clustering
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 层次聚类
 - en: Grid-Based clustering
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于网格的聚类
 - en: Exclusive clustering
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 排他性聚类
 - en: Overlapping clustering
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重叠聚类
 - en: Density-based clustering
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于密度的聚类
 - en: In this blog, we will be focusing on density-based clustering methods, especially
     the DBSCAN algorithm with scikit-learn. The density-based algorithms are good
     at finding high-density regions and outliers. It is commonly used for anomaly
     detection and clustering non-linear datasets.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客中，我们将重点关注基于密度的聚类方法，特别是使用scikit-learn的DBSCAN算法。基于密度的算法擅长发现高密度区域和离群点。它通常用于异常检测和聚类非线性数据集。
 - en: What is DBSCAN?
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是DBSCAN？
 - en: DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a density-based
     unsupervised learning algorithm. It computes nearest neighbor graphs to find arbitrary-shaped
     clusters and outliers. Whereas the K-means clustering generates spherical-shaped
     clusters.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: DBSCAN（基于密度的空间聚类算法，带噪声）是一种基于密度的无监督学习算法。它计算最近邻图以找到任意形状的簇和离群点。而K-means聚类生成的是球形簇。
 - en: 'DBSCAN does not require **K** clusters initially. Instead, it requires two
     parameters: eps and minPts.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: DBSCAN最初不需要**K**个簇。相反，它需要两个参数：eps和minPts。
 - en: '**eps**: it is the radius of specific neighborhoods. If the distance between
     two points is less than or equal to esp, it will be considered its neighbors.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**eps**：这是特定邻域的半径。如果两个点之间的距离小于或等于eps，它们将被视为邻居。'
 - en: '**minPts**: minimum number of data points in a given neighborhood to form the
     clusters.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**minPts**：在给定邻域中形成簇所需的最小数据点数量。'
 - en: DBSCAN uses these two parameters to define a core point, border point, or outlier.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: DBSCAN使用这两个参数来定义核心点、边界点或离群点。
 - en: '![Implementing DBSCAN in Python](../Images/c1396de7ad158c30211a70ba97a24097.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![在Python中实现DBSCAN](../Images/c1396de7ad158c30211a70ba97a24097.png)'
 - en: Image from [Wikipedia](https://en.wikipedia.org/wiki/DBSCAN)
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来自 [维基百科](https://en.wikipedia.org/wiki/DBSCAN)
 - en: How does the DBSCAN clustering algorithm work?
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: DBSCAN聚类算法是如何工作的？
 - en: Randomly selecting any point **p**. It is also called **core point** if there
     are more data points than **minPts** in a neighborhood.
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 随机选择任何点**p**。如果在邻域中有比**minPts**更多的数据点，它也被称为**核心点**。
 - en: It will use **eps** and **minPts** to identify all density reachable points.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它将使用**eps**和**minPts**来识别所有密度可达点。
 - en: It will create a cluster using **eps** and **minPts** if **p** is a core point.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果**p**是核心点，它将使用**eps**和**minPts**来创建一个簇。
 - en: It will move to the next data point if **p** is a **border point**. A data point
     is called a border point if it has fewer points than **minPts** in the neighborhood.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果**p**是**边界点**，它将移动到下一个数据点。一个数据点被称为边界点，如果在邻域中有的点少于**minPts**。
 - en: The algorithm will continue until all points are visited.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 算法将继续进行，直到所有点都被访问。
 - en: DBSCAN Clustering in Python
+  id: totrans-34
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 中的 DBSCAN 聚类
 - en: We will be using the Deepnote notebook to run the example. It comes with pre-installed
     Python packages, so we just have to import NumPy, pandas, seaborn, matplotlib,
     and sklearn.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 Deepnote 笔记本来运行示例。它附带了预装的 Python 包，因此我们只需导入 NumPy、pandas、seaborn、matplotlib
+    和 sklearn。
 - en: '[PRE0]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: We are using [Mall Customer Segmentation Data](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)
     from Kaggle. It contains customers' age, gender, income, and spending score. We
     will be using these features to create various clusters.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用的是来自 Kaggle 的 [Mall Customer Segmentation Data](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)。它包含客户的年龄、性别、收入和消费评分。我们将使用这些特征来创建各种簇。
 - en: First, we will load the dataset using pandas `read_csv`. Then, we will select
     three columns (‘Age', 'Annual Income (k$)', 'Spending Score (1-100)') to create
     the **X_train** dataframe.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将使用 pandas `read_csv` 加载数据集。然后，我们将选择三列（‘Age'，'Annual Income (k$)'，'Spending
+    Score (1-100)'）来创建**X_train**数据框。
 - en: '[PRE1]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We will fit **X_train** on the DBSCAN algorithm with **eps** 12.5 and **min_sample**
     4\. After that, we will create a **DBSCAN_dataset** from **X_train** and create
     a ‘Cluster’ column using *clustering.labels_*.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用**eps** 12.5 和**min_sample** 4 来拟合**X_train** 到 DBSCAN 算法中。之后，我们将从**X_train**
+    创建一个**DBSCAN_dataset**，并使用*clustering.labels_* 创建一个‘Cluster’列。
 - en: '[PRE2]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: To visualize the distribution of clusters, we will use value_counts() and convert
     it into a dataframe.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了可视化簇的分布，我们将使用 value_counts() 并将其转换为数据框。
 - en: As you can see, we have 5 clusters and 1 outlier. The `0` cluster has the largest
     size with 112 rows.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，我们有 5 个簇和 1 个离群点。`0` 簇的大小最大，共有 112 行。
 - en: '[PRE3]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Implementing DBSCAN in Python](../Images/58594769218df7713ab39c8bf07c978a.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Python 中实现 DBSCAN](../Images/58594769218df7713ab39c8bf07c978a.png)'
 - en: In this section, we will use the above information and visualize the scatter
     plot.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将使用上述信息并可视化散点图。
 - en: 'There are two plots: “Annual Income vs. Spending Score” and “Annual Income
     vs. Age.” The clusters are defined by colors, and the outliers are defined as
     small black dots.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两个图： “年收入与消费评分” 和 “年收入与年龄”。簇通过颜色定义，离群点被定义为小黑点。
 - en: The visualization clearly shows how each customer is part of one of the 5 clusters,
     and we can use this information to give high-end offers to customers with purple
     clusters and cheaper offers to customers with dark green clusters.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化清楚地显示了每个客户如何属于 5 个簇中的一个，我们可以利用这些信息向紫色簇的客户提供高端优惠，而向深绿色簇的客户提供便宜的优惠。
 - en: '[PRE4]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Implementing DBSCAN in Python](../Images/36c5e6e22fd005e1a3979bcc807d0eca.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Python 中实现 DBSCAN](../Images/36c5e6e22fd005e1a3979bcc807d0eca.png)'
 - en: Conclusion
+  id: totrans-51
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: DBSCAN is one of the many algorithms that is used for customer segmentation.
     You can use K-means or Hierarchical clustering to get even better results. The
     clustering algorithms are generally used for recommendation engines, market and
     customer segmentation, social network Analysis, and document analysis.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: DBSCAN 是用于客户细分的众多算法之一。你可以使用 K-means 或层次聚类来获得更好的结果。这些聚类算法通常用于推荐引擎、市场和客户细分、社交网络分析和文档分析。
 - en: In this blog, we have learned the basics of the density-based algorithm DBCAN
     and how we can use it to create customer segmentation using scikit-learn. You
     can improve the algorithm by finding optimal **eps** and **min_samples** using
     **silhouette score** and heatmap.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本博客中，我们了解了基于密度的算法 DBSCAN 的基础知识，以及如何使用它通过 scikit-learn 创建客户细分。你可以通过使用**silhouette
+    score**和热图来寻找最佳的**eps**和**min_samples**，从而改进算法。
 - en: Reference
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考资料
 - en: '[DBSCAN Clustering — Explained. Detailed theoretical explanation](https://towardsdatascience.com/dbscan-clustering-explained-97556a2ad556)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DBSCAN 聚类 — 解释详尽的理论说明](https://towardsdatascience.com/dbscan-clustering-explained-97556a2ad556)'
 - en: '[DBSCAN in Python (with example dataset)](https://www.reneshbedre.com/blog/dbscan-python.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的 DBSCAN（带示例数据集）](https://www.reneshbedre.com/blog/dbscan-python.html)'
 - en: '[Customers clustering: K-Means, DBSCAN and AP](https://www.kaggle.com/code/datark1/customers-clustering-k-means-dbscan-and-ap)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[客户聚类：K-Means，DBSCAN 和 AP](https://www.kaggle.com/code/datark1/customers-clustering-k-means-dbscan-and-ap)'
 - en: '[Demo of DBSCAN clustering algorithm — scikit-learn 1.1.1 documentation](https://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DBSCAN 聚类算法演示 — scikit-learn 1.1.1 文档](https://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py)'
 - en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
     is a certified data scientist professional who loves building machine learning
     models. Currently, he is focusing on content creation and writing technical blogs
@@ -249,33 +374,51 @@
     in Technology Management and a bachelor''s degree in Telecommunication Engineering.
     His vision is to build an AI product using a graph neural network for students
     struggling with mental illness.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个
+    AI 产品，帮助那些与心理疾病作斗争的学生。'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多主题
 - en: '[KDnuggets News, August 24: Implementing DBSCAN in Python • How to…](https://www.kdnuggets.com/2022/n34.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月24日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
 - en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中理解和实现遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
 - en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过实现理解：决策树](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
 - en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在业务中实现推荐系统的十个关键经验](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
 - en: '[Implementing Adaboost in Scikit-learn](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Scikit-learn 中实现 Adaboost](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
