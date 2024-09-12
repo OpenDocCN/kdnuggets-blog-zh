@@ -1,415 +1,618 @@
 - en: 'Support Vector Machine (SVM) Tutorial: Learning SVMs From Examples'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 支持向量机（SVM）教程：从示例中学习SVM
 - en: 原文：[https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html/3](https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html/3)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html/3](https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html/3)
 - en: '**Kernels**'
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**核函数**'
 - en: Finally, the secret sauce that makes SVMs tick. This is where we need to look
     at a bit of math.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，使SVM运行的秘密。这是我们需要稍微涉及一些数学的地方。
 - en: 'Let’s take stock of what we have seen so far:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回顾一下迄今为止看到的内容：
 - en: For linearly separable data SVMs work amazingly well.
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于线性可分的数据，SVM表现得非常好。
 - en: For data that’s almost linearly separable, SVMs can still be made to work pretty
     well by using the right value of C.
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于几乎线性可分的数据，通过使用合适的C值，SVM仍然可以表现得相当好。
 - en: For data that’s not linearly separable, we can project data to a space where
     it is perfectly/almost linearly separable, which reduces the problem to 1 or 2
     and we are back in business.
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于那些不能线性分离的数据，我们可以将数据投影到一个完美/几乎线性可分的空间，这将问题简化为1或2维，之后我们就可以重新开始。
 - en: It looks like a big part of what makes SVMs universally applicable is projecting
     it to higher dimensions. And this is where kernels come in.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来使SVM普遍适用的一个重要部分是将其投影到更高维度。这就是核函数发挥作用的地方。
 - en: First, a slight digression.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，稍微偏离一下话题。
 - en: 'A very surprising aspect of SVMs is that in all of the mathematical machinery
     it uses, the exact projection, or even the number of dimensions, doesn’t show
     up. You could write all of it in terms of the *dot products*between various data
     points (represented as vectors). For *p*-dimensional vectors *i* and *j* where
     the first subscript on a dimensionidentifies the point and the second indicates
     the dimension number:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持向量机（SVM）的一个非常惊人的方面是，在它使用的所有数学工具中，确切的投影，甚至维度的数量，都没有出现。你可以用各种数据点（表示为向量）之间的*点积*来表示所有内容。对于*p*维向量*i*和*j*，其中维度的第一个下标标识点，第二个下标表示维度编号：
 - en: '![](../Images/902cd31e282ee778387dde4bb15d1c37.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/902cd31e282ee778387dde4bb15d1c37.png)'
 - en: 'The dot product is defined as:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 点积定义为：
 - en: '![](../Images/bfd27fba90f66326b5f0f9a971760d62.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bfd27fba90f66326b5f0f9a971760d62.png)'
 - en: If we have *n* points in our dataset, the SVM needs *only* the dot product of
     each pair of points to find a classifier. Just that. This is also true when we
     want to project data to higher dimensions. We don’t need to provide the SVM with
     exact projections; we need to give it the dot product between all pairs of points
     in the projected space.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们有*n*个点在数据集中，SVM只需要每对点的点积来找到分类器。仅此而已。当我们想将数据投影到更高维度时也是如此。我们不需要提供SVM确切的投影；我们需要给它投影空间中所有点对的点积。
 - en: This is relevant because this is exactly what kernels do. A kernel, short for *kernel
     function*, takes as input two points in the original space, and directly gives
     us the dot product in the projected space.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很重要，因为这正是核函数的作用。核函数，简称*核函数*，以原始空间中的两个点为输入，直接给出投影空间中的点积。
 - en: Let’s revisit the projection we did before, and see if we can come up with a
     corresponding kernel. We will also track the number of computations we need to
     perform for the projection and then finding the dot products — to see how using
     a kernel compares.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们重新审视之前的投影，看看是否可以提出一个相应的核函数。我们还将跟踪执行投影和然后寻找点积所需的计算数量——以比较使用核函数的效果。
 - en: 'For a point *i*:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于一个点*i*：
 - en: '![](../Images/8e72e7c177f300b021872e4f87444d64.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e72e7c177f300b021872e4f87444d64.png)'
 - en: 'Our corresponding projected point was:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对应的投影点是：
 - en: '![](../Images/d0bfd1ae9bcd0251377040a8edeb24eb.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d0bfd1ae9bcd0251377040a8edeb24eb.png)'
 - en: 'To compute this projection we need to perform the following operations:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算这个投影，我们需要执行以下操作：
 - en: 'To get the new first dimension: 1 multiplication'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取新的第一维度：1次乘法
 - en: 'Second dimension: 1 multiplication'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二维度：1次乘法
 - en: 'Third dimension: 2 multiplications'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第三维度：2次乘法
 - en: In all, 1+1+2 =** 4 multiplications**.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 总共1+1+2 = **4次乘法**。
 - en: 'The dot product in the new dimension is:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 新维度中的点积是：
 - en: '![](../Images/2b946749d624301f34c7b7cbca94dc21.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2b946749d624301f34c7b7cbca94dc21.png)'
 - en: To compute this dot product for two points *i *and *j*, we need to compute their
     projections first. So that’s 4+4 = 8 multiplications, and then the dot product
     itself requires 3 multiplications and 2 additions.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算两个点*i*和*j*的点积，我们需要首先计算它们的投影。因此，需要4+4=8次乘法，然后点积本身需要3次乘法和2次加法。
 - en: 'In all, that’s:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 总的来说是：
 - en: 'Multiplications: 8 (for the projections) + 3 (in the dot product) = 11 multiplications'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 乘法：8（用于投影）+ 3（在点积中）= 11 次乘法
 - en: 'Additions: 2 (in the dot product)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加法：2（在点积中）
 - en: Which is total of 11 + 2 = **13 operations**.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这总共是 11 + 2 = **13 次操作**。
 - en: 'I claim this kernel function gives me the same result:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我声称这个核函数给了我相同的结果：
 - en: '![](../Images/9399f8a427d05d64e6a96ea353bf5cb4.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9399f8a427d05d64e6a96ea353bf5cb4.png)'
 - en: We take the dot product of the vectors in the original space *first*, and then
     square the result.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先在原始空间中计算向量的点积，然后平方结果。
 - en: 'Let expand it out and check whether my claim is indeed true:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们展开来看我的主张是否确实成立：
 - en: '![](../Images/85452feb7164d91637298815f179a405.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/85452feb7164d91637298815f179a405.png)'
 - en: It is. How many operations does this need? Look at step (2) above. To compute
     the dot product in two dimensions I need 2 multiplications and 1 addition. Squaring
     it is another multiplication.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的。需要多少操作？请看上面的步骤（2）。在二维中计算点积需要2次乘法和1次加法。平方结果是另一个乘法。
 - en: 'So, in all:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，总共：
 - en: 'Multiplications: 2 (for the dot product in the original space) + 1 (for squaring
     the result) = 3 multiplications'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 乘法：2（用于原始空间的点积）+ 1（用于平方结果）= 3 次乘法
 - en: 'Additions: 1 (for the dot product in the original space)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加法：1（在原始空间的点积中）
 - en: A total of 3 + 1 = **4 operations. **This is only** 31% of the operations** we
     needed before.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 总共 3 + 1 = **4 次操作**。这只是**之前所需操作的31%**。
 - en: 'It looks like it is faster to use a kernel function to compute the dot products
     we need. It might not seem like a big deal here: we’re looking at 4 vs 13 operations,
     but with input points with a lot more dimensions, and with the projected space
     having an even higher number of dimensions, the computational savings for a large
     dataset add up incredibly fast. So that’s one huge advantage of using kernels.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用核函数计算所需的点积似乎更快。这在这里可能看起来没什么大不了的：我们看到的是4与13的操作，但对于具有更多维度的输入点以及投影空间有更高维度的大型数据集，计算节省的速度会非常快。这是使用核函数的一个巨大优势。
 - en: Most SVM libraries already come pre-packaged with some popular kernels like *Polynomial,
     Radial Basis Function (RBF)*, and *Sigmoid*. When we don’t use a projection (as
     in our first example in this article), we compute the dot products in the original
     space — this we refer to as using the *linear kernel*.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数SVM库已经预装了一些流行的核函数，如*Polynomial, Radial Basis Function (RBF)* 和 *Sigmoid*。当我们不使用投影（如本文的第一个示例）时，我们在原始空间计算点积——这被称为使用*linear
+    kernel*。
 - en: 'Many of these kernels give you additional levers to further tune it for your
     data. For example, the polynomial kernel:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些核函数中的许多给你额外的调节杠杆来进一步优化你的数据。例如，多项式核函数：
 - en: '![](../Images/1661dfcdaaebf0ea6ee84609f77095fa.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1661dfcdaaebf0ea6ee84609f77095fa.png)'
 - en: allows you to pick the value of *c *and *d* (the degree of the polynomial).
     For the 3D projection above, I had used a polynomial kernel with *c=0* and *d=2*.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 允许你选择 *c* 和 *d* （多项式的度数）的值。对于上面的3D投影，我使用了多项式核函数，其中 *c=0* 和 *d=2*。
 - en: But we are not done with the awesomeness of kernels yet!
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 但我们还没有结束核函数的精彩部分！
 - en: Remember I mentioned projecting to infinite dimensions a while back? If you
     haven’t already guessed, the way to make it work is to have the right kernel function.
     That way, we really don’t have to project the input data, or worry about storing
     infinite dimensions.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 还记得我提到过投影到无限维度吗？如果你还没猜到，使其有效的方法是使用正确的核函数。这样，我们实际上无需投影输入数据或担心存储无限维度。
 - en: '*A kernel function computes what the dot product would be if you had actually
     projected the data.*'
+  id: totrans-50
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*核函数计算如果你实际上投影数据时点积会是什么。*'
 - en: The RBF kernel is commonly used for a *specific *infinite-dimensional projection.
     We won’t go into the math of it here, but look at the references at the end of
     this article.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: RBF核函数通常用于一个*specific*无限维的投影。我们不会在这里深入探讨其数学原理，但请查看本文末尾的参考资料。
 - en: How can we have infinite dimensions, but can still compute the dot product?
     If you find this question confusing, think about how we compute sums of infinite
     series. This is similar. There are infinite terms in the dot product, but there
     happens to exist a formula to calculate their sum.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们怎么能有无限维度，但仍然计算点积？如果你觉得这个问题令人困惑，想一想我们如何计算无限级数的和。这是类似的。点积中有无限项，但恰好存在一个计算它们和的公式。
 - en: 'This answers the questions we had asked in the previous section. Let’s summarize:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这回答了我们在前一节中提出的问题。让我们总结一下：
 - en: We typically don’t define a specific projection for our data. Instead, we pick
     from available kernels, tweaking them in some cases, to find one best suited to
     the data.
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们通常不会为数据定义特定的投影。相反，我们从可用的核中选择，在某些情况下调整它们，以找到最适合数据的核。
 - en: Of course, nothing stops us from defining our own kernels, or performing the
     projection ourselves, but in many cases we don’t need to. Or we at least start
     by trying out what’s already available.
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当然，我们可以定义自己的核，或者自己进行投影，但在许多情况下我们不需要这样做。或者我们至少可以先尝试已经可用的选项。
 - en: If there is a kernel available for the projection we want, we prefer to use
     the kernel, because that’s often faster.
+  id: totrans-56
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果我们想要的投影有可用的核，我们更倾向于使用核，因为这样通常更快。
 - en: RBF kernels can project points to infinite dimensions.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: RBF核可以将点投影到无限维空间。
 - en: '**SVM libraries to get started**'
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**SVM库入门**'
 - en: 'There are quite a few SVM libraries you could start practicing with:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 有相当多的SVM库可以开始练习：
 - en: '[libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)'
 - en: '[SVM-Light](http://svmlight.joachims.org/)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SVM-Light](http://svmlight.joachims.org/)'
 - en: '[SVMTorch](http://bengio.abracadoudou.com/SVMTorch.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SVMTorch](http://bengio.abracadoudou.com/SVMTorch.html)'
 - en: Many general ML libraries like [scikit-learn](http://scikit-learn.org/stable/) also
     offer SVM modules, which are often wrappers around dedicated SVM libraries. My
     recommendation is to start out with the tried and tested [*libSVM*](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多通用的机器学习库，如[scikit-learn](http://scikit-learn.org/stable/)，也提供SVM模块，这些模块通常是围绕专用SVM库的封装。我的推荐是从经过验证的[*libSVM*](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)开始。
 - en: libSVM is available as a commandline tool, but the download also bundles Python,
     Java, and Matlab wrappers. As long as you have a file with your data in a format
     libSVM understands (the README that’s part of the download explains this, along
     with other available options) you are good to go.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: libSVM作为命令行工具提供，但下载包还包括Python、Java和Matlab的封装。只要你有一个libSVM理解的格式的数据文件（下载包中的README解释了这一点，以及其他可用选项），就可以开始使用了。
 - en: In fact, if you need a *really quick *feel of how different kernels, the value
     of C, etc., influence finding the separating boundary, try out the “Graphical
     Interface” on their [home page](https://www.csie.ntu.edu.tw/~cjlin/libsvm/). Mark
     your points for different classes, pick the SVM parameters, and hit Run!
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 事实上，如果你需要对不同核、C值等如何影响分隔边界有一个*非常快速*的了解，可以尝试他们的[主页](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)上的“图形界面”。为不同类别标记你的点，选择SVM参数，然后点击运行！
 - en: 'I couldn’t resist and quickly marked a few points:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我忍不住，快速标记了一些点：
 - en: '![](../Images/58389de916f9e685d93975c5f870185d.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/58389de916f9e685d93975c5f870185d.png)'
 - en: Yep, I’m not making it easy for the SVM.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，我并没有让SVM变得容易。
 - en: 'Then I tried out a couple of kernels:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我尝试了几个核：
 - en: '![](../Images/8c6175646063a8d95a54bc9c0737c42e.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8c6175646063a8d95a54bc9c0737c42e.png)'
 - en: The interface doesn’t show you the separating boundary, but shows you the regions
     that the SVM learns as belonging to a specific label. As you can see, the linear
     kernel completely ignores the red points. It thinks of the whole space as yellow
     (-ish green). But the RBF kernel neatly carves out a ring for the red label!
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 界面并未显示分隔边界，而是显示SVM学习到的属于特定标签的区域。正如你所见，线性核完全忽略了红色点。它将整个空间视为黄色（-ish绿色）。但RBF核则巧妙地为红色标签划出了一圈！
 - en: '**Helpful resources**'
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**有用资源**'
 - en: We have been primarily relying on visual intuitions here. While that’s a great
     way to gain an initial understanding, I’d strongly encourage you to dig deeper.
     An example of where visual intuition might prove to be insufficient is in understanding
     margin width and support vectors for non-linearly separable cases.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们主要依赖视觉直觉。虽然这是获得初步理解的好方法，但我强烈建议你深入探究。一个视觉直觉可能不足的例子是理解非线性可分情况下的边际宽度和支持向量。
 - en: '*Remember that these quantities are decided by optimizing a trade-off*.* Unless
     you look at the math, some of the results may seem counter-intuitive.*'
+  id: totrans-74
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*记住这些量是通过优化权衡来决定的*。*除非你查看数学公式，否则有些结果可能会显得反直觉*。'
 - en: Another area where getting to know the math helps is in understanding kernel
     functions. Consider the RBF kernel, which I’ve barely introduced in this short
     article. I hope the “mystique” surrounding it — its relation to an infinite-dimensional
     projection coupled with the fantastic results on the last dataset (the “ring”) — has
     convinced you to take a closer look at it.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个了解数学有帮助的领域是理解核函数。考虑RBF核，我在这篇短文中仅仅介绍了它的一部分。我希望它的“神秘感”——与无限维投影的关系，加上在最后一个数据集（“环”）上的出色结果——能说服你更深入地研究它。
 - en: '**Resources I would recommend:**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我推荐的资源：**'
 - en: '[Video Lectures: Learning from Data](https://www.youtube.com/watch?v=MEG35RDD7RA&list=PLCA2C1469EA777F9A) by
     Yaser Abu-Mostafa. Lectures from 14 to 16 talk about SVMs and kernels. I’d also
     highly recommend the whole series if you’re looking for an introduction to ML,
     it maintains an excellent balance between math and intuition.'
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[视频讲座：数据学习](https://www.youtube.com/watch?v=MEG35RDD7RA&list=PLCA2C1469EA777F9A)
+    由亚瑟·阿布-莫斯塔法主讲。第14至第16讲讨论了SVM和核函数。如果你在寻找机器学习的入门，整个系列都非常值得推荐，它在数学和直观之间保持了极好的平衡。'
 - en: '[Book: The Elements of Statistical Learning](http://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) — Trevor
     Hastie, Robert Tibshirani, Jerome Friedman.Chapter 4 introduces the basic idea
     behind SVMs, while Chapter 12 deals with it comprehensively.'
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[书籍：统计学习的元素](http://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) — 特雷弗·哈斯蒂、罗伯特·蒂布希拉尼、杰罗姆·弗里德曼。第4章介绍了SVM的基本思想，而第12章则全面讲解了它。'
 - en: Happy (Machine) Learning!
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 快乐（机器）学习！
 - en: '**Bio: [Abhishek Ghose](https://www.linkedin.com/in/abhishek-ghose-36197624/)**
     is a Senior Data Scientist at 24/7, Inc.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[阿比谢克·戈斯](https://www.linkedin.com/in/abhishek-ghose-36197624/)** 是24/7公司的高级数据科学家。'
 - en: '[Original](https://blog.statsbot.co/support-vector-machines-tutorial-c1618e635e93).
     Reposted with permission.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.statsbot.co/support-vector-machines-tutorial-c1618e635e93)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Support Vector Machines: A Concise Technical Overview](/2016/09/support-vector-machines-concise-technical-overview.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机：简明技术概述](/2016/09/support-vector-machines-concise-technical-overview.html)'
 - en: '[What is a Support Vector Machine, and Why Would I Use it?](/2017/02/yhat-support-vector-machine.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是支持向量机，我为什么要使用它？](/2017/02/yhat-support-vector-machine.html)'
 - en: '[The Machine Learning Abstracts: Support Vector Machines](/2017/08/machine-learning-abstracts-support-vector-machines.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习摘要：支持向量机](/2017/08/machine-learning-abstracts-support-vector-machines.html)'
 - en: '* * *'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-87
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题更多
 - en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机：直观方法](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
 - en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机的温和介绍](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
 - en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义向量搜索如何改变客户支持互动](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
 - en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python向量数据库和向量索引：LLM应用的架构](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
 - en: '[Picking Examples to Understand Machine Learning Model](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择示例来理解机器学习模型](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)'
 - en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[带实例的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
