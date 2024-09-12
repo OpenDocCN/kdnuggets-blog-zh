@@ -1,56 +1,69 @@
 - en: 'Feature Selection: Where Science Meets Art'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '**By [Mahbubul Alam](https://www.linkedin.com/in/mab-alam/), Data Scientist,
     Economist and Quantitative Researcher**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/cb4fde334a43c5979b8e5d08f990d42a.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
 - en: Photo by [David Clode](https://unsplash.com/@davidclode?utm_source=medium&utm_medium=referral)
     on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Some people say feature selection and engineering is the most important part
     of data science projects. In many cases it’s not sophisticated algorithms, rather
     it’s feature selection that makes all the difference in model performance.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Too few features can under-fit a model. For example, if you want to predict
     house prices, knowing just the number of bedrooms and floor area is not good enough.
     You are omitting many important variables a buyer cares about such as location,
     school district, property age etc.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: You can also come from the other direction and choose 100 different features
@@ -58,34 +71,41 @@
     of adding more information, these features add noise and complexity. Many of the
     features chosen might be outright irrelevant. On top of that, too many features
     add computational costs to train a model.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: So to build a good predictive model, what is the right number of features and
     how to choose which features to keep and which features to drop and which new
     features to add? This is an important consideration in machine learning projects
     in managing what’s known as the [bias-variance tradeoff](https://towardsdatascience.com/bias-variance-tradeoff-in-machine-learning-an-intuition-da85228c5074).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: This is also where “science” meets “arts.”
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: The purpose of this article is to demystify feature selection techniques with
     some simple implementation. The techniques I’m describing below should equally
     work in regression and classification problems. Unsupervised classification (e.g.
     clustering) can be a bit tricky, so I’ll talk about it separately.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: Heuristic approach
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'We don’t talk much about heuristics in data science but it is quite relevant.
     Let’s look at the definition (source: [Wikipedia](https://en.wikipedia.org/wiki/Heuristic)):'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: A heuristic or heuristic technique **…. **employs a practical method that is
     not guaranteed to be optimal, perfect, or rational, but is nevertheless sufficient
     for reaching an immediate, short-term goal or approximation.
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -93,112 +113,146 @@
     Just by looking at a dataset, you’ll get the gut feeling that such and such features
     are strong predictors and some others have nothing to do with the dependent variable
     and you feel that it’s safe to eliminate them.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: If you are not sure, you can go a step further to check the correlation between
     features and the dependent variable.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: With too many features in the dataset, just these heuristics— intuition and
     correlation — will get most of your job done in choosing the right features.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: As an example, let’s say your company is allocating budgets for advertising
     in different channels (TV, radio, newspaper). You want to predict which channel
     is most effective as an advertisement platform and what’s the expected return.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Before you build a model you look at the historical data and found the following
     relationship between ad expenses on different platforms and corresponding sales
     revenue.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/8c2c5f121cd9f6ffe2cc60f48d9be253.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
 - en: 'Bivariate scatterplots showing relationships between sales and ad expenditure
     on different platforms (figure source: author; data source: [ISLR](https://rdrr.io/cran/ISLR/),
     license: GLP 2, public domain).'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: Based on the scatterplots what do you think are the best features to explain
     ad revenue? Clearly, newspaper ads do not have any significant impact on the outcome,
     so you may want to drop it from the model.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Automated feature selection
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: We will now get into automated feature selection techniques. Most of them are
     integrated within the `sklearn` module, so you can implement feature selection
     only in a few lines of code in a standard format.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: 'For demonstration, I’ll use the ‘iris’ dataset (source: [Kaggle/UCI Machine
     Learning](https://www.kaggle.com/uciml/iris/metadata), license: CC0 public domain).
     It’s a simple dataset and has only 5 columns, nevertheless, you’ll get the key
     points across.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s load the dataset from `seaborn` library.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/63644ab4ea21380679aaa4629cd6d2b4.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
 - en: '[PRE1]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'In the dataset “species” is the one that we want to predict and the remaining
     4 columns are predictors. Let’s confirm the number of features programmatically:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Let’s now go ahead and implement a few feature selection techniques.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: 1) Chi-squared based technique
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The chi-squared-based technique selects a specific number of user-defined features
     (k) based on some scores. These scores are determined by computing chi-squared
     statistics between X (independent) and y (dependent) variables.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '`sklearn` has built-in methods for chi-square-based feature selection. All
     you have to do is determine how many features you want to keep (let’s say, k=3
     for the iris dataset).'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Let’s now confirm that we’ve got the 3 best features out of 4.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: For a large number of features, you can rather specify a certain percentage
     of features you want to keep or drop. It works in a similar fashion as above.
     Let’s say we want to keep 75% of features and drop the remaining 25%.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 2) Impurity-based feature selection
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Tree-based algorithms (e.g. Random Forest Classifier) have built-in `feature_importances_` attribute.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: A Decision Tree would split data using a feature that decreases the impurity
@@ -206,50 +260,68 @@
     gain](https://en.wikipedia.org/wiki/Decision_tree_learning#Information_gain)).
     That means, finding the best feature is a key part of how the algorithm works
     to solve classification problems. We can then access the best features via `feature_importances_` attribute.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s first fit the “iris” dataset to a Random Forest Classifier with 200 estimators.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Now let’s access feature importance by the attribute call.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The output above shows the importance of each of the 4 features at reducing
     impurity at each node/split.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: Since the Random Forest Classifier has many estimators (e.g. 200 decision trees
     above), we can calculate an estimate of the relative importance with a confidence
     interval. Let’s visualize it.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/b5061526f9889c48e31fcf0b514a0175.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
 - en: 'Figure: Importance of features in impurity measures (source: author)'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: Now that we know the importance of each feature, we can manually (or visually)
     determine which features to keep and which one to drop.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: Alternatively, we can take advantage of Scikit-Learn’s meta transformer `SelectFromModel` to
     do this job for us.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 3) Regularization
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -258,26 +330,33 @@
     If you have too many features, regularization controls their effect, either by
     shrinking feature coefficients (called L2 regularization/Ridge Regression) or
     by setting some feature coefficients to zero(called L1 regularization/LASSO Regression).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: Some linear models have built-in L1 regularization as a hyperparameter to penalize
     features. Those features can be eliminated using the meta transformer `SelectFromModel`.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s implement the`LinearSVC` algorithm with hyperparameter *penalty = ‘l1’*.
     We’ll then use `SelectFromModel`to remove some features.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 4) Sequential selection
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Sequential feature selection is an age-old statistical technique. In this case,
     you add (or remove) features to/from the model one by one, and check your model
     performance, and then heuristically choose which one to keep.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: Sequential selection has two variants. The *forward selection* technique starts
@@ -286,75 +365,101 @@
     direction. The model starts with all features and calculates error; then it eliminates
     one feature which minimizes error even further, and so on, until the desired number
     of features remains.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 顺序选择有两种变体。*前向选择*技术从零特征开始，然后添加一个最小化误差的特征；然后再添加另一个特征，以此类推。*后向选择*则在相反的方向上工作。模型从所有特征开始并计算误差；然后它会删除一个进一步最小化误差的特征，以此类推，直到剩下所需数量的特征。
 - en: Scikit-Learn module has `SequentialFeatureSelector `meta transformer to make
     life easier. Note that it works for `sklearn`v0.24 or later.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-Learn 模块有`SequentialFeatureSelector`元变换器来简化操作。请注意，它适用于`sklearn`v0.24或更高版本。
 - en: '[PRE11]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '**Alternative techniques…**'
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**替代技术……**'
 - en: Aside from the techniques I just described, there are few other methods you
     can try. Some of them are not exactly designed for feature selection, but if you
     dig a bit deeper you will find out how they can be creatively applied for feature
     selection.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了我刚才描述的技术，还有一些其他方法可以尝试。其中一些方法并不是专门为特征选择设计的，但如果你深入挖掘，你会发现它们可以被创造性地应用于特征选择。
 - en: '**Beta coefficients**: the coefficients you get after running a linear regression
     (the beta coefficients) show the relative sensitivity of the dependent variable
     to each feature. From here you can choose the features with high coefficient values.'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Beta系数**：你在进行线性回归后得到的系数（Beta系数）显示了因变量对每个特征的相对敏感性。从这里你可以选择具有高系数值的特征。'
 - en: '**p-value**: If you implement regression in a classical statistical package
     (e.g. `statsmodels` ), you’ll notice that the model output includes p-values for
     each feature ([check this out](https://www.statsmodels.org/stable/regression.html)).
     The p-value tests the null hypothesis that the coefficient is exactly zero. So
     you can eliminate the features associated with high p-values.'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**p值**：如果你在经典统计软件包（例如`statsmodels`）中实现回归，你会发现模型输出包括每个特征的p值（[查看此内容](https://www.statsmodels.org/stable/regression.html)）。p值测试的是系数是否恰好为零的原假设。因此，你可以排除那些与高p值相关的特征。'
 - en: '[**Variance Inflation Factor (VIF)**](https://etav.github.io/python/vif_factor_python.html):
     Typically VIF is used to detect multicollinearity in the dataset. Statisticians
     usually remove variables with high VIF to meet a key assumption of linear regression.'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**方差膨胀因子（VIF）**](https://etav.github.io/python/vif_factor_python.html)：VIF通常用于检测数据集中的多重共线性。统计学家通常会删除具有高VIF的变量，以满足线性回归的关键假设。'
 - en: '[**Akaike and Bayesian Information Criteria (AIC/BIC)**](https://en.wikipedia.org/wiki/Akaike_information_criterion):
     Generally AIC and BIC are used to compare performances between two models. But
     you can use it to your advantage for feature selection, for example by choosing
     certain features that get you a better model quality measured in terms of AIC/BIC.'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**赤池信息量准则（AIC/BIC）**](https://en.wikipedia.org/wiki/Akaike_information_criterion)：通常AIC和BIC用于比较两个模型之间的性能。但你可以利用它们进行特征选择，例如选择某些特征以获得在AIC/BIC度量下更好的模型质量。'
 - en: '**Principal Component Analysis (PCA)**: If you know what PCA is, you guessed
     it right. It’s not exactly a feature selection technique, but the dimensionality
     reduction properties of PCA can but used to that effect, without eliminating features
     entirely.'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**主成分分析（PCA）**：如果你知道PCA是什么，你猜对了。它不完全是特征选择技术，但PCA的降维特性可以用于这一效果，而不是完全消除特征。'
 - en: '**And many others:** There are quite a few other feature selection classes
     that come with `sklearn` module, [check out the documentation](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_selection).
     A clustering-based algorithm has also been proposed recently in a [scientific
     paper](https://www.sciencedirect.com/science/article/pii/S2314717218300059). Fisher’s
     Score is yet another technique available.'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**以及其他许多：** 有相当多的其他特征选择类，这些类随`sklearn`模块一起提供，[查看文档](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_selection)。最近也在一篇[科学论文](https://www.sciencedirect.com/science/article/pii/S2314717218300059)中提出了一种基于聚类的算法。费舍尔评分（Fisher’s
+    Score）也是另一种可用的技术。'
 - en: How about clustering?
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 聚类怎么样？
 - en: Clustering is an unsupervised machine learning algorithm, meaning you feed your
     data into a clustering algorithm and the algorithm will figure out how to segment
     the data into different clusters based on some “property”. These properties actually
     come from the features.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: Does clustering require feature selection? Of course. Without appropriate features,
@@ -364,14 +469,17 @@
     mix. Their *age *and years of *experience*? Sure. But as you increase the number
     of features, the algorithm becomes confused as to what you are trying to achieve
     and therefore the outputs may not be exactly what you were looking for.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: All that is to say, data scientists do not run clustering algorithms in a vacuum,
     they often have a hypothesis or question in mind. So the features must correspond
     to that need.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: Summary
+  id: totrans-83
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -382,15 +490,18 @@
     as well as regularization and sequential feature selection. In addition, there
     are alternative techniques that can be made useful such as beta coefficients in
     regression, p-value, VIF, AIC/BIC and dimensionality reduction.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: In the title of this article, I said “science meets art”. It is because there’s
     no right or wrong answer when it comes to feature selection. We can use science
     tools, but in the end, it can be a subjective decision made by a data scientist.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: Thanks for reading. Feel free to [subscribe](https://mab-datasc.medium.com/subscribe) to
     be notified of my forthcoming articles or simply connect with me via [Twitter ](https://twitter.com/DataEnthus)or [LinkedIn](https://www.linkedin.com/in/mab-alam/).
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Mahbubul Alam](https://www.linkedin.com/in/mab-alam/)** has 8+ years
@@ -402,52 +513,75 @@
     a data science and business analytics course designed for early to mid-career
     analysts, team leads and IT professionals who are transitioning to data science
     or building data science capabilities within their organizations.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/feature-selection-where-science-meets-art-639757d91293).
     Reposted with permission.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '[Be Wary of Automated Feature Selection — Chi Square Test of Independence Example](/2021/08/automated-feature-selection-chi-square-test-independence-example.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[警惕自动特征选择 — 卡方独立性检验示例](/2021/08/automated-feature-selection-chi-square-test-independence-example.html)'
 - en: '[Feature Selection – All You Ever Wanted To Know](/2021/06/feature-selection-overview.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择 – 你想了解的一切](/2021/06/feature-selection-overview.html)'
 - en: '[From Scratch: Permutation Feature Importance for ML Interpretability](/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从头开始：ML 可解释性的排列特征重要性](/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)'
 - en: More On This Topic
+  id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检索增强生成：信息检索与文本生成的结合](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
 - en: '[Linear Regression Model Selection: Balancing Simplicity and Complexity](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[线性回归模型选择：平衡简洁性与复杂性](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
 - en: '[Ensuring Reliable Few-Shot Prompt Selection for LLMs](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[确保 LLMs 的可靠少量样本提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
