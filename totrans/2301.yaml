@@ -1,218 +1,309 @@
 - en: 'Understanding by Implementing: Decision Tree'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 通过实现理解：决策树
 - en: 原文：[https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)
 - en: '![Understanding by Implementing: Decision Tree](../Images/2a3d41a545fa5b47a7f6524b9046821a.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/2a3d41a545fa5b47a7f6524b9046821a.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'Many advanced machine learning models such as random forests or gradient boosting
     algorithms such as XGBoost, CatBoost, or LightGBM (and even [autoencoders](https://medium.com/towards-data-science/building-a-simple-auto-encoder-via-decision-trees-28ba9342a349)!)
     rely on a crucial common ingredient: the **decision tree**!'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多高级机器学习模型，例如随机森林或梯度提升算法，如XGBoost、CatBoost或LightGBM（甚至[自编码器](https://medium.com/towards-data-science/building-a-simple-auto-encoder-via-decision-trees-28ba9342a349)！）都依赖于一个重要的共同成分：**决策树**！
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行IT管理'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Without understanding decision trees, it is impossible to understand any of
     the aforementioned advanced bagging or gradient-boosting algorithms as well, which
     is a disgrace for any data scientist! So, let us demystify the inner workings
     of a decision tree by implementing one in Python.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果不理解决策树，也无法理解上述高级的袋装算法或梯度提升算法，这对任何数据科学家来说都是一个耻辱！所以，让我们通过在Python中实现一个决策树来揭开它的神秘面纱。
 - en: In this article, you will learn
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，您将学习
 - en: why and how a decision tree splits data,
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为什么以及如何决策树分裂数据，
 - en: the information gain, and
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信息增益，以及
 - en: how to implement decision trees in Python using NumPy.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用NumPy在Python中实现决策树。
 - en: You can find the code on [my Github](https://github.com/Garve/Towards-Data-Science---Notebooks/blob/main/TDS%20-%20Decision%20Tree.ipynb).
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 您可以在[我的Github](https://github.com/Garve/Towards-Data-Science---Notebooks/blob/main/TDS%20-%20Decision%20Tree.ipynb)上找到代码。
 - en: The Theory
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理论
 - en: In order to make predictions, decision trees rely on **splitting** the dataset
     into smaller parts in a recursive fashion.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了进行预测，决策树依赖于**将**数据集递归地**分裂**成更小的部分。
 - en: '![Understanding by Implementing: Decision Tree](../Images/9b00e12744e927f329f5e8d19f29d46c.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/9b00e12744e927f329f5e8d19f29d46c.png)'
 - en: Image by Author
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: In the picture above, you can see one example of a split — the original dataset
     gets separated into two parts. In the next step, both of these parts get split
     again, and so on. This continues until some kind of stopping criterion is met,
     for example,
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上面的图片中，您可以看到一个分裂的示例——原始数据集被分成了两个部分。在下一步中，这两个部分又被进一步分裂，以此类推。这会一直持续，直到满足某种停止准则，例如，
 - en: if the split results in a part being empty
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果分裂导致某部分为空
 - en: if a certain recursion depth was reached
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果达到了一定的递归深度
 - en: if (after previous splits) the dataset only consists of only a few elements,
     making further splits unnecessary.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果（在之前的分裂后）数据集只包含几个元素，使得进一步的分裂不再必要。
 - en: How do we find these splits? And why do we even care? Let’s find out.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们如何找到这些分裂？我们为什么要关心这些？让我们来了解一下。
 - en: Motivation
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 动机
 - en: 'Let us assume that we want to solve a **binary** **classification problem** that
     we create ourselves now:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们现在要解决一个**二分类问题**：
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The two-dimensional data looks like this:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 二维数据如下所示：
 - en: '![Understanding by Implementing: Decision Tree](../Images/554cbca0ca349471b45b9ef532caf57b.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/554cbca0ca349471b45b9ef532caf57b.png)'
 - en: Image by Author
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'We can see that there are two different classes — purple in about 75% and yellow
     in about 25% of the cases. If you feed this data to a decision tree **classifier**,
     this tree has the following thoughts initially:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: “There are two different labels, which is too messy for me. I want to clean
     up this mess by splitting the data into two parts —these parts should be cleaner
     than the complete data before.” — tree that gained consciousness
+  id: totrans-33
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: And so the tree does.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '![Understanding by Implementing: Decision Tree](../Images/ece4cb957d4cfa280d757eca55a617d7.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
 - en: Image by Author
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: The tree decides to make a split approximately along the *x*-axis. This has
     the effect that the top part of the data is now perfectly *clean, ***meaning that
     you only find *a single class* (purple in this case) there.**
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: However, the bottom part is still *messy*, even messier than before in a sense.
     The class ratio used to be around 75:25 in the complete dataset, but in this smaller
     part it is about 50:50, which is as mixed up as it can get
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '* ***Note: ****Here, it doesn’t matter that the purple and yellow are nicely
     separated in the picture. Just the ****raw amout of different labels**** in the
     two parts count.**'
+  id: totrans-39
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '*![Understanding by Implementing: Decision Tree](../Images/cd6a8063e5483dd3283407b8c6e3d717.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: Image by Author
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: Still, this is good enough as a first step for the tree, and so it carries on.
     While it wouldn’t create another split in the top, *clean* part anymore, it can
     create another split in the bottom part to clean it up.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '![Understanding by Implementing: Decision Tree](../Images/4c38bd5c08fe69bd3e39b5e99888316a.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
 - en: Image by Author
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: Et voilà, each of the three separate parts is completely clean, as we only find
     a single color (label) per part.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: 'It is really easy to make predictions now: If a new data point comes in, you
     just check in which of the **three parts** it lies and give it the corresponding
     color. This works so well now because each part is *clean*. Easy, right?'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: '![Understanding by Implementing: Decision Tree](../Images/3c98457e2b72d4013552e09d1ef5848e.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
 - en: Image by Author
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Alright, we were talking about *clean* and *messy* data but so far these words
     only represent some vague idea. In order to implement anything, we have to find
     a way to define *cleanliness*.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: Measures for Cleanliness
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Let us assume that we have some labels, for example
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Intuitively, *y₁* is the cleanest set of labels, followed by *y₂* and then *y₃*.
     So far so good, but how can we put numbers on this behavior? Maybe the easiest
     thing that comes to mind is the following:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: Just count the amount of zeroes and amount of ones. Compute their absolute difference.
     To make it nicer, normalize it by dividing through the length of the arrays.
+  id: totrans-54
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -220,306 +311,464 @@
     custom-defined **cleanliness score** would be |6 - 2| / 8 = 0.5\. It is easy to
     calculate that cleanliness scores of *y₁* and *y₃* are 1.0 and 0.0 respectively.
     Here, we can see the general formula:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '![Understanding by Implementing: Decision Tree](../Images/b7483ae67d73bcffdc9d3bf191b064cc.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/b7483ae67d73bcffdc9d3bf191b064cc.png)'
 - en: Image by Author
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: Here, *n₀* and *n₁* are the numbers of zeroes and ones respectively, *n = n₀
     + n₁* is the length of the array and *p₁ = n₁ / n* is the share of the 1 labels.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，*n₀* 和 *n₁* 分别是零和一的数量，*n = n₀ + n₁* 是数组的长度，而 *p₁ = n₁ / n* 是标签为 1 的比例。
 - en: The problem with this formula is that it is **specifically tailored to the case
     of two classes**, but very often we are interested in multi-class classification.
     One formula that works quite well is the **Gini impurity measure:**
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个公式的问题在于它**专门针对两个类别的情况**，但我们很常见的是多类别分类。一个效果相当好的公式是**Gini 不纯度度量**：
 - en: '![Understanding by Implementing: Decision Tree](../Images/decde949856b7174d1d4cb86f9ec1860.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/decde949856b7174d1d4cb86f9ec1860.png)'
 - en: Image by Author
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: 'or the general case:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者一般情况：
 - en: '![Understanding by Implementing: Decision Tree](../Images/3cf6b03fa036e6e4a3f9d432d2384018.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/3cf6b03fa036e6e4a3f9d432d2384018.png)'
 - en: Image by Author
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: It works so well that scikit-learn [adopted it as the default measure](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html) for
     its `DecisionTreeClassifier` class.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 它效果非常好，以至于 scikit-learn [将其作为默认度量](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)用于其`DecisionTreeClassifier`类。
 - en: '![Understanding by Implementing: Decision Tree](../Images/31661e3c05c0e279e73ceb48861b095c.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/31661e3c05c0e279e73ceb48861b095c.png)'
 - en: Image by Author
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: '* ***Note: ****Gini measures ****messiness**** instead of cleanliness. Example:
     if a list only conains a single class (=very clean data!), then all terms in the
     sum are zero, hence the sum is zero. The worst case is if all classes appear the
     exact number of times, in which case the Gini is 1–1/*C* where *C* is the number
     of classes.**'
+  id: totrans-68
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '* ***注意：****Gini 度量的是****杂乱程度****而不是清洁程度。示例：如果一个列表只包含单一类别（=非常干净的数据！），则总和中的所有项都是零，因此总和为零。最糟糕的情况是所有类别出现的次数完全一样，这种情况下
+    Gini 为 1–1/*C*，其中 *C* 是类别的数量。**'
 - en: '*Now that we have a measure for cleanliness/messiness, let us see how it can
     be used to find good splits.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '*现在我们有了清洁度/杂乱度的度量，让我们看看它如何用于找到好的分裂。'
 - en: Finding Splits
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查找分裂
 - en: There are a lot of splits we choose from, but which is a good one? Let us use
     our initial dataset again, together with the Gini impurity measure.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有很多分裂选择，但哪个是好的呢？让我们再次使用我们的初始数据集，结合 Gini 不纯度度量。
 - en: '![Understanding by Implementing: Decision Tree](../Images/8ea233e9da061b673a7c6e958b48929c.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/8ea233e9da061b673a7c6e958b48929c.png)'
 - en: Image by Author
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: We won’t count the points now, but let us assume that 75% are purple and 25%
     are yellow. Using the definition of Gini, the impurity of the complete dataset
     is
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在不会计算点数，但假设 75% 是紫色的，25% 是黄色的。根据 Gini 的定义，整个数据集的不纯度是
 - en: '![Understanding by Implementing: Decision Tree](../Images/5234e837ea39350ce44f5fe171fbd64f.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/5234e837ea39350ce44f5fe171fbd64f.png)'
 - en: Image by Author
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: 'If we split the dataset along the *x*-axis, as done before:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们像之前那样沿 *x* 轴分裂数据集：
 - en: '![Understanding by Implementing: Decision Tree](../Images/f84e74cf628ae0ff15d1ce417d6d1b95.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/f84e74cf628ae0ff15d1ce417d6d1b95.png)'
 - en: Image by Author
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: The **top part has a Gini impurity of 0.0** and the bottom part
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**顶部部分的 Gini 不纯度是 0.0**，而底部部分'
 - en: '![Understanding by Implementing: Decision Tree](../Images/0aa3e0aad38846e2ecbe4149c772c0c3.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现理解：决策树](../Images/0aa3e0aad38846e2ecbe4149c772c0c3.png)'
 - en: Image by Author
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: 'On average, the two parts have a Gini impurity of (0.0 + 0.5) / 2 = 0.25, which
     is better than the entire dataset’s 0.375 from before. We can also express it
     in terms of the so-called **information gain**:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均而言，这两个部分的 Gini 不纯度为 (0.0 + 0.5) / 2 = 0.25，比之前整个数据集的 0.375 更好。我们还可以用所谓的**信息增益**来表示：
 - en: The information gain of this split is 0.375 – 0.25 = 0.125.
+  id: totrans-84
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个分裂的信息增益是 0.375 – 0.25 = 0.125。
 - en: Easy as that. The higher the information gain (i.e. the lower the Gini impurity),
     the better.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这么简单。信息增益越高（即 Gini 不纯度越低），效果越好。
 - en: '**Note:** Another equally good initial split would be along the y-axis.'
+  id: totrans-86
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 另一个同样好的初始分裂是沿 y 轴。'
 - en: An important thing to keep in mind is that it is useful to **weigh the Gini
     impurities of the parts by the size of the parts**. For example, let us assume
     that
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要记住的一件重要事情是，**通过部分的大小来权衡 Gini 不纯度**是有用的。例如，假设
 - en: part 1 consists of 50 datapoints and has a Gini impurity of 0.0 and
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第1部分包含50个数据点，Gini不纯度为0.0，并且
 - en: part 2 consists of 450 datapoints and has a Gini impurity of 0.5,
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第2部分包含450个数据点，Gini不纯度为0.5，
 - en: then the average Gini impurity should not be (0.0 + 0.5) / 2 = 0.25 but rather
     50 / (50 + 450) * 0.0 + 450 / (50 + 450) * 0.5 = **0.45**.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，平均Gini不纯度应该不是 (0.0 + 0.5) / 2 = 0.25，而是50 / (50 + 450) * 0.0 + 450 / (50
+    + 450) * 0.5 = **0.45**。
 - en: 'Okay, and how do we find the best split? The simple but sobering answer is:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，我们如何找到最佳分割？简单但令人清醒的答案是：
 - en: Just try out all the splits and pick the one with the highest information gain.
     It’s basically a brute-force approach.
+  id: totrans-92
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 只需尝试所有分割并选择信息增益最高的一个。这基本上是一种暴力方法。
 - en: To be more precise, standard decision trees use **splits along the coordinate
     axes**, i.e. *xᵢ = c* for some feature* i *and threshold*c.* This means that
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 更准确地说，标准决策树使用**沿坐标轴的分割**，即*xᵢ = c*，其中*i*是某个特征，*c*是阈值。这意味着
 - en: one part of the split data consists of all data points *x *with* xᵢ < c*and
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分割数据的另一部分包含所有数据点*x*，其中*xᵢ < c*。
 - en: the other part of all points* x *with *xᵢ ≥ c*.
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分割数据的一部分包含所有数据点*x*，其中*xᵢ ≥ c*。
 - en: These simple splitting rules have proven good enough in practice, but you can
     of course also extend this logic to create other splits (i.e. diagonal lines like *xᵢ
     + 2xⱼ = 3*, for example).
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些简单的分割规则在实践中已经证明足够有效，但你当然可以扩展这种逻辑来创建其他分割（例如，像*xᵢ + 2xⱼ = 3*这样的对角线）。
 - en: Great, these are all the ingredients that we need to get going now!
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，这些就是我们现在需要的一切材料！
 - en: The Implementation
+  id: totrans-98
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实现
 - en: We will implement the decision tree now. Since it consists of nodes, let us
     define a `Node` class first.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将实现决策树。由于它由节点组成，因此我们首先定义一个`Node`类。
 - en: '[PRE2]'
+  id: totrans-100
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: A node knows the feature it uses for splitting (`feature`) as well as the splitting
     value (`value`). `value` is also used as a storage for the final prediction of
     the decision tree. Since we will build a binary tree, each node needs to know
     its left and right children, as stored in `left` and `right` .
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个节点知道用于分割的特征（`feature`）以及分割值（`value`）。`value` 还被用作决策树最终预测的存储。由于我们将构建一棵二叉树，每个节点需要知道它的左子节点和右子节点，分别存储在`left`和`right`中。
 - en: Now, let’s do the actual decision tree implementation. I’m making it scikit-learn
     compatible, hence I use some classes from `sklearn.base` . If you are not familiar
     with that, check out my article about [how to build scikit-learn compatible models](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289).
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们进行实际的决策树实现。我将其与scikit-learn兼容，因此我使用了来自`sklearn.base`的一些类。如果你不熟悉，可以查看我的文章[如何构建兼容scikit-learn的模型](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)。
 - en: Let’s implement!
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们实现吧！
 - en: '[PRE3]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And that’s it! You can do all of the things that you love about scikit-learn
     now:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样！你现在可以做你喜欢的所有scikit-learn的事情了：
 - en: '[PRE4]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Since the tree is unregularized, it is overfitting a lot, hence the perfect
     train score. The accuracy would be worse on unseen data. We can also check how
     the tree looks like via
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于树没有正则化，过拟合严重，因此训练得分完美。未见数据上的准确度会更差。我们还可以通过以下方式查看树的外观
 - en: '[PRE5]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'As a picture, it would be this:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为图示，它将是这样的：
 - en: '![Understanding by Implementing: Decision Tree](../Images/e09eb496451c654e69c87a8984dbb0c2.png)'
+  id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![通过实现了解：决策树](../Images/e09eb496451c654e69c87a8984dbb0c2.png)'
 - en: Image by Author
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Conclusion
+  id: totrans-112
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, we have seen how decision trees work in detail. We started
     out with some vague, yet intuitive ideas and turned them into formulas and algorithms.
     In the end, we were able to implement a decision tree from scratch.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们详细了解了决策树的工作原理。我们从一些模糊但直观的想法开始，将它们转化为公式和算法。最后，我们能够从头实现一棵决策树。
 - en: 'A word of caution though: Our decision tree cannot be regularized yet. Usually,
     we would like to specify parameters like'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过需要提醒的是：我们的决策树尚未正则化。通常，我们希望指定像
 - en: max depth
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最大深度
 - en: leaf size
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 叶子大小
 - en: and minimal information gain
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 和最小信息增益
 - en: among many others. Luckily, these things are not that difficult to implement,
     which makes this a perfect homework for you. For example, if you specify `leaf_size=10` as
     a parameter, then nodes containing more than 10 samples should not be split anymore.
     Also, this implementation is **not efficient**. Usually, you would not want to
     store parts of the datasets in nodes, but only the indices instead. So your (potentially
     large) dataset is in memory only once.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及许多其他内容。幸运的是，这些实现起来并不难，这使得它成为你完美的作业。例如，如果你将`leaf_size=10`作为参数，那么包含超过10个样本的节点就不再拆分。此外，这种实现是**不高效的**。通常，你不希望将数据集的部分内容存储在节点中，而只存储索引。因此，你（可能很大的）数据集只在内存中存在一次。
 - en: 'The good thing is that you can go crazy now with this decision tree template.
     You can:'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 好消息是你现在可以尽情使用这个决策树模板。你可以：
 - en: implement diagonal splits, i.e. *xᵢ + 2xⱼ = 3* instead of just* xᵢ = 3,*
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实现对角线拆分，即*xᵢ + 2xⱼ = 3* 而不是仅仅 *xᵢ = 3*，
 - en: change the logic that happens inside of the leaves, i.e. you can run a logistic
     regression within each leaf instead of just doing a majority vote, which gives
     you a [linear tree](https://github.com/cerlymarco/linear-tree)
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改叶子内部发生的逻辑，即你可以在每个叶子中运行逻辑回归，而不仅仅是做多数投票，这将给你一个[线性树](https://github.com/cerlymarco/linear-tree)。
 - en: change the splitting procedure, i.e. instead of doing brute force, try some
     random combinations and pick the best one, which gives you an [extra-tree classifier](https://scikit-learn.org/stable/modules/generated/sklearn.tree.ExtraTreeClassifier.html#sklearn.tree.ExtraTreeClassifier)
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改拆分过程，即尝试一些随机组合并选择最佳组合，而不是使用暴力破解，这将给你一个[额外树分类器](https://scikit-learn.org/stable/modules/generated/sklearn.tree.ExtraTreeClassifier.html#sklearn.tree.ExtraTreeClassifier)。
 - en: and more.
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 等等。
 - en: '**[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** is a Senior
     Data Scientist at METRO.digital and Author at Towards Data Science.'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[罗伯特·库布勒博士](https://www.linkedin.com/in/robert-kuebler/)** 是 METRO.digital
+    的高级数据科学家，同时也是 Towards Data Science 的作者。'
 - en: '[Original](https://towardsdatascience.com/understanding-by-implementing-decision-tree-dd395867af7e).
     Reposted with permission.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/understanding-by-implementing-decision-tree-dd395867af7e)。转载时获得许可。'
 - en: More On This Topic
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 和 Scikit-learn 简化决策树解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树算法解析](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
 - en: '[Telling a Great Data Story: A Visualization Decision Tree](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[讲述一个伟大的数据故事：一个可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
 - en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n09, 3月2日: 讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)'
 - en: '[A Complete Guide To Decision Tree Software](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)**'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树软件的完整指南](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)**'
