@@ -1,112 +1,143 @@
 - en: Dockerize Jupyter with the Visual Debugger
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html](https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Manish Tiwari](https://www.linkedin.com/in/manish-kumar-tiwari/), Data
     Enthusiast**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/b9e0fd2862820e4423939d8b443837c6.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: Photo by [Nilantha Ilangamuwa](https://unsplash.com/@ilangamuwa?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Jupyter recently announced its first-ever public release of the much-awaited
     visual debugger. Though it is the first release it supports all the basic debugging
     requirements needed to debug and inspect variables, etc.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: The Data Science community is relied heavily on Jupyter Notebooks due to its
     ability to easily communicate and share the outcomes in an interactive way.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: However, the only concern was the missing visual debugging ability due to which
     people usually had to switch to other available classical IDEs which offer a better
     debugging and code refactoring ability. This feature was much awaited by the data
     science community which is finally released now.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: 'For a brief overview of how the visual debugger looks in action, please refer
     below screencast:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/94d10f5444d449de1cebb00591f968a3.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
 - en: Screencast by [Jeremy](https://github.com/jtpio), on [Github](https://github.com/jupyterlab/debugger/blob/master/screencast.gif)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: In this article, we will be going through the steps needed for setting up the
     visual debugger in the existing JupyterLab environment and will also dockerize
     the JupyterLab environment with the visual debugger enabled by default.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: 'Prerequisites:'
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: JupyterLab 2.0+
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: Basic understanding of debugging in any programming language
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Basic understanding of Docker.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: 'Installation:'
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Assuming that you are already using JupterLab you just need to install JupyterLab
     debugger extension for the frontend debugging and any kernel supporting the Jupyter
     debugging protocol at the backend.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'Installing JupyterLab extension for enabling the frontend debugging:'
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: The JupyterLab uses nodejs to install extensions, so we need to install nodejs
     as well in order to install the frontend debugger extension.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: In future releases, Jupyter may include this extension by default.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Installing kernel xeus-python :'
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In the backend as of now, only xeus-python has support for Jupyter debugging
     protocol. In the future, there may be many other kernels having support for this
     protocol.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Now if you run the Jupyter Lab, you should be able to see 2 additional icons,
     1 each in the console and notebook sections for the xeus-python kernel.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: Why Containerize?
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Containers enable smoother development across multiple environments. It’s why
     they’re the technological foundation for the cloud-native approach to app delivery.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: Problems arise when the supporting software environment is not identical, says
@@ -115,6 +146,7 @@
     you’ll rely on the behavior of a certain version of an SSL library and another
     one will be installed. You’ll run your tests on Debian and production is on Red
     Hat and all sorts of weird things happen.”
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: Container solves this problem by bundling the environment needed to run the
@@ -122,219 +154,292 @@
     the application itself into one package. In this way, we no longer need to worry
     about the OS and other environment-specific dependencies as everything is packaged
     in one single independent entity that can run anywhere and everywhere.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Dockerize Jupyter with the Visual Debugger enabled
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: I assume that you are familiar with basic Docker commands and terminologies.
     Explaining how docker works is out of the scope of this article. However, if you
     feel you need to revisit then please refer to the Docker [documentation](https://docs.docker.com/).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Now we will create the Dockerfile needed to create the Docker image of our required
     environment. You can think of the image as the file having instructions to include
     everything that is required to run our application in the containers.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: We will be using Miniconda, a minimal lightweight installer for Anaconda. It
     is a small, bootstrap version of Anaconda that includes only conda, Python, the
     packages they depend on, and a small number of other useful packages.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Define the metadata of the Docker file and working directory:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Install JupyterLab
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Installing nodejs and labextension for frontend debugging
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Installing a kernel supporting Jupyter debugging protocol
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Note: **Here we have used conda package manager, you could have also used
     pip, however, using both together is not recommended as it might break the environment.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: Finally, expose the port and define the entry point
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Our final Dockerfile should look as below:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: Dockerize JupyterLab with Visual Debugger enabled
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Build the Docker image from above Dockerfile.
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Navigate to the folder containing the above Dockerfile and run the below command.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Alternatively, you can also run the command from anywhere providing the absolute
     path of the Dockerfile.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: Once the image is built successfully, verify by listing the docker images by
     below command
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The output should look like below:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/4d9348c00df9a889ea45e8f5a9d13fed.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
 - en: 'Now run the docker image in a new container as below:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Here we are mapping the host port(first one before the colon) 8888 to the exposed
     port in container 8888\. This is required for the host to communicate with the
     container’s port where Jupiter is listening in the container.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: 'Once you run the above command you should see the output as below (provided
     the ports are not already being used by some other process):'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/52ee4e3c29d5a884d81fa56bd5e5c92f.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
 - en: This implies that our docker container is up and running. You can now open the
     URL specified in the above output and play with Jupyter and the visual debugger
     without even realizing that it is not running on the host machine.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: 'You can also see the list of available containers by below command:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'The above command should list the container along with the metadata of the
     container(s) as below:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/23094ef9780246a9158aed1a0794f675.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
 - en: Once you open the URL specified in the above output you should see JupyterLab
     running on host machine’s localhost and port 8888.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/109e93190201264d560fd95d2bad0e59.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
 - en: JupyterLab with visual debugger running in the container
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: Now to play around with the visual debugger, open the Notebook or Console with **xpython** shown
     in the Launcher rather than Python.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: I have published the above docker image we just built on [docker hub](https://hub.docker.com/repository/docker/beingmanish/visualdebugger-jupyter) in
     case you want a ready to use environment for Jupiter with visual debugging enabled.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: You can pull the docker image by below command and play around with it.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: If you wish to dive deeper into the visual debugging architecture of Jupyter,
     you may refer [here](https://blog.jupyter.org/a-visual-debugger-for-jupyter-914e61716559).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: Suggestions or questions? Please write in the comments.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '**References:** [Jupyter Blog](https://blog.jupyter.org/)'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '[Jupyter@Github](https://github.com/jupyter)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Manish Tiwari](https://www.linkedin.com/in/manish-kumar-tiwari/)**
     is a Data Enthusiast keen to share learnings and experience in AI space.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/dockerize-jupyter-with-official-visual-debugger-enabled-cbce1840b7f).
     Reposted with permission.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: '[The 4 Best Jupyter Notebook Environments for Deep Learning](/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[5 Google Colaboratory Tips](/2020/03/5-google-colaboratory-tips.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[GitHub Python Data Science Spotlight: High Level Machine Learning & NLP, Ensembles,
     Command Line Viz & Docker Made Easy](/2018/10/github-python-data-science-spotlight.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Visual ChatGPT: Microsoft Combine ChatGPT and VFMs](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[AI: Large Language & Visual Models](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过集成 Jupyter 和 KNIME 缩短实现时间](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
