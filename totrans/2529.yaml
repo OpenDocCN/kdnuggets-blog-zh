@@ -1,185 +1,266 @@
 - en: Fast AutoML with FLAML + Ray Tune
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 快速AutoML与FLAML + Ray Tune
 - en: 原文：[https://www.kdnuggets.com/2021/09/fast-automl-flaml-ray-tune.html](https://www.kdnuggets.com/2021/09/fast-automl-flaml-ray-tune.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/fast-automl-flaml-ray-tune.html](https://www.kdnuggets.com/2021/09/fast-automl-flaml-ray-tune.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: '**By [Qingyun Wu](https://twitter.com/qingyun_wu), [Chi Wang](https://www.linkedin.com/in/chi-wang-49b15b16/),
     [Antoni Baum](https://www.linkedin.com/in/yard1/), [Richard Liaw](https://twitter.com/richliaw)
     & [Michael Galarnyk](https://twitter.com/GalarnykMichael)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Qingyun Wu](https://twitter.com/qingyun_wu)、[Chi Wang](https://www.linkedin.com/in/chi-wang-49b15b16/)、[Antoni
+    Baum](https://www.linkedin.com/in/yard1/)、[Richard Liaw](https://twitter.com/richliaw)和[Michael
+    Galarnyk](https://twitter.com/GalarnykMichael)撰写**'
 - en: '![Image](../Images/de7c7c129074f49504448e84d6e97174.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/de7c7c129074f49504448e84d6e97174.png)'
 - en: '[FLAML](https://github.com/microsoft/FLAML) is a lightweight Python library
     from Microsoft Research that finds accurate machine learning models in an efficient
     and economical way using [cutting edge](https://arxiv.org/abs/2005.01571) algorithms
     designed to be resource-efficient and easily parallelizable. FLAML can also utilize [Ray
     Tune](https://docs.ray.io/en/master/tune/index.html) for distributed hyperparameter
     tuning to scale up these AutoML methods across a cluster.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[FLAML](https://github.com/microsoft/FLAML)是微软研究院推出的轻量级Python库，使用[前沿](https://arxiv.org/abs/2005.01571)算法以高效经济的方式找到准确的机器学习模型，这些算法旨在资源高效且易于并行化。FLAML还可以利用[Ray
+    Tune](https://docs.ray.io/en/master/tune/index.html)进行分布式超参数调优，以便在集群上扩展这些AutoML方法。'
 - en: 'This blog highlights:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客重点介绍：
 - en: The need for economical AutoML methods
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对经济高效AutoML方法的需求
 - en: Economical AutoML with FLAML
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 经济高效的AutoML与FLAML
 - en: How to scale FLAML’s optimization algorithms with Ray Tune
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用Ray Tune扩展FLAML的优化算法
 - en: The need of economical AutoML methods
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 对经济高效AutoML方法的需求
 - en: AutoML is known to be a resource and time consuming operation as it involves
     trials and errors to find a hyperparameter configuration with good performance.
     Since the space of possible configuration values is often very large, there is
     a need for an economical AutoML method that can more effectively search them.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: AutoML因涉及试错以寻找表现良好的超参数配置而被认为是资源和时间密集型操作。由于可能配置值的空间通常非常大，因此需要一种经济高效的AutoML方法来更有效地搜索这些配置。
 - en: 'The high resource and time consumption of hyperparameter search in AutoML boils
     down to the following two factors:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: AutoML中超参数搜索的高资源和时间消耗归结为以下两个因素：
 - en: large number of candidate hyperparameter configurations (trial) needed to find
     a configuration with good performance
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 需要大量候选超参数配置（试验）以找到性能良好的配置
 - en: high ‘evaluation’ cost of each hyperparameter as the evaluation involves training
     and validating a machine learning model with the given training data.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 每个超参数的高‘评估’成本，因为评估涉及使用给定的训练数据训练和验证机器学习模型。
 - en: To address both of these factors, Microsoft Researchers have developed [FLAML](https://github.com/microsoft/FLAML) (Fast
     Lightweight AutoML).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了应对这两个因素，微软研究人员开发了[FLAML](https://github.com/microsoft/FLAML)（快速轻量级AutoML）。
 - en: '**What is FLAML?**'
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**什么是FLAML？**'
 - en: 'FLAML is a newly released library containing state-of-the-art hyperparameter
     optimization algorithms. FLAML leverages the structure of the search space to
     optimize for both cost and model performance simultaneously. It contains two new
     methods developed by Microsoft Research:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: FLAML是新发布的库，包含最先进的超参数优化算法。FLAML利用搜索空间的结构，同时优化成本和模型性能。它包含了微软研究院开发的两种新方法：
 - en: Cost-Frugal Optimization (CFO)
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 成本节俭优化（CFO）
 - en: BlendSearch
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: BlendSearch
 - en: Cost-Frugal Optimization (CFO) is a method that conducts its search process
     in a cost-aware fashion. The search method starts from a low-cost initial point
     and gradually moves towards a higher cost region while optimizing the given objective
     (like model loss or accuracy).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 成本节俭优化（CFO）是一种以成本感知的方式进行搜索过程的方法。搜索方法从低成本的初始点开始，逐渐向高成本区域移动，同时优化给定目标（如模型损失或准确性）。
 - en: Blendsearch is an extension of CFO that combines the frugality of CFO and the
     exploration ability of Bayesian optimization. Like CFO, BlendSearch requires a
     low-cost initial point as input if such point exists, and starts the search from
     there. However, unlike CFO, BlendSearch will not wait for the local search to
     fully converge before trying new start points.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Blendsearch是CFO的扩展，结合了CFO的节俭性和贝叶斯优化的探索能力。像CFO一样，BlendSearch需要一个低成本的初始点作为输入（如果存在的话），并从那里开始搜索。然而，与CFO不同的是，BlendSearch不会在尝试新的起始点之前等待局部搜索完全收敛。
 - en: 'The economical HPO methods in FLAML are inspired by two key insights:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: FLAML中的经济型HPO方法受到两个关键见解的启发：
 - en: Many machine learning algorithms have hyperparameters that can cause a large
     variation in the training cost. For example, an XGBoost model with 10 trees will
     train much quicker than a model with 1000 trees.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 许多机器学习算法都有可能导致训练成本大幅变化的超参数。例如，10棵树的XGBoost模型训练速度会比1000棵树的模型快得多。
 - en: The “cost” for parameters is often ‘continuous and consistent’ — evaluating
     trees=10 is cheaper than evaluating trees=100, which itself is cheaper than evaluating
     trees=500.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 参数的“成本”通常是‘连续且一致的’——评估树=10的成本低于评估树=100，而评估树=100的成本又低于评估树=500。
 - en: Together, these insights provide useful* structural information* about the hyperparameters
     in the cost space. The methods, i.e., CFO and BlendSearch, are able to effectively
     leverage these insights to reduce the cost incurred along the way without affecting
     the convergence to the optimal solution.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些见解提供了关于成本空间中超参数的有用*结构信息*。这些方法，即CFO和BlendSearch，能够有效地利用这些见解来减少沿途产生的成本，而不影响收敛到最优解。
 - en: '**Does FLAML Work?**'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**FLAML有效吗？**'
 - en: In the latest [AutoML benchmark](https://openml.github.io/automlbenchmark/), [FLAML](https://arxiv.org/pdf/1911.04706.pdf) is
     able to achieve the same or better performance as the state-of-the-art AutoML
     solutions using only 10% of the computation resource on over 62% of the tasks.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最新的[AutoML benchmark](https://openml.github.io/automlbenchmark/)中，[FLAML](https://arxiv.org/pdf/1911.04706.pdf)能够在超过62%的任务上只使用10%的计算资源，实现与最先进AutoML解决方案相同或更好的性能。
 - en: FLAML’s performance is attributed to its economical optimization methods. The
     new HPO methods (CFO, BlendSearch) leverage the structure of the search space
     to choose search orders optimized for both good performance and low cost. This
     can make a big difference in search efficiency under budget constraints.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: FLAML的性能归因于其经济型优化方法。新的HPO方法（CFO，BlendSearch）利用搜索空间的结构来选择优化的搜索顺序，以兼顾良好的性能和低成本。在预算限制下，这可以大大提高搜索效率。
 - en: Figure 1 shows a typical result obtained from FLAML and a state-of-the-art hyperparameter
     tuning library [Optuna](https://github.com/optuna/optuna) for tuning LightGBM
     with 9-dimensional hyperparameters. You can see that FLAML is able to achieve
     a better solution in a much shorter amount of time.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1显示了FLAML和最先进的超参数调整库[Optuna](https://github.com/optuna/optuna)调整LightGBM的典型结果，使用9维超参数。你可以看到，FLAML能够在更短的时间内实现更好的解决方案。
 - en: '![](../Images/6b87b2f4515439e522f2a79d7adf4781.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6b87b2f4515439e522f2a79d7adf4781.png)'
 - en: Figure 1\. Validation loss (1-auc) curve for tuning LightGBM on a [classification
     dataset](https://www.openml.org/d/23517). The lines and shaded area show the mean
     and standard deviation of validation loss over 10 runs. Results in this figure
     are obtained from experiments with 1 cpu without parallelization (image by authors).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1\. 调整LightGBM在[classification dataset](https://www.openml.org/d/23517)上的验证损失（1-auc）曲线。线条和阴影区域显示了10次运行中验证损失的均值和标准差。本图中的结果来自于使用1个CPU且未并行化的实验（图像由作者提供）。
 - en: The following code example shows how to get started with FLAML with just several
     lines of code (assuming the training dataset is provided and saved as `X_train`, `y_train`).
     The task is to tune hyperparameters of the LightGBM model with a time budget of
     60 seconds.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码示例展示了如何仅用几行代码开始使用FLAML（假设训练数据集已提供并保存为`X_train`，`y_train`）。任务是在60秒的时间预算内调整LightGBM模型的超参数。
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: In this example, we search over a default search space for LightGBM, which is
     already provided in FLAML. FLAML provides rich customization options about one’s
     concerned task, such as the learner class, the search space, the evaluation metric,
     etc.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个示例中，我们在LightGBM的默认搜索空间中进行搜索，这个空间已经在FLAML中提供。FLAML提供了丰富的自定义选项，如学习器类、搜索空间、评估指标等。
 - en: A walkthrough example
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个示例演示
 - en: 'Now we use a toy example to demonstrate cost-frugal behavior of CFO in tuning
     XGBoost with two hyperparameters: # of trees and # of leaves.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们使用一个示例来演示CFO在调整XGBoost的两个超参数（树的数量和叶子数量）时的成本节约行为。
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: How CFO and BlendSearch Work
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: CFO和BlendSearch如何工作
 - en: The two GIFs below demonstrate the search trajectory of CFO in the loss and
     evaluation cost (i.e., the evaluation time ) space respectively. CFO begins with
     a low-cost initial point (specified through `low_cost_init_value` in the search
@@ -188,17 +269,23 @@
     a good convergence property. Additionally, CFO tends to avoid exploring the high-cost
     region until necessary. This search strategy is further grounded with a [provable
     convergence rate and bounded cost in expectation](https://arxiv.org/abs/2005.01571).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下两个GIF分别展示了CFO在损失和评估成本（即评估时间）空间中的搜索轨迹。CFO从低成本初始点（通过`low_cost_init_value`在搜索空间中指定）开始，按照其随机局部搜索策略进行局部更新。采用这种策略，CFO可以快速移动到低损失区域，显示出良好的收敛特性。此外，CFO倾向于在必要时才探索高成本区域。这种搜索策略进一步通过[可证明的收敛速率和期望的有界成本](https://arxiv.org/abs/2005.01571)得到了支持。
 - en: '![](../Images/cd50c94bbee1cf7e9397ad9f8c1d2775.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cd50c94bbee1cf7e9397ad9f8c1d2775.png)'
 - en: 'Figure 2\. CFO in tuning the # of leaves and the # of trees for XGBoost. The
     two heatmaps show the loss and cost distribution of all configurations. The black
     dots are the points evaluated in CFO. Black dots connected by lines are points
     that yield better loss performance when evaluated (image by authors).'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2\. CFO在调整XGBoost的叶子数和树木数时的表现。这两个热图展示了所有配置的损失和成本分布。黑点是CFO评估的点，黑点通过线连接的点表示评估时产生更好损失表现的点（图片由作者提供）。
 - en: BlendSearch further combines this local search strategy used in CFO with global
     search. It leverages the frugality of CFO and the space exploration capability
     of global search methods such as Bayesian optimization. Specifically, BlendSearch
@@ -208,30 +295,42 @@
     depending on their real-time performance and cost. It can further improve the
     efficiency of CFO in tasks with complicated search space, e.g., a search space
     that contains multiple disjoint, non-continuous subspaces.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: BlendSearch进一步将CFO使用的局部搜索策略与全局搜索相结合。它利用了CFO的节俭性和全局搜索方法如贝叶斯优化的空间探索能力。具体来说，BlendSearch保持一个全局搜索模型，并逐渐根据全局模型提出的超参数配置创建局部搜索线程。它根据实时性能和成本进一步优先考虑全局搜索线程和多个局部搜索线程。它可以在具有复杂搜索空间的任务中进一步提高CFO的效率，例如包含多个不连续子空间的搜索空间。
 - en: FLAML vs Bayesian Optimization Performance
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: FLAML与贝叶斯优化性能对比
 - en: Figure 3 shows typical behaviors of the economical HPO methods in FLAML (CFO
     is labeled `LS’ in this figure) versus a Bayesian Optimization (BO) method for
     tuning XGBoost with 11 hyperparameters.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3展示了FLAML中经济HPO方法（图中CFO标记为`LS`）与用于调整11个超参数的XGBoost的贝叶斯优化（BO）方法的典型行为。
 - en: From Figure 3(a), we observe that the evaluation time for the proposed configurations
     in BO can be very long. When the total resource is limited, e.g., 1 cpu-hour (or
     less), BO is not able to give a satisfying result (Figure 3(b)).
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图3(a)中，我们观察到BO中提出的配置的评估时间可能非常长。当总资源有限时，例如1个CPU小时（或更少），BO无法提供令人满意的结果（图3(b)）。
 - en: 'FLAML’s CFO (labeled LS) and BlendSearch have clear advantages in finding good
     configurations quickly: they are able to concentrate on configurations that have
     low evaluation time, while navigating ones with good performance, i.e., low loss.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: FLAML的CFO（标记为LS）和BlendSearch在快速找到良好配置方面具有明显优势：它们能够集中在评估时间低的配置上，同时导航那些具有良好性能的配置，即低损失。
 - en: '![](../Images/48ce7d9823e8612a6841e19d5028e40d.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/48ce7d9823e8612a6841e19d5028e40d.png)'
 - en: Figure 3\. (a) is a scatter plot of the hyperparameter configurations proposed
     by different methods, with x-axis and y-axis being the evaluation time and loss.
     The evaluation time of a hyperparameter configuration is the time taken for training
@@ -239,19 +338,26 @@
     data and validating its performance on a validation dataset. The loss is the validation
     loss. (b) shows the best loss obtained by different methods over wall-clock time.
     ([image source](https://openreview.net/pdf?id=VbLH04pRA3))
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3. (a) 是不同方法提出的超参数配置的散点图，x轴和y轴分别为评估时间和损失。超参数配置的评估时间是指在训练数据上训练一个机器学习模型并在验证数据集上验证其性能所需的时间。损失是验证损失。
+    (b) 显示了不同方法在墙钟时间上获得的最佳损失。 ([image source](https://openreview.net/pdf?id=VbLH04pRA3))
 - en: How to scale up CFO and BlendSearch with Ray Tune’s distributed tuning
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何利用 Ray Tune 的分布式调优扩展 CFO 和 BlendSearch
 - en: 'To speed up hyperparameter optimization, you may want to parallelizeyour hyperparameter
     search. For example, BlendSearch is able to work well in a parallel setting: It
     leverages multiple search threads that can be independently executed without obvious
     degradation of performance. This desirable property is not always true for existing
     optimization algorithms such as Bayesian Optimization.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了加速超参数优化，你可能希望将超参数搜索进行并行化。例如，BlendSearch 能够在并行设置中良好工作：它利用可以独立执行的多个搜索线程，且性能不会明显下降。这种理想特性并不总是适用于现有的优化算法，如贝叶斯优化。
 - en: To achieve parallelization, FLAML is integrated with Ray Tune. Ray Tune is a
     Python library that accelerates hyperparameter tuning by allowing you to leverage
     cutting edge optimization algorithms at scale. Ray Tune also allows you to scale
@@ -260,49 +366,76 @@
     from FLAML in Ray Tune to parallelize your search. The following code example
     shows the former usage, which is achieved by simply configuring the `n_concurrent_trials` argument
     in FLAML.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现并行化，FLAML 与 Ray Tune 集成。Ray Tune 是一个 Python 库，通过允许你利用前沿优化算法进行大规模加速超参数调整。Ray
+    Tune 还允许你将超参数搜索从你的笔记本电脑扩展到集群，而无需更改代码。你可以在 FLAML 中使用 Ray Tune，也可以在 Ray Tune 中运行
+    FLAML 的超参数搜索方法来并行化搜索。以下代码示例展示了前者的用法，通过简单地配置 FLAML 中的 `n_concurrent_trials` 参数实现。
 - en: '[PRE2]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/a14bf0e97837d77213d5398128880542.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a14bf0e97837d77213d5398128880542.png)'
 - en: Logo source ([XGBoost](https://github.com/dmlc/xgboost), [FLAML](https://github.com/microsoft/FLAML), [Ray
     Tune](https://github.com/ray-project/ray))
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: Logo 来源 ([XGBoost](https://github.com/dmlc/xgboost), [FLAML](https://github.com/microsoft/FLAML),
+    [Ray Tune](https://github.com/ray-project/ray))
 - en: The code below shows the latter usage, an end-to-end example of how to use BlendSearch
     with Ray Tune.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码展示了后者的用法，即如何在 Ray Tune 中使用 BlendSearch 的端到端示例。
 - en: '[PRE3]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Other key Ray Tune features include:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他主要 Ray Tune 功能包括：
 - en: Automatic integration with experiment tracking tools like Tensorboard and Weights/Biases
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与 Tensorboard 和 Weights/Biases 等实验跟踪工具的自动集成
 - en: Support for GPUs
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持 GPU
 - en: Early stopping
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提前停止
 - en: A scikit-learn API to easily integrate with [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray), [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray), [Scikit-Learn](https://github.com/ray-project/tune-sklearn),
     etc.
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 scikit-learn API，方便与[XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray)、[LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray)、[Scikit-Learn](https://github.com/ray-project/tune-sklearn)等集成。
 - en: Benchmark results
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 基准结果
 - en: We have conducted an experiment to check how well BlendSearch stacks up to Optuna
     (with multivariate TPE sampler) and random search in a highly parallelized setting.
     We have used a subset of 12 datasets from the [AutoML Benchmark](https://www.openml.org/s/218).
@@ -310,119 +443,186 @@
     using 3-fold cross-validation, using ROC-AUC (weighted one-vs-rest for multiclass
     datasets). The runs were repeated three times with different random seeds. Reproduction
     code can be found [here](https://github.com/Yard1/Blendsearch-on-Ray-benchmark).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们进行了一项实验，以检查在高度并行化环境中，BlendSearch 与 Optuna（使用多变量 TPE 采样器）和随机搜索的表现对比。我们使用了来自[AutoML
+    Benchmark](https://www.openml.org/s/218)的12个数据集的子集。每次优化运行均以16个并行试验进行，为期20分钟，采用3折交叉验证，使用
+    ROC-AUC（多类数据集的加权一对其余）。这些运行重复三次，使用不同的随机种子。复现代码可以在[这里](https://github.com/Yard1/Blendsearch-on-Ray-benchmark)找到。
 - en: '![](../Images/d8580e50635a1d1a0d2d0cdd7c82268e.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d8580e50635a1d1a0d2d0cdd7c82268e.png)'
 - en: Image by authors
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: BlendSearch achieved the best cross-validation score in 6 out of 12 datasets.
     Furthermore, BlendSearch had an average of 2.52% improvement over random search,
     compared to Optuna’s 1.96%. It is worth noting that BlendSearch was using univariate
     Optuna-TPE as its global searcher — using multivariate TPE would most likely improve
     the scores further.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: BlendSearch 在 12 个数据集中的 6 个数据集中达到了最佳的交叉验证得分。此外，BlendSearch 比随机搜索的平均提升了 2.52%，而
+    Optuna 的提升为 1.96%。值得注意的是，BlendSearch 使用的是单变量的 Optuna-TPE 作为其全局搜索器——使用多变量 TPE 很可能会进一步提高得分。
 - en: '![](../Images/c286e797360d45720a6c4d34881c0612.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c286e797360d45720a6c4d34881c0612.png)'
 - en: image by authors
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: In addition, thanks to its cost-frugal approach, BlendSearch evaluated, on average,
     twice the number of trials than the other searchers in the same time limit. This
     shows that the gap between BlendSearch and the other algorithms will increase
     with bigger time budgets.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，由于其节省成本的方法，BlendSearch 在相同的时间限制内平均评估的试验次数是其他搜索器的两倍。这表明，随着时间预算的增加，BlendSearch
+    与其他算法之间的差距将会扩大。
 - en: Conclusion
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: FLAML is a newly released library containing [state-of-the-art](https://arxiv.org/abs/2005.01571) hyperparameter
     optimization algorithms that leverages the structure of the search space to optimize
     for both cost and model performance simultaneously. FLAML can also utilize [Ray
     Tune](https://docs.ray.io/en/latest/tune/index.html) for distributed hyperparameter
     tuning to scale up these economical AutoML methods across a cluster.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: FLAML 是一个新发布的库，包含了 [最先进的](https://arxiv.org/abs/2005.01571) 超参数优化算法，这些算法利用搜索空间的结构来同时优化成本和模型性能。FLAML
+    还可以利用 [Ray Tune](https://docs.ray.io/en/latest/tune/index.html) 进行分布式超参数调优，以在集群中扩展这些经济高效的
+    AutoML 方法。
 - en: For more information on FLAML, please see the [GitHub repository](https://github.com/microsoft/FLAML) and
     the [project page](https://aka.ms/flaml). If you would like to keep up to date
     with all things Ray, consider [following @raydistributed on twitter](https://twitter.com/raydistributed) and [sign
     up for the newsletter](https://anyscale.us5.list-manage.com/subscribe?u=524b25758d03ad7ec4f64105f&id=d94e960a03).
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 欲了解更多关于 FLAML 的信息，请参见 [GitHub 仓库](https://github.com/microsoft/FLAML) 和 [项目页面](https://aka.ms/flaml)。如果您希望跟进
+    Ray 的最新动态，请考虑 [关注 @raydistributed 在 Twitter 上](https://twitter.com/raydistributed)
+    并 [注册新闻简报](https://anyscale.us5.list-manage.com/subscribe?u=524b25758d03ad7ec4f64105f&id=d94e960a03)。
 - en: '[Original](https://towardsdatascience.com/fast-automl-with-flaml-ray-tune-64ff4a604d1c).
     Reposted with permission.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/fast-automl-with-flaml-ray-tune-64ff4a604d1c)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Machine Learning Pipeline Optimization with TPOT](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TPOT 进行机器学习管道优化](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '[Binary Classification with Automated Machine Learning](/2021/05/binary-classification-automated-machine-learning.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习中的二分类](/2021/05/binary-classification-automated-machine-learning.html)'
 - en: '[Overview of AutoNLP from Hugging Face with Example Project](/2021/06/overview-autonlp-hugging-face-example-project.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face 的 AutoNLP 概述及示例项目](/2021/06/overview-autonlp-hugging-face-example-project.html)'
 - en: '* * *'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How To Fine-Tune ChatGPT 3.5 Turbo](https://www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何微调 ChatGPT 3.5 Turbo](https://www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo)'
 - en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face AutoTrain 微调 LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
 - en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT 在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
 - en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过快速克里金（FKR）加速机器学习](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
 - en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何让 Python 代码运行得极快](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
