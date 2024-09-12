@@ -1,324 +1,493 @@
 - en: Principal Component Analysis (PCA) with Scikit-Learn
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Scikit-Learn 的主成分分析（PCA）
 - en: 原文：[https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/6ada0542366997aba9e0f4fd17cb4e29.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![主成分分析（PCA）与 Scikit-Learn](../Images/6ada0542366997aba9e0f4fd17cb4e29.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者
 - en: If you’re familiar with the unsupervised learning paradigm, you’d have come
     across dimensionality reduction and the algorithms used for dimensionality reduction
     such as the **principal component analysis** (PCA). Datasets for machine learning
     typically contain a large number of features, but such high-dimensional feature
     spaces are not always helpful.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您对无监督学习范式比较熟悉，您可能会接触到降维及用于降维的算法，例如**主成分分析**（PCA）。机器学习的数据集通常包含大量特征，但如此高维的特征空间并不总是有用的。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In general, all the features are *not* equally important and there are certain
     features that account for a large percentage of variance in the dataset. Dimensionality
     reduction algorithms aim to reduce the dimension of the feature space to a fraction
     of the original number of dimensions. In doing so, the features with high variance
     are still retained—but are in the transformed feature space. And principal component
     analysis (PCA) is one of the most popular dimensionality reduction algorithms.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，并非所有特征都是*同等重要*的，某些特征对数据集的方差占比很大。降维算法的目标是将特征空间的维度减少到原始维度的一个小部分。在这样做的过程中，具有高方差的特征仍然被保留——但位于转换后的特征空间中。而主成分分析（PCA）是最受欢迎的降维算法之一。
 - en: In this tutorial, we’ll learn how principal component analysis (PCA) works and
     how to implement it using the scikit-learn library.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将学习主成分分析（PCA）的工作原理，并了解如何使用 scikit-learn 库实现它。
 - en: How Does Principal Component Analysis (PCA) Work?
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 主成分分析（PCA）是如何工作的？
 - en: Before we go ahead and implement principal component analysis (PCA) in  scikit-learn,
     it’s helpful to understand how PCA works.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们继续使用 scikit-learn 实现主成分分析（PCA）之前，了解 PCA 的工作原理是有帮助的。
 - en: As mentioned, principal component analysis is a dimensionality reduction algorithm.
     Meaning it reduces the dimensionality of the feature space. But how does it achieve
     this reduction?
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，主成分分析是一种降维算法。这意味着它减少了特征空间的维度。但它是如何实现这种降维的呢？
 - en: The motivation behind the algorithm is that there are certain features that
     capture a large percentage of variance in the original dataset. So it's important
     to find the **directions of maximum variance** in the dataset. These directions
     are called **principal components**. And PCA is essentially a projection of the
     dataset onto the principal components.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 该算法背后的动机是存在某些特征能够捕捉到原始数据集中很大一部分的方差。因此，找到数据集中**最大方差的方向**是很重要的。这些方向被称为**主成分**。而
+    PCA 实质上是将数据集投影到主成分上。
 - en: So how do we find the principal components?
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们如何找到主成分呢？
 - en: Suppose the data matrix X is of dimensions **num_observations x num_features**,
     we perform [eigenvalue decomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix)
     on the [covariance matrix](https://en.wikipedia.org/wiki/Covariance_matrix) of
     X.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设数据矩阵 X 的维度为**num_observations x num_features**，我们对 X 的[协方差矩阵](https://en.wikipedia.org/wiki/Covariance_matrix)执行[eigenvalue
+    decomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix)。
 - en: If the features are all zero mean, then the covariance matrix is given by X.T
     X. Here, X.T is the transpose of the matrix X. If the features are not all zero
     mean initially, we can subtract the mean of column i from each entry in that column
     and compute the covariance matrix. It’s simple to see that the covariance matrix
     is a square matrix of order **num_features**.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果特征均值为零，则协方差矩阵为 X.T X。这里，X.T 是矩阵 X 的转置。如果特征最初不都是零均值，我们可以从每一列的每个条目中减去该列的均值，然后计算协方差矩阵。可以简单地看出，协方差矩阵是一个**num_features**阶的方阵。
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/b0e66c9e00d376e00349327e28a9a6da.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/b0e66c9e00d376e00349327e28a9a6da.png)'
 - en: Image by Author
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者图片
 - en: The first k principal components are the *eigenvectors* corresponding to the
     *k largest eigenvalues*.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 前`k`个主成分是对应于*k个最大特征值*的*特征向量*。
 - en: 'So the steps in PCA can be summarized as follows:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，PCA 的步骤可以总结如下：
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/f35220082c4d4abe69a4f216416d5acf.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/f35220082c4d4abe69a4f216416d5acf.png)'
 - en: Image by Author
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者图片
 - en: 'Because the covariance matrix is a symmetric and positive semi-definite, the
     eigendecomposition takes the following form:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于协方差矩阵是对称的且半正定的，特征分解采用如下形式：
 - en: X.T X = D Λ D.T
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: X.T X = D Λ D.T
 - en: Where, D is the matrix of eigenvectors and Λ is a diagonal matrix of eigenvalues.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中，D 是特征向量矩阵，Λ 是特征值的对角矩阵。
 - en: Principal Components Using SVD
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SVD 的主成分
 - en: Another matrix factorization technique that can be used to compute principal
     components is singular value decomposition or SVD.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种可以用来计算主成分的矩阵分解技术是奇异值分解（SVD）。
 - en: 'Singular value decomposition (SVD) is defined for all matrices. Given a matrix
     X, SVD of X gives: X = U Σ V.T. Here, U, Σ, and V are the matrices of left singular
     vectors, singular values, and right singular vectors, respectively. V.T. is the
     transpose of V.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 奇异值分解（SVD）定义适用于所有矩阵。给定一个矩阵 X，X 的 SVD 为：X = U Σ V.T。这里，U、Σ 和 V 分别是左奇异向量、奇异值和右奇异向量的矩阵。V.T.
+    是 V 的转置。
 - en: 'So the SVD of the covariance matrix of X is given by:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，X 的协方差矩阵的 SVD 表示为：
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/7dc90d17b68d09a19669fea36b87f4b8.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/7dc90d17b68d09a19669fea36b87f4b8.png)'
 - en: 'Comparing the equivalence of the two matrix decompositions:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 比较这两种矩阵分解的等效性：
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/51544d8bf32a2031dd8b91a03f1625b2.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/51544d8bf32a2031dd8b91a03f1625b2.png)'
 - en: 'We have the following:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有以下内容：
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/85586a8362860c0358432f10e3217dba.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/85586a8362860c0358432f10e3217dba.png)'
 - en: There are computationally efficient algorithms for calculating the SVD of a
     matrix. The scikit-learn implementation of PCA also uses SVD under the hood to
     compute the principal components.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算矩阵的 SVD 有计算效率高的算法。scikit-learn 实现的 PCA 在内部也使用 SVD 来计算主成分。
 - en: Performing Principal Component Analysis (PCA) with Scikit-Learn
+  id: totrans-39
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Scikit-Learn 执行主成分分析 (PCA)
 - en: Now that we’ve learned the basics of principal component analysis, let’s proceed
     with the scikit-learn implementation of the same.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经了解了主成分分析的基本概念，让我们继续进行 Scikit-Learn 的实现。
 - en: Step 1 – Load the Dataset
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 步骤 1 – 加载数据集
 - en: To understand how to implement principal component analysis, let’s use a simple
     dataset. In this tutorial, we’ll use the wine dataset available as part of scikit-learn's
     **datasets** module.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了理解如何实现主成分分析，我们使用一个简单的数据集。在本教程中，我们将使用作为 scikit-learn 的**datasets**模块一部分的 wine
+    数据集。
 - en: 'Let’s start by loading and preprocessing the dataset:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从加载和预处理数据集开始：
 - en: '[PRE0]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: It has 13 features and 178 records in all.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 它有 13 个特征和总共 178 条记录。
 - en: '[PRE1]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Step 2 – Preprocess the Dataset
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 步骤 2 – 预处理数据集
 - en: 'As a next step, let''s preprocess the dataset. The features are all on different
     scales. To bring them all to a common scale, we’ll use the `StandardScaler` that
     transforms the features to have zero mean and unit variance:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步，让我们对数据集进行预处理。特征都在不同的尺度上。为了将它们都转换到一个共同的尺度，我们将使用`StandardScaler`，它将特征转换为均值为零、方差为一的形式：
 - en: '[PRE3]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Step 3 – Perform PCA on the Preprocessed Dataset
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 步骤 3 – 对预处理的数据集进行 PCA
 - en: To find the principal components, we can use the PCA class from scikit-learn’s
     **decomposition** module.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 要找到主成分，我们可以使用来自 scikit-learn 的**decomposition**模块中的 PCA 类。
 - en: Let’s instantiate a PCA object by passing in the number of principal components
     `n_components` to the constructor.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过将主成分数量 `n_components` 传递给构造函数来实例化一个 PCA 对象。
 - en: The number of principal components is the number of dimensions that you’d like
     to reduce the feature space to. Here, we set the number of components to 3.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 主成分的数量是你希望将特征空间减少到的维度数。在这里，我们将主成分数量设置为 3。
 - en: '[PRE4]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Instead of calling the `fit_transform()` method, you can also call `fit()` followed
     by the `transform()` method.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了调用 `fit_transform()` 方法，你还可以先调用 `fit()`，然后再调用 `transform()` 方法。
 - en: Notice how the steps in principal component analysis such as computing the covariance
     matrix, performing eigendecomposition or singular value decomposition on the covariance
     matrix to get the principal components have all been abstracted away when we use
     scikit-learn’s implementation of PCA.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，当我们使用 scikit-learn 实现的 PCA 时，诸如计算协方差矩阵、对协方差矩阵进行特征分解或奇异值分解以获得主成分等步骤都被抽象化了。
 - en: Step 4 – Examining Some Useful Attributes of the PCA Object
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第 4 步 – 检查 PCA 对象的一些有用属性
 - en: The PCA instance `pca` that we created has several useful attributes that help
     us understand what is going on under the hood.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们创建的 PCA 实例 `pca` 具有多个有用的属性，有助于我们理解其背后的情况。
 - en: The attribute `components_` stores the directions of maximum variance (the principal
     components).
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '`components_` 属性存储了最大方差的方向（主成分）。'
 - en: '[PRE5]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: We mentioned that the principal components are directions of maximum variance
     in the dataset. But how do we measure *how much of the total variance* is captured
     in the number of principal components we just chose?
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们提到主成分是数据集中最大方差的方向。但我们如何衡量在我们选择的主成分数量中*捕获了总方差的多少*呢？
 - en: The `explained_variance_ratio_` attribute captures the ratio of the total variance
     each principal component captures. Sowe can sum up the ratios to get the total
     variance in the chosen number of components.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`explained_variance_ratio_` 属性捕获了每个主成分所捕获的总方差比。因此，我们可以将这些比率相加以获得所选数量主成分的总方差。'
 - en: '[PRE7]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Here, we see that three principal components capture over 66.5% of total variance
     in the dataset.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们看到三个主成分捕获了数据集总方差的超过 66.5%。
 - en: Step 5 – Analyzing the Change in Explained Variance Ratio
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第 5 步 – 分析解释方差比的变化
 - en: We can try running principal component analysis by varying the number of components
     `n_components`.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以尝试通过改变主成分数量 `n_components` 来运行主成分分析。
 - en: '[PRE9]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'To visualize the `explained_variance_ratio_` for the number of components,
     let’s plot the two quantities as shown:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了可视化主成分数量的 `explained_variance_ratio_`，我们可以绘制如下两个量：
 - en: '[PRE11]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: When we use all the 13 components, the `explained_variance_ratio_` is 1.0 indicating
     that we’ve captured 100% of the variance in the dataset.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们使用所有 13 个主成分时，`explained_variance_ratio_` 为 1.0，表示我们已经捕获了数据集中的 100% 方差。
 - en: In this example, we see that with 6 principal components, we'll be able to capture
     more than 80% of variance in the input dataset.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，我们看到使用 6 个主成分可以捕获输入数据集中超过 80% 的方差。
 - en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/42f9e084065da5c276ff87857d172689.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-Learn 进行主成分分析 (PCA)](../Images/42f9e084065da5c276ff87857d172689.png)'
 - en: Conclusion
+  id: totrans-77
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: I hope you’ve learned how to perform principal component analysis using built-in
     functionality in the scikit-learn library. Next, you can try to implement PCA
     on a dataset of your choice. If you’re looking for good datasets to work with,
     check out this list of [websites to find datasets for your data science projects](/2023/04/10-websites-get-amazing-data-data-science-projects.html).
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你已经学会了如何使用 scikit-learn 库中的内置功能执行主成分分析。接下来，你可以尝试在你选择的数据集上实现 PCA。如果你在寻找好的数据集进行实验，可以查看这个[数据科学项目数据集网站列表](/2023/04/10-websites-get-amazing-data-data-science-projects.html)。
 - en: Further Reading
+  id: totrans-79
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 进一步阅读
 - en: '[1] [Computational Linear Algebra](https://github.com/fastai/numerical-linear-algebra/blob/master/README.md),
     fast.ai'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] [计算线性代数](https://github.com/fastai/numerical-linear-algebra/blob/master/README.md)，fast.ai'
 - en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
     and technical writer from India. She likes working at the intersection of math,
     programming, data science, and content creation. Her areas of interest and expertise
@@ -326,33 +495,50 @@
     writing, coding, and coffee! Currently, she''s working on learning and sharing
     her knowledge with the developer community by authoring tutorials, how-to guides,
     opinion pieces, and more.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专业领域包括
+    DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正致力于通过撰写教程、操作指南、评论文章等，学习并与开发者社区分享她的知识。'
 - en: More On This Topic
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Essential Math for Data Science: Eigenvectors and Application to PCA](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学的基础数学：特征值及其在 PCA 中的应用](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
 - en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[市场数据和新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
 - en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最佳 Python 课程：分析总结](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
 - en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的最佳领域：NLP 和文档分析中的纯方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
 - en: '[Codeless Time Series Analysis with KNIME](https://www.kdnuggets.com/2022/10/packt-codeless-time-series-analysis-knime.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[无代码时间序列分析使用 KNIME](https://www.kdnuggets.com/2022/10/packt-codeless-time-series-analysis-knime.html)'
 - en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何收集客户情感分析的数据](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
