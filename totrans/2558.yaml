@@ -1,16 +1,20 @@
 - en: 'High-Performance Deep Learning: How to train smaller, faster, and better models
     – Part 5'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
 - en: In the previous parts ([Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html),
@@ -23,41 +27,50 @@
     Techniques, Automation, and Efficient Architectures). Let us finish this series
     with the final section on the foundational Infrastructure that is critical to
     training and deploying high-performance models.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: As a side note, you are also welcome to go through our [survey paper on efficiency
     in deep learning](https://arxiv.org/abs/2106.08962), which covers this topic in
     further detail.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Infrastructure
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In order to be able to train and run inference efficiently, there has to be
     a robust software and hardware infrastructure foundation. In this section, we
     go over both these aspects.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/731ef6c8b32607021623999d6c9877f7.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
 - en: '*A mental model of the software and hardware infrastructure, and how they interact
     with each other.*'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '**Tensorflow Ecosystem:**'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Tensorflow (TF) [1] is a popular machine learning framework that has been used
     in production by many large enterprises. It has some of the most extensive software
     support for model efficiency.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: 'Tensorflow Lite for On-Device Use Cases: Tensorflow Lite (TFLite) [2] is a
     collection of tools and libraries designed for inference in low-resource environments
     such as edge devices. At a high level, we can break down the TFLite into two core
     parts:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: 'Interpreter and Op Kernels: TFLite provides an interpreter for running specialized
@@ -66,6 +79,7 @@
     The interpreter and operations are primarily optimized for inference on ARM-based
     processors as of the time of writing this post. They can also leverage smartphone
     DSPs such as Qualcomm’s Hexagon [3] for faster execution.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -74,6 +88,7 @@
     a lot of internal details like getting a graph ready for quantized inference (as
     mentioned in earlier posts), fusing operations, adding other metadata to the model,
     etc.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -86,6 +101,7 @@
     both importing models trained in TF as well as creating new models from scratch
     in TF.JS. There is also the TF Model Optimization Toolkit [7], which offers adding
     quantization, sparsity, weight-clustering etc. in a model graph.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: 'XLA for Server-Side Acceleration: XLA (Accelerated Linear Algebra) [8] is a
@@ -97,14 +113,17 @@
     et al. [9] report a 7× increase in training throughput and a 5× increase in the
     maximum batch size that can be used for BERT training using XLA. This allows training
     a BERT model for $32 on Google Cloud.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: '**PyTorch Ecosystem: **'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: PyTorch [10] is another popular machine-learning platform actively used by both
     academia and industry, and it can be compared to Tensorflow in terms of usability
     and features.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'On-Device Usecases: PyTorch also has a lightweight interpreter that enables
@@ -113,6 +132,7 @@
     [12] and other graph optimization steps such as constant folding, fusing certain
     operations together, putting the channels last (NHWC) format for optimizing convolutional
     layers.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: 'General Model Optimization: PyTorch also offers the Just-in-Time (JIT) compilation
@@ -122,40 +142,48 @@
     code for research and development to a representation that can be deployed for
     inference in production. It is the primary way PyTorch models are executed on
     mobile devices.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: The alternatives for XLA in the PyTorch world seem to be the Glow [15] and TensorComprehension
     [16] compilers. They help in generating the lower-level intermediate representation
     (IR) that is derived from the higher-level IR like TorchScript.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: 'PyTorch also offers a model tuning guide [17] which details various options
     that ML practitioners have at their disposal. Some of the core ideas in there
     are:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: Fusion of pointwise operations (add, subtract, multiply, divide, etc.) using
     PyTorch JIT.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Enabling buffer checkpointing allows keeping the outputs of only certain layers
     in memory and computing the rest during the backward pass. This specifically helps
     with cheap to compute layers with large outputs like activations.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Enabling device-specific optimizations, such as the cuDNN library and Mixed
     Precision Training with NVIDIA GPUs (explained in the GPU subsection).
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Train with Distributed Data Parallel Training, which is suitable when there
     is a large amount of data, and multiple GPUs are available for training.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Hardware-Optimized Libraries:**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: We can further extract efficiency by optimizing our software stack for the hardware
@@ -168,9 +196,11 @@
     and 16-bit floating-point for TFLite. Similarly, there are other low-level libraries
     like Accelerate for iOS [20] and NNAPI for Android [21] that try to abstract away
     the hardware-level acceleration decision from higher-level ML frameworks.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '**Hardware **'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: 'GPU: Graphics Processing Units (GPUs), while originally designed for accelerating
@@ -181,13 +211,16 @@
     focus on deep learning performance. It has also introduced Tensor Cores [24],
     which are dedicated execution units and support training and inference in a range
     of precisions (fp32, TensorFloat32, fp16, bfloat16, int8, int4).'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/565b5a29e37b45b895dd6b165cd28f3c.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
 - en: '*Reduced Precision Multiply-and-Accumulate (MAC) operation: B x C is an expensive
     operation, and hence it is done with reduced precision.*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Tensor Cores optimize the standard Multiply-and-Accumulate (MAC) operation,
@@ -201,13 +234,16 @@
     individual layers. Apart from this, NVidia also offers the cuDNN library [29]
     that contains optimized versions of standard neural network operations such as
     fully connected, convolution, batch-norm, activation, etc.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e9cc7b74251b383ecca7ae12475ef576.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
 - en: '*Data types used during training and inference on GPUs and TPUs. bfloat16 originated
     with TPUs, and Tensor Float 32 is supported on NVidia GPUs only.*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: 'TPU: TPUs are proprietary application-specific integrated circuits (ASICs)
@@ -220,6 +256,7 @@
     and passes it on to the next cell in the order, every clock-step (in a rhythmic
     manner analogous to the systolic cardiac rhythm), without the need to store intermediate
     results in memory.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: Each TPU chip has two Tensor Cores (not to be confused with NVidia’s Tensor
@@ -233,20 +270,25 @@
     applications [28]. Similar to the GPUs, TPUs support the bfloat16 data type, which
     is a reduced-precision alternative to training in full floating-point 32-bit precision.
     XLA support allows transparently switching to bfloat16 without any model changes.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/dd046fd4d4c0c60ff9e84a57d199abf3.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
 - en: '*An illustration of a basic systolic array cell, and doing a 4x4 matrix multiplication
     using a mesh of systolic array cells.*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e07609aef4d23226d614e16bb983f126.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
 - en: '*Approximate size of the EdgeTPU, Coral, and the Dev Board. **(Courtesy: Bhuwan
     Chopra)*'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: 'EdgeTPU: EdgeTPU is also a custom ASIC chip designed by Google. Similar to
@@ -257,12 +299,15 @@
     for deployment in many kinds of IoT devices. It has been deployed in Raspberry-Pi-like
     dev boards, in Pixel 4 smartphones as Pixel Neural Core, and can also be independently
     soldered onto a PCB.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/9a43025da1ed0691405d0901df757dec.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
 - en: '*Jetson Nano module. ([Source](https://www.nvidia.com/en-us/autonomous-machines/jetson-store/))*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: 'Jetson: Jetson is a family of accelerators by Nvidia to enable deep learning
@@ -271,9 +316,11 @@
     more powerful Xavier and TX variants, which are based on the NVidia Volta and
     Pascal GPU architectures. The Nano is suited for applications like home automation
     and the rest for more compute-intensive applications like industrial robotics.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: Summary
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -288,9 +335,11 @@
     training and deployment. We invite the readers to go through our more detailed
     [survey paper on model optimization and efficiency](https://arxiv.org/abs/2106.08962)
     for further insights.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: References
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -298,181 +347,226 @@
     Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al.
     2016\. Tensorflow: A system for large-scale machine learning. In 12th {USENIX}
     symposium on operating systems design and implementation ({OSDI} 16). 265–283.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[2] Tensorflow Authors. 2021\. TensorFlow Lite | ML for Mobile and Edge Devices.
     https://www.tensorflow.org/lite [Online; accessed 3\. Jun. 2021].'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '[3] XNNPACK Authors. 2021\. XNNPACK backend for TensorFlow Lite. https://github.com/tensorflow/tensorflow/blob/
     master/tensorflow/lite/delegates/xnnpack/README.md/#sparse-inference.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[4] Pete Warden and Daniel Situnayake. 2019\. Tinyml: Machine learning with
     tensorflow lite on arduino and ultra-low-power microcontrollers. " O’Reilly Media,
     Inc.".'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: '[5] Tensorflow JS: [https://www.tensorflow.org/js](https://www.tensorflow.org/js)'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '[6] WebGL: [https://en.wikipedia.org/wiki/WebGL](https://en.wikipedia.org/wiki/WebGL)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '[7] TensorFlow. 2019\. TensorFlow Model Optimization Toolkit — Post-Training
     Integer Quantization. Medium (Nov 2019). [https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba)'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '[8] Tensorflow Authors. 2021\. XLA: Optimizing Compiler for Machine Learning
     | TensorFlow. https://www.tensorflow. org/xla.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '[9] Pankaj Kanwar, Peter Brandt, and Zongwei Zhou. 2021\. TensorFlow 2 MLPerf
     submissions demonstrate best-in-class performance on Google Cloud. https://blog.tensorflow.org/2020/07/tensorflow-2-mlperf-submissions.html.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[10] Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
     Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et al. 2019\.
     Pytorch: An imperative style, high-performance deep learning library. arXiv preprint
     arXiv:1912.01703 (2019).'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '[11] PyTorch Authors. 2021\. PyTorch Mobile. https://pytorch.org/mobile/home.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[12] PyTorch Authors. 2021\. Quantization Recipe — PyTorch Tutorials 1.8.1+cu102
     documentation. https://pytorch.org/ tutorials/recipes/quantization.html.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: '[13]  PyTorch Authors. 2021\. torch.jit.script — PyTorch 1.8.1 documentation.
     https://pytorch.org/docs/stable/generated/ torch.jit.script.html'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '[14]  PyTorch Authors. 2021\. torch.jit.script — PyTorch 1.8.1 documentation.
     https://pytorch.org/docs/stable/generated/ torch.jit.script.html'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[15] Nadav Rotem, Jordan Fix, Saleem Abdulrasool, Garret Catron, Summer Deng,
     Roman Dzhabarov, Nick Gibson, James Hegeman, Meghan Lele, Roman Levenstein, et
     al. 2018\. Glow: Graph lowering compiler techniques for neural networks. arXiv
     preprint arXiv:1805.00907 (2018).'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '[16] Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal,
     Zachary DeVito, William S Moses, Sven Verdoolaege, Andrew Adams, and Albert Cohen.
     2018\. Tensor comprehensions: Framework-agnostic highperformance machine learning
     abstractions. arXiv preprint arXiv:1802.04730 (2018).'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '[17] PyTorch Authors. 2021\. Performance Tuning Guide — PyTorch Tutorials 1.8.1+cu102
     documentation. https: //pytorch.org/tutorials/recipes/recipes/tuning_guide.html'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '[18] Marat Dukhan, Yiming Wu Wu, and Hao Lu. 2020\. QNNPACK: Open source library
     for optimized mobile deep learning - Facebook Engineering. https://engineering.fb.com/2018/10/29/ml-applications/qnnpack'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '[19] XNNPACK Authors. 2021\. XNNPACK. https://github.com/google/XNNPACK'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '[20] Apple Authors. 2021\. Accelerate | Apple Developer Documentation. https://developer.apple.com/documentation/
     accelerate'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '[21] Android Developers. 2021\. Neural Networks API | Android NDK | Android
     Developers. https://developer.android. com/ndk/guides/neuralnetworks.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '[22] Contributors to Wikimedia projects. 2021\. CUDA - Wikipedia. https://en.wikipedia.org/w/index.php?title=CUDA&
     oldid=1025500257.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '[23] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. 2012\. Imagenet
     classification with deep convolutional neural networks. Advances in neural information
     processing systems 25 (2012), 1097–1105.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '[24] NVIDIA. 2020\. Inside Volta: The World’s Most Advanced Data Center GPU
     | NVIDIA Developer Blog. https: //developer.nvidia.com/blog/inside-volta.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: '[25] Dusan Stosic. 2020\. Training Neural Networks with Tensor Cores - Dusan
     Stosic, NVIDIA. https://www.youtube. com/watch?v=jF4-_ZK_tyc'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '[26] HT Kung and CE Leiserson. 1980\. Introduction to VLSI systems. Mead, C.
     A_, and Conway, L.,(Eds), Addison-Wesley, Reading, MA (1980), 271–292.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: '[27] Kaz Sato. 2021\. What makes TPUs fine-tuned for deep learning? | Google
     Cloud Blog. https://cloud.google.com/ blog/products/ai-machine-learning/what-makes-tpus-fine-tuned-for-deep-learning'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '[How to Use NVIDIA GPU Accelerated Libraries](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Getting Started with Distributed Machine Learning with PyTorch and Ray](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Best Machine Learning Frameworks & Extensions for TensorFlow](https://www.kdnuggets.com/2021/04/best-machine-learning-frameworks-extensions-tensorflow.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'

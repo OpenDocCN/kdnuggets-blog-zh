@@ -1,546 +1,816 @@
 - en: How Much Memory is your Machine Learning Code Consuming?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 你的机器学习代码消耗了多少内存？
 - en: 原文：[https://www.kdnuggets.com/2021/07/memory-machine-learning-code-consuming.html](https://www.kdnuggets.com/2021/07/memory-machine-learning-code-consuming.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/memory-machine-learning-code-consuming.html](https://www.kdnuggets.com/2021/07/memory-machine-learning-code-consuming.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/e666b93a66f863d32faf7f17039496f7.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e666b93a66f863d32faf7f17039496f7.png)'
 - en: Image source: [Pixabay](https://pixabay.com/photos/hourglass-clock-time-period-hours-2910951/)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Pixabay](https://pixabay.com/photos/hourglass-clock-time-period-hours-2910951/)
 - en: Why profile the memory usage?
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要分析内存使用情况？
 - en: Suppose you have written a cool machine learning (ML) app or created a shiny
     neural network model. Now you want to deploy this model over some web service
     or REST API.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你已经编写了一个很酷的机器学习（ML）应用程序或创建了一个炫目的神经网络模型。现在你想将这个模型部署到某个网络服务或REST API上。
 - en: Or, you might have developed this model based on data streams coming from industrial
     sensors in a manufacturing plant and now you have to deploy the model on one of
     the industrial control PCs to serve decisions based on continuously incoming data.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者，你可能是基于来自制造厂工业传感器的数据流开发了这个模型，现在你需要将模型部署到一个工业控制计算机上，以便根据持续输入的数据做出决策。
 - en: '![](../Images/d3c66c70d3e3d5a01f9a613c092c6a39.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d3c66c70d3e3d5a01f9a613c092c6a39.png)'
 - en: “Excited to have developed a shiny ML model”. Image source: [Pixabay](https://pixabay.com/photos/children-win-success-video-game-593313/)
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: “兴奋地开发了一个炫目的ML模型”。 图片来源：[Pixabay](https://pixabay.com/photos/children-win-success-video-game-593313/)
 - en: As a data scientist, an extremely common question that you may expect from the
     engineering/platform team is “***how much memory footprint does your model/code
     have?***” or “***what’s the peak memory usage by your code when running with some
     given data load?***”
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，你可能会经常遇到来自工程/平台团队的一个非常常见的问题：“***你的模型/代码的内存占用有多大？***” 或 “***当代码在某些数据负载下运行时，内存的峰值使用量是多少？***”
 - en: This is natural to wonder about because **hardware resources may be limited** and
     one single ML module should not hog all the memory of the system. This is **particularly
     true for edge computing scenarios** i.e. where the ML app may be running on the
     edge e.g. inside a virtualized container on an industrial PC.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是很自然的疑问，因为**硬件资源可能有限**，单个ML模块不应占用系统的全部内存。这在**边缘计算场景中尤为重要**，即ML应用程序可能在边缘运行，例如在工业PC上的虚拟化容器内。
 - en: Also, your model may be one of the hundreds of models running on that piece
     of hardware and you must have **some idea about the peak memory usage** because
     if a multitude of models peaks in their memory usage at the same time, it can
     crash the system.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，你的模型可能是运行在那块硬件上的数百个模型之一，你必须对**内存峰值使用量有一些了解**，因为如果多个模型在同一时间内存使用量达到峰值，可能会导致系统崩溃。
 - en: Now, that got you wondering, didn’t it?
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，这让你感到好奇了，不是吗？
 - en: '![](../Images/60dfc75688808c42908777a9085c8b0e.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/60dfc75688808c42908777a9085c8b0e.png)'
 - en: Image source: [Pixabay](https://pixabay.com/photos/child-surprise-think-interactivity-2800835/)
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Pixabay](https://pixabay.com/photos/child-surprise-think-interactivity-2800835/)
 - en: '**… hardware resources may be limited** and one single ML module should not
     hog all the memory of the system. This is **particularly true for edge computing
     scenarios…**'
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**… 硬件资源可能有限**，单个ML模块不应占用系统的全部内存。这在**边缘计算场景中尤为重要…**'
 - en: Don’t make this cardinal mistake
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不要犯这个基本错误
 - en: Note, we are talking about the runtime memory profile (a dynamic quantity) of
     your entire code. This has nothing to do with the size or compression of your
     ML model (which you may have saved as a special object on the disk e.g. [Scikit-learn
     Joblib dump](https://scikit-learn.org/stable/modules/model_persistence.html),
     a simple Python Pickle dump, a [TensorFlow HFD5](https://www.tensorflow.org/tutorials/keras/save_and_load),
     or likes).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们讨论的是你整个代码的运行时内存配置文件（一个动态量）。这与ML模型的大小或压缩（你可能将其保存为磁盘上的特殊对象，例如[Scikit-learn
+    Joblib dump](https://scikit-learn.org/stable/modules/model_persistence.html)、一个简单的Python
+    Pickle dump、[TensorFlow HFD5](https://www.tensorflow.org/tutorials/keras/save_and_load)等）无关。
 - en: 'Scalene: A neat little memory/CPU/GPU profiler'
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Scalene：一个整洁的小型内存/CPU/GPU分析器
 - en: Here is an article about some older memory profilers to use with Python.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一篇关于一些旧的内存分析工具的文章，可以与Python一起使用。
 - en: '[**How To Manage Memory in Python**](https://www.pluralsight.com/guides/profiling-memory-usage-in-python)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**如何管理Python中的内存**](https://www.pluralsight.com/guides/profiling-memory-usage-in-python)'
 - en: In this article, we will discuss **Scalene** — your one-stop shop for answering
     these questions, posed by your engineering team.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将讨论 **Scalene** —— 这是你解答工程团队提出的这些问题的一站式工具。
 - en: As per its [GitHub page](https://github.com/plasma-umass/scalene), “*Scalene
     is a high-performance CPU, GPU and memory profiler for Python that does a number
     of things that other Python profilers do not and cannot do. It runs orders of
     magnitude faster than other profilers while delivering far more detailed information.*”
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据其 [GitHub 页面](https://github.com/plasma-umass/scalene)，“*Scalene 是一个高性能的 CPU、GPU
+    和内存分析工具，用于 Python，它做了其他 Python 分析工具不能做的事情。它比其他分析工具运行速度快几个数量级，同时提供更详细的信息。*”
 - en: It is developed at the Univ. of Massachusetts. Check this video for a comprehensive
     introduction.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 它在马萨诸塞大学开发。查看这个视频以获得全面的介绍。
 - en: Install
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装
 - en: It’s a Python package after all. So, install usually,
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 毕竟它是一个 Python 包。因此，通常需要进行安装，
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Currently, works only for Linux OS. I did not test it on Windows 10.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前仅适用于 Linux 操作系统。我没有在 Windows 10 上测试过。
 - en: Use on a CLI or inside a Jupyter Notebook
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 CLI 或 Jupyter Notebook 内部使用
 - en: The use of Scalene is extremely straight-forward,
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Scalene 非常简单，
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Alternatively, you can use it inside the Jupyter notebook by using this magic
     command,
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者，你可以通过使用这个魔法命令在 Jupyter notebook 内部使用它，
 - en: '[PRE2]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Example output
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例输出
 - en: Here is an example output. We will delve deeper into this shortly.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个示例输出。我们将很快深入探讨这个问题。
 - en: '![](../Images/56327d172e1146bf408b00075cfc9130.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/56327d172e1146bf408b00075cfc9130.png)'
 - en: Features
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特性
 - en: Here are some of the cool features of Scalene. Most of them are self-explanatory
     and can be gauged from the screenshot above,
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是 Scalene 一些很酷的功能。大多数功能显而易见，可以从上面的截图中看出，
 - en: '**Lines or functions**: Reports information both for entire functions and for
     every independent code line'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**行或函数**：报告整个函数和每一行独立代码的信息'
 - en: '**Threads**: It supports Python threads.'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**线程**：它支持 Python 线程。'
 - en: '**Multiprocessing**: supports use of the `multiprocessing` library'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**多进程**：支持使用 `multiprocessing` 库'
 - en: '**Python vs. C time**: Scalene breaks out time spent in Python vs. native code
     (e.g., libraries)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Python vs. C 时间**：Scalene 区分 Python 代码与本地代码（例如库）所花费的时间'
 - en: '**System time**: It distinguishes system time (e.g., sleeping or performing
     I/O operations)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**系统时间**：它区分系统时间（例如，休眠或执行 I/O 操作）'
 - en: '**GPU**: It also can report the time spent on an NVIDIA GPU (if present)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**GPU**：它也可以报告在 NVIDIA GPU 上（如果存在）的时间'
 - en: '**Copy volume**: It reports MBs of data being copied per second'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**复制量**：报告每秒复制的数据量（以 MB 为单位）'
 - en: '**Detects leaks**: Scalene can automatically pinpoint lines responsible for
     likely memory leaks!'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**检测泄漏**：Scalene 可以自动定位可能导致内存泄漏的代码行！'
 - en: A concrete machine learning code example
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个具体的机器学习代码示例
 - en: Let’s get down to the business of putting Scalene to use for memory profiling
     standard machine learning code. We will look at two different types of ML models
     — for reasons that will be clarified soon. We will use the Scikit-learn library
     for all three models and utilize its synthetic data generation function to create
     our dataset.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始使用 Scalene 进行内存分析的标准机器学习代码。我们将查看两种不同类型的 ML 模型——原因将在不久后说明。我们将使用 Scikit-learn
+    库进行所有三个模型，并利用其合成数据生成函数来创建我们的数据集。
 - en: A multiple linear regression model
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个多元线性回归模型
 - en: A deep neural network model with the same dataset
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用相同数据集的深度神经网络模型
 - en: The modeling code follows the exact same structure for all three models. External
     I/O ops are also indicated in the following figure as we will see that they may
     or may not dominate the memory profile depending on the type of the model.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型代码在所有三个模型中遵循完全相同的结构。外部 I/O 操作在下图中也有所指示，因为我们将看到这些操作可能会主导或不主导内存分析，具体取决于模型的类型。
 - en: '![](../Images/bad072eafb90ed13e967f39d8e78549e.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bad072eafb90ed13e967f39d8e78549e.png)'
 - en: 'Image source: Author produced (owns the copyright)'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者制作（拥有版权）
 - en: Linear regression model
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 线性回归模型
 - en: The code file is [here in my GitHub repo](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/linearmodel.py).
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码文件在 [这里我的 GitHub 仓库](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/linearmodel.py)。
 - en: We use standard imports and two variables `NUM_FEATURES` and `NUM_SMPLES` for
     doing some experiments later.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用标准导入和两个变量 `NUM_FEATURES` 和 `NUM_SAMPLES` 进行一些后续实验。
 - en: '![](../Images/13f542dad7e5f782d08833165ac26985.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/13f542dad7e5f782d08833165ac26985.png)'
 - en: We are not showing the data generation and model fitting code. They are pretty
     standard and can be seen [here](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/linearmodel.py).
     We save the fitted model as a pickled dump and load it along with a test CSV file
     for the inference.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们没有展示数据生成和模型拟合的代码。这些代码相当标准，可以在[这里](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/linearmodel.py)看到。我们将拟合的模型保存为pickle格式，并与测试CSV文件一起加载进行推断。
 - en: '![](../Images/58d405dfd5cbd73c8c812d6b95f98183.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/58d405dfd5cbd73c8c812d6b95f98183.png)'
 - en: We run everything under a `main` loop for clarity with Scalene execution and
     reporting (you will understand shortly).
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在`main`循环中运行所有内容，以便于Scalene执行和报告（你很快会明白）。
 - en: '![](../Images/ff5d40503e1cab93aaa148f919586e68.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ff5d40503e1cab93aaa148f919586e68.png)'
 - en: When we run the command,
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们运行命令时，
 - en: '[PRE3]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We get these results as output. **Note, here I used the **`**--html**`** flag
     and piped the output to an HTML file for easy reporting**.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到这些结果作为输出。**注意，这里我使用了`**--html**`标志，并将输出通过管道传送到HTML文件中以便于报告**。
 - en: '![](../Images/b9a015457f196fb99f274789ee2c8455.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b9a015457f196fb99f274789ee2c8455.png)'
 - en: '![](../Images/f47459e528414a38fd1903b9ed9792b7.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f47459e528414a38fd1903b9ed9792b7.png)'
 - en: '**So, what is striking in this result?**'
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**那么，这个结果中最引人注目的是什么？**'
 - en: The memory footprint is almost entirely dominated by the external I/O such as
     Pandas and Scikit-learn estimator loading and a tiny amount going to writing out
     the test data into a CSV file on the disk.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 内存占用几乎完全由外部I/O（如Pandas和Scikit-learn估计器加载）主导，只有极少部分用于将测试数据写入磁盘上的CSV文件。
 - en: The actual ML modeling, Numpy or Pandas operations, and inference do not impact
     the memory at all!
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际的机器学习建模、Numpy或Pandas操作以及推断完全不会影响内存！
 - en: What happens as the model and data scale?
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 随着模型和数据规模的扩大，会发生什么？
 - en: We can scale the dataset size (number of rows) and the model complexity (number
     of features) and run the same memory profiling to document how the various operations
     behave in terms of memory consumption. The result is shown here.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以扩展数据集大小（行数）和模型复杂性（特征数量），并运行相同的内存分析，以记录各种操作在内存消耗方面的行为。结果如下所示。
 - en: 'Here the **X-axis represents the # of features/# of data points as a pair**.
     Note that this plot depicts percentage and not the absolute values to showcase
     the relative importance of the various types of operations.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，**X轴表示特征数量/数据点数量的配对**。请注意，此图展示的是百分比而非绝对值，以突出各种操作的相对重要性。
 - en: '![](../Images/bfadee308ec5d1872491b943029cc923.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bfadee308ec5d1872491b943029cc923.png)'
 - en: 'Image source: Author produced (owns the copyright)'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者制作（拥有版权）
 - en: So, for the linear regression model…
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 所以，对于线性回归模型……
 - en: From these experiments, we conclude that a Scikit-learn linear regression estimator
     is quite efficient and **does not consume much memory for actual model fitting
     or inference**.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这些实验中，我们得出结论，Scikit-learn的线性回归估计器非常高效，并且**在实际模型拟合或推断时不会消耗太多内存**。
 - en: It does, however, have a fixed memory footprint in terms of the code and consumes
     that much while getting loaded. However, the percentage of that code footprint
     as a whole goes down as the data size and model complexity increase.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，它在代码方面有一个固定的内存占用，并在加载时消耗了这么多内存。然而，随着数据大小和模型复杂性的增加，这部分代码占用的百分比会下降。
 - en: Therefore, if you are working with such a **small linear model, then you may
     want to focus on data file I/O to optimize your code** for better memory performance.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，如果你正在使用这样的**小型线性模型，那么你可能需要专注于数据文件的I/O以优化你的代码**以获得更好的内存性能。
 - en: What happens with a deep neural network?
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 深度神经网络会发生什么？
 - en: If we run similar experiments with a 2-hidden-layer neural network (with 50
     neurons in each hidden layer), then the result looks like the following. The [code
     file is here](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/mlp.py).
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们用一个具有2个隐藏层（每个隐藏层50个神经元）的神经网络运行类似的实验，那么结果如下所示。 [代码文件在这里](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/mlp.py)。
 - en: '![](../Images/bdc5ab77dc5b38015239b35d40d382bd.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bdc5ab77dc5b38015239b35d40d382bd.png)'
 - en: 'Image source: Author produced (owns the copyright)'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者制作（拥有版权）
 - en: Clearly, the **neural network model consumes a lot of memory at the training/fitting
     step, unlike the linear regression model**. However, for a small number of features
     and large data size, the fitting takes a low amount of memory.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，**神经网络模型在训练/拟合阶段消耗大量内存，这与线性回归模型不同**。然而，对于特征数量较少而数据量较大的情况，拟合所需的内存量较低。
 - en: You can also experiment with various architectures and hyperparameters and document
     the memory usage to arrive at the setting which works for your situation.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以尝试各种架构和超参数，并记录内存使用情况，以找到适合你情况的设置。
 - en: Follow the experimental approach
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 采取实验方法
 - en: If you repeat the experiments with the same [code files](https://github.com/tirthajyoti/Machine-Learning-with-Python/tree/master/Memory-profiling/Scalene),
     the results will vary widely depending on your hardware, disk/ CPU/ GPU/ memory
     type. The purpose of this article is not to focus on the actual values or even
     on the trends. I want you to take away the approach to do memory profiling experiments
     for your own code.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你重复使用相同的[代码文件](https://github.com/tirthajyoti/Machine-Learning-with-Python/tree/master/Memory-profiling/Scalene)进行实验，结果将根据你的硬件、磁盘/
+    CPU/ GPU/ 内存类型而有很大不同。本文的目的是不关注实际值或趋势。我希望你能够掌握为自己的代码进行内存性能分析实验的方法。
 - en: Some key advice
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一些关键建议
 - en: Preferably write **small functions** focused on one single task in your code
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽可能编写**专注于单一任务的小函数**。
 - en: Keep some **free variables** like the number of features and number of data
     points so that you can run the same code file with minimal changes to check the
     memory profile when the data/ model scales
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保持一些**自由变量**，如特征数量和数据点数量，以便在数据/模型扩展时可以对相同的代码文件进行最小更改并检查内存配置。
 - en: If you are comparing one ML algorithm to another, try to keep the **structure
     and flow of the overall code as much identical as possible** to reduce confusion.
     Preferably, just change the estimator class and compare the memory profiles.
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你在比较一个机器学习算法与另一个，尽量保持**整体代码的结构和流程尽可能相同**，以减少混淆。最好只更改估算器类并比较内存配置。
 - en: '**Data and model I/O** (import statements, model persistence on the disk) can
     be surprisingly dominating in terms of memory footprint depending on your modeling
     scenario. Never ignore them while doing optimization.'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据和模型的输入/输出**（导入语句、模型在磁盘上的持久化）在内存占用方面可能会出乎意料地占据主导地位，具体取决于你的建模场景。在进行优化时，绝不要忽视它们。'
 - en: For the same reason above, consider comparing the memory profiles of the **same
     algorithm from multiple implementation/packages** (e.g. Keras vs. PyTorch vs.
     Scikit-learn). If memory optimization is your primary goal, you may have to look
     for the implementation that has a minimal memory footprint yet can do the job
     satisfactorily even if it is not the absolute best in terms of features or performance.
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 出于上述原因，考虑比较**多个实现/包中相同算法的内存配置**（例如Keras与PyTorch与Scikit-learn）。如果内存优化是你的主要目标，你可能需要寻找内存占用最少但仍能令人满意地完成工作的实现，即使它在功能或性能方面不是绝对最佳的。
 - en: If the data I/O becomes a bottleneck, explore **faster options or other storage
     types** e.g. replacing Pandas CSV by parquet file and Apache Arrow storage. Check
     this article,
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果数据输入/输出成为瓶颈，可以探索**更快的选项或其他存储类型**，例如用parquet文件和Apache Arrow存储替换Pandas CSV。查看这篇文章，
 - en: '[**How fast is reading Parquet file (with Arrow) vs. CSV with Pandas?**](https://towardsdatascience.com/how-fast-is-reading-parquet-file-with-arrow-vs-csv-with-pandas-2f8095722e94)'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**读取Parquet文件（使用Arrow）与CSV文件（使用Pandas）的速度有多快？**](https://towardsdatascience.com/how-fast-is-reading-parquet-file-with-arrow-vs-csv-with-pandas-2f8095722e94)'
 - en: Other things you can do with Scalene
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用Scalene可以做的其他事情
 - en: In this article, we just discussed the bare minimum memory profiling with a
     focus on a canonical ML modeling code. Scalene CLI has other options which you
     can take advantage of,
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们仅讨论了最基本的内存性能分析，重点是经典的机器学习建模代码。Scalene CLI还提供了其他选项，你可以加以利用，
 - en: profiling CPU time only and no memory profile
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仅对CPU时间进行性能分析，不分析内存。
 - en: reduced profiling with non-zero memory footprint only
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仅减少有非零内存占用的性能分析
 - en: specifying CPU and memory allocation minimum thresholds
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定CPU和内存分配的最小阈值
 - en: setting the CPU sampling rate
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置CPU采样率
 - en: multithreading and check the difference
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多线程并检查差异
 - en: Final validation is sometimes necessary
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终验证有时是必要的。
 - en: For low-resource situations, it would be a good idea to host a validation environment/
     server which will accept a given modeling code (when developed) and run it through
     such a memory profiler to create runtime statistics. If it passes pre-determined
     criteria of memory footprint, only then the modeling code will be accepted for
     further deployment.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于资源有限的情况，建议托管一个验证环境/服务器，该服务器将接受给定的建模代码（开发完成后），并通过内存分析器运行该代码以生成运行时统计数据。如果它符合预定的内存占用标准，则该建模代码才会被接受以进行进一步部署。
 - en: '![](../Images/834d9c2379f2cc82d9c48a779e04b4cc.png)'
+  id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/834d9c2379f2cc82d9c48a779e04b4cc.png)'
 - en: 'Image source: Author produced (owns the copyright)'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者制作（拥有版权）
 - en: If memory optimization is your primary goal, you may have to look for an implementation
     that has a minimal memory footprint yet can do the job satisfactorily.
+  id: totrans-106
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 如果内存优化是你的主要目标，你可能需要寻找一个内存占用最小但能令人满意地完成工作的实现。
 - en: Summary
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: In this article, we discussed the importance of memory profiling your ML code
     for smooth and easy interfacing with the platform/engineering team that will deploy
     the code on a service/machine. Profiling memory can also show you surprising ways
     to optimize the code based on the particular data and algorithms you are dealing
     with.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们讨论了内存分析对你的机器学习代码的重要性，以便与将代码部署到服务/机器上的平台/工程团队顺利对接。内存分析还可以展示优化代码的意外方式，基于你处理的数据和算法。
 - en: We showed a typical ML modeling code example being profiled with a powerful
     yet lightweight Python library Scalene. We demonstrated some representative results
     with linear regression and neural network models and also provided some general
     advice.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了一个典型的机器学习建模代码示例，并使用了强大而轻量的 Python 库 Scalene 进行分析。我们展示了一些线性回归和神经网络模型的代表性结果，并提供了一些通用建议。
 - en: Hope you get more success in implementing and deploying your ML code into production
     using these tools and techniques.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你在使用这些工具和技术实现并部署你的机器学习代码时取得更多成功。
 - en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
     code, ideas, and resources in machine learning and data science. If you are, like
     me, passionate about AI/machine learning/data science, please feel free to [add
     me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
     me on Twitter](https://twitter.com/tirthajyotiS).
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以查看作者的 [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 仓库
+    **以获取机器学习和数据科学方面的代码、想法和资源。如果你像我一样，对 AI/机器学习/数据科学充满热情，请随时 [在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)
+    或 [关注我的 Twitter](https://twitter.com/tirthajyotiS)。
 - en: '[Original](https://towardsdatascience.com/how-much-memory-is-your-ml-code-consuming-98df64074c8f).
     Reposted with permission.'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-much-memory-is-your-ml-code-consuming-98df64074c8f)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Managing Your Reusable Python Code as a Data Scientist](/2021/06/managing-reusable-python-code-data-scientist.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[作为数据科学家的可重用 Python 代码管理](/2021/06/managing-reusable-python-code-data-scientist.html)'
 - en: '[5 Python Data Processing Tips & Code Snippets](/2021/07/python-tips-snippets-data-processing.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个 Python 数据处理技巧及代码片段](/2021/07/python-tips-snippets-data-processing.html)'
 - en: '[GitHub Copilot: Your AI pair programmer – what is all the fuss about?](/2021/07/github-copilot-ai-pair-programmer.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub Copilot：你的 AI 编程伙伴 – 这究竟有什么大惊小怪？](/2021/07/github-copilot-ai-pair-programmer.html)'
 - en: '* * *'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-118
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[A (Much) Better Approach to Evaluate Your Machine Learning Model](https://www.kdnuggets.com/2022/01/much-better-approach-evaluate-machine-learning-model.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一种（更佳的）评估机器学习模型的方法](https://www.kdnuggets.com/2022/01/much-better-approach-evaluate-machine-learning-model.html)'
 - en: '[How Much Math Do You Need in Data Science?](https://www.kdnuggets.com/2020/06/math-data-science.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你在数据科学中需要多少数学知识？](https://www.kdnuggets.com/2020/06/math-data-science.html)'
 - en: '[How Much Do Data Scientists Make in 2022?](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家在2022年赚多少钱？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)'
 - en: '[How to Perform Memory-Efficient Operations on Large Datasets with Pandas](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Pandas在大数据集上执行内存高效的操作](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)'
 - en: '[Memory Complexity with Transformers](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[变压器的内存复杂性](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)'
 - en: '[Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的内存分析简介](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
