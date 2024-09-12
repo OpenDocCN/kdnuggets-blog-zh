@@ -1,18 +1,27 @@
 - en: Autotuning for Multi-Objective Optimization on LinkedIn’s Feed Ranking
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: LinkedIn 供稿排名的多目标优化的自动调节
 - en: 原文：[https://www.kdnuggets.com/2020/08/autotuning-multi-objective-optimization-linkedin-feed-ranking.html](https://www.kdnuggets.com/2020/08/autotuning-multi-objective-optimization-linkedin-feed-ranking.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/08/autotuning-multi-objective-optimization-linkedin-feed-ranking.html](https://www.kdnuggets.com/2020/08/autotuning-multi-objective-optimization-linkedin-feed-ranking.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Marco Varela](https://www.linkedin.com/in/marcovarelaalvarado/) & [Mavis
     Li](https://www.linkedin.com/in/mavis-li-67aab91a/), LinkedIn**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Marco Varela](https://www.linkedin.com/in/marcovarelaalvarado/) 和 [Mavis
+    Li](https://www.linkedin.com/in/mavis-li-67aab91a/)，LinkedIn**'
 - en: The mission of LinkedIn’s Feed on the Homepage is to enable members to build
     an active professional community that advances their careers. In order to provide
     the best experience on the Feed, we leverage Artificial Intelligence (AI) to show
@@ -23,16 +32,22 @@
     aim to fulfill LinkedIn’s mission to “connect the world’s professionals to make
     them more productive and successful”. Given that we want to provide a diverse
     and rich experience to our members, we cannot simply strive to increase clicks.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: LinkedIn 主页上的供稿使命是使会员能够建立一个积极的专业社区，促进他们的职业发展。为了在供稿上提供最佳体验，我们利用人工智能（AI）向会员展示最相关的内容。这是具有挑战性的，因为我们需要从数百个选项中选择要展示的内容。这些内容类型可以包括其他会员分享的文章、职位推荐、课程推荐等，每种类型以不同的方式丰富我们的生态系统，这些共同的目标是实现
+    LinkedIn 的使命，即“连接全球专业人士，让他们更高效、更成功”。鉴于我们希望为会员提供多样化且丰富的体验，我们不能仅仅追求点击量的增加。
 - en: In order to achieve the right balance of content for optimal member experience,
     we follow a [multi-objective optimization](https://en.wikipedia.org/wiki/Multi-objective_optimization)
     approach. We have different machine learning models that optimize for different
     objectives such as reacts, comments, downstream impact from actions. However,
     the balance of these different objectives has been achieved manually with the
     adjustment of parameters by machine learning engineers, which is very inefficient.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在内容上实现最佳的平衡以优化会员体验，我们采用了 [多目标优化](https://en.wikipedia.org/wiki/Multi-objective_optimization)
+    方法。我们有不同的机器学习模型来优化不同的目标，比如反应、评论、行动的下游影响。然而，这些不同目标的平衡是通过机器学习工程师手动调整参数来实现的，这非常低效。
 - en: In this post, we share our experience coming up with an automated system to
     tune one of the main parameters in our machine learning model that recommends
     content on LinkedIn’s Feed, which is just one piece of the [community-focused
@@ -40,12 +55,17 @@
     We aim to achieve the right balance of metrics for our members while addressing
     the productivity of our engineers and meeting constraints in our ecosystem. For
     additional context on LinkedIn’s feed, please refer to [this blog post](https://engineering.linkedin.com/blog/2018/03/a-look-behind-the-ai-that-powers-linkedins-feed--sifting-through).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们分享了如何开发一个自动化系统来调整我们机器学习模型中的一个主要参数，该模型推荐 LinkedIn 供稿中的内容，这只是 [以社区为中心的架构](https://engineering.linkedin.com/blog/2019/06/community-focused-feed-optimization)
+    的一部分。我们的目标是实现成员指标的适当平衡，同时考虑到工程师的生产力和满足我们生态系统中的约束。有关 LinkedIn 供稿的更多背景信息，请参考 [这篇博客文章](https://engineering.linkedin.com/blog/2018/03/a-look-behind-the-ai-that-powers-linkedins-feed--sifting-through)。
 - en: Approach to Manage Metrics Trade-offs on Feed
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在供稿上管理指标权衡的方法
 - en: 'In order to address the complexity and tradeoffs in our ecosystem, we optimize
     for one set of metrics while keeping another set constant. The optimization part
     comes from our desire to maximize the “contributions” by our members. By “contribution”
@@ -56,27 +76,39 @@
     and likes generate downstream updates in the member''s network. These actions
     can be considered “active” in that members actively consume content by contributing
     to the ecosystem.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了应对我们生态系统中的复杂性和权衡，我们在优化一组度量标准的同时保持另一组标准不变。优化部分来自我们希望最大化会员的“贡献”。我们所说的“贡献”主要指点赞、评论和分享，这些行为更有可能在我们的生态系统中驱动对话，而不是简单的文章点击。贡献通过几种方式推动更多对话：分享会在
+    Feed 上创建新的帖子，评论使会员能够与帖子作者开始对话，点赞则在会员网络中生成下游更新。这些行为可以被视为“主动”的，因为会员通过为生态系统做出贡献而主动消费内容。
 - en: However, we also wanted to leave room for content that isn’t as conversation-driven
     and can be considered more “passive”. In particular, infrequent visitors on Feed
     are more likely to be involved in passive consumption. Because of these reasons
     we decided to keep “passive” consumption constant.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我们也希望为那些不那么以对话为驱动的内容留下空间，这些内容可以被视为更“被动”的内容。特别是，Feed 上的不频繁访客更可能参与被动消费。基于这些原因，我们决定保持“被动”消费不变。
 - en: Translating Metrics Trade-off into a Scoring Function
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 将度量权衡转化为评分函数
 - en: 'Given the diversity of content and objectives we need to manage on LinkedIn’s
     Feed, we decided to apply a [multi-objective optimization](https://en.wikipedia.org/wiki/Multi-objective_optimization)
     approach to rank content on our feed. At a high level (skipping many details)
     we score each of our updates roughly with the following equation:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于我们需要在 LinkedIn Feed 上管理内容和目标的多样性，我们决定采用 [多目标优化](https://en.wikipedia.org/wiki/Multi-objective_optimization)
+    方法对我们的 Feed 内容进行排序。从高层次来看（略过许多细节），我们用以下方程粗略地对每个更新进行评分：
 - en: '![Image](../Images/274fda16daa1c40b94c7f23f36375396.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/274fda16daa1c40b94c7f23f36375396.png)'
 - en: You can think of each P(x) as the probability score from a model for the particular
     objective. We use a lever known as the click weight (????) to choose between more
     passive-consumption content (e.g. job or article recommendations that might drive
@@ -86,19 +118,25 @@
     type of content, there can be items that encourage more passive actions compared
     to active actions. For example, a trending article might just encourage clicks,
     but an article from a close connection could spark conversations.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以将每个 P(x) 视为模型对特定目标的概率评分。我们使用一种称为点击权重（????）的杠杆来选择更偏向被动消费的内容（例如，可能会驱动点击的工作或文章推荐）与更偏向社区驱动的内容（例如，可能会鼓励评论的帖子）。不同类型的内容在某些使用场景下表现更佳，因此在被动消费和主动消费之间存在权衡。即使在特定类型的内容中，也可能有鼓励更多被动行为而非主动行为的条目。例如，热门文章可能只会鼓励点击，而来自密切联系人的文章可能会引发讨论。
 - en: Why We Need to Constantly Manage Trade-offs
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么我们需要不断管理权衡
 - en: Now that we have provided enough context on LinkedIn’s Feed, we’d like to share
     bits of our journey in choosing the right ???? (click weight) to balance passive
     consumption (i.e. clicks) vs. active consumption (i.e like, comment, shares).
     For the rest of the post, we’ll refer to the action set of like, comment, and
     share as “contributions.”
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们已经提供了足够的关于 LinkedIn Feed 的背景信息，我们想分享一些我们在选择合适的 ????（点击权重）以平衡被动消费（即点击）与主动消费（即点赞、评论、分享）过程中的经历。在接下来的内容中，我们将把点赞、评论和分享的动作集合称为“贡献”。
 - en: The ???? parameter determines the balance between active and passive consumption
     cannot remain static for several reasons. We continuously work on our machine
     learning models to provide the best experience to our members, which might affect
@@ -109,51 +147,70 @@
     than passive consumption or vice versa. Another way is that there are random components
     in our training process that might change the optimal weight after retraining
     a model.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: ???? 参数决定了主动和被动消费之间的平衡，不能保持静态，原因有几个。我们不断改进我们的机器学习模型，以提供最佳的会员体验，这可能会影响两个指标之间的平衡。例如，我们可能会加入新功能或尝试新的建模方法。这会以多种方式影响平衡。一种方式是某个特定的特征变化（例如，会员对文章帖子的偏好）或模型变化可能在推荐主动消费内容时比被动消费更有效，反之亦然。另一种方式是我们的训练过程中存在随机成分，这可能会在重新训练模型后改变最佳权重。
 - en: Challenges with Maintaining Balance in a Multi-Objective Environment
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在多目标环境中维持平衡的挑战
 - en: 'Our initial approach to manage the right balance was to build an offline simulator
     based on historical data to run our models and then get simulated metrics on different
     values of ????. This allowed us to get a sense of the right ???? by looking at
     output graphs like the following, where each dot represents a different ????:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们最初管理正确平衡的方法是基于历史数据建立离线模拟器，运行我们的模型，然后获取不同 ???? 值的模拟指标。这使我们能够通过查看如下输出图表来感知正确的
+    ????, 其中每个点表示一个不同的 ????：
 - en: '![Figure](../Images/2f5e89f3f95d9451f12e976ad27bca8b.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/2f5e89f3f95d9451f12e976ad27bca8b.png)'
 - en: '*Figure 1: Simulation Result (actual values for click rate and contribution
     rate are excluded since they are not relevant for this post). Control is the standard
     experience for our members, while treatment is a variant on the standard experience
     being evaluated.*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1：模拟结果（点击率和贡献率的实际值被排除，因为它们与此帖不相关）。对照组是我们会员的标准体验，而处理组是正在评估的标准体验的变体。*'
 - en: 'However, this method proved not to be enough. Our simulator approach inherently
     has limitations in predicting the effect in the online world due to several reasons:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这种方法证明还不够。由于几个原因，我们的模拟器方法在预测在线世界中的效果时固有的存在局限性：
 - en: The LinkedIn ecosystem changes over time. Perhaps UI changes are introduced
     that affect member behavior, or maybe we introduce new content to the feed that
     wasn’t available before, such as polls. These changes are hard to replicate offline
     since the simulator is limited to historical data and might not fully reflect
     the current state of the ecosystem.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: LinkedIn 生态系统随时间变化。也许会引入影响会员行为的 UI 变化，或者我们可能会向信息流中引入之前没有的新内容，如投票。这些变化很难在离线环境中复制，因为模拟器仅限于历史数据，可能无法完全反映当前的生态系统状态。
 - en: The sequence of actions a member might take could differ depending on the content
     shown. For example, if they saw an article first they really liked they might
     be more likely to continue interacting with other updates.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 会员可能采取的行动顺序可能会根据显示的内容而有所不同。例如，如果他们首先看到一篇他们非常喜欢的文章，他们可能更有可能继续与其他更新进行互动。
 - en: There are [reinforcement learning](https://en.wikipedia.org/wiki/Reinforcement_learning)
     components in the ecosystem that are particularly tricky to reflect in a simulator
     environment.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 生态系统中有一些 [强化学习](https://en.wikipedia.org/wiki/Reinforcement_learning) 组件，在模拟器环境中特别难以体现。
 - en: As a result, machine learning engineers had to launch multiple versions of a
     model online for live traffic to test out different ???? values, which caused
     two main pain points. First, it became time-consuming for engineers to create
@@ -161,70 +218,98 @@
     process involved trial and error. Second, given that we rely on A/B experiments
     to evaluate each variant, we would run out of online traffic and not be able to
     test as many experiments as we wanted to.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果，机器学习工程师不得不在线上发布多个版本的模型以测试不同的 ???? 值，这带来了两个主要痛点。首先，对于工程师来说，创建具有不同 ???? 值的模型变体变得耗时，特别是因为这一过程涉及反复试验。其次，由于我们依赖
+    A/B 实验来评估每个变体，我们会耗尽在线流量，无法进行我们希望进行的实验。
 - en: 'New Approach to Choose Trade-off: Online Autotuning'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 选择权衡的新方法：在线自适应调优
 - en: 'Given the difficulties in manually tuning ???? online, we decided to automate
     the process with the goal of reducing manual engineering work and the online traffic
     burden. We identified several requirements to allow our team to easily leverage
     the tool and to allow enough experiments to run at the same time by respecting
     online traffic needs:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于手动调优????在线上存在的困难，我们决定自动化这个过程，以减少人工工程工作和在线流量负担。我们确定了几个要求，以便我们的团队能够轻松利用该工具，并在尊重在线流量需求的情况下允许同时进行足够多的实验：
 - en: The tool needed to be easy to use given that we are trying to remove manual
     work for engineers, and it should be easily adoptable by tens of machine learning
     engineers.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 该工具需要易于使用，因为我们试图减少工程师的人工工作，并且它应该能够被数十名机器学习工程师轻松采用。
 - en: The tool should only require a small percentage of total traffic. E.g. if the
     tool takes 50% of traffic it wouldn’t be useful.
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 该工具只需占用总流量的一小部分。例如，如果工具占用 50% 的流量，那就没有用处。
 - en: The tool should conclude on an optimal value for ???? in a relatively short
     period of time. E.g. if the tool takes a month to find an optimal weight, it’s
     not useful.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 该工具应该在相对较短的时间内得出????的最佳值。例如，如果该工具需要一个月才能找到最佳权重，那就没有用处。
 - en: Requirements 2 and 3 are needed to ensure we can maximize the number of experiments
     run at the same time.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 需求 2 和 3 是必要的，以确保我们可以最大化同时进行的实验数量。
 - en: 'Implementation of Online Autotuning: Initial Strategy Overview'
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在线自动调优的实施：初步策略概述
 - en: 'With these requirements in mind, we decided to leverage the [TALOS](https://www.kdd.org/kdd2018/accepted-papers/view/online-parameter-selection-for-web-based-ranking-problems)
     (tuning all large-scale online systems) library within LinkedIn, which is designed
     to learn parameters in the online setting. Our goal is to autotune the click weight
     (????) so that we maximize contributions while maintaining the level of passive
     consumption. Formally, our problem can be written as follows:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这些要求，我们决定在 LinkedIn 中利用[TALOS](https://www.kdd.org/kdd2018/accepted-papers/view/online-parameter-selection-for-web-based-ranking-problems)（调优所有大规模在线系统）库，该库旨在在线环境中学习参数。我们的目标是自动调整点击权重（????），以最大化贡献的同时保持被动消费水平。正式地，我们的问题可以写成如下：
 - en: '![Image](../Images/f50c3e93d624ff259192cea24dc01fcd.png),'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Image](../Images/f50c3e93d624ff259192cea24dc01fcd.png),'
 - en: where *b* is a constant equal to the normalized clicks of the baseline model
     and ???? is the click weight. We normalized contributions and clicks based on
     the number of times the Feed was loaded with the relevant alpha (i.e. contributions/loaded_feeds).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中*b*是等于基线模型的归一化点击数的常数，????是点击权重。我们根据 Feed 加载的次数以及相关的 alpha（即贡献/加载的 Feed）对贡献和点击进行了归一化。
 - en: Our initial attempt at solving this problem involved using an [explore-exploit](https://en.wikipedia.org/wiki/Multi-armed_bandit)
     strategy with TALOS. The explore phase would put members in different click weight
     buckets and collect relevant metrics (i.e. contributions, normalized click) for
     a few days. In the exploit phase, the algorithm would zoom in on a click weight
     range to collect extra data in the range closer to the solution.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们解决这个问题的初步尝试是使用[探索-利用](https://en.wikipedia.org/wiki/Multi-armed_bandit)策略与
+    TALOS。探索阶段将成员分配到不同的点击权重桶中，并收集相关指标（即贡献，归一化点击）几天。在利用阶段，算法将聚焦于一个点击权重范围内，收集该范围内更接近解决方案的额外数据。
 - en: 'Implementation of Online Autotuning: Metrics Understanding'
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在线自动调优的实施：指标理解
 - en: Before we could implement the solution, we first focused on understanding our
     metrics. This involved determining the grid points and search range of exploration.
     We chose the search range of exploration based on the manual chosen click weights
@@ -235,132 +320,193 @@
     we saw mostly noise with the normalized contributions metric and an increasing
     trend with the normalized clicks metrics. This is illustrated in figures 2a and
     2b, which show the results for an experiment with desktop (non-app) users.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们实施解决方案之前，首先集中精力理解我们的指标。这涉及确定探索的网格点和搜索范围。我们根据历史模型迭代中手动选择的点击权重 [0.0, 0.005]
+    选择了探索的搜索范围。选择网格点数存在权衡。增加点数可以为点击权重提供更多的细粒度，但也使每个点的流量减少，从而增加了指标中的噪声。当我们用 31 个网格点收集指标时，我们在归一化贡献指标中看到主要是噪声，而在归一化点击指标中看到上升趋势。这在图
+    2a 和 2b 中得到了说明，这些图显示了对桌面（非应用程序）用户的实验结果。
 - en: '![Figure](../Images/92d8ed17b9069b61cdeb86f4197f7049.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/92d8ed17b9069b61cdeb86f4197f7049.png)'
 - en: '*Figures 2a, 2b: Small search range with 31 points*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 2a, 2b: 小搜索范围，31 个点*'
 - en: 'To remedy this situation, we did two things:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了改善这种情况，我们做了两件事：
 - en: Reduced the number of points, from 31 to 15, to collect more data at each click
     weight
+  id: totrans-42
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将点数从 31 减少到 15，以在每个点击权重下收集更多数据。
 - en: Increased the size of our search range in order to see the relationship between
     contributions and click weight more clearly
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 扩大了我们的搜索范围，以便更清楚地看到贡献与点击权重之间的关系。
 - en: As we can see from figures 3a and 3b, there is a clear trend in both clicks
     and contributions after the changes.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图 3a 和 3b 中可以看到，经过更改后，点击和贡献都有明显的趋势。
 - en: '![Figure](../Images/74916b00f0fd5a4d8de09b9d4f0afc51.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/74916b00f0fd5a4d8de09b9d4f0afc51.png)'
 - en: '*Figures 3a, 3b: Large search range with 15 points*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 3a, 3b: 大搜索范围，15 个点*'
 - en: Figures 3a and 3b are the results of reducing points and increasing the search
     range.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3a 和 3b 是减少点数并增加搜索范围的结果。
 - en: 'Implementation of Online Autotuning: Experience with Initial Strategy'
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在线自动调优的实施：初步策略经验
 - en: Once we determined the right parameters to reliably capture metrics, we experimented
     with exploitation, as shown in the graphs below. The search range is different
     since a different model on a different platform (mobile) is being exemplified
     in this section.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦确定了可靠捕捉指标的正确参数，我们进行了利用阶段的实验，如下图所示。由于这一部分示例了不同平台（移动设备）上的不同模型，因此搜索范围不同。
 - en: '![Figure](../Images/e655795ac9ae86be268f98c5a2a6d4b6.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/e655795ac9ae86be268f98c5a2a6d4b6.png)'
 - en: '*Figures 4a, 4b: Exploration results*'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 4a, 4b: 探索结果*'
 - en: Figures 4a and 4b show metrics collected in the exploration phase. We see a
     clear positive trend in the normalized clicks metric (4a) and a decreasing but
     noisy trend in the normalized contributions metric (4b). The black horizontal
     line is at the constant b, which is the normalized clicks of our control model.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4a 和 4b 显示了在探索阶段收集的指标。我们可以在归一化点击指标（4a）中看到明显的正向趋势，而在归一化贡献指标（4b）中看到下降但嘈杂的趋势。黑色水平线表示常数
+    b，即我们控制模型的归一化点击量。
 - en: '![Figure](../Images/7a6d5d154e0314c8c53b546c2a797311.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/7a6d5d154e0314c8c53b546c2a797311.png)'
 - en: '*Figures 5a, 5b: Exploration and exploitation results*'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 5a, 5b: 探索和利用结果*'
 - en: Figures 5a and 5b show an aggregation of metrics over an exploration phase followed
     by an exploitation phase. The white points are from the exploration phase (same
     data as in 4a and 4b). After the exploration phase, the algorithm decided the
     solution was in a reduced search range and selected new points (the green points)
     to collect metrics for the exploitation phase.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5a 和 5b 显示了在探索阶段之后和利用阶段的指标汇总。白色点来自探索阶段（数据与图 4a 和 4b 相同）。探索阶段之后，算法决定解决方案位于缩小的搜索范围内，并选择了新的点（绿色点）以收集利用阶段的指标。
 - en: The green exploitation points added too much noise to our metric, making it
     unclear which click weights were actually feasible. This was surprising, so we
     looked at our metrics a bit more closely. We first looked at how normalized clicks
     changed from the previous day. As seen in figure 6, on some days the variation
     can be 12%.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 绿色的利用点给我们的指标增加了过多的噪音，使得实际可行的点击权重变得不清晰。这很让人惊讶，因此我们更仔细地查看了我们的指标。我们首先查看了从前一天起标准化点击的变化。如图6所示，在某些日子中，变化幅度可以达到12%。
 - en: '![Figure](../Images/696ff326aff05de981365c6fbff713af.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/696ff326aff05de981365c6fbff713af.png)'
 - en: '*Figures 6: Day to Day Variation of NormalizedClicks*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图6：标准化点击的日间变化*'
 - en: This showed that our metrics had significant variance day-over-day and explained
     why our exploitation points had such a different trend compared to exploration,
     which threw off the algorithm since our metric could be affected in similar ways
     by both click weight and time of day.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这表明我们的指标存在显著的日间变化，并解释了为什么我们的利用点与探索相比具有如此不同的趋势，这扰乱了算法，因为我们的指标可能受到点击权重和一天中的时间的类似影响。
 - en: LinkedIn app usage varies significantly on each day of the week (e.g. professionals
     have different usage patterns on a Friday compared to a Wednesday), so seeing
     this sort of variance isn’t fully surprising.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: LinkedIn应用的使用在每周的不同日期变化显著（例如，专业人士在星期五和星期三的使用模式不同），因此看到这种变异性并不完全令人惊讶。
 - en: This was particularly challenging since our tool expected data from exploration
     and exploitation to be on a similar trend; however, once we put exploration and
     exploitation data together (as required by the tool) the trend was lost. Because
     of these reasons, we decided to skip the exploitation phase to keep a reasonable
     trend under the time and ramp constraints we were working with.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这尤其具有挑战性，因为我们的工具期望探索和利用的数据趋势相似；然而，一旦我们将探索和利用数据放在一起（如工具要求的那样），趋势就丢失了。由于这些原因，我们决定跳过利用阶段，以在我们工作所限的时间和提升约束下保持合理的趋势。
 - en: 'Implementation of Online Autotuning: Revision of Optimization Problem'
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在线自调节的实施：优化问题的修订
 - en: We then focused on applying the optimization problem on exploration data exclusively,
     which is shown below. We initially collected data at twice the online traffic
     requirement we set for ourselves at the beginning of the project (i.e requirement
     2) to get a better understanding of our metrics. Figures 7a and 7b summarize the
     data collected The blue points in figure 7b correspond to the blue region in figure
     7a, which is the feasible region as defined by our constraint.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们随后专注于仅对探索数据应用优化问题，如下所示。我们最初收集了我们在项目开始时设定的两倍在线流量需求的数据（即需求2），以更好地理解我们的指标。图7a和7b总结了收集的数据。图7b中的蓝色点对应于图7a中的蓝色区域，即我们的约束定义的可行区域。
 - en: '![Figure](../Images/a8b61e2246baadefada78b732e2ee010.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/a8b61e2246baadefada78b732e2ee010.png)'
 - en: '*Figures 7a, 7b: Feasible region with constraint*'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图7a，7b：带约束的可行区域*'
 - en: Our biggest challenge was figuring out how to deal with the noisiness of the
     contributions metrics. As we see from the plot of public contributions, even with
     twice the required ramp percentage, the contributions metric is very noisy. Given
     the limited traffic for our A/B experiments, we cannot trust the Contributions(????)
     metric.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们最大的挑战是弄清楚如何处理贡献指标的噪音问题。正如我们从公共贡献的图表中看到的，即使在所需的提升百分比的两倍下，贡献指标仍然非常嘈杂。由于我们A/B实验的流量有限，我们无法信任贡献(????)指标。
 - en: 'In order to address this challenge, we took a closer look at the patterns of
     our metrics. Since the contributions metric is a decreasing function of ???? and
     our constraint is an increasing function of ????, the solution to the problem
@@ -369,19 +515,28 @@
     reformulate our original problem as a minimization problem based on the original
     constraint, where we simply try to keep normalized clicks at the same level as
     the baseline, dropping our dependency on the normalizedContribuions metric:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了应对这一挑战，我们更仔细地查看了我们指标的模式。由于贡献指标是????的递减函数，而我们的约束是????的递增函数，因此问题的解决方案在于活动约束集，即normalizedClicks(????)
+    = b。这是有用的，因为normalizedClicks(????)是一个更稳定的指标。因此，我们可以将原始问题重新表述为基于原始约束的最小化问题，其中我们仅尝试保持标准化点击与基线相同，避免依赖normalizedContribuons指标。
 - en: '![Image](../Images/1f0598153faa4e764a38c18851b2ea24.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/1f0598153faa4e764a38c18851b2ea24.png)'
 - en: The reformulated problem involves minimizing the normalizedClicksDelta with
     no constraints.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新表述的问题涉及在没有约束的情况下最小化normalizedClicksDelta。
 - en: 'Implementation of Online AutoTuning: Final Strategy and Results'
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在线自动调优的实施：最终策略和结果
 - en: In figure 6a we observe our new metric over a range of click weights at 5% traffic
     for 2 days. Figure 6b shows the probability of click weight ???? (shown on the
     x-axis) being the optimal point in the optimization problem. This probability
@@ -389,14 +544,20 @@
     Process and then by identifying the point that optimizes (maximizes or minimizes)
     the sampled functions. The empirical distribution of the obtained points gives
     us figure 6b.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在图6a中，我们观察了在5%流量下，经过2天的点击权重范围内的新指标。图6b显示了点击权重 ????（在x轴上显示）成为优化问题中最优点的概率。这个概率是通过首先从后验高斯过程重复抽样函数，然后确定优化（最大化或最小化）这些抽样函数的点来计算的。获得的点的经验分布给出了图6b。
 - en: '![Figure](../Images/a52803cb16ad72078d3fc24e46dea7bd.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/a52803cb16ad72078d3fc24e46dea7bd.png)'
 - en: '*Figures 8a, 8b: Convergence with new objective*'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图8a, 8b：使用新目标的收敛情况*'
 - en: Previously, engineers would ramp multiple models with varying click weights
     in an attempt to find a properly tuned click weight model. This may involve relaunching
     different click weights a couple of days later if the first set of click weights
@@ -405,17 +566,25 @@
     before selecting an “optimal” click weight. Figure 9 is an example of our ramping
     schedule before the introduction of click autotuning. Figure 10 is an example
     of the new ramping schedule with the autotuning tool
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 以前，工程师会使用不同的点击权重来测试多个模型，以尝试找到一个调整得当的点击权重模型。如果第一组点击权重中没有理想的点击权重候选项，这可能涉及到几天后重新启动不同的点击权重。实际模型的一个示例时间表可能涉及在5%流量下收集4种不同的点击权重，经过2天后选择一个“最优”点击权重。图9是引入点击自动调优之前的调试计划示例。图10是使用自动调优工具的新调试计划示例。
 - en: '![Figure](../Images/e3d4e0e485759b4a0d667acced1104ec.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/e3d4e0e485759b4a0d667acced1104ec.png)'
 - en: '*Figure 9: Process with ramp volume before autotuning tool*![Figure](../Images/b09b7f17ec3bc2c20bbd58f9836bcf0e.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图9：自动调优工具之前的调试过程*![图](../Images/b09b7f17ec3bc2c20bbd58f9836bcf0e.png)'
 - en: '*Figure 10: Process with ramp volume after autotuning tool*'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图10：自动调优工具后的调试过程*'
 - en: 'The old ramping schedule may take 10% traffic over 5 days (4 days to collect
     metrics and 1 day for the traffic change in between). Now with the automatic process
     of picking the parameter ????, we can reduce this part of the process to 2 days
@@ -424,28 +593,40 @@
     In these two days, we would be looking at 10 different click weights and choosing
     a solution that may lie between these points. This new tool improved our efficiency
     by reducing costs in the following three areas:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 旧的调试时间表可能需要在5天内完成10%流量（4天收集指标，1天进行流量变化）。现在，通过自动选择参数 ???? 的过程，我们可以将这个部分的过程减少到在5%流量下的2天。在模型调试到5%后，工程师可以使用脚本启动点击自动调优，并在2天内提供一个单一的收敛点击权重。在这两天内，我们会考虑10种不同的点击权重，并选择一个可能位于这些点之间的解决方案。这种新工具通过以下三个方面的成本降低提高了我们的效率：
 - en: Ramp duration
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 调试时长
 - en: Ramp volume
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 调试量
 - en: Manual efforts by engineers
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 工程师的人工努力
 - en: In addition, the new tool also helped us find a more optimal click weight by
     being more precise in choosing ???? than previous manual efforts.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，新工具通过在选择 ???? 时更加精准，帮助我们找到更优的点击权重，相比于以前的人工努力。
 - en: Lessons
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 经验教训
 - en: We learned a few lessons along the way in this journey. First, we learned that
     in this particular optimization problem it pays to formulate your problem as simple
     as possible. After spending time to understand the metrics we wanted to target
@@ -456,8 +637,11 @@
     us to satisfy our general goal, which was to keep passive consumption constant
     between models while reducing both the manual effort required by engineers and
     online traffic requirements.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这段旅程中，我们学到了一些经验教训。首先，我们发现，在这个特定的优化问题中，将问题公式化为尽可能简单是有益的。在花时间理解我们想要目标的指标以及它们如何与我们特定的机器学习模型相关之后，我们意识到我们可以将问题定义从一个带约束的最大化问题转变为一个最小化问题。这使我们能够只处理在较低
+    ramp 百分比下更可靠的约束指标，同时仍然满足我们的总体目标，即在模型之间保持被动消费恒定，同时减少工程师所需的手动工作量和在线流量需求。
 - en: Also, it is important to be cognizant about the constraints that must be addressed
     for the solution to be practical. In our case, we could only allow the tool to
     use limited ramp volume and for a limited time to maximize the number of experiments,
@@ -466,91 +650,139 @@
     working with had significant day-over-day, so we did not find explore-exploit
     algorithms helpful under our constraints since these algorithms required longer
     and bigger ramps for our problem space.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，重要的是要意识到解决方案需要解决的约束条件。在我们的案例中，我们只能允许工具使用有限的 ramp 体积，并在有限的时间内最大化同时进行的实验数量。一旦约束条件定义清晰，就更容易识别适合的解决方案。在我们的案例中，所处理的指标存在显著的日间波动，因此在我们的约束下，我们发现探索-开发算法并不适用，因为这些算法需要更长时间和更大的
+    ramp 来适应我们的难题。
 - en: Thanks to Kinjal Basu, Viral Gupta, Yunbo Ouyang for building the parameter
     tuning library and all the advice, and our managers Ying Xuan and Zheng Li for
     their support.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢Kinjal Basu、Viral Gupta、Yunbo Ouyang构建参数调整库及提供建议，以及我们的经理Ying Xuan和Zheng Li的支持。
 - en: '**[Marco Varela](https://www.linkedin.com/in/marcovarelaalvarado/)** is a Sr.
     Software Engineer at Linkedin, where he is a part of the Feed AI team and works
     on improving the ranking of updates on the Feed through a focus on automation
     and feature freshness.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Marco Varela](https://www.linkedin.com/in/marcovarelaalvarado/)**是Linkedin的高级软件工程师，他是Feed
+    AI团队的一员，专注于通过自动化和特征新鲜度提高Feed更新的排名。'
 - en: '**[Mavis Li](https://www.linkedin.com/in/mavis-li-67aab91a/)** is a software
     engineer on the Feed AI team at Linkedin working on personalization and ranking
     of the Feed. She has worked on various projects including adding downstream models
     as objectives, incorporating out of network group updates into the feed, and click
     weight autotuning.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Mavis Li](https://www.linkedin.com/in/mavis-li-67aab91a/)**是Linkedin Feed
+    AI团队的一个软件工程师，负责Feed的个性化和排名。她参与了多个项目，包括将下游模型作为目标、将网络外的群组更新整合到Feed中，以及点击权重自动调整。'
 - en: '**Related:**'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Check out this comprehensive guide to model optimization techniques.](/2020/05/hyperparameter-optimization-machine-learning-models.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[查看这份全面的模型优化技术指南。](/2020/05/hyperparameter-optimization-machine-learning-models.html)'
 - en: '[Automated Machine Learning: The Free eBook](/2020/05/automated-machine-learning-free-ebook.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习：免费的电子书](/2020/05/automated-machine-learning-free-ebook.html)'
 - en: '[The Death of Data Scientists – will AutoML replace them?](/2020/02/data-scientists-automl-replace.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的灭亡 – AutoML会取代他们吗？](/2020/02/data-scientists-automl-replace.html)'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-94
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How LinkedIn Uses Machine Learning To Rank Your Feed](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LinkedIn 如何利用机器学习排名你的动态](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)'
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TPOT 优化机器学习管道](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AIMET 优化神经网络](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索 SQL 中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
 - en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[梯度下降：优化的山地旅行者指南](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
