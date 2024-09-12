@@ -1,37 +1,52 @@
 - en: 'Introducing Generalized Integrated Gradients (GIG): A Practical Method for
     Explaining Diverse Ensemble Machine Learning Models'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍广义积分梯度（GIG）：解释多样化集成机器学习模型的实用方法
 - en: 原文：[https://www.kdnuggets.com/2020/01/generalized-integrated-gradients-explaining-ensemble-models.html](https://www.kdnuggets.com/2020/01/generalized-integrated-gradients-explaining-ensemble-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/01/generalized-integrated-gradients-explaining-ensemble-models.html](https://www.kdnuggets.com/2020/01/generalized-integrated-gradients-explaining-ensemble-models.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Jay Budzik](https://www.linkedin.com/in/jaybudzik/), CTO at [Zest AI](https://www.zest.ai/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Jay Budzik](https://www.linkedin.com/in/jaybudzik/)，[Zest AI](https://www.zest.ai/)的首席技术官**'
 - en: '*Ensemble machine learning models provide more predictive accuracy and stability
     than single ML models alone, as we showed earlier in our post* [*Ensembles are
     Better*](https://docs.google.com/document/d/1IFgr8V_ebJqR6oROm0fNStf_a-ctsVJlPU2_A3jONDw/edit)*.
     But ensemble models are hard to explain and trust using common methods such as
     SHAP and Integrated Gradients.*'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*集成机器学习模型提供比单一机器学习模型更高的预测准确性和稳定性，正如我们在之前的文章* [*集成模型更优*](https://docs.google.com/document/d/1IFgr8V_ebJqR6oROm0fNStf_a-ctsVJlPU2_A3jONDw/edit)*中所展示的那样。*
+    但集成模型使用常见的方法如SHAP和积分梯度难以解释和信任。'
 - en: '*Zest developed a new method for explaining complex ensemble models called
     Generalized Integrated Gradients that renders them safe to use in applications
     like credit risk underwriting. Unlike other approaches, GIG follows directly from
     a small set of reasonable rules and needs no arbitrary assumptions.*'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Zest开发了一种新的方法来解释复杂的集成模型，称为广义积分梯度，使其在诸如信用风险承保等应用中安全使用。与其他方法不同，GIG直接遵循一小套合理规则，无需任意假设。*'
 - en: '**Why A New Credit Assignment Method is Needed**'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**为什么需要一种新的信用分配方法**'
 - en: 'Machine learning is proven to yield better underwriting results and mitigate
     bias in lending. But not all machine learning techniques, including the wide swath
     at work in unregulated uses, is built to be transparent. Many of the algorithms
@@ -45,8 +60,12 @@
     scoring functions, and the value of the game is the score given by the model.
     Credit allocation in a [cooperative game](https://en.wikipedia.org/wiki/Cooperative_game_theory)
     is a well-understood problem.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习已被证明能产生更好的承保结果并减少贷款中的偏见。但并非所有的机器学习技术，包括在无监管使用中广泛应用的那些，都建立在透明的基础上。许多部署的算法生成的结果难以解释。最近，研究人员提出了新颖而强大的方法来解释机器学习模型，特别是
+    [Shapley 加性解释](https://arxiv.org/abs/1705.07874)（SHAP解释器）和 [积分梯度](https://arxiv.org/abs/1703.01365)（IG）。这些方法提供了分配模型用于生成评分的数据变量的机制。它们通过将机器学习模型表示为一个游戏来工作：每个变量是一个玩家，游戏的规则是模型的评分函数，游戏的价值是模型给出的分数。在
+    [合作博弈](https://en.wikipedia.org/wiki/Cooperative_game_theory)中，信用分配是一个被很好理解的问题。
 - en: '[SHAP](https://arxiv.org/pdf/1705.07874.pdf) uses various methods to compute
     Shapley values, which work well in atomic games to identify the most important
     variables by re-computing the outcome of the model with each variable systematically
@@ -58,8 +77,10 @@
     score. After all, some changes matter more than others according to the model,
     and so our task is to measure which changes the model thinks are more or less
     important.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '[SHAP](https://arxiv.org/pdf/1705.07874.pdf)使用各种方法来计算Shapley值，这些方法在原子游戏中表现良好，通过系统地去除每个变量重新计算模型结果，从而识别出最重要的变量。当算法是神经网络时，它运行的是无穷小的微型游戏，这些游戏单独来看并不重要，但在整体中却有意义，因此你需要[集成梯度](https://arxiv.org/pdf/1703.01365.pdf)来解释模型。IG使用Aumann-Shapley值来理解两个申请人之间模型评分的差异。它量化了每个输入变量对模型评分差异的贡献。毕竟，根据模型的不同，一些变化比其他变化更重要，因此我们的任务是测量模型认为哪些变化更重要或不重要。'
 - en: Both are great innovations in their own right, but neither provides satisfactory
     credit allocation for mixed-type models that achieve the best results. As we explained
     in an earlier post ([Why Not Just Use SHAP](https://www.zest.ai/blog/why-you-shouldnt-just-use-shap-to-power-your-ml-explainability-requirements)),
@@ -68,8 +89,10 @@
     Both of these are non-starters in financial services. IG requires the model to
     be everywhere differentiable, which isn’t true for decision trees, and so it only
     works on models like neural networks.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两者在各自领域都是很好的创新，但它们都未能为混合类型模型提供令人满意的信用分配，这些模型通常能取得最佳效果。正如我们在早期文章中所解释的（[为什么不直接使用SHAP](https://www.zest.ai/blog/why-you-shouldnt-just-use-shap-to-power-your-ml-explainability-requirements)），SHAP包中实现的解释器要么要求变量在统计上是独立的，要么要求缺失值可以用平均值替代。这两种情况在金融服务中都是不可行的。IG要求模型在各处都是可微分的，这对决策树并不适用，因此它仅适用于像神经网络这样的模型。
 - en: Big tech firms like Google, Facebook, and Microsoft have been exploiting the
     benefits of ensembled ML for years. They build models that use trees and neural
     networks and a full palette of modeling math, but they’re not operating under
@@ -78,17 +101,23 @@
     like credit underwriting and fraud detection. (Check out our [recent post](https://www.zest.ai/blog/many-heads-are-better-than-one-making-the-case-for-ensemble-learning)
     introducing a new ensemble method called deep stacking that yielded one small
     lender $13 million in profit and a more accurate and stable model.)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 像谷歌、Facebook 和微软这样的科技巨头多年来一直在利用集成机器学习的优势。它们构建了使用决策树、神经网络以及全套建模数学的模型，但它们不受像金融服务公司那样的监管约束。银行和贷款机构将极大受益于将这些同样高级的模型应用于信用审批和欺诈检测等领域。（请查看我们的[近期文章](https://www.zest.ai/blog/many-heads-are-better-than-one-making-the-case-for-ensemble-learning)，介绍了一种新的集成方法——深度堆叠，这种方法为一家小型贷款机构带来了1300万美元的利润，并提供了一个更准确且稳定的模型。）
 - en: All the arrows point to the need for a new way to explain complex, ensembled
     ML models for high-stakes applications such as credit and lending. This is why
     we invented GIG.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有的迹象都表明，需要一种新的方式来解释复杂的集成机器学习模型，以适用于高风险应用，例如信用和贷款。这就是我们发明GIG的原因。
 - en: '**Introducing Generalized Integrated Gradients**'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**介绍广义集成梯度**'
 - en: '[Generalized Integrated Gradients](https://arxiv.org/abs/1909.01869) (GIG)
     is Zest AI’s new credit assignment algorithm that overcomes the limitations of
     both Shapley and Aumann-Shapley by applying the tools of [measure theory](https://www.amazon.com/Principles-Mathematical-Analysis-International-Mathematics/dp/007054235X).
@@ -96,8 +125,10 @@
     broader class of models, including almost all of the scoring functions currently
     in use in the machine learning field. GIG is the only method for rigorously calculating
     the contributions of each variable with respect to diverse ensembles of models.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[广义积分梯度](https://arxiv.org/abs/1909.01869)（GIG）是Zest AI的新信用分配算法，通过应用[测度理论](https://www.amazon.com/Principles-Mathematical-Analysis-International-Mathematics/dp/007054235X)的工具，克服了Shapley和Aumann-Shapley的局限性。GIG是IG的正式扩展，能够准确分配更广泛模型类别的信用，包括当前机器学习领域几乎所有使用的评分函数。GIG是唯一可以严格计算每个变量在多样化模型集中的贡献的方法。'
 - en: What makes GIG better at explaining complex ML models is that it avoids making
     unrealistic and potentially dangerous assumptions about the data. GIG follows
     directly from its axioms. With SHAP and other methods based on Shapley Values,
@@ -105,34 +136,46 @@
     to get the values to work for machine learning functions. There are an uncountable
     number of such mappings, and it is not clear which, if any, is the correct mapping.
     By contrast, GIG is entirely determined by mathematics.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: GIG在解释复杂机器学习模型方面的优势在于它避免了对数据进行不现实和潜在危险的假设。GIG直接遵循其公理。使用SHAP和其他基于Shapley值的方法，你必须将输入变量映射到更高维空间中，以使值适用于机器学习函数。这种映射方式不计其数，尚不清楚哪一种是正确的映射。相比之下，GIG完全由数学决定。
 - en: GIG allocates credit by directly analyzing the model function in pieces to answer
     the question, “Which input variables led to the change in the model score?” It
     measures the importance of each variable by accumulating changes in the model
     score along a path from first input to another according to a unique formula that
     computes the amount each variable causes the predictive function to change its
     score.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: GIG通过直接分析模型函数的各个部分来分配信用，以回答“哪些输入变量导致了模型得分的变化？”这个问题。它通过沿着从第一个输入到另一个输入的路径累积模型得分的变化来衡量每个变量的重要性，使用一种独特的公式计算每个变量导致预测函数得分变化的量。
 - en: '**Application to a real-world credit risk model**'
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**应用于实际的信用风险模型**'
 - en: To demonstrate GIG’s capabilities, we used it to explain a mixed ensemble model
     built from real-world lending data. The model, illustrated below and cited earlier,
     is a stacked ensemble of 4 XGBoost models and 2 neural network models.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了展示GIG的能力，我们用它来解释一个基于实际借贷数据的混合集成模型。该模型如下面所示，之前已被引用，是一个由4个XGBoost模型和2个神经网络模型组成的堆叠集成模型。
 - en: '![Figure](../Images/8d17f0ae5fe8c4a07c819595af391e92.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8d17f0ae5fe8c4a07c819595af391e92.png)'
 - en: 'Figure 1: A deeply stacked ensemble: The training data is used to train multiple
     sub-models, some of which may be tree-based models like XGBoost, others neural
     networks, which are then ensembled, along with the inputs, into a larger model,
     using a neural network.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1：深度堆叠的集成模型：训练数据用于训练多个子模型，其中一些可能是树模型，如XGBoost，其他则是神经网络，然后将这些模型与输入一起进行集成，形成一个更大的模型，使用神经网络。
 - en: Table stakes in any model explainability task are to quantify accurately the
     importance of each feature in the model. We conducted a series of experiments
     (described in our paper) that show that GIG accurately quantifies the influence
@@ -142,58 +185,90 @@
     at a real-world application. Table 1 shows feature importance for the more complex
     ensemble displayed in Figure 1\. The table shows that GIG can explain even this
     more complex, real-world model.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何模型可解释性任务中的基本要求是准确量化模型中每个特征的重要性。我们进行了一系列实验（在我们的论文中描述），表明GIG准确量化了简单模型中变量的影响。这些实验基于已知的输入数据变化构建了一系列玩具模型，并显示GIG能够准确描绘模型从故意修改的数据中学到的内容。这里，我们查看了实际应用。表1显示了图1中更复杂集成模型的特征重要性。该表显示GIG甚至能够解释这个更复杂的实际模型。
 - en: '| **Feature Definition** | **Importance** |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| **特征定义** | **重要性** |'
 - en: '| Proportion of income sources which are current | 0.045763 |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| 当前收入来源的比例 | 0.045763 |'
 - en: '| Number of full-time jobs | 0.028215 |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| 全职工作的数量 | 0.028215 |'
 - en: '| Number of employers | 0.025663 |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| 雇主的数量 | 0.025663 |'
 - en: '| Number of current income sources | 0.020645 |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| 当前收入来源的数量 | 0.020645 |'
 - en: '| Applicant has filed for bankruptcy | 0.020339 |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| 申请人是否申请了破产 | 0.020339 |'
 - en: '| Applicant has a Chapter 7 bankruptcy | 0.020039 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| 申请人是否有第7章破产记录 | 0.020039 |'
 - en: '| Number of monthly income sources | 0.017467 |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| 每月收入来源的数量 | 0.017467 |'
 - en: '| Majority of income sources are current | 0.016271 |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| 大多数收入来源是当前的 | 0.016271 |'
 - en: '| Debt-to-income ratio | 0.015139 |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| 债务与收入比 | 0.015139 |'
 - en: '| Proportion of income sources from employment | 0.011887 |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '| 收入来源中来自就业的比例 | 0.011887 |'
 - en: '| Was the applicant dismissed from a bankruptcy | 0.010515 |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| 申请人是否被免除破产记录 | 0.010515 |'
 - en: '| Did the applicant have a Chapter 13 bankruptcy | 0.010456 |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| 申请人是否有第13章破产记录 | 0.010456 |'
 - en: 'Table 1: Feature importances for the ensemble shown in Figure 1. In addition
     to computing overall feature importance, GIG allows you to quantify feature importance
     for each applicant and for various populations, such as the highest performing
     and the lowest-performing loans, or the variables that caused a difference in
     approval rate between men and women applicants.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 表1：图1中显示的集合模型的特征重要性。除了计算整体特征重要性，GIG 还允许你量化每个申请人及不同人群（例如表现最好的贷款和表现最差的贷款，或者导致男女申请人批准率差异的变量）的特征重要性。
 - en: '**How GIG works**'
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**GIG 的工作原理**'
 - en: As we mentioned earlier, GIG is a differential credit assignment function based
     on IG and [Aumann-Shapley](https://en.wikipedia.org/wiki/Shapley_value#Aumann%E2%80%93Shapley_value).
     Differential credit assignment answers the question of how much each change in
@@ -202,36 +277,52 @@
     each (for example, one applicant might have been denied, and another applicant
     might have been approved). GIG shows how much each input variable contributed
     to the change in score that led to the approved/denied decision.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们之前提到的，GIG 是基于 IG 和 [奥曼-沙普利](https://en.wikipedia.org/wiki/Shapley_value#Aumann%E2%80%93Shapley_value)
+    的差异化信用分配函数。差异化信用分配解答了每个输入变化导致模型评分变化的多少。你比较两位申请人的输入集及模型返回的违约可能性（例如，一位申请人可能被拒绝，另一位申请人可能获得批准）。GIG
+    显示了每个输入变量对导致批准/拒绝决策的评分变化的贡献。
 - en: Let’s visualize how this all works. Figure 2 shows a set of approved applicants
     in green and a set of denied applicants in red. Declined applicants have a high
     number of delinquencies and bankruptcies. The opposite is true for approved applicants.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们可视化一下这一切是如何运作的。图2显示了一组绿色的获批申请人和一组红色的被拒绝申请人。被拒绝的申请人有较高的拖欠和破产记录。获批申请人则相反。
 - en: '![Figure](../Images/bc4a16eb5a04fedb5736f62784938274.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/bc4a16eb5a04fedb5736f62784938274.png)'
 - en: 'Figure 2\. This model considers two variables: bankruptcies and delinquencies.
     The approved applicants, have low bankruptcies and low delinquencies. The denied
     applicants have high bankruptcies and high delinquencies.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2。该模型考虑了两个变量：破产和拖欠。获得批准的申请人具有低破产和低拖欠记录。而被拒绝的申请人则有高破产和高拖欠记录。
 - en: 'Differential credit assignment functions like GIG explain the difference between
     the two classes of applicants by comparing each approved applicant with each denied
     applicant: You’re basically computing the difference in delinquencies and bankruptcies
     between each pair of approved and denied applicants and taking the average. This
     process is illustrated for one pair in this comparison, shown in Figure 3, below.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 差异化信用分配函数，如 GIG，通过比较每个获批申请人与每个被拒绝申请人之间的差异来解释两类申请人之间的区别：你基本上是在计算每对获批和被拒绝申请人之间的拖欠和破产差异，并取平均值。该过程在下面的图3中进行了说明。
 - en: '![Figure](../Images/9ec95896938ec8634aaab264097aabdd.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/9ec95896938ec8634aaab264097aabdd.png)'
 - en: Figure 3\. The difference in score between the denied applicant in red and the
     approved applicant in green can be explained by the difference in delinquencies
     and the difference in the count of bankruptcies.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3。被拒绝申请人（红色）与获批申请人（绿色）之间的评分差异可以通过拖欠和破产次数的差异来解释。
 - en: This is meant for illustration only, the charts are missing the model score.
     A more realistic picture is displayed in Figure 4, below, which shows how the
     model score varies with respect to the delinquency and bankruptcy variables along
@@ -239,28 +330,41 @@
     Aumann-Shapley values to computes the contribution of delinquencies and bankruptcies
     to the change in the model score along the path between the approved and denied
     applicants.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这仅用于说明，图表中缺少模型分数。图 4 显示了更现实的情况，它展示了模型分数如何随着违约和破产变量的变化而在被拒绝的申请人与批准的申请人之间的路径上变化。IG
+    方法使用 Aumann-Shapley 值来计算违约和破产对模型分数变化的贡献。
 - en: '![Figure](../Images/b7830495c61cebc99e92b4693b465efb.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/b7830495c61cebc99e92b4693b465efb.png)'
 - en: Figure 4\. Here the model score is represented by the *y-*axis. The delinquency
     count and bankruptcies are represented on the *x-* and *z-*axes. The integral
     of the partial derivatives along the path between the denied applicant (red dot)
     and the approved applicant (green dot) represents the Aumann-Shapley contribution
     of each variable, delinquencies *x*, and bankruptcies *z*, to the model score
     *y*.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4\. 这里模型分数由 *y-*轴表示。违约计数和破产在 *x-* 和 *z-* 轴上表示。沿被拒绝的申请人（红点）和批准的申请人（绿点）之间的路径的部分导数积分表示每个变量、违约
+    *x* 和破产 *z* 对模型分数 *y* 的 Aumann-Shapley 贡献。
 - en: A model can have any number of dimensions, and Aumann-Shapley will accommodate
     them. But as we said before, the Aumann-Shapley value only works for smooth functions
     like neural networks. Figure 5 illustrates a simple example of a composition of
     functions that Aumann-Shapley (and therefore IG) cannot explain.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个模型可以具有任意数量的维度，Aumann-Shapley 可以适应它们。但正如我们之前所说，Aumann-Shapley 值仅适用于像神经网络这样的光滑函数。图
+    5 说明了 Aumann-Shapley（因此 IG）无法解释的函数组合的简单示例。
 - en: '![Figure](../Images/460f1e5d811abd165b8a90ed28e26f7d.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/460f1e5d811abd165b8a90ed28e26f7d.png)'
 - en: Figure 5\. A sample composition of functions. Here the discrete component is
     in red, and represents a decision tree that has a jump discontinuity at x=1.75\.
     The continuous part is shown in blue. The composition of these two functions is
@@ -268,8 +372,12 @@
     just like the discrete function that is part of it. These kinds of functions can’t
     be adequately explained by Shapley or Aumann-Shapley, they require something different
     like GIG.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5\. 函数组成的示例。这里的离散部分是红色的，表示在 x=1.75 处有跳跃不连续性的决策树。连续部分用蓝色表示。这两个函数的组合以绿色显示。组合函数在
+    x=1.75 处包含跳跃不连续性，就像它的离散部分一样。这些类型的函数不能通过 Shapley 或 Aumann-Shapley 充分解释，需要像 GIG
+    这样的不同方法。
 - en: GIG works by first enumerating all the discontinuities in the discrete functions
     (e.g., by depth-first search of the model’s decision trees) and computes the value
     of the discrete function from the left and from the right of each discontinuity.
@@ -277,25 +385,36 @@
     panel of Figure 6 below. The credit assigned to the continuous parts is computed
     using IG (right panel of Figure 6). The discrete and continuous contributions
     are then put back together to arrive at a highly accurate combined contribution.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: GIG 首先枚举离散函数中的所有不连续点（例如，通过对模型决策树的深度优先搜索），并计算每个不连续点左右的离散函数值。它根据这两个值的平均值分配信用，如下图
+    6 的左面板所示。对连续部分分配的信用是使用 IG 计算的（图 6 的右面板）。然后将离散和连续的贡献合并，得到一个高度准确的综合贡献。
 - en: '![Figure](../Images/5c05dd23d00b6c78486eed6511c58c49.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/5c05dd23d00b6c78486eed6511c58c49.png)'
 - en: Figure 6\. GIG works by calculating the credit at the jumps by averaging the
     value to the left and the value to the right of the discrete part and then combining
     that with the credit assigned by Aumann-Shapley on the continuous parts.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 6\. GIG 通过计算跳跃处的信用，方法是平均离散部分左右的值，然后与 Aumann-Shapley 在连续部分分配的信用相结合来工作。
 - en: The details of how this is done are contained in the [GIG explainable ML paper](https://arxiv.org/abs/1909.01869),
     which also mathematically proves that GIG is the only way of computing credit
     allocation for these types of mixed models under a small set of reasonable axioms.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 详细信息包含在 [GIG 可解释 ML 论文](https://arxiv.org/abs/1909.01869) 中，该论文还数学证明了 GIG 是在一组合理公理下计算这些混合模型信用分配的唯一方法。
 - en: '**Conclusion**'
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: Ensemble models produce better results than any single modeling method alone,
     but they have heretofore been impossible to explain accurately. We introduced
     a new method, [Generalized Integrated Gradients](https://arxiv.org/abs/1909.01869),
@@ -305,81 +424,125 @@
     to use these advanced, more effective models in your lending business to make
     more good loans and fewer bad loans and still explain the results to consumers,
     regulators, and business owners.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成模型比任何单一建模方法产生更好的结果，但之前一直难以准确解释。我们介绍了一种新方法，[广义集成梯度](https://arxiv.org/abs/1909.01869)，这是在一小组合理公理下唯一能够解释我们在实际机器学习应用中经常遇到的多样集成和函数组合的方法，例如在金融服务中。GIG使得在你的贷款业务中使用这些先进、更有效的模型成为可能，从而在提供更多良好贷款的同时减少不良贷款，并且能够向消费者、监管者和业务负责人解释结果。
 - en: '[Original](https://www.zest.ai/insights/introducing-gig-a-practical-method-for-explaining-diverse-ensemble-machine-learning-models).
     Reposted by permission.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.zest.ai/insights/introducing-gig-a-practical-method-for-explaining-diverse-ensemble-machine-learning-models)。经许可转载。'
 - en: '**Bio: [Jay Budzik](https://www.linkedin.com/in/jaybudzik/)** is CTO at **[Zest
     AI](https://www.zest.ai/)**.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Jay Budzik](https://www.linkedin.com/in/jaybudzik/)** 是 **[Zest AI](https://www.zest.ai/)**
+    的首席技术官。'
 - en: '**Related:**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Ensemble Methods for Machine Learning: AdaBoost](/2019/09/ensemble-methods-machine-learning-adaboost.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的集成方法：AdaBoost](/2019/09/ensemble-methods-machine-learning-adaboost.html)'
 - en: '[Explainability: Cracking open the black box, Part 1](/2019/12/explainability-black-box-part1.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释性：揭开黑箱，第 1 部分](/2019/12/explainability-black-box-part1.html)'
 - en: '[Many Heads Are Better Than One: The Case For Ensemble Learning](/2019/09/ensemble-learning.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[众多智慧胜过一人：集成学习的案例](/2019/09/ensemble-learning.html)'
 - en: '* * *'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How CoRise Helped Ben Wilson Land a New Job as a Analytics Engineer…](https://www.kdnuggets.com/2022/08/corise-land-new-job-analytics-engineer.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CoRise 如何帮助 Ben Wilson 找到新的数据分析工程师职位…](https://www.kdnuggets.com/2022/08/corise-land-new-job-analytics-engineer.html)'
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[广义和可扩展的最优稀疏决策树(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandas 数据框的 apply() 方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
 - en: '[Introduction to __getitem__: A Magic Method in Python](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[__getitem__ 的介绍：Python 中的魔法方法](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)'
 - en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[带示例的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
 - en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习技术：使用 Python 中的随机森林的全面指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
