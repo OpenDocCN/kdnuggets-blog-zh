@@ -1,14 +1,20 @@
 - en: 'Process Mining with R: Introduction'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用R进行流程挖掘：介绍。
 - en: 原文：[https://www.kdnuggets.com/2017/11/process-mining-r-introduction.html](https://www.kdnuggets.com/2017/11/process-mining-r-introduction.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/11/process-mining-r-introduction.html](https://www.kdnuggets.com/2017/11/process-mining-r-introduction.html)
 - en: '**By Seppe vanden Broucke, KU Leuven**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Seppe vanden Broucke，KU鲁汶大学**'
 - en: Today’s organizations employ a wide range of information support systems to
     support their business processes. Such support systems record and log an abundance
     of data, containing a variety of *events* that can be linked back to the occurrence
@@ -17,33 +23,47 @@
     to model, improve and extend operational processes “as they happen” in the organization. As
     such, process mining can be situated at the intersection of the fields of Business
     Process Management (BPM) and data mining.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 当今的组织采用了各种信息支持系统来支持其业务流程。这些支持系统记录和记录了大量的数据，其中包含了与原始业务流程中任务的发生相关联的各种*事件*。[*流程挖掘*](http://www.dataminingapps.com/dma_research/process-analytics/)的领域从这些事件日志作为分析的基石出发，旨在从组织中“实时发生”的操作流程中获取建模、改进和扩展的知识。因此，流程挖掘可以被看作是业务流程管理（BPM）和数据挖掘领域的交叉点。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐。
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈入网络安全职业生涯的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您在IT领域的组织。'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The most well-known task within the area of process mining is called *process
     discovery* (sometimes also called process identification), where analysts aim
     to derive an as-is process model, starting from the data as it is recorded in
@@ -60,8 +80,10 @@
     data set to a visual representation, a process model, highlighting frequent behavior,
     bottlenecks, or any other data dimension that might be of interest to the end
     user.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在流程挖掘领域中最著名的任务称为*流程发现*（有时也称为流程识别），分析人员的目标是从数据中推导出一个即时的流程模型，而不是从一个作为描述模型起点并试图将实际数据与此模型对齐。流程挖掘依赖于现有的方法，尽管事件数据所带来的特定环境和要求导致了各种特定的工具和算法的出现。与传统数据挖掘相比，分析人员通常使用一个平坦的实例表进行工作，而流程挖掘则从一个*分层且具有内在顺序的*数据集开始。事件日志是由记录一个流程实例执行的多个步行组成的，每个步行本身由多个事件组成。这些事件根据其执行顺序进行排序。因此，流程挖掘的一个主要用例是将这个复杂的数据集抽象为一个可视化表示，即一个流程模型，突出显示频繁的行为、瓶颈或任何对最终用户可能感兴趣的数据维度。
 - en: 'Traditional data mining tooling like R, SAS, or Python are powerful to filter,
     query, and analyze flat tables, but are not yet widely used by the process mining
     community to achieve the aforementioned tasks, due to the atypical nature of event
@@ -78,16 +100,23 @@
     with especially “dplyr“) makes for a relatively readable and concise approach,
     though there is no reason why other tools such as Python wouldn’t work just as
     well.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统的数据挖掘工具如R、SAS或Python在过滤、查询和分析平面表方面功能强大，但由于事件日志的特殊性质，尚未被过程挖掘社区广泛使用以实现上述任务。相反，出现了一系列独立的工具，包括但不限于：Disco、Minit、ProcessGold、Celonis
+    Discovery、ProM等。在本文中，我们希望通过使用更传统的数据科学编程语言R，快速介绍如何创建丰富的过程映射。这将在上述工具可能不可用的情况下提供帮助，同时还提供了如何通过或更容易地将典型的过程挖掘任务与其他更与数据挖掘相关的任务相结合的提示。此外，与数据一起直接操作的操作方式将显示出，开始使用过程发现是非常简单的。我们选择R作为我们的“工作语言”，因为现代R的流畅性（即“tidyverse”包，特别是“dplyr”）使得其相对易读和简洁，尽管没有理由不能像Python等其他工具一样工作得很好。
 - en: 'We’re going to use the “[example event log](http://www.dataminingapps.com/dma_research/process-analytics/)”
     provided by Disco as a running example. First, we load in some libraries we’ll
     need and define a few helper functions and load in the event log:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用Disco提供的“[示例事件日志](http://www.dataminingapps.com/dma_research/process-analytics/)”作为运行示例。首先，我们加载一些需要的库，并定义一些辅助函数并加载事件日志：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Next up is the key step of the analysis process: for every event line in the
     event log, we want to figure out (i) the preceding activity, i.e. the activity
     that stopped most recently before the start of this activity in the same case
@@ -95,34 +124,50 @@
     the completion of this activity in the same case. To do so, we’ll first assign
     an increasing row number to each event and use that to construct two new columns
     to refer to the following and previous event in the event log:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析过程的关键步骤是：对于事件日志中的每个事件行，我们要确定（i）前一个活动，即在同一案例中该活动开始之前最近停止的活动，以及（ii）后续活动，即在同一案例中该活动完成后最快开始的活动。为此，我们首先给每个事件分配一个递增的行号，并用此行号构建两个新列来引用事件日志中的后续事件和前一个事件：
 - en: '[PRE1]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Using this prepared event log data set, we can already obtain a lot of interesting
     descriptive statistics and insights. For instance, the following block of code
     provides an overview of the different variants (pathways) in the event log:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这个准备好的事件日志数据集，我们已经可以获得许多有趣的描述性统计和洞察。例如，下面的代码块提供了事件日志中不同变体（路径）的概述：
 - en: '[PRE2]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'As is the case with many processes, there are a few variants making up the
     largest part of the process instances, followed by a “long tail” of behavior:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 与许多过程一样，有几个变体构成了大部分的过程实例，其后是“长尾巴”行为：
 - en: '![](../Images/e8a0c33bdf2881846042dc9a1b798f31.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8a0c33bdf2881846042dc9a1b798f31.png)'
 - en: 'Next, we construct two data frames containing only the columns we’ll need to
     visualize our process maps, for the activities and edges respectively. We’ll also
     calculate the event durations in this step:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们构建两个只包含我们需要用于可视化过程映射的列的数据框，分别用于活动和边。我们还将在此步骤中计算事件持续时间。
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: This latter requires some considerate thinking. Even although a distinct list
     of (ActivityA-ActivityB)-pairs is sufficient to construct the process map, we
     do need to take into account the correct number of times an arc appears in order
@@ -136,8 +181,12 @@
     the case identifier, endpoint row numbers (“a” and “b”), the activity names of
     the endpoints, the activity start and completion times of the endpoints, and the
     duration of the arc based on the endpoints, i.e. the waiting time of the arc.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这后者需要一些周到的思考。虽然一个明确的 (ActivityA-ActivityB) 列表足以构建过程图，但我们需要考虑正确计算弧出现的次数以计算频率和其他指标。因此，我们首先将
+    (Case Identifier，RowNum，NextNum) 列表与 (Case Identifier，PrevNum，RowNum) 进行合并，并过滤出弧的一个端点等于
+    NA 的所有条目。然后，我们应用“distinct”运算符，以确保我们获得一个唯一列表，尽管在行号级别上，而不是在活动名称级别上。这样可以确保我们的频率计数保持正确。然后，我们可以通过连接事件日志本身上的两个端点，在活动级别上找出每个弧的端点。然后，对于每个弧，我们选择案例标识符、端点行号（“a”和“b”）、端点的活动名称、端点的活动开始和完成时间，以及基于端点的弧的持续时间，即弧的等待时间。
 - en: This is all the information we need to start constructing process maps. We’ll
     use the excellent “igraph” package to visualize the process maps. Plotting it
     directly in R, however, gives non-appealing results by default. Sadly, igraph,
@@ -147,42 +196,64 @@
     capabilities that we can use to our benefit. Here, we’ll export our graphs to
     the dot file format and use “Graphviz” to perform the actual layout and generation
     of a resulting image.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们开始构建过程图所需要的所有信息。我们将使用优秀的“igraph”包来可视化过程图。然而，直接在 R 中绘制结果默认情况下效果不佳。可悲的是，igraph
+    像大多数绘图工具一样，是建立在图可以非常不结构化的假设上（想想社交网络图），因此面向过程的图的布局看起来不太吸引人。幸运的是，igraph 提供了强大的导出功能，我们可以利用它们的好处。在这里，我们将我们的图导出为
+    dot 文件格式，并使用“Graphviz”来执行实际的布局和生成结果图像。
 - en: 'Let’s try this out by creating a process map annotated with median duration
     times for the activities and arcs. First, we’ll define two color gradients for
     the activities and edges respectively, as well as another small helper function,
     and then construct two new activity and edges data frames with the duration information:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过创建一个带有活动和弧的中位数持续时间注释的过程图来尝试这一点。首先，我们将为活动和边分别定义两个颜色渐变，并定义另一个小的辅助函数，然后构建包含持续时间信息的两个新的活动和边数据框：
 - en: '[PRE4]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: More On This Topic
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进一步了解
 - en: '[How to Process a DataFrame with Millions of Rows in Seconds](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在几秒钟内处理数百万行的 DataFrame](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
 - en: '[Frameworks for Approaching the Machine Learning Process](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习过程的框架](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
 - en: '[3 Ways to Process CSV Files in Python](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中处理 CSV 文件的 3 种方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)'
 - en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理的简介](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
 - en: '[An Introduction to Hill Climbing Algorithm in AI](https://www.kdnuggets.com/2022/07/introduction-hill-climbing-algorithm-ai.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI 中的爬山算法介绍](https://www.kdnuggets.com/2022/07/introduction-hill-climbing-algorithm-ai.html)'
 - en: '[An Introduction to SMOTE](https://www.kdnuggets.com/2022/11/introduction-smote.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SMOTE 简介](https://www.kdnuggets.com/2022/11/introduction-smote.html)'
