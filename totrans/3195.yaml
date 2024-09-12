@@ -1,236 +1,346 @@
 - en: How To Unit Test Machine Learning Code
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何对机器学习代码进行单元测试
 - en: 原文：[https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html](https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html](https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
 - en: '**By Chase Roberts, Machine Learning Engineer**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Chase Roberts，机器学习工程师**'
 - en: '![AI](../Images/7c1f9253aaea96785bcd1cea1033e67f.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![AI](../Images/7c1f9253aaea96785bcd1cea1033e67f.png)'
 - en: 'Credit: [provalisresearch.com/blog/machine-learning](https://provalisresearch.com/blog/machine-learning/)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '参考: [provalisresearch.com/blog/machine-learning](https://provalisresearch.com/blog/machine-learning/)'
 - en: Over the past year, I’ve spent most of my working time doing deep learning research
     and internships. And a lot of that year was making very big mistakes that helped
     me learn not just about ML, but about how to engineer these systems correctly
     and soundly. One of the main principles I learned during my time at Google Brain
     was that unit tests can make or break your algorithm and can save you weeks of
     debugging and training time.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去的一年里，我把大部分工作时间都花在了深度学习研究和实习上。而且那一年中很多时间都在犯非常大的错误，这些错误帮助我不仅了解了机器学习，还了解了如何正确而健全地设计这些系统。在我在
+    Google Brain 工作期间，我学到的主要原则之一是，单元测试可以决定你的算法成败，并且可以节省你几周的调试和训练时间。
 - en: However, there doesn’t seem to be a solid tutorial online on how to actually *write *unit
     tests for neural network code. Even places like OpenAI only found bugs by [staring
     at every line of their code and try to think why it would cause a bug](https://blog.openai.com/openai-baselines-dqn/).
     Clearly, most of us don’t have that kind of time or self hatred, so hopefully
     this tutorial can help you get started testing your systems sanely!
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，似乎网上没有一个完善的教程来 *编写* 神经网络代码的单元测试。即使是像 OpenAI 这样的地方也只是通过 [盯着每一行代码并尝试思考为什么它会导致错误](https://blog.openai.com/openai-baselines-dqn/) 来发现错误。显然，我们大多数人没有那种时间或自我厌恶，因此希望这个教程可以帮助你理智地开始测试你的系统！
 - en: Let’s start off with a simple example. Try to find the bug in this code.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从一个简单的例子开始。试着找出这段代码中的错误。
 - en: Do you see it? The network isn’t actually stacking. When I wrote this code,
     I copy and pasted the line slim.conv2d(…) and only modified the kernel sizes,
     and never the actual input.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 你看到了吗？网络实际上并没有堆叠。当我写这段代码时，我复制并粘贴了 slim.conv2d(…) 行，只修改了内核大小，而从未修改实际输入。
 - en: I’m embarrassed to say that this actually happened to me about a week ago… But
     it’s an important lesson! These bugs are really hard to catch for a few reasons.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我很尴尬地说，这实际上发生在我大约一周前……但这是一个重要的教训！这些错误很难发现，原因有几个。
 - en: This code never crashes, raises an error, or even slows down.
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这段代码从未崩溃、报错，甚至变慢。
 - en: This network still trains and the loss will still go down.
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这个网络仍然可以训练，损失值仍然会下降。
 - en: The values converge after a few hours, but to really poor results, leaving you
     scratching your head as to what you need to fix.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 数值在几小时后收敛，但结果非常差，让你挠头不知道需要修复什么。
 - en: When your only feedback is the final validation error, the only place you have
     to search is your entire network architecture. Needless to say, you’ll need a
     better system.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你唯一的反馈是最终验证错误时，你唯一需要搜索的就是你的整个网络架构。不用说，你需要一个更好的系统。
 - en: So how do we actually catch this *before* we do a full multi day training session?
     Well, the easiest thing to notice about this is that the values of the layers
     never actually reach any other tensors outside the function. So assuming we had
     some type of loss and an optimizer, these tensors never get optimized, so they
     will always have their default values.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们如何在进行完整的多天训练之前 *发现* 这个问题呢？实际上最容易注意到的一点是，层的值从未实际到达函数外的任何其他张量。所以假设我们有某种损失函数和优化器，这些张量永远不会被优化，因此它们将始终保持默认值。
 - en: We can detect it by simply taking a training step and comparing their before
     and after.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过简单地进行一次训练步骤，并比较其前后的值来检测这个问题。
 - en: Boom. In less than 15 lines of code, we now verified that a least all of the
     variables that we created get trained.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 啪。不到 15 行代码，我们现在验证了至少我们创建的所有变量都得到了训练。
 - en: This test is super simple and super useful. Let’s say that we fixed the previous
     issue and now we want to start adding some batch normalization. See if you can
     spot the bug.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个测试非常简单而且非常有用。假设我们解决了之前的问题，现在我们想开始添加一些批量归一化。看看你能否发现错误。
 - en: Did you see it? This one is super subtle. You see, in tensorflow batch_norm
     actually has is_training defaulted to *False, *so adding this line of code won’t
     actually normalize your input during training! Thankfully, the last unit test
     we wrote will catch this issue immediately! (I know, because this happened to
     me 3 days ago.)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你看到了吗？这个 bug 非常微妙。你看，tensorflow 中的 batch_norm 实际上将 is_training 默认设置为*False*，因此添加这一行代码在训练期间实际上不会对输入进行归一化！幸运的是，我们写的最后一个单元测试会立即捕捉到这个问题！（我知道，因为这发生在我三天前。）
 - en: Let’s do another example. This actually comes from a [reddit post](https://www.reddit.com/r/MachineLearning/comments/6qyvvg/p_tensorflow_response_is_making_no_sense/) I
     saw one day. I won’t get into too much detail, but basically the person wanted
     to create a classifier that gave an output in the range of (0, 1). See if you
     can find the bug.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们再做一个例子。这实际上来自于我一天看到的一个[reddit帖子](https://www.reddit.com/r/MachineLearning/comments/6qyvvg/p_tensorflow_response_is_making_no_sense/)。我不会深入细节，但基本上这个人想创建一个输出范围在(0,
+    1)的分类器。看看你能否找到其中的 bug。
 - en: Notice the bug? This one is really hard to spot before hand, and can lead to
     super confusing results. Basically what is happening here is that prediction only
     has a single output, which, when you apply [softmax cross entropy](https://en.wikipedia.org/wiki/Softmax_function) onto
     it, causes the loss to be 0 always.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 发现 bug 了吗？这个 bug 很难事先发现，并且会导致非常混淆的结果。基本上这里发生的情况是预测只有一个输出，当你应用[softmax 交叉熵](https://en.wikipedia.org/wiki/Softmax_function)时，会导致损失总是
+    0。
 - en: An easy way to test for this is to well… make sure the loss is never 0.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种简单的方法是…确保损失从未为 0。
 - en: Another good test to do is similar to our first test, but backwards. You can
     make sure that only the variables you want to train actually get trained. Take
     for example a GAN. One of the common bugs to appear is accidentally forgetting
     to set which variables to train during which optimization. Code like this happens
     all the time.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个好的测试类似于我们的第一个测试，但方向相反。你可以确保只有你想训练的变量真正被训练。例如，一个 GAN。一个常见的 bug 是在优化过程中不小心忘记设置哪些变量需要训练。这样的代码时常出现。
 - en: 'The biggest issue here is that the optimizer has a default setting to optimize
     ALL of the variables. In advance architectures like GANs, this is a death sentence
     to all of your training time. However, you can easily detect these mistakes by
     writing a test like this:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 最大的问题在于优化器有一个默认设置来优化所有变量。在像 GANs 这样的先进架构中，这会使你所有的训练时间都付之东流。然而，你可以通过编写这样的测试来轻松检测这些错误：
 - en: A very similar test can be written for the discriminator. And this same test
     can be used for a lot of reinforcement learning algorithms as well. Many actor-critic
     models have separate networks that need to be optimized by different losses.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于鉴别器，可以编写一个非常类似的测试。这个相同的测试也可以用于许多强化学习算法。许多 actor-critic 模型有不同的网络需要通过不同的损失进行优化。
 - en: Here are some patterns I would recommend following for your tests.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一些我建议你在测试中遵循的模式。
 - en: Keep them deterministic. It would really suck to have a test fail in a weird
     way, only to never be able to recreate it. If you *really* want randomized input,
     make sure to seed the random number so you can rerun the test easily.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 保持测试结果的确定性。如果测试以奇怪的方式失败，然后永远无法重现，那真的很糟糕。如果你*真的*想要随机输入，确保为随机数设置种子，以便你可以轻松重新运行测试。
 - en: Keep the tests short. Don’t have a unit test that trains to convergence and
     checks against a validation set. You are wasting your own time if you do this.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 保持测试简短。不要有一个单元测试训练到收敛并对验证集进行检查。如果你这样做，你是在浪费自己的时间。
 - en: Make sure you reset the graph between each test.
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确保在每次测试之间重置图形。
 - en: In conclusion, these black box algorithms still have lots of ways to be tested!
     Spending an hour writing a test can save you days of rerunning training sessions,
     and can greatly improve your research. Wouldn’t suck to have to throw away perfectly
     good ideas because our implementations were buggy?
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 总之，这些黑箱算法仍然有很多测试的方法！花一个小时编写测试可以节省你几天重新运行训练会话的时间，并可以大大改善你的研究。如果我们的实现有 bug，不得不丢弃完全正确的想法，不是很糟糕吗？
 - en: This list clearly isn’t comprehensive, but it’s a solid start! If you have extra
     advice or specific tests that you found to be helpful, please message me on [twitter](https://twitter.com/TheNerdStation)!
     I’d love to make a part 2 of this.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个列表显然不是全面的，但这是一个很好的开始！如果你有额外的建议或特定的测试发现有用，请在[twitter](https://twitter.com/TheNerdStation)上给我发消息！我很乐意制作这部分内容的第二部分。
 - en: All opinions in this piece are a reflection of my experiences and are not sponsored
     or supported by Google.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文中的所有观点都是基于我的个人经验，并未得到谷歌的赞助或支持。
 - en: '**Bio: [Chase Roberts](http://thenerdstation.github.io/)** is a former Google
     Brain research intern. Worked on machine learning robotics team. Focused on implementation
     and in depth analysis of Progressive Neural Networks for transfer learning. Also
     helped implement reinforcement learning architecture.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Chase Roberts](http://thenerdstation.github.io/)** 曾是谷歌脑团队的研究实习生。曾在机器学习机器人团队工作。专注于渐进神经网络在迁移学习中的实现和深入分析。同时也帮助实现了强化学习架构。'
 - en: '[Original](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765).
     Reposted with permission.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[TensorFlow: What Parameters to Optimize?](/2017/11/tensorflow-parameters-optimize.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow: 应优化哪些参数？](/2017/11/tensorflow-parameters-optimize.html)'
 - en: '[Software Engineering vs Machine Learning Concepts](/2017/03/software-engineering-vs-machine-learning-concepts.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[软件工程与机器学习概念的比较](/2017/03/software-engineering-vs-machine-learning-concepts.html)'
 - en: '[Using TensorFlow for Predictive Analytics with Linear Regression](/2017/11/tensorflow-predictive-analytics-linear-regression.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 进行线性回归的预测分析](/2017/11/tensorflow-predictive-analytics-linear-regression.html)'
 - en: '* * *'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的 IT'
 - en: '* * *'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Perform Unit Testing in Python?](https://www.kdnuggets.com/2023/01/perform-unit-testing-python.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Python 中进行单元测试？](https://www.kdnuggets.com/2023/01/perform-unit-testing-python.html)'
 - en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过使用自动 EDA 工具在数据科学评估测试中取得好成绩](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
 - en: '[Performing a T-Test in Python](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中执行 T 检验](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)'
 - en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越准确性：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
 - en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布 PyCaret 3.0：Python 中的开源低代码机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
 - en: '[KDnuggets News, April 27: A Brief Introduction to Papers With Code;…](https://www.kdnuggets.com/2022/n17.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，4月27日：带代码的论文简要介绍；…](https://www.kdnuggets.com/2022/n17.html)'
