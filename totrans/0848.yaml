@@ -1,473 +1,716 @@
 - en: Using RAPIDS cuDF to Leverage GPU in Feature Engineering
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用RAPIDS cuDF在特征工程中利用GPU
 - en: 原文：[https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
 - en: '**Editor''s note**: This was the runner-up in our recent NVIDIA + KDnuggets
     GPU-themed blog writing contest. Congratulations to Hasan on the accomplishment!'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑备注**：这是我们最近NVIDIA + KDnuggets GPU主题博客写作比赛的亚军。恭喜Hasan取得这一成就！'
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织IT'
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The fact that particular methods succeeded in solving a problem may not lead
     to the same outcome on a different scale. When distances change, shoes need to
     change too.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定方法成功解决问题的事实可能不会在不同规模上产生相同的结果。当距离改变时，鞋子也需要改变。
 - en: In machine learning, data, and data processing are crucial in ensuring the model’s
     success, and feature engineering is part of that process. When the data is small,
     the classical Pandas library can easily handle any processing task on the CPU.
     However, Pandas can be too slow in processing big data. One solution to improving
     speed and efficiency in data processing and feature engineering is RAPIDS.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，数据及数据处理对模型的成功至关重要，而特征工程是其中的一部分。当数据量较小时，经典的Pandas库可以轻松处理CPU上的任何处理任务。然而，Pandas在处理大数据时可能过于缓慢。提高数据处理和特征工程速度和效率的一个解决方案是RAPIDS。
 - en: “*RAPIDS is a suite of open-source software libraries for executing end-to-end
     data science and analytics pipelines entirely on graphics processing units (GPUs).
     RAPIDS accelerates data science pipelines to create more productive workflows.*[1]”
+  id: totrans-11
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “*RAPIDS是一套开源软件库，用于在图形处理单元（GPU）上执行端到端的数据科学和分析管道。RAPIDS加速了数据科学管道，以创建更高效的工作流程。*[1]”
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/c05d7dfe959c3948ba5fcfb9a9f0cc7d.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![使用RAPIDS cuDF在特征工程中利用GPU](../Images/c05d7dfe959c3948ba5fcfb9a9f0cc7d.png)'
 - en: Image by [brgfx](https://www.freepik.com/free-vector/opposite-adjectives-fast-slow_1172856.htm#query=running%20fast&position=6&from_view=search&track=ais)
     on Freepik
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[brgfx](https://www.freepik.com/free-vector/opposite-adjectives-fast-slow_1172856.htm#query=running%20fast&position=6&from_view=search&track=ais)提供，来源于Freepik
 - en: 'One tool by RAPIDS to efficiently manipulate tabular data in feature engineering
     and data preprocessing is *cuDF*. RAPIDS *cuDF* enables the creation of GPU data
     frames and the performance of several *Pandas* operations such as indexing, groupby,
     merging, and string handling. As the RAPIDS website defines:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: RAPIDS的一个工具，用于在特征工程和数据预处理中高效操作表格数据，是*cuDF*。RAPIDS *cuDF* 允许创建GPU数据框，并执行多个*Pandas*操作，如索引、分组、合并和字符串处理。正如RAPIDS网站定义的：
 - en: “*cuDF is a Python GPU DataFrame library (built on the Apache Arrow columnar
     memory format) for loading, joining, aggregating, filtering, and otherwise manipulating
     tabular data using a DataFrame style API in the style of pandas.*[2]”
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “*cuDF是一个Python GPU DataFrame库（基于Apache Arrow列式内存格式），用于加载、连接、聚合、过滤和以DataFrame风格的API处理表格数据，类似于pandas。*[2]”
 - en: This article tries to explain how to create and manipulate data frames and apply
     feature engineering with *cuDF* on GPU using a real dataset.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文尝试解释如何创建和操作数据框，并在GPU上使用*cuDF*应用特征工程，采用真实数据集。
 - en: Our [dataset](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)
     belongs to Optiver Realized Volatility Prediction of Kaggle. It contains stock
     market data relevant to the practical execution of trades in the financial markets
     and includes order book snapshots and executed trades[3].
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的[数据集](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)属于Kaggle的Optiver实际波动预测。它包含与金融市场中实际交易执行相关的股票市场数据，包括订单簿快照和执行的交易[3]。
 - en: We’ll discover more about the data in the following section. Then, we will integrate
     Google Colab with Kaggle and RAPIDS. In the third section, we will see how to
     accomplish feature engineering on this dataset using *Pandas* and *cuDF*. That
     will provide us with a comparative performance review of both libraries. In the
     last section, we will plot and evaluate the results.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在下一节中深入了解数据。然后，我们将整合Google Colab与Kaggle和RAPIDS。在第三节中，我们将看到如何使用*Pandas*和*cuDF*对这个数据集进行特征工程。这将为我们提供两个库的比较性能评估。在最后一节中，我们将绘制并评估结果。
 - en: Data
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据
 - en: 'The data we are going to use consists of two sets of files[3]:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将要使用的数据包括两个文件集[3]：
 - en: 'book_[train/test].parquet: A parquet file, which is partitioned by stock_id,
     provides order book data on the most competitive buy and sell orders entered into
     the market. This file contains passive buy/sell intention updates.'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: book_[train/test].parquet：一个Parquet文件，按stock_id分区，提供市场中最具竞争力的买入和卖出订单的订单簿数据。此文件包含被动买入/卖出意图更新。
 - en: 'Feature columns in book_[train/test].parquet:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: book_[train/test].parquet中的特征列：
 - en: stock_id - ID code for the stock. Parquet coerces this column to the categorical
     data type when loaded.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: stock_id - 股票的ID代码。Parquet在加载时将此列强制转换为分类数据类型。
 - en: time_id - ID code for the time bucket. Time IDs are not necessarily sequential
     but are consistent across all stocks.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: time_id - 时间桶的ID代码。时间ID不一定是顺序的，但在所有股票中是一致的。
 - en: seconds_in_bucket - Number of seconds from the start of the bucket, always starting
     from 0.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: seconds_in_bucket - 从桶的开始时间起的秒数，总是从0开始。
 - en: bid_price[1/2] - Normalized prices of the most/second most competitive buy level.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bid_price[1/2] - 最具竞争力的买入价/第二具竞争力买入价的标准化价格。
 - en: ask_price[1/2] - Normalized prices of the most/second most competitive sell
     level.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ask_price[1/2] - 最具竞争力的卖出价/第二具竞争力卖出价的标准化价格。
 - en: bid_size[1/2] - The number of shares on the most/second most competitive buy
     level.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bid_size[1/2] - 最具竞争力的买入价/第二具竞争力买入价的股份数量。
 - en: ask_size[1/2] - The number of shares on the most/second most competitive sell
     level.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ask_size[1/2] - 最具竞争力的卖出价/第二具竞争力卖出价的股份数量。
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/d5ea073b919da625e4421b8bce8c968b.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![使用RAPIDS cuDF利用GPU进行特征工程](../Images/d5ea073b919da625e4421b8bce8c968b.png)'
 - en: 'Exhibit-1: Description of book_[train/test].parquet (Image by Author)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-1：book_[train/test].parquet的描述（作者提供的图像）
 - en: This file is 5.6 GB and contains more than 167 million entries. There are 112
     stocks and 3830 10-minute time windows (time_id). Each time window (bucket) has
     a maximum of 600 seconds. As one transaction intention can occur per second in
     each time window for each stock, the multiplication of the mentioned numbers can
     explain why we have millions of entries. A caveat is that not every second a transaction
     intention occurs, meaning that some seconds in a particular time window are missing.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 此文件大小为5.6 GB，包含超过1.67亿条记录。有112只股票和3830个10分钟的时间窗口（time_id）。每个时间窗口（桶）最多有600秒。由于每个时间窗口中的每只股票每秒钟可能会发生一个交易意图，因此上述数字的乘积可以解释为什么我们有数百万条记录。需要注意的是，并非每秒钟都会发生交易意图，这意味着某些时间窗口中的某些秒数是缺失的。
 - en: 'trade_[train/test].parquet: A parquet file, which is partitioned by stock_id,
     contains data on trades that are actually executed.'
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: trade_[train/test].parquet：一个Parquet文件，按stock_id分区，包含实际执行的交易数据。
 - en: 'Feature columns in trade_[train/test].parquet:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: trade_[train/test].parquet中的特征列：
 - en: stock_id - Same as above.
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: stock_id - 同上。
 - en: time_id - Same as above.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: time_id - 同上。
 - en: seconds_in_bucket - Same as above. Note that since trade and book data are taken
     from the same time window and trade data is more sparse in general, this field
     is not necessarily starting from 0.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: seconds_in_bucket - 同上。请注意，由于交易和订单数据来自相同的时间窗口，并且交易数据通常更稀疏，因此此字段不一定从0开始。
 - en: price - The average price of executed transactions happening in one second.
     Prices have been normalized and the average has been weighted by the number of
     shares traded in each transaction.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: price - 在一秒钟内执行交易的平均价格。价格已经过标准化，平均值按每笔交易中交易的股份数量加权。
 - en: size - The total number of shares traded.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: size - 交易的总股数。
 - en: order_count - The number of unique trade orders taking place.
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: order_count - 交易订单的唯一数量。
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/86d85c6851c2d26fb8a88c06311ff4cd.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/86d85c6851c2d26fb8a88c06311ff4cd.png)'
 - en: 'Exhibit-2: Description of trade_[train/test].parquet (Image by Author)'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-2：trade_[train/test].parquet 文件描述（作者提供的图片）
 - en: The trade_[train/test].parquet file is much less than book_[train/test].parquet.
     The former is 512.5 MB and has more than 38 million entries. Since actual transactions
     don’t have to match intentions, trade data is more sparse and hence fewer entries.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: trade_[train/test].parquet 文件远小于 book_[train/test].parquet。前者为 512.5 MB，有超过
+    3800 万条记录。由于实际交易不一定符合意图，交易数据更为稀疏，因此条目较少。
 - en: The goal is to predict the realized stock price volatility computed over the
     next 10-minute window from the feature data under the same stock_id/time_id. This
     project involves a great deal of feature engineering that should be performed
     on a large dataset. Developing new features will also increase the size of the
     data and the computational complexity. One remedy is to use *cuDF* instead of
     the *Pandas* library.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标是预测在相同 stock_id/time_id 下的特征数据在接下来的 10 分钟窗口内的实际股票价格波动。该项目涉及大量特征工程，需在大数据集上进行。开发新特征还会增加数据量和计算复杂性。一种解决办法是使用
+    *cuDF* 替代 *Pandas* 库。
 - en: In this blog, we will see a few feature engineering tasks and data frame manipulations
     trying both *Pandas* and *cuDF* to compare their performances. However, we won’t
     use all the data but only a single stock’s records to see an exemplary implementation.
     One may check out the [notebook](https://www.kaggle.com/code/hserdaraltan/optiver-train-feature-engineering-lgbm-cv-gpu)
     to see all feature engineering work done on the entire data.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客中，我们将探讨一些特征工程任务和数据框操作，同时尝试 *Pandas* 和 *cuDF* 以比较它们的性能。然而，我们不会使用所有数据，而只使用单只股票的记录以展示一个示例实现。可以查看
+    [笔记本](https://www.kaggle.com/code/hserdaraltan/optiver-train-feature-engineering-lgbm-cv-gpu)
+    来了解对整个数据进行的特征工程工作。
 - en: Since we execute the code on Google Colab, we should first configure our notebook
     to integrate Kaggle and RAPIDS.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们在 Google Colab 上执行代码，首先应配置我们的笔记本以集成 Kaggle 和 RAPIDS。
 - en: Configuration of Google Colab Notebook
+  id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Google Colab 笔记本配置
 - en: 'There are a few steps to configure the Colab notebook:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置 Colab 笔记本的步骤如下：
 - en: Create an API token on the Kaggle account to authenticate the notebook with
     Kaggle services.
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 Kaggle 账户上创建一个 API 令牌，以便用 Kaggle 服务进行身份验证。
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/80069e40e84a7975eea7b6d87cca5576.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/80069e40e84a7975eea7b6d87cca5576.png)'
 - en: 'Exhibit-3: Creating An API Token On The Kaggle Account (Image by Author)'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-3：在 Kaggle 账户上创建 API 令牌（作者提供的图片）
 - en: Go to Settings and click on “Create New Token.” A file named “kaggle.json” will
     be downloaded which contains the username and the API key.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 转到设置并点击“创建新令牌。” 会下载一个名为“kaggle.json”的文件，其中包含用户名和 API 密钥。
 - en: Start a new notebook on Google Colab and upload the kaggle.json file.
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 Google Colab 上启动一个新的笔记本并上传 kaggle.json 文件。
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/b6749068334098d8b6acfabc72c1a812.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/b6749068334098d8b6acfabc72c1a812.png)'
 - en: 'Exhibit-4: Uploading The kaggle.json File In Google Colab (Image by Author)'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-4：在 Google Colab 中上传 kaggle.json 文件（作者提供的图片）
 - en: Upload the kaggle.json file in Google Colab by clicking on the “Upload to session
     storage” icon.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 点击“上传到会话存储”图标，在 Google Colab 中上传 kaggle.json 文件。
 - en: Click the “Runtime” dropdown at the top of the page, then “Change Runtime Type”
     and confirm the instance type is *GPU*.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 点击页面顶部的“运行时”下拉菜单，然后选择“更改运行时类型”，确认实例类型为 *GPU*。
 - en: Execute the below command and check the output to ensure you have been allocated
     a Tesla T4, P4, or P100.
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 执行以下命令并检查输出，确保你分配到了 Tesla T4、P4 或 P100。
 - en: '[PRE0]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Get RAPIDS-Colab install-files and check your GPU:'
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取 RAPIDS-Colab 安装文件并检查你的 GPU：
 - en: '[PRE1]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Ensure that your Colab Instance is RAPIDS compatible in the output of this cell.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保你的 Colab 实例在该单元格的输出中兼容 RAPIDS。
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/4209f98d2eb0124501d10babcd488dc8.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/4209f98d2eb0124501d10babcd488dc8.png)'
 - en: 'Exhibit-5: Checking If The Colab Instance Is RAPIDS Compatible (Image by Author)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-5：检查 Colab 实例是否兼容 RAPIDS（作者提供的图片）
 - en: 'Check if RAPIDS libraries are installed correctly:'
+  id: totrans-65
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检查 RAPIDS 库是否正确安装：
 - en: '[PRE2]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: We are all set with the Google Colab configuration if the setup renders no error.
     Now, we can upload the Kaggle dataset.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果设置没有错误，我们的 Google Colab 配置就绪。现在，我们可以上传 Kaggle 数据集。
 - en: Importing and Uploading the Kaggle Dataset
+  id: totrans-68
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 导入和上传 Kaggle 数据集
 - en: We need to make a few arrangements in our Colab instance to import the dataset
     from Kaggle.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要在 Colab 实例中进行一些调整以从 Kaggle 导入数据集。
 - en: 'Install the Kaggle library:'
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 安装 Kaggle 库：
 - en: '[PRE3]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Make a directory named “.kaggle”:'
+  id: totrans-72
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个名为“.kaggle”的目录：
 - en: '[PRE4]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Copy the “kaggle.json” into this new directory:'
+  id: totrans-74
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将“kaggle.json”复制到这个新目录中：
 - en: '[PRE5]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Allocate the required permission for this file:'
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为此文件分配所需的权限：
 - en: '[PRE6]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Download the dataset from Kaggle:'
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从 Kaggle 下载数据集：
 - en: '[PRE7]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Create a directory for unzipped data:'
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为解压缩的数据创建一个目录：
 - en: '[PRE8]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Unzip data in the new directory:'
+  id: totrans-82
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在新目录中解压数据：
 - en: '[PRE9]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Import all other libraries we need:'
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 导入我们需要的所有其他库：
 - en: '[PRE10]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Set *Pandas* options:'
+  id: totrans-86
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 设置*Pandas*选项：
 - en: '[PRE11]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Define parameters:'
+  id: totrans-88
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 定义参数：
 - en: '[PRE12]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Get files:'
+  id: totrans-90
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取文件：
 - en: '[PRE13]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Now, our notebook is ready to run all data frame tasks and perform feature engineering.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们的笔记本已经准备好运行所有数据框任务并执行特征工程。
 - en: Feature Engineering
+  id: totrans-93
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特征工程
 - en: This section will discuss 13 typical engineering operations on *Pandas* data
     frame and *cuDF*. We will see how long these operations take and how much memory
     they use. Let us start by loading the data first.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节将讨论在*Pandas*数据框和*cuDF*上进行的13种典型工程操作。我们将查看这些操作所需的时间和使用的内存。让我们首先加载数据。
 - en: 1\. Loading data
+  id: totrans-95
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 加载数据
 - en: '[PRE14]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: When dframe=0, data will be loaded as a *Pandas* data frame, otherwise *cuDF*.
     For example,
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 dframe=0 时，数据将以*Pandas*数据框的形式加载，否则为*cuDF*。例如，
 - en: '*Pandas:*'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Pandas：*'
 - en: '[PRE15]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'This will return the first five records of the Order Book (book_[train/test].parquet):'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将返回订单簿（book_[train/test].parquet）的前五条记录：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/e2fd9dc3ad2f24f45656359185d54d94.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/e2fd9dc3ad2f24f45656359185d54d94.png)'
 - en: 'Exhibit-6: Loading The Data As Pandas Dataframe (Image by Author)'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-6：将数据加载为 Pandas 数据框（图片由作者提供）
 - en: '*cuDF:*'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '*cuDF：*'
 - en: '[PRE16]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'Output:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/9f3a498b7929dee8abe46c070a6195e6.png)'
+  id: totrans-106
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/9f3a498b7929dee8abe46c070a6195e6.png)'
 - en: 'Exhibit-7: Loading The Data As cuDF (Image by Author)'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-7：将数据加载为 cuDF（图片由作者提供）
 - en: 'Let us get information about the Order Book data from the *Pandas* version:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从*Pandas*版本中获取订单簿数据的信息：
 - en: '[PRE17]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Output:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/cd8ee13064a40ea54bdab9feec1cce94.png)'
+  id: totrans-111
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/cd8ee13064a40ea54bdab9feec1cce94.png)'
 - en: 'Exhibit-8: Information About The First Stock’s Order Book Data (Image by Author)'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-8：有关第一个股票订单簿数据的信息（图片由作者提供）
 - en: The above image tells us that the first stock has around 1.4 million entries
     and holds 47.8 MB of memory space. To reduce the space and increase the speed,
     we should convert data types to lesser formats, which we’ll do later.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的图片告诉我们，第一个股票大约有140万条记录，占用47.8 MB的内存空间。为了减少空间并提高速度，我们应该将数据类型转换为较小的格式，我们将在稍后完成。
 - en: 'In a similar fashion, we load the Trade Book (trade_[train/test].parquet) data
     in both data frame libraries as we did for the Order Book data. The data and its
     information will look like this:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 以类似的方式，我们将订单簿数据加载到两个数据框库中，也就是交易簿（trade_[train/test].parquet）数据。数据及其信息如下所示：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/6f9405078f82d66ac8395c91488d52e5.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/6f9405078f82d66ac8395c91488d52e5.png)'
 - en: 'Exhibit-9: The First Stock’s Trade Book Data And Data Info (Image by Author)'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-9：第一个股票的交易簿数据及数据说明（图片由作者提供）
 - en: The trading data for the first stock is 3.7 MB and has over 276 thousand records.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个股票的交易数据为3.7 MB，记录超过276千条。
 - en: 'In both files (Order Book and Trade Book), not every time window has 600 points
     of seconds. In other words, a particular time bucket may have transactions or
     bids only on some seconds in the 10-minute interval. That makes us face sparse
@@ -479,540 +722,852 @@
     *Pandas*. I checked into the matter multiple times in the past, but to the best
     knowledge, I couldn’t come across the method in *cuDF* as implemented in *Pandas*.
     Thus, we can do forward-filling as follows[4]:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 在订单簿和交易簿两个文件中，并非每个时间窗口都有600个秒点。换句话说，特定时间桶在10分钟间隔内可能只在某些秒钟有交易或出价。这使我们在两个文件中都面临着稀疏数据，其中一些秒钟缺失。我们应通过对缺失秒钟的所有列进行前向填充来解决此问题。虽然
+    *Pandas* 允许我们进行前向填充，但 *cuDF* 没有这个功能。因此，我们将在 *Pandas* 中进行前向填充，并从前向填充的 *Pandas*
+    数据框架重新创建 *cuDF*。对此我们感到遗憾，因为本博客的核心目标是展示 *cuDF* 如何胜过 *Pandas*。我曾多次查阅过此事，但据我所知，我无法找到
+    *cuDF* 中像 *Pandas* 中实现的方法。因此，我们可以按以下方式进行前向填充[4]：
 - en: '[PRE18]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Let’s take the order data as an example and how it is processed:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以订单数据为例，看看它是如何处理的：
 - en: '[PRE19]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/31bd00bd59ce67d1132a29cc6dee8fba.png)'
+  id: totrans-122
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/31bd00bd59ce67d1132a29cc6dee8fba.png)'
 - en: 'Exhibit-10: Forward Filling The Order Data (Image by Author)'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 展览-10：前向填充订单数据（作者提供的图片）
 - en: Unlike the data in Exhibit 7, the forward-filled data in Exhibit 10 has all
     600 seconds in the time bucket “5” as from 0 to 599, inclusive. We do the same
     operation on the trade data as well.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 与展示7中的数据不同，展示10中的前向填充数据在时间桶“5”中有全部600秒，即从0到599，全包括。我们在交易数据上也执行同样的操作。
 - en: 2\. Merging Data Frames
+  id: totrans-125
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 合并数据框架
 - en: We have two datasets, order and trade, and both are forward-filled. Both datasets
     are represented in *Pandas* and *cuDF* frameworks. Next, we will merge order and
     trade datasets on time_id and seconds_in_buckets.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有两个数据集，订单和交易，两者都已前向填充。这两个数据集在 *Pandas* 和 *cuDF* 框架中都有表现。接下来，我们将订单和交易数据集按 time_id
+    和 seconds_in_buckets 合并。
 - en: '[PRE20]'
+  id: totrans-127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '*cuDF* will execute the following command:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '*cuDF* 将执行以下命令：'
 - en: '[PRE21]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'expanded_df_cudf_trade is the forward-filled trade data and is obtained the
     same way as expanded_df_pd_order or expanded_df_cudf_order. Merge operation will
     create a combined data frame as shown below:'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: expanded_df_cudf_trade 是前向填充的交易数据，与 expanded_df_pd_order 或 expanded_df_cudf_order
+    获取方式相同。合并操作将创建如下所示的组合数据框架：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/7bcbf12ea281c2a9a75a86e8c331c52c.png)'
+  id: totrans-131
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/7bcbf12ea281c2a9a75a86e8c331c52c.png)'
 - en: 'Exhibit-11: Merging Data Frames (Image by Author)'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 展览-11：合并数据框架（作者提供的图片）
 - en: All columns of the two datasets are combined into one. Merging operation is
     repeated for the *Pandas* data frames too.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个数据集的所有列被合并为一个。合并操作也对 *Pandas* 数据框架重复执行。
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/fc670d7abbb9527f1293059695db54bc.png)'
+  id: totrans-134
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/fc670d7abbb9527f1293059695db54bc.png)'
 - en: Image by [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-flat-design-gathering-data-business-concept_20547395.htm#page=3&query=data%20engineering&position=36&from_view=search&track=ais)
     on Freepik
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-flat-design-gathering-data-business-concept_20547395.htm#page=3&query=data%20engineering&position=36&from_view=search&track=ais)
+    在 Freepik 上提供
 - en: 3\. Changing Dtype
+  id: totrans-136
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3\. 改变数据类型
 - en: We want to change the data type of some columns to reduce memory space and increase
     computation speed.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想要改变某些列的数据类型，以减少内存空间并提高计算速度。
 - en: '[PRE22]'
+  id: totrans-138
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: When we execute the below command,
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们执行以下命令时，
 - en: '[PRE23]'
+  id: totrans-140
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: 'we get the following output:'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到以下输出：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/53ea716fd59ad9e762b7eb77e0c9531d.png)'
+  id: totrans-142
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/53ea716fd59ad9e762b7eb77e0c9531d.png)'
 - en: 'Exhibit-12: Changing Dtype (Image by Author)'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 展览-12：改变数据类型（作者提供的图片）
 - en: The data in Exhibit 12 would use more memory space if no data type conversion
     took place. It still has 78.9 MB but, that was after the forward-fill and merge
     operations, which resulted in 13 columns and 2.3 million entries.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有进行数据类型转换，展示12中的数据将使用更多内存空间。它仍然有78.9 MB，但在前向填充和合并操作之后，结果为13列和230万条记录。
 - en: We fulfill every feature engineering task for both *Pandas* DF and *cuDF*. Here,
     we just showed the one for *cuDF* as an example.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为*Pandas* DF 和 *cuDF* 完成了每个特征工程任务。在这里，我们仅展示了一个*cuDF*的例子。
 - en: 4\. Getting Unique Time Ids
+  id: totrans-146
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 4\. 获取唯一时间 ID
 - en: We will use the unique method to extract the time_ids in this section.
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在本节中使用 unique 方法提取 time_ids。
 - en: '[PRE24]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: The above code will get the unique time_ids from *Pandas* DF and *cuDF*.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码将从*Pandas* DF 和 *cuDF* 中获取唯一的 time_ids。
 - en: '[PRE25]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: 'The output of the *cuDF* looks like this:'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '*cuDF* 的输出如下：'
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/21f81b24a5d7a1430277af76a62755a6.png)'
+  id: totrans-152
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/21f81b24a5d7a1430277af76a62755a6.png)'
 - en: 'Exhibit-13: Getting Unique Time Ids (Image by Author)'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-13：获取唯一时间 ID（作者提供的图像）
 - en: 5\. Checking Null Values
+  id: totrans-154
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 5\. 检查空值
 - en: Then, we will check the null values in data frames.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将检查数据框中的空值。
 - en: '[PRE26]'
+  id: totrans-156
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: 'Checking null values example in *cuDF*:'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*cuDF*中的检查空值示例：
 - en: '[PRE27]'
+  id: totrans-158
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: 'And the output is:'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出是：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/e2324cc152e7c4f88bc9c0150ee3d2d7.png)'
+  id: totrans-160
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/e2324cc152e7c4f88bc9c0150ee3d2d7.png)'
 - en: 'Exhibit-14: Checking Null Values (Image by Author)'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-14：检查空值（作者提供的图像）
 - en: 6\. Adding a Column
+  id: totrans-162
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 6\. 添加列
 - en: We want to create more features, so add a few columns.
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想要创建更多的特征，因此添加了几列。
 - en: '[PRE28]'
+  id: totrans-164
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: 'That will create new features such as weighted average price (wap1 and wap2),
     order volume, and volume imbalance. In total, eight columns will be added to the
     data frames by executing the following:'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将创建新的特征，如加权平均价格 (wap1 和 wap2)、订单量和成交量失衡。通过执行以下操作，总共会向数据框添加八列：
 - en: '[PRE29]'
+  id: totrans-166
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: 'It will hence give us:'
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此它将给我们：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/770508f193efac43d90735758027aa50.png)'
+  id: totrans-168
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/770508f193efac43d90735758027aa50.png)'
 - en: 'Exhibit-15: Adding Columns And Features (Image by Author)'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-15：添加列和特征（作者提供的图像）
 - en: 7\. Dropping a Column
+  id: totrans-170
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 7\. 删除列
 - en: 'We decide to get rid of two features, wap1 and wap2, by dropping their columns:'
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们决定通过删除 wap1 和 wap2 的列来去掉这两个特征：
 - en: '[PRE30]'
+  id: totrans-172
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: 'Implementation of dropping columns is:'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 删除列的实现是：
 - en: '[PRE31]'
+  id: totrans-174
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: That leaves us with the data frames that wap1, and wap2 columns are gone!
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得我们得到的数据显示 wap1 和 wap2 列已被删除！
 - en: 8\. Calculating Statistics by Group
+  id: totrans-176
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 8\. 按组计算统计数据
 - en: Next, we calculate the mean, median, maximum, minimum, standard deviation, and
     the sum of some features by time_id. For this, we will use groupby and agg methods.
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将通过时间 ID 计算一些特征的均值、中位数、最大值、最小值、标准差和总和。为此，我们将使用 groupby 和 agg 方法。
 - en: '[PRE32]'
+  id: totrans-178
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: We create a list named features_list to specify the features that the mathematical
     calculations will be performed.
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们创建了一个名为 features_list 的列表，以指定进行数学计算的特征。
 - en: '[PRE33]'
+  id: totrans-180
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: 'In return, we get the following output:'
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为回报，我们得到以下输出：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/cbd5b9d523799fc2d5a0d64ff2fa07cf.png)'
+  id: totrans-182
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/cbd5b9d523799fc2d5a0d64ff2fa07cf.png)'
 - en: 'Exhibit-16: Calculating Statistics (Image by Author)'
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-16：计算统计数据（作者提供的图像）
 - en: 'The returned table is a new data frame. We should merge it with the original
     one (df_cudf). We will accomplish it through *Pandas*:'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回的表格是一个新的数据框。我们应将其与原始数据框 (df_cudf) 合并。我们将通过*Pandas*完成此操作：
 - en: '[PRE34]'
+  id: totrans-185
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: The above snippet will put df_pd_stats and df_pd in one data frame and save
     it as df_cudf.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码段将把 df_pd_stats 和 df_pd 放在一个数据框中，并将其保存为 df_cudf。
 - en: As usual, we repeat the same task for *Pandas*.
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，我们对*Pandas*执行相同的任务。
 - en: 'The next step is to calculate the correlation between two columns:'
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是计算两列之间的相关性：
 - en: '[PRE35]'
+  id: totrans-189
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: This code
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码
 - en: '[PRE36]'
+  id: totrans-191
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: 'will return the following output:'
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 将返回以下输出：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/fa6260b50af6b0c2a71dec56d16f1c88.png)'
+  id: totrans-193
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/fa6260b50af6b0c2a71dec56d16f1c88.png)'
 - en: 'Exhibit-17: Calculating Correlation Between Two Features (Image by Author)'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-17：计算两个特征之间的相关性（作者提供的图像）
 - en: 9\. Renaming Columns
+  id: totrans-195
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 9\. 重命名列
 - en: To remove any confusion, we should rename two of our columns.
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了消除任何混淆，我们应重命名两列。
 - en: '[PRE37]'
+  id: totrans-197
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE37]'
 - en: Columns imbalance and volume_imbalance will be renamed as volume_imbalance and
     trade_volume_imbalance, respectively.
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: 列的失衡和成交量失衡将分别重命名为成交量失衡和交易量失衡。
 - en: 10\. Binning a Column
+  id: totrans-199
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 10\. 对列进行分箱
 - en: Another data manipulation we want to make is to bin the bid1_volume and store
     the bins in a new column.
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还想进行另一项数据操作，即对 bid1_volume 进行分箱，并将分箱结果存储在新列中。
 - en: '[PRE38]'
+  id: totrans-201
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE38]'
 - en: By running the lines
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过运行以下代码行
 - en: '[PRE39]'
+  id: totrans-203
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE39]'
 - en: 'we’ll get a data frame as the output, which we may see a part of it as shown
     below:'
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将得到一个数据框作为输出，下面展示了它的一部分：
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/b66202f08a1609adfdee7e2e9712baf4.png)'
+  id: totrans-205
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/b66202f08a1609adfdee7e2e9712baf4.png)'
 - en: 'Exhibit-18: Binning A Column (Image by Author)'
+  id: totrans-206
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-18：对列进行分箱（作者图片）
 - en: 11\. Displaying Data Frames
+  id: totrans-207
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 11\. 显示数据框
 - en: 'After feature engineering steps are completed, we can present the data frames.
     This section contains three operations: displaying the data frame, getting information
     about it, and describing it.'
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征工程步骤完成后，我们可以展示数据框。本节包含三个操作：显示数据框、获取有关数据框的信息以及描述数据框。
 - en: '[PRE40]'
+  id: totrans-209
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE40]'
 - en: 'The following code will finalize these three tasks:'
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码将完成这三个任务：
 - en: '[PRE41]'
+  id: totrans-211
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE41]'
 - en: We are done with feature engineering.
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经完成了特征工程。
 - en: Single-Run Execution
+  id: totrans-213
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 单次运行执行
 - en: 'In summary, our feature engineering efforts have focused on the following tasks:'
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，我们的特征工程工作集中在以下任务：
 - en: Loading data frames
+  id: totrans-215
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 加载数据框
 - en: Merging data frames
+  id: totrans-216
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 合并数据框
 - en: Changing data type
+  id: totrans-217
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改数据类型
 - en: Getting unique time_ids.
+  id: totrans-218
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取唯一的 `time_ids`。
 - en: Checking null values
+  id: totrans-219
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检查空值
 - en: Adding columns
+  id: totrans-220
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 添加列
 - en: Dropping columns
+  id: totrans-221
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除列
 - en: Calculating statistics
+  id: totrans-222
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算统计信息
 - en: Calculating a correlation
+  id: totrans-223
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算相关性
 - en: Renaming columns
+  id: totrans-224
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 重命名列
 - en: Binning a column
+  id: totrans-225
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对列进行分箱
 - en: Displaying data frames
+  id: totrans-226
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 显示数据框
 - en: Displaying data information
+  id: totrans-227
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 显示数据信息
 - en: Describing data frames
+  id: totrans-228
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 描述数据框
 - en: 'It was all 13 tasks, but we mentioned “Calculating a correlation” as a separate
     entity here. Now, we want to run these tasks sequentially in a single run, as
     shown below:'
+  id: totrans-229
   prefs: []
   type: TYPE_NORMAL
+  zh: 总共是 13 个任务，但我们在这里将“计算相关性”作为一个单独的实体。现在，我们希望在一次运行中按顺序执行这些任务，如下所示：
 - en: '[PRE42]'
+  id: totrans-230
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE42]'
 - en: The run_and_report function will give the same outputs as before but in a full
     report by a single execution command. It will execute the 14 tasks on both *Pandas*
     and *cuDF* and record the times they take for both data frames.
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
+  zh: '`run_and_report` 函数将以单个执行命令提供与之前相同的输出，但会生成完整报告。它将在 *Pandas* 和 *cuDF* 上执行 14
+    个任务，并记录两种数据框所需的时间。'
 - en: '[PRE43]'
+  id: totrans-232
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE43]'
 - en: We may have to run multiple cycles to see the relative performance of both data
     libraries more boldly.
+  id: totrans-233
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可能需要运行多个周期，以更明显地看到两个数据库的相对性能。
 - en: Final Evaluation
+  id: totrans-234
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 最终评估
 - en: 'If we run the run_and_report multiple times, such as in rounds, we can get
     a better sense of the difference in performance between *Pandas* and *cuDF*. So,
     we set rounds as 30\. Then, we record all time durations for every operation,
     round, and data library and finally evaluate the results:'
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们多次运行 `run_and_report`，例如在多轮中，我们可以更好地了解 *Pandas* 和 *cuDF* 之间性能的差异。因此，我们将轮次设置为
+    30。然后，我们记录每个操作、轮次和数据库的所有时间，并最终评估结果：
 - en: '[PRE44]'
+  id: totrans-236
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE44]'
 - en: The calc_exec_times function executes a few tasks. It first calls get_statistics
     to get the “average and total time durations by operation” for each data library
     over 30 rounds.
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: '`calc_exec_times` 函数执行了一些任务。它首先调用 `get_statistics`，以获取每个数据库在 30 轮中的“平均和总时间”。'
 - en: '[PRE45]'
+  id: totrans-238
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE45]'
 - en: Next, it computes the “total duration by round” for each data framework.
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，它计算每个数据框架的“按轮次总时长”。
 - en: '[PRE46]'
+  id: totrans-240
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE46]'
 - en: Lastly, it plots the results. Here, the first plot is for the “average time
     duration by operation” for both libraries.
+  id: totrans-241
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，它绘制了结果。这里，第一个图表显示了两个库的“按操作平均时间”。
 - en: '[PRE47]'
+  id: totrans-242
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE47]'
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/ef0c8925e9ea614f7769b660b9cd396d.png)'
+  id: totrans-243
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/ef0c8925e9ea614f7769b660b9cd396d.png)'
 - en: 'Exhibit-19: Average Duration By Operation For Pandas Data Frame And cuDF (Image
     by Author)'
+  id: totrans-244
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-19：Pandas 数据框和 cuDF 的操作平均时长（作者图片）
 - en: The second plot is for the “total duration by operation,” which shows the total
     time each task took over all 30 rounds.
+  id: totrans-245
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个图表显示了“按操作总时长”，即每个任务在 30 轮中的总时间。
 - en: '[PRE48]'
+  id: totrans-246
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE48]'
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/96c7fe7e93201c3be8e5fc378dbe7fad.png)'
+  id: totrans-247
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/96c7fe7e93201c3be8e5fc378dbe7fad.png)'
 - en: 'Exhibit-20: Total Duration By Operation Over 30 Rounds For Pandas Data Frame
     And cuDF (Image by Author)'
+  id: totrans-248
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-20：Pandas 数据框和 cuDF 在 30 轮中的操作总时长（作者图片）
 - en: The final plot is “total duration by round,” which shows the total time all
     operations took together for each round.
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终图表是“按轮次总时长”，显示了每轮中所有操作的总时间。
 - en: '[PRE49]'
+  id: totrans-250
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE49]'
 - en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/c35eafa8531b6c370b7aea871744251c.png)'
+  id: totrans-251
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/c35eafa8531b6c370b7aea871744251c.png)'
 - en: 'Exhibit-21: Total Duration Of All Operations For Each Round For Pandas Data
     Frame And cuDF (Image by Author)'
+  id: totrans-252
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示-21：Pandas 数据框和 cuDF 每轮所有操作的总时长（作者图片）
 - en: Even though we haven’t covered every feature engineering task fulfilled on the
     dataset, they are the same as or similar to the ones we showed here. By explaining
     14 operations individually, we tried to document the relative performance of *Pandas*
     data frame and *cuDF*, and enable reproducibility.
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们没有涵盖数据集上每个特征工程任务，但它们与我们在这里展示的任务相同或类似。通过逐个解释14个操作，我们试图记录*Pandas* 数据框和*cuDF*的相对性能，并实现可重复性。
 - en: In all cases except for correlation calculation and data frame display, *cuDF*
     surpasses *Pandas*. This performance lead becomes more remarkable in complex tasks
     such as groupby, merge, agg, and describe. Another point is *Pandas* DF gets tired
     over time when more rounds come over, while *cuDF* follows a more stable pattern.
+  id: totrans-254
   prefs: []
   type: TYPE_NORMAL
+  zh: 在所有情况下，除了相关性计算和数据框显示外，*cuDF* 都优于*Pandas*。这种性能优势在复杂任务如groupby、merge、agg和describe中尤为显著。另一个方面是，当更多轮次进行时，*Pandas*
+    数据框会变得疲惫，而*cuDF*则保持更稳定的模式。
 - en: Recall that we have reviewed only one stock as an example. If we process all
     112 stocks, we may expect a larger performance gap in favor of *cuDF*. If the
     stock's population goes up to the hundreds, *cuDF*’s performance can even be more
     dramatic. In the case of big data, where the execution of parallel tasks is possible,
     a distributed framework such as *Dask-cuDF*, which extends parallel computing
     to *cuDF* GPU DataFrames, can be the right tool.
+  id: totrans-255
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，我们只以一个股票作为例子进行回顾。如果我们处理所有112只股票，我们可以预期*cuDF*会表现得更好。如果股票的数量增加到数百只，*cuDF*的性能甚至可能更为显著。在大数据的情况下，执行并行任务是可能的，像*Dask-cuDF*这样的分布式框架，可以将并行计算扩展到*cuDF*
+    GPU 数据框，是合适的工具。
 - en: References
+  id: totrans-256
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] RAPIDS Definition, [https://www.heavy.ai/technical-glossary/rapids](https://www.heavy.ai/technical-glossary/rapids)'
+  id: totrans-257
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] RAPIDS 定义，[https://www.heavy.ai/technical-glossary/rapids](https://www.heavy.ai/technical-glossary/rapids)'
 - en: '[2] 10 Minutes to cuDF and Dask-cuDF, [https://docs.rapids.ai/api/cudf/stable/user_guide/10min/](https://docs.rapids.ai/api/cudf/stable/user_guide/10min/)'
+  id: totrans-258
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] 10分钟了解cuDF和Dask-cuDF，[https://docs.rapids.ai/api/cudf/stable/user_guide/10min/](https://docs.rapids.ai/api/cudf/stable/user_guide/10min/)'
 - en: '[3] Optiver Realized Volatility Prediction, [https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)'
+  id: totrans-259
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] Optiver 实现的波动率预测，[https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)'
 - en: '[4] Forward filling book data, [https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277)'
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] 向前填充图书数据，[https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277)'
 - en: '**[Hasan Serdar Altan](https://twitter.com/HSerdarAltan)** is Data scientist
     and AWS Cloud Architect Associate.'
+  id: totrans-261
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Hasan Serdar Altan](https://twitter.com/HSerdarAltan)** 是数据科学家和AWS云架构师助理。'
 - en: More On This Topic
+  id: totrans-262
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[RAPIDS cuDF Cheat Sheet](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)'
+  id: totrans-263
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 备忘单](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)'
 - en: '[RAPIDS cuDF to Speed up Your Next Data Science Workflow](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
+  id: totrans-264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 加速你的数据科学工作流](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
 - en: '[RAPIDS cuDF for Accelerated Data Science on Google Colab](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
+  id: totrans-265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 在 Google Colab 上加速数据科学](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
 - en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  id: totrans-266
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建GPU机器与使用GPU云](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-267
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2022特征存储峰会：一个关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[There and Back Again… a RAPIDS Tale](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
+  id: totrans-268
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前往与归来……一个RAPIDS故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
