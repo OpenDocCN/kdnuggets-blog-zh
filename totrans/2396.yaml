@@ -1,272 +1,409 @@
 - en: Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Eurybia 检测数据漂移以确保生产机器学习模型质量
 - en: 原文：[https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 - en: In the rest of this article, we will focus on a step-by-step data drift study
     using Eurybia an open-source python library. Detecting data drift is an important
     step to ensure the quality of machine learning models in production. This detection
     strongly favors robust AI maintainability over time.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文的其余部分，我们将重点介绍使用 Eurybia 这一开源 Python 库进行的逐步数据漂移研究。检测数据漂移是确保生产环境中机器学习模型质量的重要步骤。这种检测大大有利于人工智能的长期可靠性。
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/15f602b6c3985943485046c1ad53411e.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](../Images/15f602b6c3985943485046c1ad53411e.png)'
 - en: Eurybia demo, image by Author
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia 演示，图像来源：作者
 - en: What is Data Drift and Why Should You Care?
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是数据漂移，为什么要关心？
 - en: Machine learning models are usually trained on data from historical databases.
     Models are then deployed in a production environment. Predictions from the production
     environment are made on freshly available data.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型通常在历史数据库中的数据上进行训练。然后，模型被部署在生产环境中。生产环境中的预测是基于新获得的数据进行的。
 - en: As such, historical data used to train the model and data used to predict the
     results might differ. This difference between datasets is named data drift.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，用于训练模型的历史数据和用于预测结果的数据可能有所不同。这种数据集之间的差异被称为数据漂移。
 - en: Production ML models sometimes face performance drop over time. This decrease
     can be attributed either (or both) to the operational use or to the data drift.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 生产环境中的机器学习模型有时会随着时间的推移出现性能下降。这种下降可能归因于操作使用或数据漂移（或两者）。
 - en: How to Detect Data Drift?
+  id: totrans-15
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何检测数据漂移？
 - en: To detect data drift, several methods such as comparing the distributions of
     the dataset features using statistical tests are available.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了检测数据漂移，可以使用几种方法，例如通过统计测试比较数据集特征的分布。
 - en: The python library Eurybia uses a method consisting in training a **binary classification
     model** (named “*datadrift classifier*”). This model tries to predict whether
     a sample belongs to the training/baseline dataset or to the production/current
     dataset.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 库 Eurybia 使用了一种方法，该方法包括训练一个**二分类模型**（称为“*数据漂移分类器*”）。该模型试图预测样本是否属于训练/基线数据集或生产/当前数据集。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/2f5aee8dd8e202cad0e4a20476d24a70.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](../Images/2f5aee8dd8e202cad0e4a20476d24a70.png)'
 - en: How the datadrift classifier works, image by Author
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据漂移分类器的工作原理，图像来源：作者
 - en: It is then possible to study the **explainability** of the created “*datadrift
     classifier*”. This is a great advantage since the explainability provides a detailed
     analysis of what drifted along with a strong rationale for further study and understanding
     of the data drift. In addition to explainability, the performance of the “*datadrift
     classifier”* provides a measure of the data drift.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后可以研究创建的**可解释性**“*数据漂移分类器*”。这是一大优势，因为可解释性提供了关于漂移的详细分析，并为进一步研究和理解数据漂移提供了强有力的理由。除了可解释性，“*数据漂移分类器*”的性能还提供了数据漂移的度量。
 - en: 'Data Drift: What Are We Looking For?'
+  id: totrans-21
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '数据漂移：我们在寻找什么？ '
 - en: What feature changed the most ?
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 最显著的特征是什么变化了？
 - en: Feature importance of each feature included in the “*datadrift classifier*”
     can be extracted. It allows to prioritize the study of features that changed the
     most.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以提取“*datadrift classifier*”中包含的每个特征的重要性。这有助于优先研究变化最大的特征。
 - en: Does the data drift affect the model predictions ?
+  id: totrans-24
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 数据漂移是否影响模型预测？
 - en: Eurybia puts into perspective the data drift along with the feature importance
     of the deployed model. The more important a feature is for the deployed model,
     the more problematic the drift of the feature is.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia 将数据漂移与部署模型的特征重要性进行对比。特征对部署模型越重要，特征的漂移问题就越严重。
 - en: What is the variation of each feature?
+  id: totrans-26
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 每个特征的变化是什么？
 - en: It is possible to observe the feature distribution of each feature in both baseline
     and current datasets.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以观察基线数据集和当前数据集中每个特征的分布。
 - en: What is the impact of data drift?
+  id: totrans-28
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 数据漂移的影响是什么？
 - en: Eurybia plots the predicted probabilities distributions based on the baseline
     dataset and the production dataset. We can measure the difference between this
     distibution with the Jensen Shannon Divergence.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia 根据基线数据集和生产数据集绘制预测概率分布图。我们可以通过 Jensen Shannon Divergence 测量这些分布之间的差异。
 - en: Can we measure the data drift?
+  id: totrans-30
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 我们可以测量数据漂移吗？
 - en: Eurybia provides performance metrics (AUC of the “*datadrift classifier*” and
     Jensen Shannon Divergence of the predicted probabilities distributions) for data
     drift, which notably allows tracking over time.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia 提供了数据漂移的性能指标（“*datadrift classifier*”的 AUC 和预测概率分布的 Jensen Shannon Divergence），显著地允许随着时间跟踪。
 - en: Demonstration of Data Drift Detection with Eurybia
+  id: totrans-32
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Eurybia 演示数据漂移检测
 - en: 'You can install the package through pip:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过 pip 安装该软件包：
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Let’s Use Eurybia!
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我们使用 Eurybia！
 - en: In the rest of this article, we will focus on a step-by-step data drift study
     using Eurybia.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文的其余部分，我们将专注于使用 Eurybia 进行逐步的数据漂移研究。
 - en: We will use the famous “House Prices” dataset from [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).
     Data will be split into two distinct datasets. Data from 2006 will be used to
     train a regressor able to predict the selling price of a house. Then, the price
     of houses sold in 2007 will be predicted using the previously created model.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用来自 [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+    的著名“房价”数据集。数据将被拆分为两个不同的数据集。2006年的数据将用于训练一个回归模型，以预测房屋的销售价格。然后，将使用之前创建的模型预测2007年售出的房屋价格。
 - en: We will then try to detect the drift of this regressor, based on the data drift
     of 2006 vs. 2007 datasets.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将尝试检测这个回归器的漂移，基于2006年与2007年数据集的数据漂移。
 - en: '**Let’s start by loading the dataset:**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**让我们开始加载数据集：**'
 - en: '**Building supervised model:**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建监督模型：**'
 - en: '**And use Eurybia to detect data drift…**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**并使用 Eurybia 检测数据漂移…**'
 - en: '**Step 1 — Import**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 1 — 导入**'
 - en: '**Step 2 — Initialise a SmartDrift Object**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 2 — 初始化 SmartDrift 对象**'
 - en: 'Optional parameters:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 可选参数：
 - en: '**“deployed_model”**: Indicate here the model used to provide predictions.
     This parameter allows combining of data drift results with the prediction model.
     It thus provides hints about the potential impact of data drift on the deployed
     model performances.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**“deployed_model”**：在此处指明用于提供预测的模型。该参数允许将数据漂移结果与预测模型结合，从而提供关于数据漂移对部署模型性能的潜在影响的线索。'
 - en: '“**Encoding**”: If a specific encoder has been used to prepare the dataset
     to provide the *“deployed_model”* with modified data, it should be indicated here.
     Eurybia will then be able to integrate it and get back to the original data format.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “**Encoding**”：如果使用了特定的编码器来准备数据集，以便为 *“deployed_model”* 提供修改过的数据，则应在此处指明。Eurybia
+    将能够整合这些信息并返回原始数据格式。
 - en: '**Step 3 — Compile**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 3 — 编译**'
 - en: 'Optional parameters:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 可选参数：
 - en: '“**full_validation**”: False/True (default: False). The full validation consists
     in analyzing the modalities consistency between columns.'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “**full_validation**”：False/True（默认值：False）。完整验证包括分析列之间的模式一致性。
 - en: '“**date_compile_auc ”**: date to specify a date to be indicated when saving
     the results. This might be useful when computing the drift for a past data set.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “**date_compile_auc**”：指定保存结果时要标明的日期。当计算过去数据集的漂移时，这可能会很有用。
 - en: '**“datadrift_file”**: Name of the CSV file containing the data drift performance
     history. This parameter is useful when the drift is evaluated over time.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**“datadrift_file”**：包含数据漂移性能历史记录的 CSV 文件名。此参数在随时间评估漂移时很有用。'
 - en: '**Step 4 — Generate Html Report**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 4 — 生成 Html 报告**'
 - en: 'Optional parameters:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 可选参数：
 - en: '“**title_description **”: short subtitle to describe the report.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “**title_description**”：简短的副标题用于描述报告。
 - en: '“**project_info_file**”: path to yaml file. The file could contain multiple
     informations to be added to the report such as general information, dataset description,
     data preparation, or model training.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “**project_info_file**”：yaml 文件的路径。该文件可能包含多个要添加到报告中的信息，如一般信息、数据集描述、数据准备或模型训练。
 - en: How to Understand Eurybia’s Outputs
+  id: totrans-56
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何理解 Eurybia 的输出
 - en: Eurybia is designed to generate an HTML report for analysis. All the plots provided
     in the HTML report are also available in Jupyter notebooks.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia 旨在生成用于分析的 HTML 报告。HTML 报告中提供的所有图表也可以在 Jupyter notebooks 中查看。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/427852ab9371adcd67d6dd98d14b9072.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/427852ab9371adcd67d6dd98d14b9072.png)'
 - en: Eurybia Report index, image by Author
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia 报告索引，图片来源：作者
 - en: 'The report can be browsed with tabs and is separated as follows:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 报告可以通过标签浏览，结构如下：
 - en: 'Index: home page'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 索引：主页
 - en: 'Project information: report context and information'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 项目信息：报告背景和信息
 - en: 'Consistency Analysis: highlighting differences between the two datasets'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一致性分析：突出显示两个数据集之间的差异
 - en: 'Data drift: In-depth data drift analysis'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据漂移：深入数据漂移分析
 - en: '**Datadrift classifier model performances**'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Datadrift 分类器模型性能**'
 - en: The data drift detection method is based on the ability of a model classifier
     to identify whether a sample belongs to one or another dataset. For this purpose,
     a target (0) is assigned to the baseline dataset and a second target (1) to the
@@ -275,185 +412,283 @@
     between two datasets. A marked difference will lead to an easy classification
     (final AUC close to 1). Similar datasets will lead to poor data drift classifier
     performance (final AUC close to 0.5).
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据漂移检测方法基于模型分类器识别样本属于一个数据集还是另一个数据集的能力。为此，将目标 (0) 分配给基线数据集，将第二个目标 (1) 分配给当前数据集。训练一个分类模型
+    (catboost) 来预测这个目标。因此，数据漂移分类器的性能与两个数据集之间的差异相关。显著的差异将导致容易分类 (最终 AUC 接近 1)。类似的数据集将导致数据漂移分类器性能差
+    (最终 AUC 接近 0.5)。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/c703373236fb724a2e4ef16220c26fb4.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/c703373236fb724a2e4ef16220c26fb4.png)'
 - en: Datadrift classifier model performance, image by Author
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: Datadrift 分类器模型性能，图片来源：作者
 - en: The closer the AUC is from 0.5 the less the data drifted. The closer the AUC
     is from 1 the more the data drifted
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: AUC 越接近 0.5，数据漂移越少。AUC 越接近 1，数据漂移越多
 - en: '**Importance of features in data drift**'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据漂移中特征的重要性**'
 - en: Bar chart representing the feature importance of each variable included in the
     “*datadrift classifier*”.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 条形图表示每个包含在“*datadrift 分类器*”中的变量的特征重要性。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/97cfbcc3bf0fba8ea857fdda97bfe75b.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/97cfbcc3bf0fba8ea857fdda97bfe75b.png)'
 - en: Importance of features in data drift, image by Author
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据漂移中特征的重要性，图片来源：作者
 - en: This graph highlights variables that drifted the most. This might help to prioritize
     the subsequent deeper study of specific variables.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 该图表突出显示了漂移最多的变量。这有助于优先考虑对特定变量的进一步深入研究。
 - en: Feature importance overview
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 特征重要性概述
 - en: Eurybia HTML reports also contain a scatter plot depicting, for each feature,
     the feature importance of *the deployed model* as a function of the “*datadrift
     classifier*” feature importance. This highlights the real importance of a data
     drift for the deployed model classification.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia HTML 报告还包含一个散点图，描绘了每个特征的特征重要性，作为“*datadrift 分类器*”特征重要性的函数。这突出了数据漂移对已部署模型分类的实际重要性。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/95b89e12f85e4d74c8f7432f4367e844.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/95b89e12f85e4d74c8f7432f4367e844.png)'
 - en: Feature importance overview, image by Author
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征重要性概述，图片来源：作者
 - en: 'Graphical interpretation based on the feature location:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于特征位置的图形解释：
 - en: 'Top left: Feature important to the deployed model and with low data drift'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 左上角：对已部署模型重要且数据漂移较低的特征
 - en: 'Bottom left: Feature with moderated importance to the deployed model and with
     low data drift'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 左下角：对已部署模型重要性适中且数据漂移较低的特征
 - en: 'Bottom right: Feature with moderated importance to the deployed model but with
     high data drift. This feature might need your attention.'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 右下角：对部署模型重要性适中的特征但具有高数据漂移。这一特征可能需要你的关注。
 - en: 'Top right: Feature important to the deployed model and high drift. This feature
     requires your attention.'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 右上角：对部署模型重要且数据漂移高的特征。这一特征需要你的关注。
 - en: Univariate analysis
+  id: totrans-84
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 单变量分析
 - en: The univariate analysis is supported by the graphical analysis of the 2 datasets’
     distributions, making easier the study of the most important feature for drift
     detection.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 单变量分析通过两个数据集的分布图形分析得到支持，便于研究对漂移检测最重要的特征。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/11439a554a0b7045156dd767c876d943.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/11439a554a0b7045156dd767c876d943.png)'
 - en: Univariate analysis, image by Author
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 单变量分析，图片来源：作者
 - en: With the Eurybia report, in the drop-down menu, the features are sorted by their
     importance in the data drift classification. For categorical features, the possible
     values are sorted by descending difference between the two datasets.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Eurybia报告中，通过下拉菜单，特征按照数据漂移分类中的重要性排序。对于分类特征，可能的值按两个数据集之间的降序差异进行排序。
 - en: '**Distribution of predicted values**'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '**预测值的分布**'
 - en: The distribution of predicted values helps the visualization of output predictions
     provided by the deployed model on both baseline and current datasets. A difference
     in distributions might reflect a data drift.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测值的分布有助于可视化部署模型在基线数据集和当前数据集上的输出预测。分布差异可能反映数据漂移。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/cab662b411781e0011fe265abef16add.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/cab662b411781e0011fe265abef16add.png)'
 - en: Distribution of predicted values, image by Author
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测值的分布，图片来源：作者
 - en: Jensen Shannon Divergence (JSD). The JSD measures the effect of a data drift
     on the deployed model performance. A value close to 0 indicates similar data distributions,
     while a value close to 1 tends to show distinct data distributions with a negative
     effect on the deployed model performance.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: Jensen Shannon Divergence (JSD)。JSD衡量数据漂移对部署模型性能的影响。接近0的值表示数据分布相似，而接近1的值则通常显示数据分布不同，对部署模型性能有负面影响。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/14c671aba52f214fbb7443e9721f675a.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/14c671aba52f214fbb7443e9721f675a.png)'
 - en: Jensen Shannon Divergence, image by Author
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: Jensen Shannon Divergence，图片来源：作者
 - en: '**Historical Data drift**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**历史数据漂移**'
 - en: Eurybia can compile the data drift over the years with sales up to 2010.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: Eurybia可以编译数据漂移情况，涵盖销售数据直到2010年。
 - en: '![Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](../Images/b557d064c4dcf148a9310d9946f089fe.png)'
+  id: totrans-98
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/b557d064c4dcf148a9310d9946f089fe.png)'
 - en: Historical Data drift, image by Author
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 历史数据漂移，图片来源：作者
 - en: The “Datadrift classifier AUC” and “Jensen Shannon Datadrift” provide 2 helpful
     indicators of data drift.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: “Datadrift分类器AUC”和“Jensen Shannon Datadrift”提供了两个有用的数据漂移指标。
 - en: While AUC striclty focuses on data evolution, JSD evaluates the impact of data
     evolution on the predictions of the deployed model.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然AUC严格关注数据演变，JSD则评估数据演变对部署模型预测的影响。
 - en: In other words, a marked drift of a single variable with low feature importance
     for the deployed model should cause a high AUC but potentially a low JSD.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 换句话说，单一变量的明显漂移，如果该变量对部署模型的重要性较低，应导致高AUC但可能低JSD。
 - en: If You Want To Go Further…
+  id: totrans-103
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如果你想深入了解…
 - en: Tutorials on the different uses of Eurybia can be found [**here**](https://github.com/MAIF/eurybia/tree/master/tutorial)**.**
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于Eurybia不同用途的教程可以在 [**这里**](https://github.com/MAIF/eurybia/tree/master/tutorial)**找到**。
 - en: I hope that Eurybia will be useful in monitoring ML models in production. Any
     feedback and ideas are very welcomed..! [**Eurybia**](https://github.com/MAIF/eurybia) is
     open source! Feel free to contribute by commenting on this post or on the [GitHub
     discussions](https://github.com/MAIF/eurybia/discussions).
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望Eurybia在监控生产中的ML模型时能发挥作用。欢迎任何反馈和想法！[**Eurybia**](https://github.com/MAIF/eurybia)是开源的！请随时通过评论此帖或在[GitHub讨论区](https://github.com/MAIF/eurybia/discussions)来贡献。
 - en: '[**Thomas Bouché**](https://medium.com/@thomas.bouche_2245) is a Data Scientist
     at MAIF.'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**托马斯·布歇**](https://medium.com/@thomas.bouche_2245)是MAIF的首席数据科学家。'
 - en: More On This Topic
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Managing Model Drift in Production with MLOps](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用MLOps管理生产环境中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
 - en: '[Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据质量维度：用伟大的期望确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
 - en: '[Data Masking: The Core of Ensuring GDPR and other Regulatory…](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据掩码：确保GDPR及其他法规合规性的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)'
 - en: '[Ensuring Reliable Few-Shot Prompt Selection for LLMs](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[确保LLMs的可靠少量提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
 - en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习模型部署到云端生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
 - en: '[5 Free Tools For Detecting ChatGPT, GPT3, and GPT2](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检测ChatGPT、GPT3和GPT2的5款免费工具](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)'
