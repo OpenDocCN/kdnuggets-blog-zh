@@ -1,124 +1,183 @@
 - en: 3D Human Pose Estimation Experiments and Analysis
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 3D 人体姿态估计实验与分析
 - en: 原文：[https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: '**By [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/), Data
     Science Engineer at [MobiDev](https://mobidev.biz/services/data-science)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)，[MobiDev](https://mobidev.biz/services/data-science)的数据科学工程师**'
 - en: 'The basic idea of human pose estimation is understanding people’s movements
     in videos and images. By defining keypoints (joints) on a human body like wrists,
     elbows, knees, and ankles in images or videos, the deep learning-based system
     recognizes a specific posture in space. Basically, there are two types of pose
     estimation: 2D and 3D. 2D estimation involves  the extraction of X, Y coordinates
     for each joint from an RGB image, and 3D - XYZ coordinates from an RGB image.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 人体姿态估计的基本思想是理解视频和图像中的人的运动。通过在图像或视频中定义人体上的关键点（关节），如手腕、肘部、膝盖和踝关节，基于深度学习的系统可以识别空间中的特定姿势。基本上，姿态估计分为两种类型：2D
+    和 3D。2D 估计涉及从 RGB 图像中提取每个关节的 X、Y 坐标，而 3D 估计则涉及从 RGB 图像中提取 XYZ 坐标。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 事务'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this article, we explore how 3D human pose estimation works based on our
     research and experiments, which were part of the analysis of applying [human pose
     estimation in AI fitness coach applications](https://mobidev.biz/blog/human-pose-estimation-ai-personal-fitness-coach).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们探讨了基于我们的研究和实验，3D 人体姿态估计是如何工作的，这些研究和实验是分析[AI 健身教练应用中的人体姿态估计](https://mobidev.biz/blog/human-pose-estimation-ai-personal-fitness-coach)的一部分。
 - en: How 3D Human Pose Estimation Works
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3D 人体姿态估计的工作原理
 - en: 'The goal of 3D human pose estimation is to detect the XYZ coordinates of a
     specific number of joints (keypoints) on the human body by using an image containing
     a person. Visually 3D keypoints (joints) are tracked as follows:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 3D 人体姿态估计的目标是通过使用包含人的图像来检测人体上特定数量的关节（关键点）的 XYZ 坐标。视觉上，3D 关键点（关节）跟踪如下：
 - en: '![Figure](../Images/0d1eebae1652d4ae982fa5db8c576480.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/0d1eebae1652d4ae982fa5db8c576480.png)'
 - en: 3D keypoints and their specification (https://mobidev.biz/wp-content/uploads/2020/07/3d-keypoints-human-pose-estimation.png)
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 3D 关键点及其规格 (https://mobidev.biz/wp-content/uploads/2020/07/3d-keypoints-human-pose-estimation.png)
 - en: Once the position of joints is extracted, the movement analysis system checks
     the posture of a person. When keypoints are extracted from a sequence of frames
     of a video stream, the system can analyze the person’s actual movement.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦提取了关节的位置，运动分析系统会检查一个人的姿势。当关键点从视频流的连续帧中提取出来时，系统可以分析该人的实际运动。
 - en: 'There are multiple approaches to 3D human pose estimation:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 3D 人体姿态估计有多种方法：
 - en: '**To train a model capable of inferring 3D keypoints directly from the provided
     images.**'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**训练一个能够直接从提供的图像中推断 3D 关键点的模型。**'
 - en: For example, a multi-view model [EpipolarPose](https://arxiv.org/abs/1903.02330)
     is trained to jointly estimate the positions of 2D and 3D keypoints. The interesting
     thing is that it requires no ground truth 3D data for training - only 2D keypoints.
     Instead, it constructs the 3D ground truth in a self-supervised way by applying
     epipolar geometry to 2D predictions. It is helpful since a common problem with
     training 3D human pose estimation models is a lack of high-quality 3D pose annotations.
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，一个多视角模型[EpipolarPose](https://arxiv.org/abs/1903.02330)被训练以联合估计 2D 和 3D 关键点的位置。有趣的是，它在训练时不需要真实的
+    3D 数据 - 只需要 2D 关键点。相反，它通过对 2D 预测应用极几何以自监督的方式构建 3D 真实值。这很有帮助，因为训练 3D 人体姿态估计模型时常见的问题是缺乏高质量的
+    3D 姿态注释。
 - en: '**To detect the 2D keypoints and then transform them into 3D.**'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**检测 2D 关键点并将其转换为 3D。**'
 - en: This approach is the most common because 2D keypoint prediction is well-explored
     and usage of a pre-trained backbone for 2D predictions increases the overall accuracy
     of the system. Moreover, many existing models provide decent accuracy and real-time
     inference speed (for example, [PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet),
     [HRNet](https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation), [Mask R-CNN](https://research.fb.com/publications/mask-r-cnn/),
     [Cascaded Pyramid Network](https://arxiv.org/abs/1711.07319)).
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这种方法最为常见，因为 2D 关键点预测已被充分探索，并且使用预训练的 2D 预测骨干网可以提高系统的整体准确性。此外，许多现有模型提供了不错的准确度和实时推理速度（例如，[PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)，[HRNet](https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation)，[Mask
+    R-CNN](https://research.fb.com/publications/mask-r-cnn/)，[Cascaded Pyramid Network](https://arxiv.org/abs/1711.07319)）。
 - en: Regardless of the approach (image →2D →3D or image → 3D), 3D keypoints are typically
     inferred using single-view images. Alternatively, it’s possible to exploit multi-view
     image data where every frame is captured from several cameras focused on the target
     scene from different angles.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论是使用图像 →2D →3D 还是图像 → 3D 的方法，3D 关键点通常通过单视角图像推断得出。另一方面，也可以利用多视角图像数据，其中每一帧都由多个摄像头从不同角度聚焦于目标场景进行拍摄。
 - en: '![Figure](../Images/a4a2c3f9c9d817b542a85f635e85821e.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/a4a2c3f9c9d817b542a85f635e85821e.png)'
 - en: Multi-camera model pose estimation – multiple 2d detections are combined to
     predict the final 3D pose  (credit –  Learnable Triangulation of Human Pose, [https://arxiv.org/abs/1905.05754](https://arxiv.org/abs/1905.05754))
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 多摄像头模型姿态估计 – 多个 2D 检测结果被合并以预测最终的 3D 姿态（来源 – 可学习的三角测量，[https://arxiv.org/abs/1905.05754](https://arxiv.org/abs/1905.05754)）
 - en: The multi-view technique allows for improved depth perception and helps in those
     cases when some parts of the body are occluded in the image. As a result, predictions
     of models become more accurate.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 多视角技术可以提高深度感知，并帮助解决图像中一些身体部位被遮挡的情况。因此，模型的预测变得更加准确。
 - en: Normally this method requires cameras to be synchronized. However, some authors
     demonstrate that even the video stream from multiple unsynchronized and uncalibrated
     cameras can be used to estimate 3D joint positions. For example, in the [Human
@@ -126,33 +185,47 @@
     paper is described that the initial detections from uncalibrated cameras can be
     optimized using the external knowledge on the natural proportions of the human
     body and relaxed reprojection error to obtain the final 3D prediction.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常这种方法需要同步的摄像头。然而，一些作者展示了即使来自多个不同步和未校准的摄像头的视频流也可以用来估计 3D 关节位置。例如，在[《人体姿态作为校准模式》](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w34/Takahashi_Human_Pose_As_CVPR_2018_paper.pdf)论文中描述了可以利用对人体自然比例的外部知识和放宽的重投影误差来优化未校准摄像头的初始检测，从而获得最终的
+    3D 预测。
 - en: How Human Pose Estimation Model Detects and Analyze Movements
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 人体姿态估计模型如何检测和分析动作
 - en: We took a realistic situation of application development for an AI fitness coach.
     In this scenario, users should capture themselves while doing an exercise, analyze
     how correct it is performed by using the app, and review the mistakes made during
     the exercise performance.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们考虑了一个现实的应用开发场景，针对 AI 健身教练。在这个场景中，用户应在进行运动时录制自己，通过应用分析运动的正确性，并回顾在运动过程中所犯的错误。
 - en: It is the case when complicated multi-camera setup and depth sensors are not
     available. Thereby, we chose the [VideoPose3D](https://github.com/facebookresearch/VideoPose3D)
     model since it works with simple single-view detections. VideoPose3D belongs to
     a convolutional neural networks (CNNs) family and employs dilated temporal convolutions
     (see the illustration below).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 当复杂的多摄像机设置和深度传感器不可用时，这种情况就会发生。因此，我们选择了 [VideoPose3D](https://github.com/facebookresearch/VideoPose3D)
+    模型，因为它适用于简单的单视角检测。VideoPose3D 属于卷积神经网络（CNNs）家族，并采用扩张时间卷积（见下方插图）。
 - en: '![Figure](../Images/828fa0eee1d3319f4930308cee842139.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/828fa0eee1d3319f4930308cee842139.png)'
 - en: 2D to 3D keypoints transfer using VideoPose3D. Note that in this illustration
     both past and future frames are used to make a prediction. (credit [Pavllo et
     al](https://arxiv.org/abs/1811.11742).)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 VideoPose3D 进行 2D 到 3D 关键点转换。请注意，在此插图中，使用了过去和未来的帧来进行预测。（致谢 [Pavllo et al](https://arxiv.org/abs/1811.11742)。）
 - en: As an input, this model requires a set of 2D keypoint detections, where the
     2D detector is pre-trained on the COCO 2017 dataset. By utilizing the information
     from multiple frames taken at different periods, VideoPose3D essentially makes
@@ -161,210 +234,309 @@
     resolution of the uncertainty issues (for example, when the joint is occluded
     in one of the frames, the model can “look” at the neighbouring frames to resolve
     the problem).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为输入，该模型需要一组 2D 关键点检测，其中 2D 检测器是预先训练在 COCO 2017 数据集上的。通过利用不同时间段拍摄的多帧信息，VideoPose3D
+    实质上基于关于关节的过去和未来位置的数据进行预测，从而允许更准确地预测当前关节的状态，并部分解决不确定性问题（例如，当关节在某一帧中被遮挡时，模型可以“查看”相邻帧以解决问题）。
 - en: In order to explore the capabilities and limitations of the VideoPose3D, we
     applied it for analysis of powerlifting and martial arts exercises.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了探索 VideoPose3D 的能力和局限性，我们将其应用于力量举和武术练习的分析。
 - en: Spine Angle Detection
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 脊柱角度检测
 - en: The spine angle is one of the most important things to be analyzed when squatting.
     Keeping the back straight is important in this exercise since the more you lean
     forward, the more the center of mass (body + barbell) is shifted forward (it can
     be a very bad thing since the shifted center of mass causes extra load on the
     spine).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 脊柱角度是蹲下时最重要的分析内容之一。保持背部挺直在这个练习中很重要，因为你向前倾斜得越多，质心（身体 + 杠铃）就越向前移动（这可能是非常糟糕的，因为质心的偏移会导致脊柱额外负荷）。
 - en: To measure the angle, we treated the spine (start keypoint 0, end keypoint 8)
     as a vector and measured the angle between the vector and the XY plane by taking
     *arccos* of cosine similarity equation. In the video below, you can see how the
     model detects the spine angle on an example video. As you can see, when squatting
     up with incorrect form, the angle can be as small as 28-27°.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了测量角度，我们将脊柱（起始关键点 0，结束关键点 8）视为一个向量，并通过取余弦相似度方程的*反余弦*来测量该向量与 XY 平面的角度。在下方视频中，你可以看到模型如何在示例视频中检测脊柱角度。如你所见，当以不正确的姿势蹲下时，角度可能小至
+    28-27°。
 - en: '[![Figure](../Images/df31d8b2674b8a085749b57b7057a80d.png)](https://i.ibb.co/XsY88MT/image17.gif)'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/df31d8b2674b8a085749b57b7057a80d.png)](https://i.ibb.co/XsY88MT/image17.gif)'
 - en: Spine angle detection – the person is leaning forward too much (click for animation)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 脊柱角度检测——人员过度前倾（点击查看动画）
 - en: '[https://youtu.be/yZv-qoKfmqk](https://youtu.be/yZv-qoKfmqk)'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://youtu.be/yZv-qoKfmqk](https://youtu.be/yZv-qoKfmqk)'
 - en: When looking at the video where the exercise is executed correctly (see the
     video below), we can say that the angle is not going below ~47°. It means that
     the selected method can correctly detect the spine angle when squatting.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 从正确执行动作的视频中（见下方视频），我们可以看到角度不会低于 ~47°。这意味着所选方法可以正确检测蹲下时的脊柱角度。
 - en: '[![Figure](../Images/20308a4f7e374145f2193ebebbcc05c0.png)](https://i.ibb.co/T42Sfz8/image11.gif)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/20308a4f7e374145f2193ebebbcc05c0.png)](https://i.ibb.co/T42Sfz8/image11.gif)'
 - en: Spine angle detection – the person is keeping straight back (click for animation)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 脊柱角度检测——保持背部挺直（点击查看动画）
 - en: '[https://youtu.be/ikQhw9pNMy4](https://youtu.be/ikQhw9pNMy4)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://youtu.be/ikQhw9pNMy4](https://youtu.be/ikQhw9pNMy4)'
 - en: Detection of Exercise Start and End
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运动开始和结束的检测
 - en: To be able to automatically analyze only the active phase of the exercise or
     detect its duration, we investigated the process of automatic detection of the
     exercise start and end.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了能够自动分析仅在运动的活跃阶段或检测其持续时间，我们调查了自动检测运动开始和结束的过程。
 - en: Since squatting with a barbell requires the specific positioning of arms, we
     decided to use their position as a reference for detection. When squatting, both
     arms are typically bent at an angle < 90°, and hands are positioned near shoulders
     (by height). By using some arbitrary thresholds (in our case, we chose angle <
     78° and distance < 10% from max z-axis value), we can detect this condition as
     shown below.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于深蹲时需要特定的手臂定位，我们决定使用手臂的位置作为检测的参考。在深蹲时，两只手臂通常会弯曲成小于90°的角度，手的位置接近肩膀（按高度）。通过使用一些任意阈值（在我们的案例中，我们选择了小于78°的角度和小于最大z轴值的10%的距离），我们可以检测到这种情况，如下所示。
 - en: '[![Figure](../Images/885c4ef468fec4fb2e5243782417b1c8.png)](https://i.ibb.co/sjqcsDz/image1.gif)'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/885c4ef468fec4fb2e5243782417b1c8.png)](https://i.ibb.co/sjqcsDz/image1.gif)'
 - en: Detection of the squatting start (click for animation)
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 深蹲开始检测（点击查看动画）
 - en: https://youtu.be/KjtXIoX-KSo
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: https://youtu.be/KjtXIoX-KSo
 - en: In order to see if the condition and thresholds are held up during the exercise,
     we analyzed another video from a different perspective and reviewed how the system
     may work during the exercise when the detection is already started. It turned
     out that the observed parameters remained far below the selected thresholds.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了检查运动过程中是否保持了条件和阈值，我们从不同的角度分析了另一段视频，并审查了系统在检测开始后如何在运动中运作。结果发现，观察到的参数远低于所选的阈值。
 - en: '[![Figure](../Images/350ae89db0544e8798545c668de169b6.png)](https://i.ibb.co/K04qdgT/image19.gif)'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/350ae89db0544e8798545c668de169b6.png)](https://i.ibb.co/K04qdgT/image19.gif)'
 - en: Squatting condition stability during the exercise (click for animation)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 运动过程中深蹲条件的稳定性（点击查看动画）
 - en: We also checked how the condition works when the person finishes the exercise
     and saw that once the barbell is dropped off, the false condition is immediately
     triggered. And finally, we concluded that this method works well, although it
     has some nuances (described in the Errors and Possible Solutions in Human Pose
     Estimation Technology section).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还检查了在人员完成运动后条件的表现，并看到一旦杠铃被放下，错误条件会立即触发。最后，我们得出结论，这种方法效果很好，尽管它有一些细节（在“人体姿态估计技术中的错误及可能解决方案”部分中描述）。
 - en: '[![Figure](../Images/6ffc60c182946b60357acbb90d9a51bd.png)](https://i.ibb.co/0QSQ6kH/image6.gif)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/6ffc60c182946b60357acbb90d9a51bd.png)](https://i.ibb.co/0QSQ6kH/image6.gif)'
 - en: Squatting condition – end squat check (click for animation)
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 深蹲条件 – 深蹲结束检查（点击查看动画）
 - en: Detection of Knee Caving
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 膝盖凹陷检测
 - en: Knee valgus or knee caving is a common mistake in squatting. This problem is
     often encountered in squatting when an athlete reaches the bottom point and begins
     squatting up. The incorrect technique may cause severe wear of knee joints and
     lead to snapped tendons or replacement of knee cups.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 膝盖内翻或膝盖凹陷是深蹲中的常见错误。这种问题通常发生在运动员到达深蹲的底部并开始起身时。错误的技术可能导致膝关节的严重磨损，并导致韧带撕裂或膝盖杯的更换。
 - en: To see how the model detects the knee caving mistake, we captured the joints'
     3D position. Since the resulting skeleton (see the image below) can be positioned
     randomly, we rotated it along the Z-axis to align it with one of the planes.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了查看模型如何检测膝盖凹陷错误，我们捕捉了关节的3D位置。由于结果骨架（见下图）可以随机定位，我们沿Z轴旋转它以使其与某个平面对齐。
 - en: '![Figure](../Images/6eafd263e54706d954e78997073f5774.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/6eafd263e54706d954e78997073f5774.png)'
 - en: Keypoint rotation to match the selected plane (ZY plane in this case)
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 关键点旋转以匹配选定的平面（在此情况下为ZY平面）
 - en: After that, we projected the 3D keypoint onto the plane and started tracking
     the position of knees as to the position of feet. The goal was to detect situations
     when legs are bent, and knees are closer to the center torso than feet.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将3D关键点投影到平面上，并开始跟踪膝盖相对于脚的位置。目标是检测双腿弯曲的情况，以及膝盖比脚更靠近躯干中心的情况。
 - en: From the image below, you can see that the incorrect position of knees is well-detected,
     meaning that this method works well.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 从下面的图像中，你可以看到膝盖位置不正确的情况被很好地检测出来了，这意味着这种方法效果很好。
 - en: '[![Figure](../Images/1bc2c78655e23720ff20f9242e47bfd4.png)](https://mobidev.biz/wp-content/uploads/2020/07/detect-mistakes-knee-cave.gif)'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/1bc2c78655e23720ff20f9242e47bfd4.png)](https://mobidev.biz/wp-content/uploads/2020/07/detect-mistakes-knee-cave.gif)'
 - en: 'Detection of knee caving: original video, 3d detections, and frontal projection
     onto ZY plane (click for animation)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 膝盖内陷检测：原始视频、3D 检测和 ZY 平面的正投影（点击查看动画）
 - en: Comparison of Two Athletes in Powerlifting and Snatch
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 比较两位运动员在力量举和抓举中的表现
 - en: Another interesting application of 3D human pose estimation technology is the
     comparison between the movements of two people. Having the goal to improve an
     exercise technique, athletes may use the human pose estimation-based app to compare
     themselves with more experienced athletes. In order to do so, it is required to
     have a “gold standard” video with a record of a particular movement, and use it
     to evaluate similarities and differences based on body parts localization.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 3D 人体姿态估计技术的另一个有趣应用是比较两个人的运动。为了改进运动技术，运动员可以使用基于人体姿态估计的应用程序将自己与经验更丰富的运动员进行比较。为此，需要有一个包含特定动作的“黄金标准”视频，并利用它来评估身体部位定位的相似性和差异。
 - en: 'For such comparison, we took the video of the athlete performing the snatch
     with start and end tags. The goal was to speed it up or slow down for synchronization
     with the beginning and the end of the target (“gold standard”) video. The process
     looked as follows:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这种比较，我们拍摄了运动员进行抓举的视频，并标记了开始和结束点。目标是加速或减速以与目标（“黄金标准”）视频的开始和结束同步。过程如下：
 - en: Detection of the 3D keypoints position for both videos
+  id: totrans-68
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 两个视频中 3D 关键点位置的检测
 - en: Aligning of keypoints so that “skeletons” have the same center point and being
     rotated similarly
+  id: totrans-69
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对齐关键点，使“骨架”具有相同的中心点并且旋转类似
 - en: Analysis of distances between different joints frame by frame
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 分析不同关节之间的距离逐帧
 - en: '[![Figure](../Images/e6b494b816174676f52ab1762331c628.png)](https://i.ibb.co/D1vT5fh/image5.gif)'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/e6b494b816174676f52ab1762331c628.png)](https://i.ibb.co/D1vT5fh/image5.gif)'
 - en: 'Comparing the movement of two athletes performing snatch: distances between
     the respective joints are shown in the box in the upper left corner of pose reconstruction
     view (click for animation)'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 比较两位运动员在抓举中的运动：在姿态重建视图的左上角框中显示了相应关节之间的距离（点击查看动画）
 - en: https://youtu.be/34z5FI5ldyE
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: https://youtu.be/34z5FI5ldyE
 - en: As a result, we discovered that the accurate detection of a human pose during
     the fast and abrupt movement stretches the limits of a single-view detection method.
     The network predicts the move better when more frames are available, which is
     not the case with ~2-sec move (at least if you have 30 fps video).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是，我们发现准确检测人体在快速且突然的运动中的姿态超出了单视角检测方法的极限。当有更多帧可用时，网络对运动的预测更准确，而在 ~2 秒的运动中则不然（至少如果你有
+    30 fps 的视频）。
 - en: Deadlift - Reps Counter
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 硬拉 - 重复计数器
 - en: If you were wondering if 3d human pose estimation could be used to count repetitions
     in an exercise, we have prepared an example based on the deadlift exercise showing
     how you can determine the number of repetitions and also exercise phase (going
     up or going down) in an automatic manner. In the image below you can see that
     we can detect when the person is going up as well as quite reliably count the
     number of repetitions.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你曾考虑过 3D 人体姿态估计是否可以用来计数运动中的重复次数，我们准备了一个基于硬拉练习的示例，展示了如何以自动化方式确定重复次数和运动阶段（向上或向下）。在下面的图像中，你可以看到我们能够检测到人正在向上运动，并且可以相当可靠地计数重复次数。
 - en: '[![Figure](../Images/b9ac9b58f4546d6ec427083fa0339546.png)](https://i.ibb.co/VMF2Pn1/image20.gif)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/b9ac9b58f4546d6ec427083fa0339546.png)](https://i.ibb.co/VMF2Pn1/image20.gif)'
 - en: Reps and movement phase detection in deadlifting (click for animation)
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 硬拉中的重复次数和运动阶段检测（点击查看动画）
 - en: https://youtu.be/zX51qbBCiLM
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: https://youtu.be/zX51qbBCiLM
 - en: We achieved that by, first of all, considering how we can define one repetition.
     Basically, one repetition in deadlifting is when the initially bent forward person
     begins ascending, reaches a vertical position, and begins to descend again. Therefore
@@ -372,82 +544,118 @@
     is followed by a group of also consecutive “going down” frames. The edge frame
     between the two groups will be the spot where we can add one repetition to our
     counter.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先考虑了如何定义一个重复动作。基本上，硬拉中的一次重复是当最初弯腰的人开始上升，达到垂直位置，然后再次开始下降。因此，我们需要寻找一个时间点，在这个时间点，一个连续的“向上”帧组后面跟着一个连续的“向下”帧组。两个组之间的边缘帧将是我们可以向计数器中添加一次重复的地方。
 - en: In terms of practical implementation, the key to finding going up and down frames
     is the spine angle, which we already know how to detect. While using it, we can
     go through all the detected frames and compare the spine angles in the neighboring
     frames. As a result, we will get a vector of 1s and 0s where continuous stretches
     of 1s can represent ascent and 0s - descent.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实际应用中，找到上升和下降帧的关键是脊柱角度，我们已经知道如何检测。利用这一点，我们可以遍历所有检测到的帧，并比较邻近帧中的脊柱角度。结果，我们将得到一个由1和0组成的向量，其中连续的1可以代表上升，0代表下降。
 - en: '![Figure](../Images/f97664de1269fa6aec043aa8865524a5.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/f97664de1269fa6aec043aa8865524a5.png)'
 - en: Comparing two poses in a sequence based on the spine angle to determine whether
     the person is ascending or descending. Comparison filter goes over all the frames
     in the sequence
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于脊柱角度比较序列中的两个姿势，以确定个人是上升还是下降。比较滤镜遍历序列中的所有帧。
 - en: Obviously, these detections will need a small cleanup to remove accidental detections
     and oscillations. It can be done by going over the data using a sliding window
     of relatively small-size (4-5) frames and replacing all the values inside the
     window with a majority value.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，这些检测结果需要进行一些小的清理，以去除偶然的检测和振荡。这可以通过使用相对小尺寸（4-5）帧的滑动窗口遍历数据，并用窗口内的多数值替换所有值来完成。
 - en: '![Image](../Images/786f92432e81b86fed7b11512e9fe7f7.png)![Figure](../Images/809195e4f541199ece6f79d1c9bf8ad6.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/786f92432e81b86fed7b11512e9fe7f7.png)![图示](../Images/809195e4f541199ece6f79d1c9bf8ad6.png)'
 - en: Example movement phase detection on the first 17 frames before (above) and after
     (below) the value cleanup (1- going up, 0 – going down)
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 运动阶段检测示例，在值清理前（上方）和后（下方）的前17帧（1- 上升，0 – 下降）
 - en: After the cleanup is done, we can move on to detecting the actual edge frames
     where the person finished one repetition. It is surprisingly simple, as we can
     apply a convolutional filter (kernel) used for edge detection.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 清理完成后，我们可以开始检测实际的边缘帧，即个人完成一个重复的地方。这出奇简单，因为我们可以应用用于边缘检测的卷积滤镜（核）。
 - en: '![Figure](../Images/385cbccbcf90256e0eb7e7ba93dea3e0.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/385cbccbcf90256e0eb7e7ba93dea3e0.png)'
 - en: Results of a convolution using edge detection kernel
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用边缘检测核的卷积结果
 - en: As a result, when approaching the edge frame, the values begin to grow and become
     either positive or negative (depending on the edge type). Since we are looking
     for going up|going down the edge, we need to find indices of all the frames where
     the value of the filter is -50 (maximum) and then, we will know when to add repetitions.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是，当接近边缘帧时，值开始增长，变为正值或负值（取决于边缘类型）。由于我们正在寻找上升|下降的边缘，我们需要找到所有滤镜值为-50（最大）的帧的索引，然后我们就会知道何时添加重复。
 - en: '**Errors and Possible Solutions in Human Pose Estimation **'
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**人体姿势估计中的错误和可能的解决方案**'
 - en: Squatting Start Detection Error
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 蹲下起始检测错误
 - en: '**Problem:** At first glance, it may seem that squatting start detection works
     appropriately, however, the arbitrary threshold gives an error when one of the
     arms’ angles briefly goes above it.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 乍一看，蹲下起始检测似乎工作正常，但任意阈值在一个手臂角度短暂超过时会产生错误。'
 - en: '[![Figure](../Images/dddacc0934ace589e66efcc1cdc1a43d.png)](https://i.ibb.co/3hsGc6R/image15.gif)'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图示](../Images/dddacc0934ace589e66efcc1cdc1a43d.png)](https://i.ibb.co/3hsGc6R/image15.gif)'
 - en: Detection of squatting start – threshold error (click for animation)
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 蹲下起始检测 – 阈值错误（点击查看动画）
 - en: '**Solution:** We could increase the threshold to avoid the error in the particular
     video, but there is no guarantee that processing other videos won’t result in
     the same error. It means that it is necessary to test the model by using a number
     of different examples to establish a proper set of rules.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 我们可以提高阈值以避免特定视频中的错误，但不能保证处理其他视频时不会出现相同的错误。这意味着需要通过使用多个不同的示例来测试模型，以建立适当的规则集。'
 - en: Frontal Perspective Error
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 正面视角错误
 - en: '**Problem:** When processing unusual movements and strictly frontal views,
     the model tends to produce low-quality results, especially for keypoints on legs.
     The possible reason for this issue is the fact that the Human3.6M dataset used
@@ -456,161 +664,234 @@
     the presented data (which falls far out of the learned distribution) accurately.
     Comparatively, the same movement is predicted better when the view has a non-frontal
     perspective.'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 在处理不寻常的运动和严格的正面视角时，模型往往会产生低质量的结果，特别是腿部关键点。造成这一问题的可能原因是，尽管 Human3.6M
+    数据集的规模很大，但其在姿势、运动和视角方面仍然有限。因此，模型无法准确地对呈现的数据（这些数据远远超出了已学习的分布）进行泛化。相比之下，当视角为非正面时，相同的运动预测会更好。'
 - en: '[![Figure](../Images/e7afe1cf672515e103e6fe5983a4dbe6.png)](https://i.ibb.co/hRmGf7S/image10.gif)'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图示](../Images/e7afe1cf672515e103e6fe5983a4dbe6.png)](https://i.ibb.co/hRmGf7S/image10.gif)'
 - en: Poor 3D detections on snatch move for athletes in frontal position (click for
     animation)
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 正面位置的运动员在抓举动作中的 3D 检测效果差（点击查看动画）
 - en: https://youtu.be/Za1GPq6sHUk
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: https://youtu.be/Za1GPq6sHUk
 - en: '**Solution:** The problem can be solved by fine-tuning the model on the domain-specific
     data. Alternatively, you can utilize synthetic data for training (such as animated
     3D models rendered with realistic render), or encode the external knowledge about
     the skeletal system into the loss function.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 可以通过在特定领域数据上微调模型来解决这个问题。或者，您可以利用合成数据进行训练（例如用逼真的渲染生成的动画 3D 模型），或者将有关骨骼系统的外部知识编码到损失函数中。'
 - en: Unusual Movements Error
+  id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不寻常的运动误差
 - en: '**Problem:** When working with 3D human pose estimation, we found out that
     the 2D detection part may cause a low prediction accuracy.'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 在进行 3D 人体姿势估计时，我们发现 2D 检测部分可能导致预测精度低。'
 - en: '[![Figure](../Images/683d4e52bdd4c176159422718081fa4c.png)](https://i.ibb.co/VJgLk2j/image9.gif)'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图示](../Images/683d4e52bdd4c176159422718081fa4c.png)](https://i.ibb.co/VJgLk2j/image9.gif)'
 - en: Leg position is not detected properly in an unusual move (click for animation)
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 在不寻常动作中，腿部位置未被正确检测（点击查看动画）
 - en: https://youtu.be/Gu_H3s7eel0
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: https://youtu.be/Gu_H3s7eel0
 - en: The Keypoint R-CNN model detects the position of quickly moving legs incorrectly,
     which can be partially attributed to the blurring of leg features caused by the
     fast transition.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: Keypoint R-CNN 模型错误地检测了快速移动的腿部位置，这在一定程度上归因于快速过渡造成的腿部特征模糊。
 - en: In addition, this kind of limb position is not very similar to what can be found
     in the COCO 2D keypoint dataset used for pre-training the model. As a result,
     the 3D model predictions for the lower body part do not correspond to the real
     movement, while the upper part of the body looks correct since the upper limbs
     have more degrees of freedom than legs on the images used for model training.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，这种四肢位置与用于模型预训练的 COCO 2D 关键点数据集中的数据并不十分相似。因此，3D 模型对下半身的预测与实际运动不符，而上半身看起来正确，因为上肢的自由度比腿部在模型训练中使用的图像上更多。
 - en: '**Solution**:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：**'
 - en: '**Collecting and labeling of own dataset which would contain images from the
     target domain.** Despite improving the model’s performance on the target domain,
     this approach may be prohibitively costly to implement.'
+  id: totrans-111
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**收集和标注包含目标领域图像的自有数据集。** 尽管这种方法可以提高模型在目标领域的表现，但实施成本可能过于昂贵。'
 - en: '**Using train-time augmentations to make the model less sensitive to rotations
     of the human body.** This approach requires the application of random rotations
     to the training images and all the keypoints within. It will definitely help when
     predicting unusual poses, however, it may not be very helpful when detecting those
     poses that cannot be obtained by simple rotation like bending over, or high kicks.'
+  id: totrans-112
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使用训练时的数据增强，使模型对人体旋转不那么敏感。** 这种方法需要对训练图像及其中的所有关键点进行随机旋转。这确实有助于预测不寻常的姿势，但对于那些不能通过简单旋转获得的姿势（如弯腰或高踢腿），效果可能不佳。'
 - en: '**Adoption of rotation-invariant models, capable of inferring the position
     of keypoints regardless of the rotation degree of the body.** It can be done by
     training an additional rotation network aimed to find the rotation angle needed
     to transform a given image to a canonical view. Once the network is trained, it
     can be integrated into the inference pipeline so that the keypoint detection model
     receives only angle-normalized images.'
+  id: totrans-113
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**采用旋转不变模型，能够推断关键点的位置，无论身体的旋转角度如何。** 可以通过训练一个额外的旋转网络来实现，旨在找到将给定图像转换为标准视图所需的旋转角度。一旦网络训练完成，它可以集成到推理流程中，使得关键点检测模型只接收经过角度标准化的图像。'
 - en: Occluded Joints Error
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 遮挡关节错误
 - en: '**Problem:** The 2D predictor may return poor results when body parts are occluded
     with other body parts or objects. When weights on barbells obscure the position
     of hands in powerlifting, the detector may “misfire,” placing the keypoint far
     from its true position. It leads to instability of 3D keypoint models’ output
     and “shaky hands” effect.'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 当身体部位被其他身体部位或物体遮挡时，2D预测器可能会返回较差的结果。在举重时，如果杠铃上的重量遮挡了手的位置，检测器可能会“失误”，将关键点放置在离真实位置较远的地方。这会导致3D关键点模型输出的不稳定和“抖动的手”效果。'
 - en: '[![Figure](../Images/ba909d713af0704bda3bab0e9045a824.png)](https://i.ibb.co/9hGMVWM/image16.gif)'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/ba909d713af0704bda3bab0e9045a824.png)](https://i.ibb.co/9hGMVWM/image16.gif)'
 - en: 2D keypoint model fails to detect the position of the left hand leading to incorrect
     3D reconstruction (click for animation)
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 2D关键点模型未能检测左手的位置，导致3D重建不准确（点击查看动画）
 - en: https://youtu.be/1rg1lj-eAaw
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: https://youtu.be/1rg1lj-eAaw
 - en: '**Solution:** It is possible to use multi-view systems to get better accuracy
     since they can significantly reduce the occlusion problem. There are also 2D keypoint
     localization models [designed specifically](https://arxiv.org/abs/1907.06922)
     to deal with occlusions.'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 可以使用多视角系统来获得更好的准确性，因为它们可以显著减少遮挡问题。也有一些专门 [设计](https://arxiv.org/abs/1907.06922)
+    来处理遮挡的2D关键点定位模型。'
 - en: In conclusion, I'd say that based on our practical findings, most weaknesses
     of the 3D human pose estimation technology are avoidable. The main task is to
     select the right model architecture and training data. Moreover, the rapid developments
     in 3D human pose estimation indicate that current obstacles may become less of
     an issue in the future.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 总之，根据我们的实际发现，大多数3D人体姿态估计技术的弱点是可以避免的。主要任务是选择合适的模型架构和训练数据。此外，3D人体姿态估计的快速发展表明，当前的障碍在未来可能会变得不那么严重。
 - en: '**Bio: [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)**
     is a Data Science Engineer at [MobiDev](https://mobidev.biz/services/data-science). He
     has a background in Environmental and Mechanical Engineering, Materials Science,
     and Chemistry, and is keen on gaining new insights and experience in the Data
     Science and Machine Learning sectors. He is particularly interested in Deep Learning-based
     technologies and their application to business use cases.'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)**
+    是 [MobiDev](https://mobidev.biz/services/data-science) 的数据科学工程师。他拥有环境和机械工程、材料科学和化学方面的背景，并热衷于在数据科学和机器学习领域获得新的见解和经验。他特别对基于深度学习的技术及其在商业应用中的应用感兴趣。'
 - en: '**Related:**'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[A 2019 Guide to Human Pose Estimation](/2019/08/2019-guide-human-pose-estimation.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2019年人体姿态估计指南](/2019/08/2019-guide-human-pose-estimation.html)'
 - en: '[Metrics to Use to Evaluate Deep Learning Object Detectors](/2020/08/metrics-evaluate-deep-learning-object-detectors.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于评估深度学习目标检测器的指标](/2020/08/metrics-evaluate-deep-learning-object-detectors.html)'
 - en: '[Are Computer Vision Models Vulnerable to Weight Poisoning Attacks?](/2020/08/computer-vision-models-vulnerable-weight-poisoning-attacks.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算机视觉模型是否容易受到权重中毒攻击？](/2020/08/computer-vision-models-vulnerable-weight-poisoning-attacks.html)'
 - en: More On This Topic
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Versioning Machine Learning Experiments vs Tracking Them](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习实验的版本控制与追踪](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)'
 - en: '[How to Design Experiments for Data Collection](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何设计数据收集实验](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)'
 - en: '[Hydra Configs for Deep Learning Experiments](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于深度学习实验的Hydra配置](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)'
 - en: '[The Gap Between Deep Learning and Human Cognitive Abilities](https://www.kdnuggets.com/2022/10/gap-deep-learning-human-cognitive-abilities.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习与人类认知能力之间的差距](https://www.kdnuggets.com/2022/10/gap-deep-learning-human-cognitive-abilities.html)'
 - en: '[Closing the Gap Between Human Understanding and Machine Learning:…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[缩小人类理解与机器学习之间的差距：…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
 - en: '[Bringing Human and AI Agents Together for Enhanced Customer Experience](https://www.kdnuggets.com/2024/06/softweb/bringing-human-and-ai-agents-together-for-enhanced-customer-experience)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将人类与人工智能代理结合以提升客户体验](https://www.kdnuggets.com/2024/06/softweb/bringing-human-and-ai-agents-together-for-enhanced-customer-experience)'
