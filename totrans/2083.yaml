@@ -1,296 +1,445 @@
 - en: Using Hugging Face Transformers for Emotion Detection in Text
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Hugging Face Transformers进行文本情感检测
 - en: 原文：[https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
 - en: '![Emotion detection and sentiment analysis is a popular NLP task](../Images/22573f8999395d71f8c12dd0adedaba6.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![情感检测和情感分析是流行的NLP任务](../Images/22573f8999395d71f8c12dd0adedaba6.png)'
 - en: Image by [juicy_fish on Freepik](https://www.freepik.com/free-vector/three-feedback-emoji-happy-sad-medium-flat-style_41681695.htm#fromView=search&page=1&position=13&uuid=6fbf4fab-f376-491f-992a-75df016f5210)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[juicy_fish在Freepik](https://www.freepik.com/free-vector/three-feedback-emoji-happy-sad-medium-flat-style_41681695.htm#fromView=search&page=1&position=13&uuid=6fbf4fab-f376-491f-992a-75df016f5210)提供
 - en: 'Hugging Face hosts a variety of transformer-based Language Models (LMs) specialized
     in addressing language understanding and language generation tasks, including
     but not limited to:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Hugging Face托管了各种基于变换器的语言模型（LMs），这些模型专门用于处理语言理解和语言生成任务，包括但不限于：
 - en: Text classification
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文本分类
 - en: Named Entity Recognition (NER)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 命名实体识别（NER）
 - en: Text generation
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文本生成
 - en: Question-answering
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 问答
 - en: Summarization
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总结
 - en: Translation
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 翻译
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT工作'
 - en: '* * *'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: A particular -and pretty common- case of text classification task is sentiment
     analysis, where the goal is to identify the sentiment of a given text. The "simplest"
     type of sentiment analysis LMs are trained to determine the polarity of an input
     text such as a customer review of a product, into positive vs negative, or positive
     vs negative vs neutral. These two specific problems are formulated as binary or
     multiple-class classification tasks, respectively.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个特定的——也相当常见的——文本分类任务是情感分析，其目标是识别给定文本的情感。最“简单”的情感分析语言模型被训练来确定输入文本的极性，例如产品的客户评价，可以分为正面和负面，或正面、负面和中性。这两个具体问题分别被表述为二分类或多分类任务。
 - en: There are also LMs that, while still identifiable as sentiment analysis models,
     are trained to categorize texts into several emotions such as anger, happiness,
     sadness, and so on.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一些语言模型，虽然仍然可以被识别为情感分析模型，但它们被训练来将文本分类为几种情感，例如愤怒、快乐、悲伤等。
 - en: This Python-based tutorial focuses on loading and illustrating the use of a
     Hugging Face pre-trained model for classifying the main emotion associated with
     an input text. We will use the [emotions dataset](https://huggingface.co/datasets/jeffnyman/emotions)
     publicly available on the Hugging Face hub. This dataset contains thousands of
     Twitter messages written in English.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程基于Python，重点介绍了如何加载和展示使用Hugging Face预训练模型来分类输入文本的主要情感。我们将使用[情感数据集](https://huggingface.co/datasets/jeffnyman/emotions)，这是Hugging
+    Face中心公开提供的数据集。该数据集包含成千上万条用英语编写的Twitter消息。
 - en: Loading the Dataset
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 加载数据集
 - en: 'We''ll start by loading the training data within the emotions dataset by running
     the following instructions:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过运行以下指令来开始加载情感数据集中的训练数据：
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Below is a summary of what the training subset in the *train_data* variable
     contains:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是*train_data*变量中的训练子集所包含的内容摘要：
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The training fold in the emotions dataset contains 16000 instances associated
     with Twitter messages. For each instance, there are two features: one input feature
     containing the actual message text, and one output feature or label containing
     its associated emotion as a numerical identifier:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 情感数据集中的训练折叠包含16000个与Twitter消息相关的实例。每个实例有两个特征：一个输入特征包含实际消息文本，一个输出特征或标签包含其关联的情感作为数字标识符：
 - en: '0: sadness'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '0: 悲伤'
 - en: '1: joy'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '1: 快乐'
 - en: '2: love'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '2: 爱'
 - en: '3: anger'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '3: 愤怒'
 - en: '4: fear'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '4: 恐惧'
 - en: '5: surprise'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '5: 惊讶'
 - en: 'For instance, the first labeled instance in the training fold has been classified
     with the ''sadness'' emotion:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，训练集中的第一个标记实例被分类为“悲伤”情感：
 - en: '[PRE2]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Output:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Loading the Language Model
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 加载语言模型
 - en: 'Once we have loaded the data, the next step is to load a suitable pre-trained
     LM from Hugging Face for our target emotion detection task. There are two main
     approaches to loading and utilizing LMs using **Hugging Face''s Transformer library**:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们加载了数据，下一步是从 Hugging Face 加载一个适合我们目标情感检测任务的预训练语言模型。使用 **Hugging Face 的 Transformer
+    库** 有两种主要方法来加载和利用语言模型：
 - en: '**Pipelines** offer a very high abstraction level for getting ready to load
     an LM and perform inference on them almost instantly with very few lines of code,
     at the cost of having little configurability.'
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**管道** 提供了一个非常高的抽象层次，使得几乎可以立即加载语言模型并进行推断，只需极少的代码行，但配置选项较少。'
 - en: '**Auto classes** provide a lower level of abstraction, requiring more coding
     skills but offering more flexibility to adjust model parameters as well as customize
     text preprocessing steps like tokenization.'
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Auto 类** 提供了较低的抽象层次，需要更多的编码技能，但提供了更多的灵活性，以调整模型参数以及自定义文本预处理步骤，如分词。'
 - en: 'This tutorial gives you an easy start, by focusing on loading models as pipelines.
     Pipelines require specifying at least the type of language task, and optionally
     a model name to load. Since emotion detection is a very specific form of text
     classification problem, the task argument to use when loading the model should
     be "text-classification":'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程通过专注于将模型作为管道加载，为你提供了一个简单的起点。管道需要至少指定语言任务的类型， optionally 还可以指定要加载的模型名称。由于情感检测是一种非常具体的文本分类问题，因此加载模型时使用的任务参数应该是“text-classification”：
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: On the other hand, it is highly recommended to specify with the 'model' argument
     the name of a specific model in Hugging Face hub capable of addressing our specific
     task of emotion detection. Otherwise, by default, we may load a text classification
     model that has not been trained upon data for this particular 6-class classification
     problem.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，强烈建议使用“model”参数指定 Hugging Face hub 中一个能够处理我们特定情感检测任务的模型名称。否则，默认情况下，我们可能会加载一个没有针对这个特定
+    6 类分类问题训练过的文本分类模型。
 - en: 'You may ask yourself: "How do I know which model name to use?". The answer
     is simple: do a little bit of exploration throughout the Hugging Face website
     to find suitable models or models trained upon a specific dataset like the emotions
     data.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会问自己：“我怎么知道使用哪个模型名称？”答案很简单：在 Hugging Face 网站上进行一点探索，找到适合的模型或训练于特定数据集（如情感数据）的模型。
 - en: 'The next step is to start making predictions. Pipelines make this inference
     process incredibly easy, but just calling our newly instantiated pipeline variable
     and passing an input text to classify as an argument:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是开始进行预测。管道使得这个推断过程变得极其简单，只需调用我们新实例化的管道变量，并将要分类的输入文本作为参数传递：
 - en: '[PRE5]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'As a result, we get a predicted label and a confidence score: the closer this
     score to 1, the more "reliable" the prediction made is.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果，我们得到一个预测标签和一个置信度分数：这个分数越接近 1，预测结果的“可靠性”越高。
 - en: '[PRE6]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: So, our input example "I love hugging face transformers!" confidently conveys
     a sentiment of joy.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们的输入示例“I love hugging face transformers!” 自信地传达了喜悦的情感。
 - en: 'You can pass multiple input texts to the pipeline to perform several predictions
     simultaneously, as follows:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以将多个输入文本传递给管道，以同时执行多个预测，如下所示：
 - en: '[PRE7]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The second input in this example seemed much more challenging for the model
     to perform a confident classification:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，第二个输入对模型来说似乎更具挑战性，难以进行自信的分类：
 - en: '[PRE8]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Last, we can also pass a batch of instances from a dataset like our previously
     loaded ''emotions'' data. This example passes the first 10 training inputs to
     our LM pipeline for classifying their feelings, then it prints a list containing
     each predicted label, leaving their confidence scores aside:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们还可以将数据集中一批实例传递给我们的语言模型管道，例如之前加载的“情感”数据。这个例子将前 10 个训练输入传递给我们的语言模型管道进行情感分类，然后打印一个包含每个预测标签的列表，置信度分数不予显示：
 - en: '[PRE9]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Output:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE10]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'For comparison, here are the original labels given to these 10 training instances:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为比较，这里是这 10 个训练实例的原始标签：
 - en: '[PRE11]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Output:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE12]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: By looking at the emotions each numerical identifier is associated with, we
     can see that about 7 out of 10 predictions match the real labels given to these
     10 instances.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过查看每个数字标识符关联的情感，我们可以看到大约 7 成的预测与这 10 个实例的真实标签匹配。
 - en: Now that you know how to use Hugging Face transformer models to detect text
     emotions, why not explore other use cases and language tasks where pre-trained
     LMs can help?
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然你已经知道如何使用 Hugging Face transformer 模型来检测文本情感，为什么不探索其他用例和语言任务，看看预训练的 LMs 如何提供帮助呢？
 - en: '[](https://www.linkedin.com/in/ivanpc/)****[Iván Palomares Carrascosa](https://www.linkedin.com/in/ivanpc/)****
     is a leader, writer, speaker, and adviser in AI, machine learning, deep learning
     & LLMs. He trains and guides others in harnessing AI in the real world.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[](https://www.linkedin.com/in/ivanpc/)****[Iván Palomares Carrascosa](https://www.linkedin.com/in/ivanpc/)****
+    是一位在 AI、机器学习、深度学习和 LLMs 领域的领袖、作家、演讲者和顾问。他训练和指导他人在实际应用中利用 AI。'
 - en: More On This Topic
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关话题
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Transformers 对 BERT 进行微调以进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
 - en: '[How to Use GPT for Generating Creative Content with Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 GPT 生成创意内容与 Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
 - en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
 - en: '[How to Use the Hugging Face Tokenizers Library to Preprocess Text Data](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Tokenizers 库预处理文本数据](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)'
 - en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前 10 大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
 - en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个为客户数据建模的 Hugging Face 社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
