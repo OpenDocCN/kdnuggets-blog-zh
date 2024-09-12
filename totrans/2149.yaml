@@ -1,288 +1,441 @@
 - en: How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM
 - en: 原文：[https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)
 - en: '![How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](../Images/b6981736e060f20b69ebe17ff9798b3c.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/b6981736e060f20b69ebe17ff9798b3c.png)'
 - en: Image by Editor
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由编辑提供
 - en: With the progress of LLM research worldwide, many models have become more accessible.
     One of the small yet powerful open-source models is [Mistral AI 7B LLM](https://mistral.ai/).
     The model boasts adaptability on many use cases, showing better performance than
     LlaMA 2 13B on all benchmarks, employing a [sliding window attention (SWA)](https://arxiv.org/pdf/1904.10509.pdf)
     mechanism and being easy to deploy.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着全球 LLM 研究的进展，许多模型变得更加易于获取。一个小而强大的开源模型是 [Mistral AI 7B LLM](https://mistral.ai/)。该模型在多个用例上展现出适应性，在所有基准测试中表现优于
+    LlaMA 2 13B，采用了 [滑动窗口注意力（SWA）](https://arxiv.org/pdf/1904.10509.pdf) 机制，并且易于部署。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Mistral 7 B's overall performance benchmark can be seen in the image below.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral 7 B 的整体性能基准见下图。
 - en: '![How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](../Images/f03b284e0c26fd081dbae259afb81539.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/f03b284e0c26fd081dbae259afb81539.png)'
 - en: Mistral 7B Performance Benchmark ([Jiang *et al.* (2023)](https://arxiv.org/pdf/2310.06825.pdf))
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral 7B 性能基准（[江等（2023）](https://arxiv.org/pdf/2310.06825.pdf)）
 - en: The Mistral 7B model is available in the [HuggingFace](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1)
     as well. With this, we can use the Hugging Face AutoTrain to fine-tune the model
     for our use cases. [Hugging Face’s AutoTrain](https://huggingface.co/docs/autotrain/v0.6.10/index)
     is a no-code platform with Python API that we can use to fine-tune any LLM model
     available in HugginFace easily.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral 7B 模型也可在 [HuggingFace](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1)
+    中找到。通过这个模型，我们可以使用 Hugging Face AutoTrain 针对我们的用例对模型进行微调。[Hugging Face 的 AutoTrain](https://huggingface.co/docs/autotrain/v0.6.10/index)
+    是一个无需编码的平台，配有 Python API，我们可以使用它轻松微调任何可用的 LLM 模型。
 - en: This tutorial will teach us to fine-tune Mistral AI 7B LLM with Hugging Face
     AutoTrain. How does it work? Let’s get into it.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将教我们如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM。它是如何工作的？让我们深入了解。
 - en: Environment and Dataset Preparation
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 环境和数据集准备
 - en: To fine-tune the LLM with Python API, we need to install the Python package,
     which you can run using the following code.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用 Python API 微调 LLM，我们需要安装 Python 包，你可以使用以下代码运行。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Also, we would use the Alpaca sample dataset from [HuggingFace](https://huggingface.co/datasets/tatsu-lab/alpaca),
     which required datasets package to acquire and the transformers package to manipulate
     the Hugging Face model.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我们将使用来自 [HuggingFace](https://huggingface.co/datasets/tatsu-lab/alpaca) 的
+    Alpaca 样本数据集，该数据集需要通过数据集包获取，并使用 transformers 包来操作 Hugging Face 模型。
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Next, we must format our data for fine-tuning the Mistral 7B model. In general,
     there are two foundational models that Mistral released: [Mistral 7B v0.1](https://docs.mistral.ai/llm/mistral-v0.1)
     and [Mistral 7B Instruct v0.1](https://docs.mistral.ai/llm/mistral-instruct-v0.1).
     The Mistral 7B v0.1 is the base foundation model, and the Mistral 7B Instruct
     v0.1 is a Mistral 7B v0.1 model that has been fine-tuned for conversation and
     question answering.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们必须为微调 Mistral 7B 模型格式化数据。一般来说，Mistral 发布了两个基础模型：[Mistral 7B v0.1](https://docs.mistral.ai/llm/mistral-v0.1)
+    和 [Mistral 7B Instruct v0.1](https://docs.mistral.ai/llm/mistral-instruct-v0.1)。Mistral
+    7B v0.1 是基础模型，而 Mistral 7B Instruct v0.1 是为对话和问答微调过的 Mistral 7B v0.1 模型。
 - en: We would need a CSV file containing a text column for the fine-tuning with Hugging
     Face AutoTrain. However, we would use a different text format for the base and
     instruction models during the fine-tuning.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要一个包含文本列的 CSV 文件来进行 Hugging Face AutoTrain 微调。不过，在微调过程中，我们将使用不同的文本格式用于基础和指令模型。
 - en: First, let’s look at the dataset we used for our sample.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们查看用于示例的数据集。
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The code above would take ten percent samples of the actual data. We would only
     need that much for this tutorial as it would take longer to train for bigger data.
     Our data sample looks like the image below.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码将会抽取实际数据的百分之十的样本。我们在这个教程中只需要这么多，因为训练更大数据会花费更长时间。我们的数据样本如下图所示。
 - en: '![How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](../Images/4cd0e21304bf8a7f1fbae7882f1ae4e6.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/4cd0e21304bf8a7f1fbae7882f1ae4e6.png)'
 - en: Image by Author
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: The dataset already contains the text columns with a format we need to fine-tune
     our LLM model. That’s why we don’t need to perform anything. However, I would
     provide a code if you have another dataset that needs the formatting.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集已经包含了我们需要微调 LLM 模型的文本列格式。因此，我们无需执行任何操作。不过，如果你有其他需要格式化的数据集，我会提供代码。
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: For the Hugging Face AutoTrain, we would need the data in the CSV format so
     that we would save the data with the following code.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 Hugging Face AutoTrain，我们需要将数据保存为 CSV 格式，可以使用以下代码来保存数据。
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Then, move the CSV result into a folder called data. That’s all you need to
     prepare the dataset for fine-tuning Mistral 7B v0.1.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，将 CSV 结果移动到一个名为 data 的文件夹中。这就是为微调 Mistral 7B v0.1 准备数据集所需的全部操作。
 - en: If you want to fine-tune the Mistral 7B Instruct v0.1 for conversation and question
     answering, we need to follow the chat template format provided by Mistral, shown
     in the code block below.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想为对话和问答微调 Mistral 7B Instruct v0.1，我们需要按照 Mistral 提供的聊天模板格式进行操作，如下方代码块所示。
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: If we use our previous example dataset, we need to reformat the text column.
     We would use only the data without any input for the chat model.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们使用之前的示例数据集，我们需要重新格式化文本列。我们将只使用没有输入的聊天模型数据。
 - en: '[PRE6]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Then, we could reformat the data with the following code.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们可以使用以下代码重新格式化数据。
 - en: '[PRE7]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: We will end up with a dataset appropriate for fine-tuning the Mistral 7B Instruct
     v0.1 model.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将得到一个适合微调 Mistral 7B Instruct v0.1 模型的数据集。
 - en: '![How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](../Images/7b1930b4a2f258cd2001cb658385c2e7.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/7b1930b4a2f258cd2001cb658385c2e7.png)'
 - en: Image by Author
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: With all the preparation set, we can now initiate the AutoTrain to fine-tune
     our Mistral model.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 准备好所有设置后，我们现在可以启动 AutoTrain 来微调我们的 Mistral 模型。
 - en: Training and Fine-tuning
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 训练和微调
 - en: Let’s set up the Hugging Face AutoTrain environment to fine-tune the Mistral
     model. First, let’s run the AutoTrain setup using the following command.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们设置 Hugging Face AutoTrain 环境来微调 Mistral 模型。首先，运行以下命令来进行 AutoTrain 设置。
 - en: '[PRE8]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Next, we would provide the information required for AutoTrain to run. For this
     tutorial, let’s use the Mistral 7B Instruct v0.1.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们需要提供 AutoTrain 运行所需的信息。在这个教程中，我们使用 Mistral 7B Instruct v0.1。
 - en: '[PRE9]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Then, we would add the Hugging Face information if you want to push your model
     to the repository.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想将模型推送到仓库，我们将添加 Hugging Face 信息。
 - en: '[PRE10]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Lastly, we would initiate the model parameter information in the variables below.
     You can change them to see if the result is good.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将在下面的变量中初始化模型参数信息。你可以修改它们来查看结果是否良好。
 - en: '[PRE11]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: We can tweak many parameters but will not discuss them in this article. Some
     tips to improve the LLM fine-tuning include using a lower learning rate to maintain
     pre-learned representations and vice versa, avoiding overfitting by adjusting
     the number of epochs, using larger batch size for stability, or adjusting the
     gradient accumulation if you have a memory problem.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以调整许多参数，但在本文中不会讨论它们。一些改进LLM微调的技巧包括使用较低的学习率以保持预先学习的表示，避免过拟合通过调整周期数，使用较大的批量大小以提高稳定性，或者在有内存问题时调整梯度累积。
 - en: When all the information is ready, we will set up the environment to accept
     all the information we have set up previously.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 当所有信息准备好后，我们将设置环境以接受之前设置的所有信息。
 - en: '[PRE12]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: We would use the following command to run the AutoTrain in our notebook.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用以下命令在笔记本中运行AutoTrain。
 - en: '[PRE13]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: If the fine-tuning process succeeds, we will have a new directory of our fine-tuned
     model. We would use this directory to test our newly fine-tuned model.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果微调过程成功，我们将拥有一个新的微调模型目录。我们将使用这个目录来测试我们新微调的模型。
 - en: '[PRE14]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: With the model and tokenizer ready to use, we would try the model with an input
     example.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型和分词器准备好后，我们会用一个示例输入测试模型。
 - en: '[PRE15]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '**Output:**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: Give three tips for staying healthy.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 给出三条保持健康的建议。
 - en: 'Eat a balanced diet: Make sure to include plenty of fruits, vegetables, lean
     proteins, and whole grains in your diet. This will help you get the nutrients
     you need to stay healthy and energized.'
+  id: totrans-63
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 均衡饮食：确保饮食中包含大量水果、蔬菜、瘦蛋白和全谷物。这将帮助你获得保持健康和充满活力所需的营养。
 - en: 'Exercise regularly: Aim for at least 30 minutes of moderate exercise, such
     as brisk walking or cycling, every day. This will help you maintain a healthy
     weight, reduce your risk of chronic diseases, and improve your overall physical
     and mental health.'
+  id: totrans-64
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 定期锻炼：每天至少进行30分钟的中等强度运动，如快走或骑车。这将帮助你维持健康的体重，降低慢性疾病的风险，并改善整体身体和心理健康。
 - en: 'Get enough sleep: Aim for 7-9 hours of quality sleep each night. This will
     help you feel more rested and alert during the day, and it will also help you
     maintain a healthy weight and reduce your risk of chronic diseases.'
+  id: totrans-65
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 充足的睡眠：每晚目标睡眠7-9小时。这将帮助你在白天感到更有休息感和警觉性，同时有助于维持健康的体重并降低慢性疾病的风险。
 - en: The output from the model has been close to the actual output from our training
     data, shown in the image below.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的输出与我们的训练数据的实际输出接近，如下图所示。
 - en: Eat a balanced diet and make sure to include plenty of fruits and vegetables.
+  id: totrans-67
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 均衡饮食，并确保包含大量水果和蔬菜。
 - en: Exercise regularly to keep your body active and strong.
+  id: totrans-68
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 定期锻炼以保持身体活跃和强壮。
 - en: Get enough sleep and maintain a consistent sleep schedule.
+  id: totrans-69
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 充足的睡眠并保持一致的作息时间。
 - en: Mistral models certainly are powerful for their size, as simple fine-tuning
     has already shown a promising result. Try out your dataset to see if it suits
     your work.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral模型确实因其体积小而强大，简单的微调已经显示出良好的结果。尝试你的数据集，以查看它是否适合你的工作。
 - en: Conclusion
+  id: totrans-71
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: The Mistral AI 7B family model is a powerful LLM model that boasts higher performance
     than LLaMA and great adaptability. As the model is available in the Hugging Face,
     we can employ HuggingFace AutoTrain to fine-tune the model. There are two models
@@ -290,40 +443,62 @@
     base foundation model, and the Mistral 7B Instruct v0.1 for conversation and question
     answering. The fine-tuning showed promising results even with a quick training
     process.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral AI 7B系列模型是一个强大的LLM模型，性能优于LLaMA，并具有出色的适应性。由于该模型在Hugging Face上可用，我们可以使用HuggingFace
+    AutoTrain来微调模型。目前，Hugging Face上有两个可微调的模型：Mistral 7B v0.1作为基础模型，以及Mistral 7B Instruct
+    v0.1用于对话和问答。即使经过快速训练，微调结果也表现出良好的前景。
 - en: '**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha
     Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** is a data science
     assistant manager and data writer. While working full-time at Allianz Indonesia,
     he loves to share Python and data tips via social media and writing media. Cornellius
     writes on a variety of AI and machine learning topics.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha
+    Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰写员。在全职工作于Allianz
+    Indonesia的同时，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius在各种AI和机器学习主题上进行写作。'
 - en: More On This Topic
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题
 - en: '[Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Mistral 7B-V0.2: 微调 Mistral 的新开源 LLM 与…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)'
 - en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face AutoTrain 微调 LLM](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
 - en: '[Web LLM: Bring LLM Chatbots to the Browser](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Web LLM: 将 LLM 聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)'
 - en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[十大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
 - en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个为客户数据建模开发 Hugging Face 的社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
 - en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Hugging Face 和 Gradio 在 5 分钟内构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
