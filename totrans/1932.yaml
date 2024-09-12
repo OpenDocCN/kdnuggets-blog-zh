@@ -1,213 +1,321 @@
 - en: Using Ensembles in Kaggle Data Science Competitions – Part 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在Kaggle数据科学竞赛中使用集成方法——第2部分
 - en: 原文：[https://www.kdnuggets.com/2015/06/ensembles-kaggle-data-science-competition-p2.html](https://www.kdnuggets.com/2015/06/ensembles-kaggle-data-science-competition-p2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2015/06/ensembles-kaggle-data-science-competition-p2.html](https://www.kdnuggets.com/2015/06/ensembles-kaggle-data-science-competition-p2.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2015/06/ensembles-kaggle-data-science-competition-p1.html#comments)**By
     Henk van Veen**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2015/06/ensembles-kaggle-data-science-competition-p1.html#comments)**由
+    Henk van Veen 提供**'
 - en: '**Stacked Generalization & Blending**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**堆叠泛化与融合**'
 - en: 'Averaging prediction files is nice and easy, but it’s not the only method that
     the top Kagglers [Repetition code]( https://www.kaggle.com/users) are using. The
     serious gains start with stacking and blending. Hold on to your top-hats and petticoats:
     Here be dragons. With 7 heads. Standing on top of 30 other dragons.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均预测文件是简单易行的，但这不是顶级Kagglers所使用的唯一方法。[重复码]( https://www.kaggle.com/users)的真正收益始于堆叠和融合。抓紧你的高帽和衬裙：这里有龙。七头的。站在其他30条龙的上面。
 - en: '**Netflix**[![This image shows netflix leaderboard results with blending hundreds
     of predictive models](../Images/5430890728ebc281f0fbace948acb835.png)](/wp-content/uploads/compiling-blending-predictive-models-by-netflix-engineers.jpg)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Netflix**[![此图展示了Netflix排行榜结果，融合了数百个预测模型](../Images/5430890728ebc281f0fbace948acb835.png)](/wp-content/uploads/compiling-blending-predictive-models-by-netflix-engineers.jpg)'
 - en: Blending hundreds of predictive models to finally cross the finish line.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 融合数百个预测模型，最终跨越终点线。
 - en: Netflix organized and popularized the first data science competitions. Competitors
     in the movie recommendation challenge really pushed the state of the art on ensemble
     creation, perhaps so much so that Netflix decided not to implement the winning
     solution in production. That one was simply too complex.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: Netflix组织并推广了第一个数据科学竞赛。电影推荐挑战中的参赛者真正推动了集成方法的前沿，甚至可能使Netflix决定不在生产中实施获胜的解决方案，因为它实在太复杂了。
 - en: 'Nevertheless, a number of papers and novel methods resulted from this challenge:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管如此，这一挑战仍产生了大量论文和新方法：
 - en: '[Feature-Weighted Linear Stacking](http://arxiv.org/pdf/0911.0460.pdf)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征加权线性堆叠](http://arxiv.org/pdf/0911.0460.pdf)'
 - en: '[Combining Predictions for Accurate Recommender Systems](http://elf-project.sourceforge.net/CombiningPredictionsForAccurateRecommenderSystems.pdf
     )'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为准确的推荐系统结合预测](http://elf-project.sourceforge.net/CombiningPredictionsForAccurateRecommenderSystems.pdf
+    )'
 - en: '[The BigChaos Solution to the Netflix Prize](http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
     )'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BigChaos解决Netflix奖的方案](http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
+    )'
 - en: All are interesting, accessible and relevant reads when you want to improve
     your Kaggle game.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你想提高你的Kaggle表现时，这些都是有趣、易读且相关的读物。
 - en: '**Stacked generalization**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**堆叠泛化**'
 - en: 'Stacked generalization was introduced by Wolpert in a 1992 paper, 2 years before
     the seminal Breiman paper “Bagging Predictors“. Wolpert is famous for another
     very popular machine learning theorem:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠泛化由Wolpert在1992年的一篇论文中引入，早于Breiman在1994年发表的开创性论文“Bagging Predictors”。Wolpert还因另一条非常流行的机器学习定理而闻名：
 - en: '*“There is no free lunch in search and optimization“.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*“搜索和优化中没有免费的午餐”。*'
 - en: The basic idea behind stacked generalization is to use a pool of base classifiers,
     then using another classifier to combine their predictions, with the aim of reducing
     the generalization error.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠泛化的基本思想是使用一组基础分类器，然后使用另一个分类器来组合它们的预测，旨在减少泛化误差。
 - en: 'Let’s say you want to do 2-fold stacking:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想进行2折堆叠：
 - en: 'Split the train set in 2 parts: train_a and train_b'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将训练集拆分为两部分：`train_a`和`train_b`。
 - en: Fit a first-stage model on train_a and create predictions for train_b
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`train_a`上拟合第一个阶段的模型，并为`train_b`创建预测。
 - en: Fit the same model on train_b and create predictions for train_a
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`train_b`上拟合相同的模型，并为`train_a`创建预测。
 - en: Finally fit the model on the entire train set and create predictions for the
     test set.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后，在整个训练集上拟合模型，并为测试集创建预测。
 - en: Now train a second-stage stacker model on the probabilities from the first-stage
     model(s).
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现在在第一个阶段模型的概率上训练第二阶段的堆叠模型。
 - en: A stacker model gets more information on the problem space by using the first-stage
     predictions as features, than if it was trained in isolation.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠模型通过使用第一阶段的预测作为特征，比在孤立训练时获得更多的问题空间信息。
 - en: '**Blending**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**融合**'
 - en: Blending is a word introduced by the Netflix winners. It is very close to stacked
     generalization, but a bit simpler and less risk of an information leak. Some researchers
     use “stacked ensembling” and “blending” interchangeably.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 混合是Netflix获胜者引入的一个词。它与堆叠泛化非常接近，但更简单，且信息泄漏的风险较小。一些研究者将“堆叠集成”和“混合”互换使用。
 - en: With blending, instead of creating out-of-fold predictions for the train set,
     you create a small holdout set of say 10% of the train set. The stacker model
     then trains on this holdout set only.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用混合时，你不是为训练集创建外折预测，而是创建一个例如10%的训练集的持出集。然后堆叠模型仅在这个持出集上进行训练。
 - en: 'Blending has a few benefits:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 混合有一些好处：
 - en: It is simpler than stacking.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它比堆叠更简单。
 - en: 'It wards against an information leak: The generalizers and stackers use different
     data.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它防止信息泄漏：泛化器和堆叠器使用不同的数据。
 - en: You do not need to share a seed for stratified folds with your teammates. Anyone
     can throw models in the ‘blender’ and the blender decides if it wants to keep
     that model or not.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你不需要与队友分享分层折叠的种子。任何人都可以将模型放入“混合器”，然后混合器决定是否保留该模型。
 - en: 'However, The cons are:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，缺点是：
 - en: You use less data overall
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你总体上使用的数据更少。
 - en: The final model may overfit to the holdout set.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终模型可能会对持出集过拟合。
 - en: Your CV is more solid with stacking (calculated over more folds) than using
     a single small holdout set.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用堆叠（通过更多折计算）的简历比使用单个小的持出集要更扎实。
 - en: As for performance, both techniques are able to give similar results, and it
     seems to be a matter of preference and skill which you prefer. The author prefers
     stacking.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 就性能而言，两种技术能提供相似的结果，似乎是个人偏好和技能的差异。作者更喜欢堆叠。
 - en: If you can not choose, you can always do both. Create stacked ensembles with
     stacked generalization and out-of-fold predictions. Then use a holdout set to
     further combine these models at a third stage which we will explore next.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你无法选择，你可以同时进行两个。创建具有堆叠泛化和外折预测的堆叠集成。然后使用持出集进一步在第三阶段组合这些模型，我们将会在下一部分探讨。
 - en: '[**Using Ensembles in Kaggle Data Science Competitions – Part 1**](/2015/06/ensembles-kaggle-data-science-competition-p1.html)'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在Kaggle数据科学比赛中使用集成方法 - 第1部分**](/2015/06/ensembles-kaggle-data-science-competition-p1.html)'
 - en: '[**Using Ensembles in Kaggle Data Science Competitions – Part 3**](/2015/06/ensembles-kaggle-data-science-competition-p3.html)'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在Kaggle数据科学比赛中使用集成方法 - 第3部分**](/2015/06/ensembles-kaggle-data-science-competition-p3.html)'
 - en: How are you planning to implement what you learned? Share your thoughts!
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你计划如何实现你学到的东西？分享你的想法吧！
 - en: 'Original: [**Kaggle Ensembling Guide**](http://mlwave.com/kaggle-ensembling-guide/)
     by Henk van Veen.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 原文：[**Kaggle集成指南**](http://mlwave.com/kaggle-ensembling-guide/) 作者：Henk van
+    Veen。
 - en: '**Related:**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[How to Lead a Data Science Contest without Reading the Data](/2015/05/data-science-contest-leaderboard-without-reading-data.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在不读取数据的情况下领导数据科学比赛](/2015/05/data-science-contest-leaderboard-without-reading-data.html)'
 - en: '[Top 20 R Machine Learning and Data Science packages](/2015/06/top-20-r-machine-learning-packages.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前20名R机器学习和数据科学包](/2015/06/top-20-r-machine-learning-packages.html)'
 - en: '[Netflix: Director – Product Analytics, Data Science and Engineering](/jobs/14/08-11-netflix-director-product-analytics-data-science-engineering.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Netflix: 主管 - 产品分析、数据科学与工程](/jobs/14/08-11-netflix-director-product-analytics-data-science-engineering.html)'
 - en: More On This Topic
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Are Kaggle Competitions Useful for Real World Problems?](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kaggle比赛对实际问题有用吗？](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)'
 - en: '[5 Free Competitions for Aspiring Data Scientists](https://www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个免费比赛供有志的数据科学家](https://www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参加比赛学习机器学习快4倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[7 Free Kaggle Micro-Courses for Data Science Beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7个免费Kaggle微课程，适合数据科学初学者](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
 - en: '[Top 10 Kaggle Machine Learning Projects to Become Data Scientist in 2024](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前10名Kaggle机器学习项目，助你在2024年成为数据科学家](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
 - en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Kaggle上竞争的4个技巧及为何你应该开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
