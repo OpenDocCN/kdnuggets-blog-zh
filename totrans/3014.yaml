@@ -1,441 +1,659 @@
 - en: What to do when your training and testing data come from different distributions
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 当你的训练数据和测试数据来自不同的分布时应该怎么办
 - en: 原文：[https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html](https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html](https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Nezar Assawiel](https://www.linkedin.com/in/assawiel/), Machine Learning
     Developer, Founder at Clinical AI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Nezar Assawiel](https://www.linkedin.com/in/assawiel/)，机器学习开发者，Clinical
+    AI创始人**'
 - en: '![Figure](../Images/7906a1dad8eea961af94ad613f47a801.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/7906a1dad8eea961af94ad613f47a801.png)'
 - en: 'credit: [https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/](https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 版权： [https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/](https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/)
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: To build a well-performing machine learning (ML) model, it is essential to train
     the model on and test it against data that come from the same target distribution.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 要构建一个表现良好的机器学习（ML）模型，必须在来自相同目标分布的数据上训练和测试模型。
 - en: However, sometimes only a limited amount of data from the target distribution
     can be collected. It may not be sufficient to build the needed train/dev/test
     sets.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，有时候只能收集到有限数量的目标分布数据。这可能不足以构建所需的训练/开发/测试集。
 - en: Yet similar data from other data distributions might be readily available. What
     to do in such a case? Let us discuss some ideas!
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，类似的数据可能会从其他数据分布中轻松获得。在这种情况下应该怎么办？让我们讨论一些想法吧！
 - en: '****Some background knowledge****'
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****一些背景知识****'
 - en: 'To better follow the discussion here, you can read up on the following basic
     ML concepts, if you are not familiar with them already:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地跟上讨论，如果你对以下基本的机器学习（ML）概念不熟悉，可以阅读一下：
 - en: '**Train, dev (development), and test sets: **Note that the dev set is also
     called the validation or the hold-on set. [This post](https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7) is
     a good short introduction to the topic.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**训练、开发（开发）和测试集：** 请注意，开发集也被称为验证集或保留集。[这篇文章](https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7)是一个很好的简短介绍。'
 - en: '**Bias (underfitting) and variance (overfitting) errors: **[This](https://www.quora.com/What-is-the-best-way-to-explain-the-bias-variance-trade-off-in-layman%E2%80%99s-terms) is
     a great simple explanation of these errors.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**偏差（欠拟合）和方差（过拟合）错误：** [这篇文章](https://www.quora.com/What-is-the-best-way-to-explain-the-bias-variance-trade-off-in-layman%E2%80%99s-terms)对这些错误提供了很好的简单解释。'
 - en: '**How the train/dev/test split is correctly made:** You may refer to [this
     post](https://medium.freecodecamp.org/how-to-strategically-accomplish-your-machine-learning-models-performance-goals-44dddc11697e) that
     I havewritten before for a short background on this topic.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**如何正确地划分训练/开发/测试集：** 你可以参考[这篇文章](https://medium.freecodecamp.org/how-to-strategically-accomplish-your-machine-learning-models-performance-goals-44dddc11697e)
+    以获得关于这一主题的简短背景介绍。'
 - en: Scenario
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 场景
 - en: Say you are building a dog-image classifier application that determines if an
     image is of a dog or not.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你正在构建一个狗图像分类器应用程序，用于判断图像是否为狗。
 - en: The application is intended for users in rural areas who can take pictures of
     animals by their mobile devices for the application to classify the animals for
     them.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 该应用程序旨在为农村地区的用户提供服务，用户可以通过他们的移动设备拍摄动物照片，然后应用程序将对这些动物进行分类。
 - en: 'Studying the target data distribution — you found that the images are mostly
     blurry, low resolution, and similar to the following:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 研究目标数据分布时——你发现这些图像大多模糊、分辨率低，并且类似于下图：
 - en: '![](../Images/dc5a1bfada6c5f213065ac99f836a8a2.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dc5a1bfada6c5f213065ac99f836a8a2.png)'
 - en: 'Left: Dog (Volpino Italiano breed), Right: Arctic fox.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 左：狗（意大利小型梗犬品种），右：北极狐。
 - en: You were only able to collect 8,000 such images, which is not enough to build
     the train/dev/test sets. Let us assume you have determined you’ll need at least
     100,000 images.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你只能收集到8,000张这样的图像，这不足以构建训练/验证/测试集。假设你已经确定需要至少100,000张图像。
 - en: You wondered if you could use images from another dataset — in addition to the
     8,000 images you collected — to build the train/dev/test sets.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你想知道是否可以使用来自另一个数据集的图像——除了你收集的8,000张图像——来构建训练/验证/测试集。
 - en: You realized you can easily scrape the web to build a dataset of 100,000 images
     or more, with similar dog-image vs. non-dog-image frequencies to those frequencies
     required.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 你意识到你可以很容易地从网络上抓取数据，构建一个100,000张图像或更多的数据库，其图像中的狗和非狗的频率与所需的频率相似。
 - en: 'But, clearly this web dataset comes from a different distribution, with high
     resolution and clear images such as the following:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，很明显，这个网络数据集来自不同的分布，具有高分辨率和清晰的图像，如下所示：
 - en: '![](../Images/b85bc6bc9858be3d6e4a30380895fae9.png)   ![](../Images/f3f393c4a8cefdb2a476debdbebee0ed.png)   ![](../Images/964ddc69d412a0d7fcfeed96c96fc163.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b85bc6bc9858be3d6e4a30380895fae9.png)   ![](../Images/f3f393c4a8cefdb2a476debdbebee0ed.png)   ![](../Images/964ddc69d412a0d7fcfeed96c96fc163.png)'
 - en: Images of dogs (left and right) and a fox (center).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 狗的图像（左边和右边）和狐狸的图像（中间）。
 - en: How would you build the train/dev/test sets?
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将如何构建训练/验证/测试集？
 - en: You can’t only use the original 8,000 images you collected to build the train/dev/test
     sets as they are not enough to make a well-performing classifier. Generally, computer
     vision as other natural perception problems — speech recognition or natural language
     processing — need a lot of data.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 你不能仅仅使用你收集的8,000张原始图像来构建训练/验证/测试集，因为这些图像不足以构建一个表现良好的分类器。通常，计算机视觉和其他自然感知问题——语音识别或自然语言处理——需要大量的数据。
 - en: Also, you can’t only use the web dataset. The classifier will not perform well
     on the users’ blurry images, which are different from the clear, high definition
     web images used to train the model.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，你不能仅仅使用网络数据集。分类器在用户的模糊图像上的表现不好，而这些图像与用来训练模型的清晰、高分辨率的网络图像不同。
 - en: So, what do you do? Let us consider some possibilities.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，你该怎么办？让我们考虑一些可能性。
 - en: '**A possible option — shuffling the data**'
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**一个可能的选择——打乱数据**'
 - en: Something you can do is to combine the two datasets and randomly shuffle them.
     Then, split the resulting dataset into train/dev/test sets.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以做的是将这两个数据集合并并进行随机打乱。然后，将结果数据集划分为训练/验证/测试集。
 - en: 'Assuming you decided to go with a 96:2:2% split for the train/dev/test sets,
     this process will be something like this:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你决定将数据划分为96:2:2%的训练/验证/测试集，这个过程将会是这样的：
 - en: '![](../Images/7d0d026dc1de4fd2c05d213cfbfd506b.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7d0d026dc1de4fd2c05d213cfbfd506b.png)'
 - en: With this set up, the train/dev/test sets all come from the same distribution,
     as illustrated by the colors in the graph above, which is desired.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这种设置，训练/验证/测试集都来自相同的分布，如上图中的颜色所示，这样是理想的。
 - en: However, there a big drawback here!
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，这里有一个很大的缺陷！
 - en: If you look at the dev set, out of 2,000 images, on average only 148 images
     come from the target distribution.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你查看验证集，从2,000张图像中，平均只有148张来自目标分布。
 - en: This means that for the most part you are optimizing the classifier for the
     web images distribution (1,852 images out of 2,000 images) — which is **not **what
     you want!
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着在大多数情况下，你是在为网络图像分布（2,000张图像中的1,852张）优化分类器——这**不是**你想要的！
 - en: The same thing can be said about the test set when assessing the performance
     of the classifier against it. So, this is not a good way to make the train/dev/test
     split.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于测试集也是如此，当评估分类器的性能时也是如此。因此，这不是一种好的训练/验证/测试集划分方式。
 - en: '**A better option**'
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**更好的选择**'
 - en: An alternative is to make the dev/test sets come from the target distribution
     dataset, and the training set from the web dataset.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种选择是使验证/测试集来自目标分布的数据集，而训练集来自网络数据集。
 - en: 'Say you’re still using 96:2:2% split for the train/dev/test sets as before.
     The dev/test sets will be 2,000 images each — coming from the target distribution — and
     the rest will go to the train set, as illustrated below:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你仍然使用96:2:2%的划分比例用于训练/开发/测试集。开发/测试集将各包含2,000张图像——来自目标分布——其余部分将用于训练集，如下图所示：
 - en: '![](../Images/7c4de9a024e2aa831d65c0746ab9795a.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7c4de9a024e2aa831d65c0746ab9795a.png)'
 - en: Using this split, you will be optimizing the classifier to perform well on the
     target distribution, which is what you care about. This is because the images
     of the dev set come solely from the target distribution.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这种划分，你将优化分类器以在目标分布上表现良好，这正是你关心的。这是因为开发集的图像完全来自目标分布。
 - en: However, the training distribution is now different from the dev/test distribution.
     This means that for the most part, you are training the classifier on web images.
     Thus, it will take longer and more effort to optimize the model.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，训练分布现在不同于开发/测试分布。这意味着大部分时间你是在对网络图像进行分类器训练。因此，优化模型将需要更长的时间和更多的努力。
 - en: More importantly, you will not be able to easily tell if the classifier error
     on the dev set relative to the error on the train set is a variance error, a data
     mismatch error, or a combination of both.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 更重要的是，你将无法轻易判断开发集上的分类器错误相对于训练集错误是方差错误、数据不匹配错误，还是两者的组合。
 - en: Let us consider this in more detail, and see what we can do about it.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们更详细地考虑一下这个问题，看看我们可以做些什么。
 - en: '**Variance vs data mismatch**'
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**方差与数据不匹配**'
 - en: Consider the train/dev/test split from the second option above. Assume the human
     error is zero, for simplicity.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑上面第二种选项的训练/开发/测试划分。假设人为错误为零，以简化计算。
 - en: Also, let us assume you found that the training error to be 2% and the dev error
     10%. How much of the 8% error between these two is due to the data mismatch between
     the two sets — given they are coming from different distributions? And how much
     is due to the variance of the model (overfitting)? We can’t tell.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，假设你发现训练错误为2%，开发错误为10%。那么这8%错误中有多少是由于这两个集之间的数据不匹配——考虑到它们来自不同的分布？有多少是由于模型的方差（过拟合）？我们无法得知。
 - en: 'Let us modify the train/dev/test split. Take out a small portion of the train
     set and call it the “bridge” set. The bridge set will not be used to train the
     classifier. It is instead an independent set. The split now has four sets belonging
     to two data distributions — as follows:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们修改训练/开发/测试划分。拿出训练集的一小部分，称之为“桥接”集。桥接集将不用于训练分类器，而是作为独立集。现在的划分有四个集合，属于两个数据分布——如下所示：
 - en: '![](../Images/d141541582d501acf408fde6059cce54.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d141541582d501acf408fde6059cce54.png)'
 - en: '**Variance error**'
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**方差错误**'
 - en: 'With this split, let us assume you found training and dev errors to be 2% and
     10%, respectively. You found the bridge error to be 9%, as shown below:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你发现训练错误和开发错误分别为2%和10%。你发现桥接错误为9%，如下所示：
 - en: '![](../Images/e190aa06d9d7e4bacf2db74bd6b32b72.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e190aa06d9d7e4bacf2db74bd6b32b72.png)'
 - en: Now, how much of the 8% error between the train and dev set errors is a variance
     error, and how much of it is a data mismatch error?
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，训练集和开发集之间的8%错误中，有多少是方差错误，有多少是数据不匹配错误？
 - en: Easy! The answer is 7% variance error and 1% data mismatch error. But why?
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 很简单！答案是7%是方差错误，1%是数据不匹配错误。但为什么呢？
 - en: It’s because the bridge set comes from the same distribution as the train set,
     and the error difference between them is 7%. This means the classifier is overfitted
     to the train set. This tells us we have a **high variance problem** at hand.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为桥接集来自与训练集相同的分布，且它们之间的错误差异为7%。这意味着分类器过度拟合了训练集。这告诉我们我们面临一个**高方差问题**。
 - en: '**Data mismatch error**'
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**数据不匹配错误**'
 - en: 'Now, let us assume you found the error on the bridge set to be 3% and the rest
     as before as shown below:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们假设你发现桥接集的错误率为3%，其余的保持不变，如下所示：
 - en: '![](../Images/2836527243d47d6500e6099f663527a4.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2836527243d47d6500e6099f663527a4.png)'
 - en: How much of the 8% error between the train and dev sets is a variance error
     and how much of it is a data mismatch error?
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练集和开发集之间8%的错误中有多少是方差错误，有多少是数据不匹配错误？
 - en: The answer is 1% variance error and 7% data mismatch error. Why so?
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 答案是1%是方差错误，7%是数据不匹配错误。为什么？
 - en: This time, it is because the classifier performs well on a dataset it hasn’t
     seen before if it comes from the same distribution, such as the bridge set. It
     performs poorly if it comes from a different distribution, like the dev set. Thus,
     we have a **data mismatch problem**.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次，因为分类器在未见过的数据集上表现良好，如果它来自相同的分布，如桥接集。如果它来自不同的分布，如开发集，则表现较差。因此，我们遇到了**数据不匹配问题**。
 - en: Reducing the variance error is a common task in ML. For example, you can use
     regularization methods, or allocate a larger train set.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 减少方差错误是机器学习中的一个常见任务。例如，你可以使用正则化方法，或分配一个更大的训练集。
 - en: However, mitigating the data mismatch error is a more interesting problem. So,
     let us talk bout it.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，减少数据不匹配错误是一个更有趣的问题。所以，让我们深入讨论一下。
 - en: '**Mitigating data mismatch**'
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**减轻数据不匹配**'
 - en: To reduce the data mismatch error, you would need to somehow incorporate the
     characteristics of the dev/test datasets — the target distribution — into the
     train set.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了减少数据不匹配错误，你需要以某种方式将开发/测试数据集的特征——即目标分布——融入训练集中。
 - en: 'Collecting more data from the target distribution to add to the train set is
     always the best option. But, if that is not possible (as we assumed at the beginning
     of our discussion), you can try the following approaches:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 从目标分布中收集更多数据以添加到训练集中总是最好的选择。但如果这不可行（如我们在讨论开始时假设的那样），你可以尝试以下方法：
 - en: '**Error analysis**'
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**错误分析**'
 - en: Analyzing the errors on the dev set and how they are different from the errors
     on the train set could give you ideas to address the data mismatch problem.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析开发集上的错误以及这些错误与训练集上的错误的不同，可能会给你提供解决数据不匹配问题的思路。
 - en: For example, if you find many of the errors on the dev set occur when the background
     of the animal’s image is rocky, you can mitigate such errors by adding animal
     images with rocky background to the train set.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果你发现开发集中的许多错误发生在动物图像的背景是岩石时，你可以通过将带有岩石背景的动物图像添加到训练集中来减少这些错误。
 - en: '**Artificial data synthesis**'
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**人工数据合成**'
 - en: Another way to incorporate the characteristics of the dev/test sets into the
     train set is to synthesize data with similar characteristics.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种将开发/测试集的特征融入训练集的方法是合成具有类似特征的数据。
 - en: 'For example, we mentioned before that the images in our dev/test sets are mostly
     blurry in contrast to the clear images from the web that make most of our train
     set. You can artificially add blurriness to the images of the train set to be
     more similar to the dev/test sets as in the following image:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，我们之前提到，开发/测试集中的图像通常是模糊的，而我们训练集中的大部分图像来自网络，通常是清晰的。你可以人为地将模糊度添加到训练集的图像中，使其更类似于开发/测试集，如下图所示：
 - en: '![](../Images/9207d15c4581896bc9e9adee824018cf.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9207d15c4581896bc9e9adee824018cf.png)'
 - en: Image from the train set before and after blurring.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像展示了训练集在模糊前后的变化。
 - en: However, there is an important point to notice here!
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这里有一个重要的点需要注意！
 - en: You could end up overfitting your classifier to the artificial characteristics
     you made.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会使分类器过拟合于你所制造的人工特征。
 - en: In our example, the blurriness you artificially made by some mathematical function
     might only be a small sub-set of the blurriness that exists in the images of the
     target distribution.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，你通过某些数学函数人工制造的模糊度可能仅是目标分布图像中存在的模糊度的一小部分。
 - en: In other words, the blurriness in the target distribution could be due to many
     reasons. For example, fog, low resolution camera, subject movement could all be
     causes. But your synthesized blurriness may not represent all of these causes.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 换句话说，目标分布中的模糊度可能由于多种原因，例如雾霾、低分辨率相机、主体运动等。 但你合成的模糊度可能并不能代表所有这些原因。
 - en: More generally, when synthesizing data for the training set for any type of
     problem (such as computer vision, or speech recognition), you could overfit your
     model to the synthesized dataset.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 更一般来说，在为任何类型的问题（例如计算机视觉或语音识别）合成训练数据时，你可能会使模型过拟合到合成的数据集上。
 - en: This dataset may look representative enough of the target distribution to the
     human eye. But in fact, it is only a small set of the target distribution. So,
     just keep this in mind while using this powerful tool — data synthesis.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集可能在肉眼看来足够代表目标分布。但实际上，它只是目标分布的一个小子集。因此，使用这个强大工具——数据合成时，务必要记住这一点。
 - en: '**In Summary**'
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**总结**'
 - en: When developing an ML model, ideally the trian/dev/test datasets should all
     come from the same data distribution — that of the data which the model will encounter
     when used by the userbase.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开发机器学习模型时，理想情况下，训练/开发/测试数据集都应来自同一数据分布——即模型在用户使用时将遇到的数据分布。
 - en: However, sometimes it is not possible to collect enough data from the target
     distribution to build the trian/dev/test sets, while similar data from other distributions
     is readily available.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，有时从目标分布中收集足够的数据以构建训练/开发/测试集是不可能的，而来自其他分布的类似数据则很容易获得。
 - en: In such cases, the dev/test sets should come from the target distribution while
     the data from the other distributions can be used to build (most of) the train
     set. Data mismatch techniques can then be used to mitigate the the data distribution
     differences between the train set vs the dev/test sets.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，开发/测试集应来自目标分布，而来自其他分布的数据可以用于构建（大部分）训练集。数据不匹配技术可以用来减轻训练集与开发/测试集之间的数据分布差异。
 - en: '**Bio: [Nezar Assawiel](https://www.linkedin.com/in/assawiel/)** is a Machine
     Learning Developer and Founder at Clinical AI.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [Nezar Assawiel](https://www.linkedin.com/in/assawiel/)** 是一位机器学习开发者和Clinical
+    AI的创始人。'
 - en: '[Original](https://medium.freecodecamp.org/what-to-do-when-your-training-and-testing-data-come-from-different-distributions-d89674c6ecd8).
     Reposted with permission.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.freecodecamp.org/what-to-do-when-your-training-and-testing-data-come-from-different-distributions-d89674c6ecd8)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[How (dis)similar are my train and test data?](/2018/06/how-dissimilar-train-test-data.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我的训练数据和测试数据有多（不）相似？](/2018/06/how-dissimilar-train-test-data.html)'
 - en: '[What is Normal?](/2018/07/what-is-normal.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是正态分布？](/2018/07/what-is-normal.html)'
 - en: '[Why Data Scientists Love Gaussian](/2018/06/why-data-scientists-love-gaussian.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么数据科学家喜欢高斯分布](/2018/06/why-data-scientists-love-gaussian.html)'
 - en: More On This Topic
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Where Does Data Come From?](https://www.kdnuggets.com/2022/08/data-come.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据来自哪里？](https://www.kdnuggets.com/2022/08/data-come.html)'
 - en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[假设检验和A/B测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
 - en: '[Exploring Data Distributions with Histograms](https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过直方图探索数据分布](https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html)'
 - en: '[Things Aren''t Always Normal: Some of the "Other" Distributions](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[事情并不总是正态分布: 一些“其他”分布](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)'
 - en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中训练数据和测试数据的区别](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
 - en: '[5 Different Ways to Load Data in Python](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Python中加载数据的5种不同方法](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)'
