@@ -1,128 +1,187 @@
 - en: Dealing with Imbalanced Data in Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 处理机器学习中的不平衡数据
 - en: 原文：[https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html](https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html](https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: As an ML engineer or data scientist, sometimes you inevitably find yourself
     in a situation where you have hundreds of records for one class label and thousands
     of records for another class label.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为 ML 工程师或数据科学家，你有时不可避免地会发现自己处于这样一种情况：一个类标签有数百条记录，而另一个类标签有数千条记录。
 - en: Upon training your model you obtain an accuracy above 90%. You then realize
     that the model is predicting everything as if it’s in the class with the majority
     of records. Excellent examples of this are fraud detection problems and churn
     prediction problems, where the majority of the records are in the negative class.
     What do you do in such a scenario? That will be the focus of this post.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练模型后，你的准确度超过 90%。然后你会发现模型预测一切都像是属于记录最多的那个类别。这在欺诈检测问题和流失预测问题中尤为明显，其中大多数记录都在负类中。在这种情况下你该怎么办？这将是本文的重点。
 - en: Collect More Data
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收集更多数据
 - en: The most straightforward and obvious thing to do is to collect more data, especially
     data points on the minority class. This will obviously improve the performance
     of the model. However, this is not always possible. Apart from the cost one would
     have to incur, sometimes it's not feasible to collect more data. For example,
     in the case of churn prediction and fraud detection, you can’t just wait for more
     incidences to occur so that you can collect more data.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 最直接明显的做法是收集更多的数据，特别是少数类的数据点。这将显著改善模型的性能。然而，这并不总是可能的。除了需要花费的成本，有时收集更多的数据也是不可行的。例如，在流失预测和欺诈检测的情况下，你不能仅仅等待更多事件发生，以便收集更多数据。
 - en: Consider Metrics Other than Accuracy
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 考虑准确率以外的指标
 - en: Accuracy is not a good way to measure the performance of a model where the class
     labels are imbalanced. In this case, it's prudent to consider other metrics such
     as precision, recall, Area Under the Curve (AUC) — just to mention a few.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 精确度不是衡量类别标签不平衡模型性能的好方法。在这种情况下，考虑其他指标，如精确率、召回率、曲线下面积（AUC）——仅举几例。
 - en: '**Precision** measures the ratio of the true positives among all the samples
     that were predicted as true positives and false positives. For example, out of
     the number of people our model predicted would churn, how many actually churned?'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**精确率** 衡量在所有被预测为正例的样本中，真正的正例与假正例的比例。例如，我们的模型预测会流失的用户中，有多少人实际上确实流失了？'
 - en: '![Image for post](../Images/8c8a6e75ec765f13c71b170a739268d0.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/8c8a6e75ec765f13c71b170a739268d0.png)'
 - en: '**Recall** measures the ratio of the true positives from the sum of the true
     positives and the false negatives. For example, the percentage of people who churned
     that our model predicted would churn.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**召回率** 衡量真正正例与真正正例和假负例之和的比例。例如，我们的模型预测会流失的人中，实际流失的百分比。'
 - en: '![Image for post](../Images/d9823a244fcef9c52f95a711414e44ad.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/d9823a244fcef9c52f95a711414e44ad.png)'
 - en: The AUC is obtained from the Receiver Operating Characteristics (ROC) curve.
     The curve is obtained by plotting the true positive rate against the false positive
     rate. The false positive rate is obtained by dividing the false positives by the
     sum of the false positives and the true negatives.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: AUC 是从接收者操作特征（ROC）曲线获得的。通过绘制真正正例率与假正例率的关系来获得该曲线。假正例率是通过将假正例除以假正例和真正负例之和来获得的。
 - en: AUC closer to one is better, since it indicates that the model is able to find
     the true positives.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: AUC 越接近 1 越好，因为这表明模型能够找到真正的正例。
 - en: Emphasize the Minority Class
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 强调少数类
 - en: Another way to deal with imbalanced data is to have your model focus on the
     minority class. This can be done by computing the class weights. The model will
     focus on the class with a higher weight. Eventually, the model will be able to
     learn equally from both classes. The weights can be computed with the help of
     scikit-learn.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理不平衡数据的另一种方法是让模型关注少数类。这可以通过计算类权重来实现。模型将关注权重更高的类。最终，模型将能够平等地从两个类中学习。可以借助 scikit-learn
+    计算这些权重。
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'You can then pass these weights when training the model. For example, in the
     case of logistic regression:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，你可以在训练模型时传递这些权重。例如，在逻辑回归的情况下：
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Alternatively, you can pass the class weights as `balanced` and the weights
     will be automatically adjusted.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，你可以将类权重设置为`balanced`，权重将自动调整。
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Here’s the ROC curve before the weights are adjusted.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是调整权重之前的ROC曲线。
 - en: '![Image for post](../Images/72c19a66abae792bd28fd187eb3cf048.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/72c19a66abae792bd28fd187eb3cf048.png)'
 - en: And here’s the ROC curve after the weights have been adjusted. Note the AUC
     moved from 0.69 to 0.87.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 调整权重后的ROC曲线在这里。请注意AUC从0.69移动到了0.87。
 - en: '![Image for post](../Images/4613bff2ccc6dc6c1ca9df6fcd6f086f.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/4613bff2ccc6dc6c1ca9df6fcd6f086f.png)'
 - en: Try Different Algorithms
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 尝试不同的算法
 - en: As you focus on the right metrics for imbalanced data, you can also try out
     different algorithms. Generally, tree-based algorithms perform better on imbalanced
     data. Furthermore, some algorithms such as [LightGBM](https://heartbeat.fritz.ai/lightgbm-a-highly-efficient-gradient-boosting-decision-tree-53f62276de50) have
     hyperparameters that can be tuned to indicate that the data is not balanced.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你关注于不平衡数据的正确指标时，也可以尝试不同的算法。一般来说，基于树的算法在不平衡数据上表现更好。此外，一些算法如[LightGBM](https://heartbeat.fritz.ai/lightgbm-a-highly-efficient-gradient-boosting-decision-tree-53f62276de50)具有可调参数，以指示数据不平衡。
 - en: Generate Synthetic Data
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 生成合成数据
 - en: You can also generate [synthetic data](https://heartbeat.fritz.ai/synthetic-data-a-bridge-over-the-data-moat-29f392a52f27) to
     increase the number of records in the minority class — usually known as oversampling.
     This is usually done on the training set after doing the train test split. In
@@ -130,62 +189,92 @@
     One of the strategies that can be implemented from the package is known as the [Synthetic
     Minority Over-sampling Technique (SMOTE)](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.over_sampling.SMOTE.html).
     The technique is based on k-nearest neighbors.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以生成[合成数据](https://heartbeat.fritz.ai/synthetic-data-a-bridge-over-the-data-moat-29f392a52f27)来增加少数类的记录数量——通常称为过采样。这通常在训练集上进行，经过训练测试分割后。在Python中，可以使用[Imblearn](https://github.com/scikit-learn-contrib/imbalanced-learn)包来完成。该包中可以实现的一种策略被称为[Synthetic
+    Minority Over-sampling Technique (SMOTE)](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.over_sampling.SMOTE.html)。该技术基于k-最近邻。
 - en: 'When using SMOTE:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用SMOTE时：
 - en: The first parameter is a `float` that indicates the ratio of the number of samples
     in the minority class to the number of samples in the majority class, once resampling
     has been done.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一个参数是一个`float`，表示在重新采样后少数类样本数量与多数类样本数量的比例。
 - en: The number of neighbors to be used to generate the synthetic samples can be
     specified via the `k_neighbors`parameter.
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成合成样本时使用的邻居数量可以通过`k_neighbors`参数来指定。
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You can then fit your resampled data to your model.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后你可以将你的重采样数据拟合到模型中。
 - en: '[PRE4]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Undersample the Majority Class
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对多数类进行欠采样
 - en: You can also experiment on reducing the number of samples in the majority class.
     One such strategy that can be implemented is the `[NearMiss](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.under_sampling.NearMiss.html)` method.
     You can also specify the ratio just like in SMOTE, as well as the number of neighbors
     via `n_neighbors`***.***
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以尝试减少多数类中的样本数量。可以实现的一种策略是`[NearMiss](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.under_sampling.NearMiss.html)`方法。你还可以像在SMOTE中一样指定比例，并通过`n_neighbors`***来指定邻居的数量。***
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Final Thoughts
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终思考
 - en: Other techniques that can be used include using building [an ensemble](https://heartbeat.fritz.ai/a-guide-to-ensemble-learning-390027fe38b8) of
     weak learners to create a strong classifier. Metrics such as precision-recall
     curve and area under curve (PR, AUC) are also worth trying when the positive class
     is the most important.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他可以使用的技术包括使用建立[一个集成](https://heartbeat.fritz.ai/a-guide-to-ensemble-learning-390027fe38b8)的弱学习器来创建一个强分类器。当正类最重要时，精确率-召回率曲线和曲线下面积（PR,
+    AUC）也是值得尝试的。
 - en: As always, you should experiment with different techniques and settle on the
     ones that give you the best results for your specific problems. Hopefully, this
     piece has given some insights on how to get started.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 像往常一样，你应该尝试不同的技术，并选择那些在特定问题上给你最佳结果的技术。希望这篇文章能为你提供一些如何开始的见解。
 - en: '**[Code available here](https://github.com/mwitiderrick/imbalanced-data)**.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[代码在这里](https://github.com/mwitiderrick/imbalanced-data)**。'
 - en: '**Bio: Derrick Mwiti** is a data scientist who has a great passion for sharing
     knowledge. He is an avid contributor to the data science community via blogs such
     as Heartbeat, Towards Data Science, Datacamp, Neptune AI, KDnuggets just to mention
@@ -197,77 +286,119 @@
     the world of Data Science, Machine Learning, and Deep Learning interest you, you
     might want to check his [Complete Data Science & Machine Learning Bootcamp in
     Python course](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4).'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：德里克·姆维蒂**是一位对分享知识充满热情的数据科学家。他通过Heartbeat、Towards Data Science、Datacamp、Neptune
+    AI、KDnuggets等博客积极贡献于数据科学社区。他的内容在互联网的浏览量超过一百万次。德里克还是一位作者和在线讲师。他还与各种机构合作，实施数据科学解决方案，并提升员工技能。德里克在多媒体大学学习数学和计算机科学，还是Meltwater创业技术学校的校友。如果数据科学、机器学习和深度学习的世界吸引你，你可以查看他的[完整的数据科学与机器学习Python课程](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4)。'
 - en: '[Original](https://heartbeat.fritz.ai/dealing-with-imbalanced-data-in-machine-learning-18e45fea7bb5).
     Reposted with permission.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/dealing-with-imbalanced-data-in-machine-learning-18e45fea7bb5)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to fix an Unbalanced Dataset](/2019/05/fix-unbalanced-dataset.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何修复不平衡数据集](/2019/05/fix-unbalanced-dataset.html)'
 - en: '[The 5 Most Useful Techniques to Handle Imbalanced Datasets](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理不平衡数据集的5种最有用的技术](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)'
 - en: '[Pro Tips: How to deal with Class Imbalance and Missing Labels](/2019/11/tips-class-imbalance-missing-labels.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[专家提示：如何处理类别不平衡和缺失标签](/2019/11/tips-class-imbalance-missing-labels.html)'
 - en: '* * *'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Dealing With Noisy Labels in Text Data](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理文本数据中的噪声标签](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)'
 - en: '[Dealing with Position Bias in Recommendations and Search](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理推荐和搜索中的位置偏差](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)'
 - en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在类别不平衡数据集上进行无监督解缠表示学习…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
 - en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)'
 - en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理不平衡数据的7种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
 - en: '[Overcoming Imbalanced Data Challenges in Real-World Scenarios](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[克服现实世界中的不平衡数据挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)'
