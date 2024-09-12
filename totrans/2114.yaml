@@ -1,350 +1,537 @@
 - en: 'Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with Hugging Face'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'Mistral 7B-V0.2: 用 Hugging Face 微调 Mistral 的新开源 LLM'
 - en: 原文：[https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)
 - en: '![Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with Hugging Face](../Images/48bfc0ce427cb35b9a82f42561e5b59e.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![Mistral 7B-V0.2: 用 Hugging Face 微调 Mistral 的新开源 LLM](../Images/48bfc0ce427cb35b9a82f42561e5b59e.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: Mistral AI, one of the world’s leading AI research companies, has recently released
     the base model for [**Mistral 7B v0.2**](https://anakin.ai/blog/mistral-7b-v0-2-base-model/).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral AI，全球领先的 AI 研究公司之一，最近发布了[**Mistral 7B v0.2**](https://anakin.ai/blog/mistral-7b-v0-2-base-model/)的基础模型。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This open-source language model was unveiled during the company’s hackathon
     event on March 23, 2024.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个开源语言模型在 2024 年 3 月 23 日的公司黑客松活动中首次揭晓。
 - en: The Mistral 7B models have 7.3 billion parameters, making them extremely powerful.
     They outperform Llama 2 13B and Llama 1 34B on almost all benchmarks.  The latest
     V0.2 model introduces a 32k context window among other advancements, enhancing
     its ability to process and generate text.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Mistral 7B 模型具有 73 亿个参数，使其极为强大。它们在几乎所有基准测试中都优于 Llama 2 13B 和 Llama 1 34B。 最新的
+    V0.2 模型引入了 32k 上下文窗口等改进，增强了处理和生成文本的能力。
 - en: Additionally, the version that was recently announced is the base model of the
     instruction-tuned variant, “Mistral-7B-Instruct-V0.2,” which was released earlier
     last year.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，最近公布的版本是指令调优变体的基础模型，“Mistral-7B-Instruct-V0.2”，该版本早在去年发布。
 - en: In this tutorial, I will show you how to access and fine-tune this language
     model on Hugging Face.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我将展示如何在 Hugging Face 上访问和微调这个语言模型。
 - en: Understanding Hugging Face’s AutoTrain Feature
+  id: totrans-15
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理解 Hugging Face 的 AutoTrain 功能
 - en: We will be fine-tuning the Mistral 7B-v0.2 base model using Hugging Face’s AutoTrain
     functionality.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 Hugging Face 的 AutoTrain 功能对 Mistral 7B-v0.2 基础模型进行微调。
 - en: '[Hugging Face](https://huggingface.co/) is renowned for democratizing access
     to machine learning models, allowing everyday users to develop advanced AI solutions.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Hugging Face](https://huggingface.co/) 以使机器学习模型的使用变得更加民主化而闻名，让普通用户能够开发先进的
+    AI 解决方案。'
 - en: AutoTrain, a feature of Hugging Face, automates the process of model training,
     making it accessible and efficient.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: AutoTrain 是 Hugging Face 的一项功能，它自动化了模型训练过程，使其变得易于访问和高效。
 - en: It helps users select the best parameters and training techniques when fine-tuning
     models, which is a task that can otherwise be daunting and time-consuming.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 它帮助用户选择最佳参数和训练技术进行模型微调，这一任务通常令人畏惧且耗时。
 - en: Fine-Tuning the Mistral-7B Model with AutoTrain
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用 AutoTrain 微调 Mistral-7B 模型
 - en: 'Here are 5 steps to fine-tuning your Mistral-7B model:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是微调你的 Mistral-7B 模型的 5 个步骤：
 - en: 1\. Setting up the environment
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 设置环境
 - en: You must first create an account with Hugging Face, and then create a model
     repository.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你必须首先创建一个 Hugging Face 帐户，然后创建一个模型库。
 - en: To achieve this, simply follow the steps provided in this [link](https://huggingface.co/docs/hub/en/repositories-getting-started)
     and come back to this tutorial.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现这一点，只需按照此[链接](https://huggingface.co/docs/hub/en/repositories-getting-started)中提供的步骤操作，然后返回本教程。
 - en: We will be training the model in Python. When it comes to selecting a notebook
     environment for training, you can use [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks)
     or [Google Colab](https://colab.google/), both of which provide free access to
     GPUs.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在Python中训练模型。选择一个笔记本环境进行训练时，你可以使用 [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks)
+    或 [Google Colab](https://colab.google/)，这两者都提供免费的GPU访问。
 - en: If the training process takes too long, you might want to switch to a cloud
     platform like AWS Sagemaker or Azure ML.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果训练过程花费的时间过长，你可能需要切换到像AWS Sagemaker或Azure ML这样的云平台。
 - en: 'Finally, perform the following pip installs before you start coding along to
     this tutorial:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，在开始跟随本教程编写代码之前，请执行以下pip安装：
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 2\. Preparing your dataset
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 准备你的数据集
 - en: 'In this tutorial, we will be using the [Alpaca dataset](https://huggingface.co/datasets/tatsu-lab/alpaca/viewer/default/train?p=520)
     on Hugging Face, which looks like this:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用Hugging Face上的 [Alpaca数据集](https://huggingface.co/datasets/tatsu-lab/alpaca/viewer/default/train?p=520)，其样例如下：
 - en: '![Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with Hugging Face](../Images/dfc4a9431798c2b1a531e84d9364ef91.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![Mistral 7B-V0.2: 使用Hugging Face对Mistral的新开源LLM进行微调](../Images/dfc4a9431798c2b1a531e84d9364ef91.png)'
 - en: We will fine-tune the model on pairs of instructions and outputs and assess
     its ability to respond to the given instruction in the evaluation process.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将对模型进行微调，使用指令和输出对，并在评估过程中评估其对给定指令的响应能力。
 - en: 'To access and prepare this dataset, run the following lines of code:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 要访问和准备此数据集，请运行以下代码行：
 - en: '[PRE1]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The first function will load the Alpaca dataset using the “datasets” library
     and clean it to ensure that we aren’t including any empty instructions. The second
     function structures your data in a format that AutoTrain can understand.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个函数将使用“datasets”库加载Alpaca数据集，并对其进行清理，以确保不包含任何空指令。第二个函数将你的数据结构化为AutoTrain可以理解的格式。
 - en: After running the above code, the dataset will be loaded, formatted, and saved
     in the specified path. When you open your formatted dataset, you should see a
     single column labeled “formatted_text.”
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在运行上述代码后，数据集将被加载、格式化并保存在指定路径。当你打开格式化后的数据集时，你应该会看到一个标记为“formatted_text”的单列。
 - en: 3\. Setting up your training environment
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3\. 设置你的训练环境
 - en: Now that you’ve successfully prepared the dataset, let’s proceed to set up your
     model training environment.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经成功准备了数据集，我们来设置你的模型训练环境。
 - en: 'To do this, you must define the following parameters:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，你必须定义以下参数：
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Here is a breakdown of the above specifications:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是上述规格的详细说明：
 - en: You can specify any *project_name*. This is where all your project and training
     files will be stored.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以指定任何 *project_name*。这将是你所有项目和训练文件存储的地方。
 - en: The *model_name* parameter is the model you’d like to fine-tune. In this case,
     I’ve specified a path to the **Mistral-7B v0.2 base model** on Hugging Face.
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*model_name* 参数是你希望微调的模型。在这种情况下，我指定了Hugging Face上的 **Mistral-7B v0.2基础模型**
+    的路径。'
 - en: The *hf_token* variable must be set to your Hugging Face token, which can be
     obtained by navigating to [this link](https://huggingface.co/settings/tokens).
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*hf_token* 变量必须设置为你的Hugging Face令牌，该令牌可以通过访问 [此链接](https://huggingface.co/settings/tokens)
+    获得。'
 - en: Your *repo_id* must be set to the Hugging Face model repository that you created
     in the first step of this tutorial. For example, my repository ID is *NatasshaS/Model2.*
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的 *repo_id* 必须设置为你在本教程第一步中创建的Hugging Face模型库。例如，我的仓库ID是 *NatasshaS/Model2*。
 - en: 4\. Configuring model parameters
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 4\. 配置模型参数
 - en: Before fine-tuning our model, we must define the training parameters, which
     control aspects of model behavior such as training duration and regularization.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在微调我们的模型之前，我们必须定义训练参数，这些参数控制模型行为的各个方面，如训练时长和正则化。
 - en: These parameters influence key aspects like how long the model trains, how it
     learns from the data, and how it avoids overfitting.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些参数影响关键方面，比如模型训练的时间长度、如何从数据中学习，以及如何避免过拟合。
 - en: 'You can set the following parameters for your model:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以为你的模型设置以下参数：
 - en: '[PRE3]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 5\. Setting environment variables
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 5\. 设置环境变量
 - en: Let’s now prepare our training environment by setting some environment variables.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们通过设置一些环境变量来准备我们的训练环境。
 - en: 'This step ensures that the AutoTrain feature uses the desired settings to fine-tune
     the model, such as our project name and training preferences:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一步骤确保AutoTrain功能使用期望的设置来微调模型，例如我们的项目名称和训练偏好：
 - en: '[PRE4]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 6\. Initiate model training
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 6\. 启动模型训练
 - en: 'Finally, let’s start training the model using the *autotrain* command. This
     step involves specifying your model, dataset, and training configurations, as
     displayed below:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让我们使用*autotrain*命令开始训练模型。此步骤包括指定你的模型、数据集和训练配置，如下所示：
 - en: '[PRE5]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Make sure to change the *data-path* to where your training dataset is located.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保将*data-path*更改为你的训练数据集所在的位置。
 - en: 7\. Evaluating the model
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 7\. 评估模型
 - en: Once your model has finished training, you should see a folder appear in your
     directory with the same title as your project name.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你的模型完成训练，你应该会在你的目录中看到一个与项目名称相同的文件夹出现。
 - en: 'In my case, this folder is titled “*mistralai,”* as seen in the image below:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 对我来说，这个文件夹被命名为“*mistralai，”* 如下图所示：
 - en: '![Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with Hugging Face](../Images/e650269f16bb1815dfccc3be3ad0b343.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![Mistral 7B-V0.2: 用Hugging Face微调Mistral的新开源LLM](../Images/e650269f16bb1815dfccc3be3ad0b343.png)'
 - en: Within this folder, you can find files that encompass your model weights, hyperparameters,
     and architecture details.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个文件夹中，你可以找到包含模型权重、超参数和架构细节的文件。
 - en: 'Let’s now check whether this fine-tuned model is able to respond accurately
     to a question in our dataset. To achieve this, we first need to run the following
     lines of code to generate 5 sample inputs and outputs from our dataset:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们来检查这个微调后的模型是否能够准确回答数据集中的问题。为此，我们首先需要运行以下代码行，从数据集中生成5个样本输入和输出：
 - en: '[PRE6]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'You should see a response that looks like this, showcasing 5 sample data points:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该看到一个类似于以下内容的响应，展示了5个样本数据点：
 - en: '[PRE7]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'We are going to type one of the above instructions into the model and check
     if it generates accurate output. Here is a function to provide an instruction
     to the model and get a response from it:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将把上述指令之一输入到模型中，检查它是否生成准确的输出。以下是一个向模型提供指令并从中获取响应的函数：
 - en: '[PRE8]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Finally, enter a question into this function as displayed below:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，按照下面的显示，输入一个问题到这个函数中：
 - en: '[PRE9]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Your model should generate a response that is identical to its corresponding
     output in the training dataset, as displayed below:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的模型应生成与训练数据集中相应输出完全一致的响应，如下所示：
 - en: '[PRE10]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Please note that the response may seem incomplete or cut off because of the
     number of tokens we’ve specified. Feel free to adjust the “max_length” value to
     allow for a more extended response.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，由于我们指定的令牌数量，响应可能看起来不完整或被截断。请随意调整“max_length”值，以允许更长的响应。
 - en: Fine-Tuning Mistral-7B V0.2 - Next Steps
+  id: totrans-75
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 微调Mistral-7B V0.2 - 下一步
 - en: If you’ve come this far, congratulations!
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你已经走到这一步，恭喜你！
 - en: You have successfully fine-tuned a state-of-the-art language model, leveraging
     the power of Mistral 7B v-0.2 alongside Hugging Face’s capabilities.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 你已经成功微调了一个最先进的语言模型，利用了Mistral 7B v-0.2的强大功能以及Hugging Face的能力。
 - en: But the journey doesn’t end here.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 但旅程并不会就此结束。
 - en: As a next step, I recommend experimenting with different datasets or tweaking
     certain training parameters to optimize model performance. Fine-tuning models
     on a larger scale will enhance their utility, so try experimenting with bigger
     datasets or varying formats, such as PDFs and text files.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为下一步，我建议尝试不同的数据集或调整某些训练参数以优化模型性能。对更大规模的模型进行微调将提升其效用，因此可以尝试使用更大的数据集或不同格式的文件，如PDF和文本文件。
 - en: Such experience becomes invaluable when working with real-world data in organizations,
     which is often messy and unstructured.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理组织中的真实数据时，这种经验变得极为宝贵，因为这些数据通常是混乱且无结构的。
 - en: '[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)**
     is a self-taught data scientist with a passion for writing. Natassha writes on
     everything data science-related, a true master of all data topics. You can connect
     with her on [LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)
     or check out her [YouTube channel](https://www.youtube.com/@natassha_ds).'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)**
+    是一位自学成才的数据科学家，对写作充满热情。Natassha写作内容涉及所有数据科学相关主题，真正是所有数据话题的专家。你可以通过[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系，或查看她的[YouTube频道](https://www.youtube.com/@natassha_ds)。'
 - en: More On This Topic
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Hugging Face AutoTrain微调Mistral AI 7B LLM](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
 - en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAG 与微调：哪种工具最适合提升你的 LLM 应用？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
 - en: '[Web LLM: Bring LLM Chatbots to the Browser](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Web LLM：将 LLM 聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)'
 - en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[十大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
 - en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个开发 Hugging Face 以进行客户数据建模的社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
 - en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face 和 Gradio 在 5 分钟内构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
