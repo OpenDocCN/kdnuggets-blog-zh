@@ -1,18 +1,27 @@
 - en: Adventures in MLOps with Github Actions, Iterative.ai, Label Studio and NBDEV
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 与 Github Actions、Iterative.ai、Label Studio 和 NBDEV 一起探索 MLOps
 - en: 原文：[https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html](https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html](https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/) & [Will
     Kunz](https://www.linkedin.com/in/willkunz/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/) 和 [Will
+    Kunz](https://www.linkedin.com/in/willkunz/)**'
 - en: When designing the MLOps stack for our project, we needed a solution that allowed
     for a high degree of customization and flexibility to evolve as our experimentation
     dictated. We considered large platforms that encompassed many functions, but found
@@ -20,24 +29,38 @@
     specialized tools were implemented for labeling, data versioning, and continuous
     integration. This article documents our experience building this custom MLOps
     approach.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在为我们的项目设计 MLOps 堆栈时，我们需要一个允许高度自定义和灵活演变的解决方案，以适应我们的实验需求。我们考虑了涵盖许多功能的大型平台，但在一些关键领域发现其限制。最终，我们决定采用将标签、数据版本控制和持续集成分别实现的专用工具的方法。本文记录了我们构建这种定制
+    MLOps 方法的经验。
 - en: '![](../Images/1de6ffdf729c70393d5fa10dec24c761.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1de6ffdf729c70393d5fa10dec24c761.png)'
 - en: Photo by [Finding Dan | Dan Grinwis](https://unsplash.com/@finding_dan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Finding Dan | Dan Grinwis](https://unsplash.com/@finding_dan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    提供，来源于 [Unsplash](https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: NBDEV
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: NBDEV
 - en: '![](../Images/c7067d28a0d19f6b72674420ae109bc3.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c7067d28a0d19f6b72674420ae109bc3.png)'
 - en: (Taken from [https://github.com/fastai/nbdev](https://github.com/fastai/nbdev))
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: (摘自 [https://github.com/fastai/nbdev](https://github.com/fastai/nbdev))
 - en: The classic problem using Jupyter for development was moving from prototype
     to production required copy/pasting code from a notebook to a python module. NBDEV
     automates the transition between notebook and module, thus enabling the Jupyter
@@ -48,18 +71,29 @@
     a base Github Action to implement testing in the CI/CD framework. The resulting
     Python module requires no editing by the developer, and can easily be integrated
     into other notebooks or the project at large using built-in python import functionality.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Jupyter 进行开发的经典问题是，从原型到生产的过渡需要将代码从笔记本复制粘贴到 Python 模块中。NBDEV 自动化了笔记本与模块之间的过渡，从而使
+    Jupyter 笔记本成为生产流程的正式部分。NBDEV 允许开发者指定笔记本应该创建哪个模块，哪些笔记本单元应推送到模块中，以及哪些笔记本单元是测试。NBDEV
+    的一个关键功能是其在笔记本中进行测试的方法，NBDEV 模板甚至提供了一个基础 Github Action 以在 CI/CD 框架中实现测试。生成的 Python
+    模块无需开发者编辑，可以轻松地使用内置的 Python 导入功能集成到其他笔记本或整个项目中。
 - en: 'Iterative.ai: DVC/CML'
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 'Iterative.ai: DVC/CML'
 - en: '![](../Images/8ddbc52ba48451e1af2a6aa73e4bd4eb.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8ddbc52ba48451e1af2a6aa73e4bd4eb.png)'
 - en: (Taken from [https://iterative.ai/](https://iterative.ai/))
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: (摘自 [https://iterative.ai/](https://iterative.ai/))
 - en: The files used in machine learning pipelines are often large archives of binary/compressed
     files, which are not accessible or cost prohibitive for existing version control
     solutions like git. DVC solves data versioning by representing large datasets
@@ -70,104 +104,149 @@
     workflows into comments attached Github Issues, Pull Requests, etc... That is
     important because it helps us start to fill in the gaps in the Pull Requests accounting
     for training data changes and resulting model accuracy and effectiveness.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习流水线中使用的文件通常是大型的二进制/压缩文件档案，这些文件对现有的版本控制解决方案如git既不可访问又成本高昂。DVC通过将大型数据集表示为文件内容的哈希值来解决数据版本控制问题，从而使DVC能够跟踪更改。它的工作原理类似于git（例如
+    `dvc add`、`dvc push`）。当你在数据集上运行`dvc add`时，它会被添加到`.gitignore`中，并由`dvc`跟踪更改。CML是一个项目，提供将模型工件从Github
+    Actions工作流发布到附加到Github Issues、Pull Requests等的评论中的功能。这一点很重要，因为它帮助我们开始填补Pull Requests中训练数据变化和模型准确性及效果的差距。
 - en: Github Actions
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Github Actions
 - en: '![](../Images/986a4058fc9c06b2bca4e15d272a9a31.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/986a4058fc9c06b2bca4e15d272a9a31.png)'
 - en: (Taken from [https://github.com/features/actions](https://github.com/features/actions))
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: （取自 [https://github.com/features/actions](https://github.com/features/actions)）
 - en: We want automated code testing, including building models in the automated testing
     pipeline. Github Actions is in competition with CircleCI, Travis, Jenkins, which
     is to automate testing around code pushes, commits, pull requests, etc. Since
     we’re already using Github to host our repos, we avoid another 3rd party app by
     using Actions. In this project we need to use Github self-hosted runners to run
     jobs on an on-prem GPU cluster.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望自动化代码测试，包括在自动化测试流水线中构建模型。Github Actions与CircleCI、Travis、Jenkins竞争，这些工具用于自动化测试代码推送、提交、拉取请求等。由于我们已经使用Github来托管我们的代码库，我们通过使用Actions来避免另一个第三方应用。在这个项目中，我们需要使用Github自托管的运行器在本地GPU集群上运行作业。
 - en: Label Studio
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Label Studio
 - en: '![](../Images/6fc4d94e308f6e66b77a6e2c52de00ec.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6fc4d94e308f6e66b77a6e2c52de00ec.png)'
 - en: (Taken from [https://labelstud.io/](https://labelstud.io/))
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: （取自 [https://labelstud.io/](https://labelstud.io/)）
 - en: We did a deep dive into how we’re using Label Studio found [here](https://towardsdatascience.com/development-of-a-benchmark-dataset-with-an-interface-to-the-fastai-dataloader-using-label-studio-d3aa3c26661f).
     Label Studio is a solution for labeling data. It works well, and is flexible to
     run in a variety of environments.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们深入了解了我们如何使用Label Studio，详细信息见 [这里](https://towardsdatascience.com/development-of-a-benchmark-dataset-with-an-interface-to-the-fastai-dataloader-using-label-studio-d3aa3c26661f)。Label
+    Studio是一个用于标注数据的解决方案。它运行良好，并且可以灵活地在各种环境中运行。
 - en: Why use them together?
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么要一起使用它们？
 - en: The setup is designed to deploy models faster. That means, more data scientists
     working harmoniously in parallel, transparency in the repository and faster onboarding
     time for new people. The goal is to standardize the types of activities that data
     scientists need to do in project and provide clear instructions for them.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个设置旨在加快模型的部署速度。这意味着，更多的数据科学家可以协同工作，代码库中的透明度提高，新人员的入职时间缩短。目标是标准化数据科学家在项目中需要执行的活动类型，并为他们提供清晰的指示。
 - en: 'The following is a list of tasks we want to streamline with this system design:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是我们希望通过该系统设计简化的任务列表：
 - en: Automate the ingest from Label Studio and provide a single point for ingesting
     that into the model training and evaluation activities.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 自动化从Label Studio的获取，并提供一个将其整合到模型训练和评估活动中的单一入口点。
 - en: Automated testing on the data pipeline code, that is unit testing and re-deployment
     of containers used by the process.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对数据管道代码进行自动化测试，即单元测试和容器的重新部署。
 - en: Automated testing on the model code, that is unit testing and re-deployment
     of containers used by the process.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对模型代码进行自动化测试，即单元测试和容器的重新部署。
 - en: Enable automated testing to include model re-training and evaluation criteria.
     When the model code changes, train a model with the new code and compare it to
     the existing incumbent model.
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 启用自动化测试，包括模型再训练和评估标准。当模型代码发生变化时，使用新代码训练模型，并将其与现有的旧模型进行比较。
 - en: Trigger model retraining when training data changes.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当训练数据发生变化时，触发模型再训练。
 - en: Below is the description of pipeline for each task.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是每个任务的流水线描述。
 - en: Traditional CI/CD Pipeline
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 传统CI/CD流水线
 - en: 'This pipeline implements automated testing feedback for each pull request that
     includes evaluation of syntax, unit, regression and integration tests. The outcome
     of this process is a functionally tested docker image to our private repository.
     This process maximizes the likelihood that the latest best code is in a fully
     tested image available in the repository for downstream tasks. Here’s how the
     developer lifecycle works in the context of a new feature:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/a4761dfdadbb159032a87bf8245781ca.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
 - en: Here we show how the workflow function for while editing the code. Using NBDEV
     enables us to work directly from the Jupyter notebooks including writing the tests
     directly in the notebook. NBDEV requires that all the cells in the notebooks run
     without exception (unless the cell is flagged not to run). (Image by Author)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: Data pipeline
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -177,16 +256,20 @@
     the updates can be done as part of the training pipeline as well. We have the
     ability to trigger the data pipeline refresh on demand using the Github Actions
     interface.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/576cc3526614e7f27fd041cfba29247a.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
 - en: The data pipeline feeds from Label Studio, and persists every version of the
     dataset and relevant inputs to the DVC cache stored in AWS S3\. (Image by Author)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: Model Pipeline
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -194,55 +277,69 @@
     the repository. This enables each pull request to evaluate the syntax, unit, integration
     and regression tests configured on the codebase, but also can provide feedback
     that includes evaluating the new resulting model
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/2a951bf045884ee15bffc2627b7c0e24.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
 - en: The workflow in this case, run the model training experiment specified in the
     configuration file (model_params.yaml) and update the model artifact (best-model.pth)
     (Image by Author)
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Benchmark Evaluation Pipeline
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The benchmarking pipeline forms an “official submission” process to ensure all
     modeling activities are measured against the metrics of the project.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/6efd84d0d1769b4a465bcff6626bcd4f.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
 - en: The newly trained model in best-model.pth is evaluated against the benchmark
     dataset and the results are tagged with the latest commit hash and persisted in
     AWS S3\. (Image by Author)
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: Workflow
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Here is the DAG definition file that is used by DVC. It captures the workflow
     steps and their inputs, and allows for reproducibility across users and machines.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Findings
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The Github Actions workflow `cron` trigger is not extremely reliable. It does
     not guarantee timing.
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: DVC does not work in a clear manner inside a Github Action workflow that is
     triggered on push. It will alter the trackers that are source controlled and when
     that is committed it will create another Github action.
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -252,148 +349,219 @@
     the exact repo without removing that self-hosted runner configuration from the
     repo or else random people would be able to run workloads on our training server
     by pushing code to the project.
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 Github Actions 作为运行模型的机制需要一个自托管的运行器来使用 GPU。这意味着需要连接到云中的 GPU 实例或本地 GPU，这会带来访问控制问题。例如，我们不能在不移除自托管运行器配置的情况下开源确切的仓库，否则随机的人可以通过将代码推送到项目中在我们的训练服务器上运行工作负载。
 - en: NBDEV built-in workflow is testing the code in the wrong place. It’s testing
     the notebook instead of the compiled package. On the one hand, it’s nice to be
     able to say that the “tests can be written right into the notebook”. On the other
     hand, testing the notebooks directly tests leaves open the possibility that the
     code package created by NBDEV fails even though the notebook ran. What we need
     is the ability to test the NBDEV-compiled package directly
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: NBDEV 内置的工作流是在错误的地方测试代码。它是在测试 notebook，而不是编译后的包。一方面，能够说“测试可以直接写入 notebook”是件好事。另一方面，直接测试
+    notebook 仍然存在可能性，即使 notebook 运行了，NBDEV 创建的代码包也可能失败。我们需要的是能够直接测试 NBDEV 编译的包。
 - en: NBDEV doesn’t interoperate with “traditional” Python development in the sense
     that NBDEV is a one-way street. It simply allows the project to be developed in
     the interactive Jupyter notebook style. It makes it impossible to develop the
     Python modules directly. If at any point, the project wants to be converted to
     “traditional” Python development testing would need to be accomplished another
     way.
+  id: totrans-56
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: NBDEV 不与“传统” Python 开发进行互操作，因为 NBDEV 是单向的。它仅允许项目以交互式 Jupyter notebook 的风格进行开发。它使得直接开发
+    Python 模块变得不可能。如果在任何时候，项目想要转换为“传统” Python 开发，则需要通过其他方式进行测试。
 - en: In the beginning, we were using Weights & Biases as our experiment tracking
     dashboard, however there were issues deploying it into a Github Action. What we
     can say is that the user experience for implementing `wandb` hit its first hiccup
     in the Action Workflow. Removing Weights & Biases resolved the problem straight
     away. Before that, `wandb` stood out as the best user experience in MLOps.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一开始，我们使用 Weights & Biases 作为我们的实验跟踪仪表盘，但在将其部署到 Github Action 时出现了问题。我们可以说，实现
+    `wandb` 的用户体验在 Action Workflow 中遇到了第一个困难。移除 Weights & Biases 立即解决了这个问题。在此之前，`wandb`
+    在 MLOps 中脱颖而出，提供了最佳的用户体验。
 - en: '**Conclusions**'
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: 'Ultimately, it took one week to complete the implementation of these tools
     for managing our code with Github Actions, Iterative.ai tools (DVC & CML) and
     NBDEV. This provides us with the following capabilities:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，完成这些工具的实施花费了一周时间，用于管理我们的代码，包括 Github Actions、Iterative.ai 工具（DVC & CML）和
+    NBDEV。这为我们提供了以下功能：
 - en: Work from Jupyter notebooks as the system of record for the code. We like Jupyter.
     The main use case it accomplishes is to enable us to work directly on any hardware
     we can SSH into by hosting a Jupyter server there and forwarding it to a desktop.
     To be clear, we would be doing this even if we were not using NBDev because the
     alternative is using Vim or some such tool that we don’t like as much. Past experiments
     to connect to remote servers with VS Code or Pycharm failed. So it’s Jupyter.
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从 Jupyter notebooks 开始，将其作为代码的记录系统。我们喜欢 Jupyter。它主要的用途是让我们能够通过在任何可以 SSH 连接的硬件上托管
+    Jupyter 服务器，并将其转发到桌面上来直接工作。需要明确的是，即使我们不使用 NBDev，我们也会这样做，因为替代方法是使用 Vim 或其他我们不太喜欢的工具。以往尝试使用
+    VS Code 或 Pycharm 连接远程服务器的实验失败了。因此我们选择了 Jupyter。
 - en: Testing the code, and testing the model it creates. Now as part of the CI/CD
     pipeline we can evaluate whether or not the model resulting from the changes to
     the repo make the model better, worse or stay the same. This is all available
     in the pull request before it is merged into `main`.
+  id: totrans-61
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 测试代码，以及测试它创建的模型。现在，作为 CI/CD 流水线的一部分，我们可以评估从仓库更改所生成的模型是否更好、更差或保持不变。这一切都可以在合并到
+    `main` 之前在拉取请求中进行评估。
 - en: Using Github Actions server as an orchestrator for training runs begins to allow
     multiple data scientists to work simultaneously in a more clear manner. Going
     forward, we will see the limitations of this setup for orchestrating the collaborative
     data science process.
+  id: totrans-62
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 Github Actions 服务器作为训练运行的协调器开始允许多个数据科学家以更清晰的方式同时工作。未来，我们将看到这种设置在协作数据科学过程中的局限性。
 - en: '**[Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/)** has formerly
     worked as a data scientist and software engineer solving problems in finance,
     predictive maintenance and sports. He currently works as a machine learning systems
     consultant with Hoplabs working on a multi-camera computer vision application.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/)** 曾担任数据科学家和软件工程师，解决金融、预测维护和体育领域的问题。他目前在
+    Hoplabs 担任机器学习系统顾问，专注于多摄像头计算机视觉应用。'
 - en: '**[Will Kunz](https://www.linkedin.com/in/willkunz/)** is a back end software
     developer, bringing a can-do attitude and dogged determination to challenges.
     It doesn''t matter if it''s tracking down an elusive bug or adapting quickly to
     a new technology. If there''s a solution, Will wants to find it.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Will Kunz](https://www.linkedin.com/in/willkunz/)** 是一名后端软件开发人员，带着积极的态度和顽强的决心应对各种挑战。不论是追踪难以捉摸的
+    bug 还是快速适应新技术，只要有解决方案，Will 就想找到它。'
 - en: '[Original](https://towardsdatascience.com/machine-learning-lifecycle-with-mlops-github-actions-label-studio-iterative-ai-and-nbdev-30515f444a3e).
     Reposted with permission.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/machine-learning-lifecycle-with-mlops-github-actions-label-studio-iterative-ai-and-nbdev-30515f444a3e)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[MLOps Best Practices](/2021/07/mlops-best-practices.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps 最佳实践](/2021/07/mlops-best-practices.html)'
 - en: '[MLOps is an Engineering Discipline: A Beginner’s Overview](/2021/07/mlops-engineering-discipline.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps 是一门工程学科：初学者概述](/2021/07/mlops-engineering-discipline.html)'
 - en: '[MLOps And Machine Learning Roadmap](/2021/08/mlops-machine-learning-roadmap.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps 和机器学习路线图](/2021/08/mlops-machine-learning-roadmap.html)'
 - en: '* * *'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 部门'
 - en: '* * *'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Schedule & Run ETLs with Jupysql and GitHub Actions](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Jupysql 和 GitHub Actions 计划与运行 ETL](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
 - en: '[GitHub Actions For Machine Learning Beginners](https://www.kdnuggets.com/github-actions-for-machine-learning-beginners)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub Actions 机器学习初学者指南](https://www.kdnuggets.com/github-actions-for-machine-learning-beginners)'
 - en: '[Multi-label NLP: An Analysis of Class Imbalance and Loss Function…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[多标签自然语言处理：类别不平衡和损失函数分析…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)'
 - en: '[How You Can Use Machine Learning to Automatically Label Data](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用机器学习自动标注数据](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
 - en: '[Run an LLM Locally with LM Studio](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 LM Studio 本地运行 LLM](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
 - en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费使用 Lightning AI Studio](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'

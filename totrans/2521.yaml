@@ -1,345 +1,502 @@
 - en: How to Find Weaknesses in your Machine Learning Models
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何发现机器学习模型中的弱点
 - en: 原文：[https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html](https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html](https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/), Data
     Scientist at Tubi**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/), Tubi
+    数据科学家**'
 - en: Any time you simplify data using a summary statistic, you lose information.
     Model accuracy is no different. When simplifying your model’s fit to a summary
     statistic, you lose the ability to determine where your performance is lowest/highest
     and why.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当你使用总结统计来简化数据时，你都会丢失信息。模型准确性也不例外。当简化模型的拟合到总结统计时，你失去了确定性能最低/最高以及原因的能力。
 - en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
     Frea ai IBM data slicing](../Images/f4d29e3365fe6c2bbed992bac867cd27.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习准确性表现 深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/f4d29e3365fe6c2bbed992bac867cd27.png)'
 - en: 'Figure 1: example of areas of the data where model performance is low. Image
     by author.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1：模型表现差的数据区域示例。图片由作者提供。
 - en: To combat this problem, researchers at IBM recently developed a method called [FreaAI](https://arxiv.org/pdf/2108.05620.pdf) that
     identifies interpretable data slices where a given model has poor accuracy. From
     these slices, the engineer can then take the necessary steps to ensure the model
     will perform as intended.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，IBM 的研究人员最近开发了一种名为 [FreaAI](https://arxiv.org/pdf/2108.05620.pdf) 的方法，它识别出模型准确率较差的可解释数据切片。工程师可以根据这些切片采取必要措施，以确保模型按预期运行。
 - en: FreaAI is unfortunately not open source, but many of the concepts can be easily
     implemented in your favorite tech stack. Let’s dive in…
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: FreaAI 不幸的是不是开源的，但许多概念可以很容易地在你喜欢的技术栈中实现。让我们深入了解一下……
 - en: Technical TLDR
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 技术总结
 - en: 'FreaAI finds slices in testing data with statistically significant low performance.
     They are returned to the engineer for examination. The method steps are the following:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: FreaAI 在测试数据中找到统计上显著低性能的切片。它们被返回给工程师进行检查。方法步骤如下：
 - en: '**Use Highest Prior Density (HPD) methods to find univariate data slices with
     low accuracy. **These univariate data slices reduce the search space and show
     where our data are more likely to be problematic.'
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使用最高先验密度 (HPD) 方法找到准确率低的单变量数据切片。** 这些单变量数据切片减少了搜索空间，显示了数据中更可能存在问题的地方。'
 - en: '**Use decisions trees to find bivariate data slices with low accuracy. **These
     bivariate data slices reduce the search space for categorical predictors and 2nd-order
     interactions to show where our data are more likely to be problematic.'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使用决策树找到准确率低的双变量数据切片。** 这些双变量数据切片减少了分类预测变量和二阶交互的搜索空间，显示了数据中更可能存在问题的地方。'
 - en: '**Remove all data slices that don’t meet certain heuristics.** The main two
     are minimal support of the testing set and statistically significant increase
     in error.'
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**移除所有不符合特定启发式规则的数据切片。** 主要的两个规则是测试集的最小支持度和统计上显著的误差增加。'
 - en: But, what’s actually going on?
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 但是，实际上发生了什么？
 - en: That was a lot of jargon, so let’s slow down a bit a really understand what’s
     going on…
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 那些都是术语，我们来慢慢了解一下实际情况……
 - en: 1\. The Problem
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 问题
 - en: When developing a model, we often use “accuracy” measures to determine fit.
     One example is Mean Squared Error, which is used in linear regression and defined
     in figure 2.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开发模型时，我们经常使用“准确性”指标来判断模型的拟合度。例如均方误差，这在图 2 中定义并用于线性回归。
 - en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
     Frea ai IBM data slicing](../Images/e8f1354a8ec32a3f741874c6a5b525cf.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习准确性表现 深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/e8f1354a8ec32a3f741874c6a5b525cf.png)'
 - en: 'Figure 2: Mean Squared Error formula. Image by author — [src](https://www.probabilitycourse.com/chapter9/9_1_5_mean_squared_error_MSE.php).'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 2：均方误差公式。图片由作者提供 — [源](https://www.probabilitycourse.com/chapter9/9_1_5_mean_squared_error_MSE.php)。
 - en: But this averaged error only tells us how well were doing **on average**. We
     don’t know if we’re performing really well on certain areas of our data or really
     poorly on other areas.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，这个平均误差只告诉我们 **平均** 来说表现如何。我们不知道模型在数据的某些区域表现很好还是在其他区域表现很差。
 - en: This is a long-standing problem in predictive modeling that has recently gotten
     lots of attention.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个长期存在的预测建模问题，最近引起了很多关注。
 - en: 2\. The Solution
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 解决方案
 - en: One solution is FreaAI. The method was developed at IBM and looks to determine
     where in our data our model underperforms.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个解决方案是 FreaAI。该方法在 IBM 开发，旨在确定我们数据中模型表现不佳的地方。
 - en: There are two main steps. The first involves creating data slices and the second
     involves determining if the model underperforms in those data slices. The output
     of FreaAI is a set of “locations” in our data where model performance is low.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 主要有两个步骤。第一步是创建数据切片，第二步是确定模型在这些数据切片中的表现是否不佳。FreaAI 的输出是一组“位置”，这些位置的数据中模型表现不佳。
 - en: '**2.1\. Data Slicing**'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**2.1\. 数据切片**'
 - en: Combinatorial Testing (CT) is a framework that sequentially looks at all groups
     of predictors to find areas of poor performance. For example, if we have two categorical
     predictors, color and shape, we’d look at all possible combinations and see where
     accuracy drops.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 组合测试 (CT) 是一个框架，它依次查看所有预测变量组合以找到表现不佳的区域。例如，如果我们有两个类别预测变量，颜色和形状，我们会查看所有可能的组合，并查看准确性下降的地方。
 - en: However, leveraging combinatorial testing on large datasets is computationally
     impossible — with each new column we see an exponential increase in the number
     of combinations required. So, we need to define a method that helps us search
     through features to find potential areas of inaccuracy.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，利用组合测试在大型数据集上是计算上不可行的 — 每增加一列，我们会看到所需组合数量的指数增长。因此，我们需要定义一种方法来帮助我们搜索特征，以找到潜在的不准确区域。
 - en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
     Frea ai IBM data slicing](../Images/94461909e59d19dc5df2267481024fb4.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习准确性表现深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/94461909e59d19dc5df2267481024fb4.png)'
 - en: 'Figure 3: example of a 50% highest density region (HDR) in blue. Image by author
     — [src](https://mathematica.stackexchange.com/questions/173282/computing-credible-region-highest-posterior-density-from-empirical-distributio).'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3：50% 最高密度区域 (HDR) 的蓝色示例。图像由作者提供 — [源](https://mathematica.stackexchange.com/questions/173282/computing-credible-region-highest-posterior-density-from-empirical-distributio)。
 - en: The first method leveraged in FreaAI uses something called [Highest Density
     Regions (HDR)](https://stats.stackexchange.com/questions/148439/what-is-a-highest-density-region-hdr) (figure
     3). In short, HDR finds the smallest area of a numeric feature where a certain
     proportion of the data can be found i.e. high-density areas. In figure 3, the
     area is differentiated by the horizontal blue dotted line — 50% of our data are
     above that line.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: FreaAI 使用的第一种方法利用了叫做 [最高密度区域 (HDR)](https://stats.stackexchange.com/questions/148439/what-is-a-highest-density-region-hdr)
+    的技术（见图 3）。简而言之，HDR 找出数值特征中数据占比最高的最小区域，即高密度区域。在图 3 中，区域由水平蓝色虚线区分 — 我们的数据中有 50%
+    在该线之上。
 - en: From there we iteratively decrease this range by a value of ε (default to 0.05)
     and look for increases in accuracy. **If the accuracy does increase on a given
     iteration, we know that the model did not perform well in the area between the
     prior iteration and current iteration.**
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 从那里我们通过一个 ε 值（默认 0.05）逐步减少这个范围，并观察准确性的提高。**如果准确性在给定的迭代中提高，我们知道模型在前一次迭代和当前迭代之间的区域表现不佳。**
 - en: To determine areas of poor fit on with numeric predictors, we iteratively run
     this HDR method for all predictors in our testing set.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 要确定数值预测变量的不良拟合区域，我们会对测试集中的所有预测变量迭代运行 HDR 方法。
 - en: Pretty cool, right?
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 相当酷，对吧？
 - en: The second method leverages decision trees to handle all non-numeric predictors
     as well as combinations of two features. In short, we fit a decision tree and
     look to find what splits of those features minimized accuracy.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二种方法利用决策树来处理所有非数值预测变量以及两个特征的组合。简而言之，我们拟合一个决策树，并寻找使准确性最小化的特征切分。
 - en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
     Frea ai IBM data slicing](../Images/9fbe22ea608bbee93f4f618bc932facf.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习准确性表现深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/9fbe22ea608bbee93f4f618bc932facf.png)'
 - en: 'Figure 4: example of a decision tree on a continues univariate predictor “age”.
     Image by author.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4：关于连续单变量预测变量“年龄”的决策树示例。图像由作者提供。
 - en: In figure 4, each *decision node* (blue) is a split on our feature(s) and each *end
     node* (number) is the accuracy for that split. By fitting these trees, we can
     really reduce the search space and more quickly find areas of poor performance. **Furthermore,
     because trees are so robust for many different kinds of data, we can run this
     on categorical predictors or more than one predictors to capture interaction effects.**
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在图 4 中，每个*决策节点*（蓝色）是对特征的拆分，每个*终端节点*（数字）是该拆分的准确度。通过拟合这些树，我们可以真正缩小搜索空间，更快地找到表现不佳的区域。**此外，由于树对许多不同类型的数据都非常强健，我们可以在分类预测变量或多个预测变量上运行，以捕捉交互效应。**
 - en: This is decision tree approach is repeated for all combinations of features,
     as well as single features that were not numeric.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种决策树方法会重复用于所有特征组合，以及那些不是数字的单一特征。
 - en: 2.2\. Heuristics for Data Slicing
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.2. 数据切片的启发式方法
 - en: 'Now up to here, we’ve only concerned ourselves with developing data slices
     using accuracy, but there are other heuristics that help us find **useful** data
     slices:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们只关注了通过准确度开发数据切片，但还有其他启发式方法可以帮助我们找到**有用的**数据切片：
 - en: '**Statistically Significant**: to ensure that we’re only looking at data slices
     that have meaningful drops in accuracy, we only only keep slices with performance
     4% lower than bottom bound of our error’s confidence interval. By doing so, we
     can state with probability *α* that our data slices have higher error.'
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**统计显著性**：为了确保我们只关注准确度有显著下降的数据切片，我们仅保留性能低于误差置信区间下界 4% 的切片。通过这样做，我们可以以*α* 的概率断言我们的数据切片具有更高的误差。'
 - en: '**Explainable**: we also want to ensure that the problematic areas found can
     be acted upon, so we only look at two or three features when creating combinations.
     By limiting to low-order interactions, there’s a higher chance that our engineers
     can develop solutions.'
+  id: totrans-42
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**可解释性**：我们还希望确保发现的问题区域可以付诸行动，因此我们在创建组合时仅查看两个或三个特征。通过限制低阶交互作用，我们的工程师更有可能开发解决方案。'
 - en: '**Minimal Support**: finally, the data slice must have enough error to be worth
     investigating. We required that there must be at least 2 misclassifications or
     it must cover 5% of the testing error — whichever value is larger is the criteria
     we go with.'
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**最小支持**：最后，数据切片必须有足够的误差值得调查。我们要求至少有 2 次分类错误，或覆盖 5% 的测试误差 — 取较大的值作为标准。'
 - en: It’s also interesting to note that you can tailor other heuristics to your business
     needs. Misclassifying some users is worse than others, so you can build that in
     to your data slicing criteria — think [precision/recall tradeoff](https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9).
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 还值得注意的是，你可以根据业务需求调整其他启发式方法。错误分类某些用户比其他用户更严重，因此你可以将其纳入数据切片标准中 — 参考 [精确度/召回率权衡](https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9)。
 - en: 3\. Summary and Takeaways
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3. 总结和要点
 - en: So, there you have it — FreaAI in all its glory.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，你看到了 — FreaAI 的全部荣耀。
 - en: Again, FreaAI is not open source, but hopefully it will be released to the public
     in the future. In the meantime, you can apply the frameworks we talked about to
     your own predictive models and determine where there’s systematic underperformance.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次说明，FreaAI 不是开源的，但希望将来能向公众发布。在此期间，你可以将我们讨论的框架应用到你自己的预测模型中，确定系统性表现不佳的地方。
 - en: 3.1\. Summary
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3.1. 总结
 - en: To recap, FreeAI uses HDR and decision trees to reduce the search space for
     our predictors. It then iteratively looks at individual features as well as combinations
     to determine where there’s low performance. These low-performance areas have some
     extra heuristics that ensure the findings are actionable.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，FreeAI 使用 HDR 和决策树来缩小我们预测变量的搜索空间。然后，它迭代地查看单个特征及其组合，以确定性能较低的地方。这些低性能区域具有一些额外的启发式方法，以确保发现具有可操作性。
 - en: 3.2\. Why should you care?
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3.2. 你为什么要关心？
 - en: Well, first this framework helps engineers identify model weaknesses. When those
     weaknesses are found, they can be (hopefully) corrected, thereby improve the forecasts.
     This gain is especially enticing for black box models, such as neural nets, because
     there are no model coefficients.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，这个框架帮助工程师识别模型的弱点。当这些弱点被发现时，它们可以（希望）得到纠正，从而改善预测。对于黑箱模型（如神经网络），这种改进尤其诱人，因为没有模型系数。
 - en: '**By isolating areas of the data that underperform, we get a window into the
     black box.**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**通过隔离表现不佳的数据区域，我们可以窥视黑箱。**'
 - en: FreaAI also hold interesting potential for other applications. One example is
     identifying model drift, which is what happens when a trained model becomes less
     and less effective over time. A [hypothesis testing framework to determine model
     drift](https://arxiv.org/pdf/2108.05319.pdf) was just released by IBM.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: FreaAI 还具有其他应用的有趣潜力。一个例子是识别模型漂移，即训练后的模型随着时间推移变得越来越无效。IBM 刚刚发布了一个 [用于确定模型漂移的假设检验框架](https://arxiv.org/pdf/2108.05319.pdf)。
 - en: Another interesting application would be determining model bias. In this case,
     bias is the concept of being unfair, such as refusing to give someone a loan based
     on their gender. By looking at different data splits where model performance is
     low, you can stumble upon areas of bias.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个有趣的应用是确定模型偏差。在这种情况下，偏差是指不公平的概念，例如基于性别拒绝向某人提供贷款。通过查看模型性能较低的不同数据拆分，你可以发现偏差的领域。
 - en: '*Thanks for reading! I’ll be writing 37 more posts that bring academic research
     to the DS industry. Check out my comments for links to the main source for this
     post as well as some useful resources.*'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*感谢阅读！我将撰写 37 篇帖子，将学术研究引入数据科学行业。请查看我的评论，获取本文主要来源的链接以及一些有用的资源。*'
 - en: '**Bio: [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/)**
     (**[https://michaeldberk.com/](https://michaeldberk.com/)**) is a Data Scientist
     at Tubi.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [迈克尔·伯克](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[https://michaeldberk.com/](https://michaeldberk.com/)**)
+    是 Tubi 的数据科学家。'
 - en: '[Original](https://towardsdatascience.com/how-to-find-weaknesses-in-your-machine-learning-models-ae8bd18880a3).
     Reposted with permission.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-find-weaknesses-in-your-machine-learning-models-ae8bd18880a3)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Antifragility and Machine Learning](/2021/09/antifragility-machine-learning.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[反脆弱性与机器学习](/2021/09/antifragility-machine-learning.html)'
 - en: '[Adventures in MLOps with Github Actions, Iterative.ai, Label Studio and NBDEV](/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[与 Github Actions、Iterative.ai、Label Studio 和 NBDEV 的 MLOps 探险](/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)'
 - en: '[Math 2.0: The Fundamental Importance of Machine Learning](/2021/09/math-fundamental-importance-machine-learning.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数学 2.0：机器学习的基础重要性](/2021/09/math-fundamental-importance-machine-learning.html)'
 - en: '* * *'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-63
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并寻找目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为出色数据科学家所需的 5 种关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学的统计学顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
