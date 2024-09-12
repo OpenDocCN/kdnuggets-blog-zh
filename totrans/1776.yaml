@@ -1,73 +1,111 @@
 - en: The Most Underutilized Function in SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 中最被低估的函数
 - en: 原文：[https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html](https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html](https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html)
 - en: '**Tristan Handy, Founder and President of Fishtown Analytics.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Tristan Handy，Fishtown Analytics 创始人兼总裁。**'
 - en: Over the past nine months I’ve worked with over a dozen venture-funded startups
     to build out their internal analytics. In doing so, there’s a single SQL function
     that I have come to use surprisingly often. At first it wasn’t at all clear to
     me why I would want to use this function, but as time goes on I have found ever
     more uses for it.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去的九个月里，我与十多个风险投资资助的初创公司合作，构建它们的内部分析。在此过程中，有一个 SQL 函数我用得出乎意料地多。刚开始我完全不明白为什么要使用这个函数，但随着时间的推移，我发现它有越来越多的用处。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
 - en: 'What is it? **md5()**. If you’re not familiar, here’s an example snippet from
     the Redshift docs:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是什么？**md5()**。如果你不熟悉，这里有一个来自 Redshift 文档的示例代码片段：
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Give md5() a varchar and it returns its [MD5 hash](https://en.wikipedia.org/wiki/MD5).
     Simple... but seemingly pointless. *Why exactly would I want to use that?!*
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 给 `md5()` 一个 varchar，它返回其 [MD5 哈希](https://en.wikipedia.org/wiki/MD5)。简单……但看起来似乎毫无意义。*我究竟为什么要使用这个？！*
 - en: Great question. In this post I’m going to show you two uses for md5() that make
     it one of the most powerful tools in my SQL kit.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好的问题。在这篇文章中，我将展示 `md5()` 的两个用法，使它成为我 SQL 工具包中最强大的工具之一。
 - en: '#1: Building Yourself a Unique ID'
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '#1: 为自己建立一个独特的ID'
 - en: 'I’m going to make a really strong statement here, but it’s one that I really
     believe in: **every single** [**data model**](http://dbt.readthedocs.io/en/docs-0.6.0/guide/building-models/)
     **in your warehouse should have a rock solid unique ID**.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我要做一个非常强烈的声明，但我真的相信：**你仓库中的每一个** [**数据模型**](http://dbt.readthedocs.io/en/docs-0.6.0/guide/building-models/)
+    **都应该有一个坚如磐石的唯一 ID**。
 - en: 'It’s extremely common for this not to be the case. One reason is that your
     source data doesn’t have a unique key—if you’re syncing advertising performance
     data from Facebook Ads via [Stitch](http://stitchdata.com/) or [Fivetran](http://fivetran.com/),
@@ -75,158 +113,234 @@
     on. Instead, you have a combination of fields that is reliably unique (in this
     case date and ad_id). Using that knowledge, you can build yourself a unique id
     using md5():'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不是很常见的情况。一个原因是你的源数据没有唯一键——如果你通过 [Stitch](http://stitchdata.com/) 或 [Fivetran](http://fivetran.com/)
+    从 Facebook Ads 同步广告表现数据，那么你在 ad_insights 表中的源数据没有一个你可以依赖的唯一键。相反，你有一个可靠的唯一字段组合（在这种情况下是日期和
+    ad_id）。利用这些知识，你可以使用 `md5()` 为自己构建一个唯一的 ID。
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The resulting hash is a meaningless string of alphanumeric text that functions
     as a unique identifier for your record. Of course, you could just as easily just
     create a single concatenated varchar field that performed the same function, but
     *it’s actually important to obfuscate the underlying logic behind the hash*: you
     will innately treat the field differently if it looks like an id versus if it
     looks like a jumble of human-readable text.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成的哈希是一个毫无意义的字母数字文本字符串，作为你的记录的唯一标识符。当然，你也可以很容易地创建一个单一的连接 varchar 字段来执行相同的功能，但
+    *实际上重要的是要掩盖哈希背后的基本逻辑*：如果字段看起来像一个 ID 而不是一串人类可读的文本，你会自然而然地以不同的方式对待它。
 - en: 'There are a couple of reasons why creating a unique id is an important practice:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建唯一 ID 是一个重要实践的几个原因：
 - en: One of the most common causes of error is duplicate values in a key that an
     analyst was expecting to be unique. Joins on that field will “fan out” a result
     set in unexpected ways and can cause significant error that is difficult to troubleshoot.
     To avoid this, only join on fields where you’ve validated the cardinality and
     constructed a unique key where necessary.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最常见的错误原因之一是分析师期望唯一的键中存在重复值。对该字段的连接会以意想不到的方式“展开”结果集，并可能导致难以排查的重大错误。为了避免这种情况，只在你已经验证了基数并在必要时构建了唯一键的字段上进行连接。
 - en: Some BI tools require you to have a unique key in order to provide certain functionality.
     For instance, Looker [symmetric aggregates](https://discourse.looker.com/t/symmetric-aggregates/261)
     require a unique key in order to function.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一些 BI 工具要求你拥有唯一的键以提供某些功能。例如，[Looker 对称聚合](https://discourse.looker.com/t/symmetric-aggregates/261)需要唯一的键才能发挥作用。
 - en: We create unique keys for every table and then test uniqueness on this key using
     [dbt schema tests](http://dbt.readthedocs.io/en/master/guide/testing/). We run
     these tests multiple times per day on [Sinter](http://sinterdata.com/)and get
     notifications for any failures. This allows us to be completely confident of the
     analytics we implement on top of these data models.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为每个表创建唯一的键，然后使用 [dbt schema tests](http://dbt.readthedocs.io/en/master/guide/testing/)
+    测试该键的唯一性。我们每天多次运行这些测试，在 [Sinter](http://sinterdata.com/) 上获取任何失败的通知。这使我们能够对我们在这些数据模型上实施的分析充满信心。
 - en: '#2: Simplifying Complex Joins'
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '#2：简化复杂的连接'
 - en: 'This case is similar to #1 in its execution but it solves a very different
     puzzle. Imagine the following case. You have the same Facebook Ads dataset as
     referenced earlier but this time you have a new challenge: join that data to data
     in your web analytics sessions table so that you can calculate Facebook [ROAS](http://www.verticalrail.com/kb/calculate-roas/).'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '这个案例在执行上类似于 #1，但它解决了一个非常不同的难题。想象一下以下情况。你有与之前提到的相同的 Facebook Ads 数据集，但这次你面临一个新的挑战：将这些数据与
+    web 分析会话表中的数据进行连接，以便你可以计算 Facebook [ROAS](http://www.verticalrail.com/kb/calculate-roas/)。'
 - en: In this case, your available join keys are the date and your [UTM parameters](https://en.wikipedia.org/wiki/UTM_parameters)(utm_medium,
     source, campaign, etc). Seems easy, right? Just do a join on all 6 fields and
     call it a day.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，你可以使用的连接键是日期和你的[UTM 参数](https://en.wikipedia.org/wiki/UTM_parameters)（utm_medium、source、campaign
+    等）。看起来很简单，对吧？只需在所有 6 个字段上进行连接即可。
 - en: 'Unfortunately that doesn’t work, for a really simple reason: it’s extremely
     common for some subset of those fields to be null, and a null doesn’t join to
     another null. So, that 6-field join is a dead end. You can hack together something
     incredibly complicated using a bunch of conditional logic, but that code is hideous
     and performs terribly (I’ve tried it).'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，这并不起作用，原因非常简单：这些字段的某个子集为空是极其常见的，而空值无法与另一个空值连接。因此，6 字段连接是死路一条。你可以用一堆条件逻辑拼凑出一些非常复杂的东西，但那段代码很丑且性能极差（我尝试过）。
 - en: 'Instead, use md5(). In both datasets, you can take the 6 fields we mentioned
     and concatenate them together into a single string, and then call md5() on the
     entire string. Here’s a code snippet from a client project where we did exactly
     this:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 相反，使用 md5()。在这两个数据集中，你可以将我们提到的 6 个字段拼接成一个字符串，然后对整个字符串调用 md5()。这里有一段来自客户项目的代码片段，我们正是这样做的：
 - en: 'You can see that this code is actually building the id on top of even more
     fields: in this example we’re actually unioning together advertising spend data
     from 7 different ad channels, and the data from Bing and Adwords is identified
     by ad_group_id and keyword_id instead of by UTM parameters. The approach extends
     cleanly.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到这段代码实际上是在更多字段的基础上构建 id：在这个例子中，我们实际上将来自 7 个不同广告渠道的广告支出数据进行合并，而 Bing 和 Adwords
+    的数据则通过 ad_group_id 和 keyword_id 来识别，而不是通过 UTM 参数。该方法可以干净地扩展。
 - en: 'In the sessions table, you then create the exact same hashed id field. **The
     resulting join is simple, readable, and easy to use for downstream analysis**:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在会话表中，你然后创建完全相同的哈希 id 字段。**结果连接简单、易读，并且易于用于下游分析**：
 - en: Resources
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 资源
 - en: 'Interested in implementing something like this yourself? Here are a few resources:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 有兴趣自己实现类似的功能吗？以下是一些资源：
 - en: '[dbt](https://github.com/fishtown-analytics/dbt)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[dbt](https://github.com/fishtown-analytics/dbt)'
 - en: (the open source tool we build and use to do all of our data modeling)
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: （我们构建和使用的开源工具来进行所有的数据建模）
 - en: '[Facebook Ads code](https://github.com/fishtown-analytics/facebook-ads)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Facebook Ads 代码](https://github.com/fishtown-analytics/facebook-ads)'
 - en: (our open source Facebook Ads dbt package)
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: （我们的开源Facebook广告dbt包）
 - en: Thanks for reading! I’m definitely curious to hear if anyone has any additional
     clever uses for md5().
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读！我很想知道是否有人对md5()有额外的巧妙用法。
 - en: '**Bio: [Tristan Handy](https://twitter.com/jthandy)** is Founder and President
     of [**Fishtown Analytics**](http://fishtownanalytics.com/). He builds open source
     tools for advanced analytics.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Tristan Handy](https://twitter.com/jthandy)** 是 [**Fishtown Analytics**](http://fishtownanalytics.com/)
+    的创始人兼总裁。他构建了用于高级分析的开源工具。'
 - en: '[Original](https://blog.fishtownanalytics.com/the-most-underutilized-function-in-sql-9279b536ed1a#.qb2x0foea).
     Reposted with permission.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://blog.fishtownanalytics.com/the-most-underutilized-function-in-sql-9279b536ed1a#.qb2x0foea)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据科学SQL的7个步骤](/2016/06/seven-steps-mastering-sql-data-science.html)'
 - en: '[Making Python Speak SQL with pandasql](/2017/02/python-speak-sql-pandasql.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[让Python使用pandasql说SQL](/2017/02/python-speak-sql-pandasql.html)'
 - en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用SQL进行统计](/2016/08/doing-statistics-sql.html)'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多主题
 - en: '[3 More SQL Aggregate Function Interview Questions for Data Science](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中3个SQL聚合函数面试问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)'
 - en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于梯度下降和成本函数的5个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
 - en: '[What is a Function?](https://www.kdnuggets.com/2022/11/function.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是函数？](https://www.kdnuggets.com/2022/11/function.html)'
 - en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
 - en: '[Multi-label NLP: An Analysis of Class Imbalance and Loss Function…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[多标签NLP：类别不平衡和损失函数的分析…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)'
 - en: '[How to Use the pivot_table Function for Advanced Data Summarization…](https://www.kdnuggets.com/how-to-use-the-pivot_table-function-for-advanced-data-summarization-in-pandas)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用pivot_table函数进行高级数据汇总…](https://www.kdnuggets.com/how-to-use-the-pivot_table-function-for-advanced-data-summarization-in-pandas)'
