@@ -1,61 +1,87 @@
 - en: 'Knowing Your Neighbours: Machine Learning on Graphs'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 了解你的邻居：图上的机器学习
 - en: 原文：[https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Pantelis Elinas](https://medium.com/@pantelis.elinas), senior machine
     learning research engineer.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Pantelis Elinas](https://medium.com/@pantelis.elinas)，高级机器学习研究工程师。**'
 - en: We live in a connected world and generate a vast amount of connected data. Social
     networks, financial transaction systems, biological networks, transportation systems,
     and a telecommunication nexus are all examples. The paper citation network displayed
     in Figure 1 is another example of connected data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们生活在一个互联的世界中，生成大量的连接数据。社交网络、金融交易系统、生物网络、交通系统和电信网络都是例子。图1所示的论文引用网络是连接数据的另一个例子。
 - en: '![](../Images/df0943a8a32dc9911f6055e12cf7b529.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/df0943a8a32dc9911f6055e12cf7b529.png)'
 - en: '*Figure 1: Visualisation of a paper citation network. The nodes represent research
     papers, while the edges illustrate citations between papers, with the various
     colour indicative of a report’s subject, with seven colours coding seven topics.*'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1：论文引用网络的可视化。节点代表研究论文，而边表示论文之间的引用，各种颜色表示报告的主题，七种颜色编码七个主题。*'
 - en: Representing connected data is possible using a [graph data structure](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))
     regularly used in Computer Science.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 表示连接数据可以使用计算机科学中常用的[图数据结构](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))。
 - en: In this article, we will provide an introduction to the assorted types of connected
     data, what they represent, and the challenges we can solve. We also introduce
     graph convolutional networks (GCNs). Using GCN as an example, this paper will
     also explain how modern machine learning methods can build predictive models of
     connected data.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将介绍各种类型的连接数据，它们表示什么，以及我们可以解决的挑战。我们还介绍图卷积网络（GCNs）。以GCN为例，本文还将解释现代机器学习方法如何构建连接数据的预测模型。
 - en: Definitions and types of networks
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 网络的定义和类型
 - en: 'A graph data structure has two basic elements: nodes and edges (see Figure
     2 below). Nodes represent entities in the data such as members of an online social
     network, while edges symbolise relationships between those entities, such as the
     friendship between members of a social network. This web of nodes and edges form
     a graph — a mathematical representation of the network structure of the data.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 图数据结构有两个基本元素：节点和边（见下图2）。节点表示数据中的实体，例如在线社交网络的成员，而边表示这些实体之间的关系，例如社交网络成员之间的友谊。节点和边的网络构成了一个图——数据网络结构的数学表示。
 - en: '![](../Images/5ff1f0fe30efd40b3a552b62ce62d5a9.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5ff1f0fe30efd40b3a552b62ce62d5a9.png)'
 - en: '*Figure 2: The basic components of a graph (undirected in this case) are nodes
     and edges.*'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图2：图的基本组件（在此情况下为无向图）是节点和边。*'
 - en: Graph nodes and edges can optionally have a type. A graph with a single type
     of node and a single type of edge is called homogeneous. An example of a homogeneous
     graph is an online social network with nodes representing people and edges representing
@@ -64,62 +90,86 @@
     is called heterogeneous. An online social network with edges of different types
     says ‘friendship’ and ‘co-worker,’ between nodes of ‘person’ type is an example
     of a heterogeneous network (see Figure 3 below).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 图中的节点和边可以选择性地具有类型。具有单一类型的节点和单一类型的边的图称为同质图。一个同质图的例子是一个在线社交网络，其中节点代表人，边代表友谊，节点和边的类型始终相同。另一方面，具有两种或更多类型的节点和/或两种或更多类型的边的图称为异质图。一个例子是在线社交网络，其中的边有不同的类型，比如‘友谊’和‘同事’，节点的类型是‘人’（见下图3）。
 - en: '![](../Images/d499abe17299a19d5996148f2d9b7a83.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d499abe17299a19d5996148f2d9b7a83.png)'
 - en: '*Figure 3: A pictorial representation of two types of graphs, homogeneous (left)
     and heterogeneous (right). The heterogeneous graph (in black and white) has two
     different types of nodes, people and cities, that are connected by four different
     types of edges.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图3：两种类型图的图示表示，同质图（左）和异质图（右）。异质图（黑白图）具有两种不同类型的节点，人和城市，通过四种不同类型的边连接。*'
 - en: The graph nodes and edges can also incorporate properties called attributes
     or features. Revisiting the online social network example, a node representing
     a person, i.e., a person node, may have attributes for their age, salary, hobbies,
     and location. Similarly, an edge between two people nodes may have a date property
     establishing when the online relationship began, or a weight property reflective
     of the strength of the relationship.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 图的节点和边还可以包含称为属性或特征的属性。以在线社交网络为例，表示一个人的节点，即人节点，可能具有年龄、薪水、爱好和位置等属性。类似地，两个人人节点之间的边缘可能具有一个日期属性，用于确定在线关系开始的时间，或一个权重属性，反映关系的强度。
 - en: We can also classify graphs based on whether they are static or dynamic. True
     to their name, static graphs do not change with time, while a dynamic graph changes
     its structure over time, adding and removing nodes and edges, or altering attributes
     and features (e.g. node attributes can be time series), or both.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以根据图是静态还是动态来对图进行分类。顾名思义，静态图不会随着时间变化，而动态图会随时间改变其结构，添加和删除节点和边，或改变属性和特征（例如，节点属性可以是时间序列），或两者兼有。
 - en: What can we learn from graphs?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们可以从图中学到什么？
 - en: 'Given a connected dataset, what kinds of problems can we solve, or put differently,
     what kinds of queries can we answer? We can broadly classify the kinds of problems
     connected data can solve into four categories:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定一个连通数据集，我们可以解决什么类型的问题，或者换句话说，我们可以回答什么类型的查询？我们可以将连通数据可以解决的问题大致分为四类：
 - en: Node Classification
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 节点分类
 - en: Link Prediction
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 链接预测
 - en: Community Detection
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 社区检测
 - en: Graph Classification
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 图分类
 - en: There exist other graph problems that don’t necessarily fit in these four categories,
     e.g., Traveling Salesman Problems. However, for this article, we will focus on
     the above four categories, as graph machine learning is an excellent tool for
     solving them.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有其他图问题不一定适合这四类，例如旅行推销员问题。然而，对于本文，我们将专注于上述四类，因为图机器学习是解决这些问题的绝佳工具。
 - en: '**Node classification**, also known as **node attribute inference**, is the
     problem of inferring missing or incomplete attribute values of some nodes, given
     attribute values of other nodes in the network. The advantage over other machine
@@ -127,15 +177,21 @@
     in context and neighbourhood information into your predictions. For example, in
     an online social network we might be interested in predicting the music preferences
     of a user’s friendship network (see Figure 4 below).'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**节点分类**，也称为**节点属性推断**，是根据网络中其他节点的属性值来推断某些节点的缺失或不完整属性值的问题。与其他机器学习方法相比，其优势在于节点属性推断使你能够将上下文和邻域信息纳入你的预测。例如，在在线社交网络中，我们可能会对预测用户朋友网络的音乐偏好感兴趣（见下图4）。*'
 - en: '![](../Images/dda24ac5a460216f0e77f549bd8f913b.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dda24ac5a460216f0e77f549bd8f913b.png)'
 - en: '*Figure 4: An example node classification problem, inferring an online social
     network member’s music preferences.*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图4：一个节点分类问题的示例，推断在线社交网络成员的音乐偏好。*'
 - en: '**Link prediction***, *another important problem for network-structured datasets,
     is the problem of inferring missing or finding hidden relationships between entities.
     We may be interested in predicting missing relationships because some were hidden
@@ -146,8 +202,10 @@
     For example, in an online social network, we can use link prediction to suggest
     new friends to members. Another example is product recommendation for a content
     provider or an e-commerce website.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**链接预测**，*另一个对网络结构数据集非常重要的问题，是推断缺失或寻找实体之间隐藏关系的问题。我们可能会对预测缺失的关系感兴趣，因为在数据收集期间某些关系对我们是隐藏的。或者，我们可能会对预测网络结构在未来如何通过插入或删除链接而演变感兴趣，给定其当前时刻的快照。链接预测是我们每天使用的算法，因为它通常是推荐系统背后的算法。例如，在在线社交网络中，我们可以使用链接预测向成员推荐新朋友。另一个例子是为内容提供商或电子商务网站进行产品推荐。*'
 - en: '**Community detection** infers communities or clusters of nodes based on the
     graph’s structure, the similarity of node attributes, or both. There are many
     applications for community detection, [1]. One example is segmentation of users
@@ -157,77 +215,105 @@
     by the algorithm using the data gathered from the people the individual frequently
     interacts with. Such segmentation can be used to deliver targeted ads based on
     common traits of community members.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**社区检测** 推断基于图结构、节点属性的相似性或两者的节点社区或簇。社区检测有许多应用，[1]。一个例子是将社交网络的用户根据他们的爱好划分为社区，而无需明确询问每个用户是否对该主题感兴趣。相反，算法使用来自个人频繁互动的人的数据来回答例如“你喜欢虚构还是非虚构？”这样的话题问题。这种分段可以用来根据社区成员的共同特征提供定向广告。'
 - en: '**Graph classification** is the problem of discriminating between graphs of
     different classes. As an example, consider the representation of a chemical compound
     as a graph; in this case, nodes are atoms, and edges are bonds between atoms.
     Given a set of chemical compounds each represented as a graph, we want to predict
     whether a compound is cancer-hindering or not. This is a graph classification
     problem, [2].'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图分类** 是区分不同类别图的问题。举例来说，考虑将化学化合物表示为图；在这种情况下，节点是原子，边是原子之间的键。给定一组每个都表示为图的化学化合物，我们想预测一个化合物是否具有抗癌性。这是一个图分类问题，[2]。'
 - en: Node classification example using a Graph Convolutional Network
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用图卷积网络的节点分类示例
 - en: For the remainder of this article, we’ll demonstrate how to apply graph machine
     learning to solve a node classification problem in a homogenous graph. In subsequent
     articles, we will consider state-of-the-art methods for link prediction and community
     detection.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文的其余部分，我们将演示如何将图机器学习应用于解决同质图中的节点分类问题。在后续的文章中，我们将考虑最先进的链接预测和社区检测方法。
 - en: Our dataset is the paper citation network known as [Cora](https://relational.fit.cvut.cz/dataset/CORA) where
     graph nodes represent research papers, and edges represent citation relationships
     between the papers. If a paper cites another paper then there is an edge between
     the two papers. Even though citations are directed, for the purpose of this tutorial,
     we are going to consider the corresponding edges as undirected.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据集是被称为 [Cora](https://relational.fit.cvut.cz/dataset/CORA) 的论文引文网络，其中图节点代表研究论文，边代表论文之间的引文关系。如果一篇论文引用了另一篇论文，那么这两篇论文之间就有一条边。尽管引文是有向的，但为了本教程的目的，我们将对应的边视为无向。
 - en: Each paper has an associated feature vector that encodes information about the
     vocabulary used in the paper. The feature vector for each paper has 1433 binary
     elements encoding presence (encoded as 1) or absence (encoded as 0) of 1433 keywords
     extracted from the entire corpus of the papers’ texts.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 每篇论文都有一个相关的特征向量，用于编码论文中使用的词汇信息。每篇论文的特征向量包含 1433 个二进制元素，编码了从整个语料库中提取的 1433 个关键词的存在（编码为
+    1）或不存在（编码为 0）。
 - en: Figure 5 demonstrates the [Bag-of-Words (BoW)](https://en.wikipedia.org/wiki/Bag-of-words_model) model
     for two papers in Cora. Each paper also has an attribute representing the *subject* of
     the paper. Each paper has one of seven subjects, such as Neural Networks, Probabilistic,
     Theory, etc. The dataset has 2708 papers (nodes) and 5429 citations (edges).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5 演示了用于 Cora 中两篇论文的 [词袋模型 (BoW)](https://en.wikipedia.org/wiki/Bag-of-words_model)。每篇论文还有一个表示论文*主题*的属性。每篇论文有七种主题之一，如神经网络、概率论、理论等。数据集包含
+    2708 篇论文（节点）和 5429 个引文（边）。
 - en: '![](../Images/14be0fcbdbacd6aba11a7359bd71f80f.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/14be0fcbdbacd6aba11a7359bd71f80f.png)'
 - en: '*Figure 5: The Bag-of-Words (BoW) features associated with a node in the Cora
     citation dataset.*'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 5: 词袋模型 (BoW) 与 Cora 引文数据集中一个节点相关的特征。*'
 - en: Our goal is to train a predictive model to infer the subject of a paper that
     was hidden from the machine learning algorithm during training. Since *subject* is
     categorical with seven categories, this is a multi-class node classification problem.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是训练一个预测模型，以推断在训练过程中对机器学习算法隐藏的论文主题。由于*主题*是七个类别的分类问题，因此这是一个多类别节点分类问题。
 - en: As a baseline approach, we can use traditional machine learning methods to solve
     this problem ignoring the relationships between papers. We can stack the nodes’
     feature vectors into a 2D array **F**, known as the *design matrix*, of dimensionality
     2708x1433, and then train a classifier such as Logistic Regression, Neural Network,
     or Random Forest on a subset of the data. We can use the remaining data for evaluation
     of the classifier as validation and test sets.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为基线方法，我们可以使用传统的机器学习方法来解决这个问题，忽略论文之间的关系。我们可以将节点的特征向量堆叠成一个二维数组**F**，即*设计矩阵*，其维度为2708x1433，然后在数据的子集上训练分类器，如逻辑回归、神经网络或随机森林。我们可以使用剩余的数据来评估分类器作为验证集和测试集。
 - en: This approach, which captures relationships between the vocabulary used in the
     papers and their *subject*, works fairly well. A 2-layer [Multi-Layer Perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron) (MLP)
     trained on only 140 samples (20 training samples per class) has been reported
     to achieve a test accuracy of approximately 55%, [3].
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法，通过捕捉论文中使用的词汇与其*主题*之间的关系，效果相当不错。训练仅140个样本（每类20个训练样本）的2层[多层感知器](https://en.wikipedia.org/wiki/Multilayer_perceptron)（MLP）据报道在测试中达到了约55%的准确率，[3]。
 - en: However, the above method ignores the citation relationships between the papers.
     We might believe that the relationships provide additional information about the *subject* of
     a paper as one would expect that a paper would cite other papers with the same
     subject. How can we exploit such information?
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，上述方法忽略了论文之间的引用关系。我们可能会认为这些关系提供了有关论文*主题*的额外信息，因为我们可以预期一篇论文会引用其他具有相同主题的论文。我们如何利用这些信息？
 - en: One approach would be to use manual feature engineering to augment the vocabulary-based
     feature vectors with graph-related node features. For example, there exists a
     large amount of literature on methods for calculating quantitative values of the
@@ -235,23 +321,31 @@
     to add would be the number of neighbours a node has in the graph (a node’s degree).
     Other useful structural node features include PageRank, [4], and various centrality
     measures. See Figure 6 for some examples of centrality measures.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种方法是使用手动特征工程，通过图相关的节点特征来增强基于词汇的特征向量。例如，有大量文献讨论如何计算图中节点结构位置的定量值。一个直接的结构性节点特征是节点在图中的邻居数量（节点的度）。其他有用的结构性节点特征包括PageRank，[4]和各种中心性度量。有关中心性度量的示例，请参见图6。
 - en: '![](../Images/d75e670c2daf1e1eaeead57ee0a47de3.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d75e670c2daf1e1eaeead57ee0a47de3.png)'
 - en: '*Figure 6: Examples of common centrality measures that can be used for manual
     feature engineering in graph machine learning.*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图6：可以用于图机器学习中的手动特征工程的常见中心性度量示例。*'
 - en: Manual feature engineering is known to be successful and has been employed extensively
     over the years. However, what we have learned from the success of deep learning
     and convolutional neural networks, in particular, is that these algorithms are
     adept at *automatically* learning essential features that maximise the performance
     of a downstream task. Unfortunately, “traditional” neural network and convolutional
     neural network algorithms cannot directly exploit relationship data.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 手动特征工程被认为是成功的，并且多年来被广泛应用。然而，从深度学习和卷积神经网络的成功经验中，我们了解到，这些算法擅长*自动*学习能够最大化下游任务性能的基本特征。不幸的是，“传统”的神经网络和卷积神经网络算法不能直接利用关系数据。
 - en: Despite this, researchers recently proposed graph neural network algorithms
     that can utilise relationship information in training neural network models on
     graphs. Of these graph neural network algorithms, Graph Convolutional Network
@@ -259,35 +353,47 @@
     we are going to apply a GCN model to our working example of predicting the subject
     of papers in a citation network. We begin with a brief description of the GCN
     architecture.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管如此，研究人员最近提出了图神经网络算法，这些算法可以在训练图上的神经网络模型时利用关系信息。在这些图神经网络算法中，图卷积网络（GCN）[3]是最成功且易于理解的之一。在这篇文章中，我们将应用GCN模型到我们预测引用网络中论文主题的工作示例中。我们从简要描述GCN架构开始。
 - en: 'GCN authors introduce a new type of neural network layer known as graph convolutional
     layer. The architecture of a GCN layer is shown in Figure 7\. The layer has trainable
     parameters: weight matrix **W** and bias vector **b**; its inputs are nodes features
     matrix **F**, and the normalised graph adjacency matrix **A’**.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: GCN作者引入了一种新的神经网络层类型，称为图卷积层。GCN层的结构如图7所示。该层具有可训练参数：权重矩阵**W**和偏置向量**b**；其输入是节点特征矩阵**F**和归一化的图邻接矩阵**A'**。
 - en: '![](../Images/6ca7b84eaadd54b10f1e1657a88bca0f.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6ca7b84eaadd54b10f1e1657a88bca0f.png)'
 - en: '*Figure 7: The basic definition of a Graph Convolutional Neural Network (GCN)
     layer.*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图7：图卷积神经网络（GCN）层的基本定义。*'
 - en: The normalised adjacency matrix encodes the graph structure and upon multiplication
     with the design matrix effectively smooths a node’s feature vector based on those
     of its immediate neighbours in the graph. **A’** is normalised such that each
     neighbouring node’s contribution is proportional to how connected that node is
     in the graph.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 归一化的邻接矩阵编码了图结构，通过与设计矩阵相乘，有效地平滑了节点的特征向量，基于其在图中的直接邻居。**A'**被归一化，以使每个邻接节点的贡献与该节点在图中的连接程度成正比。
 - en: The layer definition is completed by the application of an element-wise non-linear
     function, e.g., ReLu, to **A’FW+b**. The output matrix **Z **of this layer can
     be used as input to another GCN layer or any other type of neural network layer,
     allowing the creation of deep neural architectures able to learn a complex hierarchy
     of node features needed for the downstream node classification task.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 该层的定义通过对**A'FW+b**应用逐元素非线性函数（如ReLu）来完成。该层的输出矩阵**Z**可以用作另一个GCN层或任何其他类型神经网络层的输入，从而允许创建深度神经网络架构，能够学习用于下游节点分类任务的复杂节点特征层次结构。
 - en: Training a 2-layer GCN model (done in [this script](https://github.com/stellargraph/stellargraph/blob/develop/demos/node-classification/gcn/gcn-cora-example.py) using
     our open-source Python library [StellarGraph](https://github.com/stellargraph/stellargraph))
     with 32 output units per layer on the Cora dataset with just 140 training node
@@ -298,8 +404,10 @@
     relationships between the papers. This clearly demonstrates that at least for
     some datasets utilising relationship information in the data can significantly
     boost performance in a predictive task.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Cora数据集上训练一个2层GCN模型（通过[this script](https://github.com/stellargraph/stellargraph/blob/develop/demos/node-classification/gcn/gcn-cora-example.py)使用我们开源的Python库[StellarGraph](https://github.com/stellargraph/stellargraph)），每层32个输出单元，并且模型只见到140个训练节点标签，相较于基线2层MLP，分类准确率显著提高。在对一组留出的论文测试集进行预测时，准确率提高至大约81%——比仅使用BoW节点特征并忽略论文之间引用关系的MLP提高了21%。这清楚地表明，至少对于某些数据集，利用数据中的关系信息可以显著提升预测任务的性能。
 - en: Node classification is only a small part of graph machine learning but is a
     very powerful method that can assist in the handling of connected data. If you’d
     like to know more about graph machine learning, please contact us [here](https://www.stellargraph.io/about-us),
@@ -308,115 +416,175 @@
     You can learn more about graph machine learning by studying the [StellarGraph
     demos](https://github.com/stellargraph/stellargraph/tree/develop/demos) and ask
     any questions on our [forum](https://community.stellargraph.io/)!
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 节点分类只是图机器学习的一小部分，但它是一种非常强大的方法，可以帮助处理连接的数据。如果你想了解更多关于图机器学习的信息，请通过[这里](https://www.stellargraph.io/about-us)联系我们，如果你想尝试节点分类或其他图机器学习算法，可以下载我们开源的Python库[StellarGraph](https://github.com/stellargraph/stellargraph)。你可以通过学习[StellarGraph演示](https://github.com/stellargraph/stellargraph/tree/develop/demos)来深入了解图机器学习，并在我们的[论坛](https://community.stellargraph.io/)上提出任何问题！
 - en: '*This work is supported by *[*CSIRO’s Data61*](https://www.data61.csiro.au/)*,
     Australia’s leading digital research network.*'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '*此项工作得到了[*CSIRO的Data61*](https://www.data61.csiro.au/)的支持，这是澳大利亚领先的数字研究网络。*'
 - en: '![](../Images/fbfd31b941e74ce1d5fa0b73c8dfa832.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fbfd31b941e74ce1d5fa0b73c8dfa832.png)'
 - en: '**References:**'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: Fortunato, S. (2010). “[Community detection in graphs](https://arxiv.org/pdf/0906.0612.pdf),”
     Physics reports, 486(3–5), 75–174.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Fortunato, S. (2010). “[图中的社区检测](https://arxiv.org/pdf/0906.0612.pdf)”，《物理学报告》，486(3–5)，75–174。
 - en: Wale, I. A. Watson, and G. Karypis, “[Comparison of descriptor spaces for chemical
     compound retrieval and classification](https://link.springer.com/content/pdf/10.1007/s10115-007-0103-5.pdf),”
     Knowledge and Information Systems, vol. 14, no. 3, pp. 347–375, 2008.
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Wale, I. A. Watson 和 G. Karypis，“[化学化合物检索和分类的描述符空间比较](https://link.springer.com/content/pdf/10.1007/s10115-007-0103-5.pdf)”，《知识与信息系统》，第
+    14 卷，第 3 期，第 347–375 页，2008 年。
 - en: Kipf, T. N., & Welling, M. (2016). “[Semi-supervised classification with graph
     convolutional networks](https://arxiv.org/pdf/1609.02907.pdf),” arXiv preprint
     arXiv:1609.02907.
+  id: totrans-59
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Kipf, T. N., & Welling, M. (2016). “[图卷积网络的半监督分类](https://arxiv.org/pdf/1609.02907.pdf)”，arXiv
+    预印本 arXiv:1609.02907。
 - en: Brin, S., & Page, L. (1998). “[The anatomy of a large-scale hypertextual web
     search engine](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/334.pdf),”
     Computer networks and ISDN systems, 30(1–7), 107–117.
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Brin, S., & Page, L. (1998). “[大规模超文本 Web 搜索引擎的构造](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/334.pdf)”，《计算机网络与
+    ISDN 系统》，30(1–7)，107–117。
 - en: '**Bio: [Pantelis Elinas](https://medium.com/@pantelis.elinas)** is senior machine
     learning research engineer. He enjoy working on interesting problems, sharing
     knowledge, and developing useful software tools.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Pantelis Elinas](https://medium.com/@pantelis.elinas)** 是高级机器学习研究工程师。他喜欢解决有趣的问题、分享知识以及开发有用的软件工具。'
 - en: '[Original](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896).
     Reposted with permission.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896)。已获授权转载。'
 - en: '**Related:**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Graphs Are The Next Frontier In Data Science](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图是数据科学的下一前沿](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
 - en: '[Machine Learning and Deep Link Graph Analytics: A Powerful Combination](https://www.kdnuggets.com/2019/04/machine-learning-graph-analytics.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习与深度链接图分析：强大的组合](https://www.kdnuggets.com/2019/04/machine-learning-graph-analytics.html)'
 - en: '[Graph Analytics Using Big Data](https://www.kdnuggets.com/2017/12/graph-analytics-using-big-data.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用大数据进行图分析](https://www.kdnuggets.com/2017/12/graph-analytics-using-big-data.html)'
 - en: '* * *'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在 IT 领域'
 - en: '* * *'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个 90 亿美元的 AI 失败，深度分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
