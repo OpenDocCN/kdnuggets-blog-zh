@@ -1,305 +1,468 @@
 - en: Streamline Your Machine Learning Workflow with Scikit-learn Pipelines
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Scikit-learn 管道简化你的机器学习工作流程
 - en: 原文：[https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/2c07f2e6c45bd747dbb667658e74d496.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-learn 管道简化你的机器学习工作流程](../Images/2c07f2e6c45bd747dbb667658e74d496.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Using Scikit-learn pipelines can simplify your preprocessing and modeling steps,
     reduce code complexity, ensure consistency in data preprocessing, help with hyperparameter
     tuning, and make your workflow more organized and easier to maintain. By integrating
     multiple transformations and the final model into a single entity, Pipelines enhance
     reproducibility and make everything more efficient.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Scikit-learn 管道可以简化你的预处理和建模步骤，减少代码复杂性，确保数据预处理的一致性，帮助超参数调整，并使你的工作流程更加有序且易于维护。通过将多个转换和最终模型集成到一个单一实体中，管道提高了可重复性，使一切变得更高效。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this tutorial, we will be working with the [Bank Churn](https://www.kaggle.com/datasets/rangalamahesh/bank-churn?select=train.csv)
     dataset from Kaggle to train a Random Forest Classifier. We will compare the conventional
     approach of data preprocessing and model training with a more efficient method
     using Scikit-learn pipelines and ColumnTransformers.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用来自 Kaggle 的 [Bank Churn](https://www.kaggle.com/datasets/rangalamahesh/bank-churn?select=train.csv)
+    数据集来训练一个随机森林分类器。我们将比较传统的数据预处理和模型训练方法与使用 Scikit-learn 管道和 ColumnTransformers 的更高效的方法。
 - en: Data Processing Pipeline
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据处理管道
 - en: In the data processing pipeline, we will learn how to transform both categorical
     and numerical columns individually. We will start with a traditional style of
     code and then show a better way to perform similar processing.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据处理管道中，我们将学习如何单独转换分类和数值列。我们将从传统的代码风格开始，然后展示一种更好的处理方式。
 - en: After extracting the data from the zip file, load the `train.csv` file with
     “id” as the index column. Drop unnecessary columns and shuffle the dataset.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 zip 文件中提取数据后，加载 `train.csv` 文件，将“id”作为索引列。删除不必要的列并打乱数据集。
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: We have categorical, integer, and float columns. The dataset looks pretty clean.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有分类、整数和浮点列。数据集看起来相当干净。
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/39cabe76a0d32a591c3e21afc3efa379.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-learn 管道简化你的机器学习工作流程](../Images/39cabe76a0d32a591c3e21afc3efa379.png)'
 - en: Simple Scikit-learn Code
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 简单的 Scikit-learn 代码
 - en: As a data scientist, I have written this code multiple times. Our objective
     is to fill in the missing values for both categorical and numerical features.
     To achieve this, we will use a `SimpleImputer` with different strategies for each
     type of feature.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，我已经多次编写了这段代码。我们的目标是填充分类特征和数值特征中的缺失值。为此，我们将使用 `SimpleImputer`，对每种特征使用不同的策略。
 - en: After the missing values are filled in, we will convert categorical features
     to integers and apply min-max scaling on numerical features.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在填充缺失值之后，我们将把分类特征转换为整数，并对数值特征应用最小-最大缩放。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: As a result, we got a dataset that is clean and transformed with only integer
     or float values.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是，我们得到了一个干净且转化后的数据集，只有整数或浮点值。
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/a27edfcfb4081adc41a03bed8942bea0.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-learn 管道简化你的机器学习工作流程](../Images/a27edfcfb4081adc41a03bed8942bea0.png)'
 - en: Scikit-learn Pipelines Code
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Scikit-learn 管道代码
 - en: Let’s convert the above code using the `Pipeline` and `ColumnTransformer`. Instead
     of applying the preprocessing technique, we will create two pipelines. One is
     for numerical columns, and one is for categorical columns.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用`Pipeline`和`ColumnTransformer`转换上述代码。我们将创建两个管道：一个用于数值列，一个用于分类列。
 - en: In the numerical pipeline, we have used a simple impute with a “mean” strategy
     and applied a min-max scaler for normalization.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在数值管道中，我们使用了简单的插补“mean”策略，并应用了最小-最大缩放器进行归一化。
 - en: In the categorical pipeline, we used the simple imputer with the “most_frequent“
     strategy and the original encoder to convert the categories into numerical values.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在分类管道中，我们使用了简单插补器的“most_frequent”策略和原始编码器将类别转换为数值。
 - en: We combined the two pipelines using the ColumnTransformer and provided each
     with the columns index. It will help you apply these pipelines on certain columns.
     For example, a categorical transformer pipeline will be applied to only columns
     1 and 2.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用 ColumnTransformer 结合了两个管道，并为每个管道提供了列索引。这将帮助你将这些管道应用于特定的列。例如，分类转换器管道将仅应用于列
+    1 和 2。
 - en: '**Note:**  the remainder="passthrough" means that the columns that have not
     been processed will be added in the end. In our case, it is the target column.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：**  remainder="passthrough" 表示未处理的列将最终添加进来。在我们的例子中，它是目标列。'
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After the transformation, the resulting array contains numerical transform value
     at the start and categorical transform value at the end, based on the order of
     the pipelines in the column transformer.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过转换后，结果数组包含了数值转换值在开始部分和分类转换值在结束部分，这取决于管道在列转换器中的顺序。
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You can run the pipeline object in the Jupyter Notebook to visualize the pipeline.
     Make sure you have the latest version of Scikit-learn.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 Jupyter Notebook 中运行管道对象以可视化管道。确保你拥有最新版本的 Scikit-learn。
 - en: '[PRE4]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/2a060e3204d137789f79a96ba7a7d13f.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![通过 Scikit-learn 管道简化您的机器学习工作流程](../Images/2a060e3204d137789f79a96ba7a7d13f.png)'
 - en: Data Training Pipeline
+  id: totrans-36
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据训练管道
 - en: 'To train and evaluate our model, we need to split our dataset into two subsets:
     training and testing.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 要训练和评估我们的模型，我们需要将数据集拆分为两个子集：训练集和测试集。
 - en: To do this, we will first create dependent and independent variables and convert
     them into NumPy arrays. Then, we will use the `train_test_split` function to split
     the dataset into two subsets.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们将首先创建依赖变量和自变量，并将其转换为 NumPy 数组。然后，我们将使用`train_test_split`函数将数据集拆分为两个子集。
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Simple Scikit-learn Code
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 简单的 Scikit-learn 代码
 - en: The conventional way of writing training code is to first perform feature selection
     using `SelectKBest` and then provide the new feature to our Random Forest Classifier
     model.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统的训练代码编写方式是首先使用`SelectKBest`进行特征选择，然后将新特征提供给我们的随机森林分类器模型。
 - en: We will first train the model using the training set and evaluate the results
     using the testing dataset.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将首先使用训练集训练模型，并使用测试数据集评估结果。
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: We achieved a reasonably good accuracy score.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们达到了相当不错的准确率。
 - en: '[PRE7]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Scikit-learn Pipelines Code
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Scikit-learn 管道代码
 - en: Let's use the `Pipeline` function to combine both training steps into a pipeline.
     We can then fit the model on the training set and evaluate it on the testing set.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用`Pipeline`函数将两个训练步骤合并到一个管道中。然后我们可以在训练集上拟合模型，并在测试集上评估。
 - en: '[PRE8]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: We achieved similar results, but the code appears to be more efficient and straightforward.
     It's quite easy to add or remove new steps from the training pipeline.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们取得了类似的结果，但代码看起来更高效、更简洁。添加或移除训练管道中的新步骤非常简单。
 - en: '[PRE9]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Run the pipeline object to visualize the pipeline.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行管道对象以可视化管道。
 - en: '[PRE10]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/3c5776c9a41fc5ee436f9e5d646dc350.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![通过 Scikit-learn 管道简化您的机器学习工作流程](../Images/3c5776c9a41fc5ee436f9e5d646dc350.png)'
 - en: Combining Processing & Training Pipelines
+  id: totrans-54
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结合处理与训练管道
 - en: Now, we will combine both preprocessing and training pipeline by creating another
     pipeline and adding both pipelines.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将通过创建另一个管道并将两个管道相结合来整合预处理和训练管道。
 - en: 'Here is the complete code:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是完整的代码：
 - en: '[PRE11]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Output:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE12]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Visualizing the complete pipeline.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化完整的管道。
 - en: '[PRE13]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/2d33c985665b1ba91e86992f793ef83e.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![通过 Scikit-learn 管道简化您的机器学习工作流程](../Images/2d33c985665b1ba91e86992f793ef83e.png)'
 - en: Saving and Loading the Model
+  id: totrans-63
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 保存和加载模型
 - en: One of the major advantages of using pipelines is that you can save the pipeline
     with the model. During inference, you only need to load the pipeline object, which
     will be ready to process the raw data and provide you with accurate predictions.
     You don't need to re-write the processing and transformation functions in the
     app file, as it will work out of the box. This makes the machine learning workflow
     more efficient and saves time.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用管道的一个主要优势是你可以与模型一起保存管道。在推理过程中，你只需加载管道对象，它将准备好处理原始数据并提供准确的预测。你不需要在应用程序文件中重新编写处理和转换函数，因为它可以直接使用。这使得机器学习工作流程更高效，并节省了时间。
 - en: Let’s first save the pipeline using the [skops-dev/skops](https://github.com/skops-dev/skops)
     library.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，使用 [skops-dev/skops](https://github.com/skops-dev/skops) 库保存管道。
 - en: '[PRE14]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Then, load the saved pipeline and display the pipeline.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，加载保存的管道并显示管道。
 - en: '[PRE15]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: As we can see, we have successfully loaded the pipeline.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，我们已成功加载管道。
 - en: '![Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](../Images/27b169009d71748fb062ca3d68a62271.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![用 Scikit-learn 管道简化您的机器学习工作流程](../Images/27b169009d71748fb062ca3d68a62271.png)'
 - en: To evaluate our loaded pipeline, we will make predictions on the test set and
     then calculate accuracy and F1 scores.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了评估我们加载的管道，我们将对测试集进行预测，然后计算准确率和 F1 分数。
 - en: '[PRE16]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: It turns out we need to focus on minority classes to improve our f1 score.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 事实证明，我们需要关注少数类以提高我们的 f1 分数。
 - en: '[PRE17]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'The project files and code is available on [**Deepnote Workspace**](https://deepnote.com/workspace/abid-5efa63e7-7029-4c3e-996f-40e8f1acba6f/project/Streamline-Your-Machine-Learning-workflow-with-Scikit-learn-Pipelines-a2088a14-c9d1-490e-a610-c0e505b14282/notebook/With%20SKlearn%20Pipelines-49b6e41b5f1142fb8982dfbec4b1fb18).
     The workspace has two Notebooks: One with the Scikit-learn pipeline and one without
     it.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 项目文件和代码可以在 [**Deepnote Workspace**](https://deepnote.com/workspace/abid-5efa63e7-7029-4c3e-996f-40e8f1acba6f/project/Streamline-Your-Machine-Learning-workflow-with-Scikit-learn-Pipelines-a2088a14-c9d1-490e-a610-c0e505b14282/notebook/With%20SKlearn%20Pipelines-49b6e41b5f1142fb8982dfbec4b1fb18)
+    上找到。该工作区有两个笔记本：一个包含 Scikit-learn 管道，另一个不包含。
 - en: Conclusion
+  id: totrans-76
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this tutorial, we learned how Scikit-learn pipelines can help streamline
     machine learning workflows by chaining together sequences of data transforms and
     models. By combining preprocessing and model training into a single Pipeline object,
     we can simplify code, ensure consistent data transformations, and make our workflows
     more organized and reproducible.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们学习了 Scikit-learn 管道如何通过将数据转换和模型序列链接在一起来简化机器学习工作流程。通过将预处理和模型训练结合到一个 Pipeline
+    对象中，我们可以简化代码，确保一致的数据转换，并使我们的工作流程更有组织、更具可重复性。
 - en: '[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)****
     ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) is a certified data
     scientist professional who loves building machine learning models. Currently,
@@ -308,33 +471,51 @@
     and a bachelor''s degree in telecommunication engineering. His vision is to build
     an AI product using a graph neural network for students struggling with mental
     illness.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)****
+    ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专家，他热爱构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid
+    拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为遭受心理疾病困扰的学生构建一个 AI 产品。'
 - en: More On This Topic
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Easily Integrate LLMs into Your Scikit-learn Workflow with Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[轻松将 LLM 集成到您的 Scikit-learn 工作流程中](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
 - en: '[7 GPTs to Help Improve Your Data Science Workflow](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 个 GPT 帮助改善您的数据科学工作流程](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)'
 - en: '[5 MLOps Courses from Google to Level Up Your ML Workflow](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 门来自 Google 的 MLOps 课程提升您的 ML 工作流程](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)'
 - en: '[RAPIDS cuDF to Speed up Your Next Data Science Workflow](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 加速您的下一个数据科学工作流程](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
 - en: '[The 7 Best AI Tools for Data Science Workflow](https://www.kdnuggets.com/the-7-best-ai-tools-for-data-science-workflow)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学工作流的 7 款最佳人工智能工具](https://www.kdnuggets.com/the-7-best-ai-tools-for-data-science-workflow)'
 - en: '[Unify Batch and ML Systems with Feature/Training/Inference Pipelines](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[统一批处理和机器学习系统的特征/训练/推断流水线](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
