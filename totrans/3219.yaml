@@ -1,49 +1,74 @@
 - en: Random Forests®, Explained
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 随机森林®，解析
 - en: 原文：[https://www.kdnuggets.com/2017/10/random-forests-explained.html](https://www.kdnuggets.com/2017/10/random-forests-explained.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/10/random-forests-explained.html](https://www.kdnuggets.com/2017/10/random-forests-explained.html)
 - en: '![](../Images/32bd7c1f79cf7bfb80a751e5590bb162.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/32bd7c1f79cf7bfb80a751e5590bb162.png)'
 - en: In this post, we will give an overview of a very popular ensemble method called
     Random Forests(®). We first discuss the fundamental components of this ensemble
     learning algorithm - Decision Trees - and then the underlying algorithm and training
     procedures. We will also discuss some variations and advantages of this tool,
     and finally provide resources for you to get started with this powerful tool.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将概述一种非常流行的集成方法——随机森林（®）。我们首先讨论这种集成学习算法的基本组件——决策树，然后介绍其底层算法和训练程序。我们还将讨论该工具的一些变体和优势，最后提供一些资源，帮助你入门这一强大的工具。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 为你的组织提供IT支持'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*Decision Trees in a Nutshell*'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*决策树简述*'
 - en: A decision tree is a Machine Learning algorithm capable of fitting complex datasets
     and performing both classification and regression tasks. The idea behind a tree
     is to search for a pair of variable-value within the training set and split it
@@ -54,8 +79,10 @@
     the data. To make predictions, every new instance starts in the root node (top
     of the tree) and moves along the branches until it reaches a leaf node where no
     further branching is possible.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 决策树是一种机器学习算法，能够适应复杂的数据集，并执行分类和回归任务。树的核心思想是在训练集中寻找一对变量-值，并将其拆分，以生成“最佳”的两个子集。目标是基于最佳拆分标准创建分支和叶子，这一过程称为树的生长。具体来说，在每个分支或节点处，一个条件语句会根据特定变量的固定阈值对数据点进行分类，从而实现数据拆分。为了进行预测，每个新实例从根节点（树的顶部）开始，沿着分支移动，直到到达一个叶子节点，此时不再进行进一步的分支。
 - en: The algorithm used to train a tree is called CART(®) (Classification And Regression
     Tree). As we already mentioned, the algorithm seeks the best feature–value pair
     to create nodes and branches. After each split, this task is performed recursively
@@ -64,19 +91,25 @@
     gain or mean square error) to measure the quality of the split. It is important
     to mention that due to the greedy nature of the CART algorithm, finding an optimal
     tree is not guaranteed and usually, a reasonably good estimation will suffice.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于训练树的算法称为CART（®）（分类与回归树）。正如我们之前提到的，算法寻找最佳的特征-值对来创建节点和分支。在每次拆分后，这一任务会递归进行，直到达到树的最大深度或找到一个优化的树。根据任务的不同，算法可能使用不同的度量标准（基尼不纯度、信息增益或均方误差）来衡量拆分的质量。需要提到的是，由于CART算法的贪婪特性，找到一个最优的树并不保证，通常情况下，一个合理的估计就足够了。
 - en: Trees have a high risk of overfitting the training data as well as becoming
     computationally complex if they are not constrained and regularized properly during
     the growing stage. This overfitting implies a low bias, high variance trade-off
     in the model. Therefore, in order to deal with this problem, we use Ensemble Learning,
     an approach that allows us to correct this overlearning habit and hopefully, arrive
     at better, stronger results.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 树有很高的过拟合训练数据的风险，并且如果在生长阶段没有适当约束和正则化，它们可能会变得计算复杂。这种过拟合意味着模型的低偏差、高方差权衡。因此，为了解决这个问题，我们使用集成学习，这种方法可以纠正过度学习的习惯，并希望得到更好、更强的结果。
 - en: '*What is an Ensemble Method?*'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*什么是集成方法？*'
 - en: 'An ensemble method or ensemble learning algorithm consists of aggregating multiple
     outputs made by a diverse set of predictors to obtain better results. Formally,
     based on a set of “weak” learners we are trying to use a “strong” learner for
@@ -84,34 +117,46 @@
     the outcome of individual predictions by diversifying the set of predictors, thus
     lowering the variance, to arrive at a powerful prediction model that reduces overfitting
     our training set.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成方法或集成学习算法通过汇总由不同预测因子集产生的多个输出以获得更好的结果。正式地说，基于一组“弱”学习者，我们试图为模型使用一个“强”学习者。因此，使用集成方法的目的是：通过多样化预测因子集来平均单个预测的结果，从而降低方差，得到一个强大的预测模型，减少对训练集的过拟合。
 - en: In our case, a Random Forest (strong learner) is built as an ensemble of Decision
     Trees (weak learners) to perform different tasks such as regression and classification.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，随机森林（强学习者）作为决策树（弱学习者）的集成来执行回归和分类等不同任务。
 - en: '![](../Images/2b5e97066ca2c2499491ffcb8bd2221c.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2b5e97066ca2c2499491ffcb8bd2221c.png)'
 - en: '*How are Random Forests trained?*'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*随机森林是如何训练的？*'
 - en: Random Forests are trained via the bagging method. Bagging or Bootstrap Aggregating,
     consists of randomly sampling subsets of the training data, fitting a model to
     these smaller data sets, and aggregating the predictions. This method allows several
     instances to be used repeatedly for the training stage given that we are sampling
     with replacement. Tree bagging consists of sampling subsets of the training set,
     fitting a Decision Tree to each, and aggregating their result.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林通过袋装方法进行训练。袋装或自助聚合方法包括随机抽取训练数据的子集，拟合模型到这些较小的数据集上，并汇总预测结果。由于我们进行有放回抽样，这种方法允许多个实例在训练阶段被重复使用。树袋装方法包括抽取训练集的子集，对每个子集拟合一棵决策树，并汇总它们的结果。
 - en: The Random Forest method introduces more randomness and diversity by applying
     the bagging method to the feature space. That is, instead of searching greedily
     for the best predictors to create branches, it randomly samples elements of the
     predictor space, thus adding more diversity and reducing the variance of the trees
     at the cost of equal or higher bias. This process is also known as “feature bagging”
     and it is this powerful method what leads to a more robust model.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林方法通过将袋装法应用于特征空间来引入更多的随机性和多样性。即，不是贪婪地寻找最佳预测因子来创建分支，而是随机抽取预测因子空间中的元素，从而增加更多多样性并降低树的方差，但代价是偏差相同或更高。这个过程也被称为“特征袋装”，正是这个强大的方法使得模型更加稳健。
 - en: Let’s see now how to make predictions with Random Forests. Remember that in
     a Decision Tree a new instance goes from the root node to the bottom until it
     is classified in a leaf node. In the Random Forests algorithm, each new data point
@@ -121,17 +166,23 @@
     differ. For Classification problems, it uses the mode or most frequent class predicted
     by the individual trees (also known as a majority vote), whereas for Regression
     tasks, it uses the average prediction of each tree.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们来看看如何使用随机森林进行预测。记住，在决策树中，一个新实例从根节点走到最底层，直到在叶节点被分类。在随机森林算法中，每个新数据点经过相同的过程，但现在它访问集成中的所有不同树，这些树是使用训练数据和特征的随机样本生长起来的。根据手头的任务，聚合所用的函数会有所不同。对于分类问题，它使用个体树预测的模式或最频繁的类别（也称为多数投票），而对于回归任务，它使用每棵树的平均预测值。
 - en: Although this is a powerful and accurate method used in Machine Learning, you
     should always cross-validate your model as there may be overfitting. Also, despite
     its robustness, the Random Forest algorithm is slow, as it has to grow many trees
     during training stage and as we already know, this is a greedy process.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这是一种在机器学习中使用的强大且准确的方法，但你应该始终交叉验证你的模型，因为可能会出现过拟合。此外，尽管它非常稳健，但随机森林算法运行缓慢，因为在训练阶段必须生成许多树，正如我们所知，这是一个贪婪的过程。
 - en: '*Variations*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*变体*'
 - en: As we already specified, a Random Forest uses sampled subsets of both the training
     data and the feature space, which result in high diversity and randomness as well
     as low variance. Now, we can go a step further and introduce a bit more variety
@@ -142,75 +193,111 @@
     This ensemble is also known as Extremely Randomized Trees or Extra-Trees. This
     model also trades more bias for a lower variance but it is faster to train as
     it is not looking for an optimum, like the case of Random Forests.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们之前所述，随机森林使用训练数据和特征空间的采样子集，从而产生高多样性和随机性以及低方差。现在，我们可以更进一步，通过不仅寻找随机预测器，还考虑这些变量的随机阈值来引入更多的多样性。因此，它不是寻找特征和阈值的最佳配对用于分裂，而是使用这两者的随机样本来创建不同的分支和节点，从而进一步用偏差换取方差。这个集成方法也被称为极端随机树或额外树。这个模型也用更多的偏差换取较低的方差，但训练更快，因为它不像随机森林那样寻找最佳解。
 - en: '*Additional Properties*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*附加属性*'
 - en: One other important attribute of Random Forests is that they are very useful
     when trying to determine feature or variable importance. Because important features
     tend to be at the top of each tree and unimportant variables are located near
     the bottom, one can measure the average depth at which this
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林的另一个重要特性是它们在确定特征或变量重要性时非常有用。因为重要特征往往位于每棵树的顶部，而不重要的变量位于底部，可以通过测量这一点的平均深度来衡量其重要性。
 - en: '*Further Information*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*更多信息*'
 - en: You may find more information about Random Forests in [this Wikipedia article](https://en.wikipedia.org/wiki/Random_forest).
     The Johns Hopkins University Coursera's course on [Practical Machine Learning](https://www.coursera.org/learn/practical-machine-learning/lecture/XKsl6/random-forests)
     has a nice intuitive approach with applications in R. For a Python implementation,
     [follow the code](https://github.com/ageron/handson-ml/blob/master/07_ensemble_learning_and_random_forests.ipynb)
     by Aurélien Géron from [his book](https://shop.oreilly.com/product/0636920052289.do)
     "Hands-On Machine Learning with Scikit-Learn and TensorFlow".
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这个维基百科文章](https://en.wikipedia.org/wiki/Random_forest)中找到更多关于随机森林的信息。约翰霍普金斯大学Coursera的[实践机器学习](https://www.coursera.org/learn/practical-machine-learning/lecture/XKsl6/random-forests)课程提供了一个直观的方法，并且在R中有应用。对于Python实现，请[跟随这段代码](https://github.com/ageron/handson-ml/blob/master/07_ensemble_learning_and_random_forests.ipynb)，它来自Aurélien
+    Géron的[书籍](https://shop.oreilly.com/product/0636920052289.do)《动手机器学习：Scikit-Learn和TensorFlow》。
 - en: Random Forests™ is a trademark of Leo Breiman and Adele Cutler and is licensed
     exclusively to [Salford Systems](https://www.salford-systems.com/products/randomforests)
     for the commercial release of the software. CART(®) is a registered trademark
     of California Statistical Software, Inc. and is exclusively licensed to [Salford
     Systems](https://www.salford-systems.com/products/cart).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: Random Forests™ 是Leo Breiman和Adele Cutler的商标，并被[Salford Systems](https://www.salford-systems.com/products/randomforests)独家授权用于商业软件发布。CART(®)
+    是加利福尼亚统计软件公司的注册商标，并被[Salford Systems](https://www.salford-systems.com/products/cart)独家授权。
 - en: '*Related Content*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*相关内容*'
 - en: '[Random Forest in Python](/2016/12/random-forests-python.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的随机森林](/2016/12/random-forests-python.html)'
 - en: '[Understanding Machine Learning Algorithms](/2017/10/understanding-machine-learning-algorithms.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解机器学习算法](/2017/10/understanding-machine-learning-algorithms.html)'
 - en: '[Getting Up Close and Personal with Algorithms](/2017/03/dataiku-top-algorithms.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[与算法的亲密接触](/2017/03/dataiku-top-algorithms.html)'
 - en: More On This Topic
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树与随机森林的解释](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学，寻找目标，并以目标为…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'

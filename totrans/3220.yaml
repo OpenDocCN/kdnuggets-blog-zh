@@ -1,19 +1,27 @@
 - en: How LinkedIn Makes Personalized Recommendations via Photon-ML Machine Learning
     tool
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何通过 Photon-ML 机器学习工具在 LinkedIn 上生成个性化推荐
 - en: 原文：[https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html](https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html](https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html)
 - en: '**By Yiming Ma, Bee-Chung Chen & Deepak Agarwal, LinkedIn Corp.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：马一鸣、陈碧中与迪帕克·阿加瓦尔，LinkedIn 公司**'
 - en: Introduction
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Recommender systems are automated computer programs that match items to users
     in different contexts. Such systems are ubiquitous and have become an integral
     part of our daily lives. Examples include recommending products to users on a
@@ -21,33 +29,51 @@
     recommending movies to users on a site like Netflix, recommending jobs to users
     on LinkedIn, and so on. Given the significant heterogeneity in user preferences,
     providing personalized recommendations is key to the success of such systems.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 推荐系统是自动化计算机程序，用于在不同的上下文中将项目匹配到用户。这些系统无处不在，已成为我们日常生活的不可或缺的一部分。例如，像亚马逊这样的网站向用户推荐产品，像
+    Yahoo! 这样的网站向用户推荐内容，像 Netflix 这样的网站向用户推荐电影，LinkedIn 上向用户推荐工作等等。鉴于用户偏好的显著异质性，提供个性化推荐是这些系统成功的关键。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: To achieve this goal at scale, using machine learning models to estimate user
     preference from feedback data is essential. Such models are constructed using
     large amounts of high-frequency data obtained from past user interactions with
@@ -57,8 +83,10 @@
     require close collaboration among computer scientists, machine learners, statisticians,
     optimization experts, system experts, and, of course, domain experts. It is one
     of the most exciting applications of big data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在大规模上实现这一目标，使用机器学习模型从反馈数据中估计用户偏好是至关重要的。这些模型是通过大量从过去用户与项目互动中获得的高频数据构建的。它们本质上是统计性的，涉及诸如序列决策过程、高维分类数据交互建模以及开发可扩展统计方法等挑战。该领域的新方法需要计算机科学家、机器学习专家、统计学家、优化专家、系统专家以及领域专家之间的紧密合作。这是大数据应用中最令人兴奋的领域之一。
 - en: Many products at LinkedIn are empowered by recommender systems. A core component
     of these systems is an easy-to-use and flexible machine learning library, called
     Photon-ML, which is key to our productivity, agility, and developer happiness.
@@ -66,25 +94,37 @@
     we focus on the personalization aspect of model building and explain the modeling
     principle as well as how to implement Photon-ML so that it can scale to hundreds
     of millions of users.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: LinkedIn 上的许多产品都由推荐系统驱动。这些系统的核心组件是一个易于使用和灵活的机器学习库，名为 Photon-ML，它对我们的生产力、敏捷性和开发者满意度至关重要。我们已经开源了
+    Photon-ML 使用的大部分算法。在本文中，我们关注模型构建的个性化方面，并解释建模原理以及如何实现 Photon-ML 以便能够扩展到数亿用户。
 - en: Personalized Models in Photon-ML
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Photon-ML 中的个性化模型
 - en: At LinkedIn, we have observed significant lifts in user engagement and other
     business metrics in many product domains through Photon-ML. To provide a concrete
     example, note how we make personalized job recommendations using a Generalized
     Additive Mixed-Effect (GAME) model, which generated 20% to 40% more job applications
     for job seekers in our online A/B experiments.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 LinkedIn，我们通过 Photon-ML 在许多产品领域观察到了用户参与度和其他业务指标的显著提升。以一个具体的例子来说，我们使用广义加性混合效应（GAME）模型进行个性化职位推荐，在我们的在线
+    A/B 实验中，为求职者产生了 20% 到 40% 更多的职位申请。
 - en: '![LinkedIn image](../Images/49da1fcd3e13df7ec6787de1b1df203e.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![LinkedIn 图片](../Images/49da1fcd3e13df7ec6787de1b1df203e.png)'
 - en: Figure 1\. A snapshot of LinkedIn job home
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1\. LinkedIn 职位首页的快照
 - en: As the world's largest professional social network, LinkedIn provides a unique
     value proposition for its over 500 million members to connect with all kinds of
     opportunities for their career growth. One of the most important products we offer
@@ -100,29 +140,41 @@
     or on the website of the company posting the job. One of the key success metrics
     of LinkedIn’s jobs business is the total number of **job application clicks**
     (i.e. the number of clicks on the “apply” button).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为全球最大的职业社交网络，LinkedIn 为其超过 5 亿会员提供了独特的价值主张，以便他们能够与各种职业成长机会连接。我们提供的最重要的产品之一是职位首页，它作为一个中心位置，帮助有求职意向的会员找到适合申请的职位。图
+    1 是 LinkedIn 职位首页的快照。页面上的主要模块之一是“您可能感兴趣的职位”，根据会员的公开资料数据和在网站上的过往活动，向会员推荐相关的职位缩略图。如果会员对推荐的职位感兴趣，可以点击该职位进入职位详细信息页面，页面上显示了原始职位发布信息，包括职位名称、描述、职责、所需技能和资格。职位详细信息页面上还有一个“申请”按钮，允许会员一键申请该职位，无论是在
+    LinkedIn 上还是在发布职位的公司网站上。LinkedIn 职位业务的一个关键成功指标是**职位申请点击总数**（即点击“申请”按钮的次数）。
 - en: 'The goal of our model is to accurately predict the probability that a member
     will click on the "apply" button of a recommended job. Intuitively, the model
     consists of three components (sub-models):'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们模型的目标是准确预测会员点击推荐职位的“申请”按钮的概率。直观地说，模型由三个组件（子模型）组成：
 - en: A global model that captures the general behavior of how members apply for jobs,
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 捕捉会员申请职位的一般行为的全局模型，
 - en: A member-specific model with parameters (to be learned from data) specific to
     the given member to capture member's personal behavior that deviates from the
     general behavior, and
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 针对特定会员的模型，具有特定于给定会员的参数（从数据中学习），以捕捉会员的个人行为，这些行为偏离了通用行为，以及
 - en: A job-specific model with parameters (to be learned from data) specific to the
     given job to capture the job's unique behavior that deviates from the general
     behavior.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 针对特定职位的模型，具有特定于给定职位的参数（从数据中学习），以捕捉职位的独特行为，这些行为偏离了通用行为。
 - en: Like many recommender system applications, we observe a lot of heterogeneity
     in the amount of data per member or job. There are new members to the site (hence
     almost no data) as well as members who have strong job search intent and applied
@@ -131,8 +183,10 @@
     to rely on the member-specific model. On the other hand, if the member does not
     have much past response data, we would like the member to fall back to the global
     model that captures the general behavior.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 像许多推荐系统应用一样，我们观察到每个会员或职位的数据量存在很大的异质性。网站上有新会员（因此几乎没有数据），以及有强烈求职意图且过去申请过许多职位的会员。类似地，职位也有流行和不流行之分。对于过去对不同职位有许多响应的会员，我们希望依赖于特定会员的模型。另一方面，如果会员没有很多过去的响应数据，我们希望该会员可以退回到捕捉一般行为的全局模型。
 - en: 'Now let us take a deep look at how the GAME model enables such a level of personalization.
     Let *y[mjt]* denote the binary response of whether member *m* would apply for
     job *j* in context *t*, where the context usually includes the time and location
@@ -148,17 +202,29 @@
     because IDs will be treated differently from regular features. The GAME model
     for predicting the probability of member *m* applying for job *j* using logistic
     regression is:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们深入探讨一下 GAME 模型如何实现如此高水平的个性化。令 *y[mjt]* 表示成员 *m* 在上下文 *t* 中是否申请职位 *j* 的二元响应，其中上下文通常包括职位展示的时间和地点。我们用
+    *q[m]* 表示成员 *m* 的特征向量，包含从成员的公开资料中提取的特征，例如成员的头衔、职位职能、教育历史、行业等。我们用 *s[j]* 表示职位 *j*
+    的特征向量，包含从职位发布中提取的特征，例如职位头衔、所需技能和经验等。令 *x[mjt]* 表示（*m, j, t*）三元组的整体特征向量，这可以包括 *q[m]*
+    和 *s[j]* 的特征级主效应，*q[m]* 和 *s[j]* 的外积用于捕捉成员和职位特征之间的交互作用，以及上下文的特征。我们假设 *x[mjt]*
+    不包含成员 ID 或项目 ID 作为特征，因为 ID 会与常规特征不同对待。用于预测成员 *m* 申请职位 *j* 的概率的 GAME 模型采用逻辑回归形式：
 - en: '![Equation](../Images/200876f8b83666b6a8eb38aff11812b3.png)      **(1)**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '![方程式](../Images/200876f8b83666b6a8eb38aff11812b3.png)      **(1)**'
 - en: where
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中
 - en: '![Equation](../Images/6761cbc6946e5453aa66a263baa73dec.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![方程式](../Images/6761cbc6946e5453aa66a263baa73dec.png)'
 - en: is the link function, ***b*** is the global coefficient vector (also called
     ***fixed effect*** coefficients in the statistical literature), and *α[m]* and
     *β[j]* are the coefficient vectors specific to member *m* and job *j*, respectively.
@@ -171,12 +237,19 @@
     close to zero, and the model for member *m* will fall back to the global fixed
     effect component *x'[mjt]b*. The same behavior applies to the per-job coefficient
     vector *β[j]*.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 是连接函数，***b*** 是全局系数向量（在统计学文献中也称为 ***固定效应*** 系数），*α[m]* 和 *β[j]* 分别是成员 *m* 和职位
+    *j* 特有的系数向量。*α[m]* 和 *β[j]* 称为 ***随机效应系数***，它们捕捉成员 *m* 对不同项目特征的个人偏好以及职位 *j* 对不同成员特征的吸引力。对于过去对不同项目有许多响应的成员
+    *m*，我们能够准确估计她的个人系数向量 *α[m]* 并提供个性化预测。另一方面，如果成员 *m* 过去没有多少响应数据，*α[m]* 的后验均值将接近于零，成员
+    *m* 的模型将回退到全局固定效应组件 *x'[mjt]b*。相同的行为适用于每个职位的系数向量 *β[j]*。
 - en: 'Photon-ML: Scalable Platform for Building Personalized Models'
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 'Photon-ML: 可扩展的平台用于构建个性化模型'
 - en: To train a model using a large amount of data on a Hadoop cluster, we developed
     Photon-ML on top of Apache Spark. One main challenge in designing a scalable algorithm
     is that the number of model parameters to be learned from the data is huge (e.g.
@@ -187,8 +260,10 @@
     As a result, the key to making the algorithm scalable is to avoid communicating
     or broadcasting the large number of parameters in the user-specific and job-specific
     models to the cluster.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在Hadoop集群上使用大量数据训练模型，我们在Apache Spark的基础上开发了Photon-ML。设计可扩展算法的一个主要挑战是需要从数据中学习的模型参数数量巨大（例如，数十亿）。如果我们天真地使用标准机器学习方法（例如Spark提供的MLlib）训练模型，则更新大量参数的网络通信成本过高，计算上不可行。大量的参数主要来自用户特定和工作特定模型。因此，使算法可扩展的关键是避免将用户特定和工作特定模型中的大量参数传递或广播到集群。
 - en: We solve the large-scale model training problem by applying parallel block-wise
     coordinate descent (PBCD), which iteratively trains the global model, user-specific
     models and job-specific models in turns until convergence. The global model is
@@ -198,12 +273,16 @@
     be communicated across machines in the cluster. Instead, a partial score per training
     example is communicated across machines. This significantly reduced the communicate
     cost. PBCD can be easily applied to models with different kinds of sub-models.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过应用并行块坐标下降（PBCD）解决了大规模模型训练问题，该方法交替训练全球模型、用户特定模型和工作特定模型，直到收敛。全球模型使用标准的分布式梯度下降方法进行训练。对于用户特定模型和工作特定模型，我们设计了一种模型参数更新方案，使得用户特定和工作特定模型中的参数无需在集群中的机器之间传递。相反，每个训练样本的部分得分在机器之间传递。这显著降低了通信成本。PBCD可以轻松应用于具有不同子模型类型的模型。
 - en: Conclusions and Future Work
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论与未来工作
 - en: In this article, we have briefly explained how to use Photon-ML to enable personalized
     recommendations. Many intriguing optimization and implementation details have
     been skipped due to the length limitation of this article. We highly recommend
@@ -212,49 +291,73 @@
     plans for Photon-ML. In the near future, we are planning to add more modeling
     capabilities to Photon-ML, including tree models and different deep learning algorithms
     to capture non-linear and deeper representation structures.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们简要说明了如何使用Photon-ML实现个性化推荐。由于文章长度限制，许多有趣的优化和实现细节被省略了。我们强烈建议读者查看开源的Photon-ML库。在LinkedIn，我们致力于构建最先进的推荐系统。我们对Photon-ML制定了令人兴奋的计划。在不久的将来，我们计划向Photon-ML添加更多建模能力，包括树模型和不同的深度学习算法，以捕捉非线性和更深层次的表示结构。
 - en: '**Related:**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Recommendation System Algorithms: An Overview](/2017/08/recommendation-system-algorithms-overview.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[推荐系统算法概述](/2017/08/recommendation-system-algorithms-overview.html)'
 - en: '[9 Must-Have Datasets for Investigating Recommender Systems](/2016/02/nine-datasets-investigating-recommender-systems.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调查推荐系统的9个必备数据集](/2016/02/nine-datasets-investigating-recommender-systems.html)'
 - en: '[Top 10 Active Big Data, Data Science, Machine Learning Influencers on LinkedIn,
     Updated](/2017/09/top-10-big-data-science-machine-learning-influencers-linkedin-updated.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LinkedIn上的前10位活跃大数据、数据科学、机器学习影响者（更新）](/2017/09/top-10-big-data-science-machine-learning-influencers-linkedin-updated.html)'
 - en: More On This Topic
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标并找到目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元AI失败的剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
