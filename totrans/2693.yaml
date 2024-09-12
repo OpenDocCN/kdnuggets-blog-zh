@@ -1,274 +1,424 @@
 - en: Exploring The Brute Force K-Nearest Neighbors Algorithm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 探索暴力K-近邻算法
 - en: 原文：[https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html](https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html](https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/),
     Praxis Business School**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/)，普拉克西斯商学院**'
 - en: '![Header image](../Images/97ae97e55099f6b9421805e97dcccecb.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![标题图片](../Images/97ae97e55099f6b9421805e97dcccecb.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 在IT方面支持你的组织'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Did you find any difference between the two graphs?
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 你发现这两个图表之间有什么不同吗？
 - en: Both show the accuracy of a classification problem for K values between 1 to
     10.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 两者都显示了K值在1到10之间的分类问题的准确性。
 - en: Both of the graphs use the KNN classifier model with 'Brute-force' algorithm
     and 'Euclidean' distance metric on same dataset. Then why is there a difference
     in the accuracy between the two graphs?
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个图表都使用了带有“暴力法”算法和“欧几里得”距离度量的KNN分类器模型，并在相同的数据集上进行比较。那么为什么两个图表之间的准确性会有差异呢？
 - en: Before answering that question, let me just walk you through the KNN algorithm
     pseudo code.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回答这个问题之前，让我先带你了解一下KNN算法的伪代码。
 - en: I hope all are familiar with k-nearest neighbour algorithm. If not, you can
     read the basics about it at [https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望大家对k近邻算法都很熟悉。如果不熟悉，你可以在[https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/)上阅读有关基础知识。
 - en: 'We can implement a KNN model by following the below steps:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以按照以下步骤实现KNN模型：
 - en: Load the data
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 加载数据
 - en: Initialise the value of k
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 初始化k的值
 - en: For getting the predicted class, iterate from 1 to total number of training
     data points
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 要获得预测的类别，请从1迭代到训练数据点的总数。
 - en: Calculate the distance between test data and each row of training data. Here
     we will use Euclidean distance as our distance metric since it’s the most popular
     method. Some of the other metrics that can be used are Chebyshev, cosine, etc.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算测试数据和每一行训练数据之间的距离。这里我们将使用欧几里得距离作为我们的距离度量，因为它是最流行的方法。其他可以使用的度量包括切比雪夫距离、余弦距离等。
 - en: Sort the calculated distances in ascending order based on distance values
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 根据距离值对计算出的距离进行升序排序
 - en: Get top k rows from the sorted array
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从排序后的数组中获取前k行
 - en: Get the most frequent class of these rows
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取这些行中最频繁的类别
 - en: Return the predicted class
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 返回预测的类别
 - en: For our analysis, lets just focus on step 7, getting the most frequent class
     of these rows.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的分析，让我们专注于第7步，即获取这些行中最频繁的类别。
 - en: After getting the top k rows, we pick the most frequent class (mode) from these
     rows. There is a little problem with that.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在获得前k行后，我们从这些行中选择最频繁的类别（众数）。这存在一些问题。
 - en: In case of an odd k neighbours, there will be always a majority class in the
     list. Thus, there will be no problem with odd k neighbours.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果k是奇数邻居，则列表中总会有一个主要类别。因此，奇数k邻居不会有问题。
 - en: But what about an even k neighbours number and if two or more classes get the
     same majority?
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么偶数k邻居的情况如何，如果两个或更多类别获得相同的多数？
 - en: The KNN algorithm can also give high accuracy for a dataset for k even neighbours.
     It is not restricted to only use odd k neighbours to get the majority class.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: KNN算法对于数据集中k是偶数邻居时也可以提供高准确率。它并不仅限于使用奇数k邻居来获得主要类别。
 - en: 'Take for example:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 举个例子：
 - en: If k = 4 and we have Class A = 2 and Class B = 2 in our list. In that case,
     the algorithm will take the class what falls in the first rows of the top K rows
     instead of looking at the distance metric.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果k = 4，且我们在列表中有类别A = 2和类别B = 2。在这种情况下，算法将选择前K行中的类别，而不是查看距离度量。
 - en: To solve this problem, we used **distance - mode - distance** as our criteria
     for even-numbered k neighbours in our algorithm.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，我们在算法中使用了**距离 - 模式 - 距离**作为偶数k邻居的标准。
 - en: Our algorithm works the same way as the brute-force algorithm, but the difference
     that it makes with even k neighbours is great.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的算法与暴力算法的工作方式相同，但在偶数k邻居的情况下差异很大。
 - en: What our algorithm does is very simple. It takes the top k rows from the distance
     metric. In the case of an odd k value, it takes the majority. For an even number
     of k rows, majority classes are selected. If it happens to have two or more classes
     having a majority, those two or more major class distances will go to the distance
     metric loop again and check which class has the lowest distance metric, and that
     class is chosen as the majority class.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的算法做的事情非常简单。它从距离度量中选取前k行。在k值为奇数的情况下，它选择多数类。对于偶数个k行，选择多数类。如果有两个或更多的类别具有多数情况，这些主要类别的距离将再次进入距离度量循环，检查哪个类别的距离度量最小，该类别被选为主要类别。
 - en: Let's see an example of how this works.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看这个是如何工作的。
 - en: For our analysis we used the penguin dataset.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的分析，我们使用了企鹅数据集。
 - en: '**Brute-force Algorithm:**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**暴力算法：**'
 - en: '![Image](../Images/e2ffb131bc18c7520ff8bad8817223fd.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/e2ffb131bc18c7520ff8bad8817223fd.png)'
 - en: Here we gave k = 4.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里我们设置了k = 4。
 - en: Class ‘Chinstrap’ and ‘Adelie’ ended up with mode as 2\. After arranging the
     K neighbours based on mode, brute-force ended up picking the first class instead
     of picking the class which had least distance in the distance metric.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 类别‘Chinstrap’和‘Adelie’最终模式为2。在根据模式排列K邻居后，暴力算法选择了第一个类别，而不是选择距离度量中最小距离的类别。
 - en: This affects the accuracy for the brute-force algorithm when k value is even.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这会影响当k值为偶数时暴力算法的准确性。
 - en: '**Our Model:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们的模型：**'
 - en: '![Image](../Images/811e79aeb0610d3b53c518090d21cdef.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/811e79aeb0610d3b53c518090d21cdef.png)'
 - en: Our model is able to increase the accuracy in case of even numbered neighbours.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的模型能够在偶数邻居的情况下提高准确性。
 - en: '**Results:**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结果：**'
 - en: I have compared the accuracy of our model with brute-force and below are the
     results.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经将我们模型的准确性与暴力算法进行了比较，以下是结果。
 - en: '| **K** | **Brute Force** | **Our Model** |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| **K** | **暴力算法** | **我们的模型** |'
 - en: '| 1 | 0.805 | 0.805 |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 0.805 | 0.805 |'
 - en: '| 2 | 0.746 | 0.805 |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 0.746 | 0.805 |'
 - en: '| 3 | 0.761 | 0.761 |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 0.761 | 0.761 |'
 - en: '| 4 | 0.746 | 0.791 |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 0.746 | 0.791 |'
 - en: '| 5 | 0.776 | 0.776 |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 0.776 | 0.776 |'
 - en: '| 6 | 0.716 | 0.791 |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | 0.716 | 0.791 |'
 - en: '| 7 | 0.746 | 0.746 |'
+  id: totrans-54
   prefs: []
   type: TYPE_TB
+  zh: '| 7 | 0.746 | 0.746 |'
 - en: '| 8 | 0.686 | 0.746 |'
+  id: totrans-55
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 0.686 | 0.746 |'
 - en: '| 9 | 0.746 | 0.746 |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '| 9 | 0.746 | 0.746 |'
 - en: '| 10 | 0.701 | 0.776 |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| 10 | 0.701 | 0.776 |'
 - en: I compared the results with **kd tree and ball tree algorithms** also, and similar
     results were obtained.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我还将结果与**kd树和球树算法**进行了比较，得到了类似的结果。
 - en: GitHub Link: [https://github.com/myuvarajmp/Exploring_KNN_Algorithm](https://github.com/myuvarajmp/Exploring_KNN_Algorithm)
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 'GitHub链接: [https://github.com/myuvarajmp/Exploring_KNN_Algorithm](https://github.com/myuvarajmp/Exploring_KNN_Algorithm)'
 - en: Thanks for your time and be kind with your feedback as this is my first article.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢你的时间，请对我的反馈保持友好，因为这是我的第一篇文章。
 - en: '**Bio: [Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/)**
     is a Student at Praxis Business School in Bangalore, India.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/)**
+    是印度班加罗尔Praxis商学院的学生。'
 - en: '**Related:**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Beginner’s Guide to K-Nearest Neighbors in R: from Zero to Hero](/2020/01/beginners-guide-nearest-neighbors-r.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R中k-最近邻的初学者指南：从零到英雄](/2020/01/beginners-guide-nearest-neighbors-r.html)'
 - en: '[Introduction to the K-nearest Neighbour Algorithm Using Examples](/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过示例介绍k-最近邻算法](/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html)'
 - en: '[Classifying Heart Disease Using K-Nearest Neighbors](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用K-最近邻分类心脏病](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)'
 - en: More On This Topic
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从理论到实践：构建k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
 - en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类中的最近邻](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
 - en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Scikit-learn中的K最近邻](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
 - en: '[40% of Labour Force Will be Affected by AI in 3 Years](https://www.kdnuggets.com/40-of-labour-force-will-be-affected-by-ai-in-3-years)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3年内40%的劳动力将受AI影响](https://www.kdnuggets.com/40-of-labour-force-will-be-affected-by-ai-in-3-years)'
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
 - en: '[Exploring the Latest Trends in AI/DL: From Metaverse to Quantum Computing](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索AI/DL的最新趋势：从元宇宙到量子计算](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)'
