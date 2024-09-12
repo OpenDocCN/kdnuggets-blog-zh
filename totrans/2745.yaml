@@ -1,532 +1,796 @@
 - en: 'LightGBM: A Highly-Efficient Gradient Boosting Decision Tree'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: LightGBM：高效的梯度提升决策树
 - en: 原文：[https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html](https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html](https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: The power of the LightGBM algorithm cannot be taken lightly (pun intended).
     LightGBM is a distributed and efficient [gradient boosting framework](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html) that
     uses [tree-based learning](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/).
     It’s [histogram-based](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html) and
     places continuous values into discrete bins, which leads to faster training and
     more efficient memory usage. In this piece, we’ll explore LightGBM in depth.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM算法的强大不容小觑（双关语）。LightGBM是一个分布式且高效的[梯度提升框架](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)，它使用[基于树的学习](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/)。它是[基于直方图的](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)，并将连续值分入离散的箱中，这使得训练更快、内存使用更高效。在这篇文章中，我们将深入探讨LightGBM。
 - en: LightGBM Advantages
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LightGBM的优点
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'According to the official docs, here are the advantages of the LightGBM framework:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据官方文档，LightGBM框架的优点如下：
 - en: Faster training speed and higher efficiency
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更快的训练速度和更高的效率
 - en: Lower memory usage
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更低的内存使用
 - en: Better accuracy
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更好的准确性
 - en: Support of parallel and GPU learning
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持并行和GPU学习
 - en: Capable of handling large-scale data
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够处理大规模数据
 - en: Parameter Tuning
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参数调整
 - en: The framework uses a leaf-wise tree growth algorithm, which is unlike many other
     tree-based algorithms that use depth-wise growth. Leaf-wise tree growth algorithms
     tend to converge faster than depth-wise ones. However, they tend to be more prone
     to overfitting.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 该框架使用叶子优先树生长算法，这不同于许多其他基于树的算法，它们使用深度优先生长。叶子优先树生长算法通常比深度优先算法收敛得更快。然而，它们更容易过拟合。
 - en: '![Figure](../Images/56ad54fca4c0ecc23b36a5ca30e21996.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/56ad54fca4c0ecc23b36a5ca30e21996.png)'
 - en: '[source](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)![Figure](../Images/008a899a4e51dafd9da8c073fcc560db.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)![图示](../Images/008a899a4e51dafd9da8c073fcc560db.png)'
 - en: '[source](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)'
 - en: 'Here are the parameters we need to tune to get good results on a leaf-wise
     tree algorithm:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是我们需要调整的参数，以获得良好的叶子优先树算法结果：
 - en: '`num_leaves`: Setting the number of leaves to `num_leaves = 2^(max_depth)` will
     give you the same number of leaves as a depth-wise tree. However, it isn’t a good
     practice. Ideally, the number of leaves should be smaller than `2^(max_depth)`'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_leaves`：将叶子数量设置为`num_leaves = 2^(max_depth)`会得到与深度优先树相同的叶子数量。但这不是一个好的实践。理想情况下，叶子数量应小于`2^(max_depth)`'
 - en: '`min_data_in_leaf` prevents overfitting. It’s set depending on `num_leaves` and
     the number of training samples. For a large dataset, it can be set to hundreds
     or thousands.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`min_data_in_leaf`防止过拟合。它的设置依赖于`num_leaves`和训练样本的数量。对于大数据集，可以设置为数百或数千。'
 - en: '`max_depth` for limiting the depth of the tree.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_depth`用于限制树的深度。'
 - en: 'Faster speeds on the algorithm can be obtained by using:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用以下方法可以获得更快的算法速度：
 - en: a small `max_bin`
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个小的`max_bin`
 - en: '`save_binary` to speed up data loading in future learning'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`save_binary` 用于加速未来学习中的数据加载'
 - en: parallel learning
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并行学习
 - en: bagging, through setting `bagging_freq` and `bagging_fraction`
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bagging，通过设置 `bagging_freq` 和 `bagging_fraction`
 - en: '`feature_fraction` for feature sub-sampling'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`feature_fraction` 用于特征子采样'
 - en: 'In order to get better accuracy, one can use a large `max_bin`, use a small
     learning rate with large `num_iterations`, and use more training data. One can
     also use many `num_leaves`, but it may lead to overfitting. Speaking of overfitting,
     you can deal with it by:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得更好的准确性，可以使用较大的 `max_bin`、较小的学习率和较大的 `num_iterations`，以及更多的训练数据。还可以使用更多的
+    `num_leaves`，但这可能导致过拟合。说到过拟合，你可以通过以下方法处理：
 - en: Increasing `path_smooth`
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加 `path_smooth`
 - en: Using a larger training set
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用更大的训练集
 - en: Trying `lambda_l1`, `lambda_l2`, and `min_gain_to_split` for regularization
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尝试 `lambda_l1`、`lambda_l2` 和 `min_gain_to_split` 进行正则化
 - en: Avoid growing a very deep tree
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 避免生成过深的树
 - en: Machine learning is rapidly moving closer to where data is collected — edge
     devices. [Subscribe to the Fritz AI Newsletter to learn more about this transition
     and how it can help scale your business.](https://www.fritz.ai/newsletter?utm_campaign=fritzai-newsletter-scale6&utm_source=heartbeat)
+  id: totrans-37
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 机器学习正迅速向数据收集的地方——边缘设备靠近。[订阅 Fritz AI 通讯，了解更多有关这一过渡的内容，以及它如何帮助扩展你的业务。](https://www.fritz.ai/newsletter?utm_campaign=fritzai-newsletter-scale6&utm_source=heartbeat)
 - en: Categorical Features
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分类特征
 - en: A common way of processing categorical features in machine learning is one-hot
     encoding. This method is not optimal for tree learners, and especially for high-cardinality
     categorical features. Trees built on one-hot encoded features are unbalanced and
     have to grow too deep in order to obtain good accuracy.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理机器学习中的分类特征的一种常见方法是独热编码。这种方法对树模型并不理想，特别是对于高基数分类特征。基于独热编码特征构建的树模型往往不平衡，需要生长得过深才能获得良好的准确性。
 - en: Using the `categorical_feature` attribute, we can specify categorical features
     (without one-hot encoding) for their model. Categorical features should be encoded
     as non-negative integers less than `Int32.MaxValue`. They should start from zero.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `categorical_feature` 属性，我们可以为模型指定分类特征（无需独热编码）。分类特征应编码为小于 `Int32.MaxValue`
+    的非负整数，从零开始。
 - en: LightGBM Applications
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LightGBM 应用
 - en: 'LightGBM can be best applied to the following problems:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 最适合应用于以下问题：
 - en: Binary classification using the `logloss` objective function
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `logloss` 目标函数的二分类
 - en: Regression using the `L2` loss
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `L2` 损失进行回归
 - en: Multi-classification
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多分类
 - en: Cross-entropy using the `logloss` objective function
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `logloss` 目标函数的交叉熵
 - en: LambdaRank using `lambdarank` with NDCG as the objective function
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `lambdarank` 进行 LambdaRank，并以 NDCG 作为目标函数
 - en: Metrics
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 指标
 - en: 'The metrics supported by LightGBM are:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 支持的指标有：
 - en: L1 loss
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: L1 损失
 - en: L2 loss
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: L2 损失
 - en: Log loss
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对数损失
 - en: Classification error rate
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分类错误率
 - en: AUC
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: AUC
 - en: NDCG
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: NDCG
 - en: MAP
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MAP
 - en: Multi-class log loss
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多分类对数损失
 - en: Multi-class error rate
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多分类错误率
 - en: Fair
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Fair
 - en: Huber
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Huber
 - en: Poisson
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 泊松
 - en: Quantile
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Quantile
 - en: MAPE
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MAPE
 - en: Kullback-Leibler
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Kullback-Leibler
 - en: Gamma
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Gamma
 - en: Tweedie
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Tweedie
 - en: Handling Missing Values
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理缺失值
 - en: By default, LightGBM is able to handle missing values. You can disable this
     by setting `use_missing=false`. It uses NA to represent missing values, but to
     use zero you can set it `zero_as_missing=true`.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，LightGBM 能处理缺失值。你可以通过设置 `use_missing=false` 禁用此功能。它使用 NA 表示缺失值，但如果要使用零，你可以设置
+    `zero_as_missing=true`。
 - en: Core Parameters
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 核心参数
 - en: 'Here are some of the core parameters for LightGBM:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是 LightGBM 的一些核心参数：
 - en: '`task` defaults to `train`. Other options are `predict`, `convert_model`, and `refit`.
     The alias for this parameter is `task_type.` `convert_model` converts the model
     into an if-else format.'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`task` 默认值为 `train`。其他选项包括 `predict`、`convert_model` 和 `refit`。该参数的别名是 `task_type`。`convert_model`
+    将模型转换为 if-else 格式。'
 - en: '`objective` defaults to regression. The other options are `regression_l1`,
     `huber`, `fair`, `poisson`, `quantile`, `mape`, `gamma`, `tweedie`, `binary`,
     `multiclass`, `multiclassova`, `cross_entropy`, `cross_entropy_lambda`, `lambdarank`,
     and `rank_xendcg`. The aliases for this parameter are `objective_type`, `app`,
     and `application`.'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`objective` 默认值为回归。其他选项包括 `regression_l1`、`huber`、`fair`、`poisson`、`quantile`、`mape`、`gamma`、`tweedie`、`binary`、`multiclass`、`multiclassova`、`cross_entropy`、`cross_entropy_lambda`、`lambdarank`
+    和 `rank_xendcg`。该参数的别名包括 `objective_type`、`app` 和 `application`。'
 - en: '`boosting` defaults to `gbdt` — a traditional Gradient Boosting Decision Tree.
     Other options are `rf`, — Random Forest, `dart`, — [Dropouts meet Multiple Additive
     Regression Trees](https://arxiv.org/abs/1505.01866), `goss` — Gradient-based One-Side
     Sampling. This parameter’s aliases are `boosting_type` and `boost`.'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`boosting` 默认为 `gbdt` — 传统的梯度提升决策树。其他选项包括 `rf` — 随机森林，`dart` — [Dropouts meet
+    Multiple Additive Regression Trees](https://arxiv.org/abs/1505.01866)，`goss` —
+    基于梯度的单边采样。此参数的别名为 `boosting_type` 和 `boost`。'
 - en: '`num_leaves`: maximum tree leaves for base learners — defaults to 31'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_leaves`: 基学习器的最大树叶数 — 默认为 31。'
 - en: '`max_depth`: maximum tree depth for base learners'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_depth`: 基学习器的最大树深度。'
 - en: '`learning_rate`: the boosting learning rate'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`learning_rate`: 提升学习率。'
 - en: '`n_estimators`: number of boosted trees to fit — defaults to 200000'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_estimators`: 要拟合的提升树的数量 — 默认为 200000。'
 - en: '`importance_type`: the type of importance to be filled in the `feature_importances_`.
     Using `split` means that the number of times a feature is used in a model will
     be contained in the result.'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`importance_type`: 要填充到 `feature_importances_` 中的重要性类型。使用 `split` 意味着结果中将包含特征在模型中使用的次数。'
 - en: '`device_type`: device for the tree learning — CPU Or GPU. Can be used with `device` as
     the alias.'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`device_type`: 树学习的设备 — CPU 或 GPU。可以与 `device` 作为别名一起使用。'
 - en: Learning Control Parameters
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 学习控制参数
 - en: 'Let’s look at a couple of learning control parameters:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看几个学习控制参数：
 - en: '`force_col_wise`: When set to true, it forces col-wise histogram building.
     It’s recommended to set this to true when the number of columns is large, or the
     total number of bins is large. You can also set it to true when you want to reduce
     cost on memory, and when the `num_threads` is large, e.g greater than 20\. This
     parameter is only used with a CPU.'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`force_col_wise`: 当设置为 true 时，强制按列构建直方图。当列数较多或总的 bin 数量较大时，建议将其设置为 true。你也可以在需要减少内存消耗并且
+    `num_threads` 较多（例如大于 20）时设置为 true。此参数仅在 CPU 上使用。'
 - en: '`force_row_wise`: When set to true, it forces row-wise histogram building.
     This parameter is only used with a CPU. You can turn this one on when the number
     of data points is large, the total number of bins is smaller, and when the `num_threads` is
     small (e.g. less than or equal to 16). It can also be set to true when you want
     to use a small `bagging_fraction` or `goss` boosting to speed up training.'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`force_row_wise`: 当设置为 true 时，强制按行构建直方图。此参数仅在 CPU 上使用。当数据点数量大，总的 bin 数量较小且
+    `num_threads` 较少（例如小于或等于 16）时，可以启用此参数。当你希望使用小的 `bagging_fraction` 或 `goss` 提升速度时，也可以设置为
+    true。'
 - en: '`neg_bagging_fraction`: Used for imbalanced binary classification problems.'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`neg_bagging_fraction`: 用于处理不平衡的二分类问题。'
 - en: '`bagging_freq`: The frequency for bagging. Zero means bagging is disabled.'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bagging_freq`: Bagging 的频率。零表示禁用 bagging。'
 - en: '`feature_fraction`: Can be used to deal with overfitting. For instance, setting
     it to 0.5 would mean that LightGBM will select 50% of the features at each tree
     node.'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`feature_fraction`: 可用于处理过拟合。例如，将其设置为 0.5 意味着 LightGBM 会在每个树节点选择 50% 的特征。'
 - en: '`extra_trees`: Set to true when you want to use extremely randomized trees.'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`extra_trees`: 当你希望使用极端随机树时设置为 true。'
 - en: '`early_stopping_round`: When true, training stops once a certain parameter
     fails to improve.'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`early_stopping_round`: 当设置为 true 时，一旦某个参数未能改进，训练将停止。'
 - en: '`max_drop`: Defaults to 50\. Signifies the number of trees to drop on every
     iteration.'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_drop`: 默认为 50。表示每次迭代中要丢弃的树的数量。'
 - en: '`cat_l2`: L2 regularization in a categorical split'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cat_l2`: 类别分裂中的 L2 正则化。'
 - en: '`cat_smooth`: Reduces the effect of noise in categorical features, especially
     for categories with limited data.'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cat_smooth`: 减少类别特征中的噪声效应，特别是对于数据有限的类别。'
 - en: '`path_smooth`: Helps prevent overfitting on leaves with few samples.'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`path_smooth`: 有助于防止在样本较少的叶子上过拟合。'
 - en: Objective Parameters
+  id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标参数
 - en: 'Here are a couple of objective parameters to take note of:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有几个需要注意的目标参数：
 - en: '`is_unbalance`: Can be set to true if the training data is unbalanced for classification
     problems.'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`is_unbalance`: 如果训练数据在分类问题中不平衡，可以设置为 true。'
 - en: '`num_class`: Used to indicate the number of classes in a multi-classification
     problem.'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_class`: 用于指示多分类问题中的类别数量。'
 - en: '`scale_pos_weight`: Weight of labels with positive class. Cannot be used together
     with `is_unbalance`. This parameter increases the overall performance metric of
     the model but may result in poor estimates of the individual class probabilities.'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`scale_pos_weight`: 正类标签的权重。不能与 `is_unbalance` 一起使用。此参数提高了模型的整体性能指标，但可能导致个别类别概率的估计不佳。'
 - en: Practical Implementation
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实践实施
 - en: We’ll now look at a quick implementation of the algorithm. We’ll use scikit-lean’s
     wrapper for the classifier.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将快速实现算法。我们将使用scikit-learn的分类器封装。
 - en: 'As always, we start by importing the model:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，我们从导入模型开始：
 - en: '[PRE0]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The next step is to create an instance of the model while setting the objective.
     The options for the objective are regression for `LGBMRegressor`, binary or multi-class
     for `LGBMClassifier`, and LambdaRank for `LGBMRanker`.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是创建模型实例并设置目标。目标的选项包括`LGBMRegressor`的回归，`LGBMClassifier`的二分类或多分类，以及`LGBMRanker`的LambdaRank。
 - en: '[PRE1]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'When fitting the model, we can set the categorical features:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 在拟合模型时，我们可以设置分类特征：
 - en: '[PRE2]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Once you run predictions on the model, you can also obtain the important features:'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你在模型上进行预测，你还可以获得重要特征：
 - en: '[PRE3]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Conclusion
+  id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'I hope that this has given you enough background into LightGBM to start experimenting
     on your own. We’ve seen that we can use it for both regression and classification
     problems. For more information on the framework, you can check out the official
     docs:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这段介绍能为你提供足够的LightGBM背景，以便你开始自己的实验。我们已经看到它可以用于回归和分类问题。有关框架的更多信息，你可以查看官方文档：
 - en: '[**Welcome to LightGBM''s documentation! - LightGBM 2.3.2 documentation**](https://lightgbm.readthedocs.io/en/latest/)'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**欢迎来到LightGBM文档！ - LightGBM 2.3.2文档**](https://lightgbm.readthedocs.io/en/latest/)'
 - en: LightGBM is a gradient boosting framework that uses tree based learning algorithms.
     It is designed to be distributed...
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM是一个使用基于树的学习算法的梯度提升框架。它被设计为分布式...
 - en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
     and a mentor. He is driven by delivering great results in every task, and is a
     mentor at Lapid Leaders Africa.'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[德里克·姆维蒂](https://derrickmwiti.com/)** 是一位数据分析师、作家和导师。他致力于在每项任务中提供卓越成果，并且是Lapid
+    Leaders Africa的导师。'
 - en: '[Original](https://heartbeat.fritz.ai/lightgbm-a-highly-efficient-gradient-boosting-decision-tree-53f62276de50).
     Reposted with permission.'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/lightgbm-a-highly-efficient-gradient-boosting-decision-tree-53f62276de50)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Research Guide: Advanced Loss Functions for Machine Learning Models](/2019/11/research-guide-advanced-loss-functions-machine-learning-models.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[研究指南：机器学习模型的高级损失函数](/2019/11/research-guide-advanced-loss-functions-machine-learning-models.html)'
 - en: '[Automated Machine Learning in Python](/2019/01/automated-machine-learning-python.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的自动化机器学习](/2019/01/automated-machine-learning-python.html)'
 - en: '[Federated Learning: An Introduction](/2020/04/federated-learning-introduction.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[联邦学习：简介](/2020/04/federated-learning-introduction.html)'
 - en: More On This Topic
+  id: totrans-118
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[3 Reasons Why Data Scientists Should Use LightGBM](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家应使用LightGBM的3个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python和Scikit-learn简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树算法解释](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
 - en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过实现理解：决策树](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
 - en: '[Telling a Great Data Story: A Visualization Decision Tree](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[讲述精彩的数据故事：可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
