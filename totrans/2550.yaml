@@ -1,18 +1,26 @@
 - en: Design patterns in machine learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习中的设计模式
 - en: 原文：[https://www.kdnuggets.com/2021/07/design-patterns-machine-learning.html](https://www.kdnuggets.com/2021/07/design-patterns-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/design-patterns-machine-learning.html](https://www.kdnuggets.com/2021/07/design-patterns-machine-learning.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Ágoston Török](https://www.linkedin.com/in/agoston-torok/), Director
     Data Science, AGT International**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Ágoston Török](https://www.linkedin.com/in/agoston-torok/)，AGT International数据科学总监**'
 - en: 'According to its [definition](https://en.wikipedia.org/wiki/Software_design_pattern),
     a design pattern is a reusable solution to a commonly occurring problem. In software
     engineering, the concept dates back to [1987](http://c2.com/doc/oopsla87.html) when
@@ -24,13 +32,18 @@
     learning models and the underlying data. This fusion requires a seamless integration
     of these components, which is often far from trivial given the fields’ often disparate
     history and evolution.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据其[定义](https://en.wikipedia.org/wiki/Software_design_pattern)，设计模式是解决常见问题的可重用方案。在软件工程中，这一概念可以追溯到[1987](http://c2.com/doc/oopsla87.html)，当时Beck和Cunningham开始将其应用于编程。到了2000年代，设计模式——尤其是面向对象编程的SOLID设计原则——被认为是程序员的常识。快进15年，我们进入了[Software
+    2.0](https://karpathy.medium.com/software-2-0-a64152b37c35)时代：机器学习模型开始在越来越多的代码位置替代传统功能。如今，我们将软件视为传统代码、机器学习模型和底层数据的融合。这种融合需要无缝集成这些组件，而这往往因领域间历史和演变的不同而不简单。
 - en: Today, we look at software as a fusion of traditional code, machine learning
     models and the underlying data.
+  id: totrans-5
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 如今，我们将软件视为传统代码、机器学习模型和底层数据的融合。
 - en: 'Design patterns, however, have not been extended yet to deal with the challenges
     of this new era. In Software 2.0 common challenges do not appear only at the code
     level but at the level of problem definition, data representation, training methods,
@@ -42,34 +55,46 @@
     by their practitioners. Therefore in the following, I will give two examples of
     common ML challenges but, instead of starting with the design pattern, I will
     introduce first their solution antipatterns.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，设计模式尚未扩展以应对这一新时代的挑战。在Software 2.0中，常见挑战不仅出现在代码层面，还涉及问题定义、数据表示、训练方法、扩展性以及AI系统设计的伦理方面。这为机器学习*反模式*的实践创造了肥沃的土壤。不幸的是，如今甚至博客文章和会议中有时也会出现反模式：那些被认为能改进事物的做法，但实际上却使情况更糟。由于反模式也需要技能，实践者通常无法识别这些反模式。因此，接下来我将给出两个常见的机器学习挑战示例，但不会直接从设计模式开始，而是先介绍它们的解决方案反模式。
 - en: The model shows bad performance on the evaluation metrics
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型在评估指标上表现不佳
 - en: In the common scenario, after collecting, cleaning, and preparing the data the
     engineer trains a first model and finds that it shows bad performance on the test
     data. A common antipattern is to replace the first model with a more complex one
     (e.g. often gradient boosted trees) and improve the performance by this. A variation
     of this antipattern may follow this step by combining several models by e.g. model
     averaging.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在常见场景中，在收集、清理和准备数据后，工程师训练第一个模型，发现其在测试数据上表现不佳。一个常见的反模式是用更复杂的模型（例如，通常是梯度提升树）替代第一个模型，并通过此来提高性能。这个反模式的一个变体可能是在此步骤之后通过例如模型平均来结合多个模型。
 - en: '[![](../Images/1c3bdb1c6477244edad8338aec17a007.png)](https://i.ibb.co/60JgGn1/1-C2-Xo0-Cyun-Fmcf-C6k-BGOmw.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/1c3bdb1c6477244edad8338aec17a007.png)](https://i.ibb.co/60JgGn1/1-C2-Xo0-Cyun-Fmcf-C6k-BGOmw.png)'
 - en: Donald Knuth famous quote “premature optimization is the root of all evil” is
     almost 50 years old and is still true. Image with permission from [tddcomics](https://www.instagram.com/tddcomics/).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**唐纳德·克努斯**（Donald Knuth）著名的“过早优化是万恶之源”这句话已经有将近50年了，依然适用。图片由[tddcomics](https://www.instagram.com/tddcomics/)提供许可。'
 - en: The problem with these methods is that they look only at part of the problem,
     i.e. the model, and choose to resolve it by increasing the complexity of the model.
     This steps forces us to accept the high risk of overfitting and to trade explainability
     for additional predictive power. While there are efficient practices to mitigate
     the side effects of this choice (e.g. LIME), we cannot fully eliminate them.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些方法的问题在于它们只关注问题的一部分，即模型，并选择通过增加模型的复杂性来解决问题。这一步骤迫使我们接受较高的过拟合风险，并在可解释性与额外的预测能力之间进行权衡。尽管有一些有效的实践可以缓解这种选择的副作用（例如，LIME），但我们无法完全消除它们。
 - en: The design pattern is error analysis. This in practice means looking at where
     our model made errors, either by assessing the model fit on different test sets
     or by even looking at individual cases where our model was wrong. Although, we
@@ -81,19 +106,25 @@
     However, we should also keep in mind that in a significant proportion of big data
     situations we also deal with long tail events (e.g. identify rare talents from
     an admission exam).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 设计模式是错误分析。这实际上意味着查看我们的模型在哪些地方出现了错误，可以通过评估模型在不同测试集上的表现，甚至查看模型出错的个别案例来进行。尽管我们都听过“垃圾进，垃圾出”的说法，但仍然很少有人意识到即使是数据中的小不一致也非常真实。也许标签来自不同的评分者，每个评分者对标签指南有自己稍微不同的解释。也许数据收集的方式随着时间的推移发生了变化。错误分析对小数据问题的影响尤其显著。然而，我们还应记住，在相当一部分的大数据情况下，我们也面临长尾事件（例如，从入学考试中识别稀有人才）。
 - en: The true power of error analysis comes from the fact that we do not trade either
     explainability or risk of overfitting by applying it, in fact solely applying
     it yields critical knowledge about the distribution of the data. Error analysis,
     furthermore, enables us to choose both model-centric (e.g. more complex model)
     and a data-centric (e.g. further cleaning steps) solutions.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 错误分析的真正力量在于我们无需在应用它时权衡可解释性或过拟合风险，实际上，单独应用它能够提供关于数据分布的关键知识。此外，错误分析还使我们能够选择以模型为中心（例如，更复杂的模型）和以数据为中心（例如，进一步清理步骤）的解决方案。
 - en: Performance degradation over time on a deployed model
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 部署模型随时间的性能下降
 - en: The model goes through extensive validation and is deployed to production. The
     users are happy and give positive feedback. Then, a month/quarter/year later,
     reports are coming in that tell about flaws in prediction. This is usually a manifestation
@@ -102,15 +133,21 @@
     (word semantics, spam detectors) but ‘concept’ drift can happen in any field.
     For instance, masks and social distancing regulations challenged many previously
     deployed computer vision models too.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型经过广泛验证并部署到生产环境中。用户很满意并给予积极反馈。然而，一个月/季度/年后，报告显示预测存在缺陷。这通常是概念漂移的表现，即你的模型学习的输入与输出之间的连接随着时间发生了变化。有些地方的概念漂移是广为人知的（如词语语义、垃圾邮件检测），但“概念”漂移可以发生在任何领域。例如，口罩和社交距离规定也挑战了许多先前部署的计算机视觉模型。
 - en: '[![](../Images/410662702e7d045dd21bc5e9cc6101cd.png)](https://i.ibb.co/xzZfH6B/1-L-k-Qqpm-VBd5-Qe-Fuv-En-Tg-Jg.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/410662702e7d045dd21bc5e9cc6101cd.png)](https://i.ibb.co/xzZfH6B/1-L-k-Qqpm-VBd5-Qe-Fuv-En-Tg-Jg.png)'
 - en: ML systems without retraining assume no change in the learned relationship between
     input and output. Image with permission from [tddcomics](https://www.facebook.com/tddcomics).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 未经过再训练的机器学习系统假设输入和输出之间的学习关系没有变化。图像由[tddcomics](https://www.facebook.com/tddcomics)提供许可。
 - en: A common antipattern is to attribute these examples to noise and expect the
     situation to stabilize with time. This means not only a lack of action but a false
     attribution too, which should be generally discouraged in a data-driven business.
@@ -119,8 +156,10 @@
     team assumes they follow agile software development principles and therefore choose
     to be quick in reaction to change. The problem is that this solution addresses
     the symptom but not the flaw in the design of the system.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个常见的反模式是将这些例子归因于噪声，并期望情况随着时间的推移而稳定。这不仅意味着缺乏行动，还意味着错误的归因，这在数据驱动的业务中应该一般不被鼓励。一个稍微更好的反模式是通过快速重新训练和部署新模型来回应报告。即使团队假设他们遵循敏捷软件开发原则并因此选择快速响应变化，这也是一个反模式。问题在于，这种解决方案解决的是症状而不是系统设计中的缺陷。
 - en: The design patterns are a continuous evaluation of performance, which means
     you expect drifts to happen and, hence, design the system to notice it as soon
     as possible. This is a completely different approach as the focus is not on the
@@ -133,12 +172,17 @@
     devices to generate ground truth labels. For example, in the development of self-driving
     cars the input from one sensor (e.g. LiDAR) can be used to generate the ground
     truth for another sensor (e.g. camera).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 设计模式是对性能的持续评估，这意味着你期望漂移的发生，因此设计系统以尽快察觉到它。这是一种完全不同的方法，因为重点不在于反应的速度，而在于 *检测*的速度。这使整个系统处于一个更加可控的轨道上，给任何反应的优先级分配留出了更多空间。持续评估意味着建立流程和工具，持续生成一部分新数据的真实标签。在大多数情况下，这涉及到手动标记，通常使用众包服务。然而，在某些情况下，我们可以使用其他更复杂但在部署环境中不可行的模型和设备来生成真实标签。例如，在自动驾驶汽车的开发中，一个传感器（例如
+    LiDAR）的输入可以用于生成另一个传感器（例如摄像头）的真实标签。
 - en: The SOLID design principles of machine learning
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 机器学习的 SOLID 设计原则
 - en: The reason I’m writing about design patterns is that this field has reached
     the level of maturity where we should not only share our best practices but we
     should be able to abstract them to real design patterns. Luckily, this work has
@@ -151,89 +195,140 @@
     is already available and is used to build the AI-enabled products of today, work
     on design patterns and antipatterns is an important step towards the era of Software
     2.0.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我写关于设计模式的原因是，这个领域已经达到了成熟的水平，我们不仅应该分享最佳实践，还应该能够将其抽象为真正的设计模式。幸运的是，这项工作已经由多个小组开始。实际上，最近有两本关于这个主题的书籍出版了
+    [[1](https://www.oreilly.com/library/view/machine-learning-design/9781098115777/)],
+    [[2](https://www.manning.com/books/deep-learning-design-patterns)]。我很喜欢阅读这些书籍，但仍然感到，尽管我们正在朝着正确的方向前进，我们仍然离为机器学习从业者制定
+    SOLID 设计原则还有几步之遥。我相信，虽然基础知识已经可用并被用于构建今天的 AI 驱动产品，但在设计模式和反模式上的工作是迈向软件 2.0 时代的重要一步。
 - en: '[![](../Images/075e0ee3fd10aefc8311e6cd6e35ec47.png)](https://i.ibb.co/mFZj5Jk/1-l3d-Ype-C9z-S5tkkls-ZMOaq-Q.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/075e0ee3fd10aefc8311e6cd6e35ec47.png)](https://i.ibb.co/mFZj5Jk/1-l3d-Ype-C9z-S5tkkls-ZMOaq-Q.png)'
 - en: Design patterns are the foundation of the craftsmanship of machine learning.
     Image with permission from [tddcomics](https://twitter.com/tddcomics).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 设计模式是机器学习工艺的基础。图片来源于 [tddcomics](https://twitter.com/tddcomics)。
 - en: '**Bio: [Ágoston Török](https://www.linkedin.com/in/agoston-torok/)** is Director
     of Data Science at AGT International.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Ágoston Török](https://www.linkedin.com/in/agoston-torok/)** 是 AGT International
+    的数据科学总监。'
 - en: '[Original](https://towardsdatascience.com/design-patterns-in-machine-learning-b73eea4882cd).
     Reposted with permission.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/design-patterns-in-machine-learning-b73eea4882cd)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[When to Retrain an Machine Learning Model? Run these 5 checks to decide on
     the schedule](/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[何时重新训练机器学习模型？运行这5项检查以决定时间表](/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)'
 - en: '[Top 6 Data Science Online Courses in 2021](/2021/07/top-6-data-science-online-courses.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年排名前六的数据科学在线课程](/2021/07/top-6-data-science-online-courses.html)'
 - en: '[How Much Memory is your Machine Learning Code Consuming?](/2021/07/memory-machine-learning-code-consuming.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你的机器学习代码消耗了多少内存？](/2021/07/memory-machine-learning-code-consuming.html)'
 - en: '* * *'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT需求'
 - en: '* * *'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻求目的，找到目的后…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计学习的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的AI失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
