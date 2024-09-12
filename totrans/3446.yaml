@@ -1,19 +1,27 @@
 - en: 'Multi-Task Learning in Tensorflow: Part 1'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Tensorflow中的多任务学习：第一部分
 - en: 原文：[https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2](https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2](https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2)
 - en: Alternate Training
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 交替训练
 - en: The first solution is particularly suited to situations where you’ll have a
     batch of Task 1 data and then a batch of Task 2 data.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个解决方案特别适合于你会有一批任务1的数据，然后是一批任务2的数据的情况。
 - en: Remember that Tensorflow automatically figures out which calculations are needed
     for the operation you requested, and only conducts those calculations. This means
     that **if we define an optimiser on only one of the tasks, it will only train
@@ -21,34 +29,48 @@
     Since Task 1 relies only on the Task 1 and Shared Layers, the Task 2 layer will
     be untouched. Let’s draw another diagram with the desired optimisers at the end
     of each task.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，Tensorflow会自动确定操作所需的计算，并仅进行这些计算。这意味着**如果我们只在一个任务上定义优化器，它只会训练计算该任务所需的参数——并且不会动其他参数**。由于任务1仅依赖于任务1和共享层，任务2层将不会被触及。让我们画另一个图示，显示每个任务末尾的期望优化器。
 - en: '![Graph with optimisers](../Images/5bd03318ff44c0d9530716319655d482.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![带有优化器的图表](../Images/5bd03318ff44c0d9530716319655d482.png)'
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'We can conduct Multi-Task learning by alternately calling each task optimiser,
     which means we can continually transfer some of the information from each task
     to the other. In a loose sense, we are discovering the ‘commonality’ between the
     tasks. The following code implements this for our easy example. If you are following
     along, paste this at the bottom of the previous code:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过交替调用每个任务的优化器来进行多任务学习，这意味着我们可以不断将一些信息从一个任务转移到另一个任务。从宽泛的意义上讲，我们正在发现任务之间的“共性”。以下代码实现了这一点，如果你在跟随教程，请将其粘贴到之前代码的底部：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Tips: When is Alternate Training Good?**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提示：何时交替训练效果较好？**'
 - en: Alternate training is a good idea when you have two different datasets for each
     of the different tasks (for example, translating from English to French and English
     to German). By designing a network in this way, you can improve the performance
     of each of your individual tasks without having to find more task-specific training
     data.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你为不同任务有两个不同的数据集时（例如，从英语翻译成法语和英语翻译成德语），交替训练是个好主意。通过这种方式设计网络，你可以在不需要找到更多任务特定训练数据的情况下提高每个任务的性能。
 - en: Alternate training is the most common situation you’ll find yourself in, because
     there aren’t that many datasets that have two or more outputs. We’ll come on to
     one example, but the clearest examples are where you want to build hierarchy into
@@ -56,130 +78,193 @@
     the rotation of an object, the other what the object would look like if you changed
     the camera angle. These two tasks are obviously related - in fact the rotation
     probably comes before the image generation.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 交替训练是你最常遇到的情况，因为没有多少数据集有两个或更多的输出。我们会讲一个例子，但最清晰的例子是你想在任务中建立层次结构。例如，在视觉任务中，你可能希望一个任务预测物体的旋转，另一个任务预测如果你改变相机角度物体会是什么样子。这两个任务显然是相关的——实际上，旋转可能发生在图像生成之前。
 - en: '**Tips: When is Alternate Training Less Good?**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提示：何时交替训练效果不佳？**'
 - en: Alternate training can easily become biased towards a specific task. The first
     way is obvious - if one of your tasks has a far larger dataset than the other,
     then if you train in proportion to the dataset sizes your shared layer will contain
     more information about the more significant task.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 交替训练容易对特定任务产生偏差。第一种方式很明显——如果你的一个任务的数据集比另一个任务大得多，那么如果你按数据集大小的比例进行训练，你的共享层将包含关于更重要任务的更多信息。
 - en: The second is less so. If you train alternately, the final task in your model
     will create a bias in the parameters. There isn’t any obvious way that you can
     overcome this problem, but it does mean that in circumstances where you don’t
     have to train alternately, you shouldn’t.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二种情况则不然。如果你交替训练，模型中的最终任务将对参数产生偏差。没有明显的方法可以克服这个问题，但这确实意味着在你不需要交替训练的情况下，你不应该这样做。
 - en: Training at the Same Time - Joint Training
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 同时训练 - 联合训练
 - en: 'When you have a dataset with multiple labels for each input, what you really
     want is to train the tasks at the same time. The question is, how do you preserve
     the independence of the task-specific functions? The answer is surprisingly simple
     - you just add up the loss functions of the individual tasks and optimise on that.
     Below is a diagram that shows a network that can train jointly, with the accompanying
     code:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你有一个包含多个标签的数据集时，你真正需要的是同时训练这些任务。问题是，如何保持任务特定函数的独立性？答案出奇简单 - 你只需将各个任务的损失函数相加，并在此基础上进行优化。下面是一个展示可以联合训练的网络的图示，附有相应的代码：
 - en: '![Joint training](../Images/7e111a03e0943c04ebd6be7be88209f6.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![联合训练](../Images/7e111a03e0943c04ebd6be7be88209f6.png)'
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Conclusions and Next Steps
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论和下一步
 - en: In this post we’ve gone through the basic principles behind multi-task learning
     in deep neural nets. If you’ve used Tensorflow before, and have your own project,
     then hopefully this has given you enough to get started.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们已经探讨了深度神经网络中多任务学习的基本原理。如果你之前使用过 Tensorflow，并且有自己的项目，希望这能为你提供足够的启示来开始。
 - en: For those of you who want a more meaty, more detailed example of how this can
     be used to improve performance in multiple tasks, then stay tuned for part 2 of
     the tutorial where we’ll delve into Natural Language Processing to build a multi-task
     model for shallow parsing and part of speech tagging.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于那些想要更详细、具体的示例来展示如何提高多任务性能的人，请关注教程的第二部分，我们将*深入*探讨自然语言处理，构建一个用于浅层解析和词性标注的多任务模型。
 - en: '**Bio: [Jonathan Godwin](https://jg8610.github.io/)** is currently studying
     for a Msc in Machine Learning from UCL with a specialism in deep multi-task learning
     for NLP. He will be finishing in September and will be looking for jobs/research
     roles where he can use this skill set on interesting problems.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Jonathan Godwin](https://jg8610.github.io/)** 目前在 UCL 学习机器学习硕士，专攻深度多任务学习和自然语言处理。他将于九月完成学业，并寻求可以在有趣问题上运用这一技能的工作或研究岗位。'
 - en: '[Original](https://jg8610.github.io/Multi-Task/). Reposted with permission.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://jg8610.github.io/Multi-Task/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Introduction to Recurrent Networks in TensorFlow](/2016/05/intro-recurrent-networks-tensorflow.html)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 中的递归网络介绍](/2016/05/intro-recurrent-networks-tensorflow.html)'
 - en: '[The Good, Bad & Ugly of TensorFlow](/2016/05/good-bad-ugly-tensorflow.html)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 的优缺点](./2016/05/good-bad-ugly-tensorflow.html)'
 - en: '[Scikit Flow: Easy Deep Learning with TensorFlow and Scikit-learn](/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Scikit Flow：使用 TensorFlow 和 Scikit-learn 轻松深度学习](/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html)'
 - en: '* * *'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多此主题
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 计算机视觉 - 简化迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 还是 TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
 - en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Tensorflow 的“Hello World”](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建并训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Free TensorFlow 2.0 Complete Course](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 TensorFlow 2.0 完整课程](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'

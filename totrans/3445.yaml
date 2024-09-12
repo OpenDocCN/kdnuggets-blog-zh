@@ -1,45 +1,63 @@
 - en: 'Multi-Task Learning in Tensorflow: Part 1'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Tensorflow 中的多任务学习：第1部分
 - en: 原文：[https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html](https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html](https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html)
 - en: '**By Jonathan Godwin, University College London**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：乔纳森·戈德温，伦敦大学学院**。'
 - en: A Jupyter notebook accompanies this blog post. Please download [here](https://github.com/jg8610/multi-task-part-1-notebook/tree/master).
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这篇博客文章附带一个 Jupyter notebook。请[下载这里](https://github.com/jg8610/multi-task-part-1-notebook/tree/master)。
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 引言
 - en: '**Why Multi-Task Learning**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为什么选择多任务学习**'
 - en: When you think about the way people learn to do new things, they often use their
     experience and knowledge of the world to speed up the learning process. When I
     learn a new language, especially a related one, I use my knowledge of languages
     I already speak to make shortcuts. The process works the other way too - learning
     a new language can help you understand and speak your own better.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你考虑人们如何学习新事物时，他们通常会利用自己的经验和对世界的知识来加快学习过程。当我学习一种新语言，特别是相关的语言时，我会利用我已经掌握的语言知识来走捷径。这个过程也可以反向进行——学习一种新语言可以帮助你更好地理解和使用自己的语言。
 - en: Our brains learn to do multiple different tasks at the same time - we have the
     same brain architecture whether we are translating English to German or English
     to French. If we were to use a Machine Learning algorithm to do both of these
     tasks, we might call that ‘multi-task’ learning.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的大脑能够同时学习多种不同的任务——无论是将英语翻译成德语还是翻译成法语，我们的大脑架构都是相同的。如果我们使用机器学习算法来完成这两个任务，我们可能会称之为“多任务”学习。
 - en: It’s one of the most interesting and exciting areas of research for Machine
     Learning in coming years, radically reducing the amount of data required to learn
     new concepts. One of the great promises of Deep Learning is that, with the power
     of the models and simple ways to share parameters between tasks, we should be
     able to make significant progress in multi-task learning.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是未来几年机器学习中最有趣和激动人心的研究领域之一，极大地减少了学习新概念所需的数据量。深度学习的一个重要承诺是，通过模型的强大能力和在任务之间共享参数的简单方法，我们应该能够在多任务学习中取得显著进展。
 - en: As I started to experiment in this area I came across a bit of a road block
     - while it was easy to understand the architecture changes required to implement
     multi-task learning, it was harder to figure out how to implement it in Tensorflow.
@@ -47,209 +65,308 @@
     how it works, but most of the stock examples don’t provide helpful guidance. I
     hope the following tutorial explains some key concepts simply, and helps those
     who are struggling.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我开始在这个领域进行实验时，我遇到了一些障碍——虽然理解实现多任务学习所需的架构更改很容易，但弄清楚如何在 Tensorflow 中实现它却更难。除了标准网络之外的任何操作都需要对
+    Tensorflow 的工作原理有很好的理解，但大多数现成的示例并未提供有用的指导。我希望下面的教程能够简单地解释一些关键概念，并帮助那些遇到困难的人。
 - en: What We Are Going To Do
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们将要做的
 - en: '**Part 1**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第1部分**'
 - en: '**Understand Tensorflow Computation Graphs With An Example**. Doing multi-task
     learning with Tensorflow requires understanding how computation graphs work -
     skip if you already know.'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**通过示例理解 Tensorflow 计算图**。进行 Tensorflow 多任务学习需要理解计算图的工作原理——如果你已经知道了，可以跳过这部分。'
 - en: '**Understand How We Can Use Graphs For Multi-Task Learning**. We’ll go through
     an example of how to adapt a simple graph to do Multi-Task Learning.'
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**理解我们如何使用图进行多任务学习**。我们将通过一个示例来演示如何调整一个简单的图以进行多任务学习。'
 - en: '**Part 2**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第2部分**'
 - en: '**Build A Graph for POS Tagging and Shallow Parsing**. We’ll fill in a template
     that trains a net for two related linguistic tasks. Don’t worry, you don’t need
     to know what they are!'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**构建一个用于词性标注和浅层解析的图**。我们将填写一个模板，训练一个用于两个相关语言任务的网络。别担心，你不需要知道它们是什么！'
 - en: '**Train A Net Jointly and Separately**. We’ll actually train a model in two
     different ways. You should be able to do this on your laptop.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**联合和分开训练一个网络**。我们将以两种不同的方式训练一个模型。你应该能够在你的笔记本电脑上完成这项工作。'
 - en: Understanding Computation Graphs With A Toy Example
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用玩具示例理解计算图
 - en: The Computation Graph is the thing that makes Tensorflow (and other similar
     packages) fast. It’s an integral part of machinery of Deep Learning, but can be
     confusing.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算图是使 Tensorflow（以及其他类似的软件包）快速的关键因素。它是深度学习机器的一个重要组成部分，但可能会让人感到困惑。
 - en: There are some neat features of a graph that mean it’s very easy to conduct
     multi-task learning, but first we’ll keep things simple and explain the key concepts.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图有一些很棒的特性，使得多任务学习变得非常容易，但首先我们会保持简单，解释关键概念。
 - en: '**Definition: Computation Graph**'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**定义：计算图**'
 - en: 'The **Computation Graph** is a **template** for computation (re: algorithm)
     you are going to run. It **doesn’t perform any calculations**, but it means that
     your computer can conduct backpropagation far more quickly.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**计算图**是你将要运行的**计算模板**（参见：算法）。它**不会执行任何计算**，但这意味着你的计算机可以更快地进行反向传播。'
 - en: If you ask Tensorflow for a **result of a calculation** it will **only make
     those calculations required** for the job, **not the whole graph**.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你请求 Tensorflow 得到一个**计算结果**，它将**只进行工作所需的计算**，**而不是整个图**。
 - en: 'A Toy Example - Linear Transformation: Setting Up The Graph'
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 玩具示例 - 线性变换：设置图
 - en: 'We’re going to look at the graph for a simple calculation - a linear transformation
     of our inputs, and taking the square loss:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将查看一个简单计算的图 - 对输入进行线性变换，并计算平方损失：
 - en: '![Toy Example](../Images/52c75dcdf2f4ae57c1cc42de0b09640c.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![玩具示例](../Images/52c75dcdf2f4ae57c1cc42de0b09640c.png)'
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'There are a few things to emphasis about this graph:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于这个图，有几个要点需要强调：
 - en: '**If we were to run this code right now, we would get no output**. Remember
     that a Computation Graph is just a template - it doesn’t do anything. If we want
     an answer, we have to tell Tensorflow to run the computation using a **Session**.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**如果我们现在运行这段代码，我们将不会得到任何输出**。记住，计算图只是一个模板 - 它什么也不做。如果我们想要答案，我们必须告诉 Tensorflow
+    使用**会话**来运行计算。'
 - en: '**We haven’t explicitly created a graph object**. You might expect that we
     would have to create a graph object somewhere in order for Tensorflow to know
     that we wanted to create a graph. In fact, by using the Tensorflow operations,
     we are telling Tensorflow what parts of our code are in the graph.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**我们没有显式创建图对象**。你可能会期待我们需要在某个地方创建一个图对象，以便 Tensorflow 知道我们想创建一个图。实际上，通过使用 Tensorflow
+    操作，我们告诉 Tensorflow 哪些部分的代码在图中。'
 - en: '**Tip: Keep Your Graph Separate**. You’ll typically be doing a fair amount
     of data manipulation and computation outside of the graph, which means keeping
     track of what is and isn’t available inside of python a bit confusing. I like
     to put my graph in a separate file, and often in a separate class to keep concerns
     separated, but this isn’t required.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提示：保持图的独立**。你通常会在图外进行大量的数据操作和计算，这意味着在 Python 中跟踪哪些内容是可用的会有点混乱。我喜欢把图放在一个单独的文件中，通常还会放在一个单独的类里以保持关注点分离，但这并不是强制要求。'
 - en: 'A Toy Example - Linear Transformation: Getting Results'
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 玩具示例 - 线性变换：获取结果
 - en: 'Computations on your Graph are conducted inside a Tensorflow **Session**. To
     get results from your session you need to provide it with two things: Target Results
     and Inputs.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Tensorflow 的**会话**中进行图上的计算。要从会话中获取结果，你需要提供两个东西：目标结果和输入。
 - en: '**Target Results or Operations**. You tell Tensorflow what parts of the graph
     you want to return values for, and it will **automatically figure out what calculations
     within need to be run**. You can also call operations, for example, to initialise
     your variables.'
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**目标结果或操作**。你告诉 Tensorflow 你想要哪些图的部分返回值，它将**自动确定需要运行哪些计算**。你也可以调用操作，例如初始化变量。'
 - en: '**Inputs As Required (‘Feed Dict’)**. In most calculations you will provide
     the input data ad-hoc. In this case, you construct the graph with a**placeholder** for
     this data, and feed it in at computation time. Not all calculations or operations
     will require an input - for many, all the information is already contained in
     the graph.'
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**按需输入（‘Feed Dict’）**。在大多数计算中，你会即时提供输入数据。在这种情况下，你使用**占位符**构建图，并在计算时提供数据。并不是所有的计算或操作都需要输入
+    - 对于许多情况，所有信息已经包含在图中。'
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: How To Use Graphs for Multi-Task Learning
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何使用图进行多任务学习
 - en: When we create a Neural Net that performs multiple tasks we want to have some
     parts of the network that are shared, and other parts of the network that are
     specific to each individual task. When we’re training, we want information from
     each task to be transferred in the shared parts of the network.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们创建一个执行多个任务的神经网络时，我们希望网络的一些部分是共享的，而其他部分则特定于每个任务。在训练时，我们希望从每个任务中获取的信息能在网络的共享部分传递。
 - en: So, to start, let’s draw a diagram of a simple two-task network that has a shared
     layer and a specific layer for each individual task. We’re going to feed the outputs
     of this into our loss function with our targets. I’ve labelled where we’re going
     to want to create placeholders in the graph.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，首先，让我们绘制一个简单的两任务网络图，其中包含一个共享层和每个任务的特定层。我们将把这些输出输入到我们的损失函数中与目标进行比较。我已经标记了我们希望在图中创建占位符的位置。
 - en: '![Basic shared graph](../Images/8ae5537858dcd61fd6448f72993af879.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![基本共享图](../Images/8ae5537858dcd61fd6448f72993af879.png)'
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: When we are training this network, **we want the parameters of the Task 1 layer
     to not change no matter how wrong we get Task 2**, but **the parameters of the
     shared layer to change with both tasks**. This might seem a little difficult -
     normally you only have one optimiser in a graph, because you only optimise one
     loss function. Thankfully, using the properties of the graph it’s very easy to
     train this sort of model in two ways.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们训练这个网络时，**我们希望任务 1 层的参数不管任务 2 有多么错误都不改变**，但**共享层的参数要随着两个任务的变化而变化**。这可能看起来有点困难——通常图中只有一个优化器，因为你只优化一个损失函数。幸运的是，利用图的属性，这种模型的训练非常简单。
 - en: '* * *'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 部门'
 - en: '* * *'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 还是 TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
 - en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Tensorflow 的 "Hello World"](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Free TensorFlow 2.0 Complete Course](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 TensorFlow 2.0 完整课程](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'
