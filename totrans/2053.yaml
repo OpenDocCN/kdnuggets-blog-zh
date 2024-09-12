@@ -1,146 +1,224 @@
 - en: Apache Spark Cluster on Docker
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Docker 上的 Apache Spark 集群
 - en: 原文：[https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html](https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html](https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [André Perez](https://www.linkedin.com/in/andremarcosperez/), Data Engineer
     at Experian**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [André Perez](https://www.linkedin.com/in/andremarcosperez/)，Experian
+    数据工程师**'
 - en: '![Figure](../Images/6504ccaf02651d78847df87f699dffe1.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/6504ccaf02651d78847df87f699dffe1.png)'
 - en: Sparks by [Jez Timms](https://unsplash.com/@jeztimms) on [Unsplash](https://unsplash.com/photos/r4lM2v9M84Q)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: Sparks by [Jez Timms](https://unsplash.com/@jeztimms) on [Unsplash](https://unsplash.com/photos/r4lM2v9M84Q)
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[Apache Spark](https://spark.apache.org/) is arguably the most popular big
     data processing engine. With more than 25k stars on [GitHub](https://github.com/apache/spark),
     the framework is an excellent starting point to learn parallel computing in distributed
     systems using Python, Scala and R.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Apache Spark](https://spark.apache.org/) 可以说是最受欢迎的大数据处理引擎。它在 [GitHub](https://github.com/apache/spark)
+    上拥有超过 25k 的星标，是学习使用 Python、Scala 和 R 进行分布式系统并行计算的绝佳起点。'
 - en: To get started, you can run Apache Spark on your machine by using one of the
     many great Docker distributions available out there. [Jupyter](https://github.com/jupyter/docker-stacks) offers
     an excellent *dockerized *Apache Spark with a JupyterLab interface but misses
     the framework distributed core by running it on a single container. Some GitHub [projects](https://github.com/big-data-europe/docker-spark) offer
     a distributed cluster experience however lack the JupyterLab interface, undermining
     the usability provided by the IDE.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始，你可以通过使用许多优秀的 Docker 发行版之一在你的机器上运行 Apache Spark。 [Jupyter](https://github.com/jupyter/docker-stacks)
+    提供了一个很棒的 *dockerized* Apache Spark 和 JupyterLab 界面，但由于在单个容器上运行，它缺少框架的分布式核心。一些
+    GitHub [项目](https://github.com/big-data-europe/docker-spark) 提供了分布式集群体验，但缺少 JupyterLab
+    界面，从而削弱了 IDE 提供的可用性。
 - en: I believe a comprehensive environment to learn and practice Apache Spark code
     must keep its distributed nature while providing an awesome user experience.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我相信，一个全面的环境用于学习和实践 Apache Spark 代码必须保持其分布式特性，同时提供出色的用户体验。
 - en: This article is all about this belief.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文正是关于这一信念的。
 - en: In the next sections, I will show you how to build your own cluster. By the
     end, you will have a fully functional Apache Spark cluster built with Docker and
     shipped with a Spark master node, two Spark worker nodes and a JupyterLab interface.
     It will also include the Apache Spark Python API (PySpark) and a simulated Hadoop
     distributed file system (HDFS).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的章节中，我将向你展示如何构建自己的集群。到最后，你将拥有一个完全功能的 Apache Spark 集群，它是通过 Docker 构建的，包含一个
+    Spark 主节点、两个 Spark 工作节点和一个 JupyterLab 界面。它还包括 Apache Spark Python API（PySpark）和一个模拟的
+    Hadoop 分布式文件系统（HDFS）。
 - en: '**TL;DR**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**TL;DR**'
 - en: 'This article shows how to build an Apache Spark cluster in [standalone mode](http://spark.apache.org/docs/latest/spark-standalone.html) using
     Docker as the infrastructure layer. It is shipped with the following:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文展示了如何使用 Docker 作为基础设施层在 [独立模式](http://spark.apache.org/docs/latest/spark-standalone.html)
+    下构建一个 Apache Spark 集群。它包括以下内容：
 - en: Python 3.7 with PySpark 3.0.0 and Java 8;
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python 3.7 配合 PySpark 3.0.0 和 Java 8；
 - en: Apache Spark 3.0.0 with one master and two worker nodes;
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Apache Spark 3.0.0 配备一个主节点和两个工作节点；
 - en: JupyterLab IDE 2.1.5;
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: JupyterLab IDE 2.1.5；
 - en: Simulated HDFS 2.7.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模拟的 HDFS 2.7。
 - en: To make the cluster, we need to create, build and compose the Docker images
     for JupyterLab and Spark nodes. You can skip the tutorial by using the **out-of-the-box
     distribution **hosted on my [GitHub](https://github.com/andre-marcos-perez/spark-cluster-on-docker).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了搭建集群，我们需要创建、构建和组合 JupyterLab 和 Spark 节点的 Docker 镜像。你可以通过使用我在 [GitHub](https://github.com/andre-marcos-perez/spark-cluster-on-docker)
+    上托管的**开箱即用的发行版**来跳过教程。
 - en: '**Requirements**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**要求**'
 - en: '**Docker** 1.13.0+;*   **Docker Compose** 3.0+.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Docker** 1.13.0+；* **Docker Compose** 3.0+。'
 - en: '**Table of contents**'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**目录**'
 - en: Cluster overview;
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 集群概述；
 - en: Creating the images;
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建镜像；
 - en: Building the images;
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 构建镜像；
 - en: Composing the cluster;
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 组合集群；
 - en: Creating a PySpark application.
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个 PySpark 应用。
 - en: 1\. Cluster overview
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 集群概述
 - en: 'The cluster is composed of four main components: the JupyterLab IDE, the Spark
     master node and two Spark workers nodes. The user connects to the master node
     and submits Spark commands through the nice GUI provided by Jupyter notebooks.
@@ -148,30 +226,44 @@
     workers nodes, sending back the results to the IDE. The components are connected
     using a localhost network and share data among each other via a shared mounted
     volume that simulates an HDFS.'
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 集群由四个主要组件组成：JupyterLab IDE、Spark 主节点和两个 Spark 工作节点。用户连接到主节点，并通过 Jupyter notebooks
+    提供的优雅 GUI 提交 Spark 命令。主节点处理输入并将计算工作负载分配给工作节点，将结果发送回 IDE。组件通过本地主机网络连接，并通过模拟 HDFS
+    的共享挂载卷相互共享数据。
 - en: '![Figure](../Images/37dc76fd9b4537e013b05fa07e2602ab.png)'
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_IMG
+  zh: '![Figure](../Images/37dc76fd9b4537e013b05fa07e2602ab.png)'
 - en: Apache Spark cluster overview
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Apache Spark 集群概述
 - en: 'As mentioned, we need to create, build and compose the Docker images for JupyterLab
     and Spark nodes to make the cluster. We will use the following Docker image hierarchy:'
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如前所述，我们需要创建、构建和组合 JupyterLab 和 Spark 节点的 Docker 镜像来搭建集群。我们将使用以下 Docker 镜像层级：
 - en: '![Figure](../Images/fb19f5b9139a812de78f5788550224b4.png)'
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_IMG
+  zh: '![Figure](../Images/fb19f5b9139a812de78f5788550224b4.png)'
 - en: Docker images hierarchy
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Docker 镜像层级
 - en: The cluster base image will download and install common software tools (Java,
     Python, etc.) and will create the shared directory for the HDFS. On the Spark
     base image, the Apache Spark application will be downloaded and configured for
@@ -180,30 +272,43 @@
     Spark application to run as a worker node. Finally, the JupyterLab image will
     use the cluster base image to install and configure the IDE and PySpark, Apache
     Spark’s Python API.
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 集群基础镜像将下载并安装常用软件工具（Java、Python 等），并为 HDFS 创建共享目录。在 Spark 基础镜像上，Apache Spark
+    应用将被下载并为主节点和工作节点配置。Spark 主镜像将配置框架以运行主节点。类似地，Spark 工作节点将配置 Apache Spark 应用以运行工作节点。最后，JupyterLab
+    镜像将使用集群基础镜像来安装和配置 IDE 和 PySpark，Apache Spark 的 Python API。
 - en: 2\. Creating the images
+  id: totrans-40
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 创建镜像
 - en: 2.1\. Cluster base image
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.1\. 集群基础镜像
 - en: For the base image, we will be using a Linux distribution to install Java 8
     (or 11), [Apache Spark only requirement](https://spark.apache.org/docs/latest/#downloading).
     We also need to install Python 3 for PySpark support and to create the shared
     volume to simulate the HDFS.
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于基础镜像，我们将使用 Linux 发行版来安装 Java 8（或 11），[Apache Spark 唯一要求](https://spark.apache.org/docs/latest/#downloading)。我们还需要安装
+    Python 3 以支持 PySpark，并创建共享卷以模拟 HDFS。
 - en: Dockerfile for the cluster base image
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 集群基础镜像的 Dockerfile
 - en: First, let’s choose the Linux OS. Apache Spark official GitHub repository has
     a [Dockerfile](https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile) for
     Kubernetes deployment that uses a small Debian image with a built-in Java 8 runtime
@@ -211,14 +316,21 @@
     we solve both the OS choice and the Java installation. Then, we get the [latest
     Python release](https://packages.debian.org/stable/python/python3) (currently
     3.7) from Debian official package repository and we create the shared volume.
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 首先，选择 Linux 操作系统。Apache Spark 官方 GitHub 仓库有一个用于 Kubernetes 部署的 [Dockerfile](https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile)，它使用了一个内置
+    Java 8 运行时环境（JRE）的 Debian 小镜像。通过选择 [相同的基础镜像](https://hub.docker.com/_/openjdk?tab=tags&page=1&name=8-jre-slim)，我们解决了操作系统选择和
+    Java 安装的问题。然后，我们从 Debian 官方包仓库获取 [最新的 Python 版本](https://packages.debian.org/stable/python/python3)（目前为
+    3.7），并创建共享卷。
 - en: 2.2\. Spark base image
+  id: totrans-45
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.2\. Spark 基础镜像
 - en: For the Spark base image, we will get and setup Apache Spark in [standalone
     mode](http://spark.apache.org/docs/latest/spark-standalone.html), its simplest
     deploy configuration. In this mode, we will be using its resource manager to setup
@@ -228,322 +340,464 @@
     Furthermore, we will get an Apache Spark version with Apache Hadoop support to
     allow the cluster to simulate the HDFS using the shared volume created in the
     base cluster image.
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 Spark 基础镜像，我们将获取并设置 Apache Spark 以 [standalone mode](http://spark.apache.org/docs/latest/spark-standalone.html)
+    运行，这是一种最简单的部署配置。在这种模式下，我们将使用其资源管理器设置容器，以主节点或工作节点的身份运行。相比之下，资源管理器如 [Apache YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html)
+    会根据用户工作负载动态分配容器作为主节点或工作节点。此外，我们将获取一个支持 Apache Hadoop 的 Apache Spark 版本，以便集群能够使用基础集群镜像中创建的共享卷来模拟
+    HDFS。
 - en: Dockerfile for the Spark base image
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Spark 基础镜像的 Dockerfile
 - en: 'Let’s start by downloading the Apache Spark latest version (currently 3.0.0)
     with Apache Hadoop support from the official [Apache repository](https://archive.apache.org/dist/spark/).
     Then, we play a bit with the downloaded package (unpack, move, etc.) and we are
     ready for the setup stage. Lastly, we configure four Spark variables common to
     both master and workers nodes:'
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 首先，我们从官方 [Apache repository](https://archive.apache.org/dist/spark/) 下载最新版本的
+    Apache Spark（目前是 3.0.0）并支持 Apache Hadoop。然后，我们对下载的包进行一些操作（解压、移动等），准备好进入设置阶段。最后，我们配置四个
+    Spark 变量，这些变量对主节点和工作节点都是通用的：
 - en: '**SPARK_HOME** is the installed Apache Spark location used by the framework
     for setting up tasks;'
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**SPARK_HOME** 是框架用于设置任务的已安装 Apache Spark 位置；'
 - en: '**SPARK_MASTER_HOST **is the master node **hostname** used by worker nodes
     to connect;'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**SPARK_MASTER_HOST** 是工作节点用于连接的主节点 **主机名**；'
 - en: '**SPARK_MASTER_PORT** is the master node **port** used by worker nodes to connect;'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**SPARK_MASTER_PORT** 是工作节点用于连接的主节点 **端口**；'
 - en: '**PYSPARK_PYTHON** is the installed Python location used by Apache Spark to
     support its Python API.'
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**PYSPARK_PYTHON** 是 Apache Spark 用于支持其 Python API 的已安装 Python 位置。'
 - en: 2.3\. Spark master image
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.3\. Spark 主节点镜像
 - en: For the Spark master image, we will set up the Apache Spark application to run
     as a master node. We will configure network ports to allow the network connection
     with worker nodes and to expose the master web UI, a web page to monitor the master
     node activities. In the end, we will set up the container startup command for
     starting the node as a master instance.
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 Spark 主节点镜像，我们将设置 Apache Spark 应用程序以主节点身份运行。我们将配置网络端口以允许与工作节点的网络连接，并暴露主节点的
+    Web UI，即一个用于监控主节点活动的网页。最后，我们将设置容器启动命令以启动主节点实例。
 - en: Dockerfile for the Spark master image
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Spark 主节点镜像的 Dockerfile
 - en: We start by exposing the port configured at **SPARK_MASTER_PORT** environment
     variable to allow workers to connect to the master node. Then, we expose the **SPARK_MASTER_WEBUI_PORT** port
     for letting us access the master web UI page. Finally, we set the container startup
     command to run Spark built-in deploy script with the [master class](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/master/Master.scala) as
     its argument.
+  id: totrans-56
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 我们首先暴露配置在 **SPARK_MASTER_PORT** 环境变量中的端口，以允许工作节点连接到主节点。接着，我们暴露 **SPARK_MASTER_WEBUI_PORT**
+    端口，以便我们访问主节点的 Web UI 页面。最后，我们设置容器启动命令，以 [master class](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/master/Master.scala)
+    作为参数运行 Spark 内置的部署脚本。
 - en: 2.4\. Spark worker image
+  id: totrans-57
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.4\. Spark 工作节点镜像
 - en: For the Spark worker image, we will set up the Apache Spark application to run
     as a worker node. Similar to the master node, we will configure the network port
     to expose the worker web UI, a web page to monitor the worker node activities,
     and set up the container startup command for starting the node as a worker instance.
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 Spark 工作节点镜像，我们将设置 Apache Spark 应用程序以工作节点身份运行。与主节点类似，我们将配置网络端口以暴露工作节点的 Web
+    UI，即一个用于监控工作节点活动的网页，并设置容器启动命令以启动工作节点实例。
 - en: Dockerfile for the Spark worker image
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Spark 工作节点镜像的 Dockerfile
 - en: First, we expose the **SPARK_WORKER_WEBUI_PORT** port to allow access to the
     worker web UI page, as we did with the master node. Then, we set the container
     startup command to run Spark built-in deploy script with the [worker class](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/worker/Worker.scala) and
     the master network address as its arguments. This will make workers nodes connect
     to the master node on its startup process.
+  id: totrans-60
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 首先，我们暴露 **SPARK_WORKER_WEBUI_PORT** 端口，以便访问工作节点的 Web UI 页面，就像我们对主节点所做的那样。然后，我们设置容器启动命令，以运行
+    Spark 内置的部署脚本，使用 [worker class](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/worker/Worker.scala)
+    和主节点网络地址作为其参数。这将使工作节点在启动过程中连接到主节点。
 - en: 2.5\. JupyterLab image
+  id: totrans-61
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.5\. JupyterLab 镜像
 - en: For the JupyterLab image, we go back a bit and start again from the cluster
     base image. We will install and configure the IDE along with a slightly different
     Apache Spark distribution from the one installed on Spark nodes.
+  id: totrans-62
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 JupyterLab 镜像，我们稍微回到基础镜像，从集群基础镜像开始。我们将安装和配置 IDE，并安装与 Spark 节点上不同的 Apache
+    Spark 发行版。
 - en: Dockerfile for the JupyterLab image
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: JupyterLab 镜像的 Dockerfile
 - en: We start by installing pip, Python’s package manager, and the Python development
     tools to allow the installation of Python packages during the image building and
     at the container runtime. Then, let’s get [JupyterLab](https://pypi.org/project/jupyterlab/) and [PySpark](https://pypi.org/project/pyspark/) from
     the Python Package Index (PyPI). Finally, we expose the default port to allow
     access to JupyterLab web interface and we set the container startup command to
     run the IDE application.
+  id: totrans-64
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 我们首先安装 pip，Python 的包管理器，以及 Python 开发工具，以便在镜像构建和容器运行时安装 Python 包。接着，从 Python
+    包索引（PyPI）中获取 [JupyterLab](https://pypi.org/project/jupyterlab/) 和 [PySpark](https://pypi.org/project/pyspark/)。最后，我们暴露默认端口以便访问
+    JupyterLab 网络界面，并将容器启动命令设置为运行 IDE 应用程序。
 - en: 3\. Building the images
+  id: totrans-65
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 构建镜像
 - en: The Docker images are ready, let’s build them up. Note that since we used Docker *arg* keyword
     on Dockerfiles to specify software versions, we can easily change the default
     Apache Spark and JupyterLab versions for the cluster.
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Docker 镜像已准备好，让我们构建它们。请注意，由于我们在 Dockerfile 中使用了 Docker *arg* 关键字来指定软件版本，因此我们可以轻松更改集群的默认
+    Apache Spark 和 JupyterLab 版本。
 - en: Building the cluster images
+  id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 构建集群镜像
 - en: 4\. Composing the cluster
+  id: totrans-68
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. 组建集群
 - en: The Docker compose file contains the recipe for our cluster. Here, we will create
     the JuyterLab and Spark nodes containers, expose their ports for the localhost
     network and connect them to the simulated HDFS.
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Docker compose 文件包含我们集群的配方。在这里，我们将创建 JupyterLab 和 Spark 节点容器，暴露其端口以供本地网络使用，并将它们连接到模拟
+    HDFS。
 - en: Cluster’s Docker compose file
+  id: totrans-70
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 集群的 Docker compose 文件
 - en: We start by creating the Docker volume for the simulated HDFS. Next, we create
     one container for each cluster component. The *jupyterlab* container exposes the
     IDE port and binds its shared workspace directory to the HDFS volume. Likewise,
     the *spark-master* container exposes its web UI port and its *master-worker* connection
     port and also binds to the HDFS volume.
+  id: totrans-71
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 我们首先创建用于模拟 HDFS 的 Docker 卷。接下来，为每个集群组件创建一个容器。*jupyterlab* 容器暴露 IDE 端口，并将其共享工作目录绑定到
+    HDFS 卷。同样，*spark-master* 容器暴露其 Web UI 端口和 *master-worker* 连接端口，并将其绑定到 HDFS 卷。
 - en: 'We finish by creating two Spark worker containers named *spark-worker-1* and *spark-worker-2*.
     Each container exposes its web UI port (mapped at 8081 and 8082 respectively)
     and binds to the HDFS volume. These containers have an environment step that specifies
     their hardware allocation:'
+  id: totrans-72
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 我们通过创建两个名为 *spark-worker-1* 和 *spark-worker-2* 的 Spark 工作容器来完成。每个容器暴露其 Web UI
+    端口（分别映射为 8081 和 8082）并绑定到 HDFS 卷。这些容器具有一个环境步骤，指定其硬件分配：
 - en: '**SPARK_WORKER_CORE** is the number of cores;'
+  id: totrans-73
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**SPARK_WORKER_CORE** 是核心数；'
 - en: '**SPARK_WORKER_MEMORY** is the amount of RAM.'
+  id: totrans-74
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**SPARK_WORKER_MEMORY** 是 RAM 的数量。'
 - en: By default, we are selecting one core and 512 MB of RAM for each container.
     Feel free to play with the hardware allocation but make sure to respect your machine
     limits to avoid memory issues. Also, provide enough resources for your Docker
     application to handle the selected values.
+  id: totrans-75
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 默认情况下，我们为每个容器选择一个核心和 512 MB 的 RAM。可以自由调整硬件分配，但请确保尊重您的机器限制，以避免内存问题。此外，提供足够的资源以供
+    Docker 应用程序处理所选值。
 - en: 'To compose the cluster, run the Docker compose file:'
+  id: totrans-76
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要组建集群，运行 Docker compose 文件：
 - en: Composing the cluster
+  id: totrans-77
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 组建集群
 - en: 'Once finished, check out the components web UI:'
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 完成后，检查组件的 Web UI：
 - en: '**JupyterLab** at [localhost:8888](http://localhost:8888/);'
+  id: totrans-79
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**JupyterLab** 在 [localhost:8888](http://localhost:8888/)；'
 - en: '**Spark master** at [localhost:8080](http://localhost:8080/);'
+  id: totrans-80
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Spark master** 在 [localhost:8080](http://localhost:8080/)；'
 - en: '**Spark worker I** at [localhost:8081](http://localhost:8081/);'
+  id: totrans-81
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Spark worker I** 在 [localhost:8081](http://localhost:8081/)；'
 - en: '**Spark worker II** at [localhost:8082](http://localhost:8082/);'
+  id: totrans-82
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Spark worker II** 在 [localhost:8082](http://localhost:8082/)；'
 - en: 5\. Creating a PySpark application
+  id: totrans-83
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5. 创建 PySpark 应用程序
 - en: With our cluster up and running, let’s create our first PySpark application.
+  id: totrans-84
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 集群启动并运行后，让我们创建第一个 PySpark 应用程序。
 - en: Creating a PySpark application
+  id: totrans-85
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 创建 PySpark 应用程序
 - en: 'Open the JupyterLab IDE and create a Python Jupyter notebook. Create a PySpark
     application by connecting to the Spark master node using a Spark session object
     with the following parameters:'
+  id: totrans-86
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 打开 JupyterLab IDE 并创建一个 Python Jupyter notebook。通过使用以下参数的 Spark session 对象连接到
+    Spark master 节点，创建一个 PySpark 应用程序：
 - en: '**appName** is the name of our application;'
+  id: totrans-87
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**appName** 是我们应用程序的名称；'
 - en: '**master** is the Spark master connection URL, the same used by Spark worker
     nodes to connect to the Spark master node;'
+  id: totrans-88
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**master** 是 Spark master 的连接 URL，Spark 工作节点用来连接到 Spark master 节点的 URL；'
 - en: '**config **is a general [Spark configuration for standalone mode](https://spark.apache.org/docs/latest/configuration.html).
     Here, we are matching the executor memory, that is, a Spark worker JVM process,
     with the provisioned worker node memory.'
+  id: totrans-89
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**config** 是一个通用的 [Spark 独立模式配置](https://spark.apache.org/docs/latest/configuration.html)。在这里，我们将执行器内存（即
+    Spark 工作节点 JVM 进程）与配置的工作节点内存进行匹配。'
 - en: Run the cell and you will be able to see the application listed under “Running
     Applications” at the Spark master web UI. At last, we install the Python [wget](https://pypi.org/project/wget/) package
     from PyPI and download the iris data set from [UCI repository](https://archive.ics.uci.edu/ml/datasets/iris) into
     the simulated HDFS. Then we read and print the data with PySpark.
+  id: totrans-90
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 运行单元格后，你将能够在 Spark master 的网页 UI 下的“运行中的应用程序”中看到应用程序。最后，我们从 PyPI 安装 Python [wget](https://pypi.org/project/wget/)
+    包，并将鸢尾花数据集从 [UCI 代码库](https://archive.ics.uci.edu/ml/datasets/iris) 下载到模拟 HDFS
+    中。然后我们使用 PySpark 读取并打印数据。
 - en: That’s all folks. I hope I have helped you to learn a bit more about Apache
     Spark internals and how distributed applications works. Happy learning!
+  id: totrans-91
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 就这些了。我希望我能帮助你多了解一些 Apache Spark 的内部工作原理以及分布式应用程序的工作方式。祝学习愉快！
 - en: '**Bio: [André Perez](https://www.linkedin.com/in/andremarcosperez/)** ([**@dekoperez**](https://twitter.com/dekoperez))
     is a Data Engineer at Experian & MSc. Data Scientist student at University of
     Sao Paulo.'
+  id: totrans-92
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**简介: [André Perez](https://www.linkedin.com/in/andremarcosperez/)** ([**@dekoperez**](https://twitter.com/dekoperez))
+    是 Experian 的数据工程师，同时也是圣保罗大学的硕士数据科学学生。'
 - en: '[Original](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445).
     Reposted with permission.'
+  id: totrans-93
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-94
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Benefits & Examples of Using Apache Spark with PySpark](/2020/04/benefits-apache-spark-pyspark.html)'
+  id: totrans-95
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Apache Spark 和 PySpark 的好处及示例](/2020/04/benefits-apache-spark-pyspark.html)'
 - en: '[Five Interesting Data Engineering Projects](/2020/03/data-engineering-projects.html)'
+  id: totrans-96
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[五个有趣的数据工程项目](/2020/03/data-engineering-projects.html)'
 - en: '[Skills to Build for Data Engineering](/2020/06/skills-build-data-engineering.html)'
+  id: totrans-97
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据工程需要掌握的技能](/2020/06/skills-build-data-engineering.html)'
 - en: More On This Topic
+  id: totrans-98
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题
 - en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  id: totrans-99
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用聚类分析对数据进行分段](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
 - en: '[The Evolution of Apache Druid](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)'
+  id: totrans-100
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Apache Druid 的演变](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)'
 - en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  id: totrans-101
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Apache Kafka 构建可扩展的数据架构](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
 - en: '[Scaling Data Management Through Apache Gobblin](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
+  id: totrans-102
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Apache Gobblin 扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
 - en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  id: totrans-103
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes 中高可用性 SQL Server Docker 容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
 - en: '[12 Docker Commands Every Data Scientist Should Know](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)'
+  id: totrans-104
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的 12 个 Docker 命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)'
