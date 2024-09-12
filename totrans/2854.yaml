@@ -1,57 +1,86 @@
 - en: 'Machine Learning 101: The What, Why, and How of Weighting'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习 101：权重的定义、目的和方法
 - en: 原文：[https://www.kdnuggets.com/2019/11/machine-learning-what-why-how-weighting.html](https://www.kdnuggets.com/2019/11/machine-learning-what-why-how-weighting.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/11/machine-learning-what-why-how-weighting.html](https://www.kdnuggets.com/2019/11/machine-learning-what-why-how-weighting.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Eric Hart](https://www.linkedin.com/in/erichart07), Altair**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Eric Hart](https://www.linkedin.com/in/erichart07)，Altair**。'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: One thing I get asked about a lot is weighting. What is it? How do I do it?
     What do I need to worry about? By popular demand, I recently put together a lunch-and-learn
     at my company to help address all these questions. The goal was to be applicable
     to a large audience, (e.g., with a gentle introduction), but also some good technical
     advice/details to help practitioners. This blog was adapted from that presentation.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我经常被问到关于权重的事情。它是什么？我怎么做？我需要注意什么？根据大家的需求，我最近在公司举办了一次午餐学习活动，旨在解答这些问题。目标是适用于广大受众（例如，进行温和的介绍），同时也提供一些良好的技术建议/细节以帮助从业者。这个博客是从那次演讲中改编而来的。
 - en: Model Basics
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型基础
 - en: 'Before we talk about weighting, we should all get on the same page about what
     a model is, what they are used for, and some of the common issues that modelers
     run into. Models are basically tools that humans can use to (over-)simplify the
@@ -63,8 +92,10 @@
     trying to uncover physical truths from data. Prediction means trying to make guesses
     about what is going to happen. For most of the rest of this discussion, we’re
     going to be focused on models built with purposes of prediction in mind.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在讨论权重之前，我们需要对模型是什么、它们的用途以及建模过程中常见的一些问题有一个共同的认识。模型基本上是人类用来以严谨的方式（过度）简化现实世界的工具。通常，它们表现为方程式或规则集，通常尝试捕捉数据中的模式。人们通常将模型分为两个高层次的类别（是的，也可能有重叠）：推断和预测。推断意味着尝试使用模型来帮助理解世界。想象一下科学家从数据中揭示物理真相。预测则意味着尝试对未来发生的事情进行猜测。在接下来的讨论中，我们将重点关注以预测为目的构建的模型。
 - en: If you’re building a model to make predictions, you’re going to need a way to
     measure how good that model is at making predictions. A good place to start is
     with Accuracy. The Accuracy of a model is simply the percentage of its predictions,
@@ -77,103 +108,153 @@
     priority over the other). Accuracy also doesn’t care about differences between
     the set of records the accuracy is measured on and the real population which the
     model is supposed to apply to. These things can be important.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你正在建立一个模型来进行预测，你需要一种衡量该模型预测效果的方法。一个好的起点是准确率。模型的准确率只是它的预测结果中正确的百分比。这可以是一个有用的指标，实际上它也是许多自动训练模型工具的默认指标，但它确实有一些缺点。例如，准确率不关心模型认为每个预测的*可能性*（与猜测相关的概率）。准确率也不关心模型做出的预测（例如，如果它在决定正面事件或负面事件，准确率不会优先考虑其中一个）。准确率也不关心准确率测量的记录集与模型应该适用的实际人群之间的差异。这些可能是重要的。
 - en: 'Let’s jump into an example. Recently, the 2019 World Series concluded. I’m
     going to contrast some predictions for that world series below. Spoiler Alert:
     I’m going to tell you who won the world series.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一个例子。最近，2019年世界大赛结束了。我将对比一些关于那个世界大赛的预测。剧透警告：我将告诉你谁赢得了世界大赛。
 - en: The 2019 world series took place between the Washington Nationals and the Houston
     Astros
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 2019年世界大赛是在华盛顿国民队和休斯顿太空人队之间进行的
 - en: '![](../Images/9c2dfabf71423bfb460a253e451e1088.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9c2dfabf71423bfb460a253e451e1088.png)'
 - en: 'Let’s investigate some models. I have an internal model in my head, which I
     won’t explain. It gave these predictions for each of the 7 games of the series:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来调查一些模型。我脑海中有一个内部模型，我不会解释。它给出了该系列赛7场比赛的这些预测：
 - en: '![](../Images/58ac86de1ea73efc53dd45369e6d9059.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/58ac86de1ea73efc53dd45369e6d9059.png)'
 - en: 'Apparently, I was pretty high on the Nationals. Meanwhile, one of my favourite
     websites, FiveThirtyEight, has an advanced statistical model which they use to
     [predict games](https://projects.fivethirtyeight.com/2019-mlb-predictions/games/).
     It gave these predictions:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，我对国民队的期望很高。与此同时，我最喜欢的网站之一，FiveThirtyEight，有一个先进的统计模型，用于[预测比赛](https://projects.fivethirtyeight.com/2019-mlb-predictions/games/)。它给出了这些预测：
 - en: '![](../Images/27c27d7f45360b0f6216d3b2ac42e425.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/27c27d7f45360b0f6216d3b2ac42e425.png)'
 - en: 'It’s worth noting: these are individual game predictions, made in advance of
     each game if it was going to happen; these are not predictions for the series
     as a whole. Since the series is a best-of-seven, once a team wins 4 games, no
     more games will be played, so obviously neither of the two sets of predictions
     above will happen exactly as is.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 值得注意的是：这些是单场比赛的预测，提前做出，如果比赛真的会发生；这些预测不是针对整个系列赛的。由于系列赛是七场四胜制，一旦一个队赢得4场比赛，将不再进行更多比赛，因此显然上述两组预测都不会完全如预期发生。
 - en: These predictions are based on things like team strength, home field advantage,
     and specifics of which pitcher is starting each game. FiveThirtyEight’s model
     predicted the home team to win in every game, except game 5, when Houston’s best
     pitcher, Gerrit Cole, was pitching in Washington.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些预测是基于团队实力、主场优势和每场比赛首发投手的具体情况。FiveThirtyEight的模型预测主队会赢得每场比赛，除了第5场比赛，当时休斯顿最好的投手，杰里特·科尔，正在华盛顿投球。
 - en: 'Anyway, let’s spoil the series, see what happened, and compare accuracy. Here
     was the real result:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论如何，让我们揭示系列赛的结果，看看发生了什么，并比较准确率。这里是实际结果：
 - en: '![](../Images/59a08570ab450a514ca828522b710d22.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/59a08570ab450a514ca828522b710d22.png)'
 - en: The series went 7 games, with Washington winning the first and last 2\. (As
     an aside, the away team won every game in this series, which had never happened
     before in this, or any other, major North American professional sport.)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 系列赛进行了7场比赛，华盛顿赢得了前两场和最后两场。（顺便提一下，在这个系列赛中，客队赢得了每一场比赛，这在这个或其他任何主要的北美职业运动中从未发生过。）
 - en: 'So, let’s look at how we each did:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，我们来看看我们每个人的表现：
 - en: 'My result:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的结果：
 - en: '![](../Images/3d63fbbe561744ffa05c383878948cf5.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3d63fbbe561744ffa05c383878948cf5.png)'
 - en: I got 5 of the 7 games right, for an accuracy of 0.71
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我正确预测了7场比赛中的5场，准确率为0.71
 - en: 'FiveThirtyEight’s Result:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: FiveThirtyEight的结果：
 - en: '![](../Images/217b2691814f7b9459e1642846d718d1.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/217b2691814f7b9459e1642846d718d1.png)'
 - en: FiveThirtyEight got only 1 game right, for an accuracy of 0.14.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: FiveThirtyEight只预测对了1场比赛，准确率为0.14。
 - en: 'So, you might be tempted to think that my model is better than FiveThirtyEight’s,
     or at least that it did better in this case. But predictions aren’t the whole
     story. FiveThirtyEight’s model comes not only with predictions, but with helpful
     probabilities, suggesting how likely FiveThirtyEight thinks each team is to win.
     In this case, those probabilities looked like this:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，你可能会被诱导认为我的模型比FiveThirtyEight的更好，或者至少在这种情况下表现更好。但预测并不是全部。FiveThirtyEight的模型不仅有预测，还有有用的概率，建议FiveThirtyEight认为每个队伍赢的可能性。在这种情况下，这些概率是这样的：
 - en: '![](../Images/512177b89c3f8a7d8e3477dd702d1c3a.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/512177b89c3f8a7d8e3477dd702d1c3a.png)'
 - en: Meanwhile, I’m the jerk who is always certain he’s right about everything. You
     all know the type. My probabilities looked like this.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 同时，我是那个总是确信自己对一切都正确的讨厌鬼。你们都知道这种人。我的概率看起来是这样的。
 - en: '![](../Images/8ca907801052ee91f3937c13aa01ac07.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8ca907801052ee91f3937c13aa01ac07.png)'
 - en: With this in mind, even though I had a higher accuracy, you might rethink which
     model you prefer.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住这一点，尽管我的准确率更高，你可能需要重新考虑你更喜欢哪个模型。
 - en: It’s important to discuss this because we’re going to be talking about accuracy
     again soon while addressing some of the shortcomings of certain models. It’s important
     to remember that accuracy can be a useful metric, but it doesn’t always give you
@@ -185,18 +266,26 @@
     are more visual, and often, machine learning algorithms need a single number underneath,
     so accuracy ends up getting baked into a lot of algorithms as the default measure
     of choice, even when that’s detrimental to some external goal.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 讨论这一点很重要，因为我们将很快再次谈论准确性，同时解决某些模型的缺陷。重要的是要记住，准确性可以是一个有用的指标，但它并不总是提供完整的情况。还有其他工具可以衡量模型的质量，这些工具关注诸如概率等更微妙的概念，而不仅仅是预测。我喜欢使用的一些例子是提升图、ROC曲线和精准度-召回曲线。这些都是选择好模型的好工具，但单独使用任何一个都不是万无一失的。此外，这些工具更具可视化性质，通常，机器学习算法需要一个单一的数值，因此准确性常常被作为许多算法的默认选择，即使这对某些外部目标有害。
 - en: The What of Weighting
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 权重的意义
 - en: 'Consider the following data table:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 请考虑以下数据表：
 - en: '![](../Images/7737da7e5ee9b0ce07831615c29e7625.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7737da7e5ee9b0ce07831615c29e7625.png)'
 - en: Say you want to build a model to predict the value of ‘DV’ using only Age and
     Sex. Because there is only one example with DV=1, you may have a hard time predicting
     that value. If this is a dataset about credit lending, and the DV is whether someone
@@ -204,173 +293,249 @@
     correct on the DV=1 cases than the DV=0 cases. Take a minute and see if you can
     come up with a good model (e.g. some rules) to predict DV=1 on this dataset. (Spoiler,
     you can’t possibly get 100% accuracy).
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想建立一个只用年龄和性别来预测‘DV’的模型。因为只有一个例子DV=1，你可能会很难预测这个值。如果这是一个关于信用贷款的数据集，而DV是某人是否会违约（1表示违约），你可能更关心DV=1的案例，而不是DV=0的案例。花一点时间看看你是否能提出一个好的模型（例如一些规则）来预测这个数据集中的DV=1。（剧透，你不可能得到100%的准确率）。
 - en: 'Here are some possible examples:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是一些可能的例子：
 - en: Intercept Only Model
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 仅拦截模型
 - en: Always Predict 0
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总是预测0
 - en: Accuracy = 0.9
+  id: totrans-47
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准确率 = 0.9
 - en: 27 Year Olds
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 27岁
 - en: Predict DV=1 for 27-year-olds, and 0 otherwise
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对27岁的人预测DV=1，其余预测0
 - en: Accuracy = 0.9
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准确率 = 0.9
 - en: Young Women
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 年轻女性
 - en: Predict DV=1 for women under 30, and 0 otherwise
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于30岁以下的女性预测DV=1，其余预测0
 - en: Accuracy = 0.9
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准确率 = 0.9
 - en: 'All these models have the same accuracy, but some of them may be more useful
     in certain use cases. If you ask a decision tree or a logistic regression algorithm
     to build a model on these datasets, they will both give you model #1 by default.
     The models don’t know that you might care more about the DV=1 cases. So, how can
     we make the DV=1 cases more important to the model?'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些模型的准确率相同，但其中一些在某些用例中可能更有用。如果你要求决策树或逻辑回归算法在这些数据集上建立模型，它们默认都会给你模型#1。这些模型不知道你可能更关心DV=1的案例。那么，我们如何让DV=1的案例对模型更重要呢？
 - en: 'Idea #1: Oversampling: Duplicate existing rare event records and leave common
     event records alone.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '想法 #1：过采样：复制现有的稀有事件记录，保持常见事件记录不变。'
 - en: 'Idea #2: Undersampling: Remove some of the common event records, keep all the
     rare event records.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '想法 #2：欠采样：移除一些常见事件记录，保留所有稀有事件记录。'
 - en: In both cases, we manually use a different population to train the model on
     than what we naturally had, with the express purpose of affecting the model we’re
     going to build.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这两种情况下，我们都使用了与自然数据不同的人群来训练模型，目的在于影响我们将要构建的模型。
 - en: 'Weighting is kind of like this, but instead of duplicating or removing records,
     we assign different weights to each record as a separate column. For example,
     instead of doing this:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 权重类似于这样，但不是复制或删除记录，而是将不同的权重分配给每条记录作为单独的列。例如，不是这样做：
 - en: '![](../Images/8e1ccac8de78c3b91a0f1a7598449283.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e1ccac8de78c3b91a0f1a7598449283.png)'
 - en: 'We could just do this:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以这样做：
 - en: '![](../Images/7482df33d0431ab1092f363c806acd0c.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7482df33d0431ab1092f363c806acd0c.png)'
 - en: 'You might legitimately ask if it’s possible for machine learning algorithms
     to handle weighted data this way, but a legitimate answer is: “yes, it’s fine,
     don’t worry about it.”'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会合理地问，机器学习算法是否可以以这种方式处理加权数据，但一个合理的回答是：“是的，没问题，不用担心。”
 - en: 'In fact, we don’t even need to give integer weights. You could even do something
     like this:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我们甚至不需要给出整数权重。你可以像这样做：
 - en: '![](../Images/fc15a2418d14aa5378db84104c7551ec.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fc15a2418d14aa5378db84104c7551ec.png)'
 - en: 'But for now, let’s stick to the integer weights. Say you want to build your
     model on the weighted dataset above:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 但现在，让我们坚持使用整数权重。假设你想在上述加权数据集上构建你的模型：
 - en: '![](../Images/acac8fd83d85d21e3784ff62b0f453d1.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/acac8fd83d85d21e3784ff62b0f453d1.png)'
 - en: 'Then if we revisit the possible models we discussed before, we see this:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后如果我们回顾之前讨论的可能模型，我们会看到：
 - en: Intercept Only Model
+  id: totrans-68
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 仅拦截模型
 - en: 'Weighted Accuracy (for training model): 0.82'
+  id: totrans-69
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加权准确率（用于训练模型）：0.82
 - en: Real Accuracy = 0.9
+  id: totrans-70
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实际准确率 = 0.9
 - en: 27 Year Olds
+  id: totrans-71
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 27 岁
 - en: 'Weighted Accuracy (for training model): 0.91'
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加权准确率（用于训练模型）：0.91
 - en: Real Accuracy = 0.9
+  id: totrans-73
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实际准确率 = 0.9
 - en: Young Women
+  id: totrans-74
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 年轻女性
 - en: 'Weighted Accuracy (for training model): 0.91'
+  id: totrans-75
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加权准确率（用于训练模型）：0.91
 - en: Real Accuracy = 0.9
+  id: totrans-76
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实际准确率 = 0.9
 - en: By weighting, even though we haven’t changed the real accuracy, we’ve changed
     the weighted accuracy, which would cause the first option to be less desirable
     than the latter two at training time. In fact, if you build a model on this weighted
     table, a decision tree naturally finds the second model, while a Logistic Regression
     naturally finds the third model.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过加权，虽然我们没有改变实际准确率，但我们改变了加权准确率，这会使得在训练时，第一个选项不如后两个选项理想。实际上，如果你在这个加权表上构建模型，决策树自然会找到第二个模型，而逻辑回归自然会找到第三个模型。
 - en: 'A common question I get about weighting is: how do you handle things after
     model training? Do you have to apply your weights during validation or deployment?
     The answer is No! The point of weighting was to influence your model, not to influence
     the world. Once your model is trained, your weights are no longer needed (or useful)
     for anything.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于加权，我常常遇到一个问题：在模型训练之后你如何处理这些权重？你是否需要在验证或部署过程中应用这些权重？答案是否定的！加权的目的是影响你的模型，而不是影响现实世界。一旦你的模型训练完成，权重就不再需要（或有用）。
 - en: The Why of Weighting
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 加权的原因
 - en: In the previous section we got a vague sense of why you might want to use weighting
     to influence model selection, but let’s dive in a little deeper.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上一节中，我们对为什么可能想使用加权来影响模型选择有了一个模糊的了解，但让我们更深入地探讨一下。
 - en: 'One reason you might want to use weighting is if your training data isn’t a
     representative sample of the data you plan to apply your model to. Pollsters come
     across this problem all the time. Fun fact: with a truly random sample of just
@@ -380,48 +545,69 @@
     more closely match the expected voting demographics. There’s a great story from
     2016 about how one person was responsible for strongly skewing an entire poll.
     You can read about it [here](https://www.nytimes.com/2016/10/13/upshot/how-one-19-year-old-illinois-man-is-distorting-national-polling-averages.html).'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能想使用加权的一个原因是如果你的训练数据不是你计划应用模型的数据的代表性样本。民意测验者经常遇到这个问题。有趣的事实是：用一个真正随机的2500人样本，民意测验者可以在+/-
+    1%范围内预测选举结果。问题是如何获得一个真正的随机样本。这很困难，因此民意测验者通常对不同的投票者应用权重，使样本人口统计更接近预期的投票人口统计。2016年有一个很棒的故事，讲述了一个人如何强烈地扭曲了整个民意测验。你可以[在这里](https://www.nytimes.com/2016/10/13/upshot/how-one-19-year-old-illinois-man-is-distorting-national-polling-averages.html)阅读。
 - en: 'Here’s a common argument I hear for another reason you might want to use weighting:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我听到的另一个你可能想使用加权的常见理由：
 - en: Fraud is rare
+  id: totrans-83
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 欺诈很少见
 - en: Need to upweight rare cases
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 需要增加稀有案例的权重
 - en: Then the model performs better overall
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这样模型整体表现会更好
 - en: This common argument turns out to be wrong. In general, weighting causes models
     to perform worse overall but causes them to perform better on certain segments
     of the population. In the case of fraud, the missing piece from the above argument
     is that failing to catch fraud is usually more expensive than falsely flagging
     non-fraudulent transactions.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个常见的论点被证明是错误的。一般来说，加权会使模型整体表现更差，但在某些人群中表现更好。在欺诈的情况下，上述论点的遗漏之处在于，未能捕捉到欺诈通常比错误标记非欺诈交易的成本更高。
 - en: 'What we really want to talk about as a good reason for weighting is cost-sensitive
     classification. Some examples:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们真正想讨论的作为加权的一个好理由是成本敏感分类。一些例子：
 - en: In fraud detection, false negatives tend to cost more than false positives
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在欺诈检测中，假阴性往往比假阳性更昂贵
 - en: In credit lending, defaults tend to be more expensive than rejected loans that
     would not have defaulted
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在信用贷款中，违约往往比被拒绝的不会违约的贷款更昂贵
 - en: In preventative maintenance, part failures tend to be more expensive than premature
     maintenance
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在预防性维护中，部件故障通常比过早维护更昂贵
 - en: All of these are only true within reason. You can’t go all the way to the extreme,
     because flagging every transaction as fraudulent, rejecting all loan applications,
     or spending all your time repairing systems instead of using them are all clearly
@@ -429,78 +615,112 @@
     more expensive than other kinds of misclassification, so we might want to influence
     our model to make decisions that are wrong more often, but still less expensive
     overall. Using weighting is a reasonable tool to help solve this problem.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些仅在合理范围内才成立。你不能走到极端，因为将每个交易标记为欺诈、拒绝所有贷款申请或花费所有时间维修系统而不是使用它们显然都是糟糕的商业决策。但关键是，某些类型的错误分类比其他类型的错误分类更昂贵，因此我们可能希望影响我们的模型，使其做出更多错误的决定，但整体上仍然更便宜。使用加权是一种合理的工具来解决这个问题。
 - en: The How of Weighting
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 加权的方法
 - en: '*Note upfront: a lot of the great information from this section comes from
     the [same paper](http://web.cs.iastate.edu/~honavar/elkan.pdf).*'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '*提前说明：本节的许多有用信息来自[同一篇论文](http://web.cs.iastate.edu/~honavar/elkan.pdf)。*'
 - en: 'This brings us to an important question: how do you weight? With most modern
     data science software, you just use computer magic and the weights are taken care
     of for you.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 这引出了一个重要的问题：你如何加权？使用大多数现代数据科学软件，你只需使用计算机魔法，权重就会被处理好。
 - en: But, of course, there are still important decisions to make. Should you over-sample
     or under-sample, or just use weighting? Should you use advanced packages like
     SMOTE or ROSE? What weights should you pick?
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 但当然，还有重要的决策要做。你应该过采样还是欠采样，还是仅仅使用加权？你应该使用像SMOTE或ROSE这样的高级包吗？你应该选择什么权重？
 - en: 'Well, good news: I’m going to tell you the optimal thing to do. But of course,
     since I’m a data scientist, I’m going to give you a lot of caveats first:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 好消息是：我要告诉你最优的做法。但当然，由于我是数据科学家，我会先给你很多警告：
 - en: This method is only “optimal” for cost-sensitive classification issues (e.g.
     you have different costs for different outcomes of what you’re predicting). I’m
     not going to help pollsters out here (sorry).
+  id: totrans-97
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这种方法仅对成本敏感的分类问题（例如，你对预测结果有不同的成本）是“最佳”的。我不会在这里帮助民调机构（抱歉）。
 - en: This method assumes you know the costs associated with your problem, and that
     the costs are fixed. If the true costs are unknown, or variable, this gets a lot
     harder.
+  id: totrans-98
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这种方法假设你知道与你的问题相关的成本，并且这些成本是固定的。如果真实成本未知或可变，这会变得更加困难。
 - en: Before we get right down to the formulas, let’s talk about a little trap that
     you might fall into baseline/reference errors. Here’s a typical looking cost-matrix
     example from the German credit dataset from the [Statlog project](https://archive.ics.uci.edu/ml/datasets/Statlog+%28German+Credit+Data%29).
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们深入公式之前，先谈谈你可能会陷入的基准/参考错误的一个小陷阱。这是来自[Statlog项目](https://archive.ics.uci.edu/ml/datasets/Statlog+%28German+Credit+Data%29)的德国信用数据集的一个典型成本矩阵示例。
 - en: '|  | Actual Bad | Actual Good |'
+  id: totrans-100
   prefs: []
   type: TYPE_TB
+  zh: '|  | 实际坏 | 实际好 |'
 - en: '| Predict Bad | 0 | 1 |'
+  id: totrans-101
   prefs: []
   type: TYPE_TB
+  zh: '| 预测坏 | 0 | 1 |'
 - en: '| Predict Good | 5 | 0 |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
+  zh: '| 预测好 | 5 | 0 |'
 - en: If you look at this for a few minutes, the rationale for where this came from
     becomes clear. This is meant to imply that if you misclassify someone who will
     default and give them a loan, you’ll lose $5, but if you misclassify someone who
     would not have defaulted and don’t give them credit, you lose the opportunity
     to make $1, which is itself a cost.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你看几分钟，这个来源的理由就会变得清晰。这意味着如果你错误分类了一个会违约的人并给他们贷款，你会损失$5，但如果你错误分类了一个不会违约的人而不给他们信用，你会失去赚取$1的机会，这本身也是一种成本。
 - en: 'But something is wrong here. If the intention is that when you predict bad
     you don’t extend someone''s credit, then it seems clear that the costs associated
     with predicting bad should be the same no matter what would have actually happened.
     In fact, this cost matrix is likely supposed to be this:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这里似乎有些问题。如果目的是当你预测坏时不延长某人的信用，那么预测坏所关联的成本应当是相同的，无论实际情况如何。事实上，这个成本矩阵可能应该是这样的：
 - en: '|  | Actual Bad | Actual Good |'
+  id: totrans-105
   prefs: []
   type: TYPE_TB
+  zh: '|  | 实际坏 | 实际好 |'
 - en: '| Predict Bad | 0 | 0 |'
+  id: totrans-106
   prefs: []
   type: TYPE_TB
+  zh: '| 预测坏 | 0 | 0 |'
 - en: '| Predict Good | 5 | -1 |'
+  id: totrans-107
   prefs: []
   type: TYPE_TB
+  zh: '| 预测好 | 5 | -1 |'
 - en: Where there is a negative cost (or benefit) of predicting good on someone who
     will actually repay their loan. While these two cost matrices are similar, they
     are not interchangeable. If you imagine a situation where you get one customer
@@ -510,45 +730,69 @@
     benefits instead of costs. That said, I’m still going to give the formula in terms
     of costs, and leave it to the reader to figure out how to translate it to a benefit
     formula.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中对一个实际会偿还贷款的人预测好会有负成本（或收益）。虽然这两个成本矩阵类似，但不能互换。如果你想象一下每种类型一个客户的情况，第一个矩阵建议你的总成本是$6，而第二个矩阵建议你的总成本是$4。第二个显然是这里的意图。因此，将矩阵以收益而非成本的形式呈现通常是有益的。尽管如此，我还是将以成本的形式给出公式，留给读者自己将其转化为收益公式。
 - en: 'So, say you have a cost matrix that looks like this:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，假设你有一个看起来像这样的成本矩阵：
 - en: '|  | Actual Negative | Actual Positive |'
+  id: totrans-110
   prefs: []
   type: TYPE_TB
+  zh: '|  | 实际负面 | 实际正面 |'
 - en: '| Predict Negative | C[00] | C[01] |'
+  id: totrans-111
   prefs: []
   type: TYPE_TB
+  zh: '| 预测负 | C[00] | C[01] |'
 - en: '| Predict Positive | C[10] | C[11] |'
+  id: totrans-112
   prefs: []
   type: TYPE_TB
+  zh: '| 预测积极 | C[10] | C[11] |'
 - en: 'First, we will state 2 reasonableness criteria:'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将陈述两个合理性标准：
 - en: C[10] > C[00]
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: C[10] > C[00]
 - en: C[01] > C[11]
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: C[01] > C[11]
 - en: These criteria basically say that your costs are higher if you misclassify something
     than if you don’t. Reasonable, right?
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些标准基本上表明，如果你错误分类某个事物的成本会高于你不分类的成本。合理，对吧？
 - en: 'Now define:'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在定义：
 - en: '![](../Images/9681028b0f2e8bf5e750bd2f7936636c.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9681028b0f2e8bf5e750bd2f7936636c.png)'
 - en: Then you should upweight your negative examples by ![Equation](../Images/fb4d62e25fde4f552be319c7f5a77978.png) (and
     leave your positive examples alone).
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么你应该通过![公式](../Images/fb4d62e25fde4f552be319c7f5a77978.png)加重你的负面样本的权重（并保持你的正面样本不变）。
 - en: 'Actually, we can even take this a step further. Many machine learning models
     produce probabilities (as opposed to just predictions) and then use a threshold
     to convert that probability into a prediction. In other words, you have some rules
@@ -560,117 +804,175 @@
     for now, we can write down a formula for how to make a model with threshold p[0]
     act as though it has threshold p^*, we can do that by upweighting the negative
     examples by:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我们甚至可以更进一步。许多机器学习模型生成的是概率（而不是仅仅预测），然后使用阈值将该概率转换为预测。换句话说，你有一些规则，比如：如果正例的概率大于
+    0.5，则预测为正例，否则预测为负例。但你可以有另一种规则，例如，如果正例的概率大于 0.75，则预测为正例，否则预测为负例。这里的数字（上面例子中的 0.5
+    或 0.75）称为“阈值”。稍后会有更多相关内容，但现在，我们可以写下一个公式，说明如何让具有阈值 p[0] 的模型表现得像具有阈值 p^* 一样，我们可以通过上调负例的权重来实现：
 - en: '![Equation](../Images/70476b54f61b643db3f28ce912759d15.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/70476b54f61b643db3f28ce912759d15.png)'
 - en: Note that in the special case where p[0] is 0.5 (as is typical), this reduces
     to the previous formula.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，在 p[0] 为 0.5 的特殊情况下（这很典型），这将简化为之前的公式。
 - en: Once again, it’s worth noting that the case of variable costs is a lot harder.
     If you’re using decision trees, some smoothing is a good idea, but in general,
     it’s too involved to say much more here. But you can check out [this paper](http://cseweb.ucsd.edu/~elkan/kddbianca.pdf)
     for some ideas.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次值得注意的是，变动成本的情况要困难得多。如果你使用决策树，一些平滑处理是个好主意，但一般来说，这里不便详细讨论。你可以查看[这篇论文](http://cseweb.ucsd.edu/~elkan/kddbianca.pdf)以获取一些想法。
 - en: The Why Not of Weighting
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 权重调整的理由
 - en: Weighting is kind of like pretending to live in a fantasy world to make better
     decisions about the real world. Instead of this, you could just make better decisions
     without the pretend part.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 权重调整有点像是为了更好地决策而假装生活在幻想世界中。你可以直接做出更好的决策，而不需要假装部分。
 - en: Let’s return to our discussion about thresholds from the previous section. Instead
     of using weights to make a machine learning model with one threshold behave as
     though it had a different threshold, you could just change the threshold of that
     model directly. This would (presumably) lead to a poorly calibrated model, but
     it might still be a good business decision because it might reduce costs.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回到上一节讨论阈值的内容。与其使用权重让一个具有某一阈值的机器学习模型表现得像具有不同阈值一样，你可以直接更改该模型的阈值。这可能（假设）会导致模型校准不佳，但它仍可能是一个好的商业决策，因为它可能减少成本。
 - en: In fact, if you return to the cost matrix considered previously,
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，如果你回到之前考虑的成本矩阵，
 - en: '|  | Actual Negative | Actual Positive |'
+  id: totrans-128
   prefs: []
   type: TYPE_TB
+  zh: '|  | 实际负例 | 实际正例 |'
 - en: '| Predict Negative | C[00] | C[01] |'
+  id: totrans-129
   prefs: []
   type: TYPE_TB
+  zh: '| 预测为负例 | C[00] | C[01] |'
 - en: '| Predict Positive | C[10] | C[11] |'
+  id: totrans-130
   prefs: []
   type: TYPE_TB
+  zh: '| 预测为正例 | C[10] | C[11] |'
 - en: the optimal threshold for making decisions in order to minimize costs is precisely
     p^*
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了最小化成本，做出决策的最佳阈值恰好是 p^*
 - en: '![](../Images/389f1604cc4120736dd7e6a564667f21.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/389f1604cc4120736dd7e6a564667f21.png)'
 - en: This is often simpler, and empirical evidence suggests that adjusting the threshold
     directly works a little better than weighting [in practice](http://web.cs.iastate.edu/~honavar/elkan.pdf).
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 这通常更简单，实证证据表明，直接调整阈值比权重调整[在实践中](http://web.cs.iastate.edu/~honavar/elkan.pdf)效果稍好。
 - en: So basically, after all that talk about weighting, my general advice is, if
     possible don’t weight at all, but adjust your threshold instead! But of course,
     many of the ideas overlap, so hopefully, this discussion was still useful.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，总的来说，经过这些关于权重的讨论，我的建议是，如果可能的话，尽量不要使用权重，而是调整你的阈值！但当然，许多想法是重叠的，所以希望这次讨论仍然有用。
 - en: 'Also, one last tip: If you aren’t worried about cost-sensitive classification
     problems (e.g., problems where you have different costs associated with different
     predictions and DV cases), you probably shouldn’t be thinking about using weighting
     as a tool. Unless you’re a pollster.'
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，最后一个提示：如果你不担心成本敏感的分类问题（例如，你有不同的预测和 DV 情况相关的不同成本），你可能不应该考虑使用权重作为工具。除非你是一个民意调查员。
 - en: '**Bio:** [Dr. Eric Hart](https://www.linkedin.com/in/erichart07) is a Senior
     Data Scientist on the services team at Altair. He has a background in engineering
     and mathematics, and likes using his problem solving skill to tackle interesting
     data challenges. He’s also a Blokus world champion.'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [埃里克·哈特博士](https://www.linkedin.com/in/erichart07) 是Altair服务团队的高级数据科学家。他拥有工程和数学背景，喜欢运用自己的问题解决技巧来应对有趣的数据挑战。他还是Blokus世界冠军。'
 - en: '**Related:**'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Balance the Five Analytic Dimensions](https://www.kdnuggets.com/2015/09/how-balance-five-analytic-dimensions.html)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何平衡五个分析维度](https://www.kdnuggets.com/2015/09/how-balance-five-analytic-dimensions.html)'
 - en: '[How to fix an Unbalanced Dataset](https://www.kdnuggets.com/2019/05/fix-unbalanced-dataset.html)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何修复不平衡的数据集](https://www.kdnuggets.com/2019/05/fix-unbalanced-dataset.html)'
 - en: '[Comparing Machine Learning Models: Statistical vs. Practical Significance](https://www.kdnuggets.com/2019/01/comparing-machine-learning-models-statistical-vs-practical-significance.html)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较机器学习模型：统计意义与实际意义](https://www.kdnuggets.com/2019/01/comparing-machine-learning-models-statistical-vs-practical-significance.html)'
 - en: More On This Topic
+  id: totrans-141
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Linear Programming 101 for Data Scientists](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的线性编程基础](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
 - en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LangChain基础：构建你自己的GPT驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
 - en: '[Prompt Engineering 101: Mastering Effective LLM Communication](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提示工程基础：掌握有效的LLM沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)'
 - en: '[Machine Learning Algorithms - What, Why, and How?](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习算法 - 什么，为什么，以及如何？](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)'
 - en: '[Why Do Machine Learning Models Die In Silence?](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么机器学习模型在沉默中消亡？](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)'
 - en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习没有为我的业务带来价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'

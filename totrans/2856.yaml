@@ -1,83 +1,114 @@
 - en: Stop explaining black box machine learning models for high stakes decisions
     and use interpretable models instead
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 停止为高风险决策解释黑箱机器学习模型，改用可解释的模型
 - en: 原文：[https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html](https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html](https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '[Stop explaining black box machine learning models for high stakes decisions
     and use interpretable models instead](https://arxiv.org/abs/1811.10154) Rudin
     et al., *arXiv 2019*'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[停止为高风险决策解释黑箱机器学习模型，改用可解释的模型](https://arxiv.org/abs/1811.10154) 由Rudin等人，*arXiv
+    2019*'
 - en: With thanks to Glyn Normington for pointing out this paper to me.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢Glyn Normington指出了这篇论文。
 - en: 'It’s pretty clear from the title alone what Cynthia Rudin would like us to
     do! The paper is a mix of technical and philosophical arguments and comes with
     two main takeaways for me: firstly, a sharpening of my understanding of the difference
     between explainability and interpretability, and why the former may be problematic;
     and secondly some great pointers to techniques for creating truly interpretable
     models.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 从标题中可以很清楚地看出辛西娅·鲁丁希望我们做什么！这篇论文混合了技术性和哲学性的论点，对我来说有两个主要的收获：首先，加深了我对可解释性与解释性的区别的理解，以及为什么前者可能存在问题；其次，提供了一些很好的方法来创建真正可解释的模型。
 - en: There has been a increasing trend in healthcare and criminal justice to leverage
     machine learning (ML) for high-stakes prediction applications that deeply impact
     human lives… The lack of transparency and accountability of predictive models
     can have (and has already had) severe consequences…
+  id: totrans-6
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在医疗保健和刑事司法领域，越来越多地利用机器学习（ML）进行高风险预测应用，这对人类生活产生深远影响……预测模型的透明性和问责制的缺乏可能会（并且已经）带来严重后果……
 - en: Defining terms
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 定义术语
 - en: 'A model can be a **black box** for one of two reasons: (a) the function that
     the model computes is far too complicated for any human to comprehend, or (b)
     the model may in actual fact be simple, but its details are proprietary and not
     available for inspection.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型可能成为**黑箱**有两个原因：（a）模型计算的函数过于复杂，以至于任何人都无法理解，或者（b）模型实际上可能很简单，但其细节是专有的，无法进行检查。
 - en: In **explainable ML** we make predictions using a complicated black box model
     (e.g., a DNN), and use a second (posthoc) model created to explain what the first
     model is doing. A classic example here is [LIME](https://blog.acolyer.org/2016/09/22/why-should-i-trust-you-explaining-the-predictions-of-any-classifier/),
     which explores a local area of a complex model to uncover decision boundaries.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在**可解释的机器学习**中，我们使用一个复杂的黑箱模型（例如，DNN）进行预测，并使用第二个（事后）模型来解释第一个模型的行为。一个经典的例子是[LIME](https://blog.acolyer.org/2016/09/22/why-should-i-trust-you-explaining-the-predictions-of-any-classifier/)，它探讨了复杂模型的局部区域以揭示决策边界。
 - en: An **interpretable model** is a model used for predictions, that can itself
     be directly inspected and interpreted by human experts.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**可解释的模型**是一个用于预测的模型，可以被人类专家直接检查和解释。'
 - en: Interpretability is a domain-specific notion, so there cannot be an all-purpose
     definition. Usually, however, an interpretable machine learning model is **constrained
     in model form** so that it is either useful to someone, or obeys structural knowledge
     of the domain, such as monotonicity, or physical constraints that come from domain
     knowledge.
+  id: totrans-11
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 可解释性是一个特定领域的概念，因此没有一个通用的定义。然而，通常来说，可解释的机器学习模型是**在模型形式上受限的**，以便它要么对某人有用，要么遵循领域的结构性知识，如单调性，或来自领域知识的物理约束。
 - en: Explanations don’t really explain
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解释并没有真正解释
 - en: 'There has been a lot of research into producing explanations for the outputs
     of black box models. Rudin thinks this approach is fundamentally flawed. At the
     root of her argument is the observation that ad-hoc explanations are only really
     “guessing” (my choice of word) at what the black box model is doing:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前已经有大量研究致力于为黑箱模型的输出生成解释。鲁丁认为这种方法从根本上是有缺陷的。她论点的根源在于观察到临时解释实际上只是“猜测”（我选择的词）黑箱模型在做什么：
 - en: Explanations must be wrong. They cannot have perfect fidelity with respect to
     the original model. If the explanation was completely faithful to what the original
     model computes, the explanation would equal the original model, and one would
     not need the original model in the first place, only the explanation.
+  id: totrans-14
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 解释一定是错误的。它们不能与原始模型完美一致。如果解释完全忠实于原始模型的计算，解释将等同于原始模型，那么我们根本不需要原始模型，只需要解释。
 - en: Even the word “explanation” is problematic, because we’re not really describing
     what the original model actually does. The example of COMPAS (Correctional Offender
     Management Profiling for Alternative Sanctions) brings this distinction to life.
@@ -85,142 +116,199 @@
     race, was used to accuse COMPAS (which is a black box) of depending on race. But
     we don’t know whether or not COMPAS has race as a feature (though it may well
     have correlated variables).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 甚至“解释”这个词也是有问题的，因为我们并没有真正描述原始模型实际做了什么。COMPAS（替代制裁的刑事犯罪管理分析）这一例子生动地体现了这种区别。ProPublica
+    创建的一个线性解释模型与种族相关，被用来指责 COMPAS（这是一个黑箱）依赖于种族。但我们不知道 COMPAS 是否将种族作为一个特征（尽管它可能确实有相关的变量）。
 - en: Let us stop calling approximations to black box model predictions **explanations**.
     For a model that does not use race explicitly, an automated explanation “This
     model predicts you will be arrested because you are black” is not a model of what
     the model is actually doing, and would be confusing to a judge, lawyer or defendant.
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 让我们停止称对黑箱模型预测的近似为**解释**。对于一个没有明确使用种族的模型，自动生成的解释“这个模型预测你会因为是黑人而被逮捕”并不能反映模型实际在做什么，这会让法官、律师或被告感到困惑。
 - en: In the image space, saliency maps show us where the network is looking, but
     even they don’t tell us what it is truly looking at. Saliency maps for many different
     classes can be very similar. In the example below, the saliency based ‘explanations’
     for why the model thinks the image is husky, and why it thinks it is a flute,
     look very similar!
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在图像空间中，显著性图展示了网络关注的区域，但即使是这些图也无法告诉我们它真正关注的内容。不同类别的显著性图可能非常相似。在下面的例子中，模型认为图像是哈士奇的显著性“解释”和认为图像是长笛的显著性“解释”看起来非常相似！
 - en: '![](../Images/e66f228dd34d0b1544bfcb140b069b74.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e66f228dd34d0b1544bfcb140b069b74.png)'
 - en: Since explanations aren’t really explaining, identifying and troubleshooting
     issues with black box models can be very difficult
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于解释并没有真正解释，识别和排查黑箱模型的问题可能非常困难
 - en: Arguments against interpretable models
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 针对可解释模型的争论
 - en: Given the issues with black-box models + explanations, why are black-box models
     so in-vogue? It’s hard to argue against the tremendous recent successes of deep
     learning models, but we shouldn’t conclude from this that more complex models
     are always better.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于黑箱模型和解释的问题，为什么黑箱模型如此流行？虽然很难对深度学习模型的巨大近期成功提出异议，但我们不应从中得出更复杂的模型总是更好的结论。
 - en: There is a widespread belief that more complex models are more accurate, meaning
     that a complicated black box is necessary for top predictive performance. However,
     this is often not true, particularly when the data is structured, with a good
     representation in terms of naturally meaningful features.
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 有一种广泛的观点认为更复杂的模型更为准确，这意味着为了获得顶级的预测性能，需要一个复杂的黑箱。然而，这通常并不成立，特别是当数据是结构化的，并且在自然有意义的特征方面有很好的表示时。
 - en: 'As a consequence of the belief that complex is good, it’s also a commonly held
     myth that if you want good performance you have to sacrifice interpretability:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于相信复杂的东西更好，也有一种普遍的误解，即如果你想要好的性能，你必须牺牲可解释性：
 - en: '![](../Images/d21235ffd41cfe8d022b1c6d55b7c07d.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d21235ffd41cfe8d022b1c6d55b7c07d.png)'
 - en: The belief that there is always a trade-off between accuracy and interpretability
     has led many researchers to forgo the **attempt** to produce an interpretable
     model. This problem is compounded by the fact that researchers are now trained
     in deep learning, but not in interpretable machine learning…
+  id: totrans-25
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 认为准确性和可解释性之间总是存在权衡的信念使许多研究人员放弃了**尝试**产生可解释模型。这个问题由于研究人员现在受过深度学习训练，但没有受过可解释机器学习训练而变得更加复杂…
 - en: 'The *Rashomon set* says that we are often likely to be able to find an interpretable
     model if we try: given that the data permit a large set of reasonably accurate
     predictive models to exist, it often contains at least one model that is interpretable.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Rashomon 集* 说，如果我们尝试的话，我们通常有可能找到一个可解释的模型：鉴于数据允许存在一大组合理准确的预测模型，它通常至少包含一个可解释的模型。'
 - en: This suggests to me an interesting approach of first doing the comparatively
     quicker thing of trying a deep learning method without any feature engineering
     etc.. If that produces reasonable results, we know that the data permits the existing
     of reasonably accurate predictive models, and we can invest the time in trying
     to find an *interpretable one*.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使我想到一个有趣的方法：首先进行相对较快的尝试，即使用深度学习方法而不进行任何特征工程等。如果产生了合理的结果，我们就知道数据允许存在合理准确的预测模型，我们可以投入时间去寻找一个*可解释的模型*。
 - en: For data that are unconfounded, complete, and clean, it is much easier to use
     a black box machine learning method than to troubleshoot and solve computationally
     hard problems. However, for high-stakes decisions, analyst time and computational
     time are less expensive than the cost of having a flawed or overly complicated
     model.
+  id: totrans-28
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 对于那些没有混杂、完整且干净的数据，使用黑箱机器学习方法要比解决计算难题要容易得多。然而，对于高风险决策来说，分析师时间和计算时间的成本比存在一个有缺陷或过于复杂的模型的成本要低。
 - en: Creating interpretable models
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建可解释的模型
 - en: 'Section 5 in the paper discusses three common challenges that often arise in
     the search for interpretable machine learning models: constructing optimal logical
     models, constructing optimal (sparse) scoring systems, and defining what interpretability
     might mean in specific domains.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 论文的第5节讨论了在寻找可解释机器学习模型时常遇到的三个常见挑战：构建最佳逻辑模型、构建最佳（稀疏）评分系统，以及在特定领域中定义可解释性可能意味着什么。
 - en: '**Logical models**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**逻辑模型**'
 - en: 'A logical model just a bunch of if-then-else statements! These have been crafted
     by hand for a long time. The ideal logical model would have the smallest number
     of branches possible for a given level of accuracy. [CORELS](https://corels.eecs.harvard.edu/index.html) is
     a machine learning system designed to find such optimal logical models. Here’s
     an example output model that has similar accuracy to the blackbox COMPAS model
     on data from Broward County, Florida:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 逻辑模型只是一些if-then-else语句！这些语句已经手工制作了很长时间。理想的逻辑模型应具有给定准确性水平下最少的分支数。[CORELS](https://corels.eecs.harvard.edu/index.html)
+    是一个旨在寻找这种最佳逻辑模型的机器学习系统。以下是一个输出模型的示例，它在来自佛罗里达州布劳沃德县的数据上具有与黑箱COMPAS模型类似的准确性：
 - en: '![](../Images/fa82ab8b6e0fc0e660f3f07f7e1e33c0.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fa82ab8b6e0fc0e660f3f07f7e1e33c0.png)'
 - en: Note that the figure caption calls it a ‘machine learning model.’ That terminology
     doesn’t seem right to me. It’s a machine-*learned*-model, and CORELS is a machine
     learning model that produces it, but the IF-THEN-ELSE statement is not itself
     a machine learning model. Nevertheless, CORELS looks very interesting and we’re
     going to take a deeper look at it in the next edition of The Morning Paper.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，图例称其为“机器学习模型”。我认为这个术语不太准确。它是一个机器*学习*模型，而CORELS是一个生成它的机器学习模型，但IF-THEN-ELSE语句本身不是一个机器学习模型。不过，CORELS看起来很有趣，我们将在下一期《晨报》中对其进行深入探讨。
 - en: '**Scoring systems**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**评分系统**'
 - en: 'Scoring systems are used pervasively through medicine. We’re interested in
     optimal scoring systems that are the outputs of machine learning models, but *look
     like they could have been produced by a human*. For example:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 评分系统在医学中被广泛使用。我们对作为机器学习模型输出的最佳评分系统感兴趣，但*看起来像是由人类产生的*。例如：
 - en: '![](../Images/bf08ff918280541f56732be46d22cb9c.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bf08ff918280541f56732be46d22cb9c.png)'
 - en: This model was in fact produced by [RiskSLIM](https://www.kdd.org/kdd2017/papers/view/optimized-risk-scores),
     the Risk-Supersparse-Linear-Integer-Models algorithm (which we’ll also look at
     in more depth later this week).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个模型实际上是由 [RiskSLIM](https://www.kdd.org/kdd2017/papers/view/optimized-risk-scores)
+    产生的，即风险超稀疏线性整数模型算法（我们将在本周晚些时候对此进行更深入的探讨）。
 - en: For both the CORELS and the RiskSLIM models, the key thing to remember is that
     although they look simple and highly interpretable, they give results with highly
     competitive accuracy. It’s not easy getting things to look this simple! I certainly
     know which models I’d rather deploy and troubleshoot given the option.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于CORELS和RiskSLIM模型，关键在于尽管它们看起来简单且高度可解释，但它们的结果具有高度竞争的准确性。让这些东西看起来如此简单并不容易！我当然知道如果有选择的话，我更愿意部署和故障排除哪些模型。
 - en: '**Designing for interpretability in specific domains**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在特定领域设计可解释性**'
 - en: …even for classic domains of machine learning, where latent representations
     of data need to be constructed, there could exist interpretable models that are
     as accurate as black box models.
+  id: totrans-41
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: …即使是在经典的机器学习领域，其中数据的潜在表示需要被构建，也可能存在与黑箱模型一样准确的可解释模型。
 - en: The key is to consider interpretability in the model design itself. Fore example,
     if an expert where to explain to you why they classified an image in the way that
     they did, they would probably point out different parts of the image that were
@@ -229,139 +317,203 @@
     a model that during training learns parts of images that act as prototypes for
     a class, and then during testing finds parts of the test image similar to the
     prototypes it has learned.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 关键是要在模型设计本身中考虑可解释性。例如，如果一个专家要解释为什么他们以某种方式对图像进行分类，他们可能会指出图像中的不同部分，这些部分在他们的推理过程中是重要的（有点像显著性），并*解释原因*。将这一理念引入网络设计，[Chen,
+    Li 等人](https://arxiv.org/abs/1806.10574) 构建了一个模型，在训练过程中学习作为类别原型的图像部分，然后在测试过程中寻找与已学到的原型相似的测试图像部分。
 - en: These explanations are the actual computations of the model, and these are not
     posthoc explanations. The network is called “This look like that” because its
     reasoning process considers whether “this” part of the image looks like “that”
     prototype.
+  id: totrans-43
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这些解释是模型的实际计算过程，而不是事后解释。该网络被称为“这看起来像那”，因为它的推理过程考虑了图像的“这”部分是否像“那”原型。
 - en: '![](../Images/db78028091ac65304cab1c502dba973b.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/db78028091ac65304cab1c502dba973b.png)'
 - en: Explanation, Interpretation, and Policy
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解释、解释性和政策
 - en: Section 4 of the paper discusses potential policy changes to encourage interpretable
     models to be preferred (or even required in high-stakes situations).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 论文第4节讨论了鼓励优先使用（或甚至在高风险情况下要求使用）可解释模型的潜在政策变化。
 - en: Let us consider a possible mandate that, for certain high-stakes decisions, **no
     black box should be deployed when there exists an interpretable model with the
     same level of performance**.
+  id: totrans-47
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 让我们考虑一个可能的要求，即对于某些高风险决策，**如果存在一个性能水平相同的可解释模型，则不应部署黑箱模型**。
 - en: That sounds a worthy goal, but as worded it would be very tough to prove that
     there doesn’t exist an interpretable model. So perhaps companies would have to
     be required to be able to produce evidence of having searched for an interpretable
     model with an appropriate level of diligence…
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 这听起来是一个值得追求的目标，但按这种措辞，很难证明不存在可解释模型。因此，或许公司需要被要求能够提供证据，证明他们已经进行了适当级别的尽职调查来寻找可解释模型……
 - en: Consider a second proposal, which is weaker than the one provided above, but
     which might have a similar effect. Let us consider the possibility that organizations
     that introduce black box models would be mandated to report the accuracy of interpretable
     modeling methods.
+  id: totrans-49
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 考虑第二个提议，它比上述提议要弱一些，但可能会有类似的效果。我们考虑一下这样的可能性：引入黑箱模型的组织应该被要求报告可解释建模方法的准确性。
 - en: 'If this process is followed, we’re likely to see a lot fewer black box machine
     learning models deployed in the wild if the author’s experience is anything to
     go by:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果按照这个过程进行，我们很可能会看到实际应用中部署的黑箱机器学习模型大大减少，如果作者的经验有参考价值的话：
 - en: It could be possible that there are application domains where a complete black
     box is required for a high stakes decision. As of yet, I have not encountered
     such an application, despite having worked on numerous applications in healthcare
     and criminal justice, energy reliability, and financial risk assessment.
+  id: totrans-51
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 可能存在一些应用领域，对于高风险决策需要完全的黑箱模型。尽管我在医疗保健、刑事司法、能源可靠性和金融风险评估等多个领域工作过，但至今尚未遇到这样的应用。
 - en: The last word
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最后一段
 - en: If this commentary can shift the focus even slightly from the basic assumption
     underlying most work in Explainable ML— which is that a black box is necessary
     for accurate predictions— we will have considered this document a success…. If
     we do not succeed [in making policy makers aware of the current challenges in
     interpretable machine learning], it is possible that black box models will continue
     to be permitted when it is not safe to use them.
+  id: totrans-53
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 如果这篇评论能够稍微转移一下大多数可解释机器学习工作的基本假设——即黑箱模型对于准确预测是必需的——我们将认为这份文件是成功的……如果我们没有成功[让政策制定者意识到当前可解释机器学习的挑战](https://www.kdnuggets.com/google-data-analytics)，黑箱模型可能会继续被允许使用，而这些模型在不安全的情况下仍然被使用。
 - en: '[Original](https://blog.acolyer.org/2019/10/28/interpretable-models/). Reposted
     with permission.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.acolyer.org/2019/10/28/interpretable-models/)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Choosing a Machine Learning Model](/2019/10/choosing-machine-learning-model.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择机器学习模型](/2019/10/choosing-machine-learning-model.html)'
 - en: '[“Please, explain.” Interpretability of machine learning models](/2019/05/interpretability-machine-learning-models.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[“请解释。”机器学习模型的可解释性](/2019/05/interpretability-machine-learning-models.html)'
 - en: '[Python Libraries for Interpretable Machine Learning](/2019/09/python-libraries-interpretable-machine-learning.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释机器学习的Python库](/2019/09/python-libraries-interpretable-machine-learning.html)'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学来寻找目标，找到目标后…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Stop Hard Coding in a Data Science Project - Use Config Files Instead](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[90亿美元的AI失败，详细审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
