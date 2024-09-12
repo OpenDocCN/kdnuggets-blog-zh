@@ -1,366 +1,562 @@
 - en: Feature Ranking with Recursive Feature Elimination in Scikit-Learn
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Scikit-Learn中的递归特征消除
 - en: 原文：[https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html](https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html](https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html)
 - en: '[comments](#comments)![Figure](../Images/95584b7d1e39d41ec7aaa93bdb355848.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/95584b7d1e39d41ec7aaa93bdb355848.png)'
 - en: '[Photo by Element5 Digital on Unsplash](https://unsplash.com/photos/LTyDj7u_TU4)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[照片由Element5 Digital提供，来自Unsplash](https://unsplash.com/photos/LTyDj7u_TU4)'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[Feature selection](https://heartbeat.fritz.ai/search?q=feature%20selection) is
     an important task for any machine learning application. This is especially crucial
     when the data in question has many features. The optimal number of features also
     leads to improved model accuracy. Obtaining the most important features and the
     number of optimal features can be obtained via feature importance or feature ranking.
     In this piece, we’ll explore feature ranking.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '[特征选择](https://heartbeat.fritz.ai/search?q=feature%20selection) 是任何机器学习应用中的重要任务。特别是当数据具有许多特征时，这一点尤为重要。最佳特征数量还会提高模型准确性。通过特征重要性或特征排名可以获得最重要的特征和最佳特征数量。在这篇文章中，我们将探讨特征排名。'
 - en: Recursive Feature Elimination
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 递归特征消除
 - en: The first item needed for recursive feature elimination is an estimator; for
     example, a linear model or a decision tree model.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 递归特征消除所需的第一个项目是一个估计器，例如线性模型或决策树模型。
 - en: These models have coefficients for linear models and feature importances in
     decision tree models. In selecting the optimal number of features, the estimator
     is trained and the features are selected via the coefficients, or via the feature
     importances. The least important features are removed. This process is repeated
     recursively until the optimal number of features is obtained.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些模型具有线性模型的系数和决策树模型的特征重要性。在选择最佳特征数量时，估计器通过系数或特征重要性进行训练，选择特征。最不重要的特征被移除。这个过程递归重复，直到获得最佳特征数量。
 - en: Application in Sklearn
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Scikit-learn中的特征选择
 - en: 'Scikit-learn makes it possible to implement recursive feature elimination via
     the `sklearn.feature_selection.**RFE**`class. The class takes the following parameters:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-learn使得可以通过`sklearn.feature_selection.**RFE**`类实现递归特征消除。该类接受以下参数：
 - en: '`estimator` — a machine learning estimator that can provide features importances
     via the `coef_` or `feature_importances_` attributes.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`estimator` — 一个机器学习估计器，可以通过`coef_`或`feature_importances_`属性提供特征重要性。'
 - en: '`n_features_to_select` — the number of features to select. Selects `half` if
     it''s not specified.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_features_to_select` — 要选择的特征数量。如果未指定，则选择`half`。'
 - en: '`step` — an integer that indicates the number of features to be removed at
     each iteration, or a number between 0 and 1 to indicate the percentage of features
     to remove at each iteration.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`step` — 一个整数，表示每次迭代中要移除的特征数量，或者是一个0到1之间的数，表示每次迭代中要移除的特征百分比。'
 - en: 'Once fitted, the following attributes can be obtained:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦拟合，可以获得以下属性：
 - en: '`ranking_` — the ranking of the features.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ranking_` — 特征的排名。'
 - en: '`n_features_` — the number of features that have been selected.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_features_` — 已选择的特征数量。'
 - en: '`support_` — an array that indicates whether or not a feature was selected.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`support_` — 一个数组，指示特征是否被选中。'
 - en: Application
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 应用
 - en: As noted earlier, we’ll need to work with an estimator that offers a `feature_importance_s` attribute
     or a `coeff_` attribute. Let’s work through a quick example. The dataset has 13
     features—we’ll work on getting the optimal number of features.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，我们需要使用一个提供`feature_importance_s`属性或`coeff_`属性的估计器。让我们通过一个简单的例子来演示。数据集有13个特征——我们将努力获得最佳特征数量。
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Image for post](../Images/209209c877a917a2b8030c25653e1f1d.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/209209c877a917a2b8030c25653e1f1d.png)'
 - en: Let’s obtain the `X` and `y` features.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们获取`X`和`y`特征。
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We’ll split it into a testing and training set to prepare for modeling:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将其拆分为测试集和训练集，以准备建模：
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Let’s get a couple of imports out of the way:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们先处理几个导入：
 - en: '`Pipeline` — since we’ll perform some cross-validation. It’s best practice
     in order to avoid data leakage.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Pipeline` — 因为我们会进行一些交叉验证。为了避免数据泄漏，这是最佳实践。'
 - en: '`RepeatedStratifiedKFold` — for repeated stratified cross-validation.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`RepeatedStratifiedKFold` — 用于重复分层交叉验证。'
 - en: '`cross_val_score` — for evaluating the score on cross-validation.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cross_val_score` — 用于评估交叉验证中的分数。'
 - en: '`GradientBoostingClassifier` — the estimator we’ll use.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`GradientBoostingClassifier` — 我们将使用的估计器。'
 - en: '`numpy` — so that we can compute the mean of the scores.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numpy` — 以便我们可以计算分数的均值。'
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The first step is to create an instance of the `RFE` class while specifying
     the estimator and the number of features you’d like to select. In this case, we’re
     selecting 6:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是创建`RFE`类的实例，同时指定估计器和要选择的特征数量。在这种情况下，我们选择6个特征：
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Next, we create an instance of the model we’d like to use:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们创建我们想使用的模型实例：
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We’ll use a `Pipeline` to transform the data. In the `Pipeline` we specify `rfe` for
     the feature selection step and the model that’ll be used in the next step.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用`Pipeline`来转换数据。在`Pipeline`中，我们指定`rfe`作为特征选择步骤，并指定下一步将使用的模型。
 - en: We then specify a `RepeatedStratifiedKFold` with 10 splits and 5 repeats. The
     stratified K fold ensures that the number of samples from each class is well balanced
     in each fold. `RepeatedStratifiedKFold` repeats the stratified K fold the specified
     number of times, with a different randomization in each repetition.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们指定一个具有10个拆分和5次重复的`RepeatedStratifiedKFold`。分层K折确保每个折中的每个类别样本数量均衡。`RepeatedStratifiedKFold`重复指定次数的分层K折，每次重复时随机化不同。
 - en: '[PRE6]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The next step is to fit this pipeline to the dataset.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是将这个管道拟合到数据集上。
 - en: '[PRE7]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: With that in place, we can check the support and the ranking. The support indicates
     whether or not a feature was chosen.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了这些准备，我们可以检查支持度和排名。支持度指示了特征是否被选择。
 - en: '[PRE8]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: We can put that into a dataframe and check the result.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将其放入数据框中并检查结果。
 - en: '[PRE9]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Image for post](../Images/91d6aa62aa3531efcd67be1b1099da9d.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/91d6aa62aa3531efcd67be1b1099da9d.png)'
 - en: We can also check the relative rankings.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以检查相对排名。
 - en: '[PRE10]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![Image for post](../Images/1b2724743842b9841ead3da64919e86c.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/1b2724743842b9841ead3da64919e86c.png)'
 - en: Automatic Feature Selection
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自动特征选择
 - en: 'Instead of manually configuring the number of features, it would be very nice
     if we could automatically select them. This can be achieved via recursive feature
     elimination and cross-validation. This is done via the `sklearn.feature_selection.RFECV` class.
     The class takes the following parameters:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们能够自动选择特征，而不是手动配置特征数量，那将非常好。这可以通过递归特征消除和交叉验证来实现。这是通过`sklearn.feature_selection.RFECV`类来完成的。该类接受以下参数：
 - en: '`estimator` — similar to the `RFE` class.'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`estimator` — 类似于`RFE`类。'
 - en: '`min_features_to_select` — the minimum number of features to be selected.'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`min_features_to_select` — 要选择的最小特征数量。'
 - en: '`cv`— the cross-validation splitting strategy.'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cv` — 交叉验证拆分策略。'
 - en: 'The attributes returned are:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回的属性包括：
 - en: '`n_features_` — the optimal number of features selected via cross-validation.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`n_features_` — 通过交叉验证选择的最佳特征数量。'
 - en: '`support_` — the array containing information on the selection of a feature.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`support_` — 包含特征选择信息的数组。'
 - en: '`ranking_` — the ranking of the features.'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ranking_` — 特征的排名。'
 - en: '`grid_scores_` — the scores obtained from cross-validation.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`grid_scores_` — 从交叉验证中获得的分数。'
 - en: The first step is to import the class and create its instance.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是导入类并创建其实例。
 - en: '[PRE11]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: The next step is to specify the pipeline and the cv. In this pipeline we use
     the just created `rfecv`.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是指定管道和交叉验证。在这个管道中，我们使用刚刚创建的`rfecv`。
 - en: '[PRE12]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Let’s fit the pipeline and then obtain the optimal number of features.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们拟合管道，然后获取最佳特征数量。
 - en: '[PRE13]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: The optimal number of features can be obtained via the `n_features_` attribute.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 最佳特征数量可以通过`n_features_`属性获得。
 - en: '[PRE14]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The rankings and support can be obtained just like last time.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 排名和支持可以像上次一样获得。
 - en: '[PRE15]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: With the `grid_scores_` we can plot a graph showing the cross-validated scores.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`grid_scores_`我们可以绘制一个显示交叉验证得分的图表。
 - en: '[PRE16]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![Figure](../Images/9fe7d440cbcadab2f300a2a7f716b781.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/9fe7d440cbcadab2f300a2a7f716b781.png)'
 - en: Numbers of features against the accuracy plot
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征数量与准确率图
 - en: Final Thoughts
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最后的想法
 - en: The process for applying this in a regression problem is the same. Just ensure
     to use regression metrics instead of accuracy. I hope this piece has given you
     some insight on selecting the optimal number of features for your machine learning
     problems.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回归问题中应用此方法的过程是相同的。只需确保使用回归指标而非准确率。我希望这篇文章能为你选择机器学习问题的最佳特征数量提供一些见解。
 - en: '[**mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination**](https://github.com/mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination)'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**mwitiderrick/特征排名与递归特征消除**](https://github.com/mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination)'
 - en: Feature Ranking with Recursive Feature Elimination - mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征排名与递归特征消除 - mwitiderrick/特征排名与递归特征消除
 - en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
     and a mentor. He is driven by delivering great results in every task, and is a
     mentor at Lapid Leaders Africa.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[德里克·姆维提](https://derrickmwiti.com/)** 是一名数据分析师、作家和导师。他致力于在每项任务中取得卓越的结果，并且是Lapid
+    Leaders Africa的导师。'
 - en: '[Original](https://heartbeat.fritz.ai/feature-ranking-with-recursive-feature-elimination-3e22db639208).
     Reposted with permission.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/feature-ranking-with-recursive-feature-elimination-3e22db639208)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[How I Consistently Improve My Machine Learning Models From 80% to Over 90%
     Accuracy](/2020/09/improve-machine-learning-models-accuracy.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将我的机器学习模型的准确率从80%持续提升到90%以上](/2020/09/improve-machine-learning-models-accuracy.html)'
 - en: '[LightGBM: A Highly-Efficient Gradient Boosting Decision Tree](/2020/06/lightgbm-gradient-boosting-decision-tree.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LightGBM：一种高效的梯度提升决策树](/2020/06/lightgbm-gradient-boosting-decision-tree.html)'
 - en: '[Fast Gradient Boosting with CatBoost](/2020/10/fast-gradient-boosting-catboost.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CatBoost的快速梯度提升](/2020/10/fast-gradient-boosting-catboost.html)'
 - en: More On This Topic
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择：科学与艺术的交汇](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建一个可处理的、多变量时间序列特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
 - en: '[Feature Stores for Real-time AI & Machine Learning](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实时AI与机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
