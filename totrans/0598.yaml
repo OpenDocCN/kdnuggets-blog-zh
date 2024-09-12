@@ -1,242 +1,344 @@
 - en: A Guide to Train an Image Classification Model Using Tensorflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Tensorflow 训练图像分类模型的指南
 - en: 原文：[https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
 - en: Humans learn to identify and label visuals at a very early age. Now, computers
     are able to classify images at scale and with very high accuracy with the advent
     of machine learning and deep learning algorithms. Such advanced algorithms  have
     a multitude of applications — the common ones include distinguishing healthy lung
     scans, facial recognition by a mobile device, or classifying objects into different
     categories for a retailer.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 人类在很小的时候就学会了识别和标记视觉图像。现在，随着机器学习和深度学习算法的出现，计算机能够大规模且高精度地分类图像。这些先进的算法有许多应用——常见的包括区分健康的肺部扫描、移动设备的人脸识别，或将物体分类为零售商的不同类别。
 - en: '![A Guide to Train an Image Classification Model Using Tensorflow](../Images/472ad8cf48e76d29710c311e72f06031.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Tensorflow 训练图像分类模型指南](../Images/472ad8cf48e76d29710c311e72f06031.png)'
 - en: '[Facial Recognition](https://www.freepik.com/free-vector/man-face-scan-biometric-digital-technology_5597121.htm#query=facial%20recognition&position=1&from_view=search&track=sph)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[人脸识别](https://www.freepik.com/free-vector/man-face-scan-biometric-digital-technology_5597121.htm#query=facial%20recognition&position=1&from_view=search&track=sph)'
 - en: The post explains one such application of computer vision i.e. image classification
     and illustrates how to train a model on a small dataset of images using Tensorflow.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文解释了计算机视觉的一个应用，即图像分类，并说明了如何使用 Tensorflow 在小型图像数据集上训练模型。
 - en: Dataset and Objectives
+  id: totrans-6
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据集和目标
 - en: 'For the purpose of this demo, we will use the [MNIST](https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=mnist)
     dataset which contains images of digits from 0 to 9\. Sample images are shown
     below:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示的目的，我们将使用包含0到9数字图像的[MNIST](https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=mnist)数据集。样本图像如下所示：
 - en: '![A Guide to Train an Image Classification Model Using Tensorflow](../Images/dfcba57b4b12bbea981a23980db6396f.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Tensorflow 训练图像分类模型指南](../Images/dfcba57b4b12bbea981a23980db6396f.png)'
 - en: '[Tensorflow-dataset](https://www.tensorflow.org/datasets/catalog/mnist)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Tensorflow-dataset](https://www.tensorflow.org/datasets/catalog/mnist)'
 - en: The objective of training this model is to classify the images to their respective
     label i.e. their respective digit equivalent. Deep neural network architecture
     with one input, one output, two hidden, and one dropout layer is used for training
     the model. CNN or Convolutional Neural Network is the preferred choice for larger
     images because of its ability to capture relevant information while reducing the
     size of the input.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练这个模型的目的是将图像分类到它们各自的标签，即对应的数字等价物。使用一个输入层、一个输出层、两个隐藏层和一个 Dropout 层的深度神经网络架构来训练模型。CNN
+    或卷积神经网络是较大图像的首选，因为它能够在减少输入大小的同时捕捉相关信息。
 - en: Getting Started
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 入门指南
 - en: Firstly, import all the relevant libraries starting with TensorFlow, to_categorical
     (for converting numeric class values to categories), Sequential, Flatten, Dense,
     and Dropout for building Neural Network architecture. If some of these libraries
     are new to you, then do not worry. They are explained in the upcoming section.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，导入所有相关的库，包括 TensorFlow、to_categorical（用于将数值类值转换为类别）、Sequential、Flatten、Dense
+    和 Dropout，用于构建神经网络架构。如果这些库中的一些对你来说是新的，不用担心。它们将在接下来的部分中进行解释。
 - en: Hyperparameters
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 超参数
 - en: 'The following pointers help you choose the right set of hyperparameters:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下提示帮助你选择正确的超参数：
 - en: Let's define some hyperparameters as a starting point, you can tune them to
     run different experiments. We have chosen a mini-batch size of 128\. The batch
     size can take any value but selecting a batch size as a power of 2 is memory efficient
     and hence, is a preferred choice. Let us also understand one of the prime reasoning
     behind deciding appropriate batch size – a tiny batch size would make the convergence
     very noisy and a very large batch size might not fit in the memory of your computer.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 让我们定义一些超参数作为起点，你可以调整它们以进行不同的实验。我们选择了128的迷你批量大小。批量大小可以取任何值，但选择一个2的幂作为批量大小在内存使用上更高效，因此是首选。让我们还理解决定适当批量大小的主要原因——过小的批量大小会使收敛过程非常嘈杂，而过大的批量大小可能无法适应你的计算机内存。
 - en: Let's keep the number of epochs as 50 to quickly train the model. The dataset
     is small and simple and justifies the low epoch number.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们将epoch数量设置为50，以快速训练模型。数据集较小且简单，适合较低的epoch数量。
 - en: Next, you need to add hidden layers. We have kept two hidden layers of 128 neurons
     each – you can experiment with 64 and 32 as well. Higher numbers are not recommended
     for a simple dataset like MINST.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接下来，你需要添加隐藏层。我们保留了两个各128个神经元的隐藏层——你也可以尝试64和32。对于像MINST这样简单的数据集，不推荐使用更高的数字。
 - en: You can try different learning rates like 0.01, 0.05, and 0.1\. For the purpose
     of this demo, it is kept at 0.01.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以尝试不同的学习率，如0.01、0.05和0.1。为了演示的目的，保持在0.01。
 - en: Other hyperparameters like decay steps and decay rate are chosen as 2000, and
     0.9 respectively. They are used to reduce the learning rate as the training progresses.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其他超参数如衰减步数和衰减率分别选择为2000和0.9。它们用于在训练过程中减少学习率。
 - en: Adamax is picked as an optimizer, although you have options of other optimizers
     like Adam, RMSProp, SGD, etc to choose from. You can read more about the [available
     list of optimizers](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers)
     along with their differences to choose the right one for your solution.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择Adamax作为优化器，尽管你还可以选择其他优化器，如Adam、RMSProp、SGD等。你可以阅读更多关于[可用优化器列表](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers)以及它们的区别，以选择适合你解决方案的优化器。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Creating Train and Test Set
+  id: totrans-22
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建训练和测试集
 - en: Tensorflow library also includes the MNIST dataset which you can get by calling
     datasets.mnist and then load_data() on the object to get the train (60,000 samples)
     and test (10,000 samples) datasets separately.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TensorFlow库还包括MNIST数据集，你可以通过调用datasets.mnist，然后在对象上调用load_data()来分别获取训练（60,000个样本）和测试（10,000个样本）数据集。
 - en: Next, you need to reshape and normalize the training and test images, where
     normalization bounds image pixel intensity between 0 and 1.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接下来，你需要重新调整和归一化训练和测试图像，其中归一化将图像像素强度限制在0到1之间。
 - en: Convert train and test labels to categorical by using the to_categorical method
     imported earlier. This is essential to communicate to the TensorFlow framework
     that the output labels i.e. 0 to 9 are classes and not numerical in nature.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用之前导入的to_categorical方法将训练和测试标签转换为类别。这对于向TensorFlow框架传达输出标签即0到9是类别而不是数值性质至关重要。
 - en: Designing Neural Network Architecture
+  id: totrans-26
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 设计神经网络架构
 - en: It is important to understand the nuanced details of how to design a neural
     network architecture.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解如何设计神经网络架构的细节非常重要。
 - en: Define DNN (Deep Neural Network) structure by adding Flatten to convert 2D image
     matrices to vectors. The input neurons correspond to the numbers in these vectors.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过添加Flatten来定义DNN（深度神经网络）结构，将2D图像矩阵转换为向量。输入神经元对应于这些向量中的数字。
 - en: Next, Dense() method is used to add two hidden dense layers pulling in the hyperparameters
     from the “params” dictionary defined earlier. Let’s use the activation function
     for these layers as “relu” i.e. Rectified Linear Unit which is one of the most
     used activation functions in neural network hidden layers.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接下来，使用Dense()方法添加两个隐藏的全连接层，并从之前定义的“params”字典中提取超参数。我们将这些层的激活函数设置为“relu”，即修正线性单元，它是神经网络隐藏层中最常用的激活函数之一。
 - en: Next add the dropout layer using the Dropout method. It is used to avoid overfitting
     while training the neural network. An overfit model has a tendency to remember
     the training set exactly and is unable to generalize over unseen datasets.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接下来使用Dropout方法添加dropout层。它用于在训练神经网络时避免过拟合。一个过拟合的模型倾向于准确记住训练集，而无法对未见过的数据集进行泛化。
 - en: The output layer is the last layer in our network, which is defined using the
     Dense() method. It is important to note that the output layer has 10 neurons corresponding
     to the number of classes (digits).
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 输出层是我们网络中的最后一层，使用Dense()方法定义。需要注意的是，输出层有10个神经元，分别对应于类别（数字）的数量。
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Time to Train
+  id: totrans-33
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 训练时间
 - en: Now that we have defined the architecture, let’s compile and train the neural
     network with the given training data.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经定义了架构，让我们用给定的训练数据来编译和训练神经网络。
 - en: Define a learning rate schedule with ExponentialDecay (exponentially decaying
     learning rate) with initial learning rate, decay steps, and decay rate as arguments.
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义一个学习率调度器，使用ExponentialDecay（指数衰减学习率），并以初始学习率、衰减步数和衰减率作为参数。
 - en: Define loss function as CategoricalCrossentropy (for multi-class classification).
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义损失函数为CategoricalCrossentropy（用于多类分类）。
 - en: Compile the model by passing the optimizer (adamax), loss function, and metrics
     (choosing accuracy because all classes are equally important and uniformly distributed)
     as arguments.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过将优化器（adamax）、损失函数和指标（选择准确率，因为所有类别同等重要且均匀分布）作为参数传递来编译模型。
 - en: Fit the model by calling a fit method with x_train, y_train, batch_size, epochs,
     and validation_data.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过调用 fit 方法，传入 x_train、y_train、batch_size、epochs 和 validation_data 来拟合模型。
 - en: Call the evaluate method over the model object to get a score for how well the
     model is performing on the unseen dataset.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调用模型对象上的 evaluate 方法，以获取模型在未见数据集上的表现分数。
 - en: You can save the model object to be deployed in production using the save method
     called over the model object.
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以使用 save 方法将模型对象保存以供生产使用。
 - en: The post explained the primer to train a Deep Neural Network for an Image Classification
     task and is a good starting point to get familiar with image classification tasks
     using neural networks. It elaborated on the choices and reasoning behind how we
     choose the right set of parameters and architecture, in general.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章解释了训练深度神经网络进行图像分类任务的基础知识，并且是熟悉使用神经网络进行图像分类任务的良好起点。它详细阐述了选择正确参数和架构的一般方法和理由。
 - en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
     a digital transformation leader working at the intersection of product, sciences,
     and engineering to build scalable machine learning systems. She is an award-winning
     innovation leader, an author, and an international speaker. She is on a mission
     to democratize machine learning and break the jargon for everyone to be a part
     of this transformation.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位 AI 策略师和数字化转型领导者，她在产品、科学和工程的交汇处工作，致力于构建可扩展的机器学习系统。她是获奖的创新领袖、作者和国际演讲者，致力于使机器学习民主化，并让每个人都能参与这一转型。'
 - en: More On This Topic
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多关于此主题的信息
 - en: '[Understanding Classification Metrics: Your Guide to Assessing Model…](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解分类指标：评估模型准确性的指南](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)'
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用卷积神经网络（CNNs）进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从零开始构建和训练 Transformer 模型](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Segment Anything Model: 图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么我们永远需要人类来训练 AI — 有时甚至是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
 - en: '[Machine Learning Algorithms for Classification](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类的机器学习算法](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'
