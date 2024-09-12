@@ -1,382 +1,579 @@
 - en: Development & Testing of ETL Pipelines for AWS Locally
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在本地开发和测试AWS的ETL管道
 - en: 原文：[https://www.kdnuggets.com/2021/08/development-testing-etl-pipelines-aws-locally.html](https://www.kdnuggets.com/2021/08/development-testing-etl-pipelines-aws-locally.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/08/development-testing-etl-pipelines-aws-locally.html](https://www.kdnuggets.com/2021/08/development-testing-etl-pipelines-aws-locally.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Subhash Sreenivasachar](https://www.linkedin.com/in/subhashsreenivasachar/),
     Software Engineer Technical Lead at Epsilon**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Subhash Sreenivasachar](https://www.linkedin.com/in/subhashsreenivasachar/)，Epsilon的软件工程技术负责人**'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: AWS plays a pivotal role in helping engineers, data-scientists focus on building
     solutions and problem solving without worrying about the need to setup infrastructure.
     With Serverless & pay-as-you-go approach for pricing, AWS provides ease of creating
     services on the fly.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS在帮助工程师和数据科学家专注于构建解决方案和解决问题方面发挥了关键作用，而不必担心设置基础设施的需求。通过无服务器和按需付费的定价方式，AWS提供了即刻创建服务的便利。
 - en: AWS Glue is widely used by Data Engineers to build serverless ETL pipelines.
     PySpark being one of the common tech-stack used for development. However, despite
     the availability of services, there are certain challenges that need to be addressed.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS Glue被数据工程师广泛用于构建无服务器ETL管道。PySpark是开发中常用的技术栈之一。然而，尽管服务可用，但仍有一些挑战需要解决。
 - en: Debugging code in AWS environment whether for ETL script (PySpark) or any other
     service is a challenge.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在AWS环境中调试代码，无论是ETL脚本（PySpark）还是其他服务，都具有挑战性。
 - en: Ongoing monitoring of AWS service usage is key to keep the cost factor under
     control
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 持续监控AWS服务的使用情况是控制成本因素的关键。
 - en: AWS does offer Dev Endpoint with all the spark libraries installed, but considering
     the price, it’s not viable for use for large development teams
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: AWS确实提供了带有所有Spark库的开发端点，但考虑到价格，对于大型开发团队来说并不切实可行。
 - en: Accessibility of AWS services may be ***limited*** for certain users
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对某些用户而言，AWS服务的可访问性可能是***有限的***。
 - en: Solution
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Solutions for AWS can be developed, tested in local environment without worrying
     about accessibility or cost factor. Through this article, we are addressing two
     problems -
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS的解决方案可以在本地环境中开发和测试，无需担心可访问性或成本因素。通过本文，我们解决了两个问题 -
 - en: Debugging PySpark code locally without using AWS dev endpoints.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在不使用AWS开发端点的情况下，本地调试PySpark代码。
 - en: Interacting with AWS Services locally
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 本地与AWS服务的交互
 - en: Both problems can be solved with use of Docker images.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个问题可以通过使用Docker镜像来解决。
 - en: First, we do away the need for a server on AWS environment & instead, a docker
     image running on the machine acts as the environment to execute the code.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 首先，我们取消了在AWS环境中使用服务器的需求，而是使用运行在机器上的Docker镜像作为执行代码的环境。
 - en: AWS provides a sandbox image which can be used for PySpark scripts. Docker image
     can be setup to execute PySpark Code. [https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/](https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/)
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS提供了一个沙盒镜像，可用于PySpark脚本。可以设置Docker镜像来执行PySpark代码。 [https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/](https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/)
 - en: With docker machine available to execute the code, there’s a need for a service
     like S3 to store (read/write) files while building an ETL pipeline.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 有了可以执行代码的Docker机器，需要像S3这样的服务来存储（读/写）文件，以便在构建ETL管道时使用。
 - en: Interactions with S3 can be replaced with [LocalStack](https://localstack.cloud/)
     which provides an easy-to-use test/mocking framework for developing Cloud applications.
     It spins up a testing environment on your local machine that provides the same
     functionality and APIs as the real AWS cloud environment.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 S3 的交互可以用 [LocalStack](https://localstack.cloud/) 替代，它提供了一个易于使用的测试/模拟框架，用于开发云应用程序。它在你的本地机器上启动一个测试环境，提供与真实
+    AWS 云环境相同的功能和 API。
 - en: '![Header](../Images/f2ac8f59636e1ab8666404cc4e3bc9f0.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![Header](../Images/f2ac8f59636e1ab8666404cc4e3bc9f0.png)'
 - en: So far, the article deals with building an ETL pipeline and use of services
     available. However, similar approach can be adapted to any use case while working
     with AWS services like SNS, SQS, CloudFormation, Lambda functions etc.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，本文涉及构建 ETL 管道和使用可用服务。然而，类似的方法可以适用于与 AWS 服务（如 SNS、SQS、CloudFormation、Lambda
+    函数等）一起工作时的任何用例。
 - en: Approach
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 方法
 - en: Use docker containers as remote interpreter
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 docker 容器作为远程解释器
 - en: Run PySpark session on the containers
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在容器上运行 PySpark 会话
 - en: Spin up S3 service locally using LocalStack
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 LocalStack 在本地启动 S3 服务
 - en: Use PySpark code to read and write from S3 bucket running on LocalStack
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 PySpark 代码从运行在 LocalStack 上的 S3 存储桶中读取和写入数据
 - en: Pre-requisites
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 前提条件
 - en: Following tools must be installed on your machine
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 必须在你的机器上安装以下工具
 - en: Docker
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Docker
 - en: PyCharm Professional/ VisualStudio Code
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: PyCharm Professional/ VisualStudio Code
 - en: Setup
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置
 - en: Download or pull docker images (docker pull <image name>)
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 下载或拉取 docker 镜像（docker pull <image name>）
 - en: libs:glue_libs_1.0.0_image_01
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: libs:glue_libs_1.0.0_image_01
 - en: localstack/localstack
+  id: totrans-40
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: localstack/localstack
 - en: Docker containers can be used as remote interpreters in PyCharm professional
     version.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Docker 容器可以作为 PyCharm 专业版中的远程解释器使用。
 - en: Implementation
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实施
 - en: With Docker installed and images pulled to your local machine, start setting
     PyCharm with configurations to start the containers.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本地机器上安装 Docker 并拉取镜像后，开始设置 PyCharm 配置以启动容器。
 - en: Create a docker-compose.yml file
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个 docker-compose.yml 文件
 - en: '[PRE0]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Create a DockerFile
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个 DockerFile
 - en: '[PRE1]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Use requirements file with packages to be installed
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用包含要安装的包的 requirements 文件
 - en: '[PRE2]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Setup Python remote interpreter
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置 Python 远程解释器
 - en: Setup Python interpreter using the docker-compose file.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 docker-compose 文件设置 Python 解释器。
 - en: Select `glue-service` in PyCharm Docker Compose settings.
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 PyCharm Docker Compose 设置中选择 `glue-service`。
 - en: Docker-compose file creates and runs the containers for both images
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Docker-compose 文件创建并运行两个镜像的容器
 - en: LocalStack by default runs on port 4566 and S3 service is enabled on it
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: LocalStack 默认运行在 4566 端口，S3 服务在该端口启用
 - en: Code
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: Required libraries to be imported
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 需要导入的库
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Add a file to S3 bucket running on LocalStack
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将文件添加到运行在 LocalStack 上的 S3 存储桶
 - en: '[PRE4]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: http://host.docker.internal:4566 is the S3 running locally inside docker container
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: http://host.docker.internal:4566 是在 docker 容器内本地运行的 S3
 - en: Setup PySpark session to read from S3
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置 PySpark 会话以从 S3 读取数据
 - en: '[PRE5]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: PySpark session connects to S3 via mock credentials provided
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: PySpark 会话通过提供的模拟凭证连接到 S3
 - en: You can read from S3 directly using the PySpark session created
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以直接使用创建的 PySpark 会话从 S3 读取数据
 - en: '[PRE6]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Finally, it’s possible to write to S3 in any preferred format
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后，可以以任何首选格式写入 S3
 - en: '[PRE7]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Once the above-mentioned steps have been followed, we can create a dummy csv
     file with mock data for testing and you should be good to
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦完成上述步骤，我们可以创建一个带有模拟数据的虚拟 CSV 文件用于测试，你应该可以
 - en: Add file to S3 (which is running on LocalStack)
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将文件添加到 S3（运行在 LocalStack 上）
 - en: Read from S3
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从 S3 读取数据
 - en: Write back to S3 as parquet
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以 parquet 格式写回 S3
 - en: You should be able to run the .py file to execute & PySpark session will be
     created that can read from S3 bucket which is running locally using LocalStack
     API.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该能够运行 .py 文件来执行，PySpark 会话将被创建，可以使用 LocalStack API 从本地运行的 S3 存储桶中读取数据。
 - en: Additionally, you can also check if LocalStack is running with [http://localhost:4566/health](http://localhost:4566/health)
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，你还可以检查 LocalStack 是否运行，通过 [http://localhost:4566/health](http://localhost:4566/health)
 - en: LocalStack provides you ability to run commands using AWS CLI as well.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: LocalStack 还提供了使用 AWS CLI 运行命令的功能。
 - en: Conclusion
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Use of Docker & Localstack provides a quick and easy way to run Pyspark code,
     debug on containers and write to S3 which is running locally. All this without
     having to connect to any AWS service.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Docker 和 Localstack 提供了一种快速简便的方式来运行 Pyspark 代码、在容器中调试并写入本地运行的 S3。所有这些无需连接到任何
+    AWS 服务。
 - en: '**References:**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考资料：**'
 - en: 'Glue endpoint: [https://docs.aws.amazon.com/glue/latest/dg/dev-endpoint.html](https://docs.aws.amazon.com/glue/latest/dg/dev-endpoint.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Glue 端点: [https://docs.aws.amazon.com/glue/latest/dg/dev-endpoint.html](https://docs.aws.amazon.com/glue/latest/dg/dev-endpoint.html)'
 - en: 'Docker: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Docker: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)'
 - en: 'PyCharm: [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'PyCharm: [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)'
 - en: 'PyCharm Remote interpreter: [https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'PyCharm远程解释器: [https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html)'
 - en: 'LocalStack: [https://localstack.cloud](https://localstack.cloud/)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'LocalStack: [https://localstack.cloud](https://localstack.cloud/)'
 - en: '**Bio: [Subhash Sreenivasachar](https://www.linkedin.com/in/subhashsreenivasachar/)**
     is Lead Software Engineer at Epsilon Digital Experience team, building engineering
     solutions to solve data science problems specifically personalization, and help
     drive ROI for clients.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Subhash Sreenivasachar](https://www.linkedin.com/in/subhashsreenivasachar/)**
+    是Epsilon数字体验团队的首席软件工程师，负责构建工程解决方案来解决数据科学问题，特别是个性化，并帮助推动客户的投资回报率。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关链接:**'
 - en: '[MLOps is an Engineering Discipline: A Beginner’s Overview](/2021/07/mlops-engineering-discipline.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps是一门工程学科：初学者概述](/2021/07/mlops-engineering-discipline.html)'
 - en: '[ETL in the Cloud: Transforming Big Data Analytics with Data Warehouse Automation](/2021/04/etl-cloud-transforming-big-data-analytics-data-warehouse-automation.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[云中的ETL：通过数据仓库自动化转变大数据分析](/2021/04/etl-cloud-transforming-big-data-analytics-data-warehouse-automation.html)'
 - en: '[What’s ETL?](/2021/04/whats-etl.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是ETL？](/2021/04/whats-etl.html)'
 - en: More On This Topic
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[假设检验与A/B测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Building a Scalable ETL with SQL + Python](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用SQL + Python构建可扩展的ETL](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
 - en: '[ETL vs ELT: Data Integration Showdown](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ETL与ELT：数据集成对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)'
 - en: '[What Does ETL Have to Do with Machine Learning?](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ETL与机器学习有什么关系？](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)'
 - en: '[SQL and Data Integration: ETL and ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL和数据集成：ETL与ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
