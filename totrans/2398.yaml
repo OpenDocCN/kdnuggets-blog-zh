@@ -1,350 +1,531 @@
 - en: Using Scikit-learn’s Imputer
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Scikit-learn 的填补器
 - en: 原文：[https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html](https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html](https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html)
 - en: '![Using Scikit-learn''s Imputer](../Images/6237013757a9a03d4aae1d849299a8af.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Scikit-learn 的填补器](../Images/6237013757a9a03d4aae1d849299a8af.png)'
 - en: '[Puzzle shape](https://www.freepik.com/photos/puzzle-shape) photo created by
     [freepik](https://www.freepik.com)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[拼图形状](https://www.freepik.com/photos/puzzle-shape) 照片由[freepik](https://www.freepik.com)创建'
 - en: What is an Imputer?
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是填补器？
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: If you have some missing values in your dataset, you can drop the missing values
     row or even column. This method is highly discouraged as it reduces the size of
     data, and the data analysis can be skewed from the ground truth. Instead, we should
     use machine learning algorithms that are not affected by missing values or use
     imputers to fill in the missing information.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的数据集中存在缺失值，你可以删除缺失值所在的行或列。这种方法并不推荐，因为它会减少数据量，可能导致数据分析偏离实际情况。相反，我们应该使用不受缺失值影响的机器学习算法，或使用填补器来填充缺失的信息。
 - en: The imputer is an estimator used to fill the missing values in datasets. For
     numerical values, it uses **mean**, **median**, and **constant**. For categorical
     values, it uses the **most frequently used** and **constant value**. You can also
     train your model to predict the missing labels.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 填补器是一种用于填充数据集中缺失值的估算器。对于数值型数据，它使用**均值**、**中位数**和**常量**。对于类别型数据，它使用**最常用值**和**常量值**。你也可以训练你的模型来预测缺失的标签。
 - en: In the tutorial, we will learn about Scikit-learn’s **SimpleImputer**, **IterativeImputer**,
     and **KNNImputer**. We will also create a pipeline to impute categorical and numerical
     features and feed them into a machine learning model.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将学习 Scikit-learn 的**SimpleImputer**、**IterativeImputer** 和 **KNNImputer**。我们还将创建一个管道来填补类别和数值特征，并将其输入到机器学习模型中。
 - en: How to use Scikit-learn's Imputer
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Scikit-learn 的填补器
 - en: The [scikit-learn](https://scikit-learn.org/stable/modules/impute.html)’s imputation
     functions provide us with an easy-to-fill option with few lines of code. We can
     integrate these imputers and create pipelines to reproduce results and improve
     machine learning development processes.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[scikit-learn](https://scikit-learn.org/stable/modules/impute.html)的填补函数为我们提供了一个简单的填充选项，只需几行代码。我们可以集成这些填补器，创建管道以重现结果并改进机器学习开发过程。'
 - en: Getting Started
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 入门指南
 - en: We will be using the [Deepnote](https://deepnote.com/) environment, which is
     similar to Jupyter Notebook but on the cloud.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用[Deepnote](https://deepnote.com/)环境，它类似于 Jupyter Notebook，但在云端运行。
 - en: To download and unzip data from [Kaggle](https://www.kaggle.com/). You have
     to install the Kaggle Python package and download the [spaceship-titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)
     dataset using API. Finally, unzip the data into the dataset folder.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 要从[Kaggle](https://www.kaggle.com/)下载并解压数据，你需要安装 Kaggle Python 包，并使用 API 下载[太空船泰坦尼克号](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)数据集。最后，将数据解压到数据集文件夹中。
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Next, we will import the required Python Packages for data ingestion, imputation,
     and creating transformation pipelines.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将导入所需的 Python 包用于数据摄取、填补以及创建转换管道。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The [Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)
     dataset is part of Kaggle’s getting started prediction competition. It consists
     of train, test, and submission CSV files. We will be using **train.csv**, which
     contains passenger information on space ships.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)数据集是Kaggle入门预测比赛的一部分。它包括训练、测试和提交的CSV文件。我们将使用**train.csv**，其中包含宇宙飞船上的乘客信息。'
 - en: The pandas **read_csv()** function reads the train.csv and then displays the
     dataframe.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: pandas的**read_csv()**函数读取train.csv并显示数据框。
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Using Scikit-learn''s Imputer](../Images/f6f658a4b29bc3a93b8c4935833f651e.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Scikit-learn的插补器](../Images/f6f658a4b29bc3a93b8c4935833f651e.png)'
 - en: Data Analysis
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据分析
 - en: In this section, we will explore columns with missing values, but first, we
     need to check the shape of the dataset. It has 8693 rows and 14 columns.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将探讨缺失值的列，但首先需要检查数据集的形状。它有8693行和14列。
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We will now display missing value count and percentage based on columns. To
     display it in a dataframe, we will create a new dataframe of missing values and
     apply style gradients to the **NA Count** column.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将基于列显示缺失值的数量和百分比。为了在数据框中显示它，我们将创建一个新的缺失值数据框，并对**NA Count**列应用样式渐变。
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Using Scikit-learn''s Imputer](../Images/28ac6aaf0b02b65004ff589fe965ab36.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Scikit-learn的插补器](../Images/28ac6aaf0b02b65004ff589fe965ab36.png)'
 - en: Except for **PassengerID** and **Transported**, there are missing values in
     every column.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了**PassengerID**和**Transported**之外，每一列都有缺失值。
 - en: Numerical Imputation
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数值数据插补
 - en: We will use the information in missing columns and divide it into categorical
     and numerical columns. We will treat them differently.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将利用缺失列的信息，将其分为类别列和数值列。我们将对它们采取不同的处理方式。
 - en: For numerical Imputation, we will select the **Age** column and display the
     number missing value. It will help us validate the before and after results.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于数值插补，我们将选择**Age**列并显示缺失值的数量。这将帮助我们验证插补前后的结果。
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Next, we will use sklearn’s **SimpleImputer** and apply it to the **Age** column.
     It will replace missing data with the **average** value of the column.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将使用sklearn的**SimpleImputer**并将其应用于**Age**列。它将用列的**average**值替换缺失数据。
 - en: As we can observe, there are no missing values left in the **Age** column.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所观察到的，**Age**列中没有剩余的缺失值。
 - en: '[PRE7]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: For numerical columns, you can use **constant**, **mean**, and **median** strategy
     and for categorical columns, you can use **most_frequent** and **constant** strategy.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于数值列，你可以使用**constant**、**mean**和**median**策略，对于类别列，你可以使用**most_frequent**和**constant**策略。
 - en: Categorical Imputation
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 类别数据插补
 - en: For categorical Imputation, we will use the **HomePlanet** column which contains
     201 missing values.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于类别数据插补，我们将使用包含201个缺失值的**HomePlanet**列。
 - en: '[PRE8]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: To fill categorical missing values, we will use **SimpleImputer** with the **most_frequent**
     strategy.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了填充类别缺失值，我们将使用带有**most_frequent**策略的**SimpleImputer**。
 - en: '[PRE10]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: We have filled all of the missing values in the HomePlanet column.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经填充了HomePlanet列中的所有缺失值。
 - en: '[PRE11]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Multivariate Imputer
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 多变量插补器
 - en: In **univariate Imputer,** the missing value is calculated using the same feature,
     whereas in **multivariate Imputer** algorithms use the entire set of available
     feature dimensions to predict the missing value.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在**单变量插补器**中，缺失值是通过相同的特征计算的，而在**多变量插补器**中，算法使用所有可用特征维度来预测缺失值。
 - en: We will be imputing numerical columns at once, and as we can see, they all have
     150+ missing values.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将一次性填充数值列，正如我们所看到的，它们都有150+的缺失值。
 - en: '[PRE12]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[PRE13]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: We will use IterativeImputer with 10 **max_iter** to estimate and fill missing
     values in numerical columns. The algorithm will consider all of the columns in
     making value estimation.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用`IterativeImputer`，设置**max_iter**为10，以估计和填充数值列中的缺失值。该算法将在估计值时考虑所有列。
 - en: '[PRE14]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '[PRE15]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Imputing Categorical and Numerical for Machine Learning
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 机器学习中的类别和数值数据插补
 - en: Why Scikit-learn’s Imputer? Apart from Imputer, the machine learning framework
     provides feature transformation, data manipulation, pipelines, and machine learning
     algorithms. They all integrate smoothly. With a few lines of code, you can Impute,
     normalize, transform, and train your model on any dataset.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么选择Scikit-learn的插补器？除了插补器外，机器学习框架还提供特征转换、数据处理、管道和机器学习算法。它们都能无缝集成。只需几行代码，你就可以在任何数据集上进行插补、归一化、转换和训练你的模型。
 - en: In this section, we will learn how to integrate Imputer in a machine learning
     project to get better results.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将学习如何在机器学习项目中集成插补器以获得更好的结果。
 - en: First, we will import relevant functions from sklearn.
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先，我们将从 sklearn 中导入相关函数。
 - en: Then, we will drop irrelevant columns to create X and Y variables. Our target
     column is “Transported”.
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，我们将删除不相关的列以创建 X 和 Y 变量。我们的目标列是“Transported”。
 - en: After that, we will split them into training and test sets.
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 之后，我们将数据分割为训练集和测试集。
 - en: '[PRE16]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: To create numerical and categorical transformation data pipelines, we will use
     sklearn’s Pipeline function.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 要创建数值和类别转换数据管道，我们将使用 sklearn 的 Pipeline 函数。
 - en: 'For **numeric_transformer**, we have used:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 **numeric_transformer**，我们使用了：
 - en: '**KNNImputer** with 2 **n_neighbors** and uniform **weights**'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**KNNImputer** 使用 2 个 **n_neighbors** 和均匀的 **weights**'
 - en: In the second step, we have used **StandardScaler** with the default configuration
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在第二步中，我们使用了**StandardScaler**的默认配置。
 - en: 'For **categorical_transformer**, we have used:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 **categorical_transformer**，我们使用了：
 - en: '**SimpleImputer** with **most_frequent** strategy'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**SimpleImputer** 使用 **most_frequent** 策略'
 - en: In the second step, we have used **OrdinalEncoder**, to convert categories into
     numbers.
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在第二步中，我们使用了**OrdinalEncoder**，将类别转换为数字。
 - en: '[PRE17]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Now, we will process and transform the training feature using **ColumnTransformer**.
     For **numeric_transformer,** we have provided it with a list of numerical columns,
     and for **categorical_transformer,** we will be using a list of categorical columns.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将使用 **ColumnTransformer** 处理和转换训练特征。对于 **numeric_transformer**，我们提供了一组数值列，对于
+    **categorical_transformer**，我们将使用一组类别列。
 - en: '**Note:** we are just preparing pipelines and transformers. We have not processed
     any data yet.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：**我们只是准备了管道和转换器。我们还没有处理任何数据。'
 - en: '[PRE18]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Finally, we will create a transform pipeline that contains a **processor** and
     **DecisionTreeClassifier** for the binary classification task. This pipeline will
     first process and transform the data, and then it will train the classifier model.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将创建一个包含**处理器**和**DecisionTreeClassifier**的转换管道，用于二分类任务。该管道将首先处理和转换数据，然后训练分类模型。
 - en: '[PRE19]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: This is where the magic happens. We will fit the training dataset on the **transform**
     pipeline. After that, we will evaluate our model using a test dataset.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是魔法发生的地方。我们将使用**transform**管道来拟合训练数据集。之后，我们将使用测试数据集来评估我们的模型。
 - en: We got **75% accuracy** with the default configuration. Not bad!!!
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在默认配置下得到了**75% 的准确率**。不错!!!
 - en: '[PRE20]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: Next, we will run predictions on a test dataset and create a structured **classification
     report**.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将在测试数据集上进行预测，并创建结构化的**分类报告**。
 - en: '[PRE21]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: As we can see, we have stable scores for the **True** and **False** classes.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，我们对**True**和**False**类有稳定的得分。
 - en: '[PRE22]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: Conclusion
+  id: totrans-85
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: For more accuracy data scientists are using a deep learning approach for the
     Imputation of missing values. Again, you have to decide how much time and resources
     are required for you to build a system and what value it brings. In most cases,
     Scikit-learn's Imputers provide greater value, and it took us a few lines of code
     to Impute the entire dataset.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得更高的准确性，数据科学家们正在使用深度学习方法来插补缺失值。再次，你需要决定构建系统所需的时间和资源，以及它带来的价值。在大多数情况下，Scikit-learn
+    的插补器提供了更大的价值，并且我们只需几行代码就能插补整个数据集。
 - en: In this blog, we have learned about Imputation and how the Scikit-learn library
     works in estimating missing values. We have also learned about univariant, multivariate,
     categorical, and numerical imputations. In the final part, we have used data pipelines,
     column transformers, and machine learning pipelines to impute, transform, train,
     and evaluate our model.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客中，我们了解了插补及 Scikit-learn 库如何估计缺失值。我们还了解了单变量、变量间、多变量、类别和数值插补。在最后部分，我们使用了数据管道、列转换器和机器学习管道来插补、转换、训练和评估我们的模型。
 - en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
     is a certified data scientist professional who loves building machine learning
     models. Currently, he is focusing on content creation and writing technical blogs
@@ -352,33 +533,51 @@
     in Technology Management and a bachelor''s degree in Telecommunication Engineering.
     His vision is to build an AI product using a graph neural network for students
     struggling with mental illness.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为有心理疾病困扰的学生构建
+    AI 产品。'
 - en: More On This Topic
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
 - en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化 Microsoft Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
 - en: '[How to Determine the Best Fitting Data Distribution Using Python](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 确定最佳拟合数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Datawig，AWS 的深度学习库进行缺失值插补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
