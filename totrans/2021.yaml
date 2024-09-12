@@ -1,51 +1,76 @@
 - en: The Evolution of Apache Druid
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Apache Druid 的演变
 - en: 原文：[https://www.kdnuggets.com/2022/07/evolution-apache-druid.html](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/07/evolution-apache-druid.html](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)
 - en: For several years now, software developers at 1000s of companies including Netflix,
     Confluent, Target, and Salesforce have turned to Apache Druid to power their analytics
     applications. Druid has been the database-of-choice for its ability to deliver
     an interactive data experience without any limitations to data volume or concurrency
     requirements.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 近年来，包括 Netflix、Confluent、Target 和 Salesforce 在内的数千家公司的软件开发人员都转向 Apache Druid
+    以推动他们的分析应用程序。Druid 因其能够提供交互式数据体验而成为首选数据库，且没有数据量或并发要求的限制。
 - en: Apache Druid excels at interactive slice-and-dice on multi-dimensional, high-cardinality
     data at any scale. It is designed to support fast moving, high volume data for
     any number of users and can scale from a single node to thousands easily in a
     flexible, distributed architecture. The largest Druid installations scale to petabytes
     of data served by thousands of data servers, and are able to return queries on
     billions and billions of rows in less than a second.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Apache Druid 在任何规模下对多维、高基数数据进行交互式切片和切块方面表现卓越。它被设计来支持快速移动、大量数据，适用于任何数量的用户，并且可以在灵活的分布式架构中从单个节点轻松扩展到数千个节点。最大的
+    Druid 安装可以扩展到数PB的数据，由数千台数据服务器提供服务，并能够在不到一秒的时间内返回数十亿行的数据查询结果。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 领域'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'But my experience is that while Druid is ideal for interactive slice-and-dice,
     this is not the full story for a modern analytics application. Increasingly there
     are other user-facing features that analytics apps need, like data exports and
@@ -53,55 +78,79 @@
     ideal for Druid. Today, developers handle these workloads by using other systems
     alongside Druid. But this adds cost and complexity: the same data must be loaded
     up twice and two separate data pipelines must be managed.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 但根据我的经验，尽管 Druid 非常适合交互式切片和切块，这并不是现代分析应用的全部故事。分析应用程序越来越需要其他面向用户的功能，如数据导出和报告，这些功能依赖于运行时间较长或更复杂的查询，这些查询对于
+    Druid 来说并不理想。今天，开发者通过在 Druid 旁边使用其他系统来处理这些工作负载。但这会增加成本和复杂性：相同的数据必须加载两次，并且必须管理两个独立的数据管道。
 - en: And so true to the origins of its name, Apache Druid is shapeshifting - with
     the addition of a new multi-stage query engine. But before diving into the new
     engine, let’s look at how Druid’s core query engine executes queries to compare
     the difference.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 贴合其名称起源的事实，Apache Druid 正在不断变革——新增了一个多阶段查询引擎。但在深入了解新引擎之前，让我们看看 Druid 的核心查询引擎如何执行查询，以比较其差异。
 - en: Druid Query Execution Today
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Druid 查询执行现状
 - en: Performance is the key to interactivity, and in Druid, “don’t do it” is the
     key to performance. It means focusing on efficiency and minimizing the work the
     computer has to do.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能是交互性的关键，在 Druid 中，“不要做”是性能的关键。这意味着要专注于效率，并减少计算机需要做的工作。
 - en: Druid is great at this because it is designed from the ground up to be efficient.
     Druid has a tightly integrated query engine and storage format, designed in tandem
     to minimize the amount of work that each data server has to do.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Druid 擅长这一点，因为它从一开始就被设计为高效。Druid 拥有紧密集成的查询引擎和存储格式，二者协同设计，以最小化每台数据服务器需要执行的工作量。
 - en: 'Druid''s query engine executes queries with a “scatter/gather” technique: it
     quickly identifies which segments are relevant to a query, pushes the computation
     down to individual data servers, then gathers filtered and aggregated results
     from each server via what we call a Broker, which then performs a final merge
     and returns results to the user.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Druid 的查询引擎使用“散布/聚合”技术来执行查询：它迅速识别出哪些分段与查询相关，将计算推送到各个数据服务器，然后通过我们称之为 Broker 的组件收集过滤和聚合后的结果，Broker
+    然后执行最终合并并将结果返回给用户。
 - en: Each data server may be processing billions of rows, but the partial result
     set returned to the Broker is much smaller due to pushed-down filters, aggregations,
     and limits. So, Brokers normally deal with relatively small amounts of data. This
     design means a single Broker can handle a query that spans thousands of data servers
     and trillions of rows.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个数据服务器可能处理数十亿行数据，但由于下推的过滤器、聚合和限制，返回给 Broker 的部分结果集要小得多。因此，Broker 通常处理相对较少的数据。这种设计意味着单个
+    Broker 可以处理跨越数千个数据服务器和万亿行的数据的查询。
 - en: '![Druid Query Execution Today](../Images/9b6eedebaa682176d81283d566ab7ba3.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![Druid 查询执行现状](../Images/9b6eedebaa682176d81283d566ab7ba3.png)'
 - en: 'Scatter/gather is very efficient and performant for the types of queries used
     in analytics applications. But the technique has one Achilles’ heel: the Broker
     can turn into a bottleneck when query results are very large, or when a query
     is structured in such a way that multiple passes over the data are required.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 散布/聚合对分析应用中使用的查询类型非常高效且性能卓越。但是，该技术有一个 Achilles’ heel：当查询结果非常庞大，或查询结构需要对数据进行多次访问时，Broker
+    可能成为瓶颈。
 - en: A New Multi-Stage Query Engine
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 新的多阶段查询引擎
 - en: 'When we set out to rethink how long-running queries could work in Druid, we
     knew that it was important to keep all the good aspects: namely, very tight integration
     with the storage format, and excellent data server performance. We also knew we
@@ -109,8 +158,10 @@
     approach for queries where the bulk of processing can be done on the data servers.
     But we would have to *also* support exchanging data between data servers, instead
     of requiring that every query use scatter/gather.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们重新考虑长期运行的查询在 Druid 中如何工作的时，我们知道保持所有好的方面是很重要的：即，与存储格式的紧密集成，以及出色的数据服务器性能。我们还知道，我们需要保留使用轻量级、高并发的散布/聚合方法的能力，用于在数据服务器上完成大部分处理的查询。但我们还需要*支持*数据服务器之间的数据交换，而不是要求每个查询都使用散布/聚合。
 - en: 'To accomplish this, we’re building a multi-stage query engine that hooks into
     the existing data processing routines from Druid’s standard query engine, so it
     will have all the same query capabilities and data server performance. But on
@@ -119,69 +170,99 @@
     to run across many data servers at once. There isn’t any need for tuning: Druid
     will be able to run this process automatically using skew-resistant shuffling
     and cooperative scheduling.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现这一点，我们正在构建一个多阶段查询引擎，它接入了 Druid 标准查询引擎的现有数据处理流程，因此它将拥有所有相同的查询能力和数据服务器性能。除此之外，我们还在其上添加了一个系统，将查询拆分成多个阶段，并使数据能够在阶段之间通过洗牌网格进行交换。每个阶段都被并行化，以便同时在多个数据服务器上运行。不需要任何调优：Druid
+    将能够使用抗偏斜的洗牌和协作调度自动运行这一过程。
 - en: '![A New Multi-Stage Query Engine](../Images/2f37f8118c4ba390dbc024ef7180610c.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![新的多阶段查询引擎](../Images/2f37f8118c4ba390dbc024ef7180610c.png)'
 - en: By allowing each stage of a multi-stage query to run distributed across the
     entire cluster, we can efficiently carry any amount of data through all stages
     of the query, instead of requiring that the bulk of data is processed at the bottom
     layer.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过允许多阶段查询的每个阶段在整个集群上分布式运行，我们可以有效地处理所有阶段中的任何数量的数据，而不需要在底层处理大部分数据。
 - en: A New Standard for Analytics Databases
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 分析数据库的新标准
 - en: Once we started thinking it through, we realized that we could do much more
     than just handle complex queries. We could open up the ability to run queries
     and ingestion using a single system and a single SQL language. We could move past
     the need to have separate operational models for ingestion and query execution.
     We could enable querying external data, and enable deployment modes with separated
     storage and compute.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们开始深入思考，我们意识到我们可以做的远不止处理复杂查询。我们可以通过一个系统和一个SQL语言来实现查询和摄取的功能。我们可以摆脱对分开操作模型的需求。我们可以支持外部数据查询，并启用分离存储和计算的部署模式。
 - en: With this effort, we're building a platform for blending the performance of
     real-time analytical databases with the power and capabilities associated with
     traditional SQL RDBMS. I'm really excited about this direction for the project.
     Today, Druid is the most compelling database for real-time analytics at scale.
     As Druid gains this new functionality over time, it will become the most compelling
     analytics database *period*.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '通过这项工作，我们正在建立一个平台，将实时分析数据库的性能与传统SQL关系数据库管理系统相关的功能和能力相结合。我对这个项目的方向感到非常兴奋。如今，Druid是最具吸引力的大规模实时分析数据库。随着Druid逐渐获得这些新功能，它将成为最具吸引力的分析数据库*绝对*。 '
 - en: '**[Gian Merlino](https://www.linkedin.com/in/gianmerlino/)** is a co-author
     of the open source Apache Druid project and co-founder and CTO at Imply. Gian
     is also the Apache Druid Committee (PMC) Chair. Previously, Gian led the data
     ingestion team at Metamarkets and held senior engineering positions at Yahoo.
     He holds a B.S. in Computer Science from Caltech.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[贾恩·梅尔利诺](https://www.linkedin.com/in/gianmerlino/)** 是开源Apache Druid项目的联合作者，并且是Imply的共同创始人和CTO。贾恩还担任Apache
+    Druid委员会（PMC）主席。之前，贾恩曾在Metamarkets领导数据摄取团队，并在Yahoo担任高级工程职位。他拥有加州理工学院计算机科学学士学位。'
 - en: More On This Topic
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[From Oracle to Databases for AI: The Evolution of Data Storage](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从Oracle到AI数据库：数据存储的演变](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
 - en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析未来成功概率与智能…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
 - en: '[The Evolution From Artificial Intelligence to Machine Learning to…](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从人工智能到机器学习再到……](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)'
 - en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语音识别指标的演变](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
 - en: '[A Deep Dive into GPT Models: Evolution & Performance Comparison](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深入探讨GPT模型：演变与性能比较](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)'
 - en: '[Evolution of the Data Landscape](https://www.kdnuggets.com/2023/06/evolution-data-landscape.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据领域的演变](https://www.kdnuggets.com/2023/06/evolution-data-landscape.html)'
