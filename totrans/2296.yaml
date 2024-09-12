@@ -1,216 +1,314 @@
 - en: Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 广义且可扩展的最佳稀疏决策树 (GOSDT)
 - en: 原文：[https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)
 - en: '![Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](../Images/f314c76c07388670f39e82fba455f7ea.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![广义且可扩展的最佳稀疏决策树 (GOSDT)](../Images/f314c76c07388670f39e82fba455f7ea.png)'
 - en: Image by [fabrikasimf](https://www.freepik.com/free-photo/network-with-pins_20988125.htm#query=Decision%20Trees&position=49&from_view=search&track=ais)
     on Freepik
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源 [fabrikasimf](https://www.freepik.com/free-photo/network-with-pins_20988125.htm#query=Decision%20Trees&position=49&from_view=search&track=ais)
+    在 Freepik
 - en: I often talk about explainable AI(XAI) methods and how they can be adapted to
     address a few pain points that prohibit companies from building and deploying
     AI solutions. You can check my [blog](https://medium.com/@supreetkaur_66831/explainable-ai-xai-building-interpretable-models-d616b0fccd33)
     if you need a quick refresher on XAI methods.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我经常谈论可解释 AI（XAI）方法及其如何被调整以解决一些阻碍公司构建和部署 AI 解决方案的痛点。如果你需要快速回顾 XAI 方法，可以查看我的 [博客](https://medium.com/@supreetkaur_66831/explainable-ai-xai-building-interpretable-models-d616b0fccd33)。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: One such XAI method is Decision Trees. They have gained significant traction
     historically because of their interpretability and simplicity. However, many think
     that decision trees cannot be accurate because they look simple, and greedy algorithms
     like C4.5 and CART don’t optimize them well.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种这样的 XAI 方法是决策树。由于其可解释性和简洁性，决策树历史上获得了显著的关注。然而，许多人认为决策树不能准确，因为它们看起来简单，而像 C4.5
+    和 CART 这样的贪婪算法不能很好地优化它们。
 - en: 'The claim is partially valid as some variants of decision trees, such as C4.5
     and CART, have the following disadvantages:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个说法部分有效，因为某些变体的决策树，如 C4.5 和 CART，具有以下缺点：
 - en: Prone to overfitting, particularly when the tree becomes too deep with too many
     branches. This can result in poor performance on new, unseen data.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 易于过拟合，特别是当树变得过深且分支过多时。这可能会导致在新数据上的表现不佳。
 - en: It can be slower to evaluate and make predictions with large datasets because
     they require making multiple decisions based on the values of the input features.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 由于需要根据输入特征的值做出多个决策，因此在大数据集上评估和预测可能会比较慢。
 - en: It can be difficult for them to deal with continuous variables as they require
     the tree to split the variable into multiple, smaller intervals, which can increase
     the complexity of the tree and make it difficult to identify meaningful patterns
     in the data.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 处理连续变量可能很困难，因为它们要求将变量划分为多个更小的区间，这可能会增加树的复杂性，并使识别数据中的有意义模式变得困难。
 - en: Often known as the “greedy” algorithm, it makes the locally optimal decision
     at each step without considering the consequences of those decisions on future
     steps. Sub Optimal Trees are an output of CART, but no “real” metric exists to
     measure it.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通常被称为“贪婪”算法，它在每一步做出局部最优决策，而不考虑这些决策对未来步骤的影响。次优树是 CART 的输出，但没有“真正的”指标来衡量它。
 - en: More sophisticated algorithms, such as Ensemble Learning Methods, are available
     to address these issues. But often can be considered a “black box” because of
     the underlined functioning of the algorithms.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 更复杂的算法，如集成学习方法，可以解决这些问题。但通常它们被认为是“黑箱”，因为算法的底层工作机制不透明。
 - en: However, recent work has shown that if you optimize decision trees (rather than
     using greedy methods like C4.5 and CART), they can be surprisingly accurate, in
     many cases, as accurate as the black box. One such algorithm that can help optimize
     and address some of the disadvantages mentioned above is GOSDT. GOSDT is an algorithm
     for producing sparse optimal decision trees.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，近期的研究表明，如果优化决策树（而不是使用像 C4.5 和 CART 这样的贪婪方法），它们可以在许多情况下与黑箱模型一样准确。GOSDT 是一个可以帮助优化并解决上述一些缺点的算法。GOSDT
+    是一个生成稀疏最优决策树的算法。
 - en: The blog aims to give a gentle introduction to GOSDT and present an example
     of how it can be implemented on a dataset.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客旨在对 GOSDT 进行温和的介绍，并展示如何在数据集上实现它的示例。
 - en: This blog is based on a research paper published by a few fantastic folks. You
     can read the paper [here](https://arxiv.org/pdf/2006.08690.pdf). This blog is
     not a substitute for this paper, nor will it touch on extremely mathematical details.
     This is a guide for data science practitioners to learn about this algorithm and
     leverage it in their daily use cases.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客基于几位优秀人士发表的研究论文。你可以在[这里](https://arxiv.org/pdf/2006.08690.pdf)阅读这篇论文。这个博客并不是该论文的替代品，也不会涉及极其数学化的细节。这是为数据科学从业者提供的指南，用于了解这个算法并在日常用例中加以利用。
 - en: 'In a nutshell, GOSDT addresses a few major issues:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，GOSDT 解决了几个主要问题：
 - en: Handle Imbalanced datasets well and optimize various objective functions (not
     just accuracy).
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 能够很好地处理不平衡数据集并优化各种目标函数（不仅仅是准确率）。
 - en: Fully optimizes trees and does not greedily construct them.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 完全优化树，而不是贪婪地构建它们。
 - en: It is almost as fast as greedy algorithms as it solves NP-hard optimization
     problems for decision trees.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它几乎与贪婪算法一样快，因为它解决了决策树的 NP-hard 优化问题。
 - en: How do GOSDT trees solve the above issues?
+  id: totrans-25
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: GOSDT 树如何解决上述问题？
 - en: GOSDT trees use a dynamic search space through hash trees to improve the model’s
     efficiency. By limiting the search space and using bounds to identify similar
     variables, GOSDT trees can reduce the number of calculations needed to find the
     optimal split. This can significantly improve the computation time, mainly when
     working with continuous variables.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: GOSDT 树通过哈希树使用动态搜索空间来提高模型的效率。通过限制搜索空间并使用边界来识别相似变量，GOSDT 树可以减少找到最佳切分所需的计算次数。这可以显著提高计算时间，特别是在处理连续变量时。
 - en: In GOSDT trees, the bounds for splitting are applied to partial trees, and they
     are used to eliminate many trees from the search space. This allows the model
     to focus on one of the remaining trees (which can be a partial tree) and evaluate
     it more efficiently. By reducing the search space, GOSDT trees can quickly find
     the optimal split and generate a more accurate and interpretable model.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 GOSDT 树中，切分的边界应用于部分树，并用于从搜索空间中消除许多树。这使得模型可以专注于剩余的树（这可以是部分树）并更高效地评估它。通过减少搜索空间，GOSDT
+    树可以快速找到最佳切分，并生成更准确、更易解释的模型。
 - en: GOSDT trees are designed to handle imbalanced data, a common challenge in many
     real-world applications. GOSDT trees address imbalanced data using a weighted
     accuracy metric that considers the relative importance of different classes in
     the dataset. This can be particularly useful when there is a pre-determined threshold
     for the desired level of accuracy, as it allows the model to focus on correctly
     classifying samples that are more critical to the application.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: GOSDT 树旨在处理不平衡数据，这在许多实际应用中是一个常见挑战。GOSDT 树通过加权准确度指标来解决不平衡数据，该指标考虑了数据集中不同类别的相对重要性。当有一个预定的准确度阈值时，这尤其有用，因为它允许模型专注于正确分类对应用更关键的样本。
 - en: Summarizing the observations from GOSDT
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结 GOSDT 的观察结果
 - en: These trees directly optimize the trade-off between training accuracy and the
     number of leaves.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这些树直接优化了训练准确率和叶子数量之间的权衡。
 - en: Produces excellent training and test accuracy with a reasonable number of leaves
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 以合理数量的叶子生成优秀的训练和测试准确率
 - en: Perfect for highly non-convex problems
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 非常适合高度非凸问题
 - en: Most effective for small or medium number of features. But it can handle up
     to tens of thousands of observations while maintaining its speed and accuracy.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最适合小型或中等数量的特征。但它可以处理多达数万个观测值，同时保持其速度和准确性。
 - en: Time to see it all in action!! In my previous blog, I solved a loan application
     approval problem using Keras Classification. We will use the same dataset to build
     a classification tree using GOSDT.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 是时候看到所有实际操作了！！在我之前的博客中，我使用 Keras 分类解决了一个贷款申请批准问题。我们将使用相同的数据集来构建一个使用 GOSDT 的分类树。
 - en: Code Example
+  id: totrans-35
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 代码示例
 - en: Code by Author
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者代码
 - en: '**[Supreet Kaur](https://www.linkedin.com/in/supreet-kaur1995/)** is an AVP
     at Morgan Stanley. She is a fitness and tech enthusiast. She is the founder of
     community called DataBuzz.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Supreet Kaur](https://www.linkedin.com/in/supreet-kaur1995/)** 是摩根士丹利的副总裁。她是一位健身和科技爱好者，同时也是名为
+    DataBuzz 的社区的创始人。'
 - en: More On This Topic
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
 - en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在机器学习模型中处理稀疏特征](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
 - en: '[Best Machine Learning Model For Sparse Data](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[适用于稀疏数据的最佳机器学习模型](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)'
 - en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从头开始学习机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
 - en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树与随机森林的比较与解释](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
 - en: '[Demystifying Decision Trees for the Real World](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开决策树的神秘面纱](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)'
