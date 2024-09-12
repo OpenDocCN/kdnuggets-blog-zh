@@ -3,54 +3,69 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何检测和克服 MLOps 中的模型漂移
 - en: 原文：[https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html](https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html](https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Bhaskar Ammu](https://www.sigmoid.com/), Senior Data Scientist at [Sigmoid](https://www.sigmoid.com/)**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Bhaskar Ammu](https://www.sigmoid.com/)，[Sigmoid](https://www.sigmoid.com/)
+    的高级数据科学家**'
 - en: '![](../Images/d3d4445359db348c3d3000d7f0fcf71d.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d3d4445359db348c3d3000d7f0fcf71d.png)'
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 在 IT 领域支持你的组织'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Machine learning (ML) is widely regarded as the cornerstone of digital transformation,
     yet ML models are the most susceptible to the changing dynamics of a digital landscape.
     ML models are defined and optimized by the variables and parameters available
@@ -58,6 +73,7 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习（ML）被广泛认为是数字化转型的基石，但 ML 模型最容易受到数字环境动态变化的影响。ML 模型是由其创建时所用的变量和参数来定义和优化的。
 - en: Let us look at the case of an **[ML model](https://www.sigmoid.com/ebooks-whitepapers/ml-models-poc-to-production/)** created
     to track spam emails based on a generalized template of spam emails that may have
     been proliferating at the time. With this baseline in place, the ML model is able
@@ -70,6 +86,9 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一个**[ML 模型](https://www.sigmoid.com/ebooks-whitepapers/ml-models-poc-to-production/)**的例子，这个模型是基于当时可能泛滥的垃圾邮件的通用模板来跟踪垃圾邮件的。建立了这个基准后，ML
+    模型能够识别和阻止这些类型的邮件，从而防止潜在的网络钓鱼攻击。然而，随着威胁环境的变化和网络犯罪分子的变得更加聪明，更复杂且逼真的邮件已经取代了旧的邮件。面对这些新的黑客尝试，基于过去几年的变量运行的
+    ML 检测系统将无法正确地分类这些新威胁。这只是模型漂移的一个例子。
 - en: Model Drift (or model decay) is the degradation of an ML model’s predictive
     ability. Caused by changes in the digital environment, and the subsequent changes
     in variables such as concept and data, model drift is prominent in ML models simply
@@ -77,12 +96,14 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型漂移（或模型衰退）是 ML 模型预测能力的退化。由于数字环境的变化以及概念和数据等变量的随之变化，模型漂移在 ML 模型中非常突出，这本身就是机器学习模型的特性。
 - en: The assumption that all future variables will remain the same as those that
     were prevalent when the ML model was created is a fertile breeding ground for **[model
     drift in MLOps](https://www.sigmoid.com/machine-learning-operationalization-mlops/)**.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设所有未来的变量将与创建 ML 模型时的变量保持一致，这是**[MLOps 中的模型漂移](https://www.sigmoid.com/machine-learning-operationalization-mlops/)**的滋生温床。
 - en: For instance, if a model runs in a static environment using static data then
     its performance shouldn’t degrade as the data predicted is coming from the same
     distribution which was used during training. However, if the model exists in a
@@ -91,11 +112,13 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果一个模型在一个静态环境中使用静态数据运行，那么其性能不应退化，因为预测的数据来自与训练时相同的分布。然而，如果模型存在于一个不断变化的动态环境中，涉及过多的变量，那么模型的性能也会有所不同。
 - en: Types of Model Drift
   id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 模型漂移的类型
 - en: 'Model drift can be broadly classified into two main types based on changes
     in either the variables or the predictors: Concept drift and Data Drift respectively.'
   id: totrans-17
