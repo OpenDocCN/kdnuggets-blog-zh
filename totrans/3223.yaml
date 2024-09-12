@@ -1,32 +1,45 @@
 - en: Learn Generalized Linear Models (GLM) using R
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用R学习广义线性模型（GLM）
 - en: 原文：[https://www.kdnuggets.com/2017/10/learn-generalized-linear-models-glm-r.html](https://www.kdnuggets.com/2017/10/learn-generalized-linear-models-glm-r.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/10/learn-generalized-linear-models-glm-r.html](https://www.kdnuggets.com/2017/10/learn-generalized-linear-models-glm-r.html)
 - en: '**By Chaitanya Sagar, Perceptive Analytics.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由Chaitanya Sagar，Perceptive Analytics。**'
 - en: '**Editor''s note:** Data files discussed below can be acquired here:'
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑注：** 下面讨论的数据文件可以在此处获取：'
 - en: ''
+  id: totrans-4
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[**cola.csv**](https://gist.githubusercontent.com/mmmayo13/0112df82bf54961e60edfe6a69bbe22c/raw/2ceaa9131ebb40595a4d76a423ffe5c1c91ca6e3/cola.csv)'
+  id: totrans-5
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**cola.csv**](https://gist.githubusercontent.com/mmmayo13/0112df82bf54961e60edfe6a69bbe22c/raw/2ceaa9131ebb40595a4d76a423ffe5c1c91ca6e3/cola.csv)'
 - en: '[**penalty.csv**](https://gist.githubusercontent.com/mmmayo13/0e57f0b86ee3e1d58f067ecf36efc9fe/raw/6a433f74c589a68ae436ee9a358e6965dae34a63/penalty.csv)'
+  id: totrans-6
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**penalty.csv**](https://gist.githubusercontent.com/mmmayo13/0e57f0b86ee3e1d58f067ecf36efc9fe/raw/6a433f74c589a68ae436ee9a358e6965dae34a63/penalty.csv)'
 - en: Generalized Linear Model (GLM) helps represent the dependent variable as a linear
     combination of independent variables. Simple linear regression is the traditional
     form of GLM. Simple linear regression works well when the dependent variable is
@@ -34,11 +47,15 @@
     is often violated in real situations. For example, consider a case where dependent
     variable can take only positive values and has fat tail. The dependent variable
     is number of coffee sold and the independent variable is the temperature.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 广义线性模型（GLM）帮助将因变量表示为自变量的线性组合。简单线性回归是GLM的传统形式。当因变量呈正态分布时，简单线性回归效果良好。在实际情况中，因变量通常不满足正态分布的假设。例如，考虑一种情况，其中因变量只能取正值且具有厚尾。因变量是咖啡销售量，自变量是温度。
 - en: '![R GLM header](../Images/c27e32b99685cf77c1f9961d64d36346.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![R GLM header](../Images/c27e32b99685cf77c1f9961d64d36346.png)'
 - en: Let's assume that we have modeled a linear relationship between the variables.
     The expected number of coffee sold decreases by 10 units as temperature increases
     by 1 degree. The problem with this kind of model is that it can give meaningless
@@ -55,8 +72,10 @@
     case) of the variable before regression would lead to a logical model. The ability
     of GLM to transform data with arbitrary distribution to fit a meaningful linear
     model makes it a powerful tool.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们已经建模了变量之间的线性关系。随着温度每升高1度，预计咖啡销售量减少10个单位。此类模型的问题在于它可能会给出无意义的结果。例如，当温度上升1度时，模型可能会输出负值的咖啡销售量。在这些情况下，GLM显得非常有用。GLM广泛应用于建模自变量具有任意分布（即非正态分布）的情况。GLM的基本直觉是将因变量建模为自变量的线性组合，而不是将因变量的函数建模为因变量的线性组合。用于变换自变量的函数称为链接函数。在上述例子中，咖啡销售量的分布将不是正态分布而是泊松分布，回归前对变量进行对数变换（在这种情况下，对数将是链接函数）将导致一个合理的模型。GLM将任意分布的数据转化为适合的线性模型的能力使其成为一个强大的工具。
 - en: 'In this article, we aim to discuss various GLMs that are widely used in the
     industry. We focus on: a) log-linear regression b) interpreting log-transformations
     and c) binary logistic regression. We also review the underlying distributions
@@ -66,11 +85,15 @@
     R script to implement the modeling technique on R statistical software.  For the
     purpose of illustration on R, we use sample datasets. We hope that you find the
     article useful.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们旨在讨论各种广义线性模型（GLM），这些模型在行业中被广泛使用。我们重点关注：a）对数线性回归 b）解释对数变换 c）二项逻辑回归。我们还回顾了相关的分布及适用的连接函数。然而，我们首先简要讨论了GLM的传统形式，即简单线性回归。除了详细解释上述模型外，我们还提供了在R统计软件上实现建模技术的步骤和注释的R脚本。为了在R中进行演示，我们使用了示例数据集。希望你觉得这篇文章有用。
 - en: '**Linear Regression**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**线性回归**'
 - en: Linear regression is the most basic form of GLM. Linear regression models a
     linear relationship between the dependent variable, without any transformation,
     and the independent variable. The model assumes that the variables are normally
@@ -79,57 +102,84 @@
     on linear regression and OLS, please refer to our earlier article at [https://www.kdnuggets.com/2017/03/building-regression-models-support-vector-regression.html](https://www.kdnuggets.com/2017/03/building-regression-models-support-vector-regression.html).
     The article provides explanation and an example of linear regression. We hope
     that now you are comfortable with the idea of linear regression.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归是广义线性模型（GLM）中最基本的形式。线性回归建模了因变量与自变量之间的线性关系，且没有任何变换。该模型假设变量服从正态分布。其表示形式为Yi=
+    α+ βXi [Eq. 1]。系数通过普通最小二乘法（OLS）计算。有关线性回归和OLS的详细解释，请参阅我们早期的文章 [https://www.kdnuggets.com/2017/03/building-regression-models-support-vector-regression.html](https://www.kdnuggets.com/2017/03/building-regression-models-support-vector-regression.html)。该文章提供了线性回归的解释和示例。希望现在你对线性回归的概念已经感到熟悉。
 - en: 'Now, with the objective of showing limitation of linear regression, we will
     implement the linear model on R using a not so perfect case. The data consists
     of two variables - Temperature and Coca-Cola sales in a university campus. Please
     click here to download. Let us visualize the data and fit a linear model to predict
     sales of coca cola based on given temperature.  The R code is below:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，为了展示线性回归的局限性，我们将在R中使用一个不那么完美的案例来实现线性模型。数据包括两个变量——大学校园内的温度和可口可乐销售额。请点击这里下载。让我们可视化数据并拟合一个线性模型，以根据给定的温度预测可乐销售。以下是R代码：
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Figure 1 Scatter Plot**'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1 散点图**'
 - en: '![Fig 1](../Images/6ec534da855e0214a6d21717e6d0b9bd.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![图 1](../Images/6ec534da855e0214a6d21717e6d0b9bd.png)'
 - en: Figure 1 visualizes the data to provide us with a better understanding of the
     relationship between Temperature and Coca-Cola sales. We observe that sales increase
     exponentially with increase in temperature.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1 可视化了数据，以便更好地理解温度与可口可乐销售之间的关系。我们观察到，销售额随着温度的升高而呈指数增长。
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The relationship between Temperature and Cola Sales is represented in Equation
     [2]. The Root Mean Square Error for the model is pretty high at 241.49\. The values
     of cola sales can be obtained by plugging the temperature in the equation.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 温度与可乐销售之间的关系在方程[2]中表示。该模型的均方根误差相当高，达到241.49。可以通过将温度代入方程中来获得可乐销售的值。
 - en: '![Eq](../Images/67b12841cd5b8dbc8164e94de4fd67e2.png) [2]'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Eq](../Images/67b12841cd5b8dbc8164e94de4fd67e2.png) [2]'
 - en: '**Figure 2 Overlay best-fit line given by simple linear regression on scatter
     plot**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 2 使用简单线性回归给出的最佳拟合线叠加在散点图上**'
 - en: '![Fig 2](../Images/d3b10cad33ee77171133e808e1aa5267.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![图 2](../Images/d3b10cad33ee77171133e808e1aa5267.png)'
 - en: Figure 2 shows the best-fit line as per the simple linear regression. The fit
     is bad and leads to absurd predictions. As per the model the Cola sales will be
     negative for temperature below 10 units. There are two ways to deal with the situation.
     First, fit a non-linear model. Second, transform the data to fit a linear model.
     In the next section we will discuss the second method.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 2 显示了根据简单线性回归得到的最佳拟合线。拟合效果较差，导致了荒谬的预测。根据该模型，当温度低于10个单位时，可乐销售将为负值。有两种方法可以处理这种情况。首先，拟合一个非线性模型。其次，转换数据以适配线性模型。在下一节中，我们将讨论第二种方法。
 - en: '**Log-Linear Regression**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**对数线性回归**'
 - en: 'Log-linear regression becomes a useful tool when the dependent and independent
     variable follow an exponential relationship. It means that Y does not change linearly
     with a unit change in X but Y changes by a constant percentage with unit change
@@ -147,8 +197,13 @@
     - Poisson distribution is the distribution of random variable that results from
     a Poisson experiment. For example, the number of successes or failures in a time
     period T follows Poisson distribution.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 对数线性回归在因变量和自变量呈指数关系时变得非常有用。这意味着 Y 并不会随着 X 的单位变化而线性变化，而是随着 X 的单位变化 Y 会以一个固定的百分比变化。例如，复利情况下到期金额与时间
+    T 呈指数关系。随着 T 增加一个单位，到期金额会以一定百分比增加，即利率。另一个例子是预期薪资和教育水平。预期薪资与教育水平之间并不呈线性关系，而是随着教育水平的提高而呈指数增长。这类增长模型描绘了多种现实生活中的情况，并可以通过对数线性回归进行建模。除了指数关系外，当因变量遵循以下分布时，也会使用对数变换：a)
+    对数正态分布 - 对数正态分布是指随机变量的对数遵循正态分布。因此，对对数正态随机变量取对数，使得变量呈正态分布，并适合进行线性回归。b) 泊松分布 - 泊松分布是指由泊松实验产生的随机变量分布。例如，时间段
+    T 内的成功或失败次数遵循泊松分布。
 - en: In this article we focus on the exponential relationship, which is expressed
     as *Y=a(b)^X* [Eq. 2].  In this case, a log transformation would make the relationship
     linear. We can represent *log(Y)* as a linear combination on Xs. Taking log on
@@ -160,26 +215,42 @@
     value of *log(b)* would indicate that Y decreases by a certain percentage for
     unit increase in X. Now we will implement the model on R using the Coca-Cola sales
     data. The R code is below.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们重点关注指数关系，其表达式为 *Y=a(b)^X* [方程 2]。在这种情况下，对数变换会使关系变为线性。我们可以将 *log(Y)* 表示为
+    X 的线性组合。对方程两边取对数，我们得到 log *(Y)=log(a)+log⁡(b)X*。现在我们可以使用普通最小二乘法（OLS）来估计模型。请注意，这个方程与方程
+    1 非常相似，*log(a)* 和 *log(b)* 分别等同于 *α* 和 *β*。现在我们将探讨对数线性模型的解释。*log(a)* 是常数项，*log(b)*
+    是 Y 随 X 单位变化而增长的增长率。*log(b)* 的负值表明 Y 会因为 X 的单位增加而以一定百分比减少。接下来，我们将使用可口可乐销售数据在 R
+    中实现该模型。R 代码如下。
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Figure 3 Best-fit line given by log-linear regression**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 3 对数线性回归给出的最佳拟合线**'
 - en: '![Fig 3](../Images/904c64eb887ca12a309765d48c122b41.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![图 3](../Images/904c64eb887ca12a309765d48c122b41.png)'
 - en: 'Figure 3 displays the best-fit line using log-linear regression. We can look
     at it as a two-step process i.e. data transformation by taking log on both sides
     and then using simple linear regression on the transformed data. The computed
     model is as follows:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3 显示了使用对数线性回归的最佳拟合线。我们可以将其视为一个两步过程，即对数据进行变换（对两边取对数），然后对变换后的数据进行简单线性回归。计算出的模型如下：
 - en: '![Eq 3](../Images/941ecb922ca885c4364c6b798ac5daab.png) [3]'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '![方程 3](../Images/941ecb922ca885c4364c6b798ac5daab.png) [3]'
 - en: The Cola sales can be predicted by plugging the values of temperature in Equation
     [3]. We observe that the fit has greatly improved over the simple linear regression.
     The RMSE for the transformed model is 0.24 only. Please note that log-linear regression
@@ -187,58 +258,89 @@
     of temperature we get a negative value of cola sales. A simple log transformation
     helps us to deal with the absurdity. In the next section we will discuss other
     log transformations that come handy in various situations.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 可乐销售量可以通过将温度值代入方程[3]来预测。我们观察到与简单线性回归相比，拟合效果有了很大改善。变换后的模型的RMSE仅为0.24。请注意，日志线性回归也解决了可乐销售量出现荒谬负值的问题。对于任何温度值，我们都不会得到负的可乐销售量。简单的对数变换帮助我们处理了这种荒谬情况。在下一部分，我们将讨论其他在各种情况下非常有用的对数变换。
 - en: '* * *'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT需求。'
 - en: '* * *'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通用和可扩展的最优稀疏决策树(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用线性回归模型的三大理由而不是…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
 - en: '[Top 3 Free Resources to Learn Linear Algebra for Machine Learning](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中学习线性代数的三大免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)'
 - en: '[Learn About Large Language Models](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解大语言模型](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)'
 - en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较线性回归与逻辑回归](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
 - en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
