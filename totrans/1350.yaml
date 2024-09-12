@@ -1,63 +1,97 @@
 - en: 'Data Science Meets Devops: MLOps with Jupyter, Git, and Kubernetes'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据科学与 DevOps 的融合：使用 Jupyter、Git 和 Kubernetes 的 MLOps
 - en: 原文：[https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/), Software
     Engineer at Google & [Hamel Husain](https://hamel.dev/), Staff Machine Learning
     Engineer at GitHub**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/)（谷歌软件工程师）与
+    [Hamel Husain](https://hamel.dev/)（GitHub 高级机器学习工程师）**'
 - en: The Problem
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 在 IT 支持您的组织'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[Kubeflow](https://www.kubeflow.org/) is a fast-growing open source project
     that makes it easy to deploy and manage machine learning on Kubernetes.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Kubeflow](https://www.kubeflow.org/) 是一个快速增长的开源项目，使得在 Kubernetes 上部署和管理机器学习变得简单。'
 - en: 'Due to Kubeflow’s explosive popularity, we receive a large influx of GitHub
     issues that must be triaged and routed to the appropriate subject matter expert.
     The below chart illustrates the number of new issues opened for the past year:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Kubeflow 的爆炸性流行，我们收到大量需要分流和转交给相关领域专家的 GitHub 问题。下图展示了过去一年中新开问题的数量：
 - en: '![Figure](../Images/ca21ec3fd9d9af4779955e596f179893.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/ca21ec3fd9d9af4779955e596f179893.png)'
 - en: '**Figure 1:** Number of Kubeflow Issues'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1：** Kubeflow 问题数量'
 - en: To keep up with this influx, we started investing in a Github App called [Issue
     Label Bot](https://github.com/marketplace/issue-label-bot) that used machine learning
     to auto label issues. Our [first model](https://github.com/marketplace/issue-label-bot) was
@@ -69,95 +103,157 @@
     table below contains evaluation metrics for Kubeflow specific labels on a holdout
     set. The [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall) below
     coincide with prediction thresholds that we calibrated to suit our needs.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了应对这一涌入，我们开始投资一个名为 [Issue Label Bot](https://github.com/marketplace/issue-label-bot) 的
+    GitHub 应用，该应用使用机器学习自动标记问题。我们的 [第一个模型](https://github.com/marketplace/issue-label-bot) 是使用
+    GitHub 上流行的公共代码库进行训练的，只预测通用标签。随后，我们开始使用 [Google AutoML](https://cloud.google.com/automl/docs) 训练一个特定于
+    Kubeflow 的模型。新模型能够以 72% 的平均精度和 50% 的平均召回率预测 Kubeflow 特定标签。这大大减少了 Kubeflow 维护者在问题管理方面的工作量。下表包含了
+    Kubeflow 特定标签在保留集上的评估指标。下方的 [精度和召回率](https://en.wikipedia.org/wiki/Precision_and_recall) 与我们调整以满足需求的预测阈值一致。
 - en: '| Label | Precision | Recall |'
+  id: totrans-16
   prefs: []
   type: TYPE_TB
+  zh: '| 标签 | 精度 | 召回率 |'
 - en: '| --- | --- | --- |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| area-backend | 0.6 | 0.4 |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| area-backend | 0.6 | 0.4 |'
 - en: '| area-bootstrap | 0.3 | 0.1 |'
+  id: totrans-19
   prefs: []
   type: TYPE_TB
+  zh: '| area-bootstrap | 0.3 | 0.1 |'
 - en: '| area-centraldashboard | 0.6 | 0.6 |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| area-centraldashboard | 0.6 | 0.6 |'
 - en: '| area-components | 0.5 | 0.3 |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| area-components | 0.5 | 0.3 |'
 - en: '| area-docs | 0.8 | 0.7 |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| area-docs | 0.8 | 0.7 |'
 - en: '| area-engprod | 0.8 | 0.5 |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| area-engprod | 0.8 | 0.5 |'
 - en: '| area-front-end | 0.7 | 0.5 |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| area-front-end | 0.7 | 0.5 |'
 - en: '| area-frontend | 0.7 | 0.4 |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| area-frontend | 0.7 | 0.4 |'
 - en: '| area-inference | 0.9 | 0.5 |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| area-inference | 0.9 | 0.5 |'
 - en: '| area-jupyter | 0.9 | 0.7 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| area-jupyter | 0.9 | 0.7 |'
 - en: '| area-katib | 0.8 | 1.0 |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| area-katib | 0.8 | 1.0 |'
 - en: '| area-kfctl | 0.8 | 0.7 |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| area-kfctl | 0.8 | 0.7 |'
 - en: '| area-kustomize | 0.3 | 0.1 |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| area-kustomize | 0.3 | 0.1 |'
 - en: '| area-operator | 0.8 | 0.7 |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '| area-operator | 0.8 | 0.7 |'
 - en: '| area-pipelines | 0.7 | 0.4 |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| area-pipelines | 0.7 | 0.4 |'
 - en: '| area-samples | 0.5 | 0.5 |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| area-samples | 0.5 | 0.5 |'
 - en: '| area-sdk | 0.7 | 0.4 |'
+  id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| area-sdk | 0.7 | 0.4 |'
 - en: '| area-sdk-dsl | 0.6 | 0.4 |'
+  id: totrans-35
   prefs: []
   type: TYPE_TB
+  zh: '| area-sdk-dsl | 0.6 | 0.4 |'
 - en: '| area-sdk-dsl-compiler | 0.6 | 0.4 |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| area-sdk-dsl-compiler | 0.6 | 0.4 |'
 - en: '| area-testing | 0.7 | 0.7 |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| area-testing | 0.7 | 0.7 |'
 - en: '| area-tfjob | 0.4 | 0.4 |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| area-tfjob | 0.4 | 0.4 |'
 - en: '| platform-aws | 0.8 | 0.5 |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| platform-aws | 0.8 | 0.5 |'
 - en: '| platform-gcp | 0.8 | 0.6 |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| platform-gcp | 0.8 | 0.6 |'
 - en: '**Table 1:** Evaluation metrics for various Kubeflow labels.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表 1:** 各种 Kubeflow 标签的评估指标。'
 - en: Given the rate at which new issues are arriving, retraining our model periodically
     became a priority. We believe continuously retraining and deploying our model
     to leverage this new data is critical to maintaining the efficacy of our models.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于新问题出现的速度，定期重新训练我们的模型成为了优先事项。我们认为，持续重新训练和部署模型以利用这些新数据对于保持模型的有效性至关重要。
 - en: Our Solution
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们的解决方案
 - en: Our CI/CD solution is illustrated in [Figure 2](https://blog.kubeflow.org/mlops/#fig2).
     We don’t explicitly create a directed acyclic graph (DAG) to connect the steps
     in an ML workflow (e.g. preprocessing, training, validation, deployment, etc…).
@@ -165,23 +261,34 @@
     describes the desired state of the world and takes actions necessary to make the
     actual state of the world match. This independence makes it easy for us to use
     whatever tools make the most sense for each step. More specifically we use
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 CI/CD 解决方案如 [图 2](https://blog.kubeflow.org/mlops/#fig2) 所示。我们没有明确创建一个有向无环图
+    (DAG) 来连接 ML 工作流中的步骤（如预处理、训练、验证、部署等）。相反，我们使用一组独立的控制器。每个控制器声明性地描述了世界的期望状态，并采取必要的行动使实际状态与之匹配。这种独立性使我们能够使用最适合每个步骤的工具。更具体地说，我们使用
 - en: Jupyter notebooks for developing models.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Jupyter notebooks 用于开发模型。
 - en: GitOps for continuous integration and deployment.
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GitOps 进行持续集成和部署。
 - en: Kubernetes and managed cloud services for underlying infrastructure.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Kubernetes 和托管云服务用于基础设施。
 - en: '![Figure](../Images/931ec07d5c7eb19b1e7c4ea2d126b568.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/931ec07d5c7eb19b1e7c4ea2d126b568.png)'
 - en: '**Figure 2:** illustrates how we do CI/CD. Our pipeline today consists of two
     independently operating controllers. We configure the Trainer (left hand side)
     by describing what models we want to exist; i.e. what it means for our models
@@ -190,20 +297,29 @@
     Deployer (right hand side) to define what it means for the deployed model to be
     in sync with the set of trained models. If the correct model is not deployed it
     will deploy a new model.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 2:** 说明了我们如何进行 CI/CD。我们现在的管道由两个独立运行的控制器组成。我们通过描述希望存在的模型来配置 Trainer（左侧）；即我们希望模型“新鲜”的含义。Trainer
+    定期检查已训练模型的集合是否足够新鲜，如果不够新鲜，则训练新模型。我们同样配置 Deployer（右侧）来定义已部署模型与训练模型集合保持同步的含义。如果未部署正确的模型，它将部署新模型。'
 - en: For more details on model training and deployment refer to the [Actuation section
     below](https://blog.kubeflow.org/mlops/#actuation).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关模型训练和部署的更多细节，请参阅 [下面的执行部分](https://blog.kubeflow.org/mlops/#actuation)。
 - en: Background
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 背景
 - en: Building Resilient Systems With Reconcilers
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用协调器构建弹性系统
 - en: A reconciler is a control pattern that has proven to be immensely useful for
     building resilient systems. The reconcile pattern is [at the heart of how Kubernetes
     works](https://book.kubebuilder.io/cronjob-tutorial/controller-overview.html).
@@ -214,225 +330,336 @@
     currently deployed has label “version=20200700”. The reconciler then takes the
     action necessary to drive the world to the desired state; e.g. open a pull request
     to change the deployed model.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 协调器是一种被证明对构建弹性系统非常有用的控制模式。协调模式 [在 Kubernetes 工作原理的核心](https://book.kubebuilder.io/cronjob-tutorial/controller-overview.html)。图
+    3 说明了协调器是如何工作的。协调器通过首先观察世界的状态来工作；例如，当前部署了哪个模型。然后，协调器将其与世界的期望状态进行比较，并计算差异；例如，应该部署标签为“version=20200724”的模型，但当前部署的模型标签为“version=20200700”。然后，协调器采取必要的行动来将世界驱动到期望状态；例如，打开一个拉取请求以更改已部署的模型。
 - en: '![Figure](../Images/d8e6c56c244863ca835a1cfa7e1ad079.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/d8e6c56c244863ca835a1cfa7e1ad079.png)'
 - en: '**Figure 3.** Illustration of the reconciler pattern as applied by our deployer.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 3。** 我们部署者应用调解器模式的示意图。'
 - en: Reconcilers have proven immensely useful for building resilient systems because
     a well implemented reconciler provides a high degree of confidence that no matter
     how a system is perturbed it will eventually return to the desired state.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 调解器在构建弹性系统方面证明极为有用，因为一个实施良好的调解器可以提供高度的信心，无论系统如何扰动，它最终都会回到期望的状态。
 - en: There is no DAG
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 没有 DAG
 - en: 'The declarative nature of controllers means data can flow through a series
     of controllers without needing to explicitly create a DAG. In lieu of a DAG, a
     series of data processing steps can instead be expressed as a set of desired states,
     as illustrated in Figure 4 below:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制器的声明性特征意味着数据可以通过一系列控制器流动，而不需要明确创建 DAG。代替 DAG，一系列数据处理步骤可以表达为一组期望的状态，如下面的图 4
+    所示：
 - en: '![Figure](../Images/1c53e020082053494462bff18c544df7.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/1c53e020082053494462bff18c544df7.png)'
 - en: '**Figure 4:** illustrates how pipelines can emerge from independent controllers
     without explicitly encoding a DAG. Here we have two completely independent controllers.
     The first controller ensures that for every element a[i] there should be an element
     b[i]. The second controller ensures that for every element b[i] there should be
     an element c[i].'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 4：** 展示了管道如何从独立的控制器中出现，而无需明确编码 DAG。这里我们有两个完全独立的控制器。第一个控制器确保每个元素 a[i] 都有一个元素
+    b[i]。第二个控制器确保每个元素 b[i] 都有一个元素 c[i]。'
 - en: 'This reconciler-based paradigm offers the following benefits over many traditional
     DAG-based workflows:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种基于调解器的范式相比于许多传统的 DAG 基于工作流具有以下优点：
 - en: '**Resilience against failures**: the system continuously seeks to achieve and
     maintain the desired state.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对故障的弹性：** 系统持续寻求实现并维持期望状态。'
 - en: '**Increased autonomy of engineering teams:** each team is free to choose the
     tools and infrastructure that suit their needs. The reconciler framework only
     requires a minimal amount of coupling between controllers while still allowing
     one to write expressive workflows.'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**工程团队的自主性提升：** 每个团队可以自由选择适合他们需求的工具和基础设施。调解器框架仅要求控制器之间有最小的耦合，同时仍允许编写表达力丰富的工作流。'
 - en: '**Battle tested patterns and tools**: This reconciler based framework does
     not invent something new. Kubernetes has a rich ecosystem of tools that aim to
     make it easy to build controllers. The popularity of Kubernetes means there is
     a large and growing community familiar with this pattern and supporting tools.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**经过战斗检验的模式和工具**：这个基于调解器的框架并没有发明什么新的东西。Kubernetes 拥有丰富的工具生态系统，旨在简化控制器的构建。Kubernetes
+    的流行意味着有一个庞大且不断增长的社区熟悉这种模式和支持工具。'
 - en: 'GitOps: Operation By Pull Request'
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GitOps：通过拉取请求操作
 - en: GitOps, Figure 5, is a pattern for managing infrastructure. The core idea of
     GitOps is that source control (doesn’t have to be git) should be the source of
     truth for configuration files describing your infrastructure. Controllers can
     then monitor source control and automatically update your infrastructure as your
     config changes. This means to make a change (or undo a change) you just open a
     pull request.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: GitOps，图 5，是管理基础设施的一种模式。GitOps 的核心思想是源代码控制（不一定是 git）应该是描述你的基础设施的配置文件的真实来源。控制器可以监控源代码控制，并在配置变化时自动更新你的基础设施。这意味着要进行更改（或撤销更改），你只需打开一个拉取请求。
 - en: '![Figure](../Images/adfb35bbfe035929d945819692faca86.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/adfb35bbfe035929d945819692faca86.png)'
 - en: '**Figure 5:** To push a new model for Label Bot we create a PR updating the
     config map storing the id of the Auto ML model we want to use. When the PR is
     merged, [Anthos Config Management(ACM](https://cloud.google.com/anthos-config-management/docs))
     automatically rolls out those changes to our GKE cluster. As a result, subsequent
     predictions are made using the new model. (Image courtesy of [Weaveworks](https://www.weave.works/blog/automate-kubernetes-with-gitops))'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 5：** 为了推动 Label Bot 的新模型，我们创建了一个 PR 更新存储我们想使用的 Auto ML 模型 ID 的配置映射。当 PR
+    合并时， [Anthos 配置管理(ACM](https://cloud.google.com/anthos-config-management/docs))
+    会自动将这些更改部署到我们的 GKE 集群。因此，随后的预测将使用新模型。（图像由 [Weaveworks](https://www.weave.works/blog/automate-kubernetes-with-gitops)提供）'
 - en: 'Putting It Together: Reconciler + GitOps = CI/CD for ML'
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 综合起来：调解器 + GitOps = 机器学习的 CI/CD
 - en: With that background out of the way, let’s dive into how we built CI/CD for
     ML by combining the Reconciler and GitOps patterns.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在了解了这些背景后，让我们深入探讨一下我们如何通过结合调解器和 GitOps 模式来构建机器学习的 CI/CD。
 - en: 'There were three problems we needed to solve:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要解决三个问题：
 - en: How do we compute the diff between the desired and actual state of the world?
+  id: totrans-72
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们如何计算期望状态与实际状态之间的差异？
 - en: How do we affect the changes needed to make the actual state match the desired
     state?
+  id: totrans-73
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们如何影响所需的更改，以使实际状态与期望状态匹配？
 - en: How do we build a control loop to continuously run 1 & 2?
+  id: totrans-74
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们如何构建一个控制循环来持续运行 1 和 2？
 - en: Computing Diffs
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计算差异
 - en: 'To compute the diffs we just write lambdas that do exactly what we want. So
     in this case we wrote two lambdas:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了计算差异，我们只需编写确切符合我们需求的 lambdas。因此，在这种情况下，我们编写了两个 lambdas：
 - en: The [first lambda](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/Label_Microservice/go/cmd/automl/pkg/server/server.go#L109) determines
     whether we need to retrain based on the age of the most recent model.
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[第一个 lambda](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/Label_Microservice/go/cmd/automl/pkg/server/server.go#L109)根据最新模型的年龄来确定是否需要重新训练。'
 - en: The [second lambda](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/Label_Microservice/go/cmd/automl/pkg/server/server.go#L49) determines
     whether the model needs to be updated by comparing the most recently trained model
     to the model listed in a config map checked into source control.
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[第二个 lambda](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/Label_Microservice/go/cmd/automl/pkg/server/server.go#L49)
+    通过将最近训练的模型与配置映射中列出的模型进行比较，来确定模型是否需要更新。'
 - en: We wrap these lambdas in a simple web server and deploy on Kubernetes. One reason
     we chose this approach is because we wanted to rely on Kubernetes’ [git-sync](https://github.com/kubernetes/git-sync) to
     mirror our repository to a pod volume. This makes our lambdas super simple because
     all the git management is taken care of by a side-car running [git-sync](https://github.com/kubernetes/git-sync).
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将这些 lambdas 封装在一个简单的 web 服务器中，并部署在 Kubernetes 上。我们选择这种方法的原因之一是我们希望依赖 Kubernetes
+    的 [git-sync](https://github.com/kubernetes/git-sync) 将我们的仓库镜像到一个 pod 卷中。这使我们的
+    lambdas 非常简单，因为所有的 git 管理都由一个运行 [git-sync](https://github.com/kubernetes/git-sync)
+    的 side-car 处理。
 - en: Actuation
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行
 - en: To apply the changes necessary, we use Tekton to glue together various CLIs
     that we use to perform the various steps.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了应用所需的更改，我们使用 Tekton 将各种 CLIs 连接在一起，以执行各个步骤。
 - en: Model Training
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型训练
 - en: 'To train our model we have a [Tekton task ](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/tekton/tasks/run-notebook-task.yaml#L34)that:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了训练我们的模型，我们有一个 [Tekton 任务](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/tekton/tasks/run-notebook-task.yaml#L34)，其功能是：
 - en: Runs our notebook using [papermill](https://github.com/nteract/papermill).
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [papermill](https://github.com/nteract/papermill) 运行我们的笔记本。
 - en: Converts the notebook to html using [nbconvert](https://nbconvert.readthedocs.io/en/latest/).
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [nbconvert](https://nbconvert.readthedocs.io/en/latest/) 将笔记本转换为 html。
 - en: Uploads the `.ipynb` and `.html` files to GCS using [gsutil](https://cloud.google.com/storage/docs/gsutil)
+  id: totrans-86
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [gsutil](https://cloud.google.com/storage/docs/gsutil) 将 `.ipynb` 和 `.html`
+    文件上传到 GCS。
 - en: This notebook fetches GitHub Issues data [from BigQuery](https://medium.com/google-cloud/analyzing-github-issues-and-comments-with-bigquery-c41410d3308) and
     generates CSV files on GCS suitable for import into [Google AutoML](https://cloud.google.com/automl).
     The notebook then launches an [AutoML](https://cloud.google.com/automl) job to
     train a model.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 该笔记本从 BigQuery 中获取 GitHub Issues 数据 [从 BigQuery](https://medium.com/google-cloud/analyzing-github-issues-and-comments-with-bigquery-c41410d3308)，并生成适合导入到 [Google
+    AutoML](https://cloud.google.com/automl)的 CSV 文件。然后，笔记本启动一个 [AutoML](https://cloud.google.com/automl) 任务来训练模型。
 - en: We chose AutoML because we wanted to focus on building a complete end to end
     solution rather than iterating on the model. AutoML provides a competitive baseline
     that we may try to improve upon in the future.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们选择了 AutoML，因为我们希望专注于构建一个完整的端到端解决方案，而不是在模型上进行迭代。AutoML 提供了一个竞争性的基准，我们可能在未来尝试进行改进。
 - en: To easily view the executed notebook we convert it to html and upload it to [GCS
     which makes it easy to serve public, static content](https://cloud.google.com/storage/docs/hosting-static-website).
     This allows us to use notebooks to generate rich visualizations to evaluate our
     model.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了方便查看执行过的笔记本，我们将其转换为 html 并上传到 [GCS，使其易于提供公共静态内容](https://cloud.google.com/storage/docs/hosting-static-website)。这使我们能够使用笔记本生成丰富的可视化图表，以评估我们的模型。
 - en: Model Deployment
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型部署
 - en: 'To deploy our model we have a [Tekton task](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/tekton/tasks/update-model-pr-task.yaml#L68) that:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了部署我们的模型，我们有一个 [Tekton 任务](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/tekton/tasks/update-model-pr-task.yaml#L68)，其功能如下：
 - en: Uses kpt to update our configmap with the desired value.
+  id: totrans-92
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 kpt 更新我们的 configmap 以设置所需的值。
 - en: Runs git to push our changes to a branch.
+  id: totrans-93
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行 git 将我们的更改推送到一个分支。
 - en: Uses a wrapper around the [GitHub CLI](https://github.com/cli/cli) (gh) to create
     a PR.
+  id: totrans-94
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [GitHub CLI](https://github.com/cli/cli)（gh）的封装器来创建 PR。
 - en: The controller ensures there is only one Tekton pipeline running at a time.
     We configure our pipelines to always push to the same branch. This ensures we
     only ever open one PR to update the model because GitHub doesn’t allow multiple
     PRs to be created from the same branch.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制器确保同时只有一个 Tekton 管道在运行。我们将管道配置为始终推送到相同的分支。这确保我们只会打开一个 PR 来更新模型，因为 GitHub 不允许从相同分支创建多个
+    PR。
 - en: Once the PR is merged [Anthos Config Mesh](https://cloud.google.com/anthos/config-management) automatically
     applies the Kubernetes manifests to our Kubernetes cluster.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦 PR 被合并，[Anthos Config Mesh](https://cloud.google.com/anthos/config-management)
+    会自动将 Kubernetes 清单应用到我们的 Kubernetes 集群中。
 - en: Why Tekton
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么选择 Tekton
 - en: We picked Tekton because the primary challenge we faced was sequentially running
     a series of CLIs in various containers. Tekton is perfect for this. Importantly,
     all the steps in a Tekton task run on the same pod which allows data to be shared
     between steps using a pod volume.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们选择 Tekton 是因为我们面临的主要挑战是在各种容器中顺序运行一系列 CLI。Tekton 非常适合这个任务。重要的是，Tekton 任务中的所有步骤都在同一个
+    Pod 上运行，这允许通过 Pod 卷在步骤之间共享数据。
 - en: Furthermore, since Tekton resources are Kubernetes resources we can adopt the
     same GitOps pattern and tooling to update our pipeline definitions.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，由于 Tekton 资源是 Kubernetes 资源，我们可以采用相同的 GitOps 模式和工具来更新我们的管道定义。
 - en: The Control Loop
+  id: totrans-100
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 控制循环
 - en: 'Finally, we needed to build a control loop that would periodically invoke our
     lambdas and launch our Tekton pipelines as needed. We used kubebuilder to create
     a [simple custom controller](https://github.com/kubeflow/code-intelligence/tree/master/Label_Microservice/go).
@@ -441,151 +668,227 @@
     off a Tekton pipeline to perform the actual update. An example of our [custom
     resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) is
     illustrated below:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们需要构建一个控制循环，该循环会定期调用我们的 Lambda 函数并根据需要启动我们的 Tekton 管道。我们使用 kubebuilder 创建了一个
+    [简单自定义控制器](https://github.com/kubeflow/code-intelligence/tree/master/Label_Microservice/go)。我们控制器的同步循环将调用我们的
+    Lambda 函数来确定是否需要同步，如果需要，则确定同步的参数。如果需要同步，控制器会触发 Tekton 管道来执行实际的更新。我们的 [自定义资源](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
+    的示例如下：
 - en: '[PRE0]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The custom resource specifies the endpoint, **needsSyncUrl**, for the lambda
     that computes whether a sync is needed and a Tekton PipelineRun, **pipelineRunTemplate**,
     describing the pipeline run to create when a sync is needed. The controller takes
     care of the details; e.g. ensuring only 1 pipeline per resource is running at
     a time, garbage collecting old runs, etc… All of the heavy lifting is taken care
     of for us by Kubernetes and kubebuilder.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 自定义资源指定了计算是否需要同步的 Lambda 的端点 **needsSyncUrl** 和一个 Tekton PipelineRun **pipelineRunTemplate**，描述了当需要同步时创建的管道运行。控制器处理细节，例如确保每个资源只运行一个管道，垃圾收集旧的运行等。所有繁重的工作由
+    Kubernetes 和 kubebuilder 处理。
 - en: Note, for historical reasons the kind, **ModelSync**, and apiVersion **automl.cloudai.kubeflow.org** are
     not reflective of what the controller actually does. We plan on fixing this in
     the future.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，由于历史原因，kind **ModelSync** 和 apiVersion **automl.cloudai.kubeflow.org** 并未反映控制器实际的功能。我们计划在未来修复这一点。
 - en: Build Your Own CI/CD pipelines
+  id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建你自己的 CI/CD 管道
 - en: Our code base is a long way from being polished, easily reusable tooling. Nonetheless
     it is all public and could be a useful starting point for trying to build your
     own pipelines.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的代码库距离精炼和易于重用的工具还有很长的路要走。尽管如此，它是公开的，并且可能是尝试构建自己管道的有用起点。
 - en: 'Here are some pointers to get you started:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一些提示可以帮助你入门：
 - en: Use the Dockerfile to build your own [ModelSync controller](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/go/Dockerfile)
+  id: totrans-108
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 Dockerfile 构建你自己的 [ModelSync 控制器](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/go/Dockerfile)
 - en: '[Modify the kustomize package](https://github.com/kubeflow/code-intelligence/tree/master/Label_Microservice/go/config/default) to
     use your image and deploy the controller'
+  id: totrans-109
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[修改 kustomize 包](https://github.com/kubeflow/code-intelligence/tree/master/Label_Microservice/go/config/default)
+    以使用你的镜像并部署控制器。'
 - en: Define one or more lambdas as needed for your use cases
+  id: totrans-110
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 根据你的用例定义一个或多个 lambda 函数。
 - en: You can use our [Lambda server](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/go/cmd/automl/pkg/server/server.go) as
     an example
+  id: totrans-111
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以使用我们的 [Lambda 服务器](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/go/cmd/automl/pkg/server/server.go)
+    作为示例。
 - en: We wrote ours in go but you can use any language and web framework you like
     (e.g. flask)
+  id: totrans-112
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用 Go 编写了我们的代码，但你可以使用任何你喜欢的语言和 Web 框架（例如 flask）。
 - en: Define Tekton pipelines suitable for your use cases; our pipelines(linked below)
     might be a useful starting point
+  id: totrans-113
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为你的用例定义适合的 Tekton 流水线；我们的流水线（如下所示）可能是一个有用的起点。
 - en: '[Notebook Tekton task ](https://github.com/kubeflow/code-intelligence/blob/master/tekton/tasks/run-notebook-task.yaml)-
     Run notebook with papermill and upload to GCS'
+  id: totrans-114
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Notebook Tekton 任务](https://github.com/kubeflow/code-intelligence/blob/master/tekton/tasks/run-notebook-task.yaml)
+    - 使用 papermill 运行 notebook 并上传到 GCS。'
 - en: '[PR Tekton Task](https://github.com/kubeflow/code-intelligence/blob/master/tekton/tasks/update-model-pr-task.yaml) -
     Tekton task to open GitHub PRs'
+  id: totrans-115
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PR Tekton 任务](https://github.com/kubeflow/code-intelligence/blob/master/tekton/tasks/update-model-pr-task.yaml)
+    - 用于打开 GitHub PR 的 Tekton 任务。'
 - en: Define ModelSync resources for your use case; you can refer to ours as an example
+  id: totrans-116
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为你的用例定义 ModelSync 资源；你可以参考我们的示例。
 - en: '[ModelSync Deploy Spec](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/auto-update/prod/modelsync.yaml) -
     YAML to continuously deploy label bot'
+  id: totrans-117
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ModelSync 部署规范](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/auto-update/prod/modelsync.yaml)
+    - 用于持续部署标签机器人 的 YAML。'
 - en: '[ModelSync Train Spec](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/auto-update/prod/retrain-model.yaml) -
     YAML to continuously train our model'
+  id: totrans-118
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ModelSync 训练规范](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/auto-update/prod/retrain-model.yaml)
+    - 用于持续训练我们模型的 YAML。'
 - en: If you’d like to see us clean it up and include it in a future Kubeflow release
     please chime in on issue [kubeflow/kubeflow#5167](https://github.com/kubeflow/kubeflow/issues/5167).
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你希望看到我们清理并将其包含在未来的 Kubeflow 版本中，请在问题 [kubeflow/kubeflow#5167](https://github.com/kubeflow/kubeflow/issues/5167)
+    上发表意见。
 - en: What’s Next
+  id: totrans-120
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步
 - en: Lineage Tracking
+  id: totrans-121
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 血缘追踪
 - en: Since we do not have an explicit DAG representing the sequence of steps in our
     CI/CD pipeline understanding the lineage of our models can be challenging. Fortunately,
     Kubeflow Metadata solves this by making it easy for each step to record information
     about what outputs it produced using what code and inputs. Kubeflow metadata can
     easily recover and plot the lineage graph. The figure below shows an example of
     the lineage graph from our [xgboost example](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb).
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们没有明确的 DAG 表示 CI/CD 流水线中的步骤序列，理解我们模型的血缘关系可能具有挑战性。幸运的是，Kubeflow Metadata 通过简化每个步骤记录其产生的输出、使用的代码和输入的信息来解决这个问题。Kubeflow
+    metadata 可以轻松恢复并绘制血缘图。下图显示了我们 [xgboost 示例](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb)
+    的血缘图示例。
 - en: '![Figure](../Images/f326e5bb68979f485160afc1ff4f5995.png)'
+  id: totrans-123
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/f326e5bb68979f485160afc1ff4f5995.png)'
 - en: '**Figure 6:** screenshot of the lineage tracking UI for our [xgboost example](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb).'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 6：** 我们 [xgboost 示例](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb)
+    的血缘追踪 UI 截图。'
 - en: Our plan is to have our controller automatically write lineage tracking information
     to the metadata server so we can easily understand the lineage of what’s in production.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的计划是让控制器自动将血缘追踪信息写入 metadata 服务器，以便我们可以轻松了解生产环境中的内容的血缘关系。
 - en: Conclusion
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![alt_text](../Images/5fbf922ac3998192a63305b57198a28c.png)'
+  id: totrans-127
   prefs: []
   type: TYPE_IMG
+  zh: '![替代文本](../Images/5fbf922ac3998192a63305b57198a28c.png)'
 - en: 'Building ML products is a team effort. In order to move a model from a proof
     of concept to a shipped product, data scientists and devops engineers need to
     collaborate. To foster this collaboration, we believe it is important to allow
     data scientists and devops engineers to use their preferred tools. Concretely,
     we wanted to support the following tools for Data Scientists, Devops Engineers,
     and [SRE](https://en.wikipedia.org/wiki/Site_Reliability_Engineering)s:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建机器学习产品是一个团队合作的过程。为了将模型从概念验证阶段转变为实际产品，数据科学家和运维工程师需要协作。为了促进这种协作，我们认为允许数据科学家和运维工程师使用他们首选的工具非常重要。具体来说，我们希望支持以下工具供数据科学家、运维工程师和[SRE](https://en.wikipedia.org/wiki/Site_Reliability_Engineering)使用：
 - en: Jupyter notebooks for developing models.
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于开发模型的 Jupyter notebooks。
 - en: GitOps for continuous integration and deployment.
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GitOps用于持续集成和部署。
 - en: Kubernetes and managed cloud services for underlying infrastructure.
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Kubernetes和托管云服务作为基础设施。
 - en: To maximize each team’s autonomy and reduce dependencies on tools, our CI/CD
     process follows a decentralized approach. Rather than explicitly define a DAG
     that connects the steps, our approach relies on a series of controllers that can
@@ -594,71 +897,108 @@
     be responsible for turning weblogs into features, a modeling team might be responsible
     for producing models from the features, and a deployments team might be responsible
     for rolling those models into production.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了最大化每个团队的自主性并减少对工具的依赖，我们的CI/CD过程采用了去中心化的方法。我们的方法并不是明确地定义一个连接步骤的DAG，而是依赖一系列可以独立定义和管理的控制器。我们认为这自然适用于那些责任可能分散在多个团队中的企业；数据工程团队可能负责将网络日志转化为特性，建模团队可能负责从这些特性中生成模型，而部署团队可能负责将这些模型投入生产。
 - en: Further Reading
+  id: totrans-133
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进一步阅读
 - en: If you’d like to learn more about GitOps we suggest this [guide](https://www.weave.works/technologies/gitops/) from
     Weaveworks.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于GitOps的内容，我们建议你查看Weaveworks的[指南](https://www.weave.works/technologies/gitops/)。
 - en: To learn how to build your own Kubernetes controllers the [kubebuilder book](https://book.kubebuilder.io/) walks
     through an E2E example.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 要学习如何构建自己的Kubernetes控制器，[kubebuilder书籍](https://book.kubebuilder.io/)提供了一个端到端的示例。
 - en: '**[Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/)** is a Software
     Engineer at Google.'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/)** 是 Google
+    的软件工程师。'
 - en: '**[Hamel Husain](https://hamel.dev/)** is a Staff Machine Learning Engineer
     @ GitHub.'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Hamel Husain](https://hamel.dev/)** 是 GitHub 的高级机器学习工程师。'
 - en: '[Original](https://blog.kubeflow.org/mlops/). Reposted with permission.'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始内容](https://blog.kubeflow.org/mlops/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[What I learned from looking at 200 machine learning tools](/2020/07/200-machine-learning-tools.html)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从200种机器学习工具中学到的东西](/2020/07/200-machine-learning-tools.html)'
 - en: '[Implementing MLOps on an Edge Device](/2020/08/implementing-mlops-edge-device.html)'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在边缘设备上实现MLOps](/2020/08/implementing-mlops-edge-device.html)'
 - en: '[A Tour of End-to-End Machine Learning Platforms](/2020/07/tour-end-to-end-machine-learning-platforms.html)'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[端到端机器学习平台导览](/2020/07/tour-end-to-end-machine-learning-platforms.html)'
 - en: More On This Topic
+  id: totrans-143
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Kubernetes In Action: Second Edition](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes In Action: 第二版](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
 - en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes中的高可用SQL Server Docker容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
 - en: '[Git for Data Science Cheatsheet](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学Git快速参考](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)'
 - en: '[Unlock Your Potential with This FREE DevOps Crash Course](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过这个免费的DevOps速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
 - en: '[10 Essential DevOps Tools Every Beginner Should Learn](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者都应学习的10个必备DevOps工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)'
 - en: '[14 Essential Git Commands for Data Scientists](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家必备的14条Git命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)'
