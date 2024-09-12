@@ -1,341 +1,521 @@
 - en: Docker Tutorial for Data Scientists
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据科学家的 Docker 教程
 - en: 原文：[https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html](https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html](https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html)
 - en: '![Docker Tutorial for Data Scientists](../Images/9c5138903fba5d31dcb5396014fb2ce5.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学家的 Docker 教程](../Images/9c5138903fba5d31dcb5396014fb2ce5.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: Python and the suite of Python data analysis and machine learning libraries
     like pandas and scikit-learn help you develop data science applications with ease.
     However, dependency management in Python is a challenge. When working on a data
     science project, you’ll have to spend substantial time installing the various
     libraries and keeping track of the version of the libraries you’re using amongst
     others.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 和一系列 Python 数据分析和机器学习库，如 pandas 和 scikit-learn，帮助你轻松开发数据科学应用程序。然而，Python
+    的依赖管理是一个挑战。在进行数据科学项目时，你需要花费大量时间安装各种库，并跟踪你所使用的库的版本等。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What if other developers want to run your code and contribute to the project?
     Well, other developers who want to replicate your data science application should
     first *set up* the project environment on their machine—before they can go ahead
     and run the code. Even small differences such as differing library versions can
     introduce breaking changes to the code. **Docker** to the rescue. Docker simplifies
     the development process and facilitates seamless collaboration.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果其他开发者想要运行你的代码并为项目做贡献呢？其他希望复制你的数据科学应用程序的开发者首先需要*设置*他们机器上的项目环境——然后才能运行代码。即使是小的差异，如库版本不同，也可能引入破坏性更改。**Docker**
+    来拯救你。Docker 简化了开发过程并促进了无缝的协作。
 - en: This guide will introduce you to the basics of Docker and teach you how to containerize
     data science applications with Docker.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本指南将向你介绍 Docker 的基础知识，并教你如何使用 Docker 对数据科学应用程序进行容器化。
 - en: What Is Docker?
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是 Docker？
 - en: '![Docker Tutorial for Data Scientists](../Images/577682a67594d7d65ebf5bf6577c66f8.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学家的 Docker 教程](../Images/577682a67594d7d65ebf5bf6577c66f8.png)'
 - en: Image by Author
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：作者
 - en: '[Docker](https://www.docker.com/) is a containerization tool that lets you
     build and share applications as portable artifacts called **images**.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Docker](https://www.docker.com/) 是一个容器化工具，让你可以将应用程序构建和分享为称为**镜像**的可移植工件。'
 - en: Aside from source code, your application will have a set of dependencies, required
     configuration, system tools, and more. For example, in a data science project,
     you’ll install all the required libraries in your development environment (preferably
     inside a virtual environment). You’ll also ensure that you’re using an updated
     version of Python that the libraries support.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了源代码外，你的应用程序还会有一组依赖项、所需的配置、系统工具等。例如，在数据科学项目中，你会在开发环境中安装所有必要的库（最好是在虚拟环境中）。你还会确保使用库所支持的最新版本的
+    Python。
 - en: However, you may still run into problems when trying to run your application
     on another machine. These problems often arise from mismatched configuration and
     library versions—in the development environment—between the two machines.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，当你尝试在另一台机器上运行你的应用程序时，仍然可能会遇到问题。这些问题通常源于两台机器之间开发环境中的配置和库版本不匹配。
 - en: With Docker, you can package your application—along with the dependencies and
     configuration. So you can define an isolated, reproducible, and consistent environment
     for your applications across the range of host machines.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Docker，你可以打包你的应用程序——连同依赖项和配置一起。这样，你可以定义一个隔离、可重现且一致的环境，适用于各种主机机器上的应用程序。
 - en: 'Docker Basics: Images, Containers, and Registries'
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Docker 基础知识：镜像、容器和注册表
 - en: 'Let’s go over a few concepts/terminologies:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来回顾一些概念/术语：
 - en: Docker Image
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Docker 镜像
 - en: A Docker image is the portable artifact of your application.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker 镜像是你应用程序的便携式工件。
 - en: Docker Container
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Docker 容器
 - en: When you run an image, you’re essentially getting the application running inside
     the container environment. So a running instance of an image is a container.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你运行一个镜像时，你实际上是在容器环境中运行应用程序。因此，镜像的运行实例就是容器。
 - en: Docker Registry
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Docker 注册表
 - en: Docker registry is a system for *storing* and *distributing* Docker images.
     After containerizing an application into a Docker image, you can make it available
     for the developer community by pushing them to an image registry. DockerHub is
     the largest public registry, and all images are pulled from DockerHub by default.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker 注册表是一个*存储*和*分发* Docker 镜像的系统。在将应用程序容器化为 Docker 镜像后，你可以通过将其推送到镜像注册表来使其对开发者社区可用。
+    DockerHub 是最大的公共注册表，所有镜像默认都从 DockerHub 拉取。
 - en: How Does Docker Simplify Development?
+  id: totrans-28
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Docker 如何简化开发？
 - en: Because containers provide an isolated environment for your applications, other
     developers now only need to have Docker set up on their machine. And they can
     start containers they can pull the Docker image and start containers using a single
     command—without having to worry about complex installations—on the remote machine.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于容器为你的应用程序提供了隔离的环境，因此其他开发人员现在只需在他们的机器上设置 Docker。他们可以拉取 Docker 镜像并使用单个命令启动容器——*无需担心复杂的安装*——在远程机器上。
 - en: When developing an application, it is also common to build and test multiple
     versions of the same app. If you use Docker, you can have multiple versions of
     the same app running inside different containers—*without* any conflicts—in the
     same environment.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开发应用程序时，常常需要构建和测试多个版本的相同应用程序。如果使用 Docker，你可以在同一环境中运行多个相同应用程序的不同版本——*没有*任何冲突。
 - en: In addition to simplifying development, Docker also also simplifies deployment
     and helps the development and operations teams to collaborate effectively. On
     the server side, the operations team doesn't have to spend time resolving complex
     version and dependency conflicts. They only need to have a docker runtime set
     up
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了简化开发，Docker 还简化了部署，并帮助开发和运维团队有效协作。在服务器端，运维团队不必花时间解决复杂的版本和依赖冲突。他们只需要设置一个 docker
+    运行时环境。
 - en: Essential Docker Commands
+  id: totrans-32
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 基本 Docker 命令
 - en: 'Let''s quickly go over some basic Docker commands most of which we’ll use in
     this tutorial. For a more detailed overview read: [12 Docker Commands Every Data
     Scientist Should Know](/2023/01/12-docker-commands-every-data-scientist-know.html).'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们快速回顾一些基本的 Docker 命令，其中大多数将在本教程中使用。有关更详细的概述，请阅读：[12 个每个数据科学家都应该知道的 Docker
+    命令](/2023/01/12-docker-commands-every-data-scientist-know.html)。
 - en: '| **Command** | **Function** |'
+  id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| **命令** | **功能** |'
 - en: '| `docker ps` | Lists all running containers |'
+  id: totrans-35
   prefs: []
   type: TYPE_TB
+  zh: '| `docker ps` | 列出所有正在运行的容器 |'
 - en: '| `docker pull image-name` | Pulls image-name from DockerHub by default |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| `docker pull image-name` | 默认从 DockerHub 拉取 image-name |'
 - en: '| `docker images` | Lists all the available images |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| `docker images` | 列出所有可用的镜像 |'
 - en: '| `docker run image-name` | Starts a container from an image |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| `docker run image-name` | 从镜像启动容器 |'
 - en: '| `docker start container-id` | Restarts a stopped container |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| `docker start container-id` | 重新启动已停止的容器 |'
 - en: '| `docker stop container-id` | Stops a running container |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| `docker stop container-id` | 停止正在运行的容器 |'
 - en: '| `docker build path` | Builds an image at the path using instructions in the
     Dockerfile |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| `docker build path` | 使用 Dockerfile 中的指令在指定路径构建镜像 |'
 - en: '**Note**: Run all the commands by prefixing `sudo` if you haven’t created the
     **docker** group with the user.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：如果你没有创建**docker**组，则需要在所有命令前加上`sudo`。'
 - en: How to Containerize a Data Science App Using Docker
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Docker 容器化数据科学应用程序
 - en: We’ve learned the basics of Docker, and it’s time to apply what we’ve learned.
     In this section, we’ll containerize a simple data science application using Docker.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经了解了 Docker 的基础知识，现在是应用所学的知识的时候了。在这一部分，我们将使用 Docker 容器化一个简单的数据科学应用程序。
 - en: House Price Prediction Model
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 房价预测模型
 - en: 'Let’s take the following linear regression model that predicts the target value:
     the median house price based on the input features. The model is built using the
     [California housing dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html):'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以以下线性回归模型为例，该模型根据输入特征预测目标值：中位数房价。该模型是使用 [加州住房数据集](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html)
+    构建的：
 - en: '[PRE0]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'We know that scikit-learn is a required dependency. If you go through the code,
     we set `as_frame` equal to True when loading the dataset . So we also need pandas.
     And the `requirements.txt` file looks like so:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们知道 scikit-learn 是一个必需的依赖项。如果你查看代码，我们在加载数据集时将 `as_frame` 设置为 True。因此，我们还需要
+    pandas。`requirements.txt` 文件看起来是这样的：
 - en: '[PRE1]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Docker Tutorial for Data Scientists](../Images/e5b3ad97278fcb3d702f2fc354717f60.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学家的 Docker 教程](../Images/e5b3ad97278fcb3d702f2fc354717f60.png)'
 - en: Image by Author
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Create the Dockerfile
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 创建 Dockerfile
 - en: So far, we have the source code file `house_price_prediction.py` and the `requirements.txt`
     file. We should now define *how* to build an image from our application. The **Dockerfile**
     is used to create this definition of building an image from the application source
     code files.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们有源代码文件 `house_price_prediction.py` 和 `requirements.txt` 文件。现在我们应该定义
+    *如何* 从我们的应用程序构建镜像。**Dockerfile** 用于创建这种从应用程序源代码文件构建镜像的定义。
 - en: So what is a Dockerfile? It is a text document that contains step-by-step instructions
     to build the Docker image.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么 Dockerfile 是什么？它是一个包含逐步指令以构建 Docker 镜像的文本文件。
 - en: '![Docker Tutorial for Data Scientists](../Images/c1d34b207f02fc63c1705edf07d304fa.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学家的 Docker 教程](../Images/c1d34b207f02fc63c1705edf07d304fa.png)'
 - en: Image by Author
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'Here’s the Dockerfile for our example:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们示例的 Dockerfile：
 - en: '[PRE2]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Let’s break down the contents of the Dockerfile:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们详细分析一下 Dockerfile 的内容：
 - en: All Dockerfiles start with a `FROM` instruction specifying the base image. Base
     image is that image on which your image is based. Here we use an available image
     for Python 3.9\. The `FROM` instruction tells Docker to build the current image
     from the specified base image.
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有 Dockerfile 都以 `FROM` 指令开始，指定基础镜像。基础镜像是你的镜像所基于的镜像。在这里，我们使用一个可用的 Python 3.9
+    镜像。`FROM` 指令告诉 Docker 从指定的基础镜像构建当前镜像。
 - en: The `WORKDIR` command is used to set the working directory for all the following
     commands (*app* in this example).
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`WORKDIR` 命令用于为所有后续命令设置工作目录（在这个例子中是 *app*）。'
 - en: We then copy the `requirements.txt` file to the container’s file system.
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，我们将 `requirements.txt` 文件复制到容器的文件系统中。
 - en: The `RUN` instruction executes the specified command—in a shell—inside the container.
     Here we install all the required dependencies using `pip`.
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`RUN` 指令在容器内的 shell 中执行指定的命令。在这里，我们使用 `pip` 安装所有必需的依赖项。'
 - en: We then copy the source code file—the Python script `house_price_prediction.py`—to
     the container’s file system.
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，我们将源代码文件——Python 脚本 `house_price_prediction.py`——复制到容器的文件系统中。
 - en: Finally `CMD` refers to the instruction to be executed—when the container starts.
     Here we need to run the `house_price_prediction.py` script. The Dockerfile should
     contain only one `CMD` instruction.
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后，`CMD` 指令指的是在容器启动时要执行的指令。这里我们需要运行 `house_price_prediction.py` 脚本。Dockerfile
+    应该只包含一个 `CMD` 指令。
 - en: Build the Image
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 构建镜像
 - en: 'Now that we’ve defined the Dockerfile, we can build the docker image by running
     the `docker build`:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经定义了 Dockerfile，可以通过运行 `docker build` 来构建 Docker 镜像：
 - en: '[PRE3]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The option **-t** allows us to specify a name and tag for the image in the **name:tag**
     format. The default tag is *latest*.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 选项 **-t** 允许我们为镜像指定名称和标签，格式为 **name:tag**。默认标签是 *latest*。
 - en: 'The build process takes a couple of minutes:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建过程需要几分钟：
 - en: '[PRE4]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After the Docker image has been built, run the `docker images` command. You
     should see the `ml-app` image listed, too.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker 镜像构建完成后，运行 `docker images` 命令。你也应该看到 `ml-app` 镜像被列出。
 - en: '[PRE5]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Docker Tutorial for Data Scientists](../Images/3afe943cb4d073124528e98f182fdfe0.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学家的 Docker 教程](../Images/3afe943cb4d073124528e98f182fdfe0.png)'
 - en: 'You can run the Docker image `ml-app` using the `docker run` command:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 `docker run` 命令运行 Docker 镜像 `ml-app`：
 - en: '[PRE6]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Docker Tutorial for Data Scientists](../Images/21ce8f3f69f0e5256b06f86d62506fd1.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![数据科学家的 Docker 教程](../Images/21ce8f3f69f0e5256b06f86d62506fd1.png)'
 - en: Congratulations! You’ve just dockerized your first data science application.
     By creating a DockerHub account, you can push the image to it (or to a private
     repository within the organization).
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 恭喜！你刚刚将你的第一个数据科学应用程序容器化。通过创建 DockerHub 账户，你可以将镜像推送到 DockerHub（或推送到组织内的私有仓库）。
 - en: Conclusion
+  id: totrans-79
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Hope you found this introductory Docker tutorial helpful. You can find the code
     used in this tutorial in [this GitHub repository](https://github.com/balapriyac/docker-data-science).
     As a next step, set up Docker on your machine and try this example. Or dockerize
     an application of your choice.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你觉得这个入门级的 Docker 教程对你有帮助。你可以在 [这个 GitHub 仓库](https://github.com/balapriyac/docker-data-science)
+    中找到本教程使用的代码。下一步，设置 Docker 并尝试这个示例，或者将你选择的应用进行容器化。
 - en: 'The easiest way to install Docker on your machine is using [Docker Desktop](https://www.docker.com/products/docker-desktop/):
     you get both the  Docker CLI client as well as a GUI to manage your containers
     easily. So set up Docker and get coding right away!'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '在你的机器上安装 Docker 的最简单方法是使用 [Docker Desktop](https://www.docker.com/products/docker-desktop/):
+    你将同时获得 Docker CLI 客户端以及一个用于轻松管理容器的 GUI。快来设置 Docker，立刻开始编码吧！'
 - en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
     and technical writer from India. She likes working at the intersection of math,
     programming, data science, and content creation. Her areas of interest and expertise
@@ -343,33 +523,50 @@
     writing, coding, and coffee! Currently, she''s working on learning and sharing
     her knowledge with the developer community by authoring tutorials, how-to guides,
     opinion pieces, and more.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括
+    DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正致力于通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。'
 - en: More On This Topic
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[12 Docker Commands Every Data Scientist Should Know](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的 12 个 Docker 命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)'
 - en: '[Docker for Data Science Cheat Sheet](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学的 Docker 备忘单](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)'
 - en: '[Creating A Simple Docker Data Science Image](https://www.kdnuggets.com/2023/08/simple-docker-data-science-image.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个简单的 Docker 数据科学镜像](https://www.kdnuggets.com/2023/08/simple-docker-data-science-image.html)'
 - en: '[How To Use Docker Volumes for Persistent Data Storage](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Docker 卷进行持久数据存储](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)'
 - en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes 中的高可用性 SQL Server Docker 容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
 - en: '[Containerize Python Apps with Docker in 5 Easy Steps](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Docker 在 5 个简单步骤中容器化 Python 应用](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)'
