@@ -1,448 +1,678 @@
 - en: When to Retrain an Machine Learning Model? Run these 5 checks to decide on the
     schedule
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么时候重新训练机器学习模型？运行这 5 项检查来决定计划
 - en: 原文：[https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html](https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html](https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By** [**Emeli Dral**](https://twitter.com/EmeliDral)**, CTO and Co-founder
     of Evidently AI &** [**Elena Samuylova**](https://twitter.com/elenasamuylova/)**,
     CEO and Co-founder at Evidently AI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由** [**Emeli Dral**](https://twitter.com/EmeliDral)**，Evidently AI 的首席技术官兼联合创始人
+    &** [**Elena Samuylova**](https://twitter.com/elenasamuylova/)**，Evidently AI
+    的首席执行官兼联合创始人**'
 - en: The world and data are not static. But most machine learning models are. Once
     they are in production, they become less relevant with time. The [data distributions
     evolve, the behavioral patterns change](https://evidentlyai.com/blog/machine-learning-monitoring-data-and-concept-drift),
     and models need updates to keep up with new reality.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 世界和数据是动态的。但大多数机器学习模型是静态的。一旦它们投入生产，随着时间的推移，它们变得不那么相关了。[数据分布会演变，行为模式会变化](https://evidentlyai.com/blog/machine-learning-monitoring-data-and-concept-drift)，模型需要更新以跟上新的现实。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'The usual process is to retrain the models at defined intervals. It looks quite
     straightforward: take the new data, the old training pipeline, and fit the model
     again.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常的过程是在定义的时间间隔内重新训练模型。这看起来相当简单：使用新数据、旧的训练管道，再次拟合模型。
 - en: But how often should we do it? Should it be done daily, weekly, or monthly?
     Or every time you get a new batch of data?
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是我们应该多久做一次？是每天、每周还是每月？还是每次获得一批新数据时？
 - en: '![Image](../Images/6633c2014ec57d3088ba2179d982447e.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/6633c2014ec57d3088ba2179d982447e.png)'
 - en: Too often, the answer is based on a gut feeling or convenience. Someone picks
     a reasonable interval and schedules a regular retraining job.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 太常见的情况是，答案是基于直觉或便利性。有人选择一个合理的时间间隔并安排定期的重新训练任务。
 - en: Instead, we can approach it in a more data-driven way. To be more precise when
     planning the model maintenance, we can run a few checks in advance.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 相反，我们可以采取一种更数据驱动的方法。为了更精确地规划模型维护，我们可以提前进行一些检查。
 - en: Depending on how critical the model is, you might go through all of them or
     only some.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据模型的重要性，你可能需要检查所有的模型或只是其中的一些。
 - en: 'Check #1\. Is the model already good enough?'
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '检查 #1。模型是否已经足够好？'
 - en: Before we make our retraining plans, it helps to check if we are done with training!
     Maybe, the model hasn’t reached its peak performance yet?
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在制定重新训练计划之前，检查一下训练是否完成是有帮助的！也许，模型尚未达到其最佳性能？
 - en: The simple way to do that is to look at good old learning curves.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 最简单的方法是查看传统的学习曲线。
 - en: '![Image](../Images/f0988021c2e694e56e03bef78e14da42.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/f0988021c2e694e56e03bef78e14da42.png)'
 - en: How to proceed? We can fix the test set which we use to evaluate the model performance.
     Then, run a set of experiments by training the model on different parts of the
     training data.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何进行？我们可以固定用来评估模型性能的测试集。然后，通过在不同部分的训练数据上训练模型来运行一组实验。
 - en: We can use the random split method and iterate by changing the train size. This
     way, we focus on how the data volume impacts the performance.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用随机分割方法，通过改变训练规模进行迭代。这样，我们可以专注于数据量对性能的影响。
 - en: '![Image](../Images/1353e1f20c4313d1a9f55092a6d2800a.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/1353e1f20c4313d1a9f55092a6d2800a.png)'
 - en: 'There are two things we can learn as a result: 1) how much data we need to
     reach the peak performance 2) whether the model reaches this plateau with the
     available training data.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以从中学到两点：1）我们需要多少数据才能达到最佳性能 2）模型是否在现有训练数据下达到了这一平台。
 - en: '**Sometimes we’d learn that the model doesn’t need all the data we have.**
     For example, we have multiple years of sales data, but using just one year of
     training data gets the same quality.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**有时我们会发现模型不需要我们拥有的所有数据。** 例如，我们有多年的销售数据，但使用仅一年数据的训练结果质量相同。'
 - en: We might drop the extra data to make the model more lightweight.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可能会丢弃多余的数据以使模型更轻量化。
 - en: '**In other cases, we could see that the model quality keeps going up and up**.
     The model is hungry for more data! There are more steps to be made to bring the
     model to its top shape.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在其他情况下，我们可能会看到模型质量不断提升**。模型渴望更多的数据！还有更多步骤需要完成，以使模型达到最佳状态。'
 - en: '![Image](../Images/7d75b4bc993a559419e6f57d29fb3c70.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/7d75b4bc993a559419e6f57d29fb3c70.png)'
 - en: Rather than think about model retraining to maintain its quality, we should
     plan for continuous improvement. As soon as we get enough new data, we can use
     it to reach better performance.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其考虑重新训练模型以维持其质量，不如规划持续改进。只要我们获得足够的新数据，就可以利用这些数据来实现更好的性能。
 - en: This first test also gives a sense of scale and “density” of signal in the data.
     Do we need 10, 100, or 1000 observations to see a meaningful impact on the model
     performance? Would it take us a day or a month to collect that amount of new data?
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个第一次测试也提供了数据的规模和“密度”的感觉。我们需要10个、100个还是1000个观察才能看到对模型性能的有意义的影响？我们需要一天还是一个月来收集这么多的新数据？
 - en: That’s a helpful thing to know!
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个有用的知识！
 - en: 'Check #2\. How quickly do things change?'
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '检查 #2\. 事情变化得有多快？'
 - en: When we create our machine learning models, we assume there is some stability
     in the real-world process. Otherwise, it would make little sense to learn from
     the past!
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们创建机器学习模型时，我们假设现实世界的过程是有一定稳定性的。否则，从过去学习就没有什么意义了！
 - en: We also know that things change. When working with a dynamic process, we can
     also assume that there is a certain speed at which these new patterns accumulate.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们也知道事情会发生变化。当处理动态过程时，我们也可以假设这些新模式积累的速度是一定的。
 - en: We can then try to calculate this!
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以尝试计算这个！
 - en: Let’s take our model and see how long it “lasts” if we simulate its application
     in the past.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们拿着模型，看看如果我们模拟其过去的应用，它“持续”了多久。
 - en: '![Image](../Images/f57dc5e2baea3ed6c05cdd2eefc14927.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/f57dc5e2baea3ed6c05cdd2eefc14927.png)'
 - en: We can train a model using some older part of the data and then “apply” it to
     the later periods. Just like we do with a hold-out set, but here we simply take
     several consecutive ones.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用一些较旧的数据部分来训练模型，然后将其“应用”到后来的时期。就像我们用保留集一样，不过这里我们简单地使用几个连续的部分。
 - en: We can start with a single-point estimate and see how fast the performance degrades.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以从一个单点估计开始，看看性能下降得有多快。
 - en: '![Image](../Images/886251abc0b3af2682dc5aedba2e68cd.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/886251abc0b3af2682dc5aedba2e68cd.png)'
 - en: If we have enough historical data, we can repeat this check several times and
     then average the results. Just keep an eye on potential outliers and rare events!
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们有足够的历史数据，我们可以多次重复检查，然后平均结果。只需留意潜在的异常值和稀有事件！
 - en: '![Image](../Images/4187c122c80bd37ca886503946959293.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/4187c122c80bd37ca886503946959293.png)'
 - en: '**Sometimes we’d learn that an “old” model performs as good as new.** Some
     prefer to retrain the models often to keep them “fresh,” but it is not always
     justified.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**有时我们会发现一个“旧”模型表现得和新模型一样好。** 有些人喜欢频繁重新训练模型以保持其“新鲜”，但这并不总是合理的。'
 - en: Don’t fix what’s not broken!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 不要修复没有坏的东西！
 - en: If frequent retraining is not needed, you might go away with a lighter service
     architecture. You can also decrease the risks of technical errors that come with
     any change. The same goes for the organizational overhead, especially when new
     models require an approval process.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果不需要频繁重新训练，您可以使用更轻量的服务架构。您还可以减少随之而来的技术错误风险。组织开销也是如此，尤其是当新模型需要审批过程时。
 - en: '![Image](../Images/7cf2c1d846f0a3770216da28a8ebe87a.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/7cf2c1d846f0a3770216da28a8ebe87a.png)'
 - en: '**In other cases, you can learn that the model ages very fast!** That is good
     to know in advance to set up proper monitoring and prepare the infrastructure.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在其他情况下，您可能会发现模型老化得非常快！** 提前了解这一点有助于设置适当的监控和准备基础设施。'
 - en: You might decide to reconsider your training approach to make the model more
     stable. For example, change feature engineering or model architecture to make
     it a bit less performant on the test set but more stable in the long run. In other
     cases, you might train the model using a shorter training period but perform frequent
     calibration or consider active learning.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会决定重新考虑你的训练方法，以使模型更加稳定。例如，更改特征工程或模型架构，使其在测试集上的性能略低，但在长期内更稳定。在其他情况下，你可能会使用较短的训练周期来训练模型，但进行频繁的校准，或考虑主动学习。
 - en: We might also face constraints in our ability to retrain the model.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可能还会面临重新训练模型能力的限制。
 - en: That brings us to the next check.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 这引出了下一个检查点。
 - en: 'Check #3\. When do we get the new data?'
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '检查 #3。我们什么时候获得新数据？'
 - en: '![Image](../Images/ad4cb68a76433b6c053208581142e7d7.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/ad4cb68a76433b6c053208581142e7d7.png)'
 - en: Here, we look at the business process rather than the data.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们关注的是业务流程，而不是数据。
 - en: Sometimes, we get real-world feedback almost immediately. For example, you recommend
     an article to read, and you quickly know if the user clicked on a link.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，我们几乎立即获得真实世界的反馈。例如，你推荐一篇文章阅读，你很快就能知道用户是否点击了链接。
 - en: In other cases, the new data that you can use to retrain your model comes with
     a delay.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在其他情况下，你可以用来重新训练模型的新数据可能会有延迟。
 - en: If you have a long prediction horizon, you have to wait to know if your prediction
     was correct. With other tasks, you need a separate labeling process. Sometimes,
     the limitations come from how the data is moved or generated. For example, manual
     data entry is done once per month.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有一个较长的预测周期，你必须等待以知道你的预测是否正确。对于其他任务，你需要一个单独的标记过程。有时，限制来自于数据的移动或生成方式。例如，手动数据输入每月进行一次。
 - en: '![Image](../Images/4d963f1ef664d1112a0b9573247d2a02.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/4d963f1ef664d1112a0b9573247d2a02.png)'
 - en: We can find ourselves in one of the two situations.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可能会发现自己处于两种情况之一。
 - en: '**In some cases, the model degrades before the new data arrives.** It becomes
     a limitation.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在某些情况下，模型在新数据到达之前就已经退化。** 这成为一个限制因素。'
 - en: If we do not get the data in time to retrain the model, we might need to reconsider
     the approach again. For example, create an ensemble of models with different retraining
     horizons or combine machine learning with rules or human-in-the-loop. As a last
     resort, we can also adjust our performance expectations and prepare to deal with
     a lowered model quality.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们没有及时获取数据以重新训练模型，我们可能需要重新考虑方法。例如，创建一个具有不同重新训练周期的模型集成，或将机器学习与规则或人机协作结合起来。作为最后手段，我们也可以调整我们的性能期望，准备应对降低的模型质量。
 - en: '**In other cases, the new data starts accumulating before the model decay.**
     In this case, we have the luxury of choice.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在其他情况下，新数据会在模型退化之前开始累积。** 在这种情况下，我们有选择的余地。'
 - en: We can, of course, simply initiate the retraining at any point after the data
     comes. If we want to be more precise, there is a way to do that.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们当然可以在数据到达后的任何时候简单地启动重新训练。如果我们想更精确一点，有办法做到这一点。
 - en: Read on!
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续阅读！
 - en: 'Check #4\. How much data do we need to see the improvement?'
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '检查 #4。我们需要多少数据才能看到改进？'
 - en: Say the new data arrives daily, but the model degrades only after 30 days. What
     would be the optimal action? Should we retrain daily, weekly, or once per month?
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设新数据每天到达，但模型只有在30天后才会退化。那么，最佳的行动是什么？我们应该每天、每周还是每月重新训练一次？
 - en: '![Image](../Images/93da0c9a4e5c92b0642fc2c37d89f2a3.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/93da0c9a4e5c92b0642fc2c37d89f2a3.png)'
 - en: We can make a more precise judgment by checking if the new bucket of data brings
     the improvement we want.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过检查新数据桶是否带来了我们想要的改进来做出更精确的判断。
 - en: The thing is, sometimes adding a small set of new data points does not change
     anything. There is some minimal required data size that has a visible impact on
     the performance.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题是，有时添加一小部分新数据不会改变任何东西。存在一些最小的数据量，它对性能有明显的影响。
 - en: We can evaluate this.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以对此进行评估。
 - en: 'To do that, we choose a test set from a period of the known decay. We know
     when the performance goes down: we can then check if retraining on the new data
     improves it.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们选择一个已知退化时期的测试集。我们知道性能何时下降：然后我们可以检查是否在新数据上重新训练会改善性能。
 - en: '![Image](../Images/36e21e33e0b86cf04f120b86ea13917b.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/36e21e33e0b86cf04f120b86ea13917b.png)'
 - en: We can add data in small increments as it comes. Then, we see how it affects
     the test performance.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以在数据到达时逐步添加数据。然后，观察它对测试性能的影响。
 - en: What often happens is that we have to wait a bit to collect a “useful” amount
     of data—for example, at least a week of it to capture the relevant seasonal patterns.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们常常需要等待一段时间以收集“有用”的数据——例如，至少一周的数据以捕捉相关的季节性模式。
 - en: As a result, our actual choice of retraining window might be more narrow than
     it seemed! On the side, it is limited by the speed of data provision. On the other
     side, by the need to collect enough data for retraining to bring effect.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是，我们实际选择的重新训练窗口可能比看起来要窄！一方面，它受数据提供速度的限制。另一方面，受收集足够数据以使重新训练产生效果的需求限制。
 - en: '![Image](../Images/0c8d71d262bc407a56865915a599e208.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/0c8d71d262bc407a56865915a599e208.png)'
 - en: Within this time frame, you can pick the period based on what’s practical and
     makes more sense for the use case.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个时间框架内，你可以根据实际情况和用例的需求选择适当的时期。
 - en: 'Check #5\. Should we keep the older data?'
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '检查 #5。我们应该保留旧数据吗？'
 - en: There is one more question that often comes up. How should we retrain the model?
     Should we add some new data and drop some old? Should we continuously increase
     the training set?
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一个常见的问题。我们应该如何重新训练模型？我们应该添加一些新数据并丢弃一些旧数据吗？我们应该不断增加训练集吗？
 - en: This is a bonus check we can run.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们可以进行的额外检查。
 - en: We can imitate model retraining at the chosen interval and then check how things
     change if we start dropping the old data.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以模仿在选择的间隔进行模型重新训练，然后检查如果我们开始丢弃旧数据，情况会如何变化。
 - en: '![Image](../Images/2433693530f83ace89e16563af95b574.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/2433693530f83ace89e16563af95b574.png)'
 - en: We can often see that leaving out the old data makes no difference. Then, it
     is probably a sane thing to do to keep the training more lightweight.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们常常发现，排除旧数据没有区别。那么，保持训练更轻量化可能是明智的做法。
 - en: What’s more, sometimes it makes the model better! Keeping the old irrelevant
     data might cause the performance to go down if you have a dynamic use case. That
     is good to know in advance.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 更重要的是，有时这会让模型更好！如果你有一个动态的使用案例，保持旧的无关数据可能会导致性能下降。提前知道这一点是好的。
 - en: Of course, we might also see that it makes sense to keep all you have for the
     time being. You can probably repeat the check later on.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，我们也可能看到目前保留所有数据是有意义的。你可以稍后再重复检查。
 - en: What’s next?
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步是什么？
 - en: With these checks, you can come prepared for the model maintenance. You can
     set up your retraining pipelines to get ready for the updates at a chosen interval.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这些检查，你可以为模型维护做好准备。你可以设置你的重新训练管道，以便在选择的间隔准备好更新。
 - en: Still, we cannot simply rely on our schedule. We also need a reality check.
     This means, monitoring our models once they go live.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管如此，我们不能仅仅依赖我们的时间表。我们还需要现实检查。这意味着，在模型上线后监控它们。
 - en: To get the visibility, we can build a [monitoring dashboard](https://github.com/evidentlyai/evidently)
     or schedule regular checks to calculate the actual model performance (if we have
     the ground truth) or otherwise monitor the input data for statistical distribution
     drifts and outliers.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得可见性，我们可以建立一个[监控仪表板](https://github.com/evidentlyai/evidently)或安排定期检查，以计算实际的模型性能（如果我们有真实情况），否则监控输入数据的统计分布漂移和异常值。
 - en: '![Image](../Images/19db7390f4ca668c6a5a3a66023ce064.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/19db7390f4ca668c6a5a3a66023ce064.png)'
 - en: Even stable models can face [data and concept drift](https://evidentlyai.com/blog/machine-learning-monitoring-data-and-concept-drift)
     or certain rare events. In this case, we might then need to intervene earlier
     than planned.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使是稳定的模型也可能面临[数据和概念漂移](https://evidentlyai.com/blog/machine-learning-monitoring-data-and-concept-drift)或某些稀有事件。在这种情况下，我们可能需要比计划更早地介入。
 - en: On the other side, if things look steady, and we can skip an update for longer
     than planned.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，如果情况看起来稳定，我们可以比计划更长时间跳过更新。
 - en: Planning for regular retraining and complementing this with continuous monitoring
     is usually an optimal strategy to make the model live up to its promised performance!
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 定期计划重新训练并辅以持续监控通常是让模型达到承诺性能的最佳策略！
 - en: '**Links**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**链接**'
 - en: You can find an extended version of this article [here](https://evidentlyai.com/blog/retrain-or-not-retrain).
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这里](https://evidentlyai.com/blog/retrain-or-not-retrain)找到这篇文章的扩展版本。
 - en: '[Machine learning monitoring checklist](/2021/03/machine-learning-model-monitoring-checklist.html)'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '[机器学习监控检查清单](/2021/03/machine-learning-model-monitoring-checklist.html)'
 - en: '**Emeli Dral** is a Co-founder and CTO at Evidently AI where she creates tools
     to analyze and monitor ML models. Earlier she co-founded an industrial AI startup
     and served as the Chief Data Scientist at Yandex Data Factory. She is a co-author
     of the Machine Learning and Data Analysis curriculum at Coursera with over 100,000
     students.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Emeli Dral** 是Evidently AI的联合创始人兼首席技术官，她创建了用于分析和监控ML模型的工具。此前，她共同创办了一家工业AI初创公司，并在Yandex
+    Data Factory担任首席数据科学家。她是Coursera上的机器学习和数据分析课程的共同作者，该课程拥有超过100,000名学生。'
 - en: '[https://twitter.com/EmeliDral](https://twitter.com/EmeliDral)'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://twitter.com/EmeliDral](https://twitter.com/EmeliDral)'
 - en: '**Elena Samuylova** is a Co-founder and CEO at Evidently AI. Earlier she co-founded
     an industrial AI startup and led business development at Yandex Data Factory.
     Since 2014, she has worked with companies from manufacturing to retail to deliver
     ML-based solutions. In 2018, Elena was named 50 Women in Product Europe by Product
     Management Festival.'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Elena Samuylova** 是Evidently AI的联合创始人兼首席执行官。此前，她共同创办了一家工业AI初创公司，并在Yandex
+    Data Factory担任业务发展主管。自2014年以来，她与从制造业到零售业的公司合作，提供基于ML的解决方案。2018年，Elena被Product
+    Management Festival评选为“欧洲50位女性产品经理”之一。'
 - en: '[https://twitter.com/elenasamuylova/](https://twitter.com/elenasamuylova/)'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://twitter.com/elenasamuylova/](https://twitter.com/elenasamuylova/)'
 - en: '**Related:**'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Learning from machine learning mistakes](/2021/03/learning-from-machine-learning-mistakes.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从机器学习错误中学习](/2021/03/learning-from-machine-learning-mistakes.html)'
 - en: '[A Machine Learning Model Monitoring Checklist: 7 Things to Track](/2021/03/machine-learning-model-monitoring-checklist.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型监控检查清单：7件事需要跟踪](/2021/03/machine-learning-model-monitoring-checklist.html)'
 - en: '[MLOps: Model Monitoring 101](/2021/01/mlops-model-monitoring-101.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps：模型监控101](/2021/01/mlops-model-monitoring-101.html)'
 - en: More On This Topic
+  id: totrans-104
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Schedule & Run ETLs with Jupysql and GitHub Actions](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Jupysql和GitHub Actions计划和运行ETL](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
 - en: '[Deep Learning For Compliance Checks: What''s New?](https://www.kdnuggets.com/2022/05/deep-learning-compliance-checks-new.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[合规检查中的深度学习：有什么新变化？](https://www.kdnuggets.com/2022/05/deep-learning-compliance-checks-new.html)'
 - en: '[7 Essential Data Quality Checks with Pandas](https://www.kdnuggets.com/7-essential-data-quality-checks-with-pandas)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Pandas进行7项关键数据质量检查](https://www.kdnuggets.com/7-essential-data-quality-checks-with-pandas)'
 - en: '[Learn Machine Learning From These GitHub Repositories](https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从这些GitHub仓库学习机器学习](https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html)'
 - en: '[Learn How to Run Alpaca-LoRA on Your Device in Just a Few Steps](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解如何在设备上仅需几步运行Alpaca-LoRA](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
 - en: '[Run an LLM Locally with LM Studio](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在本地使用LM Studio运行LLM](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
