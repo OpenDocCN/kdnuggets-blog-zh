@@ -1,11 +1,15 @@
 - en: 'From Theory to Practice: Building a k-Nearest Neighbors Classifier'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从理论到实践：构建 *k*-最近邻分类器
 - en: 原文：[https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 - en: Another day, another classic algorithm: *k*-nearest neighbors. Like the [naive
     Bayes classifier](https://towardsdatascience.com/learning-by-implementing-gaussian-naive-bayes-3f0e3d2c01b2),
     it’s a rather simple method to solve classification problems. The algorithm is
@@ -14,433 +18,660 @@
     making predictions is painfully slow, especially for large datasets. The performance
     for datasets with many features might also not be overwhelming, due to the [curse
     of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality).
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 又一天，又一个经典算法：*k*-最近邻。与[朴素贝叶斯分类器](https://towardsdatascience.com/learning-by-implementing-gaussian-naive-bayes-3f0e3d2c01b2)一样，这是一个解决分类问题的相当简单的方法。该算法直观易懂，训练时间无与伦比，这使得它成为你刚开始机器学习生涯时的一个很好的学习对象。话虽如此，做出预测的速度非常慢，尤其是对于大数据集。由于[维度灾难](https://en.wikipedia.org/wiki/Curse_of_dimensionality)，对于具有许多特征的数据集，性能也可能并不令人印象深刻。
 - en: In this article, you will learn
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，你将学到
 - en: how the *k*-nearest neighbors classifier works
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*k*-最近邻分类器的工作原理'
 - en: why it was designed like this
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其设计原因
 - en: why it has these severe disadvantages and, of course,
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其严重缺陷的原因，以及，
 - en: how to implement it in Python using NumPy.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用 NumPy 在 Python 中实现它。
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: As we will implement the classifier in a scikit learn-conform way, it’s also
     worthwhile to check out my article [Build your own custom scikit-learn Regression](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289).
     However, the scikit-learn overhead is quite small and you should be able to follow
     along anyway.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们将以符合 scikit-learn 的方式实现分类器，因此查看我的文章[构建你自己的自定义 scikit-learn 回归](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)也很值得。不过，scikit-learn
+    的开销相当小，你应该仍然能够跟上进度。
 - en: '*You can find the code on *[*my Github*](https://github.com/Garve/TDS/blob/main/TDS%20-%20KNN.ipynb)*.*'
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*你可以在*[*我的 Github*](https://github.com/Garve/TDS/blob/main/TDS%20-%20KNN.ipynb)*上找到代码。*'
 - en: Theory
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理论
 - en: 'The main idea of this classifier is stunningly simple. It is directly derived
     from the fundamental question of classifying:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 该分类器的主要思想非常简单。它直接来源于分类的基本问题：
 - en: Given a data point x, what is the probability of x belonging to some class c?
+  id: totrans-18
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 给定一个数据点 x，x 属于某个类别 c 的概率是多少？
 - en: In the language of mathematics, we search for the conditional probability *p*(*c*|*x*).
     While the [naive Bayes classifier](https://towardsdatascience.com/learning-by-implementing-gaussian-naive-bayes-3f0e3d2c01b2) tries
     to model this probability directly using some assumptions, there is another intuitive
     way to compute this probability — the frequentist view of probability.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数学语言中，我们寻找条件概率 *p*(*c*|*x*)。虽然[朴素贝叶斯分类器](https://towardsdatascience.com/learning-by-implementing-gaussian-naive-bayes-3f0e3d2c01b2)尝试通过一些假设直接建模这一概率，但还有另一种直观的方法来计算这一概率——频率主义的概率观点。
 - en: The naive View on Probabilities
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 概率的朴素观点
 - en: 'Ok, but what does this mean now? Let us consider the following simple example:
     You roll a six-sided, possibly rigged die and want to compute the probability
     of rolling a six, i.e. *p*(roll number 6). How to do this? Well, you roll the
     die *n* times and write down how often it showed a six. If you have seen the number
     six *k* times, you say the probability of seeing a six is **around *k*/*n***.
     Nothing new or fancy here, right?'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，那这现在意味着什么呢？让我们考虑以下简单示例：你掷一个六面骰子，并想要计算掷出六点的概率，即 *p*(掷到6点)。怎么做呢？好吧，你掷骰子 *n*
+    次，记录下它掷出六点的次数。如果你看到六点的次数是 *k*，你可以说看到六点的概率是 **大约 *k*/*n***。这没什么新奇的，对吧？
 - en: Now, imagine that we want to compute a conditional probability, for example
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，假设我们想计算一个条件概率，例如
 - en: p(roll number 6 | roll an even number)
+  id: totrans-23
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: p(掷到6点 | 掷到偶数)
 - en: 'You don’t need [Bayes’ theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) to
     solve this. Just roll the die again and ignore all the rolls with an odd number.
     That’s what conditioning does: filtering results. If you rolled the die *n* times,
     have seen *m* even numbers and *k* of them were a six, the probability above is **around *k*/*m*** instead
     of *k*/*n*.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你不需要[贝叶斯定理](https://en.wikipedia.org/wiki/Bayes%27_theorem)来解决这个问题。只需再次掷骰子，并忽略所有奇数的结果。这就是条件作用的方式：过滤结果。如果你掷了骰子*n*次，看到*m*个偶数，其中*k*个是六点，那么上面的概率是**大约
+    *k*/*m***，而不是 *k*/*n*。
 - en: Motivating k-Nearest Neighbors
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 激励 k-最近邻
 - en: Back to our problem. We want to compute *p*(*c*|*x*) where *x* is a vector containing
     the features and *c* is some class. As in the die example, we
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到我们的问题。我们想要计算 *p*(*c*|*x*)，其中 *x* 是包含特征的向量， *c* 是某个类别。就像骰子例子中一样，我们
 - en: need a lot of data points,
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 需要大量的数据点，
 - en: filter out the ones with features *x *and
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过滤掉特征为 *x* 的数据点
 - en: check how often these data points belong to class *c*.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 检查这些数据点属于类别*c*的频率。
 - en: The relative frequency is our guess for the probability *p*(*c*|*x*).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 相对频率是我们对概率 *p*(*c*|*x*) 的猜测。
 - en: Do you see the problem here?
+  id: totrans-31
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 你看到这里的问题了吗？
 - en: '**Usually, we don’t have many data points with the same features.** Often only
     one, maybe two. For example, imagine a dataset with two features: the height (in
     cm) and the weight (in kg) of persons. The labels are *male* or *female*. Thus, *x=*(*x*?, *x*?)
     where *x*? is the height and *x*? is the weight, and *c* can take the values male
     and female. Let us look at some dummy data:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**通常，我们没有很多具有相同特征的数据点。** 经常只有一个，可能两个。例如，想象一个数据集，其中包含两个特征：人的身高（以厘米为单位）和体重（以公斤为单位）。标签为*男性*或*女性*。因此，*x=*(*x*？，
+    *x*？) 其中 *x*？是身高， *x*？是体重，*c* 可以取值为男性和女性。我们来看一些虚拟数据：'
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/1302b46785fe121717ca1c386938eb79.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建一个 k-最近邻分类器](../Images/1302b46785fe121717ca1c386938eb79.png)'
 - en: Image by the Author.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片。
 - en: Since these two features are continuous, the probability of having two, let
     alone several hundred, data points is negligible.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这两个特征是连续的，拥有两个数据点，更不用说几个数据点的概率是微不足道的。
 - en: '**Another problem:** what happens if we want to predict the gender for a data
     point with features we have never seen before, such as (190.1, 85.2)? That is
     what prediction is actually all about. That’s why this naive approach does not
     work. What the *k*-nearest neighbor algorithm does instead is the following:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**另一个问题：** 如果我们想预测一个具有我们从未见过的特征的数据点的性别，比如 (190.1, 85.2)，会发生什么？这就是预测的实际意义。这就是为什么这种简单的方法不起作用。*k*-最近邻算法的做法如下：'
 - en: It tries to approximate the probability *p*(*c*|*x*) not with data points that
     have **exactly** the features *x,* but with data points with features close to *x*.
+  id: totrans-37
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 它尝试通过具有接近 *x* 特征的数据点来逼近概率 *p*(*c*|*x*)，而不是具有**完全相同**特征的数据点。
 - en: '**It is less strict, in a sense.** Instead of waiting for a lot of persons
     with height=182.4 and weight=92.6, and checking their gender, *k*-nearest neighbors
     allows considering people *close* to having these characteristics. The *k* in
     the algorithm is the number of people we consider, it is a *hyperparameter*.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在某种意义上，这不那么严格。** 与其等待许多身高=182.4和体重=92.6的人并检查他们的性别，*k*-最近邻允许考虑*接近*这些特征的人。算法中的
+    *k* 是我们考虑的人数，它是一个*超参数*。'
 - en: These are parameters that we or a hyperparameter optimization algorithm such
     as grid search have to choose. They are not directly optimized by the learning
     algorithm.
+  id: totrans-39
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这些是我们或类似网格搜索的超参数优化算法需要选择的参数。它们不是由学习算法直接优化的。
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/e1fe20c23528526a64dddeaa28fec6e0.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建 k 最近邻分类器](../Images/e1fe20c23528526a64dddeaa28fec6e0.png)'
 - en: Image by the Author.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: The Algorithm
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 算法
 - en: We have everything we need now to describe the algorithm.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经拥有描述算法所需的一切。
 - en: '**Training:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练：**'
 - en: '**Organize** the training data in some way. During prediction time, this order
     should make it possible to give us the *k* closest points for any given data point *x*.'
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**组织**训练数据。预测时，这种顺序应该使我们能够为任何给定的数据点*x*提供*k*个最近点。'
 - en: That’s it already! ????
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 就这样了！????
 - en: '**Prediction:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**预测：**'
 - en: For a new data point *x*, find the *k* **closest neighbors** in the organized
     training data.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于一个新的数据点*x*，在组织好的训练数据中找到*k*个**最近邻**。
 - en: '**Aggregate** the labels of these *k* neighbors.'
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**汇总**这些*k*个邻居的标签。'
 - en: Output the label/probabilities.
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 输出标签/概率。
 - en: We can’t implement this so far, because there are a lot of blanks we have to
     fill in.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们目前还无法实现这一点，因为我们需要填补很多空白。
 - en: What does organizing mean?
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 组织意味着什么？
 - en: How do we measure proximity?
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们如何衡量接近度？
 - en: How to aggregate?
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何汇总？
 - en: 'Besides the value for *k*, these are all things we can choose, and different
     decisions give us different algorithms. Let’s make it easy and answer the questions
     as follows:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了*k*的值，这些都是我们可以选择的东西，不同的决策会给我们不同的算法。让我们简单一点，按以下方式回答问题：
 - en: Organizing = just save the training dataset as it is
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 组织 = 只是按原样保存训练数据集
 - en: Proximity = Euclidean distance
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接近度 = 欧几里得距离
 - en: Aggregation = Averaging
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 汇总 = 平均
 - en: This calls for an example. Let us check the picture with the person data again.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这需要一个示例。让我们再看看包含个人数据的图片。
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/34e027df8209b2c1c7f0f222a6dc59e4.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建 k 最近邻分类器](../Images/34e027df8209b2c1c7f0f222a6dc59e4.png)'
 - en: We can see that the *k*=5 closest data points to the black one have 4 male labels
     and one female label. So we could output that the person belonging to the black
     point is, in fact, 4/5=80% male and 1/5=20% female. If we prefer a single class
     as output, we would return male. No problem!
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，离黑点最近的*k*=5个数据点有4个男性标签和1个女性标签。所以我们可以输出黑点对应的人实际上是4/5=80%男性和1/5=20%女性。如果我们希望单一类别作为输出，我们将返回男性。没问题！
 - en: Now, let us implement it.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们实现它。
 - en: Implementation
+  id: totrans-63
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实现
 - en: The hardest part is to find the nearest neighbors to a point.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 最困难的部分是找到一个点的最近邻。
 - en: A quick primer
+  id: totrans-65
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 简要入门
 - en: Let us do a small example of how you can do this in Python. We start with
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们做一个小示例，展示如何在 Python 中实现这一点。我们从
 - en: '[PRE0]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/41908a9b680f91b82e59ea679196a47e.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建 k 最近邻分类器](../Images/41908a9b680f91b82e59ea679196a47e.png)'
 - en: Image by the Author.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: We have created a small dataset consisting of four data points, as well as another
     point. Which are the closest points? And should the new point have the label 0
     or 1? Let us find out. Typing in
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们创建了一个由四个数据点以及另一个点组成的小数据集。哪个点是最近的？新点应该有标签0还是1？让我们找出答案。输入
 - en: '[PRE1]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: gives us the four values distances=[4, 4, 1, 5], which is the **squared** Euclidean
     distance from `new_point` to all other points in `features` . Sweet! We can see
     that point number three is the closest, followed by points number one and two.
     The fourth point is furthest away.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 给我们四个值 `distances=[4, 4, 1, 5]`，这就是从`new_point`到`features`中所有其他点的**平方**欧几里得距离。太棒了！我们可以看到点编号三是最近的，其次是点编号一和二。第四个点是最远的。
 - en: How can we extract the closest points now from the array [4, 4, 1, 5]? A `distances.argsort()` helps.
     The result is [2, 0, 1, 3] which tells us that the data point with index 2 is
     the smallest (out point number three), then the point with index 0, then with
     index 1, and finally the point with index 3 is the largest.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们如何从数组 [4, 4, 1, 5] 中提取最近的点？`distances.argsort()` 帮助我们。结果是 [2, 0, 1, 3]，这告诉我们索引为
+    2 的数据点最小（即点编号三），接着是索引为 0 的点，然后是索引为 1 的点，最后是索引为 3 的点最大。
 - en: Note that `argsort` put the first 4 in `distances` before the second 4\. Depending
     on the sorting algorithm, this could also be the other way around, but let’s not
     go into these details for this introductory article.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，`argsort`将`distances`中的前4个排在第二个4之前。根据排序算法的不同，这也可能是相反的，但在这篇介绍文章中我们不深入这些细节。
 - en: How if we want the three closest neighbors, for example, we could get them via
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们想要三个最近邻，例如，我们可以通过以下方式获得它们
 - en: '[PRE2]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: and the labels correspond to these closest points via
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签对应于这些最近点，通过
 - en: '[PRE3]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We get [1, 0, 0], where 1 is the label of the closest point to (1, 4), and the
     zeroes are the labels belonging to the next two closest points.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到[1, 0, 0]，其中1是最接近(1, 4)的点的标签，零是属于接下来的两个最近点的标签。
 - en: That’s all we need, let’s get to the real deal.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们需要的一切，让我们进入正题。
 - en: The final Code
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 最终代码
 - en: You should be quite familiar with the code. The only new function is `np.bincount` which
     counts the occurrences of the labels. Note that I implemented a `predict_proba` method
     first to compute probabilities. The method `predict` just calls this method and
     returns the index (=class) with the highest probability using an `argmax`function.
     The class awaits classes from 0 to *C*-1, where *C* is the number of classes.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该对代码很熟悉。唯一的新函数是`np.bincount`，用于计算标签的出现次数。请注意，我首先实现了`predict_proba`方法来计算概率。`predict`方法只是调用这个方法，并使用`argmax`函数返回概率最高的索引（即类别）。该类接受从0到*C*-1的类别，其中*C*是类别的数量。
 - en: '**Disclaimer:** This code is not optimized, it only serves an educational purpose.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**免责声明：** 这段代码并未经过优化，仅用于教育目的。'
 - en: '[PRE4]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And that’s it! We can do a small test and see if it agrees with the scikit-learn *k*-nearest
     neighbor classifier.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样！我们可以做一个小测试，看看它是否与scikit-learn的*k*-最近邻分类器一致。
 - en: Testing the Code
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 测试代码
 - en: Let us create another small dataset for testing.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们创建另一个小数据集进行测试。
 - en: '[PRE5]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'It looks like this:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 它看起来是这样的：
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/a0cae9fde0a784977f82d7fa65069e57.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建一个k-最近邻分类器](../Images/a0cae9fde0a784977f82d7fa65069e57.png)'
 - en: Image by the Author.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: Using our classifier with *k *= 3
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用我们的分类器，*k*=3
 - en: '[PRE6]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: we get
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到
 - en: '[PRE7]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '**Read the output as follows: **The first point is 100% belonging to class
     1 the second point lies in each class equally with 33%, and the third point is
     about 67% class 2 and 33% class 3.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**按以下方式读取输出：** 第一个点100%属于类别1，第二个点在每个类别中均为33%，第三个点大约67%属于类别2和33%属于类别3。'
 - en: If you want concrete labels, try
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想要具体的标签，可以尝试
 - en: '[PRE8]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: which outputs [0, 0, 1]. Note that in the case of a tie, the model as we implemented
     it outputs the lower class, that’s why the point (0, 5) gets classified as belonging
     to class 0.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出为[0, 0, 1]。注意，在出现平局的情况下，我们实现的模型输出的是较低的类别，因此点(0, 5)被分类为类别0。
 - en: If you check the picture, it makes sense. But let’s reassure ourselves with
     the help of scikit-learn.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你查看这张图片，它是有意义的。但让我们借助scikit-learn来确认一下。
 - en: '[PRE9]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The result:'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果：
 - en: '[PRE10]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Phew! Everything looks good. Let us check the decision boundaries of the algorithm,
     just because it’s pretty.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 呼！一切看起来都很好。让我们检查一下算法的决策边界，只是因为它很好看。
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/f810d3b226d2e92e4e86383316bf5cb0.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建一个k-最近邻分类器](../Images/f810d3b226d2e92e4e86383316bf5cb0.png)'
 - en: Image by the Author.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: Again, the top black point is not 100% blue. It’s 33% blue, red and yellow,
     but the algorithm decides deterministically for the lowest class, which is blue.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次说明，顶部黑点并非100%为蓝色。它是33%蓝色、红色和黄色，但算法决定性地选择最低类别，即蓝色。
 - en: We can also check the decision boundaries for different values of *k*.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以检查不同*k*值的决策边界。
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/17d410874d49ad049e585e5aa428e780.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建一个k-最近邻分类器](../Images/17d410874d49ad049e585e5aa428e780.png)'
 - en: Image by the Author.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: 'Note that the blue region gets bigger in the end, because of this preferential
     treatment of this class. We can also see that for *k*=1 the boundaries are a mess:
     the model is **overfitting**. On the other side of the extreme, *k* is as large
@@ -448,113 +679,161 @@
     Thus, each data point gets the same prediction: the majority class. The model
     is **underfitting** in this case. The sweet spot is somewhere in between and can
     be found using hyperparameter optimization techniques.'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，最终蓝色区域变大，因为该类别受到优待。我们还可以看到，对于*k*=1时，边界非常混乱：模型**过拟合**。另一方面，当*k*与数据集大小相等时，所有点都用于聚合步骤。因此，每个数据点得到相同的预测：多数类别。在这种情况下，模型**欠拟合**。最佳点在两者之间，并可以通过超参数优化技术找到。
 - en: Before we get to the end, let us see which problems this algorithm has.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 在结束之前，让我们看看这个算法有哪些问题。
 - en: Drawbacks of k-Nearest Neighbors
+  id: totrans-113
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: k-最近邻的缺点
 - en: 'The problems are as follows:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题如下：
 - en: Finding the nearest neighbors takes a lot of time, especially with our naive
     implementation. If we want to predict the class of a new data point, we have to
     check it against every other point in our dataset, which is slow. There are better
     ways to organize the data using advanced data structures, but the problem still
     persists.
+  id: totrans-115
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找最近邻需要很多时间，尤其是使用我们简单的实现时。如果我们想预测新数据点的类别，就必须将其与数据集中每一个点进行比较，这很慢。有更好的方式来组织数据，使用高级数据结构，但问题仍然存在。
 - en: 'Following problem number 1: Usually, you train models on faster, stronger computers
     and can deploy the model on weaker machines afterward. Think about deep learning,
     for example. But for *k*-nearest neighbors, the training time is easy and the
     heavy work is done during prediction time, which is not what we want.'
+  id: totrans-116
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 问题 1 的后续：通常，你在更快、更强大的计算机上训练模型，然后将模型部署到较弱的机器上。例如，深度学习就是这样。但对于*k*-最近邻，训练时间很短，重的工作在预测时完成，这不是我们想要的。
 - en: What happens if the nearest neighbors are not close at all? Then they don’t
     mean anything. This can already happen in datasets with a small number of features,
     but with even more features the chance of encountering this problem increases
     drastically. This is also what people refer to as the curse of dimensionality.
     A nice visualization can be found in [this post of Cassie Kozyrkov](https://towardsdatascience.com/the-curse-of-dimensionality-minus-the-curse-of-jargon-520da109fc87).
+  id: totrans-117
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果最近邻完全不接近会发生什么？那它们就没有意义了。这在特征数量较少的数据集中就可能发生，但特征更多时遇到这个问题的机会会急剧增加。这也被称为维度诅咒。可以在[this
+    post of Cassie Kozyrkov](https://towardsdatascience.com/the-curse-of-dimensionality-minus-the-curse-of-jargon-520da109fc87)中找到很好的可视化。
 - en: '![From Theory to Practice: Building a k-Nearest Neighbors Classifier](../Images/836b112f026ada91e568cc1fbe1bbc5d.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![从理论到实践：构建一个 k-最近邻分类器](../Images/836b112f026ada91e568cc1fbe1bbc5d.png)'
 - en: Especially because of problem 2, you don’t see the *k*-nearest neighbor classifier
     in the wild too often. It’s still a nice algorithm you should know, and you can
     also use it for small datasets, nothing wrong with that. But if you have millions
     of data points with thousands of features, things get rough.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 特别是因为问题 2，你在实际应用中不常见到*k*-最近邻分类器。它仍然是一个你应该了解的不错算法，你也可以用于小数据集，这没有问题。但如果你有数百万个数据点和数千个特征，情况就会很严峻。
 - en: Conclusion
+  id: totrans-120
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, we discussed how the *k*-nearest neighbor classifier works
     and why its design makes sense. It tries to estimate the probability of a data
     point *x* belonging to a class *c* as well as possible using the closest data
     points to *x*. It is a very natural approach, and therefore this algorithm is
     usually taught at the beginning of machine learning courses.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们讨论了*k*-最近邻分类器如何工作以及它的设计为什么有意义。它尝试使用离*x*最近的数据点尽可能准确地估计数据点*x*属于类别*c*的概率。这是一种非常自然的方法，因此这个算法通常在机器学习课程开始时教授。
 - en: Note that it is really simple to build a *k*-nearest neighbor **regressor**,
     too. Instead of counting occurrences of classes, just average the labels of the
     nearest neighbors to get a prediction. You could implement this on your own, it’s
     just a small change!
+  id: totrans-122
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 请注意，构建一个*k*-最近邻**回归器**也非常简单。与计算类别的出现次数不同，只需对最近邻的标签取平均值即可获得预测结果。你可以自己实现这个，改动很小！
 - en: We then implemented it in a straightforward way, mimicking the scikit-learn
     API. This means that you can also use this estimator in scikit-learn’s pipelines
     and grid searches. This is a great benefit since we even have the hyperparameter *k* that
     you can optimize using grid search, random search, or Bayesian optimization.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们以一种直接的方式实现了它，模仿了 scikit-learn 的 API。这意味着你也可以在 scikit-learn 的管道和网格搜索中使用这个估计器。这是一个很大的好处，因为我们甚至有超参数*k*，你可以使用网格搜索、随机搜索或贝叶斯优化来优化。
 - en: However, this algorithm has some serious issues. It is not suitable for large
     datasets and it can’t be deployed on weaker machines for making predictions. Together
     with the susceptibility to the curse of dimensionality, it is an algorithm that
     is theoretically nice but can only be used for smaller data sets.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这个算法存在一些严重的问题。它不适用于大型数据集，且无法在较弱的机器上进行预测。再加上对维度诅咒的敏感性，它是一个理论上不错但仅适用于较小数据集的算法。
 - en: '**[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** is a Data
     Scientist at METRO.digital and Author at Towards Data Science.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[罗伯特·库布勒博士](https://www.linkedin.com/in/robert-kuebler/)** 是 METRO.digital
+    的数据科学家和 Towards Data Science 的作者。'
 - en: '[Original](https://towardsdatascience.com/understanding-by-implementing-k-nearest-neighbors-469d6f84b8a9).
     Reposted with permission.'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/understanding-by-implementing-k-nearest-neighbors-469d6f84b8a9)。转载已获许可。'
 - en: More On This Topic
+  id: totrans-127
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类的最近邻算法](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
 - en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Scikit-learn中的K近邻算法](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
 - en: '[Data Visualization: Theory and Techniques](https://www.kdnuggets.com/data-visualization-theory-and-techniques)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据可视化：理论与技术](https://www.kdnuggets.com/data-visualization-theory-and-techniques)'
 - en: '[Statistics in Data Science: Theory and Overview](https://www.kdnuggets.com/statistics-in-data-science-theory-and-overview)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的统计学：理论与概述](https://www.kdnuggets.com/statistics-in-data-science-theory-and-overview)'
 - en: '[Understanding Supervised Learning: Theory and Overview](https://www.kdnuggets.com/understanding-supervised-learning-theory-and-overview)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解监督学习：理论与概述](https://www.kdnuggets.com/understanding-supervised-learning-theory-and-overview)'
 - en: '[Machine Learning Evaluation Metrics: Theory and Overview](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习评估指标：理论与概述](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)'
