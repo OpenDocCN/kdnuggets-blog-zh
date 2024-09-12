@@ -1,46 +1,68 @@
 - en: Deployment of Machine learning models using Flask
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Flask 部署机器学习模型
 - en: 原文：[https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)
 - en: Sponsored Post.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 赞助帖子。
 - en: So, till now, we developed many data science models, produced forecasts on the
     testing data, and checked results offline. In the real world, creating predictions
     is only a part of your data science project. Let us consider a CPU/GPU using ML
     to detect spam text messages. A Naïve Bayes classifier is trained on CPU/GPU with
     spam and non-spam text messages. The trained model is deployed as a service on
     the web to general public or users.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们已经开发了许多数据科学模型，对测试数据进行了预测，并离线检查了结果。在现实世界中，生成预测只是数据科学项目的一部分。让我们考虑一个使用
+    CPU/GPU 的机器学习来检测垃圾短信的情况。一个朴素贝叶斯分类器在 CPU/GPU 上用垃圾短信和非垃圾短信进行训练。训练好的模型作为服务部署到网上，供大众或用户使用。
 - en: This blog will explain us about the basics of deploying a machine learning algorithm.
     In this blog, we will focus on developing a Naïve Bayes model for spam message
     identification, and use Flask (Flask is a web service development microframework
     in python.) to create an API for model. API allows us to make use of classifying
     abilities of the algorithm via HTTP requests.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客将向我们解释机器学习算法部署的基本知识。在本博客中，我们将专注于开发一个用于垃圾短信识别的朴素贝叶斯模型，并使用 Flask（Flask 是一个
+    Python 的 Web 服务开发微框架）为模型创建 API。API 允许我们通过 HTTP 请求利用算法的分类能力。
 - en: Flask is based on 2 components, WSGI (web server gateway interface) toolkit
     and Jinja2 template. WSGI is used for web applications and Jinja2 provides web
     pages. Flask is always used for bigger size machine learning projects. Flask can
     be used to build REST applications, email services, chat applications etc.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: Flask 基于 2 个组件：WSGI（Web 服务器网关接口）工具包和 Jinja2 模板。WSGI 用于 Web 应用程序，Jinja2 提供网页。Flask
+    总是用于较大规模的机器学习项目。Flask 可用于构建 REST 应用程序、电子邮件服务、聊天应用等。
 - en: Here We Go!
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 开始吧！
 - en: '**For More Information related to [Data Science Course](https://www.excelr.com/data-science-course-training-in-bangalore)
     in Bangalore Follow us @ExcelR**'
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**有关 [数据科学课程](https://www.excelr.com/data-science-course-training-in-bangalore)
+    的更多信息，请关注我们 @ExcelR**'
 - en: '**Step 1:**'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 1 步：**'
 - en: First, we will use a dataset (messages.csv) to build a classifying model that
     will accurately identify which texts are spam. [The classifier model works on
     bag of word features to identify spam email](https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering).
@@ -48,28 +70,41 @@
     reducing time to retrain. To accomplish it, we save our model as a.pkl file for
     future use. This is a pickle file which is a native python library to save and
     load python objects files.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将使用一个数据集（messages.csv）来构建一个分类模型，该模型将准确识别哪些文本是垃圾信息。[该分类器模型基于词袋特征来识别垃圾邮件](https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering)。一旦我们训练好模型，建议保存该模型以便将来使用，从而减少重新训练的时间。为此，我们将模型保存为.pkl
+    文件以备将来使用。这是一个 pickle 文件，是用于保存和加载 Python 对象文件的原生 Python 库。
 - en: '![Figure](../Images/5fda73b0870dc601a816120d9d068ac5.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5fda73b0870dc601a816120d9d068ac5.png)'
 - en: '**Step 2:**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 2 步：**'
 - en: Next step, we will have to develop a web application with a user-friendly web
     page consisting a form field for user input. After entering the user defined message
     into the web application, it will relay the message to be spam or not on a result
     page.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步，我们需要开发一个具有用户友好界面的 Web 应用程序，界面上包含一个用于用户输入的表单字段。在将用户定义的消息输入到 Web 应用程序后，它将把消息传递到结果页面，显示是否为垃圾信息。
 - en: '**Step 3:**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 3 步：**'
 - en: For developing a web application, we create a folder for this project called Spam
     Identifier on your desktop, make sure you make a directory of files within this.
     The directory branch inside folder will look like
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了开发 Web 应用程序，我们在桌面上创建一个名为 Spam Identifier 的项目文件夹，确保在其中创建文件目录。文件夹中的目录结构将如下所示：
 - en: '[PRE0] [PRE1]py      **Step 4:**    Check if this app.py file has the source
     code to be executed by the Python which runs the Flask web application, it should
     include the ML program developed (.pkl file) for classifying spam messages. This
@@ -78,5 +113,8 @@
     module to initialize a new flask instance with the argument __name__, this will
     help flask to find the html files folder (containing html files) in the same folder
     (Spam Identifier).   [PRE2]`'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE0] [PRE1]py      **步骤 4：**    检查这个`app.py`文件是否包含用于执行Flask网络应用程序的Python源代码，它应该包括用于分类垃圾信息的ML程序（.pkl文件）。此文件是链接到HTML文件和调用模型的API，以显示用户定义输入的输出。     
+    **步骤 5：**    然后将应用程序作为一个模块运行，以使用参数`__name__`初始化一个新的Flask实例，这将帮助Flask在同一文件夹（垃圾识别器）中找到HTML文件夹（包含HTML文件）。   [PRE2]'
