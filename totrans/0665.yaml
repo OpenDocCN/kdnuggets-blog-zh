@@ -1,21 +1,31 @@
 - en: Pedestrian Detection in Aerial Images Using RetinaNet
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 《使用 RetinaNet 进行航拍图像中的行人检测》
 - en: 原文：[https://www.kdnuggets.com/2019/03/pedestrian-detection-aerial-images-retinanet.html](https://www.kdnuggets.com/2019/03/pedestrian-detection-aerial-images-retinanet.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/pedestrian-detection-aerial-images-retinanet.html](https://www.kdnuggets.com/2019/03/pedestrian-detection-aerial-images-retinanet.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Priyanka Kochhar](https://github.com/priya-dwivedi), Deep Learning Consultant**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Priyanka Kochhar](https://github.com/priya-dwivedi)，深度学习顾问**'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Object Detection in Aerial Images is a challenging and interesting problem.
     With the cost of drones decreasing, there is a surge in amount of aerial data
     being generated. It will be very useful to have models that can extract valuable
@@ -27,41 +37,64 @@
     harder to detect. I have read several blogs of object detection on aerial images
     or cars/planes but there are only a few links for pedestrian detection aerially
     which is especially challenging.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 航拍图像中的物体检测是一个具有挑战性且有趣的问题。随着无人机成本的降低，生成的航拍数据量激增。拥有能够从航拍数据中提取有价值信息的模型将非常有用。[RetinaNet](https://arxiv.org/abs/1708.02002)
+    是最著名的单阶段检测器，在这篇博客中，我想测试它在来自 [斯坦福无人机数据集](http://cvgl.stanford.edu/projects/uav_data/)
+    的行人和骑车人的航拍图像上的表现。见下图。这是一个具有挑战性的问题，因为大多数物体宽度只有几个像素，有些物体被遮挡，而阴影中的物体更难检测。我阅读了几篇关于航拍图像中物体检测的博客，特别是在行人检测方面的链接较少，这尤其具有挑战性。
 - en: '![figure-name](../Images/e306cf2a57f5516f04eff71360826911.png)Aerial Images
     from Stanford drone dataset — Pedestrians in pink and Bikers in red'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/e306cf2a57f5516f04eff71360826911.png)斯坦福无人机数据集中的航拍图像 — 行人用粉色标记，骑车人用红色标记'
 - en: '* * *'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 部门'
 - en: '* * *'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Retina Net
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: RetinaNet
 - en: '[RetinaNet](https://arxiv.org/abs/1708.02002) is a single stage detector that
     uses Feature Pyramid Network (FPN) and Focal loss for training. [Feature pyramid
     network](https://medium.com/@jonathan_hui/understanding-feature-pyramid-networks-for-object-detection-fpn-45b227b9106c)
@@ -70,8 +103,11 @@
     semantically weak features via a top-down pathway and lateral connections. The
     net result is that it produces feature maps of different scale on multiple levels
     in the network which helps with both classifier and regressor networks.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[RetinaNet](https://arxiv.org/abs/1708.02002) 是一种单阶段检测器，使用特征金字塔网络 (FPN) 和焦点损失进行训练。[特征金字塔网络](https://medium.com/@jonathan_hui/understanding-feature-pyramid-networks-for-object-detection-fpn-45b227b9106c)
+    是一种用于多尺度物体检测的结构，介绍于这篇 [论文](https://arxiv.org/abs/1612.03144) 中。它通过自上而下的路径和横向连接将低分辨率、语义强的特征与高分辨率、语义弱的特征结合在一起。最终结果是，它在网络的多个层次上生成不同尺度的特征图，这有助于分类器和回归器网络。'
 - en: The Focal Loss is designed to address the single-stage object detection problems
     with the imbalance where there is a very large number of possible background classes
     and just a few foreground classes. This causes training to be inefficient as most
@@ -79,67 +115,96 @@
     amount of these negative examples overwhelm the training and reduces model performance.
     Focal loss is based on cross entropy loss as shown below and by adjusting the
     gamma parameter, we can reduce the loss contribution from well classified examples.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Focal Loss旨在解决单阶段目标检测问题中的不平衡问题，在这种问题中，背景类别的数量非常大，而前景类别则很少。这导致训练效率低下，因为大多数位置都是容易的负例，不提供有用的信号，而这些大量的负例会淹没训练并降低模型性能。Focal
+    Loss基于交叉熵损失，如下所示，通过调整gamma参数，我们可以减少来自已分类示例的损失贡献。
 - en: '![Focal Loss Explanation](../Images/0ecbff8b100cabc7535fcd410c6a6b9c.png)Focal
     Loss Explanation'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Focal Loss解释](../Images/0ecbff8b100cabc7535fcd410c6a6b9c.png)Focal Loss解释'
 - en: In this blog, I want to talk about how to train a RetinaNet model on Keras.
     I haven’t done enough justice to the theory behind RetinaNet. I used this [link](https://medium.com/@14prakash/the-intuition-behind-retinanet-eb636755607d)
     to understand the model and would highly recommend it. My first trained model
     worked quite well in detecting objects aerially as shown in the video below. I
     have also open sourced the code on my [Github link](https://github.com/priya-dwivedi/keras_retinanet_cs230).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个博客中，我想谈谈如何在Keras上训练一个RetinaNet模型。我没有充分阐述RetinaNet背后的理论。我使用了这个[链接](https://medium.com/@14prakash/the-intuition-behind-retinanet-eb636755607d)来了解该模型，并强烈推荐它。我的第一个训练模型在检测目标方面表现很好，如下面的视频所示。我还在我的[Github链接](https://github.com/priya-dwivedi/keras_retinanet_cs230)上开源了代码。
 - en: '![Retina Net on Aerial Images of pedestrians and bikers](../Images/4e8095d921b682922a0ad9255be899a8.png)Retina
     Net on Aerial Images of pedestrians and bikers'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Retina Net在人和骑车人的航空图像上的效果](../Images/4e8095d921b682922a0ad9255be899a8.png)Retina
+    Net在人和骑车人的航空图像上的效果'
 - en: Stanford Drone DataSet
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 斯坦福无人机数据集
 - en: '[Stanford Drone Data](http://cvgl.stanford.edu/projects/uav_data/) is a massive
     data set of aerial images collected by drone over the Stanford campus. The data
     set is ideal for object detection and tracking problems. It contains about 60
     aerial videos. For each video we have bounding box coordinates for the 6 classes — “Pedestrian”,
     “Biker”, “Skateboarder”, “Cart”, “Car” and “ Bus”. The data set is very rich in
     pedestrians and bikers with these 2 classes covering about 85%-95% of the annotations.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[斯坦福无人机数据集](http://cvgl.stanford.edu/projects/uav_data/)是一个由无人机在斯坦福校园上空收集的大量航空图像数据集。该数据集非常适合用于目标检测和跟踪问题。它包含约60个航空视频。每个视频都有6个类别的边界框坐标——“行人”、“骑车人”、“滑板车手”、“推车”、“汽车”和“公交车”。该数据集在人和骑车人方面非常丰富，这两个类别覆盖了约85%-95%的标注。'
 - en: Training a RetinaNet in Keras on Stanford Drone Data Set
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在斯坦福无人机数据集上训练RetinaNet
 - en: To train the Retina Net, I used [this implementation](https://github.com/fizyr/keras-retinanet)
     in Keras. It is very well documented and works without bugs. Thanks a lot to Fizyr
     for open sourcing their implementation!
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了训练Retina Net，我使用了[Keras中的这个实现](https://github.com/fizyr/keras-retinanet)。它文档齐全且没有错误。非常感谢Fizyr开源他们的实现！
 - en: 'The main steps I followed were:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我遵循的主要步骤是：
 - en: Selecting a sample of images from the massive stanford drone data set for building
     the model. I took about 2200 training images with 30,000+ annoations and kept
     around 1000 images for validation. I have put my image data set on google drive
     [here](https://drive.google.com/drive/u/0/folders/1bLt6KK_9zKogJdvW-lKh9BnBKgFfvPp9)
     for anyone interested in skipping this step.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从庞大的斯坦福无人机数据集中选择样本图像以构建模型。我取了大约2200张训练图像，带有30,000+个标注，并保留了大约1000张图像用于验证。我已经将我的图像数据集上传到Google
+    Drive [这里](https://drive.google.com/drive/u/0/folders/1bLt6KK_9zKogJdvW-lKh9BnBKgFfvPp9)，供有兴趣跳过这一步的人使用。
 - en: Generating annotations in the format required for Retina Net. Retina Net requires
     all annotations to be in the format.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成Retina Net所需格式的标注。Retina Net要求所有标注都符合该格式。
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: I converted Stanford annotations in this format and my train and validation
     annotations are uploaded to my [Github](https://github.com/priya-dwivedi/keras_retinanet_cs230).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将斯坦福标注转换为这种格式，我的训练和验证标注已上传到我的[Github](https://github.com/priya-dwivedi/keras_retinanet_cs230)。
 - en: 'Adjusting the anchor sizes: The Retina Net has default anchor sizes of 32,
     64, 128, 256, 512\. These anchor sizes work well for most objects however since
     we are working on aerial images, some objects may be smaller than 32\. This repo
@@ -147,35 +212,52 @@
     annotations in green are covered by existing in anchors and those in red are ignored.
     As can been seen a good portion of annotations are too small for even the smallest
     anchor size.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调整锚点尺寸：Retina Net 的默认锚点尺寸为 32、64、128、256、512。这些锚点尺寸适用于大多数物体，但由于我们处理的是空中图像，一些物体可能小于
+    32。这些库提供了一个方便的工具来检查现有锚点是否足够。下图中绿色的注释被现有的锚点覆盖，红色的注释被忽略。如图所示，相当一部分注释对于最小的锚点尺寸来说仍然太小。
 - en: '![Retina Net with default anchors](../Images/c98c6ab4f9a5868945fe4322ac271246.png)Retina
     Net with default anchors'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '![使用默认锚点的 Retina Net](../Images/c98c6ab4f9a5868945fe4322ac271246.png)使用默认锚点的
+    Retina Net'
 - en: 'So I adjusted the anchors to drop the biggest one of 512 and instead add a
     small anchor of size 16\. This results in a noticeable improvement as shown below:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我调整了锚点，去掉了最大的 512 并添加了一个大小为 16 的小锚点。这带来了明显的改进，如下所示：
 - en: '![After adding a small anchor](../Images/dc6487dd52610a7c051381de4ba88d3a.png)After
     adding a small anchor'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '![添加一个小锚点后](../Images/dc6487dd52610a7c051381de4ba88d3a.png)添加一个小锚点后'
 - en: 'With all this we are ready to start training. I kept most other default parameters
     including the Resnet50 backbone and started training by:'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有了这些准备，我们已经可以开始训练了。我保留了大部分其他默认参数，包括 Resnet50 主干，并开始了训练：
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Here weights are the COCO weights that can be used to jump start training. The
     annotations for training and validation are the input data and config.ini has
     the updated anchor sizes. All the files are on my [Github repo](https://github.com/priya-dwivedi/keras_retinanet_cs230)
     too.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的权重是 COCO 权重，可以用于启动训练。训练和验证的注释是输入数据，config.ini 中有更新后的锚点尺寸。所有文件也在我的 [Github
+    仓库](https://github.com/priya-dwivedi/keras_retinanet_cs230) 中。
 - en: That’s it! The model is slow to train and I trained it overnight. I tested the
     accuracy of the trained model by checking for **mean average precision (MAP)**
     on the test set. As can be seen below the first trained model had a very good
@@ -183,105 +265,160 @@
     are easy to see aerially. The MAP on Biker class is low as this is often confused
     by pedestrian. I am currently working on further improving accuracy of the Biker
     class.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这些！模型训练速度较慢，我整晚都在训练。我通过检查测试集上的 **平均精度 (MAP)** 来测试训练模型的准确性。如下所示，第一个训练模型的 MAP
+    达到了 0.63，表现非常好。尤其在汽车和公交车类别上表现优异，因为这些类别在空中比较容易识别。Biker 类的 MAP 较低，因为它经常被行人混淆。我目前正在进一步提高
+    Biker 类的准确性。
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Conclusion
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Retina Net is a powerful model that uses Feature Pyramid Networks. It is able
     to detect objects aerially on a very challenging data set where object sizes are
     quite small. I was able to train a Retina Net with half a day of work. The first
     version of the trained model has pretty good performance. I am still exploring
     how to further adapt Retina Net architecture to have a higher accuracy in aerial
     detection. That will be covered in my next blog.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: Retina Net 是一个强大的模型，使用了特征金字塔网络。它能够在一个非常具有挑战性的数据集上进行空中物体检测，该数据集中的物体尺寸非常小。我在半天的工作时间内训练了一个
+    Retina Net。第一个版本的训练模型性能相当不错。我仍在探索如何进一步调整 Retina Net 架构，以提高空中检测的准确性。有关内容将在我的下一篇博客中介绍。
 - en: I hope you liked the blog and try training the model yourself too.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你喜欢这篇博客，也尝试自己训练模型。
 - en: I have my own deep learning consultancy and love to work on interesting problems.
     I have helped many startups deploy innovative AI based solutions. Check us out
     at — [http://deeplearninganalytics.org/](http://deeplearninganalytics.org/).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我有自己的深度学习咨询公司，喜欢处理有趣的问题。我帮助了许多初创公司部署创新的 AI 解决方案。请访问我们的 [网站](http://deeplearninganalytics.org/)
+    了解更多。
 - en: 'You can also see my other writings at: [http://deeplearninganalytics.org/blog](http://deeplearninganalytics.org/blog)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以查看我的其他文章： [http://deeplearninganalytics.org/blog](http://deeplearninganalytics.org/blog)
 - en: If you have a project that we can collaborate on, then please contact me through
     my website or at priya.toronto3@gmail.com
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有一个可以合作的项目，请通过我的网站或邮件 priya.toronto3@gmail.com 联系我。
 - en: References
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[Retina Net](https://medium.com/@14prakash/the-intuition-behind-retinanet-eb636755607d)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Retina Net](https://medium.com/@14prakash/the-intuition-behind-retinanet-eb636755607d)'
 - en: '[Stanford Drone Data Set](http://cvgl.stanford.edu/projects/uav_data/)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[斯坦福无人机数据集](http://cvgl.stanford.edu/projects/uav_data/)'
 - en: '[Retina Net Keras Implementation](https://github.com/fizyr/keras-retinanet)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Retina Net Keras 实现](https://github.com/fizyr/keras-retinanet)'
 - en: '**Bio: [Priyanka Kochhar](https://github.com/priya-dwivedi)** has been a data
     scientist for 10+ years. She now has her own deep learning consultancy and loves
     to work on interesting problems. She has helped several startups deploy innovative
     AI based solutions. If you have a project that she can collaborate on then please
     contact her at [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com)'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Priyanka Kochhar](https://github.com/priya-dwivedi)** 已有10年以上的数据科学经验。她现在拥有自己的深度学习咨询公司，并热衷于解决有趣的问题。她曾帮助多家初创公司部署创新的AI解决方案。如果你有一个可以合作的项目，请通过
+    [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com) 联系她。'
 - en: '[Original](https://towardsdatascience.com/pedestrian-detection-in-aerial-images-using-retinanet-9053e8a72c6).
     Reposted with permission.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原创](https://towardsdatascience.com/pedestrian-detection-in-aerial-images-using-retinanet-9053e8a72c6)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[People Tracking using Deep Learning](/2019/03/people-tracking-using-deep-learning.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用深度学习进行人员跟踪](/2019/03/people-tracking-using-deep-learning.html)'
 - en: '[Introduction to Deep Learning with Keras](/2018/10/introduction-deep-learning-keras.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 深度学习入门](/2018/10/introduction-deep-learning-keras.html)'
 - en: '[The Keras 4 Step Workflow](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 四步工作流程](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)'
 - en: More On This Topic
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 进行动作检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月17日：如何使用…进行动作检测](https://www.kdnuggets.com/2022/n33.html)'
 - en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中异常检测技术的初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
 - en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[功能数据中的密度核深度用于异常检测](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
 - en: '[Anomaly Detection in BigQuery: Uncover Hidden Insights and Drive Action](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BigQuery 中的异常检测：揭示隐藏的见解并推动行动](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
