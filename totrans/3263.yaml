@@ -1,14 +1,20 @@
 - en: 'Going deeper with recurrent networks: Sequence to Bag of Words Model'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 深入了解递归网络：序列到词袋模型
 - en: 原文：[https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html](https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html](https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html)
 - en: '**By Solomon Fung, [MarianaIQ](https://www.marianaiq.com/).**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由Solomon Fung, [MarianaIQ](https://www.marianaiq.com/)。**'
 - en: Until the last 5 years or so, it was infeasible to uncover topics and emotions
     across the web without powerful computing resources. Engineers didn’t have efficient
     methods to make sense of words and documents at a large scale. Now, with deep
@@ -17,36 +23,55 @@
     the vast data troves of the digital world can help us understand people more directly,
     going beyond the limitations of collecting data points through measurements and
     survey results. Here’s a glimpse into how we achieve this at MarianaIQ.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去五年左右之前，若没有强大的计算资源，很难在网络上揭示话题和情感。工程师们没有高效的方法来大规模地理解单词和文档。现在，借助深度学习，我们可以将非结构化文本转换为可计算的格式，有效地结合语义知识来训练机器学习模型。利用数字世界的庞大数据资源可以帮助我们更直接地理解人们，超越通过测量和调查结果收集数据点的局限。以下是我们在MarianaIQ如何实现这一目标的简要介绍。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Going deeper with recurrent networks**'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**深入了解递归网络**'
 - en: '**Recurrent neural network (RNN)** is a network containing neural layers that
     have a temporal feedback loop. A neuron in this layer receives the current inputs
     as well as its own outputs from the previous time-step. An RNN can operate across
@@ -56,20 +81,28 @@
     time-steps and computing the signals for the forward pass. During the backwards
     pass, the loss is back-propagated through time (BPTT) like a feed-forward network,
     except the parameters’ adjustments across the clones are shared.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**递归神经网络（RNN）** 是一种包含有时间反馈回路的神经层的网络。该层的一个神经元接收当前输入以及来自上一个时间步的输出。由于递归层在处理当前输入时“记住”之前的输入，RNN可以在输入序列中操作。当计算RNN网络时，软件会“展开”网络（如下所示），通过快速克隆RNN到所有时间步并计算前向传递的信号。在反向传递期间，损失通过时间进行反向传播（BPTT），类似于前馈网络，但参数的调整在克隆之间是共享的。'
 - en: '![](../Images/ace7189de7f2ded3e526319a2c9a5818.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ace7189de7f2ded3e526319a2c9a5818.png)'
 - en: '**Fig 1\. Recurrent Network Architecture**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图1. 递归网络架构**'
 - en: We use a sophisticated RNN called **Long Short-Term Memory (LSTM)⁷**, whose
     neurons include gated activations that act like inner switches for advanced memory
     capabilities. Another distinction for LSTMs is passing along a “hidden state”
     of activations to the next time-step, separate from its outputs.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用一种复杂的RNN，称为**长短期记忆（LSTM）⁷**，其神经元包括像内部开关的门控激活，具有高级记忆能力。LSTM的另一个特点是将“隐藏状态”传递到下一个时间步，与其输出分开。
 - en: With a dataset of product reviews, we could feed an RNN word-by-word and predict
     the rating with a softmax layer after receiving the final word. Another RNN application
     is a language model, where each input predicts the next input. Well-trained RNNs
@@ -77,47 +110,65 @@
     [Obama’s speeches](https://medium.com/@samim/obama-rnn-machine-generated-political-speeches-c8abd18a2ea0),
     [lines of computer code](https://github.com/tonybeltramelli/pix2code) or even
     [composing music](http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过产品评论数据集，我们可以逐词输入RNN，并在接收到最后一个词后使用softmax层预测评分。另一个RNN应用是语言模型，其中每个输入预测下一个输入。训练良好的RNN能够生成模仿[莎士比亚戏剧](http://karpathy.github.io/2015/05/21/rnn-effectiveness/)风格的文本，[奥巴马演讲](https://medium.com/@samim/obama-rnn-machine-generated-political-speeches-c8abd18a2ea0)，[计算机代码行](https://github.com/tonybeltramelli/pix2code)甚至是[音乐创作](http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/)。
 - en: '![](../Images/e38412451a37bf6df27037a59d9b4c99.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e38412451a37bf6df27037a59d9b4c99.png)'
 - en: '**Fig 2.Training an RNN to generate Shakespeare with word-by-word prediction**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图2. 训练RNN以逐词预测生成莎士比亚作品**'
 - en: Using dual RNNs to encode one language and decode to another language, we can
     train powerful and elegant **sequence-to-sequence** translation models (“seq2seq”
     learning)⁸. Much of Google Translate intelligence now relies on this technology.
     These RNNs work with one-hot input vectors or untrained/pre-trained embeddings,
     representing text either at a character level or word level.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用双RNN编码一种语言并解码到另一种语言，我们可以训练强大而优雅的**序列到序列**翻译模型（“seq2seq”学习）⁸。现在，谷歌翻译的智能大多依赖于这项技术。这些RNN可以处理一热编码输入向量或未经训练/预训练的嵌入，代表文本的字符级别或词汇级别。
 - en: '**Solving titles: Our Seq2BoW model**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决标题问题：我们的Seq2BoW模型**'
 - en: 'We can combine RNNs with Word2vec to map job titles to interests using a model
     we’ll call “Seq2BoW” (sequence to bag of words). The RNN learns to compose the
     embedding for any title from its word sequence, giving us two advantages:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将RNN与Word2vec结合，使用我们称之为“Seq2BoW”（序列到词袋）的模型将职位标题映射到兴趣上。RNN学习从词序列中构建任何标题的嵌入，这给我们带来了两个优势：
 - en: First, we no longer require a vocabulary list to exhaustively capture so many
     combinations of similar titles.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先，我们不再需要词汇表来详尽捕捉如此多的类似标题组合。
 - en: Second, the titles and interests exist in the same embedding space so we can
     query across the two vocabularies to see how they relate in meaning. Not only
     can we assess how similar titles are, we can find out why by contrasting their
     inferred interests.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其次，标题和兴趣存在于相同的嵌入空间中，因此我们可以跨这两个词汇表查询，以查看它们在意义上的关系。我们不仅可以评估标题的相似性，还可以通过对比推断出的兴趣了解原因。
 - en: The training set consists of job descriptions containing titles and extracted
     keywords. We use a new embedding layer for the title words (tokens) and feed these
     through an LSTM to compute a fixed title embedding. This new title embedding is
     trained to predict the interests occurring in the same description.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练集包括包含标题和提取关键词的职位描述。我们使用新的嵌入层处理标题词（标记），并通过LSTM计算固定的标题嵌入。这个新的标题嵌入被训练以预测在同一描述中出现的兴趣。
 - en: To do this, we use a **linear layer** to project the new title embedding onto
     the vector space for interests (pre-trained on our own corpus using Word2vec).
     A linear layer is a neural layer without a nonlinear activation, so it is merely
@@ -125,168 +176,243 @@
     We train the word predictions like Word2vec with positive and negative embeddings
     according to the keywords that appear in the job description for the associated
     title.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们使用**线性层**将新的标题嵌入投影到兴趣的向量空间中（在我们的语料库上使用Word2vec进行预训练）。线性层是一个没有非线性激活的神经层，因此它只是将LSTM输出线性转换到现有的兴趣向量空间。我们像Word2vec那样训练词预测，使用根据职位描述中出现的关键词生成的正负嵌入。
 - en: For speedup, we combined the dot products between the RNN projection and positive
     word and negative words together into the same training sample using a softmax
     layer for predicting only the positive word instead of training separate embedding
     pairs like in Word2vec.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了加速，我们将RNN投影与正面词和负面词之间的点积结合在同一训练样本中，使用softmax层仅预测正面词，而不是像Word2vec那样训练单独的嵌入对。
 - en: '![](../Images/67aa5ff2954a3f2062b0eefab46998e5.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/67aa5ff2954a3f2062b0eefab46998e5.png)'
 - en: '**Fig 3\. Training a title RNN (one positive and one negative sample)**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图3. 训练标题RNN（一个正样本和一个负样本）**'
 - en: We use [Keras](https://keras.io/) on the [Tensorflow](https://www.tensorflow.org/)
     backend. Running on an NVIDIA GPU gave us the computation power to blaze through
     10 million job descriptions in 15 minutes (32 wide RNN and 24 wide pre-trained
     interest word vectors). We can demonstrate the representational abilities of these
     vectors with a few examples below (all lists are computer “generated”).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用了[Keras](https://keras.io/)在[Tensorflow](https://www.tensorflow.org/)后端。运行在NVIDIA
+    GPU上，使我们能够在15分钟内处理1000万份职位描述（32宽RNN和24宽预训练兴趣词向量）。我们可以通过下面的一些例子展示这些向量的表征能力（所有列表均为计算机“生成”）。
 - en: 'Using our interest vocabulary trained with Word2vec, we can enter any interest
     keyword, look up its vector and find all the words belonging to the closest vectors:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用我们用Word2vec训练的兴趣词汇，我们可以输入任何兴趣关键词，查找其向量并找到所有属于最接近向量的词汇：
 - en: '**Marketing Content**: Content generation, Corporate blogging, Content syndication,
     Bylined articles, Social media strategy, Online content creation, Content curation,
     Content production'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**营销内容**：内容生成、企业博客、内容传播、署名文章、社交媒体策略、在线内容创作、内容策划、内容制作'
 - en: '**Juggling**: Roller skating, Ventriloquism, Circus arts, Unicycle, Street
     dance, Swing dance, Comedic timing, Acrobatics'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**杂技**：溜冰、腹语、马戏艺术、独轮车、街舞、摇摆舞、喜剧时间、杂技'
 - en: '**Brain Surgery**: Medical research, Neurocritical care, Skull base surgery,
     Endocrine surgery, Brain tumors, Medical education, Pediatric cardiology, Hepatobiliary
     surgery'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**脑外科**：医学研究、神经危重病护理、颅底外科、内分泌外科、脑肿瘤、医学教育、小儿心脏病学、肝胆外科'
 - en: 'With the Seq2BoW title model, we can find related interests, given any title:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用Seq2BoW标题模型，我们可以找到任何标题的相关兴趣：
 - en: '**Marketing Analytics:** Marketing mix modeling, Adobe insight, Lifetime value,
     Attribution modeling, Customer analysis, Spss clementine, Data segmentation, Spss
     modeler'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**营销分析**：营销组合建模、Adobe洞察、生命周期价值、归因建模、客户分析、Spss Clementine、数据细分、Spss Modeler'
 - en: '**Data Engineer**: Spark, Apache Pig, Hive, Pandas, Map Reduce, Apache Spark,
     Octave, Vertica'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据工程师**：Spark、Apache Pig、Hive、Pandas、Map Reduce、Apache Spark、Octave、Vertica'
 - en: '**Winemaker**: Viticulture, Winemaking, Wineries, Red wine, Wine tasting, Food
     pairing, Champagne, Beer'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**酿酒师**：葡萄种植学、酿酒、酒庄、红酒、品酒、食品搭配、香槟、啤酒'
 - en: 'We can create a separate title vocabulary by computing and storing the vectors
     for the most frequent titles. Then, we can query among these vectors to find related
     titles:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过计算和存储最频繁标题的向量来创建一个单独的标题词汇表。然后，我们可以在这些向量中查询以找到相关标题：
 - en: '**CEO**: Chairman, General Partner, Chief Executive, Coo, President, Founder/Ceo,
     President/Ceo, Board Member'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**首席执行官**：主席、总合伙人、首席执行官、首席运营官、总裁、创始人/首席执行官、总裁/首席执行官、董事会成员'
 - en: '**Dishwasher**: Crew Member, Crew, Kitchen Staff, Busser, Barback, Shift Leader,
     Carhop, Sandwich Artist'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**洗碗工**：工作人员、队员、厨房工作人员、餐具清理员、酒吧助手、班组长、送餐员、三明治艺术家'
 - en: '**Code Monkey:** Senior Software Development Engineer, Lead Software Developer,
     Senior Software Engineer II, Software Designer, Software Engineer III, Lead Software
     Engineer, Technical Principal, Lead Software Development Engineer'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**程序员**：高级软件开发工程师、首席软件开发人员、高级软件工程师II、软件设计师、软件工程师III、首席软件工程师、技术负责人、首席软件开发工程师'
 - en: 'We can also find titles near any interest:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以找到任何兴趣附近的标题：
 - en: '**Cold Calling**: Account management, Sales presentations, Direct sales, Sales
     process, Sales operations, Outside sales, Sales, Sales management'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**电话销售**：账户管理、销售演示、直接销售、销售流程、销售运营、外勤销售、销售、销售管理'
 - en: '**Baking**: Chef Instructor, Culinary Arts Instructor, Culinary Instructor,
     Baker, Head Baker, Pastry Chef, Pastry, Assistant Pastry Chef'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**烘焙**：厨师讲师、烹饪艺术讲师、烹饪讲师、面包师、首席面包师、糕点师、糕点、助理糕点师'
 - en: '**Neural Networks:** Senior Data Scientist, Principal Data Scientist, Machine
     Learning, Data Scientist, Algorithm Engineer, Quantitative Researcher, Research
     Programmer, Lead Scientist'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**神经网络**：高级数据科学家、首席数据科学家、机器学习、数据科学家、算法工程师、定量研究员、研究程序员、首席科学家'
 - en: We can extend beyond relating interests and titles and add various inputs or
     outputs to the Seq2BoW model. For example, we could consider company information,
     educational background, geographic location or other individual social and consumer
     insights and harness the flexibility of deep learning to understand how these
     relate.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以超越兴趣和标题的关系，向Seq2BoW模型中添加各种输入或输出。例如，我们可以考虑公司信息、教育背景、地理位置或其他个人社会和消费者见解，并利用深度学习的灵活性来理解这些如何相关。
 - en: '**Understanding text powers ABM at scale**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**理解文本在规模上推动ABM**'
 - en: The ABM intelligence used by MarianaIQ relies on powerful and concise representations
     of identity. We use Deep Learning to compute semantic embeddings for keywords
     and titles. To train useful machine learning models, we feed in unique labeled
     vectors of individuals and accounts, each containing attributes concatenated with
     our embeddings – a heterogeneous but harmonious combination of structured and
     unstructured data.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: MarianaIQ使用的ABM智能依赖于强大且简洁的身份表示。我们使用深度学习来计算关键词和标题的语义嵌入。为了训练有用的机器学习模型，我们输入独特的标记向量，每个向量包含与我们的嵌入相连接的属性——这是一种结构化和非结构化数据的异质但和谐的组合。
 - en: By learning from data collected across the web, **we avoid the narrower and
     biased perspective of traditional consultants.** We can quickly and accurately
     provide quantitative assessments such as deciding who will be more responsive
     to particular topics or identifying who looks more like a potential buyer. These
     analyses are only feasible through today’s machine learning, but they’re the secret
     sauce that allows ABM to function at scale for our customers.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过学习来自网络的数据，**我们避免了传统顾问的狭隘和偏见视角。** 我们可以快速准确地提供定量评估，例如决定谁对特定主题反应更快或识别谁更像潜在买家。这些分析只有通过今天的机器学习才可行，但它们是让ABM能够在大规模为我们的客户服务的秘诀。
 - en: '**Bio:** [Solomon Fung](https://www.marianaiq.com/company-team/sol/) has a
     variety of degrees to his name, a reflection of his diverse interests. A California
     resident since his master’s degree at Stanford, he originally hails from Canada.
     His current focus at MarianaIQ is big data – his algorithms are designed to help
     companies better understand and predict the behavior of individual consumers.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [所罗门·冯](https://www.marianaiq.com/company-team/sol/)拥有多种学位，反映了他广泛的兴趣。从斯坦福大学获得硕士学位以来，他一直居住在加利福尼亚州，原籍加拿大。他在MarianaIQ的当前重点是大数据——他的算法旨在帮助公司更好地理解和预测个体消费者的行为。'
 - en: '**Related:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Building, Training, and Improving on Existing Recurrent Neural Networks](/2017/05/building-training-improving-existing-recurrent-neural-networks.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建、训练及改进现有的递归神经网络](/2017/05/building-training-improving-existing-recurrent-neural-networks.html)'
 - en: '[How to Build a Recurrent Neural Network in TensorFlow](/2017/04/build-recurrent-neural-network-tensorflow.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在TensorFlow中构建递归神经网络](/2017/04/build-recurrent-neural-network-tensorflow.html)'
 - en: '[Using the TensorFlow API: An Introductory Tutorial Series](/2017/06/using-tensorflow-api-tutorial-series.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TensorFlow API：入门教程系列](/2017/06/using-tensorflow-api-tutorial-series.html)'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
 - en: '[How to Stay on Top of What''s Going on in the AI World](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何跟上AI世界的动态](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用最先进的深度学习进行可解释的预测和实时预测…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
 - en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Segment Anything Model: 图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
 - en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络前的10个简单尝试](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
 - en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyTorch的可解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
