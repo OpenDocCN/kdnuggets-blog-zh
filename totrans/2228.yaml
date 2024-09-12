@@ -1,145 +1,206 @@
 - en: 'Ensemble Learning Techniques: A Walkthrough with Random Forests in Python'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 集成学习技术：在 Python 中使用随机森林的详细讲解
 - en: 原文：[https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 - en: Machine learning models have become an integral component of decision-making
     across multiple industries, yet they often encounter difficulty when dealing with
     noisy or diverse data sets. That is where Ensemble Learning comes into play.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型已成为多个行业决策中的重要组成部分，但在处理嘈杂或多样化的数据集时，往往会遇到困难。这就是集成学习发挥作用的地方。
 - en: This article will demystify ensemble learning and introduce you to its powerful
     random forest algorithm. No matter if you are a data scientist looking to hone
     your toolkit or a developer looking for practical insights into building robust
     machine learning models, this piece is meant for everyone!
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将揭秘集成学习，并介绍其强大的随机森林算法。无论你是希望提升工具箱的数据科学家，还是寻求构建稳健机器学习模型的实践见解的开发者，这篇文章都适合你！
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大推荐课程
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: By the end of this article, you will gain a thorough knowledge of Ensemble Learning
     and how Random Forests in Python work. So whether you are an experienced data
     scientist or simply curious to expand your machine-learning abilities, join us
     on this adventure and advance your machine-learning expertise!
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文结束时，你将全面了解集成学习及其在 Python 中的随机森林如何工作。因此，无论你是经验丰富的数据科学家，还是只是想扩展机器学习能力的好奇者，都欢迎加入我们的冒险，提升你的机器学习专业知识！
 - en: 1\. What Is Ensemble Learning?
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 1\. 什么是集成学习？
 - en: Ensemble learning is a machine learning approach in which predictions from multiple
     weak models are combined with each other to get stronger predictions. The concept
     behind ensemble learning is decreasing the bias and errors from single models
     by leveraging the predictive power of each model.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成学习是一种机器学习方法，其中多个弱模型的预测结果相互结合，以获得更强的预测。集成学习的概念是通过利用每个模型的预测能力来减少单个模型的偏差和错误。
 - en: To have a better example let's take a life example imagine that you have seen
     an animal and you do not know what species this animal belongs to. So instead
     of asking one expert, you ask ten experts and you will take the vote of the majority
     of them. This is known as **hard voting**.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地举例，假设你看到了一种动物，但不知道这只动物属于什么物种。那么，与其询问一个专家，不如询问十个专家，然后根据大多数人的意见来决定。这被称为**硬投票**。
 - en: '**Hard voting** is when we take into account the class predictions for each
     classifier and then classify an input based on the maximum votes to a particular
     class. On the other hand, **soft voting** is when we take into account the probability
     predictions for each class by each classifier and then classify an input to the
     class with maximum probability based on the average probability (averaged over
     the classifier''s probabilities) for that class.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**硬投票**是指我们考虑每个分类器的类别预测，然后根据对特定类别的最大投票数来对输入进行分类。另一方面，**软投票**是指我们考虑每个分类器对每个类别的概率预测，然后根据该类别的平均概率（分类器的概率平均值）将输入分类到概率最大类别。'
 - en: 2\. When to Use Ensemble Learning
+  id: totrans-15
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 2\. 何时使用集成学习
 - en: Ensemble learning is always used to improve the model performance which includes
     improving the classification accuracy and decreasing the mean absolute error for
     regression models. In addition to this ensemble learners always yield a more stable
     model. Ensemble learners work at their best when the models are not correlated
     then every model can learn something unique and work on improving the overall
     performance.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成学习通常用于提高模型性能，包括提高分类准确性和减少回归模型的平均绝对误差。此外，集成学习者通常能够提供更稳定的模型。当模型之间没有相关性时，集成学习者效果最佳，因为每个模型可以学习到独特的内容，并提高整体性能。
 - en: 3\. Ensemble Learning Strategies
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 3\. 集成学习策略
 - en: 'Although ensemble learning can be applied in many ways, however when it comes
     to applying it to practice there are three strategies that have gained a lot of
     popularity due to their easy implementation and usage. These three strategies
     are:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管集成学习可以通过多种方式应用，但在实践中，三种策略因其易于实现和使用而获得了很大的流行。这三种策略是：
 - en: '**Bagging**: Bagging which is short for bootstrap aggregation is an ensemble
     learning strategy in which the models are trained using random samples of the
     data set.'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Bagging：** Bagging，即自助聚合，是一种集成学习策略，其中模型使用数据集的随机样本进行训练。'
 - en: '**Stacking:** Stacking which is short for stacked generalization is an ensemble
     learning strategy in which we train a model to combine multiple models trained
     on our data.'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Stacking：** Stacking，即堆叠泛化，是一种集成学习策略，其中我们训练一个模型以结合多个在我们的数据上训练的模型。'
 - en: '**Boosting**: Boosting is an ensemble learning technique that focuses on selecting
     the misclassified data to train the models on.'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Boosting：** Boosting 是一种集成学习技术，专注于选择错误分类的数据以训练模型。'
 - en: Let's dive deeper into each of these strategies and see how we can use Python
     to train these models on our dataset.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们深入探讨这些策略，并看看如何使用 Python 在我们的数据集上训练这些模型。
 - en: 4\. Bagging Ensemble Learning
+  id: totrans-23
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 4\. Bagging 集成学习
 - en: Bagging takes random samples of data, and uses learning algorithms and the mean
     to find bagging probabilities; also known as bootstrap aggregating; it aggregates
     results from multiple models to get one broad outcome.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: Bagging 采用数据的随机样本，使用学习算法和均值来找到 Bagging 概率；也称为自助聚合；它汇总多个模型的结果以得到一个广泛的结果。
 - en: 'This approach involves:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法包括：
 - en: Splitting the original dataset into multiple subsets with replacement.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将原始数据集拆分成多个有放回的子集。
 - en: Develop base models for each of these subsets.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为这些子集中的每一个开发基础模型。
 - en: Running all models concurrently before running all predictions through to obtain
     final predictions.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在进行所有预测之前并行运行所有模型以获得最终预测。
 - en: '[**Scikit-learn**](https://scikit-learn.org/stable/) provides us with the ability
     to implement both a [**BaggingClassifier**](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)
     and [**BaggingRegressor**](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingRegressor.html).
@@ -148,248 +209,373 @@
     voting or averaging?—?into a final prediction by aggregating individual base model
     predictions into an aggregate prediction using voting or averaging. This method
     reduces variance by randomizing their construction process.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Scikit-learn**](https://scikit-learn.org/stable/) 为我们提供了实现 [**BaggingClassifier**](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)
+    和 [**BaggingRegressor**](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingRegressor.html)
+    的能力。 BaggingMetaEstimator 确定原始数据集的随机子集以拟合每个基础模型，然后通过投票或平均将每个基础模型的预测汇总成最终预测。这种方法通过随机化其构建过程来减少方差。'
 - en: 'Let''s take an example in which we use the bagging estimator using scikit learn:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们举一个使用 scikit-learn 进行包装估计器的例子：
 - en: '[PRE0]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The bagging classifier takes into consideration several parameters:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Bagging 分类器考虑多个参数：
 - en: '**base_estimator**: The base model used in the bagging approach. Here we use
     the decision tree classifier.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**base_estimator：** 在包装方法中使用的基础模型。这里我们使用决策树分类器。'
 - en: '**n_estimators:** The number of estimators we will use in the bagging approach.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**n_estimators：** 我们将在包装方法中使用的估计器数量。'
 - en: '**max_samples**: The number of samples that will be drawn from the training
     set for each base estimator.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**max_samples：** 从训练集中为每个基础估计器提取的样本数量。'
 - en: '**max_features:** The number of features that will be used to train each base
     estimator.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**max_features：** 用于训练每个基本估计器的特征数量。'
 - en: Now we will fit this classifier on the training set and score it.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将在训练集上训练这个分类器并进行评分。
 - en: '[PRE1]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We can do the same for regression tasks, the difference will be that we will
     be using regression estimators instead.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于回归任务，我们也可以做相同的处理，唯一的区别是我们将使用回归估计器。
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 5\. Stacking Ensemble Learning
+  id: totrans-41
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 5\. 堆叠集成学习
 - en: Stacking is a technique for combining multiple estimators in order to minimize
     their biases and produce accurate predictions. Predictions from each estimator
     are then combined and fed into an ultimate prediction meta-model trained through
     cross-validation; stacking can be applied to both classification and regression
     problems.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠是一种结合多个估计器的技术，以最小化它们的偏差并产生准确的预测。每个估计器的预测结果被结合在一起，然后输入到一个通过交叉验证训练的最终预测元模型中；堆叠可以应用于分类问题和回归问题。
 - en: '![Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](../Images/973ed1cfbb38a533bda3c0f44e520316.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![集成学习技术：Python 中的随机森林演练](../Images/973ed1cfbb38a533bda3c0f44e520316.png)'
 - en: Stacking ensemble learning
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠集成学习
 - en: 'Stacking occurs in the following steps:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠的过程如下：
 - en: Split the data into a training and validation set
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将数据分为训练集和验证集
 - en: Divide the training set into K folds
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将训练集分为 K 折
 - en: Train a base model on k-1 folds and make predictions on the k-th fold
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 k-1 个折叠上训练一个基本模型，并在第 k 个折叠上进行预测
 - en: Repeat until you have a prediction for each fold
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 反复进行，直到你对每一个折叠都有一个预测结果
 - en: Fit the base model on the whole training set
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在整个训练集上拟合基本模型
 - en: Use the model to make predictions on the test set
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用模型对测试集进行预测
 - en: Repeat steps 3–6 for other base models
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对其他基本模型重复步骤 3–6
 - en: Use predictions from the test set as features of a new model (the meta model)
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用测试集的预测结果作为新模型（元模型）的特征
 - en: Make final predictions on the test set using the meta-model
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用元模型对测试集进行最终预测
 - en: In this example below, we begin by creating two base classifiers (RandomForestClassifier
     and GradientBoostingClassifier) and one meta-classifier (LogisticRegression) and
     use K-fold cross-validation to use predictions from these classifiers on training
     data (iris dataset) for input features for our meta-classifier (LogisticRegression).
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面的示例中，我们首先创建两个基本分类器（RandomForestClassifier 和 GradientBoostingClassifier）和一个元分类器（LogisticRegression），并使用
+    K 折交叉验证将这些分类器在训练数据（鸢尾花数据集）上的预测作为元分类器（LogisticRegression）的输入特征。
 - en: After using K-fold cross-validation to make predictions from the base classifiers
     on test data sets as input features for our meta-classifier, predictions on test
     sets using both sets together and evaluate their accuracy against their stacked
     ensemble counterparts.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用 K 折交叉验证从基本分类器生成的预测作为元分类器的输入特征后，对测试集进行预测，并将结果与其堆叠集成模型进行准确性评估。
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 6\. Boosting Ensemble Learning
+  id: totrans-58
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 6\. 提升集成学习
 - en: Boosting is a machine learning ensemble technique that reduces bias and variance
     by turning weak learners into strong learners. These weak learners are applied
     sequentially to the dataset; firstly by creating an initial model and fitting
     it to the training set. Once errors from the first model have been identified,
     another model is designed to correct them.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 提升是一种机器学习集成技术，它通过将弱学习器转变为强学习器来减少偏差和方差。这些弱学习器按顺序应用于数据集；首先创建一个初始模型并将其拟合到训练集。一旦识别出第一个模型的错误，就设计另一个模型来纠正这些错误。
 - en: There are popular algorithms and implementations for boosting ensemble learning
     techniques. Let's explore the most famous ones.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一些流行的算法和实现用于提升集成学习技术。让我们探索其中最著名的一些。
 - en: 6.1\. AdaBoost
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 6.1\. AdaBoost
 - en: AdaBoost is an effective ensemble learning technique, that employs weak learners
     sequentially for training purposes. Each iteration prioritizes incorrect predictions
     while decreasing weight assigned to correctly predicted instances; this strategic
     emphasis on challenging observations compels AdaBoost to become increasingly accurate
     over time, with its ultimate prediction determined by aggregating majority votes
     or weighted sum of its weak learners.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 是一种有效的集成学习技术，它顺序地使用弱学习器进行训练。每次迭代时，优先考虑错误预测，同时减少对正确预测实例的权重；这种对挑战性观测的战略性关注促使
+    AdaBoost 随着时间的推移变得越来越准确，其最终预测是通过汇总多数投票或加权求和的方式来决定的。
 - en: 'AdaBoost is a versatile algorithm suitable for both regression and classification
     tasks, but here we focus on its application to classification problems using Scikit-learn.
     Let’s look at how we can use it for classification tasks in the example below:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 是一种适用于回归和分类任务的多用途算法，但在这里我们重点关注其在使用 Scikit-learn 进行分类问题的应用。让我们看看如何在下面的示例中使用它进行分类任务：
 - en: '[PRE4]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: In this example, we used the AdaBoostClassifier from scikit learn and set the
     n_estimators to 100\. The default learn is a decision tree and you can change
     it. In addition to this, the parameters of the decision tree can be tuned.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个示例中，我们使用了 scikit-learn 中的 AdaBoostClassifier，并将 n_estimators 设置为 100。默认学习器是决策树，你可以进行更改。除此之外，决策树的参数可以进行调整。
 - en: 2\. EXtreme Gradient Boosting (XGBoost)
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 极端梯度提升 (XGBoost)
 - en: eXtreme Gradient Boosting or is more popularly known as XGBoost, is one of the
     best implementations of boosting ensemble learners due to its parallel computations
     which makes it very optimized to run on a single computer. XGBoost is available
     to use through the xgboost package developed by the machine learning community.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 极端梯度提升，也更广为人知为 XGBoost，是提升集成学习者的最佳实现之一，因为其并行计算使其在单台计算机上运行非常优化。XGBoost 可以通过由机器学习社区开发的
+    xgboost 包进行使用。
 - en: '[PRE5]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 3\. LightGBM
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3\. LightGBM
 - en: LightGBM is another gradient-boosting algorithm that is based on tree learning.
     However, it is unlike other tree-based algorithms in that it uses leaf-wise tree
     growth which makes it converge faster.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 是另一种基于树学习的梯度提升算法。然而，与其他基于树的算法不同，它使用叶子-wise 树增长，使其收敛更快。
 - en: '![Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](../Images/180766a57c79ba30658b281015966a98.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![集成学习技术：使用 Python 中的随机森林的演示](../Images/180766a57c79ba30658b281015966a98.png)'
 - en: Leaf-wise tree growth / Image by [LightGBM](https://lightgbm.readthedocs.io/en/latest/Features.html#other-features)
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 叶子-wise 树增长 / 图片来源于 [LightGBM](https://lightgbm.readthedocs.io/en/latest/Features.html#other-features)
 - en: 'In the example below we will apply LightGBM to a binary classification problem:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面的示例中，我们将应用 LightGBM 于二分类问题：
 - en: '[PRE6]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Ensemble learning and random forests are powerful machine learning models that
     are always used by machine learning practitioners and data scientists. In this
     article, we covered the basic intuition behind them, when to use them, and finally,
     we covered the most popular algorithms of them and how to use them in Python.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成学习和随机森林是强大的机器学习模型，总是被机器学习从业者和数据科学家使用。在本文中，我们探讨了它们的基本直觉、何时使用它们，最后，我们介绍了最受欢迎的算法以及如何在
+    Python 中使用它们。
 - en: References
+  id: totrans-76
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[A Gentle Introduction to Ensemble Learning Algorithms](https://machinelearningmastery.com/tour-of-ensemble-learning-algorithms/)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习算法的温和介绍](https://machinelearningmastery.com/tour-of-ensemble-learning-algorithms/)'
 - en: '[A Comprehensive Guide to Ensemble Learning: What Exactly Do You Need to Know](https://neptune.ai/blog/ensemble-learning-guide)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习的全面指南：你到底需要了解什么](https://neptune.ai/blog/ensemble-learning-guide)'
 - en: '[A Comprehensive Guide to Ensemble Learning (with Python codes)](https://www.analyticsvidhya.com/blog/2018/06/comprehensive-guide-for-ensemble-models/)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习的全面指南（附 Python 代码）](https://www.analyticsvidhya.com/blog/2018/06/comprehensive-guide-for-ensemble-models/)'
 - en: '**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** is
     a computer vision researcher & data scientist. His research focuses on developing
     real-time computer vision algorithms for healthcare applications. He also worked
     as a data scientist for more than 3 years in the marketing, finance, and healthcare
     domain.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一位计算机视觉研究员和数据科学家。他的研究专注于为医疗保健应用开发实时计算机视觉算法。他还在市场营销、金融和医疗保健领域担任数据科学家超过
+    3 年。'
 - en: More On This Topic
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树与随机森林，解析](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
 - en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[何时使用集成技术是一个好选择？](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
 - en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类指标演示：逻辑回归与…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
 - en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习实例](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调优（Python）](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：主要区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
