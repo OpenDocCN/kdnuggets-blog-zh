@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 以数据科学的方式理解变换器
 - en: 原文：[https://www.kdnuggets.com/2020/10/understanding-transformers-data-science-way.html](https://www.kdnuggets.com/2020/10/understanding-transformers-data-science-way.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/10/understanding-transformers-data-science-way.html](https://www.kdnuggets.com/2020/10/understanding-transformers-data-science-way.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Transformers have become the defacto standard for any NLP tasks nowadays. Not
     only that, but they are now also being used in Computer Vision and to generate
     music. I am sure you would all have heard about the GPT3 Transformer and its applications
@@ -19,43 +22,54 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 变换器现在已经成为任何NLP任务的事实标准。不仅如此，它们现在还被用于计算机视觉和音乐生成。我相信大家都听说过GPT3变换器及其应用。***但除了这些，它们仍然像以前一样难以理解。***
 - en: It has taken me multiple readings through the Google research [paper](https://arxiv.org/pdf/1706.03762.pdf) that
     first introduced transformers along with just so many blog posts to really understand
     how a transformer works.
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我花了多次阅读谷歌研究的[论文](https://arxiv.org/pdf/1706.03762.pdf)，它首次介绍了变换器，并阅读了大量博客文章，才真正理解了变换器是如何工作的。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT。'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: So, I thought of putting the whole idea down in as simple words as possible
     along with some very basic Math and some puns as I am a proponent of having some
     fun while learning. I will try to keep both the jargon and the technicality to
@@ -65,21 +79,25 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我想尽可能用简单的语言把整个概念阐述出来，加上一些非常基础的数学和一些双关语，因为我是一个在学习过程中享受乐趣的倡导者。我会尽量将术语和技术性降到最低，但这是一个复杂的话题，我只能做到这么多。我的目标是让读者在阅读完这篇文章后，甚至理解变换器中最复杂的细节。
 - en: '***Also, this is officially my longest post both in terms of time taken to
     write it as well as the length of the post. Hence, I will advise you to Grab A
     Coffee. *☕️**'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '***此外，这篇文章也是我写作时间最长、篇幅最长的文章。因此，我建议你拿一杯咖啡。*☕️**'
 - en: So, here goes — This post will be a highly conversational one and it is about
     “***Decoding The Transformer”.***
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，接下来——这篇文章将会是非常对话式的，主题是“***解码变换器***”。
 - en: '***Q: So, Why should I even understand Transformer?***'
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：那么，为什么我应该理解变换器？***'
 - en: In the past, the LSTM and GRU architecture(as explained here in my past [post](https://towardsdatascience.com/nlp-learning-series-part-3-attention-cnn-and-what-not-for-text-classification-4313930ed566) on
     NLP) along with attention mechanism used to be the State of the Art Approach for
     Language modeling problems (put very simply, predict the next word) and Translation
@@ -90,6 +108,7 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 过去，LSTM 和 GRU 架构（在我之前的[文章](https://towardsdatascience.com/nlp-learning-series-part-3-attention-cnn-and-what-not-for-text-classification-4313930ed566)中解释过）以及注意力机制曾是语言建模问题（简单来说，就是预测下一个词）和翻译系统的最先进方法。但是，这些架构的主要问题是它们是递归性质的，随着序列长度的增加，运行时间也会增加。也就是说，这些架构以***顺序***的方式处理句子中的每个词，因此随着句子长度的增加，整体运行时间也会增加。
 - en: Transformer, a model architecture first explained in the paper Attention is
     all you need, lets go of this recurrence and instead relies entirely on an attention
     mechanism to draw global dependencies between input and output. And that makes
@@ -97,29 +116,35 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 变压器，一种在论文《Attention is all you need》中首次解释的模型架构，放弃了递归，而完全依赖注意力机制来捕捉输入和输出之间的全局依赖关系。这使得它非常快速。
 - en: '![Figure](../Images/db28f3c80be7e025d0e8b78e557c3e29.png)'
   id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/db28f3c80be7e025d0e8b78e557c3e29.png)'
 - en: '[Source](https://arxiv.org/pdf/1706.03762.pdf)'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://arxiv.org/pdf/1706.03762.pdf)'
 - en: This is the picture of the full transformer as taken from the paper. And, it
     surely is intimidating. So, I will aim to demystify it in this post by going through
     each individual piece. So read ahead.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是论文中展示的完整变压器的图片。它确实很让人畏惧。因此，我将在这篇文章中通过逐一解析每个部分来揭开它的神秘面纱。所以请继续阅读。
 - en: The Big Picture
   id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 大致情况
 - en: '***Q: That sounds interesting. So, what does a transformer do exactly?***'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：这听起来很有趣。那么，变压器到底做了什么？***'
 - en: Essentially, a transformer can perform almost any NLP task. It can be used for
     language modeling, Translation, or Classification as required, and it does it
     fast by removing the sequential nature of the problem. So, the transformer in
@@ -129,39 +154,47 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 本质上，变压器几乎可以执行任何NLP任务。它可以用于语言建模、翻译或分类，并通过去除问题的序列性质快速完成任务。因此，在机器翻译应用中，变压器将一种语言转换为另一种语言，或者在分类问题中将使用适当的输出层提供类别概率。
 - en: It all will depend on the final outputs layer for the network but, the Transformer
     basic structure will remain quite the same for any task. For this particular post,
     I will be continuing with the machine translation example.
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切将取决于网络的最终输出层，但变压器的基本结构在任何任务中都将保持相当一致。对于这篇文章，我将继续使用机器翻译的例子。
 - en: So from a very high place, this is how the transformer looks for a translation
     task. It takes as input an English sentence and returns a German sentence.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 从非常高的角度来看，这就是变压器在翻译任务中的样子。它以英文句子为输入，并返回德文句子。
 - en: '![Figure](../Images/602af3cd3df7d3c26732da85179370a0.png)'
   id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/602af3cd3df7d3c26732da85179370a0.png)'
 - en: Transformer for Translation (*Image by author*)
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 变压器用于翻译 (*作者图片*)
 - en: The Building Blocks
   id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建模块
 - en: '***Q: That was too basic. *????* Can you expand on it?***'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：这太基础了。*????* 能详细讲解一下吗？***'
 - en: Okay, just remember in the end, you asked for it. Let’s go a little deeper and
     try to understand what a transformer is composed of.
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，请记住最后你要求的。让我们深入了解一下变压器的组成。
 - en: So, a transformer is essentially composed of a stack of encoder and decoder
     layers. The role of an encoder layer is to encode the English sentence into a
     numerical form using the attention mechanism, while the decoder aims to use the
@@ -170,30 +203,36 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，变压器本质上由一系列编码器层和解码器层组成。编码器层的作用是利用注意力机制将英文句子编码成数值形式，而解码器则旨在使用编码器层编码的信息来给出特定英文句子的德文翻译。
 - en: In the figure below, the transformer is given as input an English sentence,
     which gets encoded using 6 encoder layers. The output from the final encoder layer
     then goes to each decoder layer to translate English to German.
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下图中，变压器以英文句子为输入，通过6个编码器层进行编码。最终编码器层的输出然后传递到每个解码器层，以将英文翻译成德文。
 - en: '![Figure](../Images/da94e3e12969ca0c086329ad99947d0c.png)'
   id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/da94e3e12969ca0c086329ad99947d0c.png)'
 - en: Data Flow in a Transformer (*Image by author*)
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 变压器中的数据流 (*作者图片*)
 - en: 1\. Encoder Architecture
   id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 编码器架构
 - en: '***Q: That’s alright but, how does an encoder stack encode an English sentence
     exactly?***'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：这很好，但编码器堆栈是如何精确地编码英文句子的？***'
 - en: 'Patience, I am getting to it. So, as I said the encoder stack contains six
     encoder layers on top of each other(As given in the paper, but the future versions
     of transformers use even more layers). And each encoder in the stack has essentially
@@ -201,34 +240,41 @@
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 请耐心等待，我正在进行中。正如我所说，编码器堆栈包含六个编码器层（如论文中所述，但未来版本的变压器将使用更多层）。每个堆栈中的编码器本质上有两个主要层：
 - en: '**a multi-head self-attention Layer, and**'
   id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**一个多头自注意力层，以及**'
 - en: '**a position-wise fully connected feed-forward network**'
   id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**一个位置级的全连接前馈网络**'
 - en: '![Figure](../Images/aa577079b526eb4d3bd8af2104b52238.png)'
   id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/aa577079b526eb4d3bd8af2104b52238.png)'
 - en: Very basic encoder Layer (*Image by author*)
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 非常基础的编码器层 (*作者图片*)
 - en: They are a mouthful. Right? Don’t lose me yet as I will explain both of them
     in the coming sections. Right now, just remember that the encoder layer incorporates
     attention and a position-wise feed-forward network.
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些概念可能有点复杂。对吧？不要着急，我将在接下来的部分中解释它们。现在只需记住，编码器层包含注意力机制和逐位置的前馈网络。
 - en: '***Q: But, how does this layer expect its inputs to be?***'
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：那么，这一层期望它的输入是什么样的呢？***'
 - en: This layer expects its inputs to be of the shape `SxD` (as shown in the figure
     below) where `S` is the source sentence(English Sentence) length, and `D` is the
     dimension of the embedding whose weights can be trained with the network. In this
@@ -237,14 +283,17 @@
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一层期望其输入的形状为`SxD`（如下面的图所示），其中`S`是源句子（英文句子）的长度，`D`是嵌入的维度，其权重可以与网络一起训练。在这篇文章中，我们将默认使用`D`为512。`S`则是一个批次中句子的最大长度，因此它会随着批次的不同而变化。
 - en: '![Figure](../Images/67d84024cccc6a5321f4f1a998bf653d.png)'
   id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/67d84024cccc6a5321f4f1a998bf653d.png)'
 - en: Encoder — Input and Output shapes are the same (*Image by author*)
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 编码器——输入和输出的形状相同 (*作者提供的图像*)
 - en: And what about the outputs of this layer? Remember that the encoder layers are
     stacked on top of each other. So, we want to be able to have an output of the
     same dimension as the input so that the output can flow easily into the next encoder.
@@ -252,34 +301,41 @@
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么这一层的输出如何呢？请记住，编码器层是堆叠在一起的。因此，我们希望输出的维度与输入相同，以便输出可以顺利传递到下一个编码器。所以输出的形状也是`SxD`。
 - en: '***Q: Enough about the sizes talk, I understand what goes in and what goes
     out but what actually happens in the Encoder layer?***'
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：关于尺寸的讨论够了，我了解了输入和输出的情况，但实际上在编码器层发生了什么？***'
 - en: 'Okay, let’s go through the attention layer and the feedforward layer one by
     one:'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，让我们逐一了解注意力层和前馈层：
 - en: A) Self-attention layer
   id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: A) 自注意力层
 - en: '![Figure](../Images/050821f689542c5fc7f16ef3fff7df31.png)'
   id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/050821f689542c5fc7f16ef3fff7df31.png)'
 - en: How Self-Attention Works (*Image by author*)
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 自注意力机制的工作原理 (*作者提供的图像*)
 - en: The above figure must look daunting but it is easy to understand. So just stay
     with me here.
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的图看起来可能很吓人，但其实很容易理解。所以，请继续跟随我。
 - en: Deep Learning is essentially nothing but a lot of matrix calculations and what
     we are essentially doing in this layer is a lot of matrix calculations intelligently.
     The self-attention layer initializes with 3 weight matrices — Query(W_q), Key(W_k),
@@ -289,11 +345,13 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 深度学习本质上就是大量的矩阵计算，而我们在这一层所做的就是智能地进行大量的矩阵计算。自注意力层初始化时使用了3个权重矩阵——Query（W_q）、Key（W_k）和Value（W_v）。这些矩阵的大小为（`Dxd`），其中d在论文中取为64。训练模型时，这些矩阵的权重将被训练。
 - en: In the first calculation(Calc 1 in the figure), we create matrices Q, K, and
     V by multiplying the input with the respective Query, Key, and Value matrix.
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一次计算（图中的计算1）中，我们通过将输入与各自的查询、键和值矩阵相乘来创建Q、K和V矩阵。
 - en: Till now it is trivial and shouldn’t make any sense, but it is at the second
     calculation where it gets interesting. Let’s try to understand the output of the
     softmax function. We start by multiplying the Q and Kᵀ matrix to get a matrix
@@ -302,19 +360,23 @@
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，可能还很简单，没什么意义，但在第二次计算时，事情变得有趣了。我们来尝试理解softmax函数的输出。我们首先将Q和Kᵀ矩阵相乘，得到一个`SxS`的矩阵，然后除以标量√d。接着我们进行softmax，使得每一行的和为1。
 - en: 'Intuitively, we can think of the resultant `SxS` matrix as the contribution
     of each word in another word. For example, it might look like this:'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 直观地，我们可以将结果的`SxS`矩阵看作每个词对其他词的贡献。例如，它可能看起来像这样：
 - en: '![Figure](../Images/e436dcb4757a035ca23b1cec9b93480f.png)'
   id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/e436dcb4757a035ca23b1cec9b93480f.png)'
 - en: Softmax(QxKt/sqrt(d)) (*Image by author*)
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: Softmax(QxKt/sqrt(d)) (*作者提供的图像*)
 - en: As you can see the diagonal entries are big. This is because the word contribution
     to itself is high. That is reasonable. But we can see here that the word “quick”
     devolves into “quick” and “fox” and the word “brown” also devolves into “brown”
@@ -323,6 +385,7 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所见，对角线条目的值很大。这是因为词语对自身的贡献很高。这是合理的。但我们可以在这里看到，“quick”这个词分解成了“quick”和“fox”，“brown”这个词也分解成了“brown”和“fox”。这直观地帮助我们说两个词——“quick”和“brown”都指向“fox”。
 - en: Once we have this SxS matrix with contributions we multiply this matrix by the
     Value matrix(Sxd) of the sentence and it gives us back a matrix of shape Sxd(4x64).
     So, what the operation actually does is that it replaces the embedding vector
@@ -332,21 +395,26 @@
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们得到这个SxS矩阵及其贡献，我们将此矩阵与句子的值矩阵(Sxd)相乘，得到一个形状为Sxd(4x64)的矩阵。所以，这个操作实际上是用比如0.75
+    x（quick embedding）和0.2x（fox embedding）来替代“quick”这个词的嵌入向量，因此现在“quick”这个词的结果输出中嵌入了注意力。
 - en: Note that the output of this layer has the dimension (Sxd) and before we get
     done with the whole encoder we need to change it back to D=512 as we need the
     output of this encoder as the input of another encoder.
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这一层的输出具有维度（Sxd），在完成整个编码器之前，我们需要将其更改为D=512，因为我们需要将这个编码器的输出作为另一个编码器的输入。
 - en: '***Q: But, you called this layer Multi-head self-attention Layer. What is the
     multi-head?***'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '***Q: 但是，你称这个层为多头自注意力层。什么是多头？***'
 - en: Okay, my bad but in my defense, I was just getting to that.
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，我的错，但为了辩解，我刚刚开始讲到这一点。
 - en: It’s called a multi-head because we use many such self-attention layers in parallel.
     That is, we have many self-attention layers stacked on top of each other. The
     number of attention layers,h, is kept as 8 in the paper. So the input X goes through
@@ -356,34 +424,42 @@
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 它被称为多头，因为我们并行使用了许多这样的自注意力层。也就是说，我们有许多自注意力层堆叠在一起。论文中将注意力层的数量h保持为8。因此，输入X经过多个自注意力层并行处理，每个层输出一个形状为(Sxd)
+    = 4x64的z矩阵。我们将这8(h)个矩阵连接起来，再应用一个最终的输出线性层Wo，大小为DxD。
 - en: What size do we get? For the concatenate operation we get a size of SxD(4x(64x8)
     = 4x512). And multiplying this output by Wo, we get the final output Z with the
     shape of SxD(4x512) as desired.
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到什么尺寸？对于连接操作，我们得到SxD（4x（64x8）= 4x512）。将这个输出乘以Wo，我们得到形状为SxD（4x512）的最终输出Z，如预期的。
 - en: Also, note the relation between h,d, and D i.e. h x d = D
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 同时，请注意h、d和D之间的关系，即h x d = D。
 - en: '![Figure](../Images/672d4f0db3576685d7bb30479d6be1c1.png)'
   id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/672d4f0db3576685d7bb30479d6be1c1.png)'
 - en: The Full multi-headed self-attention Layer (*Image by author*)
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的多头自注意力层 (*图片来源：作者*)
 - en: Thus, we finally get the output Z of shape 4x512 as intended. But before it
     goes into another encoder we pass it through a Feed-Forward Network.
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们最终得到了形状为4x512的输出Z，正如预期的。但在进入另一个编码器之前，我们将其通过一个前馈网络。
 - en: B) Position-wise feed-forward network
   id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: B) 位置-wise前馈网络
 - en: Once we understand the multi-headed attention layer, the Feed-forward network
     is actually pretty easy to understand. It is just a combination of various linear
     and dropout layers on the output Z. Consequentially, it is again just a lot of
@@ -391,14 +467,17 @@
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们理解了多头注意力层，前馈网络实际上是相当容易理解的。它只是对输出Z进行各种线性和dropout层的组合。因此，这里再次只是大量的矩阵乘法。
 - en: '![Figure](../Images/e44a29a2a8c8f571e7e60e56dbe388f9.png)'
   id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/e44a29a2a8c8f571e7e60e56dbe388f9.png)'
 - en: Each word goes into the feed-forward network. (*Image by author*)
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个词都进入前馈网络。 (*图片来源：作者*)
 - en: The feed-forward network applies itself to each position in the output Z parallelly(Each
     position can be thought of as a word) and hence the name Position-wise feed-forward
     network. The feed-forward network also shares weight, so that the length of the
@@ -408,44 +487,53 @@
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 前馈网络并行地应用于输出Z中的每个位置（每个位置可以看作是一个词），因此得名位置-wise前馈网络。前馈网络也共享权重，因此源句子的长度无关紧要（此外，如果它不共享权重，我们将不得不根据最大源句子长度初始化很多这样的网络，这样做是不可行的）。
 - en: '![Figure](../Images/fa0d92e074d6fa580e16e1adeaf4efd3.png)'
   id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/fa0d92e074d6fa580e16e1adeaf4efd3.png)'
 - en: It is actually just a linear layer that gets applied to each position(or word)
     (*Image by author*)
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，它只是一个线性层，应用于每个位置（或单词） (*作者提供的图片*)
 - en: With this, we near an okayish understanding of the encoder part of the Transformer.
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了这些，我们对 Transformer 编码器部分有了一个基本的理解。
 - en: '***Q: Hey, I was just going through the picture in the paper, and the encoder
     stack has something called “positional encoding” and “Add & Norm” also. What are
     these?***'
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：嘿，我刚刚查看了论文中的图片，编码器堆栈中有一个叫做“位置编码”和“Add & Norm”的东西。这些是什么？***'
 - en: '![Figure](../Images/4d5a56f76e2039776d53e46aaf96f144.png)'
   id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4d5a56f76e2039776d53e46aaf96f144.png)'
 - en: I am back again here so you don’t have to scroll [Source](https://arxiv.org/pdf/1706.03762.pdf)
   id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 我再次回到这里，所以你不需要滚动 [源](https://arxiv.org/pdf/1706.03762.pdf)
 - en: Okay, These two concepts are pretty essential to this particular architecture.
     And I am glad you asked this one. So, we will discuss these steps before moving
     further to the decoder stack.
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，这两个概念对于这种特定架构是非常重要的。我很高兴你问了这个问题。因此，在继续解码器堆栈之前，我们会讨论这些步骤。
 - en: C. Positional Encodings
   id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: C. 位置编码
 - en: Since, our model contains no recurrence and no convolution, in order for the
     model to make use of the order of the sequence, we must inject some information
     about the relative or absolute position of the tokens in the sequence. To this
@@ -456,45 +544,56 @@
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们的模型既没有递归也没有卷积，为了使模型能够利用序列的顺序，我们必须注入一些关于序列中令牌的相对或绝对位置的信息。为此，我们在编码器和解码器堆栈的底部（如后面所见）向输入嵌入添加了“位置编码”。位置编码需要与嵌入具有相同的维度
+    D，以便可以将两者相加。
 - en: '![Figure](../Images/670092d703424a38695f25763b982df5.png)'
   id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/670092d703424a38695f25763b982df5.png)'
 - en: Add a static positional pattern to X (*Image by author*)
   id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 向 X 添加一个静态位置模式 (*作者提供的图片*)
 - en: In the paper, the authors used sine and cosine functions to create positional
     embeddings for different positions.
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 在论文中，作者使用正弦和余弦函数来创建不同位置的位置编码。
 - en: '![Figure](../Images/99d8631c9f4f9db9651e38562108c935.png)'
   id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/99d8631c9f4f9db9651e38562108c935.png)'
 - en: '[Source](https://arxiv.org/pdf/1706.03762.pdf)'
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '[源](https://arxiv.org/pdf/1706.03762.pdf)'
 - en: This particular mathematical thing actually generates a 2d matrix which is added
     to the embedding vector that goes into the first encoder step.
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个特定的数学方法实际上生成了一个二维矩阵，该矩阵被添加到输入到第一个编码器步骤的嵌入向量中。
 - en: Put simply, it’s just a constant matrix that we add to the sentence so that
     the network could get the position of the word.
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，这只是一个常量矩阵，我们将其添加到句子中，以便网络能够获取单词的位置。
 - en: '![Figure](../Images/fd7c6d99a74914d576445b02b17d66c4.png)  ![Figure](../Images/09a8aaa978d699dcbfb0b8a8cee7c653.png)'
   id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/fd7c6d99a74914d576445b02b17d66c4.png)  ![图](../Images/09a8aaa978d699dcbfb0b8a8cee7c653.png)'
 - en: Positional encoding matrix for the first 300 and 3000 positions (*Image by author*)
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 前 300 个和 3000 个位置的位置编码矩阵 (*作者提供的图片*)
 - en: Above is the heatmap of the position encoding matrix that we will add to the
     input that is to be given to the first encoder. I am showing the heatmap for the
     first 300 positions and the first 3000 positions. We can see that there is a distinct
@@ -505,6 +604,8 @@
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图是我们将添加到输入中的位置编码矩阵的热图，输入将提供给第一个编码器。我展示了前 300 个位置和前 3000 个位置的热图。我们可以看到，我们为 Transformer
+    提供了一个独特的模式，以便它理解每个单词的位置。由于我们使用了由正弦和余弦组成的函数，我们能够很好地嵌入非常高位置的编码，如第二张图片所示。
 - en: '**Interesting Fact:** The authors also let the Transformer learn these encodings
     too and didn’t see any difference in performance as such. So, they went with the
     above idea as it doesn’t depend on sentence length and so even if the test sentence
@@ -512,11 +613,13 @@
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**有趣的事实：** 作者们还让 Transformer 学习这些编码，但并没有看到性能上的任何差异。因此，他们选择了上述方法，因为它不依赖于句子长度，因此即使测试句子比训练样本更长，我们也会没问题。'
 - en: D. Add and Normalize
   id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: D. 添加和归一化
 - en: Another thing, that I didn’t mention for the sake of simplicity while explaining
     the encoder is that the encoder(the decoder architecture too) architecture has
     skip level residual connections(something akin to resnet50) also. So, the exact
@@ -527,50 +630,60 @@
   id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个在解释编码器时为了简便而未提及的事情是，编码器（解码器架构也是）具有跳跃级别残差连接（类似于resnet50）。所以，论文中的确切编码器架构如下。简单来说，它有助于在深度神经网络中传递更长的信息。这可以直观地理解为在组织中传递信息的方式，你可以同时访问你的经理以及你经理的上级。
 - en: '![Figure](../Images/ea9ebb9891e4733fed5eea39f4f7f409.png)'
   id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/ea9ebb9891e4733fed5eea39f4f7f409.png)'
 - en: The Skip level connections help information flow in the network (*Image by author*)
   id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 跳跃级别连接有助于网络中的信息流动（*图像作者提供*）
 - en: 2\. Decoder Architecture
   id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 解码器架构
 - en: '***Q: Okay, so till now we have learned that an encoder takes an input sentence
     and encodes its information in a matrix of size SxD(4x512). That’s all great but
     how does it help the decoder decode it to German?***'
   id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：好吧，到目前为止，我们已经了解到编码器接收输入句子并将其信息编码为SxD（4x512）大小的矩阵。这很好，但它如何帮助解码器将其解码为德语？***'
 - en: Good things come to those who wait. So, before understanding how the decoder
     does that, let us understand the decoder stack.
   id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 好事多磨。因此，在理解解码器如何实现之前，让我们先了解解码器堆栈。
 - en: 'The decoder stack contains 6 decoder layers in a stack (As given in the paper
     again) and each decoder in the stack is comprised of these main three layers:'
   id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 解码器堆栈包含6个解码器层（如论文中所述），每个解码器堆栈包括以下三个主要层：
 - en: '**Masked multi-head self-attention Layer**'
   id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**掩码多头自注意力层**'
 - en: '**multi-head self-attention Layer, and**'
   id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**多头自注意力层，以及**'
 - en: '**a position-wise fully connected feed-forward network**'
   id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**位置级全连接前馈网络**'
 - en: It also has the same positional encoding as well as the skip level connection
     as well. We already know how the multi-head attention and feed-forward network
     layers work, so we will get straight into what is different in the decoder as
@@ -578,31 +691,37 @@
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 它还具有相同的位置信息编码和跳跃级别连接。我们已经知道多头注意力和前馈网络层的工作原理，因此我们将直接探讨解码器与编码器的不同之处。
 - en: '![Figure](../Images/4708687e5efa6ec096a3a00419857a16.png)'
   id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4708687e5efa6ec096a3a00419857a16.png)'
 - en: Decoder Architecture (*Image by author*)
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 解码器架构（*图像作者提供*）
 - en: '***Q: Wait, but do I see the output we need flowing into the decoder as input?
     What? Why? *????**'
   id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：等一下，但我看到我们需要的输出作为输入流入解码器？什么？为什么？*????**'
 - en: I am noticing that you are getting pretty good at asking questions. And that
     is a great question, something I even though myself a lot of times, and something
     that I hope will get much clearer by the time you reach the end of this post.
   id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 我注意到你提问的能力越来越强了。这是一个很好的问题，我自己也思考过很多次，希望在你读完这篇文章时会更清楚。
 - en: But to give an intuition, we can think of a transformer as a conditional language
     model in this case. A model that predicts the next word given an input word and
     an English sentence on which to condition upon or base its prediction on.
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 但为了直观理解，我们可以将变换器视作一种条件语言模型。在这种情况下，模型在给定一个输入词和一个英语句子的条件下预测下一个词。
 - en: Such models are inherently sequential as in how would you train such a model?
     You start by giving the start token(`<s>`) and the model predicts the first word
     conditioned on the English sentence. You change the weights based on if the prediction
@@ -611,6 +730,8 @@
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种模型本质上是顺序的，比如你如何训练这样的模型？你开始时给定开始标记（`<s>`），模型根据英语句子预测第一个词。你根据预测是否正确来调整权重。然后你给定开始标记和第一个词（`<s>
+    der`），模型预测第二个词。你再次调整权重。依此类推。
 - en: The transformer decoder learns just like that but the beauty is that it doesn’t
     do that in a sequential manner. It uses masking to do this calculation and thus
     takes the whole output sentence (although shifted right by adding a `<s>` token
@@ -619,15 +740,19 @@
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 变压器解码器以相同的方式学习，但美妙之处在于，它不是以顺序的方式进行的。它使用掩码来进行计算，从而在训练时处理整个输出句子（虽然通过在前面添加 ` <s>
+    ` 令牌向右偏移）。另外，请注意，在预测时我们不会将输出提供给网络。
 - en: '***Q: But, how does this masking exactly work?***'
   id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：但是，这个掩码到底是如何工作的？***'
 - en: A) Masked Multi-Head Self Attention Layer
   id: totrans-115
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: A) 掩码多头自注意力层
 - en: It works, as usual, you wear it I mean **????**. Kidding aside, as you can see
     that this time we have a **Masked** Multi-Head attention Layer in our decoder.
     This means that we will mask our shifted output (that is the input to the decoder)
@@ -636,73 +761,89 @@
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 它照常工作，你戴上它，我是说 **????**。开玩笑的，正如你所见，这次我们在解码器中有一个 **掩码** 多头注意力层。这意味着我们会对偏移的输出（即解码器的输入）进行掩码，以便网络永远看不到后续的词，否则它在训练时可以轻松复制那个词。
 - en: So, how does the mask exactly work in the masked attention layer? If you remember,
     in the attention layer we multiplied the query(Q) and keys(K) and divided them
     by sqrt(d) before taking the softmax.
   id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，掩码在掩码注意力层中是如何准确工作的？如果你记得，在注意力层中，我们将查询（Q）和键（K）相乘，并在进行 softmax 之前将它们除以 sqrt(d)。
 - en: In a masked attention layer, though, we add the resultant matrix before the
     softmax(which will be of shape (TxT)) to a masking matrix.
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 在掩码注意力层中，我们将结果矩阵（在 softmax 之前的形状为 (TxT)）加到掩码矩阵中。
 - en: 'So, In a masked layer, the function changes from:'
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在掩码层中，函数从：
 - en: '![Figure](../Images/2c0c26d49103a53b6aa4ace6762916a6.png)'
   id: totrans-120
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/2c0c26d49103a53b6aa4ace6762916a6.png)'
 - en: (*Image by author*)
   id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: (*作者提供的图像*)
 - en: '***Q: I still don’t get it, what happens if we do that?***'
   id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：我还是不明白，如果我们这样做会发生什么？***'
 - en: That’s understandable actually. Let me break it in steps. So, our resultant
     matrix(QxK/sqrt(d)) of shape (TxT) might look something like below:(The numbers
     can be big as softmax not applied yet)
   id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 这其实可以理解。让我分步骤说明。因此，我们的结果矩阵（QxK/sqrt(d)，形状为 (TxT)）可能如下所示：（由于尚未应用 softmax，数字可能较大）
 - en: '![Figure](../Images/31cc52fb62bd798ed2455178208d4d5b.png)'
   id: totrans-124
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/31cc52fb62bd798ed2455178208d4d5b.png)'
 - en: Schnelle currently attends to both Braune and Fuchs (*Image by author*)
   id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: Schnelle 目前同时关注 Braune 和 Fuchs (*作者提供的图像*)
 - en: 'The word Schnelle will now be composed of both Braune and Fuchs if we take
     the above matrix’s softmax and multiply it with the value matrix V. But we don’t
     want that, so we add the mask matrix to it to give:'
   id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们取上面矩阵的 softmax 并将其与值矩阵 V 相乘，词 Schnelle 现在将由 Braune 和 Fuchs 组成。但我们不想这样做，因此我们添加掩码矩阵来得到：
 - en: '![Figure](../Images/91883c8093be6333785af3424524d184.png)'
   id: totrans-127
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/91883c8093be6333785af3424524d184.png)'
 - en: The mask operation applied to the matrix. (*Image by author*)
   id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 对矩阵应用了掩码操作。(*作者提供的图像*)
 - en: And, now what will happen after we do the softmax step?
   id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，softmax 步骤之后会发生什么呢？
 - en: '![Figure](../Images/94e612fc5e9c04025c415c5d6f8ed70b.png)'
   id: totrans-130
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/94e612fc5e9c04025c415c5d6f8ed70b.png)'
 - en: Schnelle never attends to any word after Schnelle. (*Image by author*)
   id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: Schnelle 从未关注 Schnelle 之后的任何词。(*作者提供的图像*)
 - en: Since e^{-inf} = 0, all positions subsequent to Schnelle have been converted
     to 0\. Now, if we multiply this matrix with the value matrix V, the vector corresponding
     to Schnelle’s position in the Z vector passing through the decoder would not contain
@@ -710,25 +851,31 @@
   id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 e^{-inf} = 0，Schnelle 后续的所有位置都被转换为 0。现在，如果我们将这个矩阵与值矩阵 V 相乘，Z 矩阵中经过解码器的 Schnelle
+    位置对应的向量将不包含后续词 Braune 和 Fuchs 的任何信息，就像我们想要的那样。
 - en: And that is how the transformer takes the whole shifted output sentence at once
     and doesn’t learn in a sequential manner. Pretty neat I must say.
   id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是变压器如何一次性处理整个偏移的输出句子，而不是以顺序的方式学习。可以说相当整洁。
 - en: '***Q: Are you kidding me? That’s actually awesome.***'
   id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：你是在开玩笑吗？这实际上很棒。***'
 - en: 'So glad that you are still with me and you appreciate it. Now, coming back
     to the decoder. The next layer in the decoder is:'
   id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 很高兴你仍然跟着我，并且欣赏它。现在，回到解码器。解码器中的下一层是：
 - en: B) Multi-Headed Attention Layer
   id: totrans-136
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: B) 多头注意力层
 - en: As you can see in the decoder architecture, a Z vector(Output of encoder) flows
     from the encoder to the multi-head attention layer in the Decoder. This Z output
     from the last encoder has a special name and is often called as memory. The attention
@@ -738,10 +885,12 @@
   id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你在解码器架构中所见，一个Z向量（编码器的输出）从编码器流向解码器中的多头注意力层。这个来自最后一个编码器的Z输出有一个特别的名字，通常称为内存。注意力层将编码器输出和来自下方（移位输出）的数据作为输入，并使用注意力机制。查询向量Q是从解码器中流动的数据创建的，而键（K）和值（V）向量则来自编码器输出。
 - en: '***Q: Isn’t there any mask here?***'
   id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：这里没有掩码吗？***'
 - en: No, there is no mask here. The output coming from below is already masked and
     this allows every position in the decoder to attend over all the positions in
     the Value vector. So for every word position to be generated the decoder has access
@@ -749,23 +898,28 @@
   id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 不，这里没有掩码。来自下方的输出已经被掩码，这允许解码器中的每个位置关注值向量中的所有位置。因此，为了生成每个单词位置，解码器可以访问整个英文句子。
 - en: 'Here is a single attention layer(which will be part of a multi-head just like
     before):'
   id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个单一的注意力层（它将是多头注意力的一部分，就像之前一样）：
 - en: '![Figure](../Images/837c4d11841186b66d667a66cf1a207c.png)'
   id: totrans-141
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/837c4d11841186b66d667a66cf1a207c.png)'
 - en: (*Image by author*)
   id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: (*作者提供的图像*)
 - en: '***Q: But won’t the shapes of Q, K, and V be different this time?***'
   id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：但Q、K和V的形状这次会不同吗？***'
 - en: You can look at the figure where I have done all the weights calculation. I
     would also ask you to see the shapes of the resultant Z vector and how our weight
     matrices until now never used the target or source sentence length in any of their
@@ -777,22 +931,26 @@
   id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以查看我计算所有权重的图示。我还建议你查看结果Z向量的形状，以及我们迄今为止的权重矩阵如何在其任何维度中从未使用目标或源句子的长度。通常，形状在我们所有的矩阵计算中会被取消。例如，见上面计算2中S维度如何取消。这就是为什么在训练期间选择批次时，作者谈到紧凑的批次。也就是说，在一个批次中，所有源句子具有相似的长度。不同的批次可以有不同的源长度。
 - en: I will now talk about the skip level connections and the feed-forward layer.
     They are actually the same as in ….
   id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 我现在将讨论跳过级别连接和前馈层。它们实际上与……中的相同。
 - en: '***Q: Ok, I get it. We have the skip level connections and the FF layer and
     get a matrix of shape TxD after this whole decode operation.* *But where is the
     German translation?***'
   id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：明白了。我们有跳过级别的连接和FF层，并且在整个解码操作后得到形状为TxD的矩阵。* *但德语翻译在哪里？***'
 - en: 3\. Output Head
   id: totrans-147
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 输出头部
 - en: 'We are actually very much there now friend. Once, we are done with the transformer,
     the next thing is to add a task-specific output head on the top of the decoder
     output. This can be done by adding some linear layers and softmax on top to get
@@ -801,37 +959,45 @@
   id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 朋友，我们现在实际上已经很接近了。一旦完成了transformer，下一步是在解码器输出上添加一个任务特定的输出头。这可以通过在顶部添加一些线性层和softmax来实现，以获得*跨所有德语词汇的概率*。我们可以这样做：
 - en: '![Figure](../Images/358e58c4af26262b19003c68d0e5eeb7.png)'
   id: totrans-149
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/358e58c4af26262b19003c68d0e5eeb7.png)'
 - en: (*Image by author*)
   id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: (*作者提供的图像*)
 - en: As you can see we are able to generate probabilities. So far we know how to
     do a forward pass through this Transformer architecture. Let us see how we do
     the training of such a Neural Net Architecture.
   id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，我们能够生成概率。到目前为止，我们知道如何在这个Transformer架构中进行前向传递。让我们看看如何训练这样的神经网络架构。
 - en: 'Training:'
   id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练：
 - en: 'Till now, if we take a bird-eye view of the structure we have something like:'
   id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 迄今为止，如果我们从全局视角来看结构，我们得到的东西类似于：
 - en: '![Figure](../Images/c3b005a70e775af0c889dc8574617c98.png)'
   id: totrans-154
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c3b005a70e775af0c889dc8574617c98.png)'
 - en: (*Image by author*)
   id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: (*作者提供的图像*)
 - en: We can give an English sentence and shifted output sentence and do a forward
     pass and get the probabilities over the German vocabulary. And thus we should
     be able to use a loss function like cross-entropy where the target could be the
@@ -840,6 +1006,8 @@
   id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以给出一个英文句子和相应的输出句子，进行前向传播，得到德语词汇上的概率。因此，我们应该能够使用像交叉熵这样的损失函数，其中目标可以是我们想要的德语单词，并使用
+    Adam 优化器训练神经网络。就像任何分类示例一样。这就是你的德语。
 - en: In the paper though, the authors use slight variations of optimizers and loss.
     You can choose to skip the below 2 sections on KL Divergence Loss and Learning
     rate schedule with Adam if you want as it is done only to churn out more performance
@@ -847,19 +1015,24 @@
   id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 在论文中，尽管作者使用了优化器和损失函数的细微变化。如果你愿意，可以跳过下面的两个关于 KL 散度损失和 Adam 学习率调度的部分，因为这些只是为了从模型中挤出更多性能，而不是
+    Transformer 架构的固有部分。
 - en: '***Q: I have been here for such a long time and have I complained? *????**'
   id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：我在这里待了这么长时间，我有没有抱怨？ *????**'
 - en: Okay. Okay. I get you. Let’s do it then.
   id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，好了。我明白了。那就这么做吧。
 - en: 'A) KL Divergence with Label Smoothing:'
   id: totrans-160
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: A) 带标签平滑的 KL 散度：
 - en: KL Divergence is the information loss that happens when the distribution P is
     approximated by the distribution Q. When we use the KL Divergence loss, we try
     to estimate the target distribution(P) using the probabilities(Q) we generate
@@ -867,33 +1040,40 @@
   id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: KL 散度是当分布 P 被分布 Q 近似时发生的信息丧失。当我们使用 KL 散度损失时，我们尝试使用从模型中生成的概率（Q）来估计目标分布（P）。我们试图在训练中最小化这种信息丧失。
 - en: '![Figure](../Images/e5da050d39e1b35cbc1eb71c3867eca8.png)'
   id: totrans-162
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/e5da050d39e1b35cbc1eb71c3867eca8.png)'
 - en: (*Image by author*)
   id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: (*图片由作者提供*)
 - en: If you notice, in this form(without label smoothing which we will discuss) this
     is exactly the same as cross-entropy. Given two distributions like below.
   id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你注意到，在这种形式（没有标签平滑，我们会讨论的）下，这与交叉熵完全相同。给定如下两个分布。
 - en: '![Figure](../Images/961e1bb98f0b8d448f803a9170f452e8.png)  ![Figure](../Images/0e17ece021206f2109d722f8297c5eb8.png)'
   id: totrans-165
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/961e1bb98f0b8d448f803a9170f452e8.png)  ![图](../Images/0e17ece021206f2109d722f8297c5eb8.png)'
 - en: Target distribution and probability distribution for a word(token) (*Image by
     author*)
   id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 单词（token）的目标分布和概率分布 (*图片由作者提供*)
 - en: The KL Divergence formula just plain gives `-logq(oder)` and that is the cross-entropy
     loss.
   id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: KL 散度公式简单地给出了 `-logq(oder)`，这就是交叉熵损失。
 - en: In the paper, though the authors used label smoothing with α = 0.1 and so the
     KL Divergence loss is not cross-entropy. What that means is that in the target
     distribution the output value is substituted by (1-α) and the remaining 0.1 is
@@ -902,18 +1082,23 @@
   id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 在论文中，尽管作者使用了 α = 0.1 的标签平滑，因此 KL 散度损失不是交叉熵。这意味着在目标分布中，输出值被 (1-α) 替代，剩余的 0.1
+    分布在所有单词中。作者表示这样做是为了使模型不那么自信。
 - en: '![Figure](../Images/7a6ac740fd128a326672e21bc2ec0a02.png)  ![Figure](../Images/0e17ece021206f2109d722f8297c5eb8.png)'
   id: totrans-169
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/7a6ac740fd128a326672e21bc2ec0a02.png)  ![图](../Images/0e17ece021206f2109d722f8297c5eb8.png)'
 - en: (*Image by author*)
   id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: (*图片由作者提供*)
 - en: '***Q: But, why do we make our models not confident? It seems absurd.***'
   id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：但为什么我们让模型不那么自信呢？这似乎很荒谬。***'
 - en: Yes, it does but intuitively, you can think of it as when we give the target
     as 1 to our loss function, we have no doubts that the true label is True and others
     are not. But vocabulary is inherently a non-standardized target. For example,
@@ -922,11 +1107,14 @@
   id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，确实如此，但直观上，你可以把它理解为当我们将目标设为 1 时，我们对真正的标签为 True 和其他标签不为 True 没有疑虑。但词汇本质上是一个非标准化的目标。例如，谁能说你不能用
+    good 替代 great？所以我们在标签中加入一些混淆，以使模型不那么僵化。
 - en: B) A particular Learning Rate schedule with Adam
   id: totrans-173
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: B) Adam 的特定学习率调度
 - en: The authors use a learning rate scheduler to increase the learning rate until
     warmup steps and then decrease it using the below function. And they used the
     Adam optimizer with β¹ = 0.9, β² = 0.98\. Nothing too interesting here just some
@@ -934,38 +1122,46 @@
   id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者使用了一个学习率调度器，在预热步骤之前逐渐增加学习率，然后使用下面的函数减少学习率。他们使用了 Adam 优化器，β¹ = 0.9，β² = 0.98。这里没有特别有趣的，只是一些学习选择。
 - en: '![Figure](../Images/286b59360c1cc1432ba1ac54ceb659ab.png)'
   id: totrans-175
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/286b59360c1cc1432ba1ac54ceb659ab.png)'
 - en: Source: [Paper](https://arxiv.org/pdf/1706.03762.pdf)
   id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[论文](https://arxiv.org/pdf/1706.03762.pdf)
 - en: '***Q: But wait I just remembered that we won’t have the shifted output at the
     prediction time, would we? How do we do predictions then?***'
   id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：等等，我刚刚想到预测时不会有偏移输出，对吧？那我们怎么做预测呢？***'
 - en: If you realize what we have at this point is a generative model and we will
     have to do the predictions in a generative way as we won’t know the output target
     vector when doing prediction. So predictions are still sequential.
   id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你明白了，我们现在有一个生成模型，我们需要以生成的方式进行预测，因为在进行预测时我们不知道输出目标向量。因此，预测仍然是顺序的。
 - en: Prediction Time
   id: totrans-179
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 预测时间
 - en: '![Figure](../Images/c4feb01de609231103f61961d18ef7d4.png)'
   id: totrans-180
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c4feb01de609231103f61961d18ef7d4.png)'
 - en: Predicting with a greedy search using the Transformer (*Image by author*)
   id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用贪婪搜索进行预测的 Transformer（*作者提供的图像*）
 - en: 'This model does piece-wise predictions. In the original paper, they use the
     Beam Search to do prediction. But a greedy search would work fine as well for
     the purpose of explaining it. In the above example, I have shown how a greedy
@@ -973,17 +1169,20 @@
   id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型进行逐步预测。在原始论文中，他们使用束搜索进行预测。但贪婪搜索也足以解释这一过程。在上面的示例中，我展示了贪婪搜索的具体操作。贪婪搜索将从以下步骤开始：
 - en: Passing the whole English sentence as encoder input and just the start token `<st> `as
     shifted output(input to the decoder) to the model and doing the forward pass.
   id: totrans-183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将整个英文句子作为编码器输入，仅将起始标记`<st>`作为偏移输出（解码器的输入）传递给模型并进行前向传递。
 - en: The model will predict the next word — `der`
   id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型将预测下一个词汇——`der`
 - en: Then, we pass the whole English sentence as encoder input and add the last predicted
     word to the shifted output(input to the decoder = `<st> der`) and do the forward
     pass.
@@ -991,17 +1190,20 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，我们将整个英文句子作为编码器输入，将最后预测的词汇添加到偏移输出（解码器的输入 = `<st> der`）中，并进行前向传递。
 - en: The model will predict the next word — `schnelle`
   id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型将预测下一个词汇——`schnelle`
 - en: Passing the whole English sentence as encoder input and `<st> der schnelle` as
     shifted output(input to the decoder) to the model and doing the forward pass.
   id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将整个英文句子作为编码器输入，将`<st> der schnelle`作为偏移输出（解码器的输入）传递给模型并进行前向传递。
 - en: and so on, until the model predicts the end token `</s>` or we generate some
     maximum number of tokens(something we can define) so the translation doesn’t run
     for an infinite duration in any case it breaks.
@@ -1009,21 +1211,25 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 等等，直到模型预测出结束标记`</s>`，或者我们生成一些最大数量的标记（我们可以定义的东西），以便翻译不会在任何情况下无限运行。
 - en: '**Beam Search:**'
   id: totrans-189
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**束搜索：**'
 - en: '***Q: Now I am greedy, Tell me about beam search as well.***'
   id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问：现在我有点贪心，能告诉我关于束搜索的内容吗？***'
 - en: Okay, the beam search idea is inherently very similar to the above idea. In
     beam search, we don’t just look at the highest probability word generated but
     the top two words.
   id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，束搜索的思想本质上与上述想法非常相似。在束搜索中，我们不仅查看生成的最高概率词汇，还查看前两个词汇。
 - en: So, For example, when we gave the whole English sentence as encoder input and
     just the start token as shifted output, we get two best words as `i`(p=0.6) and `der`(p=0.3).
     We will now generate the output model for both output sequences,`<s> i` and `<s>
@@ -1036,30 +1242,39 @@
   id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 比如，当我们将整个英文句子作为编码器输入，仅将起始标记作为偏移输出时，我们得到两个最佳词汇，即`i`（p=0.6）和`der`（p=0.3）。我们现在将为两个输出序列`<s>
+    i`和`<s> der`生成输出模型，并查看生成的下一个最佳词汇的概率。例如，如果`<s> i`为下一个词汇提供了（p=0.05）的概率，而`<s> der`为下一个预测词汇提供了（p=0.5）的概率，我们将舍弃序列`<s>
+    i`，选择`<s> der`，因为句子的概率总和被最大化了（`<s> der next_word_to_der` p = 0.3+0.5，相比之下`<s>
+    i next_word_to_i` p = 0.6+0.05）。然后我们重复这一过程，以获得概率最高的句子。
 - en: Since we used the top 2 words, the beam size is 2 for this Beam Search. In the
     paper, they used beam search of size 4.
   id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们使用了前两个词汇，因此此束搜索的束大小为2。在论文中，他们使用了束搜索大小为4。
 - en: '**PS**: I showed that the English sentence is passed at every step for brevity,
     but in practice, the output of the encoder is saved and only the shifted output
     passes through the decoder at each time step.'
   id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: '**附注**：我展示了每一步传递整个英文句子以便简洁，但实际上，编码器的输出被保存，只有偏移输出在每个时间步传递给解码器。'
 - en: '***Q: Anything else you forgot to tell me? I will let you have your moment.***'
   id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问: 还有什么你忘了告诉我的吗？我让你有你的时刻。***'
 - en: 'Yes. Since you asked. Here it is:'
   id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的。既然你问了。这是：
 - en: BPE, Weight Sharing and Checkpointing
   id: totrans-197
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: BPE，权重共享和检查点
 - en: In the paper, the authors used Byte pair encoding to create a common English
     German vocabulary. They then used shared weights across both the English and german
     embedding and pre-softmax linear transformation as the embedding weight matrix
@@ -1067,6 +1282,8 @@
   id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: 在论文中，作者使用了字节对编码（Byte pair encoding）来创建一个通用的英语-德语词汇表。然后，他们在英语和德语嵌入以及预软最大线性变换中使用了共享权重，因为嵌入权重矩阵的形状（词汇长度
+    X D）是适用的。
 - en: Also, the authors average the last k checkpoints to create an ensembling effect
     to reach the performance*.* This is a pretty known technique where we average
     the weights in the last few epochs of the model to create a new model which is
@@ -1074,30 +1291,36 @@
   id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，作者将最后的k个检查点进行平均，以创建一种集成效应来提升性能*。* 这是一种非常常见的技术，我们在模型的最后几个周期中平均权重，创建一个新的模型，类似于一个集成模型。
 - en: '***Q: Can you show me some code?***'
   id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: '***问: 你能给我展示一些代码吗？***'
 - en: This post has already been so long, so I will do that in the next post. Stay
     tuned.
   id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章已经很长了，所以我会在下一篇文章中进行介绍。敬请关注。
 - en: '***Now, finally, my turn to ask the question: Did you get how a transformer
     works? Yes, or No, you can answer in the comments. :)***'
   id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: '***现在，终于轮到我提问了：你明白变换器是如何工作的吗？是，还是否，你可以在评论中回答。:)***'
 - en: '**References**'
   id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献**'
 - en: '[Attention Is All You Need](https://arxiv.org/abs/1706.03762): The Paper which
     started it all.'
   id: totrans-204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[注意力是你所需的一切](https://arxiv.org/abs/1706.03762): 这篇论文开启了一切。'
 - en: '[The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html):
     This one has all the code. Although I will write a simple transformer in the next
     post too.'
@@ -1105,23 +1328,27 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[注释Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html): 这篇文章包含了所有代码。虽然我也会在下一篇文章中编写一个简单的变换器。'
 - en: '[The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/):
     This is one of the best posts on transformers.'
   id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[插图Transformer](http://jalammar.github.io/illustrated-transformer/): 这是关于变换器的最佳文章之一。'
 - en: In this post, I covered how the Transformer architecture works from a detail-oriented,
     intuitive perspective.
   id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我从细节导向和直观的角度讲解了Transformer架构的工作原理。
 - en: If you want to learn more about NLP, I would like to call out an excellent course
     on [**Natural Language Processing**](https://click.linksynergy.com/link?id=lVarvwc5BD0&offerid=467035.11503135394&type=2&murl=https%3A%2F%2Fwww.coursera.org%2Flearn%2Flanguage-processing) from
     the Advanced Machine Learning Specialization. Do check it out.
   id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于NLP的内容，我想推荐一个来自高级机器学习专业化的优秀课程，[**自然语言处理**](https://click.linksynergy.com/link?id=lVarvwc5BD0&offerid=467035.11503135394&type=2&murl=https%3A%2F%2Fwww.coursera.org%2Flearn%2Flanguage-processing)。请查看一下。
 - en: I am going to be writing more of such posts in the future too. Let me know what
     you think about them. Should I write on heavily technical topics or more beginner
     level articles? The comment section is your friend. Use it. Also, follow me up
@@ -1129,35 +1356,42 @@
   id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: 我也会在未来撰写更多类似的文章。告诉我你对这些文章的看法。我应该写一些技术性很强的主题还是更多的入门级文章？评论区是你的朋友。使用它。同时，关注我的[**Medium**](https://medium.com/@rahul_agarwal)或订阅我的[**博客**](https://mlwhiz.ck.page/a9b8bda70c)。
 - en: And, finally a small disclaimer — There might be some affiliate links in this
     post to relevant resources, as sharing knowledge is never a bad idea.
   id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个小免责声明——这篇文章中可能会包含一些相关资源的附属链接，因为分享知识从来不是坏事。
 - en: This story was first published [**here**](https://lionbridge.ai/articles/what-are-transformer-models-in-machine-learning/).
   id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个故事首次发布于[**这里**](https://lionbridge.ai/articles/what-are-transformer-models-in-machine-learning/)。
 - en: '**Bio: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** is Senior
     Statistical Analyst at WalmartLabs. Follow him on Twitter [@mlwhiz](https://twitter.com/MLWhiz).'
   id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是WalmartLabs的高级统计分析师。在Twitter上关注他[@mlwhiz](https://twitter.com/MLWhiz)。'
 - en: '[Original](https://towardsdatascience.com/understanding-transformers-the-data-science-way-e4670a4ee076).
     Reposted with permission.'
   id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/understanding-transformers-the-data-science-way-e4670a4ee076)。获得许可后重新发布。'
 - en: '**Related:**'
   id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[A Deep Dive Into the Transformer Architecture – The Development of Transformer
     Models](/2020/08/transformer-architecture-development-transformer-models.html)'
   id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深入了解Transformer架构 – Transformer模型的发展](/2020/08/transformer-architecture-development-transformer-models.html)'
 - en: '[The Hitchhiker’s Guide to Feature Extraction](/2019/06/hitchhikers-guide-feature-extraction.html)'
   id: totrans-216
   prefs:
