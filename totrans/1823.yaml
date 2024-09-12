@@ -91,11 +91,13 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 现有的时间序列预测模型包括[ARIMA模型](https://onlinecourses.science.psu.edu/stat510/node/49)，主要用于建模时间序列数据而不直接处理季节性；[VAR模型](https://onlinecourses.science.psu.edu/stat510/node/79)、[Holt-Winters](https://www.otexts.org/fpp/7/5)季节性方法、[TAR模型](https://onlinecourses.science.psu.edu/stat510/node/82)等。不幸的是，这些算法可能无法提供所需的预测精度，因为它们可能涉及不完整、不一致或包含错误的原始数据。由于质量决策仅基于质量数据，因此进行预处理以准备进一步处理的输入信息至关重要。
 - en: Why combining models is an answer
   id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么结合模型是一个答案
 - en: 'It is clear that one particular forecasting technique cannot work in every
     situation. Each of the methods has its specific use case and can be applied with
     regard to many factors (the period over which the historical data is available,
@@ -109,11 +111,13 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，某一种预测技术无法在所有情况下都有效。每种方法都有其特定的使用场景，并且可以根据许多因素（如历史数据可用的时期、需要观察的时间段、预算规模、期望的准确度水平）和所需的输出进行应用。因此，我们面临一个问题：使用哪种方法/哪些方法才能获得所需的结果？由于不同的方法有其独特的优缺点，我们决定结合多种方法使其协同工作。这样，我们可以建立一个能够提供可靠预测的时间序列模型，以确保数据可靠性并节省时间/成本。这就是我们的方法。
 - en: The modeling process; let's dive into the details
   id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 建模过程；让我们深入了解细节
 - en: The demand data depends on various factors that can influence the result of
     the forecast, such as the price and types of goods, geographical location, the
     country’s economics, manufacturing technology, etc. As we wanted our time series
@@ -122,26 +126,31 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 需求数据依赖于多种因素，这些因素可能影响预测结果，例如价格和商品类型、地理位置、国家经济、制造技术等。为了让我们的时间序列模型为客户提供高精度预测，我们使用了[插值](https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/05Interpolation/)方法来填补缺失值，以确保输入数据的可靠性。
 - en: When conducting the time series analysis in Python 2.7., we analyzed the past
     data starting from 2010 to 2015 to calculate precisely the demand and predict
     its behavior in the future.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行 Python 2.7 的时间序列分析时，我们分析了从2010年到2015年的过去数据，以精确计算需求并预测其未来行为。
 - en: '![Fig. 1.png](../Images/86badad37232a5c8711be816bb1564bd.png)'
   id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![Fig. 1.png](../Images/86badad37232a5c8711be816bb1564bd.png)'
 - en: '*Fig. 1\. The demand data over the 2010-2015 timeframe*'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1：2010-2015年时间范围内的需求数据*'
 - en: At first sight, it may seem that there is no constant demand value, as the variance
     goes up and down, making the prediction hardly possible. But, there is a method
     that can help here.
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 起初，可能会觉得没有固定的需求值，因为方差上下波动，使得预测几乎不可能。但这里有一种方法可以帮助解决这个问题。
 - en: 'We used the decomposition method to separately extract trend (the increase
     or decrease in the series over a period of time), seasonality (the fluctuation
     that occurs within the series over each week, each month, etc.) and residuals
@@ -150,15 +159,18 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用了分解方法来分别提取趋势（系列在一段时间内的增加或减少）、季节性（系列在每周、每月等期间内发生的波动）和残差（超出预期数据范围的数据点）。利用这三部分，我们建立了加法模型：
 - en: '![add model.png](../Images/d8ddfef548870c9874d06e48bf409dce.png),'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '![add model.png](../Images/d8ddfef548870c9874d06e48bf409dce.png)'
 - en: where yt is the data, Tt is the trend-cycle component, St is the seasonal component
     and Rt is the residual component, all defined over the time period t.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 yt 是数据，Tt 是趋势-周期成分，St 是季节成分，Rt 是残差成分，所有成分都在时间周期 t 上定义。
 - en: An important first step in describing various components of the series is smoothing,
     although it does not really provide you with a ready-to-use model. In the beginning,
     we estimated the trend (behavior) component. Such methods as Moving Average, Exponential
@@ -169,14 +181,18 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 描述序列的各种成分的一个重要的第一步是平滑，尽管它实际上并未提供现成的模型。最初，我们估计了趋势（行为）成分。移动平均法、指数平滑法、Chow 自适应控制法、Winter
+    的线性和季节指数平滑方法并未提供我们预期的趋势估计精度。使用[霍德里克-普雷斯科特滤波器](https://cran.r-project.org/web/packages/mFilter/mFilter.pdf)技术获得了最可靠的结果。
 - en: '![Fig. 2.png](../Images/6f79492c6e66bb6df38997bfccb249f9.png)'
   id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![图 2.png](../Images/6f79492c6e66bb6df38997bfccb249f9.png)'
 - en: '*Fig. 2\. The estimated trend*'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 2\. 估计的趋势*'
 - en: Then, we defined the seasonality from the available data. This component could
     change over time, so we applied a powerful tool for decomposing the time series
     - the [Loess method](https://www.otexts.org/fpp/6/5). [This](https://www.otexts.org/fpp/6/5)
@@ -185,23 +201,28 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们从可用数据中定义了季节性。这个成分可能会随时间变化，因此我们应用了一个强大的时间序列分解工具——[Loess 方法](https://www.otexts.org/fpp/6/5)。[这种](https://www.otexts.org/fpp/6/5)方法可以处理任何类型的季节性，变化率可以由用户控制。
 - en: '![Fig. 3.png](../Images/eefcf56cefa0b1d4fb572f5c49d8f160.png)'
   id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![图 3.png](../Images/eefcf56cefa0b1d4fb572f5c49d8f160.png)'
 - en: '![Fig. 4.png](../Images/27e4843cceabd21b1cd4b09856a4c4d9.png)'
   id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![图 4.png](../Images/27e4843cceabd21b1cd4b09856a4c4d9.png)'
 - en: '*Fig. 3\. Multi-seasonality*'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 3\. 多季节性*'
 - en: We obtained a multi-seasonal component with some high and low variances, causing
     large fluctuations.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们获得了一个具有较高和较低方差的多季节成分，导致了较大的波动。
 - en: After applying [Elastic Net Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html)
     and [Fourier transformation](http://www.le.ac.uk/users/dsgp1/COURSES/LEIMETZ/FOURIER.pdf),
     we built a forecast for the trend based on the results obtained. The approximation
@@ -209,53 +230,65 @@
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在应用[弹性网回归](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html)和[傅里叶变换](http://www.le.ac.uk/users/dsgp1/COURSES/LEIMETZ/FOURIER.pdf)后，我们基于获得的结果构建了趋势预测。趋势的近似可以从以下公式中找到，
 - en: '![Equation 2](../Images/e30b3af647ca14f237c8b792b2f81dea.png)'
   id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![Equation 2](../Images/e30b3af647ca14f237c8b792b2f81dea.png)'
 - en: where Pn(t) is a degree polynomial and Ak is a set of indexes, including the
     first k indexes with highest amplitudes.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 Pn(t) 是一个多项式，Ak 是一组索引，包括前 k 个幅度最大的索引。
 - en: Then, we calculated the Fourier coefficients using The Discrete Fourier Transform
     ( DFT).
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们使用离散傅里叶变换（DFT）计算了傅里叶系数。
 - en: '![Fig. 4](../Images/086695b214ec1256df3fc9e7530c74a4.png)'
   id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![图 4](../Images/086695b214ec1256df3fc9e7530c74a4.png)'
 - en: '*Fig. 4\. The example of code of the DFT in Python*'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 4\. Python 中 DFT 代码示例*'
 - en: The effect of the Fourier terms, used as external regressors in the model, is
     visualised below.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型中使用的外部回归因子的傅里叶项效果如下图所示。
 - en: '![Fig. 5](../Images/bcd8ece08daf2471c898b20faa7f1634.png)'
   id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![图 5](../Images/bcd8ece08daf2471c898b20faa7f1634.png)'
 - en: '*Fig. 5\. The visualised effect of Fourier terms*'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 5\. 傅里叶项的可视化效果*'
 - en: We built the trend prediction using the additive model.
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用加法模型构建了趋势预测。
 - en: '![Fig. 6](../Images/87d3d4c8cbc944be9ded0491037ac1c5.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![图 6](../Images/87d3d4c8cbc944be9ded0491037ac1c5.png)'
 - en: '*Fig. 6\. Trend prediction*'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 6\. 趋势预测*'
 - en: When the trend and seasonal components are removed from the model, we can obtain
     the residuals (the difference between an observed value and its forecast based
     on other observations) from the remaining part to validate and fit our mathematical
@@ -263,14 +296,17 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 当模型中去除趋势和季节性成分后，我们可以从剩余部分获得残差（观察值与基于其他观察的预测值之间的差异），以验证和拟合我们的数学模型。
 - en: '![Fig. 7](../Images/6417102941576a34f4eb53cbdaea22b8.png)'
   id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![图 7](../Images/6417102941576a34f4eb53cbdaea22b8.png)'
 - en: '*Fig. 7\. Obtained residuals*'
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 7\. 获得的残差*'
 - en: You may notice that there are some negative values present, showing that something
     unusual was happening during that period of time. We aimed to find out the circumstances
     causing such behaviour, so we came up with an idea to compile the outliers with
@@ -281,38 +317,46 @@
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会注意到存在一些负值，显示在那段时间内发生了一些异常情况。我们旨在找出导致这种行为的情况，因此我们提出了一个主意，将异常值与一个简单的日历进行编译，并发现这些负值与拉马丹、开斋节等公共假期紧密相关。在收集并总结所有数据后，我们应用了基于之前数据点的机器学习方法作为输入特征，并使用了时间序列预测的机器学习策略。
 - en: After a few training sessions conducted with ML models, we built a prediction
     for residuals that can be observed below.
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行了一些与机器学习模型的训练后，我们建立了一个残差预测模型，如下所示。
 - en: '![Fig. 8](../Images/cf4526aa370979c19e6bf0a1f6362325.png)'
   id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图 8](../Images/cf4526aa370979c19e6bf0a1f6362325.png)'
 - en: '*Fig. 8\. Prediction for residuals*'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 8\. 残差预测*'
 - en: As a result, we got a final forecasting model that minimizes the mean absolute
     percentage error (MAPE) to 6% for one particular city and 10% for the entire country
     in general.
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果，我们得到了一个最终的预测模型，将某一特定城市的平均绝对百分比误差（MAPE）降低到6%，而全国范围内的误差为10%。
 - en: '![Fig. 9](../Images/9c4e934d50df51c7838165b2a9f11b5c.png)'
   id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![图 9](../Images/9c4e934d50df51c7838165b2a9f11b5c.png)'
 - en: '*Fig. 9\. The forecast at the original scale*'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 9\. 原始尺度下的预测*'
 - en: A 24-times faster prediction? Yes, it's possible
   id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 预测速度提高了24倍？是的，这是可能的。
 - en: When building our model, we attempted not only to use the available information,
     but also discover the factors which could affect the results. This approach helped
     us develop the model generating more accurate forecasting results faster than
@@ -322,6 +366,7 @@
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在构建我们的模型时，我们不仅尝试使用现有信息，还发现可能影响结果的因素。这种方法帮助我们开发了一个比现有模型更快生成更准确预测结果的模型。例如，为了训练开发出的模型预测300个不同城市的数据，我们需要大约15分钟，而其他方法则需要约6小时。
 - en: Also, the fact that the deviation between the actual demand and the predicted
     demand was only 6% resulted in possibilities to resolve mismatches between supply
     and demand. Now, the customer can more quickly and more easily plan the capacity,
@@ -329,11 +374,13 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，实际需求与预测需求之间的偏差仅为6%，这使得解决供应与需求之间的不匹配成为可能。现在，客户可以更快、更容易地规划产能，降低未来的风险并优化库存。
 - en: What’s next?
   id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 接下来是什么？
 - en: Well, the results are quite promising. And there is a long way we can go further
     in improvement of this model, so it could provide accurate long-term forecasts
     as well. As for now, the degree of error for long-term predictions is still quite
@@ -341,6 +388,7 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，结果相当有前景。而且，我们还有很长的路要走以进一步改进这个模型，使其能够提供准确的长期预测。目前，长期预测的误差程度仍然相当高。这听起来像是一个挑战？敬请关注！一些新的实验即将到来！
 - en: '**Bio: [Taras Firman](https://www.facebook.com/profile.php?id=100009049483326)**
     is a Data Scientist at ELEKS, working with statistical analysis, optimization,
     forecasting and other serious stuff. A mathematician by education and by calling,
@@ -352,15 +400,19 @@
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [Taras Firman](https://www.facebook.com/profile.php?id=100009049483326)**
+    是ELEKS的数据科学家，专注于统计分析、优化、预测和其他重要任务。作为数学家，Taras在攻读研究生课程的同时发展自己的专业技能，并教授运筹学和数据分析。此外，他从不遗漏任何有趣的数据科学或机器学习新闻，且因为有很多想法，他也决定写博客。当他完成数学和数据科学工作时，Taras还对足球和音乐充满热情。'
 - en: '**Related:**'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Deriving Better Insights from Time Series Data with Cycle Plots](/2016/03/better-insights-time-series-cycle-plots.html)'
   id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从时间序列数据中提取更好见解的循环图](/2016/03/better-insights-time-series-cycle-plots.html)'
 - en: '[A simple approach to anomaly detection in periodic big data streams](/2016/08/anomaly-detection-periodic-big-data-streams.html)'
   id: totrans-63
   prefs:
