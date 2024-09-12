@@ -1,279 +1,431 @@
 - en: Time Series Forecasting with statsmodels and Prophet
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 statsmodels 和 Prophet 进行时间序列预测
 - en: 原文：[https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/4a5c14cb8db13d4f46524c0ca6b33b11.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/4a5c14cb8db13d4f46524c0ca6b33b11.png)'
 - en: Image by [jcomp](https://www.freepik.com/free-vector/businessmen-invest-market-gain-success-from-investing_27306158.htm#query=forecast&position=6&from_view=search&track=sph#position=6&query=forecast)
     on [Freepik](https://www.freepik.com/)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [jcomp](https://www.freepik.com/free-vector/businessmen-invest-market-gain-success-from-investing_27306158.htm#query=forecast&position=6&from_view=search&track=sph#position=6&query=forecast)
+    在 [Freepik](https://www.freepik.com/)
 - en: Time series is a unique dataset within the data science field. The data is recorded
     on time-frequency (e.g., daily, weekly, monthly, etc.), and each observation is
     related to the other. The time series data is valuable when you want to analyze
     what happens to your data over time and create future predictions.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列是一种在数据科学领域独特的数据集。数据是按时间频率（例如：每日、每周、每月等）记录的，每个观察值与其他观察值相关。时间序列数据在你想分析数据随时间变化的情况并进行未来预测时非常有价值。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Time series forecasting is a method to create future predictions based on historical
     time series data. There are many statistical methods for time series forecasting,
     such as [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average)
     or [Exponential Smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测是一种基于历史时间序列数据创建未来预测的方法。时间序列预测有许多统计方法，例如 [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average)
+    或 [指数平滑](https://en.wikipedia.org/wiki/Exponential_smoothing)。
 - en: Time series forecasting is often encountered in the business, so it’s beneficial
     for the data scientist to know how to develop a time series model. In this article,
     we will learn how to forecast time series using two popular forecastings Python
     packages; statsmodels and Prophet. Let’s get into it.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测在商业中经常遇到，因此数据科学家了解如何开发时间序列模型是非常有益的。在本文中，我们将学习如何使用两个流行的预测 Python 包：statsmodels
+    和 Prophet 来进行时间序列预测。让我们开始吧。
 - en: Time Series Forecasting with statsmodels
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 statsmodels 进行时间序列预测
 - en: 'The [statsmodels](https://www.statsmodels.org/stable/index.html) Python package
     is an open-source package offering various statistical models, including the time
     series forecasting model. Let’s try out the package with an example dataset. This
     article will use the [Digital Currency Time Series](https://www.kaggle.com/datasets/ahmedadam415/digital-currency-time-series)
     data from Kaggle (CC0: Public Domain).'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[statsmodels](https://www.statsmodels.org/stable/index.html) Python 包是一个开源包，提供了各种统计模型，包括时间序列预测模型。让我们用一个示例数据集来试用这个包。本文将使用来自
+    Kaggle 的 [数字货币时间序列](https://www.kaggle.com/datasets/ahmedadam415/digital-currency-time-series)
+    数据（CC0：公共领域）。'
 - en: Let’s clean up the data and take a look at the dataset that we have.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们清理数据，看看我们拥有的数据集。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/e2438d8f02379622ea1332c80b63473c.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/e2438d8f02379622ea1332c80b63473c.png)'
 - en: For our example, let’s say we want to forecast the ‘close_USD’ variable. Let’s
     see how the data pattern over time.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的示例，假设我们想预测‘close_USD’变量。让我们看看数据随时间的模式。
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/20f95d59228f79f03a7303d94d011edf.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/20f95d59228f79f03a7303d94d011edf.png)'
 - en: Let’s build the forecast model based on our above data. Before modeling, let’s
     split the data into train and test data.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们基于上述数据构建预测模型。在建模之前，我们先将数据分为训练数据和测试数据。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: We don’t split the data randomly because it’s time series data, and we need
     to preserve the order. Instead, we try to have the train data from earlier and
     the test data from the latest data.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们不会随机分割数据，因为这是时间序列数据，我们需要保持顺序。相反，我们尝试从较早的数据中获取训练数据，从最新的数据中获取测试数据。
 - en: Let’s use statsmodels to create a forecast model. The [statsmodel](https://www.statsmodels.org/stable/tsa.html)
     provides many time series model APIs, but we would use the ARIMA model as our
     example.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用 statsmodels 创建一个预测模型。[statsmodel](https://www.statsmodels.org/stable/tsa.html)
+    提供了许多时间序列模型 API，但我们将使用 ARIMA 模型作为示例。
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/6d8bb1bef7463a9abc255d3504026004.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/6d8bb1bef7463a9abc255d3504026004.png)'
 - en: In our example above, we use the ARIMA model from statsmodels as the forecasting
     model and try to predict the next 200 days.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的示例中，我们使用 statsmodels 的 ARIMA 模型作为预测模型，并尝试预测接下来的 200 天。
 - en: Is the model result good? Let’s try to evaluate them. The time series model
     evaluation usually uses a visualization graph to compare the actual and prediction
     with regression metrics such as Mean Absolute Error (MAE), Root Mean Square Error
     (RMSE), and MAPE (Mean Absolute Percentage Error).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型结果好吗？让我们来评估一下。时间序列模型评估通常使用可视化图来比较实际值和预测值，并使用回归指标如均绝对误差 (MAE)、均方根误差 (RMSE)
+    和均绝对百分比误差 (MAPE)。
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The score above looks fine, but let’s see how it is when we visualize them.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述评分看起来不错，但我们来看看它们的可视化效果如何。
 - en: '[PRE6]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/287a6cd87f9b674343d562f5b6d2e203.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/287a6cd87f9b674343d562f5b6d2e203.png)'
 - en: As we can see, the forecast was worse as our model can’t forecast the increasing
     trend. The model ARIMA that we use seems too simple for forecasting.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，预测效果较差，因为我们的模型无法预测上升趋势。我们使用的 ARIMA 模型似乎过于简单。
 - en: Maybe it’s better if we try using another model outside of statsmodels. Let’s
     try out the famous prophet package from Facebook.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许我们可以尝试使用 statsmodels 之外的其他模型。让我们尝试一下 Facebook 的著名 Prophet 包。
 - en: Time Series Forecasting with Prophet
+  id: totrans-36
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Prophet 进行时间序列预测
 - en: '[Prophet](https://facebook.github.io/prophet/) is a time series forecasting
     model package that works best on data with seasonal effects. Prophet was also
     considered a robust forecast model because it could handle missing data and outliers.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Prophet](https://facebook.github.io/prophet/) 是一个时间序列预测模型包，适用于具有季节性影响的数据。Prophet
+    还被认为是一个稳健的预测模型，因为它可以处理缺失数据和异常值。'
 - en: Let’s try out the Prophet package. First, we need to install the package.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们试试 Prophet 包。首先，我们需要安装这个包。
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'After that, we must prepare our dataset for the forecasting model training.
     Prophet has a specific requirement: the time column needs to be named as ‘ds’
     and the value as ‘y’.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，我们必须准备数据集以进行预测模型训练。Prophet 有一个特定要求：时间列需要命名为‘ds’，值列需要命名为‘y’。
 - en: '[PRE8]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: With our data ready, let’s try to create forecast prediction based on the data.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据准备好之后，我们来尝试基于数据创建预测。
 - en: '[PRE9]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/3d34d319e0a2556190835b0f253327a3.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/3d34d319e0a2556190835b0f253327a3.png)'
 - en: What was great about the Prophet was that every forecast data point was detailed
     for us users to understand. However, it is hard to understand the result just
     from the data. So, we could try to visualize them using Prophet.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: Prophet 的优点在于每个预测数据点都为用户提供了详细的信息。然而，仅从数据中很难理解结果。因此，我们可以尝试使用 Prophet 对其进行可视化。
 - en: '[PRE10]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/7d894c1a2dd2a101a478702e2a019f24.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/7d894c1a2dd2a101a478702e2a019f24.png)'
 - en: The predictions plot function from the model would provide us with how confident
     the predictions were. From the above plot, we can see that the prediction has
     an upward trend but with increased uncertainty the longer the predictions are.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的预测绘图函数会提供我们对预测的信心程度。从上述图中，我们可以看到预测有上升的趋势，但随着预测时间的延长，不确定性增加。
 - en: It is also possible to examine the forecast components with the following function.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 还可以使用以下函数检查预测组件。
 - en: '[PRE11]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/35ada67124732d053e9e2b0442ba5590.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 statsmodels 和 Prophet 进行时间序列预测](../Images/35ada67124732d053e9e2b0442ba5590.png)'
 - en: By default, we would obtain the data trend with yearly and weekly seasonality.
     It’s a good way to explain what happens with our data.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，我们会获得具有年度和每周季节性的数据显示趋势。这是一种很好的方式来解释数据的变化情况。
 - en: 'Would it be possible to evaluate the Prophet model as well? Absolutely. Prophet
     includes a diagnostic measurement that we can use: [time series cross-validation](https://facebook.github.io/prophet/docs/diagnostics.html#cross-validation).
     The method uses part of the historical data and fits the model each time using
     data up to the cutoff point. Then the Prophet would compare the predictions with
     the actual ones. Let’s try using the code.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 是否也可以评估Prophet模型？当然可以。Prophet包括一个我们可以使用的诊断测量：[时间序列交叉验证](https://facebook.github.io/prophet/docs/diagnostics.html#cross-validation)。该方法使用历史数据的一部分，每次使用截止点之前的数据拟合模型。然后Prophet将预测结果与实际结果进行比较。让我们尝试使用代码。
 - en: '[PRE12]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/aca174fb6e6da3d9088aed28c1e5389b.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![使用statsmodels和Prophet进行时间序列预测](../Images/aca174fb6e6da3d9088aed28c1e5389b.png)'
 - en: In the result above, we acquired the evaluation result from the actual result
     compared to the forecast in each forecast day. It’s also possible to visualize
     the result with the following code.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述结果中，我们获得了每个预测日实际结果与预测结果的评估结果。也可以使用以下代码可视化结果。
 - en: '[PRE13]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Time Series Forecasting with statsmodels and Prophet](../Images/1bf2ff18fca3703cab513326672fb7bf.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![使用statsmodels和Prophet进行时间序列预测](../Images/1bf2ff18fca3703cab513326672fb7bf.png)'
 - en: If we see the plot above, we can see the prediction error was vary following
     the days, and it could achieve 50% error at some points. This way, we might want
     to tweak the model further to fix the error. You can check the [documentation](https://facebook.github.io/prophet/docs/)
     for further exploration.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们查看上面的图表，可以看到预测误差随着天数的变化而变化，在某些点可能达到50%的误差。这样，我们可能需要进一步调整模型以修正误差。你可以查看[文档](https://facebook.github.io/prophet/docs/)以进行进一步探索。
 - en: Conclusion
+  id: totrans-60
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Forecasting is one of the common cases that occur in the business. One easy
     way to develop a forecasting model is using the statsforecast and Prophet Python
     packages. In this article, we learn how to create a forecast model and evaluate
     them with statsforecast and Prophet.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测是商业中常见的情况之一。开发预测模型的一种简单方法是使用statsforecast和Prophet Python包。本文将介绍如何创建预测模型并使用statsforecast和Prophet进行评估。
 - en: '**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**
     is a data science assistant manager and data writer. While working full-time at
     Allianz Indonesia, he loves to share Python and Data tips via social media and
     writing media.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**
+    是一名数据科学助理经理和数据撰稿人。在全职工作于印尼安联期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Ploomber、Arima、Python和Slurm进行时间序列预测](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用XGBoost进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解释性预测和最新预测：最先进的深度学习…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
 - en: '[Forecasting Future Events: The Capabilities and Limitations of AI and ML](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[预测未来事件：AI和ML的能力与局限性](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)'
 - en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习现代预测技术以帮助预测未来业务…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
 - en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[市场数据和新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
