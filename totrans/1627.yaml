@@ -107,19 +107,23 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: F1是平衡精度和召回率的阈值（换句话说，它在减少假阳性和假阴性方面寻求一个相对平衡的阈值）。问题在于，在商业中，假阳性（类型1错误）和假阴性（类型2错误）相关的成本*很少*相等。实际上，在许多情况下，假阴性的成本要高得多（可能是3倍或更多！）。
 - en: '**EXAMPLE: COST OF TYPE 1 AND TYPE 2 ERRORS FOR EMPLOYEE ATTRITION**'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例: 员工流失的类型1和类型2错误成本**'
 - en: We develop a prediction algorithm that finds employees are 5X more likely when
     work too much overtime.
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们开发了一个预测算法，该算法发现员工在加班过多时离职的可能性是正常情况的5倍。
 - en: '![Expected Value](../Images/7bf139ec477fcfceaa6a51bb379f9957.png)'
   id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![期望值](../Images/7bf139ec477fcfceaa6a51bb379f9957.png)'
 - en: '*Calculating Expected Attrition Cost From H2O + LIME Results*We develop a proposal
     to reduce overtime using the extremely powerful H2O classification model along
     with LIME, which explains the results. Like many algorithms, by default we optimize
@@ -134,10 +138,13 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*从H2O + LIME结果计算预期流失成本*我们开发了一个建议，使用极其强大的H2O分类模型以及LIME来减少加班，并解释结果。像许多算法一样，我们默认通过处理类型1和类型2错误来优化。这会以大致相同的比例错误分类离职员工（类型2错误）和留任员工（类型1错误）。估计减少加班对员工的成本是如果员工离职，生产力损失的30%。然而，**错误减少留任员工的加班成本是类型1错误的30%或3倍，还把它们当作相同处理！**
+    ***商业问题的最佳阈值***几乎总是低于F1阈值。这引出了你需要了解期望值框架的第二个理由。'
 - en: '**REASON #2: the solution is Maximizing for Expected Value**'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**理由 #2: 解决方案是最大化期望值**'
 - en: When we have a calculation to determine the expected value using business costs,
     we can perform the calculation iteratively to find the optimal threshold that **maximizes
     the expected profit or savings of the business problem**. By iteratively calculating
@@ -146,6 +153,7 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们需要使用商业成本来计算期望值时，我们可以通过迭代计算来找到**最大化商业问题期望利润或节省的最佳阈值**。通过在不同的阈值下迭代计算节省金额，我们可以查看哪个阈值优化了目标方法。
 - en: In the detailed example, we can see in the threshold optimization results that
     the maximum savings ($546K) occurs at a threshold of 0.149, which is **16% more
     savings** than the savings at threshold at max F1 ($470K). It’s worth mentioning
@@ -156,24 +164,30 @@
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在详细的示例中，我们可以看到，在阈值优化结果中，最大节省（$546K）发生在阈值0.149处，这比在最大F1阈值下的节省（$470K）**节省了16%**。值得一提的是，最大化F1的阈值是0.280，对于包含总人口15%的测试集来说，由于不够优化，导致了$76K的额外成本（$546K
+    - $470K）。**将这种低效扩展到整个数据集（训练数据 + 测试数据），这是每年错失的$500K机会！**
 - en: '![Optimization results](../Images/9e5a1ad59956d2f362432d653c954343.png)'
   id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![优化结果](../Images/9e5a1ad59956d2f362432d653c954343.png)'
 - en: However, the model is based on a number of assumptions including the average
     overtime percentage, the anticipated net profit per employee, and so on.
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，模型基于多个假设，包括平均加班百分比、每位员工的预期净利润等等。
 - en: '**REASON #3: Expected value CAN TEST for VARIABILITY IN ASSUMPTIONS**'
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**理由 #3: 期望值可以测试假设中的变异性**'
 - en: We can use Sensitivity Analysis along with Expected Value. We test the effect
     of model assumptions on expected profit (or savings) of an employee quitting
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用灵敏度分析以及期望值。我们测试模型假设对员工离职期望利润（或节省）的影响。
 - en: In the human resources example below, we tested for a range of values *average
     overtime percentage* and *net revenue per employee* because our estimates for
     the future may be off. In the **Sensitivity Analysis Results** shown below, we
@@ -183,14 +197,17 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面的人力资源示例中，我们测试了*平均加班百分比*和*每位员工的净收入*的一系列值，因为我们对未来的估计可能存在偏差。在下面显示的**敏感性分析结果**中，我们可以在盈利能力热图中看到，只要平均加班百分比小于或等于25%，实施有针对性的加班政策就能为组织节省资金。
 - en: '![Profitability heatmap](../Images/0b3b0d548e8b2c8f534b89473249aade.png)'
   id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![盈利能力热图](../Images/0b3b0d548e8b2c8f534b89473249aade.png)'
 - en: '*Sensitivity Analysis Results (Profitability Heat Map)*'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*敏感性分析结果（盈利能力热图）*'
 - en: Wow! Not only can we test for the optimal threshold that maximizes the business
     case, we can use expected value to test for a range of inputs that are variable
     from year to year and person to person. If you’re interested in learning how to
@@ -200,6 +217,8 @@
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇！我们不仅可以测试最大化商业案例的最佳阈值，还可以使用期望值测试每年和每人变化的输入范围。如果你有兴趣了解如何将期望值框架应用于你的业务，我们会展示如何操作，提供代码，并展示在我们在[**数据科学商业课程（DS4B
+    201课程）**](mailto:https://university.business-science.io/p/hr201-using-machine-learning-h2o-lime-to-predict-employee-turnover/?product_id=635023&coupon_code=DS4B_15)**中的其他行业应用实例。
 - en: '**Bio: [Matt Dancho](https://www.linkedin.com/in/mattdancho/)** is a Data-Driven
     Decision Maker. Passionate about learning new tools, building software and working
     with people to gain insights and make better decisions. Enjoys working with teams
@@ -207,57 +226,69 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Matt Dancho](https://www.linkedin.com/in/mattdancho/)** 是一位数据驱动的决策者。热衷于学习新工具、开发软件和与人合作以获取见解并做出更好的决策。喜欢与团队和个人合作以推动运营卓越。驻扎在美国宾夕法尼亚州州立大学。'
 - en: '**Related:**'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The 4 Levels of Data Usage in Data Science](https://www.kdnuggets.com/2018/07/4-levels-data-usage-data-science.html)'
   id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的数据使用的4个层次](https://www.kdnuggets.com/2018/07/4-levels-data-usage-data-science.html)'
 - en: '[Deep Learning in H2O using R](https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html)'
   id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用R进行H2O深度学习](https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html)'
 - en: '[Scientific debt – what does it mean for Data Science?](https://www.kdnuggets.com/2018/05/scientific-debt.html)'
   id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[科学债务——它对数据科学意味着什么？](https://www.kdnuggets.com/2018/05/scientific-debt.html)'
 - en: More On This Topic
   id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[MLOps Is a Mess But That''s to be Expected](https://www.kdnuggets.com/2022/03/mlops-mess-expected.html)'
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps 一团糟，但这在意料之中](https://www.kdnuggets.com/2022/03/mlops-mess-expected.html)'
 - en: '[5 Reasons Why You Need Synthetic Data](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)'
   id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个你需要合成数据的理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)'
 - en: '[Top 5 Reasons Why You Should Avoid a Data Science Career](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)'
   id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[避免数据科学职业的前5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)'
 - en: '[7 Reasons Why You''re Struggling to Land a Data Science Job](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)'
   id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 个你为何难以找到数据科学工作的理由](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)'
 - en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
   id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习没有为我的业务带来价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
 - en: '[7 Reasons Why You Shouldn''t Become a Data Scientist](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)'
   id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 个你不应该成为数据科学家的理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)'
