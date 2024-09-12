@@ -1,11 +1,15 @@
 - en: Geocoding for Data Scientists
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据科学家的地理编码
 - en: 原文：[https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html](https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html](https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html)
 - en: When data scientists need to know everything there is to know about the “where”
     of their data, they often turn to Geographic Information Systems (GIS). GIS is
     a complicated set of technologies and programs that serve a wide variety of purposes,
@@ -22,40 +26,63 @@
     environments to integrate geocoding into your workflow. These tools provide the
     basis for transforming data into spatial data and open the door for more complex
     geographic analysis.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 当数据科学家需要了解有关数据“位置”的所有信息时，他们通常会转向地理信息系统（GIS）。GIS 是一套复杂的技术和程序，服务于各种目的，但华盛顿大学提供了一个相当全面的定义，称“地理信息系统是一个复杂的相关或连接事物的排列，其目的是传达有关地球表面特征的知识”（Lawler
+    et al）。GIS 涵盖了从获取到可视化处理空间数据的一系列技术，其中许多技术即使你不是 GIS 专家也是有价值的工具。本文提供了地理编码的全面概述，并通过
+    Python 演示了几个实际应用。具体而言，你将使用地址确定纽约市的一家比萨店的确切位置，并将其与附近公园的数据连接起来。尽管演示使用了 Python 代码，但核心概念可以应用于许多编程环境中，将地理编码集成到你的工作流程中。这些工具为将数据转换为空间数据提供了基础，并为更复杂的地理分析打开了大门。
 - en: '![XXXXX](../Images/841f52699d19a08a7845df4f5da16c99.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/841f52699d19a08a7845df4f5da16c99.png)'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT 部门'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What is Geocoding?
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是地理编码？
 - en: 'Geocoding is most commonly defined as the transformation of address data into
     mapping coordinates. Usually, this involves detecting a street name in an address,
     matching that street to the boundaries of its real-world counterpart in a database,
@@ -70,19 +97,31 @@
     the address can lie on any street called “Broadway” in New York city, so you can
     execute the following Python code to query the NYC Open Data SODA API for all
     streets named “Broadway.”'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 地理编码通常被定义为将地址数据转换为映射坐标。通常，这涉及到检测地址中的街道名称，将该街道与数据库中其实际世界对应物的边界匹配，然后估计在街道上放置地址的位置。以纽约百老汇的一个比萨店地址为例：2709
+    Broadway, New York, NY 10025。第一步是找到适合的路网形状文件。注意在这种情况下，地址的城市和州为“New York, NY”。幸运的是，纽约市在[NYC
+    Open Data](https://data.cityofnewyork.us/City-Government/road/svwp-sbcd)页面（CSCL
+    PUB）上发布了详细的道路信息。第二步，检查街道名称“Broadway”。你现在知道地址可能位于纽约市任何名为“Broadway”的街道上，因此你可以执行以下Python代码查询NYC
+    Open Data SODA API中所有名为“Broadway”的街道。
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: There are over 700 results of this query, but that doesn’t mean you have to
     check 700 streets to find your pizza. Visualizing the data, you can see that there
     are 3 main Broadway streets and a few smaller ones.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个查询结果超过700个，但这并不意味着你必须检查700条街道才能找到你的比萨。通过数据可视化，你可以看到有3条主要的百老汇街和几条较小的街道。
 - en: '![XXXXX](../Images/efc594233f7ae3f15dbc2b35215d7b5c.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/efc594233f7ae3f15dbc2b35215d7b5c.png)'
 - en: The reason for this is that each street is broken up into sections that correspond
     roughly to a block, allowing for a more granular look at the data. The next step
     of the process is determining exactly which of these sections the address is on
@@ -92,37 +131,53 @@
     and right sides of the street. To locate the correct segment, the following code
     applies filters to find the street segment whose ZIP code matches the address’
     ZIP code and whose address range contains the street number of the address.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为每条街道被分割成与街区大致相对应的部分，从而允许更细致地查看数据。该过程的下一步是使用邮政编码和街道号码确定地址所在的具体部分。数据集中每个街道段包含街道两侧建筑的地址范围。同样，每个段还包含街道两侧的邮政编码。为了定位正确的段，以下代码应用过滤器，找到邮政编码与地址的邮政编码匹配且地址范围包含地址的街道号码的街道段。
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This narrows the list to the one street segment seen below.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将列表缩小到下面看到的一条街道段。
 - en: '![XXXXX](../Images/1e654dbb27b4e0215c493a3cfcbffad0.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/1e654dbb27b4e0215c493a3cfcbffad0.png)'
 - en: The final task is to determine where the address lies on this line. This is
     done by placing the street number inside the address range for the segment, normalizing
     to determine how far along the line the address should be, and applying that constant
     to the coordinates of the endpoints of the line to get the coordinates of the
     address. The following code outlines this process.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终任务是确定地址在这条线上的位置。这是通过将街道号码放置在该段的地址范围内，规范化以确定地址应该在这条线上的位置，并将该常数应用于线的端点坐标以获得地址的坐标来完成的。以下代码概述了这一过程。
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Having finished geocoding the address, it is now possible to plot the location
     of this pizza parlor on a map to understand its location. Since the code above
     looked at information pertaining to the left side of a street segment, the actual
     location will be slightly left of the plotted point in a building on the left
     side of the road. You finally know where you can get some pizza.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成地址地理编码后，现在可以在地图上绘制这家比萨店的位置，以了解其位置。由于上述代码查看了街道段左侧的信息，因此实际位置将略微偏左于绘制的点，位于道路左侧的建筑物中。你终于知道了哪里可以吃到比萨饼。
 - en: '![XXXXX](../Images/9f6b44b6c2b5be7eb3d6ebfdb3428a0d.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/9f6b44b6c2b5be7eb3d6ebfdb3428a0d.png)'
 - en: This process covers what is most commonly referred to as geocoding, but it is
     not the only way the term is used. You may also see geocoding refer to the process
     of transferring landmark names to coordinates, ZIP codes to coordinates, or coordinates
@@ -131,8 +186,10 @@
     these would be “the transfer between approximate, natural language descriptions
     of locations and geographic coordinates.” So, any time you need to move between
     these two kinds of data, consider geocoding as a solution.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程涵盖了通常被称为地理编码的内容，但这不是该术语的唯一用法。你可能还会看到地理编码指的是将地标名称转化为坐标、邮政编码转化为坐标，或将坐标转化为GIS矢量的过程。你甚至可能会听到逆向地理编码（稍后会介绍）被称为地理编码。一个更宽松的地理编码定义是“在位置的近似自然语言描述和地理坐标之间的转换。”所以，每当你需要在这两种数据之间转换时，可以考虑地理编码作为解决方案。
 - en: As an alternative to repeating this process whenever you need to geocode addresses,
     a variety of API endpoints, such as the [U.S. Census Bureau Geocoder](https://geocoding.geo.census.gov/geocoder/)
     and the [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview),
@@ -143,20 +200,27 @@
     instead of on a nearby street. The following sections outline how to use these
     services to fit geocoding into your data pipeline using the U.S. Census Bureau
     Geocoder as an example.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为重复进行地理编码的替代方法，许多API端点，如[美国人口普查局地理编码器](https://geocoding.geo.census.gov/geocoder/)和[谷歌地理编码API](https://developers.google.com/maps/documentation/geocoding/overview)，提供了免费的准确地理编码服务。一些付费选项，如[Esri的ArcGIS](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview)、[Geocodio](https://www.geocod.io/)和[Smarty](https://www.smarty.com/)甚至为特定地址提供了屋顶级别的准确性，这意味着返回的坐标正好落在建筑物的屋顶上，而不是附近的街道上。以下部分将介绍如何使用这些服务，将地理编码融入你的数据处理流程，以美国人口普查局地理编码器为例。
 - en: How to Geocode
+  id: totrans-25
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何进行地理编码
 - en: In order to get the highest possible accuracy when geocoding, you should always
     begin by ensuring that your addresses are formatted to fit the standards of your
     chosen service. This will differ slightly between each service, but a common format
     is the USPS format of “PRIMARY# STREET, CITY, STATE, ZIP” where STATE is an abbreviation
     code, PRIMARY# is the street number, and all mentions of suite numbers, building
     numbers, and PO boxes are removed.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在地理编码时获得尽可能高的准确性，你应始终首先确保你的地址格式符合你选择的服务标准。不同服务之间会有些许差异，但常见格式是USPS格式的“PRIMARY#
+    STREET, CITY, STATE, ZIP”，其中STATE是一个缩写代码，PRIMARY#是街道号码，所有套房号码、建筑号码和邮政信箱的提及都会被去除。
 - en: Once your address is formatted, you need to submit it to the API for geocoding.
     In the case of the U.S. Census Bureau Geocoder, you can either manually submit
     the address through the One Line Address Processing tab or use the [provided REST
@@ -167,11 +231,17 @@
     link](https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2709+Broadway%2C+New+York%2C+NY+10025&benchmark=Public_AR_Current&format=json)
     can be used to pass the address to the REST API, which can be done in Python with
     the following code.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你的地址格式化完成，你需要将其提交给API进行地理编码。以美国人口普查局地理编码器为例，你可以通过“一行地址处理”标签手动提交地址，或者使用[提供的REST
+    API](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf)以编程方式提交地址。美国人口普查局地理编码器还允许你使用批量地理编码器对整个文件进行地理编码，并使用基准参数指定数据源。要对之前提到的披萨店进行地理编码，可以使用[这个链接](https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2709+Broadway%2C+New+York%2C+NY+10025&benchmark=Public_AR_Current&format=json)将地址传递给REST
+    API，这可以使用以下代码在Python中完成。
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The returned data is a JSON file, which is decoded easily into a Python dictionary.
     It contains a “tigerLineId” field which can be used to match the shapefile for
     the nearest street, a “side” field which can be used to determine which side of
@@ -180,22 +250,32 @@
     a “coordinates” field that can be used to locate the address on a map. The following
     code extracts the coordinates from the JSON file and processes it into a GeoDataFrame
     to prepare it for spatial analysis.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回的数据是一个JSON文件，可以轻松解码为Python字典。它包含一个“tigerLineId”字段，可用于匹配最近街道的shapefile，一个“side”字段，可用于确定地址位于街道的哪一侧，以及“fromAddress”和“toAddress”字段，包含街道段的地址范围。最重要的是，它包含一个“coordinates”字段，可以用于在地图上定位地址。以下代码从JSON文件中提取坐标，并处理成GeoDataFrame，以备进行空间分析。
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Visualizing this point shows that it is slightly off the road to the left of
     the point that was geocoded manually.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化这个点显示它略微偏离了左侧的手动地理编码点。
 - en: '![XXXXX](../Images/68387211dbdba0522f535fa6d9b0fc60.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/68387211dbdba0522f535fa6d9b0fc60.png)'
 - en: How to Reverse Geocode
+  id: totrans-33
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何进行反向地理编码
 - en: Reverse geocoding is the process of taking geographic coordinates and matching
     them to natural language descriptions of a geographic region. When applied correctly,
     it is one of the most powerful techniques for attaching external data in the data
@@ -210,8 +290,11 @@
     The result of this query can be processed using the same methods as before. However,
     creatively defining the region to fit an analysis need and manually reverse geocoding
     to it opens up many possibilities.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 反向地理编码是将地理坐标与地理区域的自然语言描述匹配的过程。正确应用时，它是数据科学工具包中最强大的技术之一。反向地理编码的第一步是确定你的目标区域。这是包含你坐标数据的区域。一些常见的例子包括人口普查区、邮政编码和城市。第二步是确定这些区域中是否包含该点。使用常见区域时，[美国人口普查地理编码器](https://geocoding.geo.census.gov/geocoder/geographies/coordinates?form)可以通过对REST
+    API请求进行小幅修改来进行反向地理编码。确定哪个人口普查地理区域包含之前的比萨店的请求可以通过[此链接](https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-73.96838669696855&y=40.799450999770706&benchmark=Public_AR_Current&vintage=ACS2022_Current&layers=all&format=json)获得。此查询的结果可以使用之前相同的方法处理。然而，创造性地定义区域以满足分析需求，并手动进行反向地理编码，打开了许多可能性。
 - en: To manually reverse geocode, you need to determine the location and shape of
     a region, then determine if the point is on the interior of that region. Determining
     if a point is inside a polygon is actually a fairly difficult problem, but the
@@ -228,8 +311,11 @@
     if the winding number is not zero. Fortunately, Python’s geopandas library provides
     the functionality necessary to both define the interior of a polygonal region
     and test if a point is inside of it without all the complex mathematics.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 要手动进行逆地理编码，你需要确定一个区域的位置和形状，然后判断该点是否在该区域的内部。确定一个点是否在多边形内部实际上是一个相当困难的问题，但可以使用[射线投射算法](https://dl.acm.org/doi/10.1145/368637.368653)，其中从点开始并无限延伸的射线如果与区域边界相交的次数为奇数，则点在区域内部，若为偶数则不在区域内部（Shimrat），来解决这个问题。在数学上，这实际上是[乔丹曲线定理](https://www.britannica.com/science/Jordan-curve-theorem)（Hosch）的直接应用。需要注意的是，如果你使用的是来自全球的数据，射线投射算法可能会失败，因为射线最终会绕到地球表面并变成一个圆圈。在这种情况下，你将需要找到区域和点的绕数（Weisstein）。如果绕数不为零，则点在区域内部。幸运的是，Python
+    的 geopandas 库提供了定义多边形区域内部以及测试点是否在其中所需的功能，而无需所有复杂的数学运算。
 - en: While manual geocoding can be too complex for many applications, manual reverse
     geocoding can be a practical addition to your skill set since it allows you to
     easily match your points to highly customized regions. For example, assume you
@@ -238,18 +324,28 @@
     shapefiles for their parks as part of the [Parks Properties dataset](https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve)
     (NYC Parks Open Data Team), and they can also be accessed via their SODA API using
     the following code.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然手动地理编码对于许多应用可能过于复杂，但手动逆地理编码可以是你技能集中的一个实用补充，因为它允许你轻松地将点匹配到高度自定义的区域。例如，假设你想把你的披萨带到一个公园野餐。你可能希望知道披萨店是否在公园的短距离内。纽约市提供了作为[Parks
+    Properties 数据集](https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve)（纽约市公园开放数据团队）一部分的公园形状文件，并且可以通过他们的
+    SODA API 使用以下代码访问。
 - en: '[PRE5]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: These parks can be added to the visualization to see what parks are nearby the
     pizza parlor.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些公园可以被添加到可视化中，以查看哪些公园靠近披萨店。
 - en: '![XXXXX](../Images/cb71e8c74732b1539860ee87d9fd4e56.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/cb71e8c74732b1539860ee87d9fd4e56.png)'
 - en: There are clearly some options nearby, but figuring out the distance using the
     shapefiles and the point can be difficult and computationally expensive. Instead,
     reverse geocoding can be applied. The first step, as mentioned above, is determining
@@ -259,101 +355,154 @@
     mentioned methods or by applying the “contains” function in geopandas. The following
     code is used to add a 1/2-mile buffer to the boundaries of the parks before testing
     to see which parks’ buffered regions now contain the point.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，附近有一些选择，但使用形状文件和点来计算距离可能是困难且计算密集的。相反，可以应用逆地理编码。第一步，如上所述，是确定你要将点附加到的区域。在这种情况下，该区域是“距纽约市公园半英里”。第二步是计算点是否位于区域内部，这可以通过之前提到的方法进行数学计算，或通过应用
+    geopandas 中的“contains”函数来完成。以下代码用于在测试之前向公园的边界添加半英里缓冲区，以查看哪些公园的缓冲区域现在包含该点。
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: This buffer reveals the nearby parks, which are highlighted in blue in the image
     below
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个缓冲区显示了附近的公园，这些公园在下图中以蓝色突出显示。
 - en: '![XXXXX](../Images/456f186d0e83357176edd979b798f287.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/456f186d0e83357176edd979b798f287.png)'
 - en: After successful reverse geocoding, you have learned that there are 8 parks
     within a half mile of the pizza parlor in which you could have your picnic. Enjoy
     that slice.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 成功进行反向地理编码后，你了解到在比萨店半英里内有8个公园，你可以在这些公园里举行野餐。享受那一片比萨吧。
 - en: '![XXXXX](../Images/03dca769c277af02035fed31a6c47d8a.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/03dca769c277af02035fed31a6c47d8a.png)'
 - en: Pizza Slice by j4p4n
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: j4p4n 制作的比萨片
 - en: Sources
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 资源
 - en: 'Lawler, Josh and Schiess, Peter. ESRM 250: Introduction to Geographic Information
     Systems in Forest Resources. Definitions of GIS, 12 Feb. 2009, University of Washington,
     Seattle. Class Lecture. [https://courses.washington.edu/gis250/lessons/introduction_gis/definitions.html](https://courses.washington.edu/gis250/lessons/introduction_gis/definitions.html)'
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 'Lawler, Josh 和 Schiess, Peter. ESRM 250: Introduction to Geographic Information
+    Systems in Forest Resources. GIS 定义, 2009年2月12日, 华盛顿大学, 西雅图. 课堂讲座. [https://courses.washington.edu/gis250/lessons/introduction_gis/definitions.html](https://courses.washington.edu/gis250/lessons/introduction_gis/definitions.html)'
 - en: CSCL PUB. New York OpenData. [https://data.cityofnewyork.us/City-Government/road/svwp-sbcd](https://data.cityofnewyork.us/City-Government/road/svwp-sbcd)
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: CSCL PUB. 纽约开放数据. [https://data.cityofnewyork.us/City-Government/road/svwp-sbcd](https://data.cityofnewyork.us/City-Government/road/svwp-sbcd)
 - en: U.S. Census Bureau Geocoder Documentation. August 2022\. [https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf)
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 美国普查局地理编码文档. 2022年8月. [https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf)
 - en: 'Shimrat, M., "Algorithm 112: Position of point relative to polygon" 1962, *Communications
     of the ACM* Volume 5 Issue 8, Aug. 1962\. [https://dl.acm.org/doi/10.1145/368637.368653](https://dl.acm.org/doi/10.1145/368637.368653)'
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 'Shimrat, M., "算法 112: 点相对于多边形的位置" 1962, *ACM 通讯* 第5卷第8期, 1962年8月. [https://dl.acm.org/doi/10.1145/368637.368653](https://dl.acm.org/doi/10.1145/368637.368653)'
 - en: Hosch, William L.. "Jordan curve theorem". *Encyclopedia Britannica*, 13 Apr.
     2018, [https://www.britannica.com/science/Jordan-curve-theorem](https://www.britannica.com/science/Jordan-curve-theorem)
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Hosch, William L.. "Jordan curve theorem". *Encyclopedia Britannica*, 2018年4月13日,
+    [https://www.britannica.com/science/Jordan-curve-theorem](https://www.britannica.com/science/Jordan-curve-theorem)
 - en: Weisstein, Eric W. "Contour Winding Number." From *MathWorld*--A Wolfram Web
     Resource. [https://mathworld.wolfram.com/ContourWindingNumber.html](https://mathworld.wolfram.com/ContourWindingNumber.html)
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Weisstein, Eric W. "Contour Winding Number." 来源于 *MathWorld*--Wolfram 网络资源.
+    [https://mathworld.wolfram.com/ContourWindingNumber.html](https://mathworld.wolfram.com/ContourWindingNumber.html)
 - en: NYC Parks Open Data Team. Parks Properties. April 14, 2023\. [https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve](https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve)
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: NYC Parks Open Data Team. 公园属性. 2023年4月14日. [https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve](https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve)
 - en: j4p4n, “Pizza Slice.” From *OpenClipArt*. [https://openclipart.org/detail/331718/pizza-slice](https://openclipart.org/detail/331718/pizza-slice)
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: j4p4n, “Pizza Slice.” 来源于 *OpenClipArt*. [https://openclipart.org/detail/331718/pizza-slice](https://openclipart.org/detail/331718/pizza-slice)
 - en: '**[Evan Miller](https://www.linkedin.com/in/evan-m-miller/)** is a Data Science
     Fellow at Tech Impact, where he uses data to support nonprofit and government
     agencies with a mission of social good. Previously, Evan used machine learning
     to train autonomous vehicles at Central Michigan University.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Evan Miller](https://www.linkedin.com/in/evan-m-miller/)** 是 Tech Impact
+    的数据科学研究员，他利用数据支持非营利组织和政府机构，以实现社会公益的使命。之前，Evan 在中密歇根大学使用机器学习训练自主车辆。'
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Geocoding in Python: A Complete Guide](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)'
 - en: '[High-Fidelity Synthetic Data for Data Engineers and Data Scientists Alike](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据工程师和数据科学家都需要的高保真合成数据](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
 - en: '[We Don''t Need Data Scientists, We Need Data Engineers](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我们不需要数据科学家，我们需要数据工程师](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)'
 - en: '[What’s the Difference Between Data Analysts and Data Scientists?](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析师和数据科学家之间的区别是什么？](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)'
 - en: '[How Do Data Scientists and Data Engineers Work Together?](https://www.kdnuggets.com/2022/08/data-scientists-data-engineers-work-together.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家和数据工程师如何协作？](https://www.kdnuggets.com/2022/08/data-scientists-data-engineers-work-together.html)'
 - en: '[Mastering the Art of Data Storytelling: A Guide for Data Scientists](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据讲故事的艺术：数据科学家的指南](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)'
