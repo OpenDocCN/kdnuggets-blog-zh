@@ -3,65 +3,81 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据工程入门指南 – 第二部分
 - en: 原文：[https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2](https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2](https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/03/beginners-guide-data-engineering-part-2.html?page=2#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/03/beginners-guide-data-engineering-part-2.html?page=2#comments)'
 - en: The Anatomy of an Airflow Pipeline
   id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Airflow 流水线的结构
 - en: '![](../Images/b3883f7be24a82be7a7c39fb4e3216e7.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b3883f7be24a82be7a7c39fb4e3216e7.png)'
 - en: Now that we have learned about the concept of fact tables, dimension tables,
     date partitions, and what it means to do data backfilling, let’s crystalize these
     concepts and put them in an actual Airflow ETL job.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经了解了事实表、维度表、日期分区的概念以及数据回填的含义，让我们把这些概念具体化，并将它们应用到实际的 Airflow ETL 任务中。
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 工作'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Defining the Directed Acyclic Graph (DAG)**'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**定义有向无环图 (DAG)**'
 - en: As we mentioned in the [earlier post](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7),
     any ETL job, at its core, is built on top of three building blocks: **E**xtract, **T**ransform,
     and **L**oad. As simple as it might sound conceptually, ETL jobs in real life
@@ -74,15 +90,23 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在 [早期的文章](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7)中提到的，任何
+    ETL 任务，其核心都是建立在三个基本构件之上：**E**xtract、**T**ransform 和 **L**oad。尽管在概念上听起来很简单，但实际中的
+    ETL 任务通常很复杂，由许多 E、T 和 L 任务的组合构成。因此，使用图形来可视化复杂的数据流往往是有用的。在视觉上，图中的一个 *节点* 代表一个任务，而
+    *箭头* 代表一个任务对另一个任务的依赖。鉴于数据只需在给定任务上计算一次，计算结果会向前传递，因此图是 *有向* 和 *无环* 的。这就是为什么 Airflow
+    任务通常被称为“DAG”（**D**irected **A**cyclic **G**raphs）的原因。
 - en: '![](../Images/9c6359d1c3dedca683467b64d23bcb98.png)'
   id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9c6359d1c3dedca683467b64d23bcb98.png)'
 - en: '[Source](https://medium.com/airbnb-engineering/https-medium-com-jonathan-parks-scaling-erf-23fd17c91166):
     A screenshot of Airbnb’s Experimentation Reporting Framework DAG'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://medium.com/airbnb-engineering/https-medium-com-jonathan-parks-scaling-erf-23fd17c91166)：Airbnb
+    实验报告框架 DAG 的截图'
 - en: One of the clever designs about Airflow UI is that it allows any users to visualize
     the DAG in a [graph view](https://airflow.apache.org/ui.html#graph-view), using
     code as configuration. The author of a data pipeline must define the structure
@@ -92,15 +116,20 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow UI 的一个聪明设计是它允许任何用户通过 [图形视图](https://airflow.apache.org/ui.html#graph-view)
+    来可视化 DAG，使用代码作为配置。数据管道的作者必须定义任务之间依赖关系的结构，以便进行可视化。这种规范通常写在一个叫做 *DAG 定义文件* 的文件中，描述了
+    Airflow 任务的结构。
 - en: '**Operators: Sensors, Operators, and Transfers**'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**操作符：传感器、操作符和传输**'
 - en: 'While DAGs describe *how* to run a data pipeline, operators describe *what* to
     do in a data pipeline. Typically, there are three broad categories of operators:'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然 DAG 描述了 *如何* 运行数据管道，操作符则描述了 *在* 数据管道中要做 *什么*。通常，操作符有三大类：
 - en: '**Sensors: **waits for a certain time, external file, or upstream data source'
   id: totrans-19
   prefs:
