@@ -1,513 +1,758 @@
 - en: 'How to Implement a YOLO (v3) Object Detector from Scratch in PyTorch: Part
     1'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何从头开始在 PyTorch 中实现 YOLO (v3) 目标检测器：第1部分
 - en: 原文：[https://www.kdnuggets.com/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html](https://www.kdnuggets.com/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html](https://www.kdnuggets.com/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/),
     Research Intern**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)，研究实习生**'
 - en: '![Header image](../Images/eb33d52c1b672fb81ea7c6f8adab2264.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![头图](../Images/eb33d52c1b672fb81ea7c6f8adab2264.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Object detection is a domain that has benefited immensely from the recent developments
     in deep learning. Recent years have seen people develop many algorithms for object
     detection, some of which include YOLO, SSD, Mask RCNN and RetinaNet.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标检测是一个在深度学习的最新发展中受益匪浅的领域。近年来，人们开发了许多目标检测算法，其中包括 YOLO、SSD、Mask RCNN 和 RetinaNet。
 - en: For the past few months, I've been working on improving object detection at
     a research lab. One of the biggest takeaways from this experience has been realizing
     that the best way to go about learning object detection is to implement the algorithms
     by yourself, from scratch. This is exactly what we'll do in this tutorial.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去的几个月里，我一直在研究实验室中改进目标检测。这个经历的最大收获之一是认识到学习目标检测的最佳方法是从头实现算法。这正是我们将在本教程中做的。
 - en: We will use PyTorch to implement an object detector based on YOLO v3, one of
     the faster object detection algorithms out there.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 PyTorch 实现基于 YOLO v3 的目标检测器，这是其中一种更快的目标检测算法。
 - en: The code for this tutorial is designed to run on Python 3.5, and PyTorch **0.4**.
     It can be found in it's entirety at this [Github repo](https://github.com/ayooshkathuria/YOLO_v3_tutorial_from_scratch).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程的代码设计为在 Python 3.5 和 PyTorch **0.4** 上运行。其完整代码可以在这个 [Github 仓库](https://github.com/ayooshkathuria/YOLO_v3_tutorial_from_scratch)
+    中找到。
 - en: 'This tutorial is broken into 5 parts:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程分为5个部分：
 - en: 'Part 1 (This one): Understanding How YOLO works'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 第1部分（这部分）：理解 YOLO 的工作原理
 - en: '[Part 2 : Creating the layers of the network architecture](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-2/)'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[第2部分：创建网络架构的层](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-2/)'
 - en: '[Part 3 : Implementing the the forward pass of the network](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-3/)'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[第3部分：实现网络的前向传播](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-3/)'
 - en: '[Part 4 : Objectness score thresholding and Non-maximum suppression](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-4/)'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[第4部分：目标性分数阈值和非极大值抑制](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-4/)'
 - en: '[Part 5 : Designing the input and the output pipelines](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-5/)'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[第5部分：设计输入和输出管道](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-5/)'
 - en: '**Prerequisites**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**前提条件**'
 - en: You should understand how convolutional neural networks work. This also includes
     knowledge of Residual Blocks, skip connections, and Upsampling.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你应该了解卷积神经网络的工作原理。这还包括对残差块、跳跃连接和上采样的了解。
 - en: What is object detection, bounding box regression, IoU and non-maximum suppression.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 了解什么是目标检测、边界框回归、IoU 和非极大值抑制。
 - en: Basic PyTorch usage. You should be able to create simple neural networks with
     ease.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基础 PyTorch 使用。你应该能够轻松创建简单的神经网络。
 - en: I've provided the link at the end of the post in case you fall short on any
     front.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经在帖子末尾提供了链接，以防你在某方面有所欠缺。
 - en: '**What is YOLO?**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**什么是 YOLO？**'
 - en: YOLO stands for You Only Look Once. It's an object detector that uses features
     learned by a deep convolutional neural network to detect an object. Before we
     get out hands dirty with code, we must understand how YOLO works.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: YOLO 代表“你只看一次”。它是一个使用深度卷积神经网络学到的特征来检测物体的检测器。在我们开始动手编写代码之前，我们必须理解 YOLO 是如何工作的。
 - en: '**A Fully Convolutional Neural Network**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**全卷积神经网络**'
 - en: YOLO makes use of only convolutional layers, making it a fully convolutional
     network (FCN). It has 75 convolutional layers, with skip connections and upsampling
     layers. No form of pooling is used, and a convolutional layer with stride 2 is
     used to downsample the feature maps. This helps in preventing loss of low-level
     features often attributed to pooling.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: YOLO 仅使用卷积层，使其成为一个全卷积网络（FCN）。它有 75 个卷积层，包括跳跃连接和上采样层。没有使用任何形式的池化，而是使用步幅为 2 的卷积层来下采样特征图。这有助于防止通常归因于池化的低级特征的丢失。
 - en: Being a FCN, YOLO is invariant to the size of the input image. However, in practice,
     we might want to stick to a constant input size due to various problems that only
     show their heads when we are implementing the algorithm.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个全卷积网络（FCN），YOLO 对输入图像的大小是不变的。然而，在实际应用中，我们可能会因为各种问题而希望坚持固定的输入大小，这些问题只有在我们实现算法时才会显现出来。
 - en: A big one amongst these problems is that if we want to process our images in
     batches (images in batches can be processed in parallel by the GPU, leading to
     speed boosts), we need to have all images of fixed height and width. This is needed
     to concatenate multiple images into a large batch (concatenating many PyTorch
     tensors into one)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些问题中一个重要的就是，如果我们想要批量处理图像（批量图像可以通过 GPU 并行处理，从而提升速度），我们需要所有图像具有固定的高度和宽度。这是为了将多个图像拼接成一个大批次（将多个
+    PyTorch 张量拼接成一个）。
 - en: The network downsamples the image by a factor called the **stride** of the network.
     For example, if the stride of the network is 32, then an input image of size 416
     x 416 will yield an output of size 13 x 13\. Generally, ***stride* of any layer
     in the network is equal to the factor by which the output of the layer is smaller
     than the input image to the network.**
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 网络通过一个称为**步幅**的因子来下采样图像。例如，如果网络的步幅是 32，那么尺寸为 416 x 416 的输入图像将产生尺寸为 13 x 13 的输出。一般来说，网络中任何层的***步幅*等于该层输出比输入图像小的因子。**
 - en: '**Interpreting the output**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释输出**'
 - en: Typically, (as is the case for all object detectors) the features learned by
     the convolutional layers are passed onto a classifier/regressor which makes the
     detection prediction (coordinates of the bounding boxes, the class label.. etc).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常情况下（所有物体检测器的情况都是如此），卷积层学到的特征会传递给一个分类器/回归器，该分类器/回归器进行检测预测（边界框的坐标、类别标签等）。
 - en: In YOLO, the prediction is done by using a convolutional layer which uses 1
     x 1 convolutions.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 YOLO 中，预测是通过使用 1 x 1 卷积的卷积层来完成的。
 - en: Now, the first thing to notice is our **output is a feature map**. Since we
     have used 1 x 1 convolutions, the size of the prediction map is exactly the size
     of the feature map before it. In YOLO v3 (and it's descendants), the way you interpret
     this prediction map is that each cell can predict a fixed number of bounding boxes.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，首先需要注意的是我们的**输出是一个特征图**。由于我们使用了 1 x 1 的卷积，预测图的大小正好是其之前的特征图的大小。在 YOLO v3（及其后续版本）中，解释这个预测图的方法是每个单元格可以预测固定数量的边界框。
 - en: Though the technically correct term to describe a unit in the feature map would
     be a *neuron*, calling it a cell makes it more intuitive in our context.
+  id: totrans-37
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 尽管在特征图中描述一个单元的技术上正确的术语是*神经元*，但在我们的上下文中，将其称为单元格使其更加直观。
 - en: '**Depth-wise, we have (B x (5 + C)) entries in the feature map.** B represents
     the number of bounding boxes each cell can predict. According to the paper, each
     of these B bounding boxes may specialize in detecting a certain kind of object.
     Each of the bounding boxes have *5 + C*attributes, which describe the center coordinates,
     the dimensions, the objectness score and *C*class confidences for each bounding
     box. YOLO v3 predicts 3 bounding boxes for every cell.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在深度上，我们在特征图中有（B x (5 + C)）个条目。** B表示每个单元格可以预测的边界框数量。根据论文，每个这些B个边界框可能专门用于检测某种类型的对象。每个边界框都有*5
+    + C*个属性，这些属性描述了中心坐标、尺寸、对象性分数以及每个边界框的*C*类置信度。YOLO v3为每个单元格预测3个边界框。'
 - en: '**You expect each cell of the feature map to predict an object through one
     of it''s bounding boxes if the center of the object falls in the receptive field
     of that cell.** (Receptive field is the region of the input image visible to the
     cell. Refer to the link on convolutional neural networks for further clarification).'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你期望特征图的每个单元格通过其边界框之一来预测一个对象，如果该对象的中心落在该单元格的感受野内。**（感受野是单元格可见的输入图像区域。有关卷积神经网络的更多解释，请参考链接）。'
 - en: This has to do with how YOLO is trained, where only one bounding box is responsible
     for detecting any given object. First, we must ascertain which of the cells this
     bounding box belongs to.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这与YOLO的训练方式有关，其中只有一个边界框负责检测任何给定的对象。首先，我们必须确定这个边界框属于哪个单元格。
 - en: To do that, we divide the **input** image into a grid of dimensions equal to
     that of the final feature map.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了做到这一点，我们将**输入**图像划分为与最终特征图尺寸相等的网格。
 - en: Let us consider an example below, where the input image is 416 x 416, and stride
     of the network is 32\. As pointed earlier, the dimensions of the feature map will
     be 13 x 13\. We then divide the input image into 13 x 13 cells.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看下面的例子，其中输入图像的尺寸为416 x 416，网络的步幅为32。如前所述，特征图的尺寸将是13 x 13。然后，我们将输入图像划分为13
+    x 13个单元格。
 - en: '![yolo-5](../Images/8c0057d5335fa9f881d70482170f6afc.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![yolo-5](../Images/8c0057d5335fa9f881d70482170f6afc.png)'
 - en: Then, the cell (*on the input image*) containing the center of the ground truth
     box of an object is chosen to be the one responsible for predicting the object.
     In the image, it is the cell which marked red, which contains the center of the
     ground truth box (marked yellow).
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，选择包含真实框中心的单元格（*在输入图像上*）作为负责预测对象的单元格。在图像中，它是标记为红色的单元格，包含真实框的中心（标记为黄色）。
 - en: Now, the red cell is the 7th cell in the 7th row on the grid. We now assign
     the 7th cell in the 7th row **on the feature map** (corresponding cell on the
     feature map) as the one responsible for detecting the dog.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，红色单元格是网格中第七行第七列的第七个单元格。我们现在将第七行第七列的单元格**在特征图上**（特征图上的对应单元格）指定为负责检测狗的单元格。
 - en: Now, this cell can predict three bounding boxes. Which one will be assigned
     to the dog's ground truth label? In order to understand that, we must wrap out
     head around the concept of anchors.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，这个单元格可以预测三个边界框。哪个会被分配给狗的真实标签？为了理解这一点，我们必须了解锚点的概念。
 - en: '*Note that the cell we''re talking about here is a cell on the prediction feature
     map. We divide the **input image** into a grid just to determine which cell of
     the **prediction feature map** is responsible for prediction*'
+  id: totrans-47
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*请注意，我们这里讨论的单元格是预测特征图上的一个单元格。我们将**输入图像**划分为网格只是为了确定**预测特征图**中哪个单元格负责预测*'
 - en: '**Anchor Boxes**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**锚框**'
 - en: It might make sense to predict the width and the height of the bounding box,
     but in practice, that leads to unstable gradients during training. Instead, most
     of the modern object detectors predict log-space transforms, or simply offsets
     to pre-defined default bounding boxes called **anchors**.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测边界框的宽度和高度可能有意义，但实际上，这会导致训练过程中的梯度不稳定。相反，大多数现代目标检测器预测对预定义默认边界框的对数空间变换，或者简单地预测偏移量，这些边界框称为**锚点**。
 - en: Then, these transforms are applied to the anchor boxes to obtain the prediction.
     YOLO v3 has three anchors, which result in prediction of three bounding boxes
     per cell.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，将这些变换应用于锚框以获得预测。YOLO v3有三个锚点，这会导致每个单元格预测三个边界框。
 - en: Coming back to our earlier question, the bounding box responsible for detecting
     the dog will be the one whose anchor has the highest IoU with the ground truth
     box.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到之前的问题，负责检测狗的边界框将是其锚点与真实框具有最高IoU的那个。
 - en: '**Making Predictions**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**做出预测**'
 - en: The following formulae describe how the network output is transformed to obtain
     bounding box predictions.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下公式描述了网络输出如何转换以获得边界框预测。
 - en: '![YOLO Equations](../Images/e289a333ec5b258865fdfe26bf2f7f99.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![YOLO 方程](../Images/e289a333ec5b258865fdfe26bf2f7f99.png)'
 - en: '*bx, by, bw, bh* are the x,y center co-ordinates, width and height of our prediction. *tx,
     ty, tw, th* is what the network outputs. *cx* and *cy* are the top-left co-ordinates
     of the grid. *pw* and *ph* are anchors dimensions for the box.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*bx, by, bw, bh* 是我们预测的 x, y 中心坐标、宽度和高度。*tx, ty, tw, th* 是网络输出的值。*cx* 和 *cy*
+    是网格的左上角坐标。*pw* 和 *ph* 是边界框的锚点尺寸。'
 - en: '**Center Coordinates**'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**中心坐标**'
 - en: Notice we are running our center coordinates prediction through a sigmoid function.
     This forces the value of the output to be between 0 and 1\. Why should this be
     the case? Bear with me.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意我们将中心坐标预测值传递通过 sigmoid 函数。这会将输出值强制在0和1之间。为什么会这样？请稍等片刻。
 - en: 'Normally, YOLO doesn''t predict the absolute coordinates of the bounding box''s
     center. It predicts offsets which are:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，YOLO 不预测边界框中心的绝对坐标。它预测的是偏移量，这些偏移量是：
 - en: Relative to the top left corner of the grid cell which is predicting the object.
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 相对于预测对象的网格单元格的左上角。
 - en: Normalised by the dimensions of the cell from the feature map, which is, 1.
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过特征图中单元格的尺寸进行归一化，即1。
 - en: For example, consider the case of our dog image. If the prediction for center
     is (0.4, 0.7), then this means that the center lies at (6.4, 6.7) on the 13 x
     13 feature map. (Since the top-left co-ordinates of the red cell are (6,6)).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，考虑我们的狗图像。如果中心的预测是 (0.4, 0.7)，这意味着中心位于13 x 13 特征图上的 (6.4, 6.7) 处。（因为红色单元格的左上角坐标是
+    (6,6)）。
 - en: But wait, what happens if the predicted x,y co-ordinates are greater than one,
     say (1.2, 0.7). This means center lies at (7.2, 6.7). Notice the center now lies
     in cell just right to our red cell, or the 8th cell in the 7th row. **This breaks
     theory behind YOLO** because if we postulate that the red box is responsible for
     predicting the dog, the center of the dog must lie in the red cell, and not in
     the one beside it.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 但等一下，如果预测的 x,y 坐标大于1，比如 (1.2, 0.7)。这意味着中心位于 (7.2, 6.7)。注意到中心现在位于红色单元格的右边的单元格，或第七行第八个单元格。**这破坏了
+    YOLO 背后的理论**，因为如果我们假设红色框负责预测狗，那么狗的中心必须位于红色单元格中，而不是旁边的单元格中。
 - en: Therefore, to remedy this problem, the output is passed through a sigmoid function,
     which squashes the output in a range from 0 to 1, effectively keeping the center
     in the grid which is predicting.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为了纠正这个问题，输出会通过 sigmoid 函数，这样可以将输出压缩到0到1的范围内，有效地将中心保持在预测的网格中。
 - en: '**Dimensions of the Bounding Box**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**边界框的尺寸**'
 - en: The dimensions of the bounding box are predicted by applying a log-space transform
     to the output and then multiplying with an anchor.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 边界框的尺寸是通过对输出应用对数空间转换，然后乘以锚点来预测的。
 - en: '![](../Images/03bf22eecaa530eb1eeca50c8e76f07b.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/03bf22eecaa530eb1eeca50c8e76f07b.png)'
 - en: '*How the detector output is transformed to give the final prediction. Image
     Credits. [http://christopher5106.github.io/](http://christopher5106.github.io/)*'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '*检测器输出如何转换以获得最终预测。图片来源：[http://christopher5106.github.io/](http://christopher5106.github.io/)*'
 - en: The resultant predictions, *bw* and *bh*, are normalised by the height and width
     of the image. (Training labels are chosen this way). So, if the predictions *bx* and *by* for
     the box containing the dog are (0.3, 0.8), then the actual width and height on
     13 x 13 feature map is (13 x 0.3, 13 x 0.8).
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果预测的 *bw* 和 *bh* 是通过将输出进行对数空间转换，然后与锚点相乘来进行归一化的。（训练标签是这样选择的）。所以，如果包含狗的框的预测 *bx*
+    和 *by* 为 (0.3, 0.8)，则13 x 13特征图上的实际宽度和高度为 (13 x 0.3, 13 x 0.8)。
 - en: '**Objectness Score**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**对象性分数**'
 - en: Object score represents the probability that an object is contained inside a
     bounding box. It should be nearly 1 for the red and the neighboring grids, whereas
     almost 0 for, say, the grid at the corners.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 对象分数表示一个对象包含在边界框内的概率。对于红色及相邻网格，这个值应接近1，而对于角落的网格，这个值应接近0。
 - en: The objectness score is also passed through a sigmoid, as it is to be interpreted
     as a probability.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 对象性分数也会通过 sigmoid 函数，因为它需要被解释为概率。
 - en: '**Class Confidences**'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**类别置信度**'
 - en: Class confidences represent the probabilities of the detected object belonging
     to a particular class (Dog, cat, banana, car etc). Before v3, YOLO used to softmax
     the class scores.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 类别置信度表示检测到的对象属于特定类别（如狗、猫、香蕉、汽车等）的概率。在v3之前，YOLO 使用 softmax 对类别分数进行处理。
 - en: However, that design choice has been dropped in v3, and authors have opted for
     using sigmoid instead. The reason is that Softmaxing class scores assume that
     the classes are mutually exclusive. In simple words, if an object belongs to one
     class, then it's guaranteed it cannot belong to another class. This is true for
     COCO database on which we will base our detector.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这种设计选择在v3中被放弃，作者选择使用sigmoid代替。原因是Softmax的类别分数假设类别是互斥的。简单来说，如果一个对象属于一个类别，那么它就不能属于另一个类别。这对于我们将基于COCO数据库的检测器来说是成立的。
 - en: However, this assumptions may not hold when we have classes like *Women* and *Person*.
     This is the reason that authors have steered clear of using a Softmax activation.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，当我们有*女性*和*人*这样的类别时，这种假设可能不成立。这就是为什么作者避免使用Softmax激活的原因。
 - en: '**Prediction across different scales.**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**不同尺度的预测。**'
 - en: YOLO v3 makes prediction across 3 different scales. The detection layer is used
     make detection at feature maps of three different sizes, having **strides 32,
     16, 8** respectively. This means, with an input of 416 x 416, we make detections
     on scales 13 x 13, 26 x 26 and 52 x 52.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: YOLO v3在3个不同尺度上进行预测。检测层用于在具有**步幅32、16、8**的三个不同大小的特征图上进行检测。这意味着，在输入为416 x 416时，我们在尺度为13
+    x 13、26 x 26和52 x 52的图像上进行检测。
 - en: The network downsamples the input image until the first detection layer, where
     a detection is made using feature maps of a layer with stride 32\. Further, layers
     are upsampled by a factor of 2 and concatenated with feature maps of a previous
     layers having identical feature map sizes. Another detection is now made at layer
     with stride 16\. The same upsampling procedure is repeated, and a final detection
     is made at the layer of stride 8.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 网络将输入图像进行下采样，直到第一个检测层，在该层使用步幅为32的特征图进行检测。进一步地，层被上采样2倍，并与具有相同特征图大小的前一层的特征图进行拼接。然后在步幅为16的层上进行再次检测。相同的上采样程序重复进行，最终在步幅为8的层上进行检测。
 - en: At each scale, each cell predicts 3 bounding boxes using 3 anchors, making the
     total number of anchors used 9\. (The anchors are different for different scales)
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 在每个尺度上，每个单元使用3个锚点预测3个边界框，总共使用了9个锚点。（不同尺度的锚点不同）
 - en: '![](../Images/2f2e5b26f9b0b03ff43fd8eebe3fd82f.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2f2e5b26f9b0b03ff43fd8eebe3fd82f.png)'
 - en: The authors report that this helps YOLO v3 get better at detecting small objects,
     a frequent complaint with the earlier versions of YOLO. Upsampling can help the
     network learn fine-grained features which are instrumental for detecting small
     objects.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者报告说，这有助于YOLO v3在检测小物体方面表现得更好，这是YOLO早期版本经常被投诉的问题。上采样可以帮助网络学习细粒度特征，这对检测小物体至关重要。
 - en: '**Output Processing**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出处理**'
 - en: For an image of size 416 x 416, YOLO predicts ((52 x 52) + (26 x 26) + 13 x
     13)) x 3 = **10647 bounding boxes**. However, in case of our image, there's only
     one object, a dog. How do we reduce the detections from 10647 to 1?
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于尺寸为416 x 416的图像，YOLO预测((52 x 52) + (26 x 26) + 13 x 13)) x 3 = **10647个边界框**。然而，在我们的图像中，只有一个对象，一只狗。我们如何将10647个检测减少到1个？
 - en: '**Thresholding by Object Confidence**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**按对象置信度进行阈值处理**'
 - en: First, we filter boxes based on their objectness score. Generally, boxes having
     scores below a threshold are ignored.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们根据对象置信度分数过滤框。通常，分数低于阈值的框会被忽略。
 - en: '**Non-maximum Suppression**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**非极大值抑制**'
 - en: NMS intends to cure the problem of multiple detections of the same image. For
     example, all the 3 bounding boxes of the red grid cell may detect a box or the
     adjacent cells may detect the same object.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: NMS旨在解决同一图像的多次检测问题。例如，红色网格单元的所有3个边界框可能检测到一个框，或相邻的单元可能检测到相同的对象。
 - en: '![](../Images/b98bbebed7b6b3886094716c258cfd09.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b98bbebed7b6b3886094716c258cfd09.png)'
 - en: If you don't know about NMS, I've provided a link to a website explaining the
     same.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你不清楚NMS，我提供了一个链接来解释相关内容。
 - en: '**Our Implementation**'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们的实现**'
 - en: YOLO can only detect objects belonging to the classes present in the dataset
     used to train the network. We will be using the official weight file for our detector.
     These weights have been obtained by training the network on COCO dataset, and
     therefore we can detect 80 object categories.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: YOLO只能检测数据集中存在的类别的对象。我们将使用官方的权重文件进行检测器。这些权重是通过在COCO数据集上训练网络获得的，因此我们可以检测80个对象类别。
 - en: That's it for the first part. This post explains enough about the YOLO algorithm
     to enable you to implement the detector. However, if you want to dig deep into
     how YOLO works, how it's trained and how it performs compared to other detectors,
     you can read the original papers, the links of which I've provided below.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一部分到此为止。此帖子解释了足够多的YOLO算法内容，以使你能够实现检测器。然而，如果你想深入了解YOLO的工作原理、如何训练以及与其他检测器的性能比较，你可以阅读下面提供的原始论文。
 - en: That's it for this part. In the next [part](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-2/),
     we implement various layers required to put together the detector.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 本部分到此为止。下一部分中，我们将在[这里](https://blog.paperspace.com/how-to-implement-a-yolo-v3-object-detector-from-scratch-in-pytorch-part-2/)实现组装检测器所需的各种层。
 - en: '**Further Reading**'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**进一步阅读**'
 - en: '[YOLO V1: You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/pdf/1506.02640.pdf)'
+  id: totrans-95
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[YOLO V1: 你只需看一次: 统一的实时物体检测](https://arxiv.org/pdf/1506.02640.pdf)'
 - en: '[YOLO V2: YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)'
+  id: totrans-96
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[YOLO V2: YOLO9000: 更好、更快、更强](https://arxiv.org/pdf/1612.08242.pdf)'
 - en: '[YOLO V3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf)'
+  id: totrans-97
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[YOLO V3: 递增的改进](https://pjreddie.com/media/files/papers/YOLOv3.pdf)'
 - en: '[Convolutional Neural Networks](http://cs231n.github.io/convolutional-networks/)'
+  id: totrans-98
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[卷积神经网络](http://cs231n.github.io/convolutional-networks/)'
 - en: '[Bounding Box Regression (Appendix C)](https://arxiv.org/pdf/1311.2524.pdf)'
+  id: totrans-99
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[边界框回归（附录C）](https://arxiv.org/pdf/1311.2524.pdf)'
 - en: '[IoU](https://www.youtube.com/watch?v=DNEm4fJ-rto)'
+  id: totrans-100
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[IoU](https://www.youtube.com/watch?v=DNEm4fJ-rto)'
 - en: '[Non maximum suppresion](https://www.youtube.com/watch?v=A46HZGR5fMw)'
+  id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[非极大值抑制](https://www.youtube.com/watch?v=A46HZGR5fMw)'
 - en: '[PyTorch Official Tutorial](http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)'
+  id: totrans-102
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[PyTorch官方教程](http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)'
 - en: '**Bio: [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)**
     currently an intern at the Defense Research and Development Organization, India,
     where he is working on improving object detection in grainy videos. When he''s
     not working, he''s either sleeping or playing pink floyd on his guitar. You can
     connect with him on [LinkedIn](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/) or
     look at more of what he does at [GitHub](https://github.com/ayooshkathuria).'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)**
+    目前是印度国防研究与发展组织的实习生，致力于提升模糊视频中的物体检测。工作之余，他要么在睡觉，要么在吉他上弹奏Pink Floyd。你可以通过[LinkedIn](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)与他联系，或者在[GitHub](https://github.com/ayooshkathuria)查看他的更多工作。'
 - en: '[Original](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/).
     Reposted with permission.'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/)。已获得许可转载。'
 - en: '**Related:**'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容:**'
 - en: '[Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
     Works](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch入门第1部分: 理解自动微分的工作原理](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
 - en: '[PyTorch Tensor Basics](/2018/05/pytorch-tensor-basics.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch张量基础](/2018/05/pytorch-tensor-basics.html)'
 - en: '[Deep Learning Development with Google Colab, TensorFlow, Keras & PyTorch](/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Google Colab、TensorFlow、Keras & PyTorch进行深度学习开发](/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html)'
 - en: More On This Topic
+  id: totrans-109
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为伟大数据科学家的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立一个可靠的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
