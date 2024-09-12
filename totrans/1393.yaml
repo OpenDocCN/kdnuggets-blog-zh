@@ -1,54 +1,81 @@
 - en: Diffusion Map for Manifold Learning, Theory and Implementation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 流形学习的扩散图，理论与实现
 - en: 原文：[https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html](https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html](https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Rahul Raj](https://randomwalk.in), Indian Institute of Technology Kanpur**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Rahul Raj](https://randomwalk.in)，印度理工学院坎普尔分校**'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: ‘Curse of dimensionality’ is a well-known problem in Data Science, which often
     causes poor performance, inaccurate results, and, most importantly, a similarity
     measure break-down. The primary cause of this is because high dimensional datasets
     are typically sparse, and often a lower-dimensional structure or ‘Manifold’ would
     embed this data. So there is a non-linear relationship among the variables (or
     features or dimensions), which we need to learn to compute better similarity.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: “维度的诅咒”是数据科学中一个著名的问题，它常常导致性能差、结果不准确，以及最重要的，相似性度量的崩溃。主要原因是高维数据集通常是稀疏的，并且往往存在一个低维结构或“流形”来嵌入这些数据。因此，变量（或特征或维度）之间存在非线性关系，我们需要学习以更好地计算相似性。
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Manifold learning is an approach to non-linear dimensionality reduction. The
     basis for algorithms in manifold learning is that the dimensionality of many data
     sets is only artificially high ¹. In this blog, we learn one of the many techniques
@@ -57,77 +84,111 @@
     Therefore, assuming there is a lower-dimensional structure or manifold to the
     data, it would be appropriate to measure similarity over this structure rather
     than in the Euclidean space itself.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 流形学习是一种非线性降维的方法。流形学习中算法的基础是许多数据集的维度仅仅是人为地高¹。在这个博客中，我们学习流形学习中的一种技术，称为扩散图。关键思想是欧几里得距离，即最常见的相似性度量，仅在“局部”上有意义。因此，假设数据存在一个低维结构或流形，那么在这个结构上而不是在欧几里得空间中度量相似性是合适的。
 - en: Let us begin exploring with the following example of 2D datapoints neatly arranged
     in **S** shape.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从以下 **S** 形状整齐排列的 2D 数据点示例开始探索。
 - en: '![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)'
 - en: There is a definite shape to this dataset. Now, if we have to measure the similarity
     of two points in this set, we measure the Euclidean Distance. If this distance
     is small, then we say points are similar or if this is large, otherwise. The following
     figure represents this scenario.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集具有明确的形状。现在，如果我们需要度量这个集合中两点的相似性，我们就测量欧几里得距离。如果这个距离很小，我们就说点是相似的，否则就不是。下图展示了这种情况。
 - en: '![alt](../Images/46b1f89c723e1d052a6d9a78b04e3107.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/46b1f89c723e1d052a6d9a78b04e3107.png)'
 - en: However, knowing the geometric structure, we know that this similarity measure
     is inaccurate. Since there is a non-linear relationship between ‘x’ and ‘y’ coordinates,
     it would be correct if we measure the similarity (or distance) over the very geometric
     structure itself, as shown in the Figure below.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，知道几何结构后，我们知道这种相似性度量是不准确的。由于‘x’和‘y’坐标之间存在非线性关系，如果我们在图示的几何结构本身上度量相似性（或距离），会更为准确。
 - en: '![alt](../Images/8f0caf1bcaf021a1c7a22b86b2ace876.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/8f0caf1bcaf021a1c7a22b86b2ace876.png)'
 - en: With Diffusion Map, we can do a non-linear dimensionality reduction as well
     as learn the underlying geometry of the high dimensional data. Let’s get straight
     to the theory and implementation, hand in hand
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用扩散映射，我们可以进行非线性维度减少，并学习高维数据的潜在几何结构。让我们直接进入理论和实施的部分。
 - en: What is the takeaway?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主要收获是什么？
 - en: This blog aims to introduce one of the manifold learning techniques called **Diffusion
     Map**². This technique enables us to understand the underlying geometric structure
     of high dimensional dataset as well as to reduce the dimensions, if required,
     by neatly capturing the non-linear relationships between the original dimensions.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客旨在介绍一种称为**扩散映射**²的流形学习技术。这种技术使我们能够理解高维数据集的潜在几何结构，以及在需要时通过整洁地捕捉原始维度之间的非线性关系来减少维度。
 - en: Theory behind (very briefly)
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 背后的理论（非常简要）
 - en: The core idea is a time-dependent diffusion process, which is nothing but a
     random walk on the dataset where each hop has a probability associated with it.
     When the diffusion process runs for a time t, we get different probabilities of
     various paths it can take to calculate the distance over the underlying geometric
     structure. Mathematically, we call this the steady-state probability of the Markov
     Chain.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 核心思想是一个时间依赖的扩散过程，这只是数据集上的随机游走，每一步都有一个相关的概率。当扩散过程运行时间t时，我们得到不同路径的各种概率，用于计算潜在几何结构上的距离。在数学上，我们称之为马尔可夫链的稳态概率。
 - en: '![alt](../Images/5fee970a0b7519d60665416cdf94c65c.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/5fee970a0b7519d60665416cdf94c65c.png)'
 - en: The connectivity between two data points, x, and y, is defined as the probability
     of jumping from x to y in one step of the random walk and is
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个数据点x和y之间的连通性定义为在随机游走的一个步骤中从x跳到y的概率，其为
 - en: '![Equation](../Images/9fd609a3923aa64072013c1b281bb5e1.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![Equation](../Images/9fd609a3923aa64072013c1b281bb5e1.png)'
 - en: However, it is useful to express the connectivity as a row-normalized likelihood
     function, K using Gaussian Kernel. This will be called **diffusion kernel**
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，使用高斯核函数表达连通性作为行归一化的似然函数K是有用的。这将被称为**扩散核**。
 - en: '![Equation](../Images/b9f427b46dffb629be7b5d29599d85fa.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![Equation](../Images/b9f427b46dffb629be7b5d29599d85fa.png)'
 - en: Now we define a row-normalized diffusion matrix, P. Mathematically, this is
     equivalent to the transition matrix in the Markov chain. While P denotes the probability
     (or connectivity in this case) of single hopping from point x to point y, P² denotes
@@ -135,128 +196,190 @@
     number of hops or Pᵗ for increasing values of t we observe that the diffusion
     process runs forward. Or in other words, the probability of following the geometric
     structure increases.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们定义一个行归一化的扩散矩阵P。在数学上，这等同于马尔可夫链中的转移矩阵。P表示从点x跳到点y的概率（或在这种情况下的连通性），P²表示在两次跳跃中从x到达y的概率，依此类推。随着跳跃次数或Pᵗ（t值增加）的增加，我们观察到扩散过程向前运行。换句话说，跟随几何结构的概率增加。
 - en: If you would like to dig deeper into the theory behind, the [paper](https://inside.mines.edu/~whereman/talks/delaPorte-Herbst-Hereman-vanderWalt-DiffusionMaps-PRASA2008.pdf) has
     explained it pretty neatly. For a quick overview, [this](https://en.wikipedia.org/wiki/Diffusion_map) Wikipedia
     article also explains the theory well.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想深入了解背后的理论，[论文](https://inside.mines.edu/~whereman/talks/delaPorte-Herbst-Hereman-vanderWalt-DiffusionMaps-PRASA2008.pdf)解释得相当清楚。对于快速概览，[这篇](https://en.wikipedia.org/wiki/Diffusion_map)维基百科文章也对理论进行了很好的解释。
 - en: Implementation
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实施
 - en: To demonstrate the algorithm, we begin with a dataset having a definite geometric
     structure. Let us begin by creating a 2D figure, as shown earlier. Our main aim
     is to find out whether the diffusion map unravels the underlying geometric structure
     of data or not.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示算法，我们从具有明确几何结构的数据集开始。让我们从创建一个如前所示的二维图形开始。我们的主要目的是找出扩散映射是否揭示了数据的潜在几何结构。
 - en: '![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)'
 - en: Now, let us add a synthetic 3rd dimension (data drawn from a uniform distribution)
     to this 2D dataset. Thus our new 3D dataset is as follows
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们在这个二维数据集上添加一个合成的第三维（从均匀分布中抽取的数据）。因此，我们的新三维数据集如下所示：
 - en: '![alt](../Images/6d5db19bd974ce6dab18d154de4f268b.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/6d5db19bd974ce6dab18d154de4f268b.png)'
 - en: As you might have noticed, the 3D dataset preserves the ‘S’ shape in one angle,
     and that is correct. Now our goal is to flatten the dimensions to 2 while preserving
     this shape. After applying the Diffusion Map, hopefully, we should see the ‘S’
     like structure in 2D.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，3D数据集在一个角度上保留了‘S’形状，这是正确的。现在我们的目标是将维度压缩到2，同时保留这个形状。在应用扩散图之后，希望我们可以在2D中看到类似‘S’的结构。
 - en: Output
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![alt](../Images/ed9ce1e228008f1fdb4ab3e9fc3e9c99.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![alt](../Images/ed9ce1e228008f1fdb4ab3e9fc3e9c99.png)'
 - en: Result
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: As it is evident from the above output figures, with a diffusion map applied
     to reduce dimension from 3 to 2, we get to understand somewhat the original geometric
     structure, which is the ‘S’ shape. With varying values for alpha, we get slightly
     different variations in the final structure. (alpha is the parameter in diffusion
     kernel described above).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上述输出图形可以明显看出，通过应用扩散图来将维度从3降低到2，我们能够在一定程度上理解原始几何结构，即‘S’形。通过不同的alpha值，我们可以在最终结构中看到略有不同的变化。（alpha是上述扩散核中的参数）。
 - en: Source Code
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 源代码
 - en: Source code is available [here](https://gist.github.com/rahulrajpl/36a5724d0c261b915292182b1d741393) and
     is open-sourced under MIT License. You can try out the code in Google Colaboratory
     with the link provided on top of the gist.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码可以在[这里](https://gist.github.com/rahulrajpl/36a5724d0c261b915292182b1d741393)获取，并且在MIT许可证下开源。你可以通过gist顶部提供的链接在Google
+    Colaboratory中尝试这段代码。
 - en: 'References:'
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献：
 - en: Manifold Learning methods in Scikit-Learn (https://scikit-learn.org/stable/modules/manifold.html)
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Scikit-Learn中的流形学习方法 (https://scikit-learn.org/stable/modules/manifold.html)
 - en: Porte, Herbst, Hereman, Walt, *An introduction to Diffusion Maps*
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Porte, Herbst, Hereman, Walt，*扩散图介绍*
 - en: '**Bio: [Rahul Raj](https://www.linkedin.com/in/rahul-r-909409184/)** (**[@rahulrajpl](https://twitter.com/rahulrajpl)**)
     is currently pursuing Masters in Computer Science and Engineering at Indian Institute
     of Technology Kanpur, India. His interests are in machine learning, data science
     and its applications in cybersecurity. More about the Author at: **[https://randomwalk.in](https://randomwalk.in)**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Rahul Raj](https://www.linkedin.com/in/rahul-r-909409184/)** (**[@rahulrajpl](https://twitter.com/rahulrajpl)**)
+    目前正在印度理工学院坎普尔分校攻读计算机科学与工程硕士学位。他的兴趣领域包括机器学习、数据科学及其在网络安全中的应用。有关作者的更多信息，请访问：**[https://randomwalk.in](https://randomwalk.in)**'
 - en: '[Original](https://randomwalk.in/python/ml/2020/03/14/Diffusion-Map.html).
     Reposted with permission.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://randomwalk.in/python/ml/2020/03/14/Diffusion-Map.html)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高级特征工程和预处理的4个技巧](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
 - en: '[7 Steps to Mastering Intermediate Machine Learning with Python — 2019 Edition](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握中级机器学习的7个步骤——2019版](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
 - en: '[What Is Dimension Reduction In Data Science?](/2019/01/dimension-reduction-data-science.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的维度降低是什么？](/2019/01/dimension-reduction-data-science.html)'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Generative AI Playground: Text-to-Image Stable Diffusion with…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[生成式AI游乐场：文本到图像的稳定扩散…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)'
 - en: '[Become an AI Artist Using Phraser and Stable Diffusion](https://www.kdnuggets.com/2022/09/become-ai-artist-phraser-stable-diffusion.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Phraser和稳定扩散成为AI艺术家](https://www.kdnuggets.com/2022/09/become-ai-artist-phraser-stable-diffusion.html)'
 - en: '[Diffusion and Denoising: Explaining Text-to-Image Generative AI](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[扩散与去噪：解释文本到图像的生成AI](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)'
 - en: '[Top 7 Diffusion-Based Applications with Demos](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7种扩散基础应用及演示](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)'
 - en: '[Stable Diffusion: Basic Intuition Behind Generative AI](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[稳定扩散：生成AI背后的基本直觉](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)'
 - en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用稳定扩散生成超现实面孔的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
