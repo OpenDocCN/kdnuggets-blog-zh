@@ -1,68 +1,102 @@
 - en: Scaling Computer Vision Models with Dataflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用数据流扩展计算机视觉模型
 - en: 原文：[https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Pablo Soto](https://www.linkedin.com/in/psoto23/), Founding Partner at
     [Pento](https://pento.ai/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Pablo Soto](https://www.linkedin.com/in/psoto23/)，[Pento](https://pento.ai/)
+    创始合伙人**'
 - en: '![Image](../Images/3c33a6f2dd790f9371940a8acaa33124.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/3c33a6f2dd790f9371940a8acaa33124.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: We will shortly introduce the Google Cloud service [Dataflow](https://cloud.google.com/dataflow),
     and how it can be used to run predictions on millions of images in a serverless
     way. No cluster creation, no maintenance, and you only pay for what you use. We
     will start by providing a context on why we think this is important, a brief introduction
     to a couple of concepts and then go directly into a use case.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将简要介绍谷歌云服务 [Dataflow](https://cloud.google.com/dataflow)，以及它如何在无服务器的方式下处理数百万张图像的预测。无需创建集群，无需维护，你只需为你使用的部分付费。我们将从提供为何认为这很重要的背景开始，简要介绍几个概念，然后直接进入一个使用案例。
 - en: 'Scaling Machine Learning models is hard and expensive. It is costly mainly
     for two reasons: because the infrastructure is expensive, and because your experimentation
     pipeline is slow causing your ML team to be constantly waiting for the results.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 扩展机器学习模型既困难又昂贵。主要有两个原因：一是基础设施成本高，二是你的实验管道速度慢，导致你的机器学习团队不断等待结果。
 - en: It is easy to underestimate how is expensive it is to have an ML team waiting
     for results. Not only because of the time wasted but also because people get frustrated
     and end up losing motivation.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 很容易低估拥有一个等待结果的机器学习团队的高成本。这不仅因为时间的浪费，还因为人员会感到沮丧并最终失去动力。
 - en: One way to optimize your ML experimentation process it is to build and manage
     your own infrastructure. This is common in big companies, but this is often prohibitively
     expensive for smaller companies.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 优化你的机器学习实验过程的一种方法是构建和管理你自己的基础设施。这在大公司中很常见，但对于小公司来说通常费用高昂。
 - en: 'Traditional software development had similar challenges years ago, companies
     needed to scale, mainly driven by business needs (slow services/API/website don''t
     scale). Cloud Providers saw an opportunity to provide services that allow companies
@@ -70,333 +104,501 @@
     that are easier to manage and serverless services. The latter were particularly
     attractive for small companies that didn''t have a big DevOps team or much money
     to pay for their own infrastructure.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 多年前，传统的软件开发也面临类似的挑战，公司需要扩展，主要是由于业务需求（服务/API/网站响应慢无法扩展）。云服务提供商看到了一个提供可以让公司在没有前期成本的情况下扩展的服务的机会。他们主要以两种方式解决这个问题：易于管理的服务和无服务器服务。后者对于没有大规模DevOps团队或资金有限的小公司尤为吸引。
 - en: A similar trend is happening in Machine Learning. This time is driven by the
     scarcity and high cost of ML talent. Like SW, small companies can't invest a huge
     amount of money to create a custom optimized infrastructure to ML, it requires
     a team of experts to build it and maintain it.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习领域也出现了类似的趋势。这次的驱动因素是机器学习人才的稀缺和高成本。像软件行业一样，小公司无法投入大量资金来创建定制优化的机器学习基础设施，这需要一支专家团队来构建和维护。
 - en: Cloud Providers saw an opportunity to add value similarly by providing Serverless
     solutions to ML. GCP, in particular, has done this for a while. GCP AI Platform
     offers different services for each stage of an ML project. But they also count
     on other services that can help solve ML challenges.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 云服务提供商发现了通过提供无服务器解决方案来为 ML 添加价值的机会。特别是 GCP 已经做了很久。GCP AI Platform 提供了 ML 项目每个阶段的不同服务。但他们也依赖其他服务来帮助解决
+    ML 挑战。
 - en: What is Dataflow?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是 Dataflow？
 - en: '[Dataflow](https://cloud.google.com/dataflow) is a fully managed processing
     service, that uses [Apache Beam](https://beam.apache.org/) as its programming
     model to define and execute pipelines. Dataflow is one of the [many runners](https://beam.apache.org/documentation/runners/capability-matrix/) that
     Beam supports.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Dataflow](https://cloud.google.com/dataflow) 是一种完全托管的处理服务，使用 [Apache Beam](https://beam.apache.org/)
+    作为其编程模型来定义和执行管道。Dataflow 是 Beam 支持的[多种运行器](https://beam.apache.org/documentation/runners/capability-matrix/)之一。'
 - en: Apache Beam provides a portable API layer for building sophisticated data-parallel
     processing pipelines that may be executed across a diversity of execution engines,
     or runners.
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: Apache Beam 提供了一个可移植的 API 层，用于构建复杂的数据并行处理管道，这些管道可以在多种执行引擎或运行器上执行。
 - en: 'Dataflow in particular has some interesting features:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Dataflow 特别具有一些有趣的特性：
 - en: Fully managed
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 完全托管
 - en: Autoscaling
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自动扩展
 - en: Easy implementation
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单实现
 - en: What is Apache Beam?
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是 Apache Beam？
 - en: As mentioned above, Beam is a programming model used to define and execute a
     processing pipeline. It provides an interface to create a processing pipeline
     that can be executed in multiple environments (such as Spark, Hadoop, Dataflow).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，Beam 是一种用于定义和执行处理管道的编程模型。它提供了一个接口来创建可以在多种环境（如 Spark、Hadoop、Dataflow）中执行的处理管道。
 - en: 'Use case: Extracting image features with a pre-trained ResNet50'
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 用例：使用预训练的 ResNet50 提取图像特征
 - en: 'As Computer Vision engineers, we often need to extract embeddings using a CNN
     model. Here we will present how to build a Dataflow pipeline that generates image
     feature embedding using a pre-trained ResNet50\. Our pipeline will consist of
     3 simple steps:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为计算机视觉工程师，我们经常需要使用 CNN 模型提取嵌入。在这里，我们将展示如何构建一个 Dataflow 管道，该管道使用预训练的 ResNet50
+    生成图像特征嵌入。我们的管道将包括 3 个简单步骤：
 - en: Load images
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 加载图像
 - en: Extract features
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 提取特征
 - en: Store features
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 存储特征
 - en: To implement our pipeline we are going to use the Apache Beam Python SDK, Keras,
     Pillow, and Click. Because we will use non-python dependencies we have to structure
     our code as it is described [here](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/#nonpython).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现我们的管道，我们将使用 Apache Beam Python SDK、Keras、Pillow 和 Click。由于我们将使用非 Python
+    依赖项，我们必须按照[这里](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/#nonpython)描述的方式构建我们的代码。
 - en: 'The first thing we need to do is create a pipeline configuration:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先需要创建一个管道配置：
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: As you can see the options change depending on whether we are executing the
     pipeline locally or on Dataflow.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，选项会根据我们是在本地执行管道还是在 Dataflow 上执行而变化。
 - en: 'Then we need to create a [Pipeline](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline):'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们需要创建一个 [Pipeline](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline)：
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '`p` is our pipeline, to add new steps to the pipeline use the operator `|` as
     follow:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '`p` 是我们的管道，要向管道中添加新步骤，请使用操作符 `|` 如下：'
 - en: '[PRE2]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'If you want to explicitly name the step you can use the operator `>>`:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想明确命名步骤，可以使用操作符 `>>`：
 - en: '[PRE3]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And now we need to specify the steps for our pipeline. There are multiple ways
     to implement it:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们需要为我们的管道指定步骤。有多种实现方式：
 - en: 'Built-in implementations: BigQuery connector, ReadFile, etc.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内置实现：BigQuery 连接器、ReadFile 等
 - en: 'Custom implementation: Map, Filter, ParDo'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自定义实现：Map、Filter、ParDo
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Here you can see we have added the three steps mentioned above. We are loading
     the paths to the images from a CSV file in Google Cloud, then we load the images,
     extract their embedding, and store them in Google Cloud Storage.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里你可以看到我们已经添加了上述三步。我们从 Google Cloud 中的 CSV 文件加载图像路径，然后加载图像，提取其嵌入，并将其存储在 Google
+    Cloud Storage 中。
 - en: In all the steps in our pipeline we expect to receive one input and return one
     output. To apply these type steps we must use the method `beam.Map`. Alternatively,
     If you are dealing with steps that could potentially receive/return zero or more
     inputs/outputs, you could use `beam.ParDo`.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们管道中的所有步骤中，我们期望接收一个输入并返回一个输出。要应用这些类型的步骤，我们必须使用方法 `beam.Map`。或者，如果你处理的步骤可能接收/返回零个或多个输入/输出，你可以使用
+    `beam.ParDo`。
 - en: Now that the pipeline is defined, let's take a look at implementations.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在管道已定义，让我们来看看实现细节。
 - en: Loading images
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 加载图像
 - en: At this step, we need to download the image from GCS, load it as a Pillow Image,
     resize it, and convert it into a numpy array object. The reason why we download
     and resize in a single step, is that we want to reduce the data transferred between
     steps in the pipeline, thus decreasing the cost.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一步，我们需要从 GCS 下载图像，将其加载为 Pillow 图像，调整大小，然后转换为 numpy 数组对象。我们将下载和调整大小合并为一步，是因为我们希望减少管道步骤之间的数据传输，从而降低成本。
 - en: '[PRE5]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Beam provides a set of [built-in Connector](https://beam.apache.org/documentation/io/built-in/) to
     handle I/O.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: Beam 提供了一组 [内置连接器](https://beam.apache.org/documentation/io/built-in/) 以处理 I/O。
 - en: Extracting features
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 提取特征
 - en: In this step, we need to load the ResNet model and run the predictions. To avoid
     loading the model multiple times on the same worker, a singleton wrapper was added
     to the `FeatureExtractor` class. Once we extract the embedding, we add it to the
     item dictionary, and as we do not longer need to have the full image loaded in
     memory, we remove it from dictionary.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一步，我们需要加载 ResNet 模型并运行预测。为了避免在同一工作节点上多次加载模型，向 `FeatureExtractor` 类中添加了单例包装器。一旦提取了嵌入，我们将其添加到项目字典中，并且由于不再需要将整个图像加载到内存中，我们将其从字典中删除。
 - en: '[PRE6]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Storing features
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 存储特征
 - en: Now that we have the embedding we just need to store it in GCS.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了嵌入，只需将其存储在 GCS 中即可。
 - en: '[PRE7]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Dataflow allows you to specify the machine type, number of workers, objective,
     etc, providing a lot of flexibility to find the right configuration for the task
     at hand. You can check all the options [here](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options).
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: Dataflow 允许你指定机器类型、工作节点数量、目标等，提供了很多灵活性以找到适合当前任务的配置。你可以在[这里](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options)查看所有选项。
 - en: Once you run your Dataflow pipeline you will see logs about the status of the
     execution in your machine. Another alternative is to use Dataflow web UI. You
     can learn more about it [on its doccumentation](https://cloud.google.com/dataflow/docs/guides/using-monitoring-intf).
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦运行 Dataflow 管道，你将看到关于执行状态的日志在你的机器上。另一种选择是使用 Dataflow Web UI。你可以在[其文档](https://cloud.google.com/dataflow/docs/guides/using-monitoring-intf)中了解更多信息。
 - en: '![Dataflow UI](../Images/7cf31c9576737830d5cefcbb9631a793.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![Dataflow UI](../Images/7cf31c9576737830d5cefcbb9631a793.png)'
 - en: You can find the [full code here](https://github.com/pento-group/dataflow-demo).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这里](https://github.com/pento-group/dataflow-demo)找到完整代码。
 - en: 'Apache Beam also supports branching your pipeline. Let''s say you want to create
     2D visualizations of your embedding, you can do this by branching your pipeline
     in the following way:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: Apache Beam 还支持将管道分支。假设你想创建嵌入的 2D 可视化，可以通过以下方式将管道分支来实现：
 - en: '[PRE8]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: This allows Beam to execute `store` and `reduce_dim` independently, providing
     more flexibility to optimize the pipeline, and therefore improving its performance.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这允许 Beam 独立执行 `store` 和 `reduce_dim`，提供了更多优化管道的灵活性，从而提高了性能。
 - en: Scale
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 规模
 - en: Dataflow provides [multiple configurations](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) that
     allow you to customize the way you want to scale, in a really easy way. By default,
     it chooses the values that improve performance. During the execution itself, Dataflow
     changes the configuration to optimize the performance, changing, for instance,
     the number of workers, the machine type, etc.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: Dataflow 提供了 [多种配置](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options)
+    ，使你可以非常简单地自定义缩放方式。默认情况下，它选择可以提高性能的值。在执行过程中，Dataflow 会更改配置以优化性能，例如更改工作节点数量、机器类型等。
 - en: 'You can let Dataflow find out what is the best configuration each time you
     run the pipeline. But if you already know what your jobs need, such as the amount
     of RAM, or whether it is CPU intensive, what is the maximum throughput supported
     by your external services (i.e.: your DB or API capacity), it is better to specify
     this information directly. This will help Dataflow converge faster into the right
     configuration, speeding up the executing and reducing costs.'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以让 Dataflow 找出每次运行管道时的最佳配置。但是，如果你已经知道你的作业需求，如 RAM 量、是否是 CPU 密集型任务、外部服务（即：数据库或
+    API 容量）支持的最大吞吐量等，最好直接指定这些信息。这将帮助 Dataflow 更快地收敛到正确配置，加快执行速度并降低成本。
 - en: Dataflow should be enough to cover most of small/medium size companies requirements
     to scale. To have a number as reference, Dataflow is able to execute the use case
     presented above at rate of 5k images per seconds, using up to 1k workers. Here
     it is the list of [Dataflow quotas](https://cloud.google.com/dataflow/quotas),
     the main one being the 1k workers limit.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: Dataflow 应该足以满足大多数中小型公司的扩展需求。作为参考，Dataflow 能以每秒 5k 张图像的速率执行上述用例，使用最多 1k 个工作节点。这里是
+    [Dataflow 配额](https://cloud.google.com/dataflow/quotas) 的列表，其中最主要的是 1k 个工作节点的限制。
 - en: Summary
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: Apache Beam is a simple programming model that allows you to execute ML steps
     in a structured way and running it in different environments. One of these environments
     is Dataflow, a Beam execution engine that is fully managed, supports autoscaling,
     and allows us to optimize for different objectives.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: Apache Beam 是一个简单的编程模型，它允许你以结构化的方式执行机器学习步骤，并在不同的环境中运行。其中一个环境是 Dataflow，这是一种完全托管的
+    Beam 执行引擎，支持自动扩展，并允许我们为不同的目标进行优化。
 - en: Dataflow is a good tool to run your ML models at scale without too much investment
     upfront or maintenance. It provides a simple API and has an active OSS community.
     In this article, we show how simple it is to build an image embedding extractor
     using Apache Beam, and scale to millions of images. In this way you can save hundreds
     of dollars without worring about the infrastructure, while speeding up your experimentation
     process.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Dataflow 是一个很好的工具，可以在不需要过多前期投资或维护的情况下运行大规模的机器学习模型。它提供了简单的 API，并且拥有一个活跃的开源社区。在本文中，我们展示了如何使用
+    Apache Beam 构建一个图像嵌入提取器，并将其扩展到数百万张图像。这样，你可以在不担心基础设施的情况下节省数百美元，同时加快实验过程。
 - en: Resources
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 资源
 - en: '[Dataflow runner documentation](https://beam.apache.org/documentation/runners/dataflow/)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dataflow 运行器文档](https://beam.apache.org/documentation/runners/dataflow/)'
 - en: '[Dynamic work rebalancing in Dataflow](https://cloud.google.com/blog/products/gcp/no-shard-left-behind-dynamic-work-rebalancing-in-google-cloud-dataflow)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dataflow 中的动态工作重新平衡](https://cloud.google.com/blog/products/gcp/no-shard-left-behind-dynamic-work-rebalancing-in-google-cloud-dataflow)'
 - en: '[Apache Beam Python SDK Quickstart](https://beam.apache.org/get-started/quickstart-py/)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Apache Beam Python SDK 快速入门](https://beam.apache.org/get-started/quickstart-py/)'
 - en: 'Python examples:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 示例：
 - en: '[Apache Beam Python SDK code examples](https://github.com/apache/beam/tree/master/sdks/python/apache_beam/examples)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Apache Beam Python SDK 代码示例](https://github.com/apache/beam/tree/master/sdks/python/apache_beam/examples)'
 - en: '[GCP VisionML integration for Apache Beam](https://github.com/apache/beam/blob/master/sdks/python/apache_beam/ml/gcp/visionml.py)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GCP VisionML 与 Apache Beam 的集成](https://github.com/apache/beam/blob/master/sdks/python/apache_beam/ml/gcp/visionml.py)'
 - en: '**Bio: [Pablo Soto](https://www.linkedin.com/in/psoto23/)** is a Founding Partner
     at **[Pento](https://pento.ai/)**, machine learning specialists.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [Pablo Soto](https://www.linkedin.com/in/psoto23/)** 是 **[Pento](https://pento.ai/)**
+    的创始合伙人，专注于机器学习。'
 - en: '[Original](https://pento.ai/blog/scaling-computer-vision-dataflow). Reposted
     with permission.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://pento.ai/blog/scaling-computer-vision-dataflow)。已获得许可转载。'
 - en: '**Related:**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[6 Easy Steps to Implement a Computer Vision Application Using Tensorflow.js](/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow.js 实现计算机视觉应用的 6 个简单步骤](/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)'
 - en: '[Crop Disease Detection Using Machine Learning and Computer Vision](/2020/06/crop-disease-detection-computer-vision.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用机器学习和计算机视觉检测作物病害](/2020/06/crop-disease-detection-computer-vision.html)'
 - en: '[Auto Rotate Images Using Deep Learning](/2020/07/auto-rotate-images-deep-learning.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用深度学习自动旋转图像](/2020/07/auto-rotate-images-deep-learning.html)'
 - en: More On This Topic
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DINOv2: Meta AI 提供的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 用于计算机视觉 - 轻松进行迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索计算机视觉的世界：介绍 MLM 最新……](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
 - en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算机视觉的 5 种应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
 - en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于数据管理你需要知道的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
 - en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻 2022年3月9日：在5步内构建一个机器学习Web应用](https://www.kdnuggets.com/2022/n10.html)'
