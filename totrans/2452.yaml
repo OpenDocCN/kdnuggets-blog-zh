@@ -1,52 +1,77 @@
 - en: Building a Tractable, Feature Engineering Pipeline for Multivariate Time Series
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建一个可处理的、多变量时间序列特征工程管道
 - en: 原文：[https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
 - en: '![Building a Tractable, Feature Engineering Pipeline for Multivariate Time
     Series](../Images/ee523c67b75080a28800f479d5af0495.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![构建一个可处理的、多变量时间序列特征工程管道](../Images/ee523c67b75080a28800f479d5af0495.png)'
 - en: Image by [Christophe Dion](https://unsplash.com/@chris_dion?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
     on [Unsplash](https://unsplash.com/photos/3KA1M16PuoE)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Christophe Dion](https://unsplash.com/@chris_dion?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)于[Unsplash](https://unsplash.com/photos/3KA1M16PuoE)
 - en: Accurate time series forecasting is crucial for business problems such as predicting
     the evolution of material properties in manufacturing and sales forecasting. Modern
     forecasting techniques include the use of machine learning algorithms like Xgboost
     to build regression models on tabular data to predict the future. Tabular data
     allows regression models to forecast by leveraging non-target factors like daily
     crowd size of a retail store that correlates with the actual sales.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 精确的时间序列预测对于业务问题至关重要，例如预测制造中的材料属性变化和销售预测。现代预测技术包括使用像Xgboost这样的机器学习算法，在表格数据上构建回归模型来预测未来。表格数据允许回归模型通过利用与实际销售相关的非目标因素（如零售店的每日客流量）来进行预测。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 为你的组织提供IT支持。'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Feature engineering is essential to enrich the influential factors that enhance
     forecasting accuracy. However, building a time series feature engineering pipeline
     is not trivial because it involves different transformations at various stages
@@ -59,8 +84,11 @@
     This [github repository](https://github.com/JQGoh/multivariate_time_series_pipeline)
     provides an example of designing a time series pipeline that serves the mentioned
     needs and this article explains some of the key steps to achieve this.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征工程对于丰富影响预测准确性的因素至关重要。然而，构建一个时间序列特征工程管道并非易事，因为它涉及不同阶段的各种转换，例如窗口值的聚合。基于滚动窗口的特征，如“两周记录的平均值”，是基础却有效的预测工具，因此支持这种特征生成的管道是有价值的。此外，经过转换后的特征输出顺序可能会在转换过程中被打乱，这对特征追踪提出了挑战。在最终模型训练之前，追踪和验证管道中的转换特征至关重要。这个[github
+    仓库](https://github.com/JQGoh/multivariate_time_series_pipeline)提供了一个设计时间序列管道的示例，以满足上述需求，本文解释了一些实现这些需求的关键步骤。
 - en: Scikit-learn based transformers may support the *get_feature_names_out()* function
     to provide their output names upon the transformations. For example, [*OneHotEncoder
     transformer*](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder.get_feature_names_out)
@@ -70,16 +98,27 @@
     a FeatureNamesMixin mixin class together with a [Factory Method](https://realpython.com/factory-method-python/)
     design pattern class, *TransformWithFeatureNamesFactory*, to equip a transformer
     with the *get_feature_names_out()* function.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于 Scikit-learn 的转换器可能支持 *get_feature_names_out()* 函数，以提供其在转换后的输出名称。例如，[*OneHotEncoder
+    转换器*](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder.get_feature_names_out)
+    具有此内置函数，但 *SimpleImputer* 转换器则没有。如果我们希望方便地检索输出名称，Scikit-learn 管道要求所有基础转换器支持 *get_feature_names_out()*。我们的解决方案是设计一个
+    FeatureNamesMixin 混入类，并结合 [工厂方法](https://realpython.com/factory-method-python/)
+    设计模式类 *TransformWithFeatureNamesFactory*，以使转换器具备 *get_feature_names_out()* 函数。
 - en: We can then create a customized *SimpleImputer* and use it as part of a Scikit-learn
     Pipeline’s steps or ColumnTransformer as shown below
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以创建一个自定义的*SimpleImputer*，并将其作为 Scikit-learn Pipeline 的步骤或 ColumnTransformer
+    的一部分，如下所示。
 - en: This only requires the transformer class initialized with any desired output
     names specified by the parameter *names*.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这仅需要转换器类通过参数 *names* 初始化时指定任何所需的输出名称。
 - en: Any other transformers can also be customized similarly to support the retrieval
     of output names provided we introduce the *get_feature_names_out()*. Here is an
     example of the [*TsfreshRollingMixin*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L15)
@@ -96,20 +135,27 @@
     of TSFresh, we can design a *TSFreshRollingTransformer* class that allows us to
     specify the relevant [TSFresh parameters](https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html)
     to derive the desired time series features as shown below.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他转换器也可以类似地自定义以支持检索输出名称，只要我们引入*get_feature_names_out()*。以下是一个[*TsfreshRollingMixin*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L15)类的示例，该类利用TSFresh库中的[*roll_time_series()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.utilities.html#tsfresh.utilities.dataframe_functions.roll_time_series)实用函数来提取时间序列的滚动窗口。要跟踪派生的滚动窗口特征，我们只需将特征分配为[*derived_names*属性](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L153-L168)。*TsfreshRollingMixin*类还包含其他辅助函数，如[*prepare_df()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L97)和[*get_combined()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L112)，以便将numpy数组转换为pandas.DataFrame，并将派生特征与输入特征结合在一起。感兴趣的读者可以查看[代码库](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/tsfresh_transformers.py)，更好地了解其实现。结合TSFresh的[*extract_features()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.feature_extraction.html#tsfresh.feature_extraction.extraction.extract_features)，我们可以设计一个*TSFreshRollingTransformer*类，使我们能够指定相关的[TSFresh参数](https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html)，以派生所需的时间序列特征，如下所示。
 - en: 'We mark the derived features of *TSFreshRollingTransformer* with a names like
     **(window #)** to indicate the aggregation window size.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '我们将*TSFreshRollingTransformer*派生的特征标记为类似于**(window #)**的名称，以指示聚合窗口的大小。'
 - en: 'In addition to the TSFresh derived time series features, [*RollingLagsTrasformer*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L171)
     class shows an example of how to extract the lag value from a given rolling window
     using the *TsfreshRollingMixin* class and track the output features with **(lag
     #)** as the lag order. Any other specific transformation performed on a rolling
     window can follow this example to design the transformers that are compatible
     with the tractable pipelines.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '除了TSFresh派生的时间序列特征，[*RollingLagsTrasformer*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L171)类展示了如何使用*TsfreshRollingMixin*类从给定的滚动窗口中提取滞后值，并将输出特征跟踪为**(lag
+    #)**作为滞后顺序。其他在滚动窗口上执行的特定变换可以参考此示例，设计与可追踪管道兼容的转换器。'
 - en: '[This script](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/make_features.py)
     demonstrates the building of time series pipelines using the above transformers
     to derive the features at different stages. For instance, the [feature](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L73)
@@ -125,8 +171,13 @@
     previously mentioned transformations. We can conveniently track the transformed
     names provided by the pipelines based on the relevant markers and validate the
     transformed outputs.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[这个脚本](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/make_features.py)展示了如何使用上述变换器构建时间序列管道，以在不同阶段衍生特征。例如，从第一个管道提取的[特征](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L73)有一个名为*Pre-MedianImputer__Global_intensity*的特征，用于指示原始特征“Global_intensity”是基于*SimpleImputer*使用中位数策略进行填补的。随后，衍生出的[滚动特征](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L162)名称类似于*TSFreshRolling__Pre-MedianImputer–Global_intensity__maximum(window
+    30)*，表示在窗口大小为 30 步的范围内填补的“Global_intensity”的最大值。最后，滚动窗口特征将经过填补和标准化处理，[建议的名称](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L213)
+    *ImputeAndScaler__TSFreshRolling__Pre-MedianImputer–Global_intensity__median(window
+    30)* 指示原始特征“Global_intensity”已经经历了上述所有变换。我们可以方便地通过相关标记追踪管道提供的变换名称，并验证变换后的输出。'
 - en: We complement this demonstration with an [example](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/models/train_and_predict.py)
     of building a linear regression model using the [Darts](https://github.com/unit8co/darts)
     package for forecasting. Once the pipelines are ready, it is straightforward to
@@ -135,44 +186,66 @@
     the derived features from the pipelines. We hope this article can provide the
     readers a basic template to build a time series pipeline conveniently for their
     time series forecasting use cases.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过一个[示例](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/models/train_and_predict.py)来补充这个演示，示例中使用了[Darts](https://github.com/unit8co/darts)包来构建线性回归模型进行预测。一旦管道准备好，就可以轻松加载输入数据集并相应地衍生特征。下图展示了基于从管道衍生特征训练的线性回归模型的预测结果。我们希望这篇文章能为读者提供一个基本模板，方便他们为时间序列预测用例构建时间序列管道。
 - en: '![Building a Tractable, Feature Engineering Pipeline for Multivariate Time
     Series](../Images/1552414f230e4b4d59d8f86d00c6e877.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![构建可处理的多变量时间序列特征工程管道](../Images/1552414f230e4b4d59d8f86d00c6e877.png)'
 - en: Linear regression model based forecasting based on the engineered features from
     the designed pipeline. Image by the author.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于设计管道中的工程特征的线性回归模型预测。图像由作者提供。
 - en: '**[Jing Qiang Goh](https://twitter.com/JQGoh)** is a time series enthusiast.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Jing Qiang Goh](https://twitter.com/JQGoh)** 是一位时间序列爱好者。'
 - en: More On This Topic
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多主题
 - en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BQML 进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会 2022：一场关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建 Formula 1 实时数据管道与 Kafka 和 Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
 - en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Bash 构建你的第一个 ETL 管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
 - en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Prefect 构建数据管道](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
 - en: '[Feature Stores for Real-time AI & Machine Learning](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实时 AI 和机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
