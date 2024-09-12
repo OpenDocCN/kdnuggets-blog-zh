@@ -1,197 +1,289 @@
 - en: 3 methods to deal with outliers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 处理离群点的三种方法
 - en: 原文：[https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html](https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html](https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html)
 - en: '**By [Alberto Quesada](https://www.linkedin.com/in/alberto-quesada-le%C3%B3n-01a6b912a),
     [Artelnics](https://www.artelnics.com/).**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Alberto Quesada](https://www.linkedin.com/in/alberto-quesada-le%C3%B3n-01a6b912a)，
+    [Artelnics](https://www.artelnics.com/).**'
 - en: '![outlier detection](../Images/fb15314161e17dc090e10ff6ca0efe21.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![离群点检测](../Images/fb15314161e17dc090e10ff6ca0efe21.png)'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: An outlier is a data point that is distant from other similar points. They may
     be due to variability in the measurement or may indicate experimental errors.
     If possible, outliers should be excluded from the data set. However, detecting
     that anomalous instances might be very difficult, and is not always possible.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 离群点是与其他类似点距离较远的数据点。它们可能是由于测量中的变异性或实验错误。如果可能，应该从数据集中排除离群点。然而，检测这些异常实例可能非常困难，并且不总是可能的。
 - en: Introduction
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 引言
 - en: Machine learning algorithms are very sensitive to the range and distribution
     of attribute values. Data outliers can spoil and mislead the training process
     resulting in longer training times, less accurate models and ultimately poorer
     results.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习算法对属性值的范围和分布非常敏感。数据离群点可能会破坏并误导训练过程，导致更长的训练时间、更不准确的模型以及最终更差的结果。
 - en: 'Along this article, we are going to talk about 3 different methods of dealing
     with outliers:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将讨论处理离群点的三种不同方法：
 - en: '*Univariate method:* This method looks for data points with extreme values
     on one variable.'
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*单变量方法：* 这种方法寻找在单个变量上具有极端值的数据点。'
 - en: '*Multivariate method:* Here we look for unusual combinations on all the variables.'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*多变量方法：* 在这里，我们寻找所有变量上的不寻常组合。'
 - en: '*Minkowski error:* This method reduces the contribution of potential outliers
     in the training process.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*闵可夫斯基误差：* 这种方法减少潜在离群点在训练过程中的影响。'
 - en: To illustrate that methods, we will use a data set obtained from the following
     function.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这些方法，我们将使用从以下函数获得的数据集。
 - en: y = sin(π·x)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: y = sin(π·x)
 - en: Once we have our data set, we replace two y values for other ones that are far
     from our function. The next graph depicts this data set.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们获得数据集，我们将两个y值替换为远离我们函数的其他值。下图展示了这个数据集。
 - en: '![outlier-detection-1](../Images/59e5e269dbcbf6262b91886543d5fe0d.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![离群点检测-1](../Images/59e5e269dbcbf6262b91886543d5fe0d.png)'
 - en: The points A=(-0.5,-1.5) and B=(0.5,0.5) are outliers. Point A is outside the
     range defined by the y data, while Point B is inside that range. As we will see,
     that makes them of different nature, and we will need different methods to detect
     and treat them.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 点A=(-0.5,-1.5)和B=(0.5,0.5)是离群点。点A在y数据定义的范围之外，而点B在该范围内。正如我们将看到的那样，这使得它们的性质不同，我们需要不同的方法来检测和处理它们。
 - en: 1\. Univariate method
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1. 单变量方法
 - en: One of the simplest methods for detecting outliers is the use of box plots.
     A box plot is a graphical display for describing the distribution of the data.
     Box plots use the median and the lower and upper quartiles.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 检测离群点的最简单方法之一是使用箱线图。箱线图是一种用于描述数据分布的图形显示。箱线图使用中位数以及下四分位数和上四分位数。
 - en: The Tukey’s method defines an outlier as those values of the data set that fall
     far from the central point, the median. The maximum distance to the center of
     the data that is going to be allowed is called the cleaning parameter. Id the
     cleaning parameter is very large, the test becomes less sensitive to outliers.
     On the contrary, if it is too small, a lot of values will be detected as outliers.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: Tukey的方法将异常值定义为那些远离数据集中心点——中位数的值。允许到数据中心的最大距离称为清理参数。如果清理参数非常大，则测试对异常值的敏感度降低。相反，如果它过小，许多值将被检测为异常值。
 - en: The following chart shows the box plot for the variable y. The minimum of the
     variable is -1.5, the first quartile is -0.707, the second quartile or median
     is 0, the third quartile is 0.588 and the maximum is 0.988.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图显示了变量y的箱线图。该变量的最小值为-1.5，第一个四分位数为-0.707，第二个四分位数或中位数为0，第三个四分位数为0.588，最大值为0.988。
 - en: '![outlier-detection-2](../Images/da5e5297ec8089173875e4934e88fed2.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![异常值检测-2](../Images/da5e5297ec8089173875e4934e88fed2.png)'
 - en: As we can see, the minimum is far away from the first quartile and the median.
     If we set the cleaning parameter to 0.6, the Tukey’s method will detect Point
     A as an outlier, and clean it from the data set.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，最小值远离第一个四分位数和中位数。如果我们将清理参数设置为0.6，Tukey方法将检测到点A是异常值，并将其从数据集中删除。
 - en: Plotting again the box plot for that variable, we can notice that the outlier
     has been removed. As a consequence, the distribution of the data is now much better.
     Now, the minimum of y is -0.9858, the first quartile is -0.588, the second quartile
     or median is 0.078, the third quartile is 0.707 and the maximum is 0.988.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新绘制该变量的箱线图后，我们可以注意到异常值已经被移除。因此，数据的分布现在好得多。现在，y的最小值为-0.9858，第一个四分位数为-0.588，第二个四分位数或中位数为0.078，第三个四分位数为0.707，最大值为0.988。
 - en: '![outlier-detection-3](../Images/0aee746ef56626cef2d6ecd4d87a099a.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![异常值检测-3](../Images/0aee746ef56626cef2d6ecd4d87a099a.png)'
 - en: However, this univariate method has not detected Point B, and therefore we are
     not finished.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这种单变量方法没有检测到点B，因此我们还没有完成。
 - en: 2\. Multivariate method
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 多变量方法
 - en: Outliers do not need to be extreme values. Therefore, as we have seen with Point
     B, the univariate method does not always work well. The multivariate method tries
     to solve that by building a model using all the data available, and then cleaning
     those instances with errors above a given value.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常值不需要是极端值。因此，正如我们在点B中看到的，单变量方法并不总是有效。多变量方法试图通过使用所有可用数据构建模型，然后清理那些误差超过给定值的实例来解决这个问题。
 - en: In this case, we have trained a neural network using all the available data
     (but Point B, which was excluded by the univariate method). Once we have our predictive
     model, we perform a linear regression analysis in order to obtain the next graph.
     The predicted values are plotted versus the actual ones as squares. The coloured
     line indicates the best linear fit. The grey line would indicate a perfect fit.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们使用所有可用的数据（但排除了由单变量方法排除的点B）训练了一个神经网络。一旦我们拥有了预测模型，我们就会执行线性回归分析，以获得下一个图表。预测值以方形图示表示，实际值以方形表示。彩色线表示最佳线性拟合。灰色线表示完美拟合。
 - en: '![outlier-detection-4](../Images/1adf093616ac03e5950806952bda3932.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![异常值检测-4](../Images/1adf093616ac03e5950806952bda3932.png)'
 - en: As we can see, there is a point that falls too far from the model. This point
     is spoiling the model, so we can think that it is another outlier.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，有一个点远离模型。这一点干扰了模型，因此我们可以认为它是另一个异常值。
 - en: To find that point quantitatively, we can calculate the maximum errors between
     the outputs from the model and the targets in the data. The following table lists
     the 5 instances with maximum errors.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了定量地找到那个点，我们可以计算模型输出与数据中目标之间的最大误差。下表列出了具有最大误差的5个实例。
 - en: '![outlier_error_table](../Images/f14ee0648b2cbe63ce2f1d91cea86b81.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![异常值错误表](../Images/f14ee0648b2cbe63ce2f1d91cea86b81.png)'
 - en: We can notice that instance 11 stands out for having a large error in comparison
     with the others (0.430 versus 0.069,…). If we look at the linear regression graph,
     we can see that this instance matches the point that is far away from the model.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以注意到实例11在与其他实例的比较中具有较大的错误（0.430对比0.069,…）。如果我们查看线性回归图，可以看到这个实例对应于远离模型的点。
 - en: If we select 20% of maximum error, this method identifies Point B as an outlier
     and cleans it from the data set. We can see that by performing again a linear
     regression analysis.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们选择 20% 的最大误差，这种方法会将 B 点识别为离群点，并将其从数据集中清除。我们可以通过再次进行线性回归分析来验证这一点。
 - en: '![outlier-detection-5](../Images/c88f847a26b4e6f9c30374ac967441ed.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![离群点检测-5](../Images/c88f847a26b4e6f9c30374ac967441ed.png)'
 - en: There are no more outliers in our data set so the generalization capabilities
     of our model will improve notably.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集中没有更多的离群点，因此我们模型的泛化能力将显著提高。
 - en: 3\. Minkowski error
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. Minkowski 误差
 - en: Now, we are going to talk about a different method for dealing with outliers.
     Unlike the univariate and multivariate methods, it doesn’t detect and clean the
     outliers. Instead, it reduces the impact that outliers will have in the model.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将讨论另一种处理离群点的方法。与单变量和多变量方法不同，这种方法并不检测和清理离群点。相反，它减少了离群点对模型的影响。
 - en: The Minkowski error is a loss index that is more insensitive to outliers than
     the standard sum squared error. The sum squared error raises each instance error
     to the square, making a too big contribution of outliers to the total error. The
@@ -199,96 +291,146 @@
     than 2, for instance 1.5\. This reduces the contribution of outliers to the total
     error. For instance, if an outlier has an error of 10, the squared error for that
     instance will be 100, while the Minkowski error will be 31.62.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: Minkowski 误差是一种损失指标，比标准的平方和误差对离群点更不敏感。平方和误差将每个实例的误差平方，使得离群点对总误差的贡献过大。Minkowski
+    误差通过将每个实例的误差提升到小于 2 的数值（例如 1.5）来解决这个问题。这减少了离群点对总误差的贡献。例如，如果一个离群点的误差为 10，那么该实例的平方误差将为
+    100，而 Minkowski 误差为 31.62。
 - en: To illustrate this method, we are going to build two different neural network
     models from our data set contaning two outliers (A and B). The architecture selected
     for this network is 1:24:1\. The first one will be created with the sum squared
     error, and the second one with the Minkowski error.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这种方法，我们将从包含两个离群点（A 和 B）的数据集中构建两个不同的神经网络模型。选定的网络架构为 1:24:1。第一个模型将使用平方和误差创建，第二个模型将使用
+    Minkowski 误差。
 - en: The model trained with sum squared error is plotted in the next figure. As we
     can see, two outliers are spoiling the model.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用平方和误差训练的模型绘制在下图中。我们可以看到，两个离群点正在破坏模型。
 - en: '![outlier-detection-6](../Images/24a24da8ce907fc7053acc836308fe84.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![离群点检测-6](../Images/24a24da8ce907fc7053acc836308fe84.png)'
 - en: Now, we are going to train the same neural network with the Minkowski error.
     The resulting model is depicted next. As we can see, the Minkowski error has made
     the training process more insensitive to outliers than the sum squared error.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将使用 Minkowski 误差训练相同的神经网络。结果模型如图所示。我们可以看到，Minkowski 误差使训练过程对离群点的敏感性低于平方和误差。
 - en: '![outlier-detection-7](../Images/bc68f54a5c1894769627c2f858781799.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![离群点检测-7](../Images/bc68f54a5c1894769627c2f858781799.png)'
 - en: As a result, Minkowski error has improved the quality of our model notably.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果表明，Minkowski 误差显著提高了我们模型的质量。
 - en: Conclusions
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: We have seen that outliers are one of the main problems when building a predictive
     model. Indeed, they cause data scientists to achieve poorer results than they
     could. To solve that, we need effective methods deal with that spurious points
     and remove them.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经看到，在构建预测模型时，离群点是主要问题之一。实际上，它们导致数据科学家获得的结果不如预期。为了解决这个问题，我们需要有效的方法来处理这些虚假的点并将其移除。
 - en: 'In this article, we have seen 3 different methods for dealing with outliers:
     the univariate method, the multivariate method and the Minkowski error. These
     methods are complementary and, if our data set has many and difficult outliers,
     we might need to try them all.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们已经看到处理离群点的 3 种不同方法：单变量方法、多变量方法和 Minkowski 误差。这些方法是互补的，如果我们的数据集有很多复杂的离群点，我们可能需要尝试所有这些方法。
 - en: '[Original](https://www.neuraldesigner.com/blog/3_methods_to_deal_with_outliers).
     Reposted with permission.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.neuraldesigner.com/blog/3_methods_to_deal_with_outliers)。经许可转载。'
 - en: '**Bio:** **[Alberto Quesada](https://www.linkedin.com/in/alberto-quesada-le%C3%B3n-01a6b912a) **is
     Research assistant at **[Artelnics](https://www.artelnics.com/).**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** **[阿尔贝托·凯萨达](https://www.linkedin.com/in/alberto-quesada-le%C3%B3n-01a6b912a)**
+    是 **[Artelnics](https://www.artelnics.com/) 的研究助理。**'
 - en: '**Related:**'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Data Science Basics: What Types of Patterns Can Be Mined From Data?](/2016/12/data-science-basics-types-patterns-mined-data.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学基础：从数据中可以挖掘出哪些类型的模式？](/2016/12/data-science-basics-types-patterns-mined-data.html)'
 - en: '[A Neat Trick to Increase Robustness of Regression Models](/2016/08/neat-trick-increase-robustness-regression-models.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提高回归模型鲁棒性的巧妙技巧](https://www.kdnuggets.com/2016/08/neat-trick-increase-robustness-regression-models.html)'
 - en: '[Machine Learning vs Statistics](/2016/11/machine-learning-vs-statistics.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习与统计学](https://www.kdnuggets.com/2016/11/machine-learning-vs-statistics.html)'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
 - en: '[5 Ways to Deal with the Lack of Data in Machine Learning](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理机器学习中数据不足的5种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
 - en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[黑色星期五优惠 - 通过DataCamp以更低的价格掌握机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
 - en: '[How to Deal with Missing Data Using Interpolation Techniques in Pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用插值技术处理Pandas中的缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
 - en: '[How to Handle Outliers in Dataset with Pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在数据集中处理异常值](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
 - en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python中的标准差移除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
