@@ -1,119 +1,183 @@
 - en: Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Docker 容器将机器学习管道部署到云端
 - en: 原文：[https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html](https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html](https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
     of PyCaret**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Moez Ali](https://www.linkedin.com/in/profile-moez/) 创始人兼 PyCaret 作者**'
 - en: '![](../Images/5349163e540ab0ae4854ac1f9ff52edd.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5349163e540ab0ae4854ac1f9ff52edd.png)'
 - en: '**RECAP**'
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**总结**'
 - en: In our [last post](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99),
     we demonstrated how to develop a machine learning pipeline and deploy it as a
     web app using PyCaret and Flask framework in Python. If you haven’t heard about
     PyCaret before, please read this [announcement](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) to
     learn more.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们 [上一篇文章](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)
+    中，我们演示了如何开发一个机器学习管道并使用 PyCaret 和 Flask 框架在 Python 中将其部署为网络应用。如果你之前没有听说过 PyCaret，请阅读这个
+    [公告](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46)
+    以了解更多信息。
 - en: In this tutorial, we will use the same machine learning pipeline and Flask app
     that we built and deployed previously. This time we will demonstrate how to deploy
     a machine learning pipeline as a web app using the [Microsoft Azure Web App Service](https://azure.microsoft.com/en-us/services/app-service/web/).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用之前构建和部署的相同机器学习管道和 Flask 应用。这次我们将演示如何使用 [Microsoft Azure Web App Service](https://azure.microsoft.com/en-us/services/app-service/web/)
+    将机器学习管道作为网络应用部署。
 - en: In order to deploy a machine learning pipeline on Microsoft Azure, we will have
     to containerize our pipeline in a software called **“Docker”**. If you don’t know
     what does containerize means, *no problem* — this tutorial is all about that.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在 Microsoft Azure 上部署机器学习管道，我们需要将我们的管道容器化为一个叫做 **“Docker”** 的软件。如果你不知道容器化是什么意思，*没问题*
+    — 本教程正是关于这个的。
 - en: ???? Learning Goals of this Tutorial
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 本教程的学习目标
 - en: What is a container? What is Docker? and why do we need it?
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是容器？什么是 Docker？我们为什么需要它？
 - en: Build a Docker file on your local computer and publish it into [Azure Container
     Registry (ACR)](https://azure.microsoft.com/en-us/services/container-registry/).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在本地计算机上构建一个 Docker 文件并将其发布到 [Azure Container Registry (ACR)](https://azure.microsoft.com/en-us/services/container-registry/)。
 - en: Deploy a web service on Azure using the container we uploaded into ACR.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用我们上传到 ACR 的容器在 Azure 上部署一个网络服务。
 - en: See a web app in action that uses a trained machine learning pipeline to predict
     on new data points in real-time.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 观看一个使用训练好的机器学习管道实时预测新数据点的网络应用。
 - en: In our last post, we covered the basics of model deployment and why it is needed.
     If you would like to learn more about model deployment, [click here](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99) to
     read our last article.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们上一篇文章中，我们介绍了模型部署的基本概念及其必要性。如果你想了解更多关于模型部署的内容， [点击这里](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)
+    阅读我们的上一篇文章。
 - en: This tutorial will cover the entire workflow of building a container locally
     to pushing it onto Azure Container Registry and then deploying our pre-trained
     machine learning pipeline and Flask app onto Azure Web Services.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将涵盖从本地构建容器到将其推送到 Azure Container Registry，然后将我们预训练的机器学习管道和 Flask 应用部署到 Azure
+    Web Services 的整个工作流程。
 - en: '![Figure](../Images/d36fc51994d651c09f77854c9f90fa8f.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/d36fc51994d651c09f77854c9f90fa8f.png)'
 - en: 'WORKFLOW: Create an image → Build container locally → Push to ACR → Deploy
     app on cloud'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作流程：创建镜像 → 在本地构建容器 → 推送到 ACR → 在云端部署应用
 - en: ???? Toolbox for this tutorial
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 本教程的工具箱
 - en: '**PyCaret**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**PyCaret**'
 - en: '[PyCaret](https://www.pycaret.org/) is an open source, low-code machine learning
     library in Python that is used to train and deploy machine learning pipelines
     and models into production. PyCaret can be installed easily using pip.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PyCaret](https://www.pycaret.org/) 是一个开源的低代码 Python 机器学习库，用于训练和部署机器学习管道和模型到生产环境中。PyCaret
+    可以通过 pip 简单安装。'
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Flask**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Flask**'
 - en: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) is a framework that allows
     you to build web applications. A web application can be a commercial website,
     blog, e-commerce system, or an application that generates predictions from data
     provided in real-time using trained models. If you don’t have Flask installed,
     you can use pip to install it.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) 是一个框架，允许你构建 web 应用程序。一个
+    web 应用程序可以是商业网站、博客、电子商务系统，或者是一个利用训练模型从实时数据中生成预测的应用。如果你还没有安装 Flask，可以使用 pip 进行安装。'
 - en: '****Docker****'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '****Docker****'
 - en: '[Docker](https://www.docker.com/)is a tool designed to make it easier to create,
     deploy, and run applications by using containers. Containers are used to package
     up an application with all of its necessary components, such as libraries and
     other dependencies, and ship it all out as one package. If you haven’t used docker
     before, this tutorial also covers the installation of docker on Windows 10.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Docker](https://www.docker.com/) 是一个工具，旨在通过使用容器简化应用程序的创建、部署和运行。容器用于将应用程序及其所有必要组件（如库和其他依赖项）打包在一起，并将其作为一个整体进行交付。如果你以前没有使用
+    docker，本教程还涵盖了在 Windows 10 上安装 docker 的步骤。'
 - en: '****Microsoft Azure****'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '****Microsoft Azure****'
 - en: '[Microsoft Azure](https://azure.microsoft.com/en-ca/overview/what-is-azure/) is
     a set of cloud services that is used to build, manage and deploy applications
     on a massive and global network. Other cloud services that are often used for
@@ -121,736 +185,1125 @@
     Cloud](https://cloud.google.com/), [IBM Cloud](https://www.ibm.com/cloud) and [Alibaba
     Cloud](https://www.alibabacloud.com/). We will cover most of them in our future
     tutorials.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Microsoft Azure](https://azure.microsoft.com/en-ca/overview/what-is-azure/)
+    是一组云服务，用于在大规模全球网络上构建、管理和部署应用程序。其他常用于部署 ML 管道的云服务有 [Amazon Web Services (AWS)](https://aws.amazon.com/)、[Google
+    Cloud](https://cloud.google.com/)、[IBM Cloud](https://www.ibm.com/cloud) 和 [Alibaba
+    Cloud](https://www.alibabacloud.com/)。我们将在未来的教程中涵盖大部分服务。'
 - en: If you haven’t used Microsoft Azure before you can [sign up](https://azure.microsoft.com/en-ca/free/search/?&ef_id=EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&OCID=AID2000061_SEM_EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&dclid=CK6R8aueoukCFVbJyAoduGYLcQ) for
     a free account here. When you sign up for the first time you get a free credit
     for the first 30 days. You can utilize that credit in building your own web app
     by following this tutorial.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你以前没有使用 Microsoft Azure，你可以在这里 [注册](https://azure.microsoft.com/en-ca/free/search/?&ef_id=EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&OCID=AID2000061_SEM_EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&dclid=CK6R8aueoukCFVbJyAoduGYLcQ)
+    免费账户。首次注册时，你会获得前 30 天的免费信用。你可以利用这些信用来按照本教程构建你自己的 web 应用。
 - en: What is a Container and why do we need it?
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是容器，为什么我们需要它？
 - en: Have you ever had the problem where your python code (*or any other code*) works
     fine on your computer but when your friend tries to run the exact same code, it
     doesn’t work? If your friend is repeating the exact same steps, they should get
     the same results right? The one-word answer to this is ***the environment*. **Your
     friend’s Python environment is different than yours.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你是否曾遇到过这样的问题：你的 python 代码 (*或任何其他代码*) 在你的计算机上运行正常，但当你的朋友尝试运行完全相同的代码时，它却无法运行？如果你的朋友重复了完全相同的步骤，他们应该得到相同的结果，对吗？一句话回答是
+    ***环境***。你朋友的 Python 环境与你的不同。
 - en: What does an environment include? → Python (*or any other language you have
     used*) and all the libraries and dependencies with the exact versions using which
     application was built and tested.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 环境包括什么？→ Python (*或你使用的任何其他语言*) 以及构建和测试应用程序所使用的所有库和依赖项的确切版本。
 - en: 'If we can somehow create an environment that we can transfer to other machines
     (for example: your friend’s computer or a cloud service provider like Microsoft
     Azure), we can reproduce the results anywhere.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们能以某种方式创建一个可以转移到其他机器（例如：你朋友的计算机或像 Microsoft Azure 这样的云服务提供商）的环境，我们就能在任何地方重现结果。
 - en: Hence, **a** **container **is a type of software that packages up an application
     and all its dependencies so the application runs reliably from one computing environment
     to another.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，**容器** 是一种软件类型，它将应用程序及其所有依赖项打包起来，使得应用程序能够在不同的计算环境中可靠地运行。
 - en: “Think about **containers, **when you think about containers.”
+  id: totrans-34
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “当你想到**容器**时，想想容器。”
 - en: '![Figure](../Images/cdba43a7a6535b917ba7ad58a0bb936b.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/cdba43a7a6535b917ba7ad58a0bb936b.png)'
 - en: '[https://www.freepik.com/free-photos-vectors/cargo-ship](https://www.freepik.com/free-photos-vectors/cargo-ship)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://www.freepik.com/free-photos-vectors/cargo-ship](https://www.freepik.com/free-photos-vectors/cargo-ship)'
 - en: This is the most intuitive way to understand containers in data science. **They
     are just like containers on a ship **where the goal is to isolate the *contents *of
     one container from the others so they don’t get mixed up. This is exactly what
     containers are used for in data science.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是在数据科学中理解容器的最直观方式。**它们就像船上的集装箱**，目标是将一个集装箱的*内容*与其他集装箱隔离开来，以避免混淆。这正是数据科学中容器的用途。
 - en: Now that we understand the metaphor behind containers, let’s look at alternate
     options for creating an isolated environment for our application. One simple alternative
     is to have a separate machine for each of your applications.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们理解了容器背后的比喻，让我们看看创建应用程序隔离环境的其他选项。一种简单的替代方案是为每个应用程序配备一台独立的机器。
 - en: (1 machine = 1 application = no conflict = everything is good)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: （1台机器 = 1个应用 = 无冲突 = 一切正常）
 - en: Using a separate machine is straight forward but it doesn’t outweigh the benefits
     of using containers since maintaining multiple machines for each application is
     expensive, a nightmare-to-maintain and hard-to-scale. In short, it’s not practical
     in many real-life scenarios.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用独立的机器是直接的，但它并不超越使用容器的好处，因为为每个应用程序维护多个机器是昂贵的、难以维护且难以扩展。简而言之，在许多实际场景中，这并不实际。
 - en: Another alternate for creating an isolated environment are **virtual machines. **Containers
     are again preferable here because they require fewer resources, are very portable,
     and are faster to spin up.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建隔离环境的另一种选择是**虚拟机**。这里容器更为优选，因为它们所需资源更少、便于移植且启动速度更快。
 - en: '![Figure](../Images/154947460cf6ccd317e662a3c46f5b36.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/154947460cf6ccd317e662a3c46f5b36.png)'
 - en: Virtual Machines vs. Containers
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 虚拟机 vs. 容器
 - en: Can you spot the difference between Virtual Machines and Containers? When you
     use containers, you do not require guest operating systems. Imagine 10 applications
     running on a virtual machine. This would require 10 guest operating systems compared
     to none required when you use containers.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 你能辨别虚拟机和容器之间的区别吗？使用容器时，你不需要客操作系统。假设在虚拟机上运行10个应用程序。这将需要10个客操作系统，而使用容器则不需要。
 - en: I understand containers but what is Docker?
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我了解容器，但Docker是什么？
 - en: Docker is a company that provides software (also called Docker) that allows
     users to build, run and manage containers. While Docker’s container are the most
     common, there are other less famous *alternatives* such as [LXD](https://linuxcontainers.org/lxd/introduction/) and [LXC](https://linuxcontainers.org/) that
     provides container solution.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker是一家提供软件（也叫Docker）的公司，该软件允许用户构建、运行和管理容器。虽然Docker的容器最为常见，但还有其他不那么著名的*替代品*，如[LXD](https://linuxcontainers.org/lxd/introduction/)和[LXC](https://linuxcontainers.org/)，也提供容器解决方案。
 - en: In this tutorial, we will use **Docker Desktop for Windows **to create a container
     that we will publish on Azure Container Registry. We will then deploy a web app
     using that container.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用**Docker Desktop for Windows**来创建一个容器，并将其发布到Azure容器注册表。然后，我们将使用该容器部署一个Web应用程序。
 - en: '![](../Images/1f2d661aa18345bf13d584bc5d593e19.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1f2d661aa18345bf13d584bc5d593e19.png)'
 - en: Docker Image vs. Docker Container
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Docker镜像 vs. Docker容器
 - en: What is the difference between a docker image and a docker container? This is
     by far the most common question asked so let’s clear this right away. There are
     many technical definitions available, however, it is intuitive to think about
     a docker image as a mold based on which container is created. An image is essentially
     a snapshot of container.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker镜像和Docker容器之间有什么区别？这是迄今为止最常被问到的问题，所以让我们立即解答。虽然有许多技术定义，但将Docker镜像视为容器创建的模具是直观的。镜像本质上是容器的快照。
 - en: If you prefer a slightly more technical definition then consider this: Docker
     images become containers at runtime when they run on a Docker Engine.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你希望更技术性的定义，可以这样考虑：Docker镜像在运行时会在Docker引擎上变成容器。
 - en: '**Breaking the hype:**'
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**打破炒作：**'
 - en: At the end of the day, docker is just a file with a few lines of instructions
     that are saved under your project folder with the name ***“Dockerfile”***.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 到了最后，docker只是一个文件，里面包含几行指令，保存在你的项目文件夹中，名字是***“Dockerfile”***。
 - en: Another way to think about docker file is that they are like recipes you have
     invented in your own kitchen. When you share those recipes with somebody else
     and they follow the exact same instructions, they are able to produce the same
     dish. Similarly, you can share your docker file with other people, who can then
     create images and run containers based on that docker file.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种理解 docker 文件的方法是将它们看作是你在自己厨房里发明的食谱。当你将这些食谱与其他人分享并且他们按照相同的指示操作时，他们能够制作出相同的菜肴。类似地，你可以将你的
+    docker 文件分享给其他人，他们可以基于该 docker 文件创建镜像并运行容器。
 - en: Now that you understand containers, docker and why we should use them, let’s
     quickly set the business context.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你了解了容器、docker 以及我们为什么要使用它们，让我们快速设定业务背景。
 - en: Setting the Business Context
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设定业务背景
 - en: An insurance company wants to improve its cash flow forecasting by better predicting
     patient charges using demographic and basic patient health risk metrics at the
     time of hospitalization.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 一家保险公司希望通过在住院时利用人口统计和基本患者健康风险指标来更好地预测患者费用，从而改善其现金流预测。
 - en: '![Figure](../Images/3638fa2bffed356be35c42d85a72bc00.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/3638fa2bffed356be35c42d85a72bc00.png)'
 - en: '*(*[*data source*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(*[*数据源*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
 - en: Objective
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标
 - en: To build and deploy a web application where the demographic and health information
     of a patient is entered into a web-based form which then outputs a predicted charge
     amount.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建和部署一个 Web 应用程序，其中患者的基本人口统计和健康信息输入到一个基于 Web 的表单中，然后输出预测的费用金额。
 - en: Tasks
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 任务
 - en: Train and develop a machine learning pipeline for deployment.
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练和开发一个机器学习管道以供部署。
 - en: Build a web app using Flask framework. It will use the trained ML pipeline to
     generate predictions on new data points in real-time.
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Flask 框架构建一个 Web 应用。它将利用训练好的 ML 管道实时生成对新数据点的预测。
 - en: Create a docker image and container.
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个 docker 镜像和容器。
 - en: Publish the container onto Azure Container Registry (ACR).
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将容器发布到 Azure 容器注册表（ACR）。
 - en: Deploy the web app in the container by publishing onto ACR. Once deployed, it
     will become publicly available and can be accessed via a Web URL.
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将 Web 应用发布到容器中，通过发布到 ACR。一旦部署，它将变得公开可用，并可以通过 Web URL 进行访问。
 - en: Since we have already covered the first two tasks in our last tutorial, we will
     quickly recap them and focus on the remaining tasks in the list above. If you
     are interested in learning more about developing machine learning pipeline in
     Python using PyCaret and building a web app using Flask framework, you can read
     our [last tutorial](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99).
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们在上一个教程中已经涵盖了前两个任务，我们将快速回顾它们并重点关注上述列表中的剩余任务。如果你有兴趣了解更多关于如何使用 PyCaret 开发机器学习管道以及使用
+    Flask 框架构建 Web 应用程序的内容，你可以阅读我们的 [最新教程](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)。
 - en: ???? Develop Machine Learning Pipeline
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 开发机器学习管道
 - en: 'We are using PyCaret in Python for training and developing a machine learning
     pipeline which will be used as part of our web app. The Machine Learning Pipeline
     can be developed in an Integrated Development Environment (IDE) or Notebook. We
     have used a notebook to run the below code:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在 Python 中使用 PyCaret 来训练和开发一个机器学习管道，该管道将作为我们 Web 应用的一部分。机器学习管道可以在集成开发环境（IDE）或笔记本中开发。我们使用了一个笔记本来运行以下代码：
 - en: 'When you save a model in PyCaret, the entire transformation pipeline based
     on the configuration defined in the **setup() **function is created . All inter-dependencies
     are orchestrated automatically. See the pipeline and model stored in the ‘deployment_28042020’
     variable:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你在 PyCaret 中保存模型时，基于 **setup()** 函数中定义的配置，会创建整个转换管道。所有的相互依赖关系都会自动协调。查看存储在‘deployment_28042020’变量中的管道和模型：
 - en: '![Figure](../Images/e083836af4d5fa14164ce9cc5be82f4a.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/e083836af4d5fa14164ce9cc5be82f4a.png)'
 - en: Machine Learning Pipeline created using PyCaret
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 PyCaret 创建的机器学习管道
 - en: ???? Build Web Application
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 构建 Web 应用程序
 - en: 'This tutorial is not focused on building a Flask application. It is only discussed
     here for completeness. Now that our machine learning pipeline is ready we need
     a web application that can connect to our trained pipeline to generate predictions
     on new data points in real-time. We have created the web application using Flask
     framework in Python. There are two parts of this application:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程不专注于构建 Flask 应用程序。这里只是为了完整性讨论。现在我们的机器学习管道已经准备好，我们需要一个可以连接到训练好的管道以实时生成新数据点预测的
+    web 应用程序。我们使用 Python 的 Flask 框架创建了这个 web 应用程序。这个应用程序有两个部分：
 - en: Front-end (designed using HTML)
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前端（使用 HTML 设计）
 - en: Back-end (developed using Flask)
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 后端（使用 Flask 开发）
 - en: 'This is how our web application looks:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们的 web 应用程序的样子：
 - en: '![Figure](../Images/74d5a86c0b0e35e02a454d152185105a.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/74d5a86c0b0e35e02a454d152185105a.png)'
 - en: Web application opened on local machine
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 本地机器上打开的 web 应用程序
 - en: If you would like to see this web app in action, [click here](https://pycaret-insurance.herokuapp.com/) to
     open a deployed web app on Heroku (*It may take few minutes to open*).
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想查看这个 web 应用程序的实际效果，[点击这里](https://pycaret-insurance.herokuapp.com/) 打开部署在
+    Heroku 上的 web 应用程序（*可能需要几分钟时间才能打开*）。
 - en: 'If you haven’t followed along, no problem. You can simply fork this [repository](https://github.com/pycaret/deployment-heroku) from
     GitHub. If you don’t know how to fork a repo, please [read this](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) official
     GitHub tutorial. This is how your project folder should look at this point:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你没有跟随步骤，也没关系。你可以简单地从 GitHub 上 fork 这个 [代码库](https://github.com/pycaret/deployment-heroku)。如果你不知道如何
+    fork 一个仓库，请 [阅读此](https://help.github.com/en/github/getting-started-with-github/fork-a-repo)
+    官方 GitHub 教程。到目前为止，你的项目文件夹应该是这样的：
 - en: '![Figure](../Images/68dd5ccdf9051f74b93e6be42b09eaef.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/68dd5ccdf9051f74b93e6be42b09eaef.png)'
 - en: '[https://github.com/pycaret/deployment-heroku](https://github.com/pycaret/deployment-heroku)'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://github.com/pycaret/deployment-heroku](https://github.com/pycaret/deployment-heroku)'
 - en: Now that we have a fully functional web application, we can start the process
     of containerizing the app using Docker.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了一个功能齐全的 web 应用程序，我们可以开始使用 Docker 容器化该应用程序的过程。
 - en: '10-steps to deploy a ML pipeline in docker container:'
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 docker 容器中部署 ML 管道的 10 个步骤：
 - en: ???? **Step 1 — Install Docker Desktop for Windows**
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? **步骤 1 — 为 Windows 安装 Docker Desktop**
 - en: You can use Docker Desktop on Mac as well as Windows. Depending on your operating
     system, you can download the Docker Desktop from [this link](https://docs.docker.com/docker-for-windows/install/).
     We will be using Docker Desktop for Windows in this tutorial.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 Mac 和 Windows 上使用 Docker Desktop。根据你的操作系统，你可以从 [这个链接](https://docs.docker.com/docker-for-windows/install/)
+    下载 Docker Desktop。在本教程中，我们将使用 Windows 版的 Docker Desktop。
 - en: '![Figure](../Images/0193062c5b309be0de0c073493e45241.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/0193062c5b309be0de0c073493e45241.png)'
 - en: '[https://hub.docker.com/editions/community/docker-ce-desktop-windows/](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://hub.docker.com/editions/community/docker-ce-desktop-windows/](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)'
 - en: The easiest way to check if the installation was successful is by opening the
     command prompt and typing in ‘docker’. It should print the help menu.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 检查安装是否成功的最简单方法是打开命令提示符并输入‘docker’。它应该打印出帮助菜单。
 - en: '![Figure](../Images/bb29701d985ed8948f31b1ee816aa065.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/bb29701d985ed8948f31b1ee816aa065.png)'
 - en: Command prompt
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令提示符
 - en: ???? **Step 2 — Install Kitematic**
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? **步骤 2 — 安装 Kitematic**
 - en: Kitematic is an intuitive graphical user interface (GUI) for running Docker
     containers on Windows or Mac. You can download Kitematic from [Docker’s GitHub
     repository](https://github.com/docker/kitematic/releases).
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: Kitematic 是一个直观的图形用户界面（GUI），用于在 Windows 或 Mac 上运行 Docker 容器。你可以从 [Docker 的 GitHub
+    仓库](https://github.com/docker/kitematic/releases) 下载 Kitematic。
 - en: '![Figure](../Images/1693d830cdb6090cb447f35bdc84f9cb.png)'
+  id: totrans-96
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/1693d830cdb6090cb447f35bdc84f9cb.png)'
 - en: '[https://github.com/docker/kitematic/releases](https://github.com/docker/kitematic/releases)'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://github.com/docker/kitematic/releases](https://github.com/docker/kitematic/releases)'
 - en: Once downloaded, simply unzip the file into the desired location.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载完成后，简单地将文件解压到所需的位置。
 - en: ???? Step 3 — Create a Dockerfile
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 3 — 创建 Dockerfile
 - en: 'The first step of creating a Docker image is to create a Dockerfile. A Dockerfile
     is just a file with a set of instructions. The Dockerfile for this project looks
     like this:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建 Docker 镜像的第一步是创建一个 Dockerfile。Dockerfile 只是一个包含一系列指令的文件。这个项目的 Dockerfile
+    如下所示：
 - en: Dockerfile is case-sensitive and must be in the project folder with the other
     project files. A Dockerfile has no extension and can be created using any editor.
     We have used [Visual Studio Code](https://code.visualstudio.com/) to create it.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: Dockerfile 是区分大小写的，必须与其他项目文件一起放在项目文件夹中。Dockerfile 没有扩展名，可以使用任何编辑器创建。我们使用了 [Visual
+    Studio Code](https://code.visualstudio.com/) 来创建它。
 - en: ???? Step 4— Create Azure Container Registry
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 4 — 创建 Azure Container Registry
 - en: 'If you don’t have a Microsoft Azure account or haven’t used it before, you
     can [sign up](https://azure.microsoft.com/en-ca/free/search/?&ef_id=EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&OCID=AID2000061_SEM_EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&dclid=CK6R8aueoukCFVbJyAoduGYLcQ) for
     free. When you sign up for the first time you get a free credit for the first
     30 days. You can utilize that credit to build and deploy a web app on Azure. Once
     you sign up, follow these steps:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你没有 Microsoft Azure 帐户或以前没有使用过，你可以 [注册](https://azure.microsoft.com/en-ca/free/search/?&ef_id=EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&OCID=AID2000061_SEM_EAIaIQobChMIm8Onqp6i6QIViY7ICh2QVA2jEAAYASAAEgK9FvD_BwE:G:s&dclid=CK6R8aueoukCFVbJyAoduGYLcQ)
+    免费。当你第一次注册时，你将获得 30 天的免费信用。你可以利用这些信用在 Azure 上构建和部署 Web 应用。注册后，请按照以下步骤操作：
 - en: Login on [https://portal.azure.com](https://portal.azure.com/).
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 登录 [https://portal.azure.com](https://portal.azure.com/)。
 - en: Click on Create a Resource.
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 点击 Create a Resource。
 - en: Search for Container Registry and click on Create.
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 搜索 Container Registry 并点击 Create。
 - en: Select Subscription, Resource group and Registry name (in our case: **pycaret.azurecr.io** is
     our registry name)
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择订阅、资源组和注册表名称（在我们的例子中：**pycaret.azurecr.io** 是我们的注册表名称）
 - en: '![Figure](../Images/c3cd0dfaa68dc7cfa09972c543a0f48a.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c3cd0dfaa68dc7cfa09972c543a0f48a.png)'
 - en: '[https://portal.azure.com](https://portal.azure.com/) → Sign in → Create a
     Resource → Container Registry'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://portal.azure.com](https://portal.azure.com/) → 登录 → 创建资源 → 容器注册表'
 - en: ???? Step 5— Build Docker Image
+  id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 5 — 构建 Docker 镜像
 - en: Once a registry is created in Azure portal, the first step is to build a docker
     image using command line. Navigate to the project folder and execute the following
     code.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦在 Azure 门户中创建了注册表，第一步是使用命令行构建 Docker 镜像。导航到项目文件夹并执行以下代码。
 - en: '[PRE1]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Figure](../Images/ce0bca0cd5356ff48f0f004a225c0804.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/ce0bca0cd5356ff48f0f004a225c0804.png)'
 - en: Building docker image using anaconda prompt
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Anaconda 提示符构建 Docker 镜像
 - en: '**pycaret.azurecr.io** is the name of the registry that you get when you create
     a resource on Azure portal.'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**pycaret.azurecr.io** 是你在 Azure 门户上创建资源时获得的注册表名称。'
 - en: '**pycaret-insurance** is the name of the image and **latest **is the tag. This
     can be anything you want.'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**pycaret-insurance** 是镜像的名称，**latest** 是标签。这可以是任何你想要的。'
 - en: ???? Step 6— Run container from docker image
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 6 — 从 Docker 镜像运行容器
 - en: 'Now that the image is created we will run a container locally and test the
     application before we push it to Azure Container Registry. To run the container
     locally execute the following code:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 镜像创建完成后，我们将在本地运行容器并测试应用程序，然后再将其推送到 Azure Container Registry。要在本地运行容器，请执行以下代码：
 - en: '[PRE2]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Once this command is successfully executed it will return an ID of the container
     created.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦成功执行该命令，它将返回创建的容器的 ID。
 - en: '![Figure](../Images/70aff8bb9e5fa36be04d0b1352c066a1.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/70aff8bb9e5fa36be04d0b1352c066a1.png)'
 - en: Running docker container locally
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 本地运行 Docker 容器
 - en: ???? Step 7 — Test container on your local machine
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 7 — 在本地机器上测试容器
 - en: Open Kitematic and you should be able to see an application up and running.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 打开 Kitematic，你应该能够看到一个正在运行的应用程序。
 - en: '![Figure](../Images/d42673b1b682d7e0b09991e275f2bdb7.png)'
+  id: totrans-125
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/d42673b1b682d7e0b09991e275f2bdb7.png)'
 - en: Kitematic — A GUI for managing containers on Mac and Windows OS
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: Kitematic — 用于在 Mac 和 Windows 操作系统上管理容器的 GUI
 - en: You can see the app in action by going to localhost:5000 in your internet browser.
     It should open up a web app.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过在互联网浏览器中访问 localhost:5000 来查看应用程序的运行效果。它应该会打开一个 Web 应用。
 - en: '![Figure](../Images/290e31b7ffe644c78001c81cfe1a3aef.png)'
+  id: totrans-128
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/290e31b7ffe644c78001c81cfe1a3aef.png)'
 - en: Application running on local container (localhost:5000)
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本地容器上运行的应用程序（localhost:5000）
 - en: Make sure that once you are done with this, you stop the app using Kitematic,
     otherwise, it will continue to utilize resources on your computer.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保完成后，使用 Kitematic 停止应用程序，否则它会继续占用你计算机上的资源。
 - en: ???? Step 8— Authenticate Azure Credentials
+  id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 8 — 认证 Azure 凭据
 - en: 'One final step before you can upload the container onto ACR is to authenticate
     azure credentials on your local machine. Execute the following code in the command
     line to do that:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你可以将容器上传到 ACR 之前的最后一步是认证本地机器上的 Azure 凭据。请在命令行中执行以下代码：
 - en: '[PRE3]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You will be prompted for a Username and password. The username is the name of
     your registry (in this example username is “pycaret”). You can find your password
     under the Access keys of the Azure Container Registry resource you created.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 系统会提示你输入用户名和密码。用户名是你的注册表名称（在此示例中用户名是“pycaret”）。你可以在你创建的 Azure 容器注册表资源的访问密钥下找到你的密码。
 - en: '![Figure](../Images/d0337b320bc86533207850e4e0f29bc4.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/d0337b320bc86533207850e4e0f29bc4.png)'
 - en: portal.azure.com → Azure Container Registry → Access keys
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: portal.azure.com → Azure 容器注册表 → 访问密钥
 - en: ???? Step 9— Push Container onto Azure Container Registry
+  id: totrans-137
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 第9步— 将容器推送到 Azure 容器注册表
 - en: 'Now that you have authenticated to ACR, you can push the container you have
     created to ACR by executing the following code:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经对 ACR 进行了身份验证，你可以通过执行以下代码将你创建的容器推送到 ACR：
 - en: '[PRE4]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Depending on the size of the container, the push command may take some time
     to transfer the container to the cloud.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据容器的大小，推送命令可能需要一些时间来将容器转移到云端。
 - en: ???? Step 10— Create a Azure Web App and see your model in action
+  id: totrans-141
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 第10步— 创建 Azure Web 应用程序并查看你的模型运行情况
 - en: 'To create a web app on Azure, follow these steps:'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在 Azure 上创建 Web 应用程序，请按照以下步骤操作：
 - en: Login on [https://portal.azure.com](https://portal.azure.com/).
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 登录到 [https://portal.azure.com](https://portal.azure.com/)。
 - en: Click on Create a Resource.
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 点击创建资源。
 - en: Search for Web App and click on Create.
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 搜索 Web 应用程序并点击创建。
 - en: Link your ACR image that you pushed in (step 9 above) to your app.
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将你在（上面的第9步）推送的 ACR 镜像链接到你的应用程序。
 - en: '![Figure](../Images/22a2abf6db31a730b356cbd968f18639.png)'
+  id: totrans-147
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/22a2abf6db31a730b356cbd968f18639.png)'
 - en: portal.azure.com → Web App → Create → Basics![Figure](../Images/a1f869ad7af3059d8ff926543ec325c9.png)
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: portal.azure.com → Web 应用程序 → 创建 → 基本![图](../Images/a1f869ad7af3059d8ff926543ec325c9.png)
 - en: portal.azure.com → Web App → Create → Docker
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: portal.azure.com → Web 应用程序 → 创建 → Docker
 - en: '**BOOM!! The app is now up and running on Azure Web Services.**'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '**砰!! 应用程序现在在 Azure Web Services 上运行。**'
 - en: '![Figure](../Images/97ea9420283775e2ae0dddedd3685694.png)'
+  id: totrans-151
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/97ea9420283775e2ae0dddedd3685694.png)'
 - en: https://pycaret-insurance2.azurewebsites.net
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: https://pycaret-insurance2.azurewebsites.net
 - en: '**Note:** By the time this story is published, the app from [https://pycaret-insurance2.azurewebsites.net](https://pycaret-insurance2.azurewebsites.net/) will
     be removed to restrict resource consumption.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 在此故事发布时，来自 [https://pycaret-insurance2.azurewebsites.net](https://pycaret-insurance2.azurewebsites.net/)
+    的应用程序将被删除以限制资源消耗。'
 - en: '[**Link to GitHub Repository for this tutorial.**](https://github.com/pycaret/pycaret-deployment-azure)'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**该教程的 GitHub 存储库链接。**](https://github.com/pycaret/pycaret-deployment-azure)'
 - en: '[**Link to GitHub Repository for Heroku Deployment.**](https://www.github.com/pycaret/deployment-heroku)** *(without
     docker)***'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Heroku 部署的 GitHub 存储库链接。**](https://www.github.com/pycaret/deployment-heroku)**
+    *(无 Docker)* **'
 - en: Next Tutorial
+  id: totrans-156
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一教程
 - en: In the next tutorial for deploying machine learning pipelines, we will dive
     deeper into deploying machine learning pipelines using the Kubernetes Service
     on Google Cloud and Microsoft Azure.
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的机器学习管道部署教程中，我们将深入探讨如何使用 Google Cloud 和 Microsoft Azure 上的 Kubernetes 服务来部署机器学习管道。
 - en: Follow our [LinkedIn](https://www.linkedin.com/company/pycaret/) and subscribe
     to our [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g) channel
     to learn more about PyCaret.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 关注我们的 [LinkedIn](https://www.linkedin.com/company/pycaret/) 并订阅我们的 [YouTube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)
+    频道，以了解更多关于 PyCaret 的信息。
 - en: Important Links
+  id: totrans-159
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重要链接
 - en: '[User Guide / Documentation](https://www.pycaret.org/guide)'
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用户指南 / 文档](https://www.pycaret.org/guide)'
 - en: '[GitHub Repository](https://www.github.com/pycaret/pycaret)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub 存储库](https://www.github.com/pycaret/pycaret)'
 - en: '[Install PyCaret](https://www.pycaret.org/install)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[安装 PyCaret](https://www.pycaret.org/install)'
 - en: '[Notebook Tutorials](https://www.pycaret.org/tutorial)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[笔记本教程](https://www.pycaret.org/tutorial)'
 - en: '[Contribute in PyCaret](https://www.pycaret.org/contribute)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 PyCaret 中贡献](https://www.pycaret.org/contribute)'
 - en: PyCaret 1.0.1 is coming!
+  id: totrans-165
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PyCaret 1.0.1 即将到来！
 - en: We have received overwhelming support and feedback from the community. We are
     actively working on improving PyCaret and preparing for our next release. **PyCaret
     1.0.1 will be bigger and better**. If you would like to share your feedback and
     help us improve further, you may [fill this form](https://www.pycaret.org/feedback) on
     the website or leave a comment on our [GitHub ](https://www.github.com/pycaret/)or [LinkedIn](https://www.linkedin.com/company/pycaret/) page.
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们收到了社区的热烈支持和反馈。我们正在积极改进 PyCaret 并为下一版本做准备。**PyCaret 1.0.1 将更大更好**。如果你希望分享你的反馈并帮助我们进一步改进，你可以
+    [填写此表单](https://www.pycaret.org/feedback) 或在我们的 [GitHub](https://www.github.com/pycaret/)
+    或 [LinkedIn](https://www.linkedin.com/company/pycaret/) 页面留下评论。
 - en: Want to learn about a specific module?
+  id: totrans-167
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 想了解特定模块吗？
 - en: As of the first release 1.0.0, PyCaret has the following modules available for
     use. Click on the links below to see the documentation and working examples in
     Python.
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 从首次发布的 1.0.0 版本开始，PyCaret 提供以下模块供使用。点击下面的链接查看文档和 Python 示例。
 - en: '[Classification](https://www.pycaret.org/classification)'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类](https://www.pycaret.org/classification)'
 - en: '[Regression](https://www.pycaret.org/regression)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归分析](https://www.pycaret.org/regression)'
 - en: '[Clustering](https://www.pycaret.org/clustering)'
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类分析](https://www.pycaret.org/clustering)'
 - en: '[Anomaly Detection](https://www.pycaret.org/anomaly-detection)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测](https://www.pycaret.org/anomaly-detection)'
 - en: '[Natural Language Processing](https://www.pycaret.org/nlp)'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理](https://www.pycaret.org/nlp)'
 - en: '[Association Rule Mining](https://www.pycaret.org/association-rules)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关联规则挖掘](https://www.pycaret.org/association-rules)'
 - en: 'Also see:'
+  id: totrans-175
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 另见：
 - en: 'PyCaret getting started tutorials in Notebook:'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret 入门教程在 Notebook 中：
 - en: '[Clustering](https://www.pycaret.org/clu101)'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类分析](https://www.pycaret.org/clu101)'
 - en: '[Anomaly Detection](https://www.pycaret.org/anom101)'
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测](https://www.pycaret.org/anom101)'
 - en: '[Natural Language Processing](https://www.pycaret.org/nlp101)'
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理](https://www.pycaret.org/nlp101)'
 - en: '[Association Rule Mining](https://www.pycaret.org/arul101)'
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关联规则挖掘](https://www.pycaret.org/arul101)'
 - en: '[Regression](https://www.pycaret.org/reg101)'
+  id: totrans-181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归分析](https://www.pycaret.org/reg101)'
 - en: '[Classification](https://www.pycaret.org/clf101)'
+  id: totrans-182
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类](https://www.pycaret.org/clf101)'
 - en: Would you like to contribute?
+  id: totrans-183
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你想贡献吗？
 - en: PyCaret is an open source project. Everybody is welcome to contribute. If you
     would like contribute, please feel free to work on [open issues](https://github.com/pycaret/pycaret/issues).
     Pull requests are accepted with unit tests on dev-1.0.1 branch.
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret 是一个开源项目。欢迎大家贡献。如果你想贡献，请随时处理[公开问题](https://github.com/pycaret/pycaret/issues)。拉取请求需在
+    dev-1.0.1 分支上附带单元测试。
 - en: Please give us ⭐️ on our [GitHub repo](https://www.github.com/pycaret/pycaret) if
     you like PyCaret.
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢 PyCaret，请在我们的 [GitHub 仓库](https://www.github.com/pycaret/pycaret) 上给我们
+    ⭐️。
 - en: Medium : [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Medium : [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)'
 - en: LinkedIn : [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 'LinkedIn : [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)'
 - en: Twitter : [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Twitter : [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)'
 - en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
     and is Founder & Author of PyCaret.'
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Moez Ali](https://www.linkedin.com/in/profile-moez/)** 是数据科学家，PyCaret
+    的创始人及作者。'
 - en: '[Original](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01).
     Reposted with permission.'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)。已获授权转载。'
 - en: '**Related:**'
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Announcing PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
+  id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布 PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
 - en: '[Build and deploy your first machine learning web app](/2020/05/build-deploy-machine-learning-web-app.html)'
+  id: totrans-193
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建和部署你的第一个机器学习 Web 应用](/2020/05/build-deploy-machine-learning-web-app.html)'
 - en: '[Machine Learning in Power BI using PyCaret](/2020/05/machine-learning-power-bi-pycaret.html)'
+  id: totrans-194
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Power BI 中使用 PyCaret 进行机器学习](/2020/05/machine-learning-power-bi-pycaret.html)'
 - en: '* * *'
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-196
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-201
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[The Top 8 Cloud Container Management Solutions of 2024](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)'
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2024 年十大云容器管理解决方案](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)'
 - en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
+  id: totrans-203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
 - en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  id: totrans-205
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何成功部署数据科学项目](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
 - en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解如何设计和部署负责任的 AI 系统](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
 - en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  id: totrans-207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解如何设计和部署负责任的 AI 系统](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)'
