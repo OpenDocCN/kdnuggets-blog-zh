@@ -1,598 +1,940 @@
 - en: 4 ways to improve your TensorFlow model – key regularization techniques you
     need to know
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提升TensorFlow模型的4种方法——你需要了解的关键正则化技术
 - en: 原文：[https://www.kdnuggets.com/2020/08/tensorflow-model-regularization-techniques.html](https://www.kdnuggets.com/2020/08/tensorflow-model-regularization-techniques.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/08/tensorflow-model-regularization-techniques.html](https://www.kdnuggets.com/2020/08/tensorflow-model-regularization-techniques.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/aff83738ac2aa42970007ee48d1054b9.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aff83738ac2aa42970007ee48d1054b9.png)'
 - en: '*Photo by [Jungwoo Hong](https://unsplash.com/@oowgnuj?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [Jungwoo Hong](https://unsplash.com/@oowgnuj?utm_source=medium&utm_medium=referral) 提供，发布于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: Reguaralization
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 正则化
 - en: According to Wikipedia,
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据维基百科，
 - en: '*In mathematics, statistics, and computer science, particularly in machine
     learning and inverse problems, **regularization** is the process of adding information
     in order to solve an ill-posed problem or to prevent overfitting.*'
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*在数学、统计学和计算机科学，特别是机器学习和逆问题中，**正则化**是为了在解决一个不适定问题或防止过拟合时添加额外信息的过程。*'
 - en: This means that we add some extra information in order to solve a problem and
     to prevent overfitting.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着我们添加一些额外的信息以解决问题并防止过拟合。
 - en: Overfitting simply means that our Machine Learning Model is trained on some
     data, and it will work extremely well on that data, but it will fail to generalize
     on new unseen examples.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 过拟合意味着我们的机器学习模型在某些数据上训练良好，在这些数据上表现极佳，但在新的未见过的样本上则会失败。
 - en: We can see overfitting in this simple example
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以在这个简单的例子中看到过拟合现象
 - en: '![](../Images/41d0f948b244917fedbb1ad53f1e1238.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/41d0f948b244917fedbb1ad53f1e1238.png)'
 - en: '*[http://mlwiki.org/index.php/Overfitting](http://mlwiki.org/index.php/Overfitting)*'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[http://mlwiki.org/index.php/Overfitting](http://mlwiki.org/index.php/Overfitting)*'
 - en: Where our data is strictly attached to our training examples. This results in
     poor performance on test/dev sets and good performance on the training set.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们的数据严格附着于训练样本时，这会导致测试/开发集上的性能较差，而训练集上的性能良好。
 - en: '![](../Images/f0d1eb3f9aac8909353ede22ad87482f.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f0d1eb3f9aac8909353ede22ad87482f.png)'
 - en: '*[http://mlwiki.org/index.php/Overfitting](http://mlwiki.org/index.php/Overfitting)*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[http://mlwiki.org/index.php/Overfitting](http://mlwiki.org/index.php/Overfitting)*'
 - en: So in order to improve the performance of the model, we use different regularization
     techniques. There are several techniques, but we will discuss 4 main techniques.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为了提高模型性能，我们使用不同的正则化技术。虽然有几种技术，但我们将讨论4种主要技术。
 - en: '**L1 Regularization**'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**L1正则化**'
 - en: '**L2 Regularization**'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**L2正则化**'
 - en: '**Dropout**'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**丢弃法**'
 - en: '**Batch Normalization**'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**批量归一化**'
 - en: I will briefly explain how these techniques work and how to implement them in
     Tensorflow 2.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将简要解释这些技术是如何工作的，以及如何在Tensorflow 2中实现它们。
 - en: In order to get good intuition about how and why they work, I refer you to Professor
     Andrew NG lectures on all these topics, easily available on Youtube.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地理解这些技术如何及其工作原理，我推荐你观看Andrew NG教授的讲座，这些讲座在Youtube上很容易找到。
 - en: '*First, I will code a model without Regularization, then I will show how to
     improve it by adding different regularization techniques. We will use the IRIS
     data set to show that using regularization improves the same model a lot.*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*首先，我将编写一个没有正则化的模型，然后展示如何通过添加不同的正则化技术来改进它。我们将使用IRIS数据集来展示正则化如何显著改善模型。*'
 - en: Model without Regularization
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 无正则化的模型
 - en: '**Code:**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**代码：**'
 - en: '**Basic Pre-processing**'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**基本预处理**'
 - en: '**Model Building**'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型构建**'
 - en: '**model1.summary()**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**model1.summary()**'
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After training the model, if we evaluate the model using the following code
     in Tensorflow, we can find our *accuracy*, *loss*, and *mse* at the test set.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练模型后，如果我们使用以下代码在Tensorflow中评估模型，我们可以找到测试集上的*准确率*、*损失*和*mse*。
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/bcc914cd55999fa3fbccbcc855b51ed2.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bcc914cd55999fa3fbccbcc855b51ed2.png)'
 - en: Let’s check the plots for Validation Loss and Training Loss.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们检查验证损失和训练损失的图表。
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/999093c9c77070fbcc3966d963759c55.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/999093c9c77070fbcc3966d963759c55.png)'
 - en: Here, we can see that validation loss is gradually increasing after **≈ **60
     epochs as compared to training loss. This shows that our model is overfitted.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们可以看到验证损失在**≈ 60**个周期后逐渐增加，而训练损失保持稳定。这表明我们的模型发生了过拟合。
 - en: And similarly, for model accuracy plot,
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样地，对于模型准确率图，
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/ce2630b3aede2497175cc83d4267f212.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ce2630b3aede2497175cc83d4267f212.png)'
 - en: This again shows that validation accuracy is low as compared to training accuracy,
     which again shows signs of overfitting.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这再次表明，与训练准确率相比，验证准确率较低，这再次显示出过拟合的迹象。
 - en: 'L1 Regularization:'
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: L1正则化：
 - en: A commonly used Regularization technique is L1 regularization, also known as
     Lasso Regularization.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种常用的正则化技术是L1正则化，也称为Lasso正则化。
 - en: The main concept of L1 Regularization is that we have to penalize our weights
     by adding absolute values of weight in our loss function, multiplied by a regularization
     parameter lambda **λ, **where **λ **is manually tuned to be greater than 0.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: L1正则化的主要概念是我们必须通过将权重的绝对值添加到损失函数中，乘以正则化参数lambda **λ**，其中**λ**是手动调节为大于0的。
 - en: The equation for L1 is
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: L1的方程是
 - en: '![](../Images/a3e67233246feda637e7c604bd4f2e2c.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a3e67233246feda637e7c604bd4f2e2c.png)'
 - en: '*Image Credit: [Towards Data Science](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261#2a1f).*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图片来源: [数据科学前沿](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261#2a1f)。*'
 - en: '**Tensorflow Code:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Tensorflow代码：**'
 - en: Here, we added an extra parameter *kernel_regularizer*, which we set it to ‘l1’
     for L1 Regularization.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，我们添加了一个额外的参数*kernel_regularizer*，我们将其设置为‘l1’，用于L1正则化。
 - en: Let’s Evaluate and plot the model now.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们来评估并绘制模型。
 - en: '[PRE4]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/12ce08d7b04a93c399fc82a29720239c.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/12ce08d7b04a93c399fc82a29720239c.png)'
 - en: Hmmm, Accuracy is pretty much the same, let’s check the plots to get better
     intuition.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 嗯，准确率差不多一样，我们来看一下图表以获得更好的直观感觉。
 - en: '[PRE5]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/bafec1e420bc0d14ed9989b77a7f4fe5.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bafec1e420bc0d14ed9989b77a7f4fe5.png)'
 - en: And for Accuracy,
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于准确率，
 - en: '[PRE6]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/564a85d559cd6798cfd8f8ad66c1ba5d.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/564a85d559cd6798cfd8f8ad66c1ba5d.png)'
 - en: Well, quite an improvement, I guess, because over validation loss is not increasing
     that much as it was previously, but validation accuracy is not increasing much.
     Let’s add l1 in more layers to check if it improves the model or not.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，相当大的改进，我想，因为过拟合的验证损失没有像之前那样增加，但验证准确率提升不大。让我们在更多层中添加l1以检查是否能改善模型。
 - en: '[PRE7]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: After training, let’s evaluate the model.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后，我们来评估模型。
 - en: '[PRE8]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/dd8649d166180440ae16a48caefbc217.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dd8649d166180440ae16a48caefbc217.png)'
 - en: Well, the accuracy is quite improved now, it jumped from 92 to 94\. Let’s check
     the plots.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了，准确率现在有了相当大的提高，从92跳升到了94。我们来看看图表。
 - en: '**Loss**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**损失**'
 - en: '[PRE9]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/4b383f796e638d58b976918b359db9f4.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4b383f796e638d58b976918b359db9f4.png)'
 - en: Now, both lines are approximately overlapping, which means that our model is
     performing just as same on the test set as it was performing on the training set.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，两条线大致重叠，这意味着我们的模型在测试集上的表现与在训练集上的表现相同。
 - en: '**Accuracy**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**准确率**'
 - en: '[PRE10]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![](../Images/11f1226d2cfbd2ffcd9cc75dd69ecce8.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/11f1226d2cfbd2ffcd9cc75dd69ecce8.png)'
 - en: And we can see that the validation loss of the model is not increasing as compared
     to training loss, and validation accuracy is also increasing.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，与训练损失相比，模型的验证损失没有增加，验证准确率也在上升。
 - en: L2 Regularization
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: L2正则化
 - en: L2 Regularization is another regularization technique which is also known as **Ridge
     regularization**. In L2 regularization we add the squared magnitude of weights
     to penalize our lost function.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: L2正则化是另一种正则化技术，也称为**岭回归**。在L2正则化中，我们将权重的平方大小添加到损失函数中以惩罚我们的损失。
 - en: '![](../Images/75665aa67638080b50c4650abf10e2bc.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/75665aa67638080b50c4650abf10e2bc.png)'
 - en: '*Image Credit: [Towards Data Science](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261#2a1f).*'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图片来源: [数据科学前沿](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261#2a1f)。*'
 - en: '**Tensorflow Code:**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Tensorflow代码：**'
 - en: '[PRE11]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: After training, let’s evaluate the model.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后，我们来评估模型。
 - en: '[PRE12]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: And the output is
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出结果是
 - en: '![](../Images/2e0ab66c243db0af399a772b08e4f0f1.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2e0ab66c243db0af399a772b08e4f0f1.png)'
 - en: Here we can see that validation accuracy is 97%, which is quite good. Let’s
     plot for more intuition.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们可以看到验证准确率为97%，这是相当不错的。我们来绘制更多图表以获得更直观的感觉。
 - en: '![](../Images/91daa2781a6680f346a0ec85fbbc0e7d.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/91daa2781a6680f346a0ec85fbbc0e7d.png)'
 - en: Here we can see that we are not overfitting our data. Let’s plot accuracy.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们可以看到，我们没有过拟合数据。让我们绘制准确率。
 - en: '![](../Images/6d9448767ff37f3f0cdda2ed4ce4586b.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6d9448767ff37f3f0cdda2ed4ce4586b.png)'
 - en: Adding “L2” Regularization in just 1 layer has improved our model a lot.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 在仅一层中添加“L2”正则化大大改善了我们的模型。
 - en: Let’s Now add **L2** in all other layers.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们在所有其他层中添加**L2**。
 - en: '[PRE13]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Here we have L2 in all layers. After training, let’s evaluate it.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们在所有层中添加了L2。训练后，我们来评估一下。
 - en: '[PRE14]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/a982288a4c9676e91e0bfa14a759d342.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a982288a4c9676e91e0bfa14a759d342.png)'
 - en: Let’s plot to get more intuitions.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘图以获得更多直观感受。
 - en: '[PRE15]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/4e91d8818f4f27683a61a88665bc6cde.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4e91d8818f4f27683a61a88665bc6cde.png)'
 - en: And for accuracy
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于准确率
 - en: '![](../Images/9f1fcf25ad26e8abc9ed7678e7bee914.png)'
+  id: totrans-96
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9f1fcf25ad26e8abc9ed7678e7bee914.png)'
 - en: We can see that this model is also good and not overfitting to the dataset.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到这个模型也表现良好，并没有过拟合数据集。
 - en: Dropout
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 丢弃法
 - en: Another common way to avoid regularization is by using the Dropout technique.
     The main idea behind using dropout is that we randomly turn off some neurons in
     our layer based on some probability. You can learn more about it’s working by
     Professor NG’s video [here](https://www.youtube.com/watch?v=ARq74QuavAo).
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种常见的正则化方法是使用丢弃法。使用丢弃法的主要思想是根据一定的概率随机关闭我们层中的一些神经元。你可以通过教授 NG 的视频了解更多关于它的工作原理，[这里](https://www.youtube.com/watch?v=ARq74QuavAo)。
 - en: Let’s code it in Tensorflow.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在 TensorFlow 中编写代码。
 - en: All previous imports are the same, and we are just adding an extra import here.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前的导入都是一样的，我们这里只是添加了一个额外的导入。
 - en: In order to implement DropOut, all we have to do is to add a *Dropout *layer
     from *tf.keras.layers* and set a dropout rate in it.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实现丢弃法，我们只需从*tf.keras.layers*中添加一个*Dropout*层并设置丢弃率。
 - en: '[PRE16]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: After training, let’s evaluate it on the test set.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练之后，让我们在测试集上进行评估。
 - en: '[PRE17]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '![](../Images/309f287e682e15e861501a280db355e5.png)'
+  id: totrans-106
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/309f287e682e15e861501a280db355e5.png)'
 - en: And wow, our results are very promising, we performed 97% on our test set. Let’s
     plot the loss and accuracy for better intuition.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇，我们的结果非常有希望，我们在测试集上的表现达到了97%。让我们绘制损失和准确率图，以获得更好的直观感受。
 - en: '[PRE18]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '![](../Images/023280950cc8a67e0368962442a95302.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/023280950cc8a67e0368962442a95302.png)'
 - en: Here, we can see that our model is performing better on validation data as compared
     to training data, which is good news.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们可以看到我们的模型在验证数据上的表现优于训练数据，这真是好消息。
 - en: Let’s plot accuracy now.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们绘制准确率图。
 - en: '![](../Images/b20e02b39a9d2a32185c9cff67dde23b.png)'
+  id: totrans-112
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b20e02b39a9d2a32185c9cff67dde23b.png)'
 - en: And we can see that our model is performing better on the validation dataset
     as compared to the training set.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，我们的模型在验证数据集上的表现优于训练集。
 - en: Let’s add more dropout layers to see how our model performs.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们添加更多丢弃层来查看我们的模型表现如何。
 - en: '[PRE19]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Let’s Evaluate it.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们评估一下。
 - en: '[PRE20]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '![](../Images/e82928464719a82f92f7d4d2552ec1ea.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e82928464719a82f92f7d4d2552ec1ea.png)'
 - en: This model is also very good, as it is performing 98% on the test set. Let’s
     plot to get better intuitions.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个模型也非常好，因为它在测试集上的表现达到了98%。让我们绘图以获得更好的直观感受。
 - en: '[PRE21]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '![](../Images/da0c05863284a9584568bbfdeafeb527.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/da0c05863284a9584568bbfdeafeb527.png)'
 - en: And we can see that adding more dropout layers makes the model perform slightly
     less good while training, but on the validation set, it is performing really well.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，添加更多丢弃层会使模型在训练时表现稍逊，但在验证集上，它表现得非常好。
 - en: Let’s plot the accuracy now.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们绘制准确率图。
 - en: '![](../Images/7cf13a5c5ae4d14095e39147df5ae02f.png)'
+  id: totrans-124
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7cf13a5c5ae4d14095e39147df5ae02f.png)'
 - en: And we can see the same pattern here, that our model is not performing as good
     while training, but when we are evaluating it, it is performing really good.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里看到相同的模式，即我们的模型在训练时表现不佳，但在评估时表现非常好。
 - en: Batch Normalization
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 批量归一化
 - en: The main idea behind batch normalization is that we normalize the input layer
     by using several techniques (*sklearn.preprocessing.StandardScaler*) in our case,
     which improves the model performance, so if the input layer is benefitted by normalization,
     why not normalize the hidden layers, which will improve and fasten learning even
     further.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 批量归一化的主要思想是我们通过使用几种技术（在我们的案例中是*sklearn.preprocessing.StandardScaler*）对输入层进行归一化，从而提高模型性能。如果输入层通过归一化受益，那为何不对隐藏层进行归一化，以进一步提高和加快学习呢？
 - en: To learn maths and get more intuition about it, I will redirect you again to
     Professor NG’s lecture [here](https://www.youtube.com/watch?v=tNIpEZLv_eg) and [here](https://www.youtube.com/watch?v=nUUqwaxLnWs).
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 要学习数学并获得更多直观感受，我会再次引导你到教授 NG 的讲座，[这里](https://www.youtube.com/watch?v=tNIpEZLv_eg)和[这里](https://www.youtube.com/watch?v=nUUqwaxLnWs)。
 - en: To add it in your TensorFlow model, just add *tf.keras.layers.BatchNormalization()* after
     your layers.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在你的 TensorFlow 模型中添加它，只需在你的层后面添加*tf.keras.layers.BatchNormalization()*。
 - en: Let’s see the code.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看代码。
 - en: '[PRE22]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: Here, if you noticed that I have removed the option for *batch_size*. This is
     because adding batch_size argument while only using *tf.keras.BatchNormalization()* as
     regularization, this results in a really poor performance of the model. I have
     tried to find the reason for this on the internet, but I could not find it. You
     can also change the optimizer from *sgd *to *rmsprop *or *adam *if you really
     want to use batch_size while training.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，如果你注意到我已经去掉了*batch_size*选项。这是因为在仅使用*tf.keras.BatchNormalization()*作为正则化时，添加*batch_size*参数会导致模型性能非常差。我尝试在网上寻找原因，但未能找到。如果你真的想在训练时使用*batch_size*，也可以将优化器从*sgd*更改为*rmsprop*或*adam*。
 - en: After training, let’s evaluate the model.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后，让我们评估模型。
 - en: '[PRE23]'
+  id: totrans-134
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: '![](../Images/6a854c3c9d073d3f3f44e478a9660b6b.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a854c3c9d073d3f3f44e478a9660b6b.png)'
 - en: Validation accuracy for 1 Batch Normalization accuracy is not as good as compared
     to other techniques. Let’s plot the loss and acc for better intuition.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于一个批量归一化的准确性，其验证准确性不如其他技术。让我们绘制损失和准确性图，以获得更好的直观感受。
 - en: '![](../Images/b9881c940d7824f31926e7bdfc5693d5.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b9881c940d7824f31926e7bdfc5693d5.png)'
 - en: '![](../Images/ebb6014ef2837e4e79571228264431ed.png)'
+  id: totrans-138
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ebb6014ef2837e4e79571228264431ed.png)'
 - en: Here we can see that our model is not performing as well on validation set as
     on test set. Let’s add normalization to all the layers to see the results.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们可以看到我们的模型在验证集上的表现不如在测试集上的表现。让我们将归一化添加到所有层中以查看结果。
 - en: '[PRE24]'
+  id: totrans-140
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: Let’s Evaluate it.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来评估一下。
 - en: '[PRE25]'
+  id: totrans-142
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: '![](../Images/d61fcb3880fd979dba67308394ea06c7.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d61fcb3880fd979dba67308394ea06c7.png)'
 - en: By adding Batch normalization in every layer, we achieved good accuracy. Let’s
     plot the loss and accuracy.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过在每一层中添加批量归一化，我们实现了良好的准确性。让我们绘制损失和准确性图。
 - en: '![](../Images/5c2682bc581e0a3ee0752adb14e1bd35.png)'
+  id: totrans-145
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5c2682bc581e0a3ee0752adb14e1bd35.png)'
 - en: '![](../Images/00908e06a1cdc384b166744b2e4f4776.png)'
+  id: totrans-146
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/00908e06a1cdc384b166744b2e4f4776.png)'
 - en: By plotting accuracy and loss, we can see that our model is still performing
     better on the Training set as compared to the validation set, but still, it is
     improving in performance.
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过绘制准确性和损失，我们可以看到我们的模型在训练集上的表现仍优于验证集，但仍在提升性能。
 - en: 'Outcome:'
+  id: totrans-148
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果：
 - en: This article was a brief introduction on how to use different techniques in
     Tensorflow. If you lack the theory, I would suggest Course 2 and 3 of Deep Learning
     Specialization at Coursera to learn more about Regularization.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章简要介绍了如何在 TensorFlow 中使用不同的技术。如果你对理论不够了解，我建议你学习 Coursera 深度学习专项课程中的第 2 和第
+    3 课程，以了解更多关于正则化的内容。
 - en: You also have to learn when to use which technique, and when and how to combine
     different techniques in order to produce really fruitful results.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还需要学习何时使用哪些技术，以及如何将不同技术结合起来，以产生真正有成效的结果。
 - en: Hopefully, now you have an idea of how to implement different regularization
     techniques in Tensorflow 2.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望现在你对如何在 TensorFlow 2 中实现不同的正则化技术有了一个概念。
 - en: '**Related:**'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Getting Started with TensorFlow 2](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 TensorFlow 2](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html)'
 - en: '[Batch Normalization in Deep Neural Networks](https://www.kdnuggets.com/2020/08/batch-normalization-deep-neural-networks.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络中的批量归一化](https://www.kdnuggets.com/2020/08/batch-normalization-deep-neural-networks.html)'
 - en: '[Fighting Overfitting in Deep Learning](https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习中的过拟合问题](https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html)'
 - en: '* * *'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-157
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-162
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该了解的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一项90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
