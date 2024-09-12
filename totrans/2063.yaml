@@ -3,54 +3,68 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 7 个数据工程师在 Google BigQuery 中需要注意的“陷阱”
 - en: 原文：[https://www.kdnuggets.com/2019/03/7-gotchas-data-engineers-google-bigquery.html](https://www.kdnuggets.com/2019/03/7-gotchas-data-engineers-google-bigquery.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/7-gotchas-data-engineers-google-bigquery.html](https://www.kdnuggets.com/2019/03/7-gotchas-data-engineers-google-bigquery.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Josh Levy](https://www.linkedin.com/in/joshlevymstr/), [Aspirent](http://www.aspirent.com)**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Josh Levy](https://www.linkedin.com/in/joshlevymstr/)，[Aspirent](http://www.aspirent.com)**'
 - en: '![BigQuery](../Images/e61b003f2909458008871a278be95a21.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![BigQuery](../Images/e61b003f2909458008871a278be95a21.png)'
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 部门'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Everywhere you look these days, IT organizations are looking to the cloud to
     solve their data storage, movement, and analytics challenges…and with good reason!
     Cloud services from Amazon, Google, Microsoft and others have revolutionized how
@@ -68,6 +82,9 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如今，无论你看向哪里，IT 组织都在寻求通过云计算来解决数据存储、传输和分析的挑战……这也有很好的理由！来自 Amazon、Google、Microsoft
+    等的云服务彻底改变了我们对数据的思考方式，无论是从 IT 还是最终用户的角度来看。它们大大减少了企业数据中心的功能，这通常不是组织的核心能力。它们使数据、分析和处理能力变得民主化。它们打破了我们对数据仓储和分析成本的思考方式。云计算拥有所有这些特性以及更多，因此很多组织急于将大数据操作转移到云端也就不足为奇了。成本节约、性能提升和简化操作都是很好的，但当你真正开始工作时会发生什么呢？很可能你的数据工程师对你组织决定使用的任何云技术都很陌生。本文详细介绍了我作为数据工程师第一次接触
+    Google BigQuery (GBQ) 的经验。
 - en: 'I’ve been a data engineer for many years and I’ve worked with most flavors
     of RDBMS and SQL in my career. A recent project had my coworkers and I redesigning
     an existing SQL Server database into GBQ, which inspired me to write this article
@@ -77,6 +94,8 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经做了多年的数据工程师，并且在职业生涯中使用过大多数类型的 RDBMS 和 SQL。最近的一个项目中，我和我的同事将一个现有的 SQL Server
+    数据库重新设计为 GBQ，这激发了我撰写本文，作为对初次接触 GBQ 的数据工程师的资源。以下是一些可能需要适应的内容，以及我发现的缓解策略：
 - en: '**Case Sensitivity** - Unlike most RDBMS, BigQuery is case sensitive, not only
     for string comparison, but for object names as well. For string comparison, using
     The UPPER function on both sides (or one side of comparing to a literal) will
@@ -86,6 +105,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**区分大小写** - 与大多数 RDBMS 不同，BigQuery 对大小写敏感，不仅在字符串比较中如此，在对象名称中也一样。对于字符串比较，在两边（或一边对比字面量）使用
+    UPPER 函数可以消除大小写敏感的影响。 有趣的是，虽然在 FROM 子句中引用对象名称时是区分大小写的，但列名称则不区分大小写。'
 - en: '**Fully Qualified Object Names** - All object names referenced in the FROM
     clause must be fully qualified to the dataset level, or the project level if they
     don''t exist in your current billing project.  Not only that, but the entire fully
