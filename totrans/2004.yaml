@@ -113,156 +113,193 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 伟大期望可以与各种提取、转换和加载 (ETL) 工具如 Airflow 和数据库集成。有关集成的详细列表和官方文档可以在伟大期望的[网站](https://greatexpectations.io/integrations)上找到。
 - en: GX features many expectations in its [repository](https://greatexpectations.io/expectations/).
     This article demonstrates how to use a single expectation to implement data quality
     dimensions with GX.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: GX 在其[仓库](https://greatexpectations.io/expectations/)中拥有许多期望。本文演示了如何使用单个期望来实现
+    GX 的数据质量维度。
 - en: Data
   id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据
 - en: Before starting with implementation, we need to know more about the data we
     will use to  demonstrate how dimensions work.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始实现之前，我们需要更多了解我们将使用的数据，以演示维度如何工作。
 - en: Let's say that I need to create a Data Mart analysis to find out how many orders
     the sales department took per region over the past three years.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我需要创建一个数据集市分析，以找出销售部门在过去三年中每个区域的订单数量。
 - en: 'We have some raw data for orders:'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有一些订单的原始数据：
 - en: '|  | **Order ID** | **Order Date** | **Sales** | **Customer Name** |'
   id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '|  | **订单 ID** | **订单日期** | **销售额** | **客户名称** |'
 - en: '|  | 5955 | 2021-05-27 | 314.6217 | Ann Chong |'
   id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '|  | 5955 | 2021-05-27 | 314.6217 | 安·钟 |'
 - en: '|  | 21870 | 2022-08-28 | 996.9088 | Doug Bickford |'
   id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '|  | 21870 | 2022-08-28 | 996.9088 | 道格·比克福德 |'
 - en: '|  | 3 | 2019-03-04 | 6025.7924 | Beth Paige |'
   id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '|  | 3 | 2019-03-04 | 6025.7924 | 贝斯·佩奇 |'
 - en: '|  | 19162 | 2021-04-11 | 403.5025 | Carlos Soltero |'
   id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '|  | 19162 | 2021-04-11 | 403.5025 | 卡洛斯·索尔特罗 |'
 - en: '|  | 12008 | 2022-11-29 | 4863.0199 | Fred Wasserman |'
   id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '|  | 12008 | 2022-11-29 | 4863.0199 | 弗雷德·沃瑟曼 |'
 - en: '|  | 18630 | 201-09-16 | 4.9900 | Neola Schneider |'
   id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '|  | 18630 | 201-09-16 | 4.9900 | 内奥拉·施奈德 |'
 - en: '|  | 18378 | 2022-01-03 | 1566.3223 | Doug Bickford |'
   id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '|  | 18378 | 2022-01-03 | 1566.3223 | 道格·比克福德 |'
 - en: '|  | 15149 | 2020-03-12 | 1212.7117 | Michelle Lonsdale |'
   id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '|  | 15149 | 2020-03-12 | 1212.7117 | 米歇尔·隆斯代尔 |'
 - en: '|  | 9829 | 2022-06-27 | 695.7497 | Eugene Barchas |'
   id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '|  | 9829 | 2022-06-27 | 695.7497 | 尤金·巴查斯 |'
 - en: '|  | 5188 | 2020-08-15 | 16426.6293 | Doug Bickford |'
   id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '|  | 5188 | 2020-08-15 | 16426.6293 | 道格·比克福德 |'
 - en: 'And some raw data for customers:'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一些客户的原始数据：
 - en: '| **Customer Name** | **Province** | **Region** | **Customer Segment** |'
   id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| **客户名称** | **省份** | **区域** | **客户细分** |'
 - en: '| Andrew Allen | Saskatchewan | Nunavut | Consumer |'
   id: totrans-35
   prefs: []
   type: TYPE_TB
+  zh: '| 安德鲁·艾伦 | 萨斯喀彻温省 | 努纳武特 | 消费者 |'
 - en: '| Trudy Brown | Nova Scotia | Nunavut | Corporate |'
   id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| 特鲁迪·布朗 | 新斯科舍省 | 努纳武特 | 企业 |'
 - en: '| Dionis Lloyd | Nunavut | West | Corporate |'
   id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| 迪奥尼斯·劳埃德 | 努纳武特 | 西部 | 企业 |'
 - en: '| Cynthia Arntzen | Northwest Territories | Atlantic | Corporate |'
   id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| 辛西娅·阿恩特森 | 西北地区 | 大西洋 | 企业 |'
 - en: '| Brooke Gillingham | Ontario | Ontario | Small Business |'
   id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| 布鲁克·吉林厄姆 | 安大略省 | 安大略省 | 小型企业 |'
 - en: '| Alejandro Savely | Nova Scotia | Nunavut | Consumer |'
   id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 亚历杭德罗·萨维利 | 新斯科舍省 | 努纳武特 | 消费者 |'
 - en: '| Harold Pawlan | Newfoundland | Prairie | Corporate |'
   id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| 哈罗德·帕夫兰 | 纽芬兰 | 大草原 | 企业 |'
 - en: '| Peter Fuller | Manitoba | Quebec | Consumer |'
   id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| 彼得·富勒 | 曼尼托巴省 | 魁北克省 | 消费者 |'
 - en: '| Ionia McGrath | Quebec | Quebec | Home Office |'
   id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| 伊昂尼亚·麦克格拉斯 | 魁北克省 | 魁北克省 | 家庭办公室 |'
 - en: '| Fred Wasserman | Ontario | Atlantic | Consumer |'
   id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| 弗雷德·沃瑟曼 | 安大略省 | 大西洋 | 消费者 |'
 - en: 'To conduct the Data Mart analysis, I will use a table based on Customer Name
     (customer_regional_sales):'
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了进行数据集市分析，我将使用基于客户名称（customer_regional_sales）的表：
 - en: '![Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](../Images/593563cfafa85434f268fdc7ea83c65a.png)'
   id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![数据质量维度：用伟大期望保证数据质量](../Images/593563cfafa85434f268fdc7ea83c65a.png)'
 - en: Implementing Data Quality Checks in Great Expectations
   id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在《伟大期望》中实现数据质量检查
 - en: 'For the purpose of this article, the following approach has been used:'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了本文的目的，使用了以下方法：
 - en: Keep data in 3 csv files
   id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据保存在 3 个 CSV 文件中
 - en: Use Pandas for reading csv
   id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Pandas 读取 CSV
 - en: Use the Great Expectations method from_pandas for converting Pandas dataframe.
   id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Great Expectations 的 `from_pandas` 方法来转换 Pandas dataframe。
 - en: '[PRE0]'
   id: totrans-52
   prefs: []
@@ -272,6 +309,7 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是对每个维度期望的一个良好示范。
 - en: Great Expectations evaluates data with Expectations. Expectations are statements
     expressed in a declarative manner that can be assessed by a computer, but also
     carry meaning for human interpretation. GX has 309 Expectations, and you can implement
@@ -279,11 +317,13 @@
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 伟大期望通过期望来评估数据。期望是以声明方式表达的陈述，可以被计算机评估，同时也对人类解释有意义。GX 具有 309 个期望，你还可以实现自定义期望。所有期望可以在[这里](https://greatexpectations.io/expectations)找到。
 - en: Completeness
   id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 完整性
 - en: Completeness is a dimension of data quality that measures whether all expected
     data is present in a dataset. In other words, completeness refers to whether all
     required data points or values are present in a dataset, and if not, how many
