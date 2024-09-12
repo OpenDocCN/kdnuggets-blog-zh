@@ -1,30 +1,43 @@
 - en: 'High-Performance Deep Learning: How to train smaller, faster, and better models
     – Part 3'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 高性能深度学习：如何训练更小、更快、更好的模型 – 第3部分
 - en: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
 - en: In the previous parts ([Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)
     & [Part 2](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)),
     we discussed why efficiency is important for deep learning models to achieve high-performance
     models that are pareto-optimal, as well as the focus areas for efficiency in Deep
     Learning. Let us now dive deeper into examples of tools and techniques that fall
     in these focus areas.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前面的部分（[第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)
+    & [第2部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)）中，我们讨论了为什么效率对深度学习模型实现高性能的帕累托最优模型至关重要，以及深度学习中效率的关注领域。现在，让我们深入探讨这些关注领域中的工具和技术示例。
 - en: Compression Techniques
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 压缩技术
 - en: Compression techniques, as mentioned earlier, are generic techniques that can
     help achieve a more efficient representation of one or more layers in a neural
     network, with a possible quality trade-off. The efficiency could come from improving
@@ -32,21 +45,29 @@
     time required for convergence, etc., in exchange for as little quality loss as
     possible. Often the model could be over-parameterized. In such cases, these techniques
     help improve generalization on unseen data as well.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，压缩技术是可以帮助实现神经网络中一个或多个层的更高效表示的通用技术，可能会带来质量上的折衷。这种效率可能来自于提高一个或多个足迹指标，如模型大小、推理延迟、收敛所需的训练时间等，以换取尽可能少的质量损失。模型通常可能被过度参数化。在这种情况下，这些技术也有助于提高对未见数据的泛化能力。
 - en: '**Pruning:** One of the popular compression techniques is Pruning, where we
     *prune* unimportant network connections, hence making the network *sparse*. LeCun
     et al. [1], in their paper titled "Optimal Brain Damage", trimmed the number of
     parameters (connections between layers) in their neural network by a factor of
     four while increasing both the inference speed and generalization.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**剪枝**：一种流行的压缩技术是剪枝，其中我们*剪除*不重要的网络连接，从而使网络*稀疏*。LeCun 等人[1]在其论文《最优大脑损伤》中，通过将神经网络中的参数（层间连接）数量减少了四倍，同时提高了推理速度和泛化能力。'
 - en: '![](../Images/d6a9408ffb6dca74628c0775dea39cdb.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d6a9408ffb6dca74628c0775dea39cdb.png)'
 - en: '*An illustration of pruning in neural networks.*'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*神经网络中剪枝的示意图。*'
 - en: A similar approach was followed by the Optimal Brain Surgeon work (OBD) by Hassibi
     et al. [2] and by Zhu et al. [3]. These methods take a network that has been pre-trained
     to reasonable quality and then iteratively prune the parameters that have the
@@ -54,19 +75,25 @@
     such that the impact on the validation loss is minimized. Once pruning concludes,
     the network is fine-tuned with the remaining parameters. The process is repeated
     until the network is pruned to the desired level.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 哈西比等人（Hassibi et al.）和朱等人（Zhu et al.）的最优大脑外科医生工作（OBD）采用了类似的方法[2]和[3]。这些方法使用已经预训练到合理质量的网络，然后迭代性地剪除具有最低*显著性*得分的参数，该得分衡量了特定连接的重要性，以使对验证损失的影响最小化。剪枝完成后，使用剩余参数对网络进行微调。该过程重复进行，直到网络被剪枝到所需的水平。
 - en: 'Amongst the various works on pruning, the differences occur in the following
     dimensions:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在各种剪枝工作中，差异发生在以下维度：
 - en: '**Saliency**: This is the heuristic for determining which connection should
     be pruned. This can be based on second-order derivatives [1, 2] of the connection
     weight with respect to the loss function, the magnitude of the connection weight
     [3], and so on.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**显著性**：这是确定应该剪枝哪个连接的启发式方法。它可以基于连接权重相对于损失函数的二阶导数[1, 2]、连接权重的大小[3]等。'
 - en: '**Unstructured v/s Structured:** The most flexible way of pruning is unstructured
     (or random) pruning, where all given parameters are treated equally. In structured
     pruning, parameters are pruned in blocks of size > 1 (such as pruning row-wise
@@ -74,35 +101,47 @@
     [4,5]). Structured pruning allows easier leveraging of inference-time gains in
     size and latency since these blocks of pruned parameters can be intelligently
     skipped for storage and inference.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**无结构与结构化修剪：** 最灵活的修剪方式是无结构（或随机）修剪，在这种方法中，所有给定的参数被平等对待。在结构化修剪中，参数按大于1的块进行修剪（例如：在权重矩阵中按行修剪或在卷积滤波器中按通道修剪（例如：[4,5]）。结构化修剪使得在推理时能够更容易地利用大小和延迟的增益，因为这些修剪后的参数块可以智能地跳过存储和推理。'
 - en: '![](../Images/df10db1ba63ca3d898f7ea733cc4662c.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/df10db1ba63ca3d898f7ea733cc4662c.png)'
 - en: '*Unstructured vs. Structured Pruning of a weight matrix, respectively.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*无结构与结构化修剪权重矩阵的对比。*'
 - en: '**Distribution**: One could set a pruning budget that is the same for each
     layer, or it could be allocated on a per-layer basis [6]. The intuition being
     that certain layers are more amenable to pruning than others. For example, often,
     the first few layers are already small enough that they cannot tolerate significant
     sparsity [7].'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**分配：** 可以为每一层设置相同的修剪预算，或者可以按层分配[6]。直觉上，有些层更适合修剪。例如，通常情况下，前几层已经足够小，无法承受显著的稀疏性[7]。'
 - en: '**Scheduling**: Yet additional criteria are how much to prune and when? Do
     we want to prune an equal number of parameters every round [8], or do we prune
     at a higher pace in the beginning and gradually slow down [9]?'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**调度**：另一个标准是修剪的数量和时机？我们是否希望每轮修剪相同数量的参数[8]，还是在开始时以较快的速度修剪，然后逐渐放慢[9]？'
 - en: '**Regrowth**: In some cases, the network is allowed to regrow the pruned connections
     [9], such that the network constantly operates with the same percentage of connections
     pruned.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**再生长：** 在某些情况下，网络允许再生长被修剪的连接[9]，以便网络始终以相同的连接修剪百分比运行。'
 - en: In terms of practical usage, structured pruning with a meaningful block size
     can help improve latency. Elsen et al. [7] construct sparse convolutional networks
     that outperform their dense counterparts by 1.3 - 2.4× with ≈ 66% of the parameters
@@ -113,15 +152,20 @@
     etc. [10]. Although they also introduce some constraints on the kinds of sparse
     networks that can be accelerated. Overall, this is a promising step towards practical
     improvements in footprint metrics with pruned networks.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实际应用中，具有有意义块大小的结构化修剪可以帮助提高延迟。Elsen等人[7]构建了稀疏卷积网络，这些网络在保留相同的Top-1准确率的同时，以约66%的参数超越了其密集网络，提升了1.3
+    - 2.4倍。他们通过库将NHWC（通道在最后）标准密集表示转换为适用于其快速内核的NCHW（通道优先）‘块压缩稀疏行’（BCSR）表示，以适应在ARM设备、WebAssembly等上进行快速推理[10]。尽管他们也对可以加速的稀疏网络类型引入了一些限制。总体而言，这是朝着修剪网络在足迹指标上取得实际改进的一个有希望的步骤。
 - en: '**Quantization:**  Quantization is another popular compression technique. It
     exploits the idea that almost all the weights of a typical network are in 32-bit
     floating-point values, and if we are okay with losing some model quality (accuracy,
     precision, recall, etc.), we can store these values in a lower precision format
     (16-bit, 8-bit, 4-bit, etc.).'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**量化：** 量化是另一种流行的压缩技术。它利用了这样一个观点：典型网络中的几乎所有权重都是32位浮点值，如果我们可以接受一定程度的模型质量损失（准确率、精度、召回率等），我们可以将这些值存储在较低精度的格式中（16位、8位、4位等）。'
 - en: For example, when a model is persisted, we can map the minimum value in a weight
     matrix to 0 and the maximum value to 2^b-1 (where b is the number of bits of precision),
     and linearly extrapolate all values between them to an integer value. Often, this
@@ -132,21 +176,30 @@
     value (due to the rounding error), using the quantized value and the min & max
     floating-point values of the array. This step is referred to as *Weight Quantization*
     since we are quantizing the model’s weights.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，当模型持久化时，我们可以将权重矩阵中的最小值映射为0，最大值映射为2^b-1（其中b是精度位数），并将它们之间的所有值线性外推为整数值。通常，这可能足以减少模型大小。例如，如果b
+    = 8，我们将32位浮点权重映射到8位无符号整数。这将导致空间减少4倍。在推理（计算模型预测）时，我们可以使用量化值以及数组的最小和最大浮点值来恢复原始浮点值的有损表示（由于舍入误差）。这一步称为*权重量化*，因为我们正在量化模型的权重。
 - en: '![](../Images/ef17b953a75298d6add43c233b60465d.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ef17b953a75298d6add43c233b60465d.png)'
 - en: '*Mapping continuous high-precision values to discrete low-precision integer
     values. [Source](https://sahnimanas.github.io/post/quantization-in-tflite)*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*将连续高精度值映射到离散低精度整数值。[来源](https://sahnimanas.github.io/post/quantization-in-tflite)*'
 - en: The lossy representation and the rounding error might be okay for larger networks
     with built-in redundancy due to a large number of parameters but might lead to
     a drop in accuracy for smaller networks, which would likely be sensitive to these
     errors.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于具有大量参数的较大网络，由于内置冗余，有损表示和舍入误差可能是可以接受的，但对于较小的网络，这可能会导致准确性下降，这些网络可能对这些误差更为敏感。
 - en: We can solve this issue (in an experimental manner) by simulating the rounding
     behavior of weight quantization during the training. We do this by adding nodes
     in the model training graph that quantize and dequantize the activations and weight
@@ -157,59 +210,82 @@
     *Activation Quantization* along with Weight Quantization during training now.
     This step of training-time simulated quantization is described in detail by Jacob
     et al. and Krishnamoorthi et al. [11,12]
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过模拟训练过程中的权重量化舍入行为来解决这个问题（以实验方式）。我们通过在模型训练图中添加量化和反量化激活和权重矩阵的节点来实现这一点，使得神经网络操作的训练时间输入看起来与推理阶段的输入相同。这些节点被称为假量化节点。以这种方式训练使网络对推理模式下的量化行为更具鲁棒性。注意，现在我们在训练过程中同时进行*激活量化*和权重量化。训练时间模拟量化的步骤由Jacob等人和Krishnamoorthi等人详细描述[11,12]。
 - en: '![](../Images/29b6800efbd8727fa22c549a99ea5b28.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/29b6800efbd8727fa22c549a99ea5b28.png)'
 - en: '*Original model training graph and the graph with fake quantization nodes.
     [Source](https://arxiv.org/abs/1712.05877)*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*原始模型训练图和包含假量化节点的图。[来源](https://arxiv.org/abs/1712.05877)*'
 - en: Since both weights and activations are run in simulated quantized mode, that
     means all layers receive inputs that could be represented in lower-precision,
     and after the model is trained, it should be robust enough to do the math operations
     directly in lower-precision. As an example, if we train the model to replicate
     quantization in the 8-bit domain, the model can be deployed to do the matrix multiplication
     and other operations with 8-bit integers.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于权重和激活都在模拟量化模式下运行，这意味着所有层都接收到可以用更低精度表示的输入，模型训练后应足够强大，以便直接在低精度下进行数学运算。例如，如果我们训练模型以在8位域中复制量化，则该模型可以部署以使用8位整数进行矩阵乘法和其他操作。
 - en: On resource-constrained devices (such as mobile, embedded, and IoT devices),
     8-bit operations can be sped up between 1.5 - 2x using libraries like GEMMLOWP
     [13] which rely on hardware support for such acceleration such as the Neon intrinsics
     on ARM processors [14]. Further, frameworks such as Tensorflow Lite enable their
     users to directly use quantized operations without having to bother about the
     lower-level implementations.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在资源受限的设备（如移动设备、嵌入式设备和物联网设备）上，使用像GEMMLOWP [13]这样的库可以将8位操作的速度提升1.5 - 2倍，这些库依赖于ARM处理器上的Neon内在支持
+    [14]。此外，像Tensorflow Lite这样的框架使用户可以直接使用量化操作，而无需担心底层实现。
 - en: '![](../Images/10e885ceb9afbb996524328488062f36.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/10e885ceb9afbb996524328488062f36.png)'
 - en: '*Top-1 Accuracy vs. Model Latency for models with and without quantization.
     [Source](https://arxiv.org/abs/1712.05877)*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*模型的Top-1准确率与模型延迟（量化与非量化模型）的对比。[来源](https://arxiv.org/abs/1712.05877)*'
 - en: Apart from Pruning and Quantization, there are other techniques like Low-Rank
     Matrix Factorization, K-Means Clustering, Weight-Sharing etc. which are also actively
     being used for model compression [15].
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了剪枝和量化，还有其他技术，如低秩矩阵分解、K均值聚类、权重共享等，这些技术也正在积极用于模型压缩 [15]。
 - en: Overall, we saw that compression techniques could be used to reduce a model’s
     footprint (size, latency, etc.) while trading off some quality (accuracy, precision,
     recall, etc.) in return.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，我们发现压缩技术可以用来减少模型的占用空间（大小、延迟等），同时以牺牲一些质量（准确性、精确度、召回率等）作为交换。
 - en: Learning Techniques
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 学习技术
 - en: '**Distillation**: As mentioned earlier, Learning techniques try to train a
     model differently in order to obtain a better performance. For example, Hinton
     et al. [16], in their seminal work, explored how smaller networks can be taught
     to extract *dark knowledge* from larger models/ensembles of larger models. They
     use a larger *teacher model* to generate soft labels on existing labeled data.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**蒸馏**：如前所述，学习技术试图以不同的方式训练模型，以获得更好的性能。例如，Hinton等人 [16] 在他们的开创性工作中，探讨了如何教会较小的网络从较大的模型/模型集成中提取*暗知识*。他们使用较大的*教师模型*在现有标记数据上生成软标签。'
 - en: The soft labels assign a probability to each possible class instead of hard
     binary values in the original data. The intuition is that these soft labels capture
     the relationship between the different classes from which the model can learn.
@@ -218,31 +294,42 @@
     to minimize the cross-entropy loss on these soft labels, along with the original
     ground-truth hard labels. The weights of each of these loss functions can be scaled
     based on the results from experimentation.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 软标签为每个可能的类别分配一个概率，而不是原始数据中的硬二进制值。直观上，这些软标签捕捉了不同类别之间的关系，模型可以从中学习。例如，卡车与汽车比与苹果更相似，而模型可能无法直接从硬标签中学习到这一点。学生网络学习在这些软标签上最小化交叉熵损失，同时也在原始的真实硬标签上进行优化。这些损失函数的权重可以根据实验结果进行调整。
 - en: '![](../Images/23d7835765b7909ccef6823a37f0376d.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/23d7835765b7909ccef6823a37f0376d.png)'
 - en: '*Distillation of a smaller student model from a larger pre-trained teacher
     model.*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*从较大的预训练教师模型中蒸馏出一个较小的学生模型。*'
 - en: In the paper, Hinton et al. [16] were able to closely match the accuracy of
     a 10-model ensemble for a speech recognition task with a single distilled model.
     There are other comprehensive studies [17,18] demonstrating the significant improvements
     in model quality of smaller models. As an example, Sanh. et al. [18] were able
     to distill a student model that retains 97% of the performance of BERT-Base while
     being 40% smaller and 60% faster on CPU.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在论文中，Hinton等人 [16] 能够用一个单独的蒸馏模型来紧密匹配10模型集成在语音识别任务中的准确性。还有其他综合研究 [17,18] 展示了较小模型在模型质量上的显著改进。例如，Sanh等人
+    [18] 能够蒸馏出一个保留97% BERT-Base性能的学生模型，同时该模型在CPU上体积小40%，速度快60%。
 - en: '**Data Augmentation**: Typically for large models and complex tasks, the more
     data you have, the higher the chances of improving your model’s performance. However,
     getting high-quality labeled data is often both slow and expensive since they
     usually require a human in the loop. Learning from this data which has been labeled
     by humans, is referred to as supervised learning. It works very well when we have
     the resources to pay for the labels, but we can and should do better.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据增强**：通常对于大型模型和复杂任务来说，你拥有的数据越多，提升模型性能的机会就越大。然而，获取高质量的标记数据通常既慢又昂贵，因为它们通常需要人工参与。学习这些由人类标记的数据被称为监督学习。当我们有资源支付标签时，它效果很好，但我们可以并且应该做得更好。'
 - en: Data Augmentation is a nifty way of improving the performance of the model.
     Usually, it involves making transformations to your data, such that it does not
     require re-labeling (label-invariant transformations). For example, if you were
@@ -251,30 +338,42 @@
     flipping, stretching, cropping, adding Gaussian noise, etc. Similarly, if you
     were detecting the sentiment of a given piece of text, introducing a typo would
     likely not change the label.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据增强是一种提升模型性能的巧妙方法。通常，这涉及对数据进行转换，使其不需要重新标记（标签不变的转换）。例如，如果你在训练神经网络来分类图像为包含狗或猫，旋转图像不会改变标签。其他转换方法可以是水平/垂直翻转、拉伸、裁剪、添加高斯噪声等。类似地，如果你在检测给定文本的情感，引入一个错别字可能不会改变标签。
 - en: Such label-invariant transformations have been used across the board in popular
     deep learning models. They are especially handy when you have a large number of
     classes and/or few examples for certain classes.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种标签不变的转换方法已在流行的深度学习模型中广泛使用。当你有大量类别和/或某些类别的样本较少时，它们尤其方便。
 - en: '![](../Images/9da7e52f7ea25c9451f2d97b4284e496.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9da7e52f7ea25c9451f2d97b4284e496.png)'
 - en: '*Some common types of data augmentations. [Source](http://ai.stanford.edu/blog/data-augmentation/)*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*一些常见的数据增强类型。[来源](http://ai.stanford.edu/blog/data-augmentation/)*'
 - en: There are other transformations such as Mixup [19], which mix inputs from two
     different classes in a weighted manner and treat the label to be a similarly weighted
     combination of the two classes. The idea is that the model should be able to extract
     out features that are relevant for both classes.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有其他转换方法，比如 Mixup [19]，它以加权的方式混合来自两个不同类别的输入，并将标签视为两个类别的加权组合。这个想法是模型应该能够提取出对这两个类别都相关的特征。
 - en: These techniques are really introducing data efficiency to the pipeline. It
     is not very different from teaching a kid to identify real-life objects in different
     contexts.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些技术确实为流程引入了数据效率。这与教孩子在不同上下文中识别现实生活中的物体并没有太大区别。
 - en: '**Self-Supervised Learning**: There is rapid progress in an adjacent area,
     where we can learn generic models that completely skip the need for labels for
     extracting meaning out of data. With methods like contrastive learning [20], we
@@ -284,157 +383,246 @@
     vectors (embeddings) which can then be useful as features in other tasks where
     we might not have enough data to train models from scratch. We can view the first
     step of using unlabeled data as *pre-training* and the next step as *fine-tuning*.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**自监督学习**：在一个相关领域取得了迅速进展，我们可以学习通用模型，完全跳过提取数据意义时对标签的需求。通过对比学习等方法 [20]，我们可以训练一个模型，使其学习输入的表示，使得相似的输入具有相似的表示，而不相关的输入具有非常不同的表示。这些表示是
+    n 维向量（嵌入），然后可以在其他任务中作为特征使用，在这些任务中我们可能没有足够的数据从头训练模型。我们可以将使用无标签数据的第一步视为 *预训练*，将下一步视为
+    *微调*。'
 - en: '![](../Images/94acb34136fcc76346915833461861aa.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/94acb34136fcc76346915833461861aa.png)'
 - en: '*Contrastive Learning. [Source](https://blog.einstein.ai/prototypical-contrastive-learning-pushing-the-frontiers-of-unsupervised-learning/)*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*对比学习。[来源](https://blog.einstein.ai/prototypical-contrastive-learning-pushing-the-frontiers-of-unsupervised-learning/)*'
 - en: This two-step process of pre-training on unlabeled data and fine-tuning on labeled
     data has also gained rapid acceptance in the NLP community. ULMFiT [21] pioneered
     the idea of training a general-purpose language model, where the model learns
     to solve the task of predicting the next word in a given sentence.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种在未标记数据上进行预训练和在标记数据上进行微调的两步过程也在NLP社区中迅速获得接受。ULMFiT [21] 开创了训练通用语言模型的理念，其中模型学习解决给定句子中预测下一个词的任务。
 - en: The authors found that using a large corpus of preprocessed but unlabeled data
     such as the WikiText-103 (derived from English Wikipedia pages) was a good choice
     for the pre-training step. This was sufficient for the model to learn general
     properties about the language. The authors found that fine-tuning such a pre-trained
     model for a binary classification problem required only 100 labeled examples (as
     compared to 10,000 labeled examples otherwise).
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者发现，使用大量预处理但未标记的数据（如来源于英文维基百科页面的WikiText-103）作为预训练步骤是一个不错的选择。这足以让模型学习语言的一般特性。作者发现，对这种预训练模型进行二分类问题的微调只需100个标记样本（相比之下，通常需要10,000个标记样本）。
 - en: '![](../Images/6e9dbfec387cb26415c2c53842c0e667.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6e9dbfec387cb26415c2c53842c0e667.png)'
 - en: '*Rapid convergence with ULMFiT. [Source](https://nlp.fast.ai/classification/2018/05/15/introducing-ulmfit.html)*'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '*ULMFiT的快速收敛。[来源](https://nlp.fast.ai/classification/2018/05/15/introducing-ulmfit.html)*'
 - en: '![](../Images/ceb4033c6ba21d1776eb88d58283bda2.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ceb4033c6ba21d1776eb88d58283bda2.png)'
 - en: '*High-level approach of pre-training on a large corpus and fine-tuning on the
     relevant dataset. [Source](https://nlp.fast.ai/classification/2018/05/15/introducing-ulmfit.html)*'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在大语料库上进行预训练并在相关数据集上进行微调的高级方法。[来源](https://nlp.fast.ai/classification/2018/05/15/introducing-ulmfit.html)*'
 - en: This idea was also explored in BERT models, where the pre-training steps involve
     learning a  bi-directional masked language model, such that the model has to predict
     a missing word in the middle of a sentence.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一思想也在BERT模型中得到了探索，其中预训练步骤涉及学习一个双向掩码语言模型，使得模型必须预测句子中间缺失的词。
 - en: Overall, learning techniques help us improve model quality without impacting
     the footprint. This could be used for improving model quality for deployment.
     If the original model quality was satisfactory, you could also exchange the newfound
     quality gains for improving model size and latency by simply reducing the number
     of parameters in your network until you go back to the minimum viable model quality.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，学习技术帮助我们提高模型质量而不影响模型的足迹。这可以用于提升模型部署的质量。如果原始模型质量令人满意，你还可以通过简单地减少网络中的参数数量来交换新获得的质量提升，从而改善模型大小和延迟，直到恢复到最低可行的模型质量。
 - en: In our next part, we will continue to go over examples of tools and techniques
     that fit in the remaining three focus areas. Also, feel free to go over our [survey
     paper](https://arxiv.org/abs/2106.08962) that explores this topic in detail.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一部分中，我们将继续探讨适用于剩余三个重点领域的工具和技术示例。此外，欢迎查阅我们的[调查论文](https://arxiv.org/abs/2106.08962)，详细探讨了这个话题。
 - en: References
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Yann LeCun, John S Denker, and Sara A Solla. 1990\. Optimal brain damage.
     In Advances in neural information processing systems. 598–605.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Yann LeCun, John S Denker, and Sara A Solla. 1990\. 最优脑损伤。在神经信息处理系统进展中。598–605.'
 - en: '[2] Babak Hassibi, David G Stork, and Gregory J Wolff. 1993\. Optimal brain
     surgeon and general network pruning. In IEEE international conference on neural
     networks. IEEE, 293–299.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] Babak Hassibi, David G Stork, and Gregory J Wolff. 1993\. 最优脑外科医生和通用网络剪枝。在IEEE国际神经网络会议。IEEE,
+    293–299.'
 - en: '[3] Michael Zhu and Suyog Gupta. 2018\. To Prune, or Not to Prune: Exploring
     the Efficacy of Pruning for Model Compression. In 6th International Conference
     on Learning Representations, ICLR 2018, Vancouver, BC, Canada, April 30 - May
     3, 2018, Workshop Track Proceedings. OpenReview.net. https://openreview.net/forum?id=Sy1iIDkPM'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] Michael Zhu and Suyog Gupta. 2018\. 剪枝还是不剪枝：探索剪枝在模型压缩中的有效性。第六届国际学习表征会议，ICLR
+    2018，加拿大温哥华，2018年4月30日 - 5月3日，研讨会论文集。OpenReview.net. https://openreview.net/forum?id=Sy1iIDkPM'
 - en: '[4] Sajid Anwar, Kyuyeon Hwang, and Wonyong Sung. 2017\. Structured pruning
     of deep convolutional neural networks. ACM Journal on Emerging Technologies in
     Computing Systems (JETC) 13, 3 (2017), 1–18.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] Sajid Anwar, Kyuyeon Hwang, and Wonyong Sung. 2017\. 深度卷积神经网络的结构化剪枝。ACM《计算系统新兴技术期刊》（JETC）13,
+    3 (2017), 1–18.'
 - en: '[5] Hao Li, Asim Kadav, Igor Durdanovic, Hanan Samet, and Hans Peter Graf.
     2016\. Pruning Filters for Efficient ConvNets. In ICLR (Poster).'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5] Hao Li, Asim Kadav, Igor Durdanovic, Hanan Samet 和 Hans Peter Graf. 2016\.
+    为高效 ConvNets 剪枝滤波器。在 ICLR（海报）。'
 - en: '[6] Xin Dong, Shangyu Chen, and Sinno Jialin Pan. 2017\. Learning to prune
     deep neural networks via layer-wise optimal brain surgeon. arXiv preprint arXiv:1705.07565
     (2017).'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[6] Xin Dong, Shangyu Chen 和 Sinno Jialin Pan. 2017\. 通过逐层最优大脑外科医生学习剪枝深度神经网络。arXiv
+    预印本 arXiv:1705.07565 (2017)。'
 - en: '[7] Erich Elsen, Marat Dukhan, Trevor Gale, and Karen Simonyan. 2020\. Fast
     sparse convnets. In Proceedings of the IEEE/CVF conference on computer vision
     and pattern recognition. 14629–14638.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[7] Erich Elsen, Marat Dukhan, Trevor Gale 和 Karen Simonyan. 2020\. 快速稀疏卷积网络。在
+    IEEE/CVF 计算机视觉与模式识别会议论文集。14629–14638。'
 - en: '[8] Song Han, Jeff Pool, John Tran, and William J Dally. 2015\. Learning both
     weights and connections for efficient neural networks. arXiv preprint arXiv:1506.02626
     (2015).'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[8] Song Han, Jeff Pool, John Tran 和 William J Dally. 2015\. 为高效神经网络学习权重和连接。arXiv
+    预印本 arXiv:1506.02626 (2015)。'
 - en: '[9] Tim Dettmers and Luke Zettlemoyer. 2019\. Sparse networks from scratch:
     Faster training without losing performance. arXiv preprint arXiv:1907.04840 (2019).'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[9] Tim Dettmers 和 Luke Zettlemoyer. 2019\. 从头开始的稀疏网络：更快的训练而不损失性能。arXiv 预印本
+    arXiv:1907.04840 (2019)。'
 - en: '[10] XNNPACK. https://github.com/google/XNNPACK'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[10] XNNPACK。https://github.com/google/XNNPACK'
 - en: '[11] Benoit Jacob, Skirmantas Kligys, Bo Chen, Menglong Zhu, Matthew Tang,
     Andrew Howard, Hartwig Adam, and Dmitry Kalenichenko. 2018\. Quantization and
     training of neural networks for efficient integer-arithmetic-only inference. In
     Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition.
     2704–2713'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '[11] Benoit Jacob, Skirmantas Kligys, Bo Chen, Menglong Zhu, Matthew Tang,
+    Andrew Howard, Hartwig Adam 和 Dmitry Kalenichenko. 2018\. 神经网络的量化和训练，用于高效的整数运算推断。在
+    IEEE 计算机视觉与模式识别会议论文集。2704–2713'
 - en: '[12] Raghuraman Krishnamoorthi. 2018\. Quantizing deep convolutional networks
     for efficient inference: A whitepaper. arXiv (Jun 2018). arXiv:1806.08342 https://arxiv.org/abs/1806.08342v1'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '[12] Raghuraman Krishnamoorthi. 2018\. 量化深度卷积网络以实现高效推断：白皮书。arXiv (2018 年 6
+    月)。arXiv:1806.08342 https://arxiv.org/abs/1806.08342v1'
 - en: '[13] GEMMLOWP. https://github.com/google/gemmlowp'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '[13] GEMMLOWP。https://github.com/google/gemmlowp'
 - en: '[14] Arm Ltd. 2021\. SIMD ISAs | Neon – Arm Developer. https://developer.arm.com/architectures/instruction-sets/simdisas/neon
     [Online; accessed 3\. Jun. 2021].'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[14] Arm Ltd. 2021\. SIMD ISAs | Neon – Arm Developer。https://developer.arm.com/architectures/instruction-sets/simdisas/neon
+    [在线；访问时间 2021 年 6 月 3 日]。'
 - en: '[15] Rina Panigrahy. 2021\. Matrix Compression Operator. https://blog.tensorflow.org/2020/02/matrix-compressionoperator-tensorflow.html'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[15] Rina Panigrahy. 2021\. 矩阵压缩操作符。https://blog.tensorflow.org/2020/02/matrix-compressionoperator-tensorflow.html'
 - en: '[16] Geoffrey Hinton, Oriol Vinyals, and Jeff Dean. 2015\. Distilling the knowledge
     in a neural network. arXiv preprint arXiv:1503.02531 (2015).'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[16] Geoffrey Hinton, Oriol Vinyals 和 Jeff Dean. 2015\. 提炼神经网络中的知识。arXiv 预印本
+    arXiv:1503.02531 (2015)。'
 - en: '[17] Gregor Urban, Krzysztof J Geras, Samira Ebrahimi Kahou, Ozlem Aslan, Shengjie
     Wang, Rich Caruana, Abdelrahman Mohamed, Matthai Philipose, and Matt Richardson.
     2016\. Do deep convolutional nets really need to be deep and convolutional? arXiv
     preprint arXiv:1603.05691 (2016).'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[17] Gregor Urban, Krzysztof J Geras, Samira Ebrahimi Kahou, Ozlem Aslan, Shengjie
+    Wang, Rich Caruana, Abdelrahman Mohamed, Matthai Philipose 和 Matt Richardson.
+    2016\. 深度卷积网络真的需要深度和卷积吗？arXiv 预印本 arXiv:1603.05691 (2016)。'
 - en: '[18] Victor Sanh, Lysandre Debut, Julien Chaumond, and Thomas Wolf. 2019\.
     DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter.
     arXiv preprint arXiv:1910.01108 (2019).'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[18] Victor Sanh, Lysandre Debut, Julien Chaumond 和 Thomas Wolf. 2019\. DistilBERT，BERT
+    的蒸馏版：更小、更快、更便宜、更轻便。arXiv 预印本 arXiv:1910.01108 (2019)。'
 - en: '[19] Hongyi Zhang, Moustapha Cisse, Yann N Dauphin, and David Lopez-Paz. 2017\.
     mixup: Beyond empirical risk minimization. arXiv preprint arXiv:1710.09412 (2017).'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[19] Hongyi Zhang, Moustapha Cisse, Yann N Dauphin 和 David Lopez-Paz. 2017\.
+    mixup: 超越经验风险最小化。arXiv 预印本 arXiv:1710.09412 (2017)。'
 - en: '[20] Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. 2020\.
     A simple framework for contrastive learning of visual representations. In International
     conference on machine learning. PMLR, 1597–1607.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[20] Ting Chen, Simon Kornblith, Mohammad Norouzi 和 Geoffrey Hinton. 2020\.
+    用于视觉表征对比学习的简单框架。国际机器学习会议论文集。PMLR, 1597–1607。'
 - en: '[21] Jeremy Howard and Sebastian Ruder. 2018\. Universal language model fine-tuning
     for text classification. arXiv preprint arXiv:1801.06146 (2018).'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[21] Jeremy Howard 和 Sebastian Ruder. 2018\. 用于文本分类的通用语言模型微调。arXiv 预印本 arXiv:1801.06146
+    (2018)。'
 - en: '**Bio**: Gaurav Menghani is a Staff Software Engineer at Google Research where
     he leads research projects geared towards optimizing large machine learning models
     for efficient training and inference on devices ranging from tiny microcontrollers
@@ -444,83 +632,131 @@
     Before Google, Gaurav worked at Facebook for 4.5 years and has contributed significantly
     to Facebook’s Search system and large-scale distributed databases. He has an M.S.
     in Computer Science from Stony Brook University.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介**：Gaurav Menghani 是 Google Research 的高级软件工程师，他领导的研究项目旨在优化大型机器学习模型，以便在从微控制器到基于
+    TPU 的服务器等设备上实现高效训练和推断。他的工作对 YouTube、Cloud、Ads、Chrome 等平台的超过10亿活跃用户产生了积极影响。他还将与
+    Manning 出版社合作撰写一本关于高效机器学习的即将出版的书。在 Google 之前，Gaurav 在 Facebook 工作了 4.5 年，为 Facebook
+    的搜索系统和大规模分布式数据库做出了重要贡献。他拥有石溪大学的计算机科学硕士学位。'
 - en: twitter.com/GauravML
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: twitter.com/GauravML
 - en: linkedin.com/in/gauravmenghani
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: linkedin.com/in/gauravmenghani
 - en: www.gaurav.im
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: www.gaurav.im
 - en: '**Related:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[High Performance Deep Learning, Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高性能深度学习，第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)'
 - en: '[High-Performance Deep Learning: How to train smaller, faster, and better models
     – Part 2](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高性能深度学习：如何训练更小、更快、更优的模型 – 第2部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)'
 - en: '[5 Challenges to Scaling Machine Learning Models](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[扩展机器学习模型的5个挑战](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)'
 - en: '* * *'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的3大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 管理'
 - en: '* * *'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7种方式让ChatGPT帮助你更快更好地编程](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
 - en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[oBERT：复合稀疏化为NLP提供更快更准确的模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练Transformer模型……](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参与竞赛让机器学习速度提高4倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么我们总是需要人类来训练AI——有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Tensorflow训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'

@@ -1,25 +1,37 @@
 - en: 'From Scratch: Permutation Feature Importance for ML Interpretability'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从零开始：机器学习可解释性的置换特征重要性
 - en: 原文：[https://www.kdnuggets.com/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html](https://www.kdnuggets.com/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html](https://www.kdnuggets.com/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)
 - en: '**By [Seth Billiau](https://www.linkedin.com/in/seth-billiau-b4b062136/), Data
     Scientist and Statistician**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Seth Billiau](https://www.linkedin.com/in/seth-billiau-b4b062136/)，数据科学家和统计学家**'
 - en: '![](../Images/b22185d12db44de4fd434cebf30c3851.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b22185d12db44de4fd434cebf30c3851.png)'
 - en: Photo by [Arno Senoner](https://unsplash.com/@arnosenoner) on [Unsplash](https://unsplash.com/photos/ZxA9vV0phGI)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Arno Senoner](https://unsplash.com/@arnosenoner) 提供，发布在 [Unsplash](https://unsplash.com/photos/ZxA9vV0phGI)
 - en: Introduction
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Advanced topics in machine learning are dominated by black box models. As the
     name suggests, black box models are complex models where it’s extremely hard to
     understand how model inputs are combined to make predictions. Deep learning models
@@ -29,22 +41,30 @@
     examples of black box models that yield remarkably accurate predictions in a variety
     of domains from [urban planning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6567884/) to [computer
     vision](https://medium.com/swlh/computer-vision-with-convolutional-neural-networks-22f06360cac9).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习中的高级主题通常由黑箱模型主导。顾名思义，黑箱模型是复杂的模型，极难理解模型输入如何组合以进行预测。深度学习模型如 [人工神经网络](https://link.springer.com/article/10.1007/s12518-021-00360-9) 以及集成模型如 [随机森林](https://towardsdatascience.com/understanding-random-forest-58381e0602d2)、梯度提升学习器和 [模型堆叠](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/) 都是黑箱模型的例子，它们在从 [城市规划](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6567884/) 到 [计算机视觉](https://medium.com/swlh/computer-vision-with-convolutional-neural-networks-22f06360cac9) 的各种领域中提供了极为准确的预测。
 - en: '![](../Images/8975079b777cc8ef90ea8076241d93cc.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8975079b777cc8ef90ea8076241d93cc.png)'
 - en: Diagram of a Black Box Model
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 黑箱模型示意图
 - en: However, one drawback to using these black box models is that it’s often difficult
     to interpret how predictors influence the predictions — especially with conventional
     statistical methods. This article will explain an alternative way to interpret
     black box models called permutation feature importance. Permutation feature importance
     is a powerful tool that allows us to detect which features in our dataset have
     predictive power regardless of what model we’re using.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，使用这些黑箱模型的一个缺点是，很难解释预测变量如何影响预测结果——尤其是使用传统的统计方法时。本文将解释一种替代方法来解释黑箱模型，即置换特征重要性。置换特征重要性是一种强大的工具，允许我们检测数据集中哪些特征具有预测能力，无论我们使用什么模型。
 - en: We will begin by discussing the differences between traditional statistical
     inference and feature importance to motivate the need for permutation feature
     importance. Then, we’ll explain permutation feature importance and implement it
@@ -52,26 +72,36 @@
     in Blotchville. We’ll conclude by discussing some drawbacks to this approach and
     introducing some packages that can help us with permutation feature importance
     in the future.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将首先讨论传统统计推断和特征重要性之间的差异，以激发对置换特征重要性的需求。然后，我们将解释置换特征重要性并从头实现它，以发现哪些预测变量对预测Blotchville的房价很重要。最后，我们将讨论这种方法的一些缺点，并介绍一些可以帮助我们在未来进行置换特征重要性的包。
 - en: Statistical Inference vs. Feature Importance
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 统计推断与特征重要性
 - en: When using traditional, parametric statistical models, we can rely on statistical
     inference to make precise statements about how our inputs relate to our outputs.
     When we use linear regression, for example, we know that a one-unit change in
     our predictor corresponds to a *linear* change in our output. The magnitude of
     that change is estimated during model fitting and we can provide uncertainty measures
     for these estimates using probability theory.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用传统的参数统计模型时，我们可以依赖统计推断来准确说明我们的输入如何与输出相关。例如，当我们使用线性回归时，我们知道预测变量的一个单位变化对应于输出的*线性*变化。这个变化的幅度在模型拟合过程中被估计，我们可以利用概率理论为这些估计提供不确定性测量。
 - en: '![](../Images/9eb6adf2cc2ec36a05fd68bede54b580.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9eb6adf2cc2ec36a05fd68bede54b580.png)'
 - en: Photo by [Javier Allegue Barros](https://unsplash.com/@soymeraki) on [Upsplash](https://unsplash.com/photos/0nOP5iHVaZ8)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Javier Allegue Barros](https://unsplash.com/@soymeraki) 拍摄，来源于 [Upsplash](https://unsplash.com/photos/0nOP5iHVaZ8)
 - en: Unfortunately, it’s often impossible for us to make these kinds of statements
     when using a black box model. A deep neural network likely has hundreds, thousands,
     or even [millions](https://towardsdatascience.com/understanding-and-coding-a-resnet-in-keras-446d7ff84d33) of
@@ -79,23 +109,31 @@
     (ResNet-50 has over 23 million trainable parameters) along with several non-linear
     activation functions. When dealing with a model this complex, it becomes extremely
     challenging to map out the relationship between predictor and prediction analytically.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，当使用黑箱模型时，我们通常无法做出这些类型的声明。深度神经网络可能有数百、数千甚至 [百万](https://towardsdatascience.com/understanding-and-coding-a-resnet-in-keras-446d7ff84d33)个可训练权重，这些权重将输入预测变量连接到输出预测（ResNet-50具有超过2300万个可训练参数），以及几个非线性激活函数。当处理如此复杂的模型时，分析性地绘制预测变量和预测之间的关系变得极其困难。
 - en: Feature importance techniques were developed to help assuage this interpretability
     crisis. Feature importance techniques assign a score to each predictor based on
     its ability to improve predictions. This allows us to rank the predictors in our
     model based on their relative predictive power.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征重要性技术的开发旨在帮助缓解这一解释性危机。特征重要性技术根据每个预测变量改善预测的能力为其分配一个分数。这使我们可以根据预测变量的相对预测能力对模型中的预测变量进行排名。
 - en: One method for generating these feature importance scores is by leveraging the
     power of random permutations. The next section explains how to perform permutation
     feature importance using python.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成这些特征重要性分数的一种方法是利用随机置换的力量。下一部分解释了如何使用Python执行置换特征重要性。
 - en: Permutation Feature Importance
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 置换特征重要性
 - en: The idea behind feature importance is simple. Inputs that are useful for prediction
     contain valuable information. If you destroy that information by randomly shuffling
     the feature values, the quality of your predictions should decrease. If the decrease
@@ -103,41 +141,57 @@
     impactful in determining your predictions — your model is still pretty good without
     it. Furthermore, if the decrease is large, then the information in the original
     predictor had a large impact on your predictions.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征重要性的基本思想很简单。对预测有用的输入包含有价值的信息。如果通过随机打乱特征值来破坏这些信息，你的预测质量应该会下降。如果质量下降很小，那么原始预测变量中的信息在确定你的预测时影响不大——即使没有它，你的模型仍然很不错。此外，如果下降很大，则原始预测变量中的信息对你的预测有很大影响。
 - en: 'This idea is implemented in three simple steps. Say that you’ve trained an
     ML model and recorded some measure of quality for the predictions (ex. MSE, log-loss,
     etc). For each predictor in the dataset:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个想法通过三个简单的步骤实现。假设你已经训练了一个机器学习模型，并记录了一些预测质量的度量（例如：MSE、对数损失等）。对于数据集中的每个预测变量：
 - en: Randomly shuffle the data in the predictor while keeping the values of other
     predictors constant
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在保持其他预测变量的值不变的情况下，随机打乱预测变量中的数据。
 - en: Generate new predictions based on the shuffled values and evaluate the quality
     of your new predictions
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 基于打乱的值生成新的预测，并评估你新的预测的质量。
 - en: Compute the feature importance score by calculating the decrease in the quality
     of your new predictions relative to your original predictions
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过计算新预测质量相对于原始预测的下降来计算特征重要性分数。
 - en: Once you’ve computed feature importance scores for all of your features, you
     can rank them in terms of predictive usefulness. To help explain permutation feature
     importance more concretely, consider the following synthetic case study.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你计算了所有特征的特征重要性分数，你可以根据预测的有用性对它们进行排名。为了更具体地解释置换特征重要性，请考虑以下合成案例研究。
 - en: 'Case Study: Predicting House Prices'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 案例研究：预测房价
 - en: '*Note: Code is included when most instructive. Follow along with the full code
     for this guide *[*here*](https://github.com/sethbilliau/FeatureImportance)*.*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：代码在最具指导性时包括在内。请参阅本指南的完整代码 *[*这里*](https://github.com/sethbilliau/FeatureImportance)*。*'
 - en: 'Suppose that the prices of 10,000 houses in [Blotchville](http://www.hcs.harvard.edu/cs50-probability/hw0705.php) are
     determined by four factors: house color, neighborhood density score, neighborhood
     crime rate score, and the neighborhood education score. Houses in Blotchville
@@ -145,58 +199,85 @@
     scores are standardized and approximately normally distributed. The price of house *i
     c*an be determined from these factors according to the following data-generating
     equation:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设[Blotchville](http://www.hcs.harvard.edu/cs50-probability/hw0705.php)的10,000栋房子的价格由四个因素决定：房屋颜色、邻里密度评分、邻里犯罪率评分和邻里教育评分。Blotchville的房屋要么是红色的，要么是蓝色的，因此颜色被编码为一个二进制指示符。三个定量评分被标准化，并且大致呈正态分布。房屋*i
+    c*的价格可以根据以下数据生成方程从这些因素中确定：
 - en: '![](../Images/2b8a74c54d0e62acac1872934d2494dc.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2b8a74c54d0e62acac1872934d2494dc.png)'
 - en: Data Generating Equation
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据生成方程
 - en: The dataset also contains five other predictors that are uncorrelated with the
     price of houses and have no predictive power. Here’s a snapshot of the first five
     rows of the dataset, `df`.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集还包含五个与房价不相关且没有预测能力的其他预测变量。以下是数据集前五行的快照，`df`。
 - en: '![](../Images/d80fb79133017e0625f51e15d8f20f41.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d80fb79133017e0625f51e15d8f20f41.png)'
 - en: Snapshot of the Dataset
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集快照
 - en: Say that we want to train a model to predict price from the other nine predictors.
     We could use any black box model, but for the sake of this example, let’s train
     a random forest regressor. To do this, we split our data into a train and test
     dataset. Then, we use sklearn to fit a simple random forest model.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想训练一个模型来根据其他九个预测变量预测价格。我们可以使用任何黑箱模型，但为了这个例子，我们训练一个随机森林回归模型。为此，我们将数据分为训练集和测试集。然后，我们使用sklearn拟合一个简单的随机森林模型。
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: At this point, feel free to take some time to tune the hyperparameters of your
     random forest regressor. But, since this isn’t a guide on [hyperparameter tuning](https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74),
     I am going to continue with this naive random forest model — it’ll be fine for
     illustrating the usefulness of permutation feature importance.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 此时，可以花些时间调整随机森林回归器的超参数。但由于这不是一个关于[超参数调整](https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74)的指南，我将继续使用这个简单的随机森林模型——它将足以说明置换特征重要性的有用性。
 - en: One commonly-used metric to assess the quality of regression predictions is [root
     mean squared error (RMSE)](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) evaluated
     onthe test set. Let’s calculate the RMSE of our model predictions and store it
     as `rmse_full_mod`.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 评估回归预测质量的一个常用指标是[root mean squared error (RMSE)](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html)，它是在测试集上进行评估的。让我们计算我们模型预测的RMSE，并将其存储为`rmse_full_mod`。
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Now, we can implement permutation feature importance by shuffling each predictor
     and recording the increase in RMSE. This will allow us to assess which predictors
     are useful for making predictions. Here’s the code to do this from scratch. See
     if you can match up the comments of this code to our algorithm from earlier.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以通过打乱每个预测变量并记录RMSE的增加来实现置换特征重要性。这将允许我们评估哪些预测变量对预测有用。以下是从头开始实现此操作的代码。看看你是否可以将这些代码的注释与我们之前的算法匹配起来。
 - en: '[PRE2]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The resulting dataframe contains permutation feature importance scores. Large
     scores correspond to large increases in RMSE — evidence of worse model performance
     when a predictor was shuffled. Upon inspection of the table, we see that the four
@@ -204,24 +285,36 @@
     large values, meaning that they have predictive power in our model. On the other
     hand, the five dummy predictors have relatively small values, meaning that they
     are not as useful for making predictions.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果数据框包含置换特征重要性分数。大分数对应于RMSE的大幅增加——这是预测变量被打乱时模型性能变差的证据。检查表格后，我们看到四个数据生成预测变量（教育、颜色、密度和犯罪）的值相对较大，这意味着它们在我们的模型中具有预测能力。另一方面，五个虚拟预测变量的值相对较小，这意味着它们在预测中不那么有用。
 - en: '![](../Images/ee79363356fd5e28bdbdfb7a808183f2.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ee79363356fd5e28bdbdfb7a808183f2.png)'
 - en: Results of Permutation Dataframe
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: Permutation Dataframe的结果
 - en: We can graph our permutation feature importance scores as well for easier comparison
     using matplotlib.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以使用matplotlib图示化我们的置换特征重要性分数，以便更容易比较。
 - en: '![](../Images/8ef8103386aea8ad2e72be9f404ee06c.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8ef8103386aea8ad2e72be9f404ee06c.png)'
 - en: Permutation Feature Importance Plot
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 置换特征重要性图
 - en: From this analysis, we gain valuable insights into how our model makes predictions.
     We see that education score is the predictor that offers the most valuable information
     when predicting house price in our model. House color, density score, and crime
@@ -229,154 +322,226 @@
     dummy predictors do not have very much predictive power. In fact, since dropping
     dummy predictor 3 actually led to a decrease in RMSE, we might consider performing
     feature selection and removing these unimportant predictors in future analysis.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这项分析中，我们获得了关于模型如何进行预测的宝贵洞察。我们看到教育分数是预测房价时提供最有价值信息的预测器。房屋颜色、密度分数和犯罪分数也似乎是重要的预测器。最后，五个虚拟预测器的预测能力似乎不强。事实上，由于去掉虚拟预测器
+    3 实际上导致 RMSE 下降，我们可能考虑在未来的分析中进行特征选择，移除这些不重要的预测器。
 - en: Drawbacks to Permutation Feature Importance
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 置换特征重要性的缺点
 - en: '![](../Images/176fcc49ddc9f174be73b548a949f6a7.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/176fcc49ddc9f174be73b548a949f6a7.png)'
 - en: Photo by [Martin Esteve](https://unsplash.com/@tme18) on [Upsplash](https://unsplash.com/photos/4y8A6Ve-3GE)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [Martin Esteve](https://unsplash.com/@tme18) 在 [Upsplash](https://unsplash.com/photos/4y8A6Ve-3GE)
 - en: 'While we’ve seen the many benefits of permutation feature importance, it’s
     equally important to acknowledge its drawbacks (no pun intended). Here are a few
     disadvantages of using permutation feature importance:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然我们看到置换特征重要性的许多好处，但同样重要的是要承认其缺点（无意中）。以下是使用置换特征重要性的一些缺点：
 - en: '**Computational Time: **This process can be computationally expensive since
     it requires you to iterate through each of your predictors and make predictions.
     If it’s not cheap to make predictions or if you have many, many predictors, this
     could be costly.'
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**计算时间：**这个过程可能会非常耗费计算资源，因为它需要你遍历每一个预测器并进行预测。如果进行预测的成本不低，或者你有很多预测器，这可能会非常昂贵。'
 - en: '**Poor Performance in the Presence of Multicollinearity: **Permutation feature
     importance can perform poorly if your dataset has correlated features. If the
     information in one predictor is also stored in a correlated predictor, then the
     model may still perform well when one of those predictors is shuffled.'
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**在多重共线性存在下表现不佳：**如果你的数据集中有相关特征，置换特征重要性可能表现不佳。如果一个预测器中的信息也存储在一个相关的预测器中，那么即使这些预测器中的一个被打乱，模型可能仍然表现良好。'
 - en: '**Scores are relative, not absolute: **Permutation importance scores show the *relative* predictive
     power of features in a model. However, these scores don’t really have any meaningful
     value out of context — any score could be really good or really bad depending
     on the other scores.'
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**分数是相对的，而不是绝对的：**置换重要性分数显示了特征在模型中的*相对*预测能力。然而，这些分数在上下文之外并没有实际的有意义的价值——任何分数都可能因为其他分数的不同而变得很好或很差。'
 - en: '**Feature importance still isn’t statistical inference:** Feature importance
     techniques can only tell you how useful a predictor is — they don’t give any insight
     into the nature of the relationship (ex. linear, quadratic, etc.) or the magnitude
     of the predictor’s effect. Permutation feature importance is not a replacement
     for statistical inference, but rather an alternative solution for when it’s impossible
     to perform traditional inference.'
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**特征重要性仍然不是统计推断：**特征重要性技术只能告诉你预测器的有用性——它们不能提供关于关系性质（如线性、二次等）或预测器效应的大小的任何洞察。置换特征重要性不是统计推断的替代品，而是当无法进行传统推断时的替代解决方案。'
 - en: Conclusion
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Permutation feature importance is a valuable tool to have in your toolbox for
     analyzing black box models and providing ML interpretability. With these tools,
     we can better understand the relationships between our predictors and our predictions
     and even perform more principled feature selection.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 置换特征重要性是分析黑箱模型和提供机器学习可解释性的一个有价值的工具。有了这些工具，我们可以更好地理解预测器和预测之间的关系，甚至进行更有原则的特征选择。
 - en: Though we implemented permutation feature importance from scratch, there are
     several packages that offer sophisticated implementations of permutation feature
     importance along with other model-agnostic methods. Python users should look into
     the `eli5`, `alibi`, `scikit-learn`, `LIME`, and `rfpimp` packages while R users
     turn to `iml`, `DALEX`, and `vip`.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们从头实现了排列特征重要性，但有几个软件包提供了复杂的排列特征重要性实现以及其他模型无关的方法。Python 用户应查看 `eli5`、`alibi`、`scikit-learn`、`LIME`
+    和 `rfpimp` 软件包，而 R 用户则可以使用 `iml`、`DALEX` 和 `vip`。
 - en: Happy permuting! If you have any questions, feel free to leave a comment, and
     I’ll do my best to provide an answer.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝你排列愉快！如果你有任何问题，请随时留言，我会尽力提供解答。
 - en: '*Acknowledgments: A big thank you to the wonderful Claire Hoffman for proofreading
     and editing this article and putting up with my neglect of the Oxford comma. I’m
     also grateful to Leo Saenger for reading the article and providing his suggestions.*'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*致谢：非常感谢出色的 Claire Hoffman 校对和编辑这篇文章，并忍受我对牛津逗号的忽视。我也感激 Leo Saenger 阅读这篇文章并提供建议。*'
 - en: '**Bio: [Seth Billiau](https://www.linkedin.com/in/seth-billiau-b4b062136/)**
     is a Data Scientist and Statistician, A.B. in Statistics at Harvard University,
     Former Vice President of the Harvard College Open Data Project. Email: sethbilliau
     [at] college.harvard.edu'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Seth Billiau](https://www.linkedin.com/in/seth-billiau-b4b062136/)**
+    是一名数据科学家和统计学家，拥有哈佛大学统计学A.B.学位，曾任哈佛大学开放数据项目副主席。邮箱: sethbilliau [at] college.harvard.edu'
 - en: '[Original](https://towardsdatascience.com/from-scratch-permutation-feature-importance-for-ml-interpretability-b60f7d5d1fe9).
     Reposted with permission.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/from-scratch-permutation-feature-importance-for-ml-interpretability-b60f7d5d1fe9)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[This Data Visualization is the First Step for Effective Feature Selection](/2021/06/data-visualization-feature-selection.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据可视化是有效特征选择的第一步](/2021/06/data-visualization-feature-selection.html)'
 - en: '[Feature Selection – All You Ever Wanted To Know](/2021/06/feature-selection-overview.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择 – 你想知道的一切](/2021/06/feature-selection-overview.html)'
 - en: '[Dashboards for Interpreting & Comparing Machine Learning Models](/2021/06/dashboards-interpreting-comparing-machine-learning-models.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于解释和比较机器学习模型的仪表板](/2021/06/dashboards-interpreting-comparing-machine-learning-models.html)'
 - en: '* * *'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 需求'
 - en: '* * *'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络预测中排列的重要性](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SHAP 值进行机器学习模型的可解释性](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2022 年特征商店峰会：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Celebrating Awareness of the Importance of Data Privacy](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[庆祝对数据隐私重要性的认识](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)'
 - en: '[The Importance of Experiment Design in Data Science](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中实验设计的重要性](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)'

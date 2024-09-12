@@ -1,134 +1,189 @@
 - en: Predict Customer Churn (the right way) using PyCaret
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 PyCaret 预测客户流失（正确的方法）
 - en: 原文：[https://www.kdnuggets.com/2021/07/pycaret-predict-customer-churn-right-way.html](https://www.kdnuggets.com/2021/07/pycaret-predict-customer-churn-right-way.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/pycaret-predict-customer-churn-right-way.html](https://www.kdnuggets.com/2021/07/pycaret-predict-customer-churn-right-way.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
     of PyCaret**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 的创始人兼作者**'
 - en: '![](../Images/d30c89e197e08c3f1818262c2757be9f.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d30c89e197e08c3f1818262c2757be9f.png)'
 - en: Predict Customer Churn (the right way) using PyCaret — Image by Author
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测客户流失（正确的方法）使用 PyCaret — 作者提供的图像
 - en: '**Introduction**'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**介绍**'
 - en: Customer retention is one of the primary KPI for companies with a subscription-based
     business model. Competition is tough particularly in the SaaS market where customers
     are free to choose from plenty of providers. One bad experience and customer may
     just move to the competitor resulting in customer churn.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户保留是订阅制商业模式公司主要的 KPI 之一。特别是在 SaaS 市场，竞争非常激烈，客户可以自由选择众多供应商。一次不好的体验，客户可能会转向竞争对手，导致客户流失。
 - en: '**What is Customer Churn?**'
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**什么是客户流失？**'
 - en: Customer churn is the percentage of customers that stopped using your company’s
     product or service during a certain time frame. One of the ways to calculate a
     churn rate is to divide the number of customers lost during a given time interval
     by the number of active customers at the beginning of the period. For example,
     if you got 1000 customers and lost 50 last month, then your monthly churn rate
     is 5 percent.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户流失是指在特定时间范围内停止使用公司产品或服务的客户百分比。计算流失率的一种方法是将给定时间间隔内失去的客户数量除以该时间段开始时的活跃客户数量。例如，如果你有1000名客户，并在上个月失去了50名，那么你的月流失率是5%。
 - en: Predicting customer churn is a challenging but extremely important business
     problem especially in industries where the cost of customer acquisition (CAC)
     is high such as technology, telecom, finance, etc. The ability to predict that
     a particular customer is at a high risk of churning, while there is still time
     to do something about it, represents a huge additional potential revenue source
     for companies.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测客户流失是一个具有挑战性但极其重要的商业问题，尤其是在客户获取成本（CAC）较高的行业，如技术、电信、金融等。能够预测某个客户处于高流失风险中，并且还有时间采取措施，这为公司代表了一个巨大的额外潜在收入来源。
 - en: How is the Customer Churn machine learning model used in practice?
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 客户流失机器学习模型在实际中的应用是什么？
 - en: 'The primary objective of the customer churn predictive model is to retain customers
     at the highest risk of churn by proactively engaging with them. For example: Offer
     a gift voucher or any promotional pricing and lock them in for an additional year
     or two to extend their lifetime value to the company.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户流失预测模型的主要目标是通过主动与高风险流失的客户互动来留住他们。例如：提供礼品券或任何促销定价，并将他们锁定额外一年或两年，以延长他们对公司的终身价值。
 - en: 'There are two broad concepts to understand here:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有两个主要概念需要理解：
 - en: We want a customer churn predictive model to predict the churn in advance (let’s
     say one month in advance, three months in advance, or even six months in advance
     — it all depends on the use-case). This means that you have to be extremely careful
     of the cut-off date i.e. You shouldn’t be using any information after the cut-off
     date as a feature in the machine learning model, otherwise it will be leakage.
     The period before the cut-off date is known as the **Event.**
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们希望客户流失预测模型能够提前预测流失（比如提前一个月、三个月或甚至六个月——这取决于具体用例）。这意味着你必须非常小心截止日期，即不应在机器学习模型中使用截止日期后的任何信息作为特征，否则将会出现数据泄漏。截止日期之前的时间段称为**事件**。
 - en: Normally for customer churn prediction, you will have to work a little bit to
     create a ***target column***, it’s generally not available in the form you would
     want it. For example, you want to predict if the customer will churn within the
     next quarter, and so you will iterate through all the active customers as of your
     event cut-off date and check if they left the company in the next quarter or not
     (1 for yes, 0 for no). The quarter in this case is called **Performance Window**.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通常，对于客户流失预测，你需要花点时间创建一个***目标列***，它通常不会以你想要的形式提供。例如，你希望预测客户是否会在下一个季度内流失，因此你将遍历所有截止日期时的活跃客户，检查他们是否在下个季度离开公司（1
+    表示是，0 表示否）。在这种情况下，季度称为**绩效窗口**。
 - en: '![](../Images/58ffbc62902aceb2f52993e2c40f8b7f.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/58ffbc62902aceb2f52993e2c40f8b7f.png)'
 - en: How to create customer churn dataset — Image by Author
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何创建客户流失数据集 — 作者提供的图像
 - en: Customer Churn Model Workflow
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 客户流失模型工作流程
 - en: 'Now that you understand how the data is sourced and churn target is created
     (which is one of the most challenging parts of the problem), let’s discuss how
     this machine learning model will be used in the business. Read the below diagram
     from left-to-right:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经了解了数据的来源和流失目标的创建（这是问题中最具挑战性的部分之一），让我们讨论一下这个机器学习模型将如何在业务中使用。请从左到右阅读下图：
 - en: A model is trained on customer churn history (event period for X features and
     performance window for target variable).
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型会基于客户流失历史进行训练（X特征的事件周期和目标变量的性能窗口）。
 - en: Every month active customer base is passed onto **Machine Learning Predictive
     Model** to return the probability of churn for each customer (in business lingo,
     this is sometimes called a score of churn).
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个月，将活跃的客户基础传递给**机器学习预测模型**以返回每个客户的流失概率（在商业术语中，有时称为流失评分）。
 - en: The list will be sorted from highest to lowest probability value (or score as
     they say it) and the customer retention teams will start engaging with the customer
     to stop the churn, normally by offering some kind of promotion or gift card to
     lock in few more years.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 列表将按从高到低的概率值（或他们所说的评分）排序，客户保留团队将开始与客户接触以阻止流失，通常通过提供某种促销或礼品卡来锁定更多年份。
 - en: Customers that have a very low probability of churn (or essentially model predicts
     no-churn) are happy customers. No actions are taken on them.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 流失概率非常低的客户（或者模型预测无流失的客户）是满意的客户。对此不采取任何措施。
 - en: '![](../Images/e91b9c8c3e68ddee366a72d0af70af4f.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e91b9c8c3e68ddee366a72d0af70af4f.png)'
 - en: Customer Churn Model Workflow— Image by Author
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户流失模型工作流程 — 作者提供的图像
 - en: Let’s get started with the practical example
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 让我们开始实际的例子
 - en: In this section, I will demonstrate the complete end-to-end workflow for machine
     learning model training & selection, hyperparameter tuning, analysis, and interpretation
     of the results. I will also discuss the metrics that you can optimize and why
@@ -136,521 +191,805 @@
     churn models. I will be using [PyCaret](https://www.pycaret.org/) — an open-source,
     low-code machine learning library to perform this experiment. This tutorial assumes
     you have basic knowledge of PyCaret.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我将展示机器学习模型训练与选择、超参数调整、分析和结果解释的完整端到端工作流程。我还会讨论你可以优化的指标以及为什么像AUC、准确率、召回率这样的传统指标可能不适用于客户流失模型。我将使用[PyCaret](https://www.pycaret.org/)——一个开源的低代码机器学习库来进行这个实验。这个教程假设你对PyCaret有基本的了解。
 - en: PyCaret
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PyCaret
 - en: '[PyCaret](https://www.pycaret.org/) is an open-source, low-code machine learning
     library and end-to-end model management tool built-in Python for automating machine
     learning workflows. PyCaret is known for its ease of use, simplicity, and ability
     to quickly and efficiently build and deploy end-to-end machine learning pipelines.
     To learn more about PyCaret, check out their [GitHub](https://www.github.com/pycaret/pycaret).'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PyCaret](https://www.pycaret.org/)是一个开源的低代码机器学习库和端到端模型管理工具，构建于Python中，用于自动化机器学习工作流程。PyCaret以其易用性、简洁性以及快速高效地构建和部署端到端机器学习管道而闻名。要了解更多关于PyCaret的信息，可以查看他们的[GitHub](https://www.github.com/pycaret/pycaret)。'
 - en: '![](../Images/88a030e919f0d8cb248448f7778563ae.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/88a030e919f0d8cb248448f7778563ae.png)'
 - en: Features of PyCaret — Image by Author
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret的特点 — 作者提供的图像
 - en: Install PyCaret
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装PyCaret
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: ????Dataset
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集
 - en: For this tutorial, I am using a [Telecom Customer Churn](https://www.kaggle.com/blastchar/telco-customer-churn) dataset
     from Kaggle. The dataset already contains the target column that we can use as
     is. You can read this dataset directly from this [GitHub](https://raw.githubusercontent.com/srees1988/predict-churn-py/main/customer_churn_data.csv) link.
     (*Shoutout to srees1988*)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我使用了来自Kaggle的[电信客户流失](https://www.kaggle.com/blastchar/telco-customer-churn)数据集。数据集已经包含我们可以直接使用的目标列。你可以直接从这个[GitHub](https://raw.githubusercontent.com/srees1988/predict-churn-py/main/customer_churn_data.csv)链接读取这个数据集。
+    (*向srees1988致敬*)
 - en: '[PRE1]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/dcad3db3c93e570415cddfa1ec0a45cc.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dcad3db3c93e570415cddfa1ec0a45cc.png)'
 - en: Sample dataset — Image by Author
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例数据集 — 作者提供的图像
 - en: '**???? Exploratory Data Analysis**'
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**探索性数据分析**'
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/84590e750b1347784d7884990412f1ea.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/84590e750b1347784d7884990412f1ea.png)'
 - en: Data types — Image by Author
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据类型 — 作者提供的图像
 - en: Notice that `TotalCharges` is of an `object` type instead of `float64.` Upon
     investigation, I figured out there are some blank spaces in this column which
     has caused Python to force the data type as `object` . To fix that, we will have
     to trim blank spaces before changing the data type.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，`TotalCharges`的数据类型是`object`而不是`float64`。经过调查，我发现该列中有一些空格，这导致Python将数据类型强制为`object`。为了解决这个问题，我们需要在更改数据类型之前去除空格。
 - en: '[PRE3]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Intuitively contract type, tenure (length of stay of the customer), and pricing
     plans are very important information when it comes to customer churn or retention.
     Let’s explore the relationship:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 从直观上看，合同类型、客户的停留时间（tenure）以及定价计划在客户流失或保留方面都是非常重要的信息。让我们来探索它们之间的关系：
 - en: '[https://gist.github.com/moezali1/2624c9a5eaf78d9a7ffa1b97195a4812](https://gist.github.com/moezali1/2624c9a5eaf78d9a7ffa1b97195a4812)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://gist.github.com/moezali1/2624c9a5eaf78d9a7ffa1b97195a4812](https://gist.github.com/moezali1/2624c9a5eaf78d9a7ffa1b97195a4812)'
 - en: '![](../Images/35598cb787fa11a5b752f1514c3b91d5.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/35598cb787fa11a5b752f1514c3b91d5.png)'
 - en: Customer Churn by Tenure, Charges, and Contract Type (Image by Author)
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据停留时间、费用和合同类型的客户流失（图片由作者提供）
 - en: Notice that most churn can be seen in the contracts that are “Month-to-Month”.
     Makes sense, ofcourse. Also, I can see that as the tenure increases and so are
     the total charges, the likelihood of customers with high tenure and low charges
     is less compared to customers with high tenure and high charges.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，大多数流失情况发生在“月度合同”中。这是有道理的。此外，我还注意到，随着停留时间的增加以及总费用的增加，高停留时间和低费用的客户流失的可能性低于高停留时间和高费用的客户。
 - en: '**Missing Values**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺失值**'
 - en: '[PRE4]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/8670ba57f1d45a72ccadc28e8f0ead3b.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8670ba57f1d45a72ccadc28e8f0ead3b.png)'
 - en: Missing Values — Image by Author
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺失值——图片由作者提供
 - en: Notice that because we replaced blank values with `np.nan` there are now 11
     rows with missing values in `TotalCharges`. No problem — I will leave it with
     PyCaret to impute it automatically.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，由于我们用`np.nan`替换了空值，现在`TotalCharges`中有11行缺失值。没问题——我将让PyCaret自动填补这些缺失值。
 - en: '**????Data Preparation**'
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**数据准备**'
 - en: Common to all modules in PyCaret, the `setup` is the first and the only mandatory
     step in any machine learning experiment performed in PyCaret. This function takes
     care of all the data preparation required prior to training models. Besides performing
     some basic default processing tasks, PyCaret also offers a wide array of pre-processing
     features. To learn more about all the preprocessing functionalities in PyCaret,
     you can see this [link](https://pycaret.org/preprocessing/).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在PyCaret的所有模块中，`setup`是任何机器学习实验中的第一个也是唯一的强制步骤。这个函数处理所有训练模型前所需的数据准备工作。除了执行一些基本的默认处理任务外，PyCaret还提供了丰富的预处理功能。要了解PyCaret中所有的预处理功能，你可以查看这个[链接](https://pycaret.org/preprocessing/)。
 - en: '[PRE5]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/7ec559818d4479530de12c4be1716312.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7ec559818d4479530de12c4be1716312.png)'
 - en: setup function in pycaret.classification — Image by Author
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: pycaret.classification中的setup函数——图片由作者提供
 - en: Whenever you initialize the `setup` function in PyCaret, it profiles the dataset
     and infers the data types for all input features. In this case, you can see except
     for `tenure` `MonthlyCharges` and `TotalCharges` , everything else is categorical,
     which is correct, you can now press enter to continue. If data types are not inferred
     correctly (which can happen sometimes), you can use `numeric_feature` and `categorical_feature` to
     overwrite the data types.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当你在PyCaret中初始化`setup`函数时，它会对数据集进行概况分析，并推断所有输入特征的数据类型。在这个例子中，除了`tenure`、`MonthlyCharges`和`TotalCharges`，其他所有都是类别型的，这些推断是正确的，你现在可以按回车键继续。如果数据类型推断不正确（这有时会发生），你可以使用`numeric_feature`和`categorical_feature`来覆盖数据类型。
 - en: Also, notice that I have passed `ignore_features = ['customerID']` in the `setup` function
     so that it is not considered when training the models. The good thing about this
     is PyCaret will not remove the column from the dataset, it will just ignore it
     behind the scene for model training. As such when you generate predictions at
     the end, you don’t need to worry about joining IDs back by yourself.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，请注意我在`setup`函数中传递了`ignore_features = ['customerID']`，以便在训练模型时忽略该特征。这样做的好处是，PyCaret不会从数据集中删除该列，而只是忽略它用于模型训练。因此，当你在最后生成预测时，不需要担心自己重新合并ID。
 - en: '![](../Images/da45ec42dc9fe41871cbce475be5690a.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/da45ec42dc9fe41871cbce475be5690a.png)'
 - en: Output from setup — truncated for display — Image by Author
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出来自于设置——为显示而截断——图片由作者提供
 - en: ???? Model Training & Selection
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型训练与选择
 - en: Now that data preparation is done, let’s start the training process by using `compare_models` functionality.
     This function trains all the algorithms available in the model library and evaluates
     multiple performance metrics using cross-validation.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据准备完成后，让我们通过使用`compare_models`功能开始训练过程。该功能训练模型库中所有可用的算法，并使用交叉验证评估多个性能指标。
 - en: '[PRE6]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/3ffd6b7d55c7694c9d8d22e2843723fc.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3ffd6b7d55c7694c9d8d22e2843723fc.png)'
 - en: Output from compare_models — Image by Author
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自compare_models的输出 — 作者提供的图像
 - en: The best model based on **AUC**is `Gradient Boosting Classifier `. AUC using
     10-fold cross-validation is 0.8472.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于**AUC**的最佳模型是`Gradient Boosting Classifier`。使用10折交叉验证，AUC为0.8472。
 - en: '[PRE7]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/2001af02cbfa5355dcdcb8dc95550223.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2001af02cbfa5355dcdcb8dc95550223.png)'
 - en: Best Model Parameters — Image by Author
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 最佳模型参数 — 作者提供的图像
 - en: '**Hyperparameter Tuning**'
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**超参数调整**'
 - en: You can use the `tune_model` function from PyCaret to automatically tune the
     hyperparameters of the model.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用PyCaret中的`tune_model`功能自动调整模型的超参数。
 - en: '[PRE8]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/de76e0c6f1e6a453d570dc188335ffe6.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/de76e0c6f1e6a453d570dc188335ffe6.png)'
 - en: tune_model results — Image by Author
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: tune_model结果 — 作者提供的图像
 - en: Notice that AUC has slightly increased from `0.8472` to `0.8478` .
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到AUC从`0.8472`略微增加到`0.8478`。
 - en: Model Analysis
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型分析
 - en: '[PRE9]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/a1b55482711e184c8da6e153b87d4e3a.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a1b55482711e184c8da6e153b87d4e3a.png)'
 - en: AUC Plot —Image by Author
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: AUC图 — 作者提供的图像
 - en: '[PRE10]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![](../Images/418830a4ce44d421caa99a4ee4b3a2c5.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/418830a4ce44d421caa99a4ee4b3a2c5.png)'
 - en: Feature Importance Plot — Image by Author
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征重要性图 — 作者提供的图像
 - en: '[PRE11]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/8b2c00c3aa421704fb991125b3bde26b.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8b2c00c3aa421704fb991125b3bde26b.png)'
 - en: Confusion Matrix Gradient Boosting Classifier — Image by Author
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 混淆矩阵梯度提升分类器 — 作者提供的图像
 - en: This confusion matrix is on the test set which includes 30% of our data (2,113
     rows) We have 309 ***True Positives*** (15%) — these are the customers for which
     we will be able to extend the lifetime value. If we wouldn’t have predicted, then
     there was no opportunity for intervention.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个混淆矩阵基于测试集，包括我们数据的30%（2,113行）。我们有309个***真正例***（15%）——这些客户的生命周期价值可以延长。如果我们没有预测到这些客户，则没有干预的机会。
 - en: We also have 138 (7%) ***False Positives*** where we will lose money because
     the promotion offered to these customers will just be an extra cost.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还发现有138个（7%）***假正例***，我们将因此损失金钱，因为对这些客户提供的促销将只是额外的成本。
 - en: 1,388 (66%) are True Negatives (good customers) and 278 (13%) are ***False Negative*** (this
     is a missed opportunity).
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 1,388个（66%）是真正例（优质客户），278个（13%）是***假负例***（这是一个错失的机会）。
 - en: So far we have trained multiple models to select the best model giving the highest
     AUC, followed by tuning the hyperparameters of the best model to squeeze a little
     more performance in terms of AUC. However, the best AUC doesn’t necessarily translate
     into the best model for business.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们已经训练了多个模型，以选择AUC最高的最佳模型，然后调整最佳模型的超参数，以在AUC方面挤出更多的性能。然而，最佳的AUC并不一定转化为对业务最有利的模型。
 - en: 'In a churn model, often the reward of ***true positives*** is way different
     than the cost of ***false positives***. Let’s use the following assumptions:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 在流失模型中，***真正例***的奖励通常与***假正例***的成本差异很大。让我们使用以下假设：
 - en: $1,000 voucher will be offered to all the customers identified as churn (True
     Positive + False Positive);
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将向所有被识别为流失的客户（真正例+假正例）提供$1,000的优惠券；
 - en: If we are able to stop the churn, we will gain $5,000 in customer lifetime value.
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果我们能够减少客户流失，我们将获得$5,000的客户生命周期价值。
 - en: 'Using these assumptions and the confusion matrix above, we can calculate the
     $ impact of this model:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据这些假设和上面的混淆矩阵，我们可以计算该模型的$影响：
 - en: '![](../Images/ef9c858bba6c8930acccefbeb34240d3.png)'
+  id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ef9c858bba6c8930acccefbeb34240d3.png)'
 - en: $ Impact of Model over 2,113 Customers — Image by Author
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: $ 在2,113名客户中的模型影响 — 作者提供的图像
 - en: It’s a good model but the problem is it’s not a business-smart model. It is
     doing a pretty good job compared to if you have no model but how can we train
     and select a model that maximizes the business value. In order to achieve that
     we have to train, select, and optimize models using business metrics instead of
     any conventional metric like AUC or Accuracy.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个不错的模型，但问题是它不是一个商业智能模型。与没有模型相比，它的表现相当不错，但我们如何训练和选择一个最大化商业价值的模型呢？为了实现这一点，我们必须使用商业指标而非AUC或准确率等传统指标来训练、选择和优化模型。
 - en: '**???? Adding Custom Metric in PyCaret**'
+  id: totrans-100
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**???? 在PyCaret中添加自定义指标**'
 - en: Thanks to PyCaret, it is extremely easy to achieve this using `add_metric` function.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 PyCaret，使用 `add_metric` 函数实现这一点变得极其简单。
 - en: '[PRE12]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Now let’s run `compare_models` and see the magic.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们运行 `compare_models`，看看奇迹。
 - en: '[PRE13]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![](../Images/db2b1d5d27db3676634fd789e74b149a.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/db2b1d5d27db3676634fd789e74b149a.png)'
 - en: Output from compare_models — Image by Author
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: compare_models 的输出 — 作者提供的图片
 - en: 'Notice that a new column `Profit` is added this time and surprisingly Naive
     Bayes which is a pretty bad model in terms of `AUC` is the best model when it
     comes to profit. Let’s see how:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，这次新增了一个 `Profit` 列，令人惊讶的是，尽管 Naive Bayes 在 `AUC` 指标上表现不佳，但在利润方面却是最佳模型。让我们来看看原因：
 - en: '[PRE14]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/375110ebf9a7ffe1ca221e3956d70796.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/375110ebf9a7ffe1ca221e3956d70796.png)'
 - en: Confusion Matrix Naive Bayes — Image by Author
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: Naive Bayes 的混淆矩阵 — 作者提供的图片
 - en: 'The total number of customers is still the same (2,113 customers in the test
     set), what’s changed is now how the model is making errors over false positives
     and false negatives. Let’s put some $ value against it, using the same assumptions
     (as above):'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户总数仍然相同（测试集中的 2,113 位客户），改变的是模型在假阳性和假阴性上的错误情况。让我们用相同的假设（如上所述）为其赋予一些 $ 价值：
 - en: '![](../Images/8116232fdd30c0d1b81d53c37c5009be.png)'
+  id: totrans-112
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8116232fdd30c0d1b81d53c37c5009be.png)'
 - en: $ Impact of Model over 2,113 Customers — Image by Author
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: $ 模型对 2,113 位客户的影响 — 作者提供的图片
 - en: '***BAM!**** We have just increased profit by ~$400,000 with a model that does
     2% less in AUC than the best model. How does this happen? Well, for starters,
     AUC or any other out-of-the-box classification metric (*Accuracy, Recall, Precision,
     F1, Kappa, etc.*) is not a business-smart metric, so it does not take into account
     the risk and reward proposition. Adding a custom metric and using it for model
     selection or optimization is a great idea and right way to go with.*'
+  id: totrans-114
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '***哇！*** 我们仅通过一个 AUC 指标比最佳模型低 2% 的模型，就将利润提高了约 $400,000。这是怎么发生的呢？首先，AUC 或任何其他现成的分类指标（*准确率、召回率、精确度、F1、Kappa
+    等*）并不是商业智能指标，因此没有考虑风险和回报。添加自定义指标并将其用于模型选择或优化是一个很好的想法，也是正确的做法。'
 - en: I hope you will appreciate the simplicity and ease of use in PyCaret. With only
     a few lines of code, we were able to train multiple models and select the one
     that matters to the business. I am a regular blogger and I mostly write about
     PyCaret and its use-cases in the real world, If you would like to be notified
     automatically, you can follow me on [Medium](https://medium.com/@moez-62905), [LinkedIn](https://www.linkedin.com/in/profile-moez/),
     and [Twitter](https://twitter.com/moezpycaretorg1).
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望你能欣赏 PyCaret 的简洁性和易用性。通过仅几行代码，我们就能够训练多个模型并选择对业务最重要的那个。我是一名常规博主，主要撰写关于 PyCaret
+    及其在实际应用中的用例的文章。如果你想自动接收通知，可以关注我的 [Medium](https://medium.com/@moez-62905)、[LinkedIn](https://www.linkedin.com/in/profile-moez/)
+    和 [Twitter](https://twitter.com/moezpycaretorg1)。
 - en: '![](../Images/e22de83ee64026c62225c29c299ff790.png)'
+  id: totrans-116
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e22de83ee64026c62225c29c299ff790.png)'
 - en: PyCaret — Image by Author
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret — 作者提供的图片
 - en: '![](../Images/e41c1178fc485896497b06e71de91329.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e41c1178fc485896497b06e71de91329.png)'
 - en: PyCaret — Image by Author
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret — 作者提供的图片
 - en: There is no limit to what you can achieve using this lightweight workflow automation
     library in Python. If you find this useful, please do not forget to give us ⭐️
     on our GitHub repository.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这个轻量级的 Python 工作流自动化库，你可以实现无限的可能。如果你觉得有用，请不要忘记在我们的 GitHub 仓库上给我们 ⭐️。
 - en: To hear more about PyCaret follow us on [LinkedIn](https://www.linkedin.com/company/pycaret/) and [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g).
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 要了解更多关于 PyCaret 的信息，请关注我们的 [LinkedIn](https://www.linkedin.com/company/pycaret/)
+    和 [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)。
 - en: Join us on our slack channel. Invite link [here](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg).
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 加入我们的 Slack 频道。邀请链接 [在这里](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg)。
 - en: Important Links
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重要链接
 - en: '[Documentation](https://pycaret.readthedocs.io/en/latest/installation.html)'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Documentation](https://pycaret.readthedocs.io/en/latest/installation.html)'
 - en: '[Blog](https://medium.com/@moez_62905)'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Blog](https://medium.com/@moez_62905)'
 - en: '[GitHub](https://www.github.com/pycaret/pycaret)'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '[GitHub](https://www.github.com/pycaret/pycaret)'
 - en: '[StackOverflow](https://stackoverflow.com/questions/tagged/pycaret)'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '[StackOverflow](https://stackoverflow.com/questions/tagged/pycaret)'
 - en: '[Install PyCaret](https://pycaret.readthedocs.io/en/latest/installation.html)
     [Notebook Tutorials](https://pycaret.readthedocs.io/en/latest/tutorials.html)
     [Contribute in PyCaret](https://pycaret.readthedocs.io/en/latest/contribute.html)'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '[安装 PyCaret](https://pycaret.readthedocs.io/en/latest/installation.html) [Notebook
+    教程](https://pycaret.readthedocs.io/en/latest/tutorials.html) [为 PyCaret 做贡献](https://pycaret.readthedocs.io/en/latest/contribute.html)'
 - en: 'More PyCaret related tutorials:'
+  id: totrans-129
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多 PyCaret 相关教程：
 - en: '[**Machine Learning in Alteryx with PyCaret**](https://towardsdatascience.com/machine-learning-in-alteryx-with-pycaret-fafd52e2d4a)'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在 Alteryx 中使用 PyCaret 进行机器学习**](https://towardsdatascience.com/machine-learning-in-alteryx-with-pycaret-fafd52e2d4a)'
 - en: A step-by-step tutorial on training and deploying machine learning models in
     Alteryx Designer using PyCaret
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份循序渐进的教程，教你如何在 Alteryx Designer 中使用 PyCaret 训练和部署机器学习模型
 - en: '[**Machine Learning in KNIME with PyCaret**](https://towardsdatascience.com/machine-learning-in-knime-with-pycaret-420346e133e2)'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在 KNIME 中使用 PyCaret 进行机器学习**](https://towardsdatascience.com/machine-learning-in-knime-with-pycaret-420346e133e2)'
 - en: A step-by-step guide on training and deploying end-to-end machine learning pipelines
     in KNIME using PyCare
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份关于如何在 KNIME 中使用 PyCaret 训练和部署端到端机器学习管道的循序渐进指南
 - en: '[**Easy MLOps with PyCaret + MLflow**](https://towardsdatascience.com/easy-mlops-with-pycaret-mlflow-7fbcbf1e38c6)'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**使用 PyCaret 和 MLflow 简化 MLOps**](https://towardsdatascience.com/easy-mlops-with-pycaret-mlflow-7fbcbf1e38c6)'
 - en: A beginner-friendly, step-by-step tutorial on integrating MLOps in your Machine
     Learning experiments using PyCaret
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份适合初学者的循序渐进教程，教你如何在机器学习实验中使用 PyCaret 集成 MLOps
 - en: '[**Write and train your own custom machine learning models using PyCaret**](https://towardsdatascience.com/write-and-train-your-own-custom-machine-learning-models-using-pycaret-8fa76237374e)'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**使用 PyCaret 编写和训练自定义机器学习模型**](https://towardsdatascience.com/write-and-train-your-own-custom-machine-learning-models-using-pycaret-8fa76237374e)'
 - en: '[**Build with PyCaret, Deploy with FastAPI**](https://towardsdatascience.com/build-with-pycaret-deploy-with-fastapi-333c710dc786)'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**使用 PyCaret 构建并使用 FastAPI 部署**](https://towardsdatascience.com/build-with-pycaret-deploy-with-fastapi-333c710dc786)'
 - en: A step-by-step, beginner-friendly tutorial on how to build an end-to-end Machine
     Learning Pipeline with PyCaret and…
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份循序渐进、适合初学者的教程，教你如何使用 PyCaret 构建端到端的机器学习管道和……
 - en: '[**Time Series Anomaly Detection with PyCaret**](https://towardsdatascience.com/time-series-anomaly-detection-with-pycaret-706a6e2b2427)'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**使用 PyCaret 进行时间序列异常检测**](https://towardsdatascience.com/time-series-anomaly-detection-with-pycaret-706a6e2b2427)'
 - en: A step-by-step tutorial on unsupervised anomaly detection for time series data
     using PyCaret
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份使用 PyCaret 对时间序列数据进行无监督异常检测的循序渐进教程
 - en: '[**Supercharge your Machine Learning Experiments with PyCaret and Gradio**](https://towardsdatascience.com/supercharge-your-machine-learning-experiments-with-pycaret-and-gradio-5932c61f80d9)'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**用 PyCaret 和 Gradio 超充你的机器学习实验**](https://towardsdatascience.com/supercharge-your-machine-learning-experiments-with-pycaret-and-gradio-5932c61f80d9)'
 - en: A step-by-step tutorial to develop and interact with machine learning pipelines
     rapidly
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份循序渐进的教程，快速开发和互动机器学习管道
 - en: '[**Multiple Time Series Forecasting with PyCaret**](https://towardsdatascience.com/multiple-time-series-forecasting-with-pycaret-bc0a779a22fe)'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**使用 PyCaret 进行多时间序列预测**](https://towardsdatascience.com/multiple-time-series-forecasting-with-pycaret-bc0a779a22fe)'
 - en: A step-by-step tutorial on forecasting multiple time series using PyCaret
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 一份关于使用 PyCaret 预测多个时间序列的循序渐进教程
 - en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
     and is Founder & Author of PyCaret.'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Moez Ali](https://www.linkedin.com/in/profile-moez/)** 是数据科学家，也是 PyCaret
+    的创始人兼作者。'
 - en: '[Original](https://towardsdatascience.com/predict-customer-churn-the-right-way-using-pycaret-8ba6541608ac).
     Reposted with permission.'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/predict-customer-churn-the-right-way-using-pycaret-8ba6541608ac)。已获得转载许可。'
 - en: '**Related:**'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[PyCaret 101: An introduction for beginners](/2021/06/pycaret-101-introduction-beginners.html)'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyCaret 101：初学者入门](/2021/06/pycaret-101-introduction-beginners.html)'
 - en: '[5 Things You Don’t Know About PyCaret](/2020/07/5-things-pycaret.html)'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你不知道的 5 件关于 PyCaret 的事](/2020/07/5-things-pycaret.html)'
 - en: '[Customer Churn Prediction: A Global Performance Study](/2020/05/customer-churn-prediction-global-performance-study.html)'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[客户流失预测：全球表现研究](/2020/05/customer-churn-prediction-global-performance-study.html)'
 - en: '* * *'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-152
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-157
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习现代预测技术以帮助预测未来业务…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
 - en: '[How to Use Python and Machine Learning to Predict Football Match Winners](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 和机器学习预测足球比赛赢家](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
 - en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyCaret 的二分类介绍](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
 - en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyCaret 的 Python 聚类介绍](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
 - en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
 - en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyCaret 入门指南](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
