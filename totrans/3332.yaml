@@ -1,159 +1,235 @@
 - en: 'Email Spam Filtering: An Implementation with Python and Scikit-learn'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 电子邮件垃圾邮件过滤：使用 Python 和 Scikit-learn 的实现
 - en: 原文：[https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html](https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html](https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html)
 - en: '**By [Machine Learning in Action](https://appliedmachinelearning.wordpress.com/).**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Machine Learning in Action](https://appliedmachinelearning.wordpress.com/).**'
 - en: '![Spam filter](../Images/b8a1b609f29a3b8d8f5000f853ad551f.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![垃圾邮件过滤器](../Images/b8a1b609f29a3b8d8f5000f853ad551f.png)'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Text mining (deriving information from text) is a wide field which has gained
     popularity with the huge text data being generated. Automation of a number of
     applications like sentiment analysis, document classification, topic classification,
     text summarization, machine translation, etc has been done using machine learning
     models.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本挖掘（从文本中提取信息）是一个广泛的领域，随着生成的大量文本数据而变得流行。许多应用程序的自动化，如情感分析、文档分类、主题分类、文本摘要、机器翻译等，已经通过机器学习模型完成。
 - en: Spam filtering is a beginner’s example of document classification task which
     involves classifying an email as spam or non-spam (a.k.a. ham) mail. Spam box
     in your Gmail account is the best example of this. So lets get started in building
     a spam filter on a publicly available mail corpus. I have extracted equal number
     of spam and non-spam emails from [Ling-spam corpus](http://www.aueb.gr/users/ion/data/lingspam_public.tar.gz).
     The extracted subset on which we will be working can be downloaded from [here](https://www.dropbox.com/s/yjiplngoa430rid/).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 垃圾邮件过滤是文档分类任务的一个初学者示例，它涉及将电子邮件分类为垃圾邮件或非垃圾邮件（即正常邮件）。Gmail 账户中的垃圾邮件箱就是最好的例子。现在开始构建一个基于公开邮件语料库的垃圾邮件过滤器。我已经从
+    [Ling-spam 语料库](http://www.aueb.gr/users/ion/data/lingspam_public.tar.gz) 中提取了相等数量的垃圾邮件和非垃圾邮件。我们将使用的提取子集可以从
+    [这里](https://www.dropbox.com/s/yjiplngoa430rid/) 下载。
 - en: 'We will walk through the following steps to build this application :'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将按照以下步骤构建这个应用程序：
 - en: Preparing the text data.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 准备文本数据。
 - en: Creating word dictionary.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建词典。
 - en: Feature extraction process
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 特征提取过程
 - en: Training the classifier
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 训练分类器
 - en: Further, we will check the results on test set of the subset created.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我们将检查创建的子集上的测试集结果。
 - en: 1\. Preparing the text data.
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 准备文本数据。
 - en: The data-set used here, is split into a training set and a test set containing
     702 mails and 260 mails respectively, divided equally between spam and ham mails.
     You will easily recognize spam mails as it contains *spmsg* in its filename.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里使用的数据集分为训练集和测试集，分别包含 702 封邮件和 260 封邮件，两者之间的垃圾邮件和正常邮件各占一半。您可以轻松识别垃圾邮件，因为其文件名中包含
+    *spmsg*。
 - en: 'In any text mining problem, text cleaning is the first step where we remove
     those words from the document which may not contribute to the information we want
     to extract. Emails may contain a lot of undesirable characters like punctuation
     marks, stop words, digits, etc which may not be helpful in detecting the spam
     email. The emails in Ling-spam corpus have been already preprocessed in the following
     ways:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何文本挖掘问题中，文本清洗是第一步，我们需要从文档中移除那些可能对我们提取的信息无帮助的词汇。电子邮件可能包含很多不必要的字符，如标点符号、停用词、数字等，这些都可能不利于检测垃圾邮件。Ling-spam
+    语料库中的电子邮件已经通过以下方式进行了预处理：
 - en: a) Removal of stop words – Stop words like “and”, “the”, “of”, etc are very
     common in all English sentences and are not very meaningful in deciding spam or
     legitimate status, so these words have been removed from the emails.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: a) 停用词去除 – “and”、“the”、“of”等停用词在所有英语句子中非常常见，在决定垃圾邮件或合法状态时并不具有很大的意义，因此这些词已从邮件中删除。
 - en: b) Lemmatization – It is the process of grouping together the different inflected
     forms of a word so they can be analysed as a single item. For example, “include”,
     “includes,” and “included” would all be represented as “include”. The context
     of the sentence is also preserved in lemmatization as opposed to stemming (another
     buzz word in text mining which does not consider meaning of the sentence).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: b) 词形还原 – 这是将一个词的不同变形形式归并在一起的过程，以便将它们作为单个项目进行分析。例如，“include”、“includes”和“included”都将表示为“include”。与词干提取（文本挖掘中的另一个流行词，它不考虑句子的意义）相比，词形还原在保留句子上下文方面表现更好。
 - en: We still need to remove the non-words like punctuation marks or special characters
     from the mail documents. There are several ways to do it. Here, we will remove
     such words after creating a dictionary, which is a very convenient method to do
     so since when you have a dictionary, you need to remove every such word only once.
     So cheers !! As of now you don’t need to do anything.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们仍然需要从邮件文档中去除非单词，例如标点符号或特殊字符。有几种方法可以做到这一点。在这里，我们将在创建词典后去除这些单词，这是一种非常方便的方法，因为当你有了词典时，你只需要去除每个这样的单词一次。所以干杯！！目前你不需要做任何事情。
 - en: 2\. Creating word dictionary.
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 创建词典。
 - en: 'A sample email in the data-set looks like this:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集中的一封示例邮件如下所示：
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: It can be seen that the first line of the mail is subject and the 3rd line contains
     the body of the email. We will only perform text analytics on the content to detect
     the spam mails. As a first step, we need to create a dictionary of words and their
     frequency. For this task, training set of 700 mails is utilized. This python function
     creates the dictionary for you.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以看出，邮件的第一行是主题，第3行包含邮件的正文。我们将仅对内容进行文本分析以检测垃圾邮件。第一步，我们需要创建一个单词及其频率的词典。为此任务，使用了700封邮件的训练集。这个python函数为你创建词典。
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Once the dictionary is created we can add just a few lines of code written below
     to the above function to remove non-words about which we talked in step 1\. I
     have also removed absurd single characters in the dictionary which are irrelevant
     here. Do not forget to insert the below code in the function `def make_Dictionary(train_dir)`.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦词典创建完成，我们可以在上面的函数中添加几行下面的代码，以去除我们在第1步中提到的非单词。我还删除了词典中与此无关的荒谬单字符。不要忘记将下面的代码插入到函数`def
+    make_Dictionary(train_dir)`中。
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Dictionary can be seen by the command `print dictionary`. You may find some
     absurd word counts to be high but don’t worry, it’s just a dictionary and you
     always have the scope of  improving it later. If you are following this blog with
     provided data-set, make sure your dictionary has some of the entries given below
     as most frequent words. Here I have chosen 3000 most frequently used words in
     the dictionary.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过命令`print dictionary`查看词典。你可能会发现一些荒谬的词频较高，但不用担心，这只是一个词典，你总是可以在之后对其进行改进。如果你正在跟随这个博客和提供的数据集，请确保你的词典中包含以下一些作为最常用单词的条目。这里我选择了词典中3000个最常用的单词。
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 3\. Feature extraction process.
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 特征提取过程。
 - en: Once the dictionary is ready, we can extract word count vector (our feature
     here) of 3000 dimensions for each email of training set. Each **word count vector**
     contains the frequency of 3000 words in the training file. Of course you might
@@ -163,28 +239,42 @@
     “Get the work done, work done” then it will be encoded as [0,0,0,0,0,…….0,0,2,0,0,0,……,0,0,1,0,0,…0,0,1,0,0,……2,0,0,0,0,0].
     Here, all the word counts are placed at 296th, 359th, 415th, 495th index of 500
     length word count vector and the rest are zero.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦词典准备好，我们可以为训练集中的每封邮件提取3000维的词频向量（我们这里的特征）。每个**词频向量**包含训练文件中3000个单词的频率。当然，你现在可能已经猜到它们中的大多数将是零。我们来看一个例子。假设我们在词典中有500个单词。每个词频向量包含训练文件中500个词典单词的频率。假设训练文件中的文本是“Get
+    the work done, work done”，那么它将被编码为[0,0,0,0,0,…….0,0,2,0,0,0,……,0,0,1,0,0,…0,0,1,0,0,……2,0,0,0,0,0]。在这里，所有的词频分别位于500维词频向量的第296、第359、第415、第495个索引位置，其余的为零。
 - en: The below python code will generate a feature vector matrix whose rows denote
     700 files of training set and columns denote 3000 words of dictionary. The value
     at index ‘*ij’* will be the number of occurrences of j^(th) word of dictionary
     in i^(th) file.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下 Python 代码将生成一个特征向量矩阵，其中行表示 700 个训练集文件，列表示 3000 个词典中的单词。索引 ‘*ij*’ 的值将是第 i
+    个文件中第 j 个词典单词的出现次数。
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 4\. Training the classifiers.
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. 训练分类器。
 - en: Here, I will be using [scikit-learn ML library](http://scikit-learn.org/stable/)
     for training classifiers. It is an open source python ML library which comes bundled
     in 3rd party distribution [anaconda](https://www.continuum.io/downloads) or can
     be used by separate installation following [this](http://scikit-learn.org/stable/install.html).
     Once installed, we only need to import it in our program.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我将使用 [scikit-learn ML 库](http://scikit-learn.org/stable/) 来训练分类器。它是一个开源的
+    Python 机器学习库，可以通过第三方发行版 [anaconda](https://www.continuum.io/downloads) 获得，或者可以按照
+    [这个](http://scikit-learn.org/stable/install.html) 方法单独安装。安装完成后，我们只需在程序中导入它即可。
 - en: I have trained two models here namely Naive Bayes classifier and Support Vector
     Machines (SVM). Naive Bayes classifier is a conventional and very popular method
     for document classification problem. It is a supervised probabilistic classifier
@@ -194,191 +284,293 @@
     from rest called the support vectors (boundary of separating hyper-plane). The
     decision function of SVM model that predicts the class of the test data is based
     on support vectors and makes use of a kernel trick.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在这里训练了两个模型，即朴素贝叶斯分类器和支持向量机 (SVM)。朴素贝叶斯分类器是一种传统且非常流行的文档分类方法。它是基于贝叶斯定理的有监督概率分类器，假设特征之间是独立的。SVM
+    是有监督的二分类器，当特征数量较多时非常有效。SVM 的目标是将训练数据的某些子集与其余数据分开，这些子集被称为支持向量（分离超平面的边界）。SVM 模型的决策函数基于支持向量，并利用核技巧。
 - en: Once the classifiers are trained, we can check the performance of the models
     on test-set. We extract word count vector for each mail in test-set and predict
     its class(ham or spam) with the trained NB classifier and SVM model. Below is
     the full code for spam filtering application. You have to include the two functions
     we have defined before in step 2 and step 3.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦训练了分类器，我们可以检查模型在测试集上的表现。我们提取测试集每封邮件的词频向量，并使用训练好的朴素贝叶斯分类器和 SVM 模型预测其类别（ham
+    或 spam）。以下是用于垃圾邮件过滤的完整代码。你需要在第 2 步和第 3 步中包含我们之前定义的两个函数。
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Checking Performance
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 检查性能
 - en: Test-set contains 130 spam emails and 130 non-spam emails. If you have come
     so far, you will find below results. I have shown the confusion matrix of the
     test-set for both the models. The diagonal elements represents the correctly identified(a.k.a.
     true identification) mails where as non-diagonal elements represents wrong classification
     (false identification) of mails.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试集包含 130 封垃圾邮件和 130 封非垃圾邮件。如果你已经读到这里，你会看到以下结果。我展示了两个模型在测试集上的混淆矩阵。对角线元素表示正确识别的邮件（即真实识别），而非对角线元素表示邮件的错误分类（虚假识别）。
 - en: '| Multinomial NB | Ham | Spam |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| 多项式朴素贝叶斯 | Ham | Spam |'
 - en: '| Ham | 129 | 1 |'
+  id: totrans-45
   prefs: []
   type: TYPE_TB
+  zh: '| Ham | 129 | 1 |'
 - en: '| Spam | 9 | 121 |'
+  id: totrans-46
   prefs: []
   type: TYPE_TB
+  zh: '| Spam | 9 | 121 |'
 - en: '| SVM(Linear) | Ham | Spam |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| SVM（线性） | Ham | Spam |'
 - en: '| Ham | 126 | 4 |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| Ham | 126 | 4 |'
 - en: '| Spam | 6 | 124 |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| Spam | 6 | 124 |'
 - en: Both the models had similar performance on the test-set except that the SVM
     has slightly balanced false identifications. I must remind you that the test data
     was neither used in creating dictionary nor in the training set.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个模型在测试集上的表现相似，唯一不同的是 SVM 稍微平衡了错误识别。我必须提醒你，测试数据既没有用于创建词典，也没有用于训练集。
 - en: Task for you
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你的任务
 - en: Download the pre-processed form of [Euron-spam](http://www.aueb.gr/users/ion/data/enron-spam/)
     corpus. The corpus contains 33716 emails in 6 directories. Each of 6 directories
     contains ‘ham’ and ‘spam’ folders. Total number of non-spam emails and spam emails
     are 16545 and 17171 respectively.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载预处理后的 [Euron-spam](http://www.aueb.gr/users/ion/data/enron-spam/) 语料库。该语料库包含
+    33716 封电子邮件，分布在 6 个目录中。每个目录包含 ‘ham’ 和 ‘spam’ 文件夹。非垃圾邮件和垃圾邮件的总数分别为 16545 和 17171。
 - en: Follow the same steps described in this blog post and check how is it performing
     with Support Vector Machines and Multinomial Naive Bayes models. As the directory
     structure of this corpus is different than the directory structure of ling-spam
     subset used in the blog post, you may have to either reorganize it or do modifications
     in `def make_Dictionary(dir)` and `def extract_features(dir)`functions.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 按照本博客文章中描述的步骤操作，并检查它在支持向量机和多项式朴素贝叶斯模型中的表现。由于此语料库的目录结构与博客文章中使用的 ling-spam 子集的目录结构不同，你可能需要重新组织目录或修改
+    `def make_Dictionary(dir)` 和 `def extract_features(dir)` 函数。
 - en: I divided the Euron-spam corpus into training set and test set in 60:40 split.
     After performing the same steps of this blog, i got the following results on 13487 test
     set emails. We can see that SVM has performed slightly better than Naive Bayes
     classifier in detecting spam emails correctly.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将 Euron-spam 语料库分为 60:40 的训练集和测试集。经过执行本博客的相同步骤后，我在 13487 个测试集邮件上获得了以下结果。我们可以看到，SVM
+    在正确检测垃圾邮件方面表现略优于朴素贝叶斯分类器。
 - en: '| Multinomial NB | Ham | Spam |'
+  id: totrans-55
   prefs: []
   type: TYPE_TB
+  zh: '| 多项式 NB | Ham | Spam |'
 - en: '| Ham | 6445 | 225 |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '| Ham | 6445 | 225 |'
 - en: '| Spam | 137 | 6680 |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| Spam | 137 | 6680 |'
 - en: '| SVM(Linear) | Ham | Spam |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| SVM(线性) | Ham | Spam |'
 - en: '| Ham | 6490 | 180 |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| Ham | 6490 | 180 |'
 - en: '| Spam | 109 | 6708 |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| Spam | 109 | 6708 |'
 - en: Final Thoughts
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终想法
 - en: Hope it was easy to go through tutorial as I have tried to keep it short and
     simple. Beginners who are interested in text analytics can start with this application.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望这个教程简单易懂，因为我尽量保持简短。对文本分析感兴趣的初学者可以从这个应用程序开始。
 - en: You might be thinking about the mathematical techniques behind the used models
     like Naive Bayes and SVM. SVM is mathematically complex model where as Naive bayes
     is relatively easy to understand. You are encouraged to study about these models
     from online sources. Apart from that, there can be a lot of experiments that can
     be done in order to find the effect of various parameters like
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会考虑使用的模型背后的数学技术，如朴素贝叶斯和 SVM。SVM 是一个数学复杂的模型，而朴素贝叶斯相对容易理解。鼓励你从在线资源中研究这些模型。此外，还可以进行大量实验，以发现各种参数的效果，如
 - en: a) Amount of training data
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: a) 训练数据量
 - en: b) Dictionary size
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: b) 字典大小
 - en: c) Variants of the ML techniques used (GaussianNB, BernoulliNB, SVC)
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: c) 使用的 ML 技术变体（GaussianNB，BernoulliNB，SVC）
 - en: d) Fine tuning of parameters of SVM models
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: d) SVM 模型参数的微调
 - en: e) Improving the dictionary by eliminating insignificant words (may be manually)
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: e) 通过消除不重要的词汇来改进字典（可能需要手动）
 - en: f) Some other feature (look for td-idf)
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: f) 其他特征（查看 td-idf）
 - en: I will be writing the mathematical explanation about these models in some another
     blog-posts some other time.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我会在其他博客文章中写这些模型的数学解释。
 - en: You can get the full python implementation for both the corpus from GitHub link
     [here](https://github.com/abhijeet3922/Mail-Spam-Filtering).
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以从 GitHub 链接 [这里](https://github.com/abhijeet3922/Mail-Spam-Filtering) 获取完整的
+    Python 实现。
 - en: If you liked the post, follow this blog to get updates about upcoming articles.
     Also, share it so that it can reach out to the readers who can actually gain from
     this. Please feel free to discuss anything regarding the post. I would love to
     hear feedback from you.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章，请关注这个博客，以获取即将发布的文章更新。同时，分享这篇文章，以便让真正受益的读者看到。请随时讨论任何关于这篇文章的内容。我非常乐意听取你的反馈。
 - en: Happy machine learning!
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝机器学习愉快！
 - en: '**[Machine Learning in Action](https://appliedmachinelearning.wordpress.com/)**
     is a perfect hands-on practice for beginners to elevate their ML skills.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[实践中的机器学习](https://appliedmachinelearning.wordpress.com/)** 是初学者提高机器学习技能的完美实践。'
 - en: '[Original](https://appliedmachinelearning.wordpress.com/2017/01/23/email-spam-filter-python-scikit-learn/).
     Reposted with permission.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://appliedmachinelearning.wordpress.com/2017/01/23/email-spam-filter-python-scikit-learn/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Working With Numpy Matrices: A Handy First Reference](/2017/03/working-numpy-matrices.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Numpy 矩阵：实用的第一参考](/2017/03/working-numpy-matrices.html)'
 - en: '[A Simple XGBoost Tutorial Using the Iris Dataset](/2017/03/simple-xgboost-tutorial-iris-dataset.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Iris 数据集的简单 XGBoost 教程](/2017/03/simple-xgboost-tutorial-iris-dataset.html)'
 - en: '[K-Means & Other Clustering Algorithms: A Quick Intro with Python](/2017/03/k-means-clustering-algorithms-intro-python.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K-Means 和其他聚类算法：Python 快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)'
 - en: More On This Topic
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多关于此主题
 - en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过集成 Jupyter 和 KNIME 缩短实现时间](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
 - en: '[First Open Source Implementation of DeepMind’s AlphaTensor](https://www.kdnuggets.com/2023/03/first-open-source-implementation-deepmind-alphatensor.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DeepMind 的 AlphaTensor 首次开源实现](https://www.kdnuggets.com/2023/03/first-open-source-implementation-deepmind-alphatensor.html)'
 - en: '[5 Ways of Filtering Python Lists](https://www.kdnuggets.com/2022/11/5-ways-filtering-python-lists.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[过滤 Python 列表的 5 种方法](https://www.kdnuggets.com/2022/11/5-ways-filtering-python-lists.html)'
 - en: '[An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[协同过滤的直观解释](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
 - en: '[Five Ways to do Conditional Filtering in Pandas](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Pandas 中进行条件过滤的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)'
 - en: '[Understanding Python''s Iteration and Membership: A Guide to…](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解 Python 的迭代和成员关系：__contains__ 和 __iter__ 魔法方法指南](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)'
