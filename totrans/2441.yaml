@@ -1,50 +1,77 @@
 - en: Time Series Forecasting with Ploomber, Arima, Python, and Slurm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Ploomber、Arima、Python 和 Slurm 进行时间序列预测
 - en: 原文：[https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)
 - en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/294263a827d6c7340aedc7571d2a26c7.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Ploomber、Arima、Python 和 Slurm 进行时间序列预测](../Images/294263a827d6c7340aedc7571d2a26c7.png)'
 - en: In this blog, we’ll review how we took a raw .ipynb notebook that does time
     series forecasting with Arima, modularized it into a [Ploomber](https://ploomber.io/)
     pipeline, and ran parallel jobs on Slurm. You can follow the steps in this guide
     to deploy it yourself. We’ve been using [this notebook](https://github.com/williewheeler/time-series-demos/blob/master/arima/arima-python.ipynb)
     by Willie Wheeler.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客中，我们将回顾如何将一个用于时间序列预测的原始 .ipynb 笔记本，模块化为一个 [Ploomber](https://ploomber.io/)
+    管道，并在 Slurm 上运行并行作业。你可以按照本指南中的步骤自行部署。我们使用了 [这份笔记本](https://github.com/williewheeler/time-series-demos/blob/master/arima/arima-python.ipynb)
+    由 Willie Wheeler 提供。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: A Short Notebook Explanation
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 简短的笔记本解释
 - en: The notebook is composed of 8 tasks as we’ll see in the graph below. It includes
     most of the basic steps for modeling - getting the data cleaning it, fitting,
     hyperparameter tuning, validation, and visualization. As a shortcut, I took the
@@ -55,133 +82,209 @@
     of using Ploomber is that it allows me to experiment faster since it caches results
     from previous runs, plus, it makes it simple to submit parallel jobs to SLURM
     to fine-tune the model.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个笔记本由 8 个任务组成，我们将在下面的图表中看到。它包括建模的大多数基本步骤——获取数据、清洗数据、拟合、超参数调优、验证和可视化。作为捷径，我使用了
+    [Soorgeon](https://github.com/ploomber/soorgeon) 工具将笔记本自动模块化成 Ploomber 管道。这将所有依赖项提取到一个
+    requirements.txt 文件中，将标题拆分为独立任务，并根据这些模块化任务创建了一个管道。使用 Ploomber 的主要好处是它允许我更快地进行实验，因为它会缓存先前运行的结果，并且可以轻松地将并行作业提交到
+    SLURM 以微调模型。
 - en: Running The Pipeline Locally?
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 本地运行管道？
 - en: 'Start by running this command to clone the example locally (in case you don’t
     have ploomber, [install Ploomber](https://docs.ploomber.io/en/latest/get-started/install.html)
     first):'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先运行这个命令来在本地克隆示例（如果你还没有 ploomber，首先 [安装 Ploomber](https://docs.ploomber.io/en/latest/get-started/install.html)）：
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Now you have the pipeline locally, you can perform a sanity check and run:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你在本地有了管道，你可以进行一个完整性检查并运行：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This should show you all of the steps of the pipeline and its status (**Has
     not been run**), this is a reference output:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该会展示管道的所有步骤及其状态（**尚未运行**），这是一个参考输出：
 - en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/309db41925bceccb5caf11bd03a40c1f.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Ploomber、Arima、Python 和 Slurm 进行时间序列预测](../Images/309db41925bceccb5caf11bd03a40c1f.png)'
 - en: You can also build the pipeline locally if you’re only interested in the time
     series piece. Next, we’ll see how we can start executing on our Slurm cluster
     and how we can have parallel runs.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你只对时间序列部分感兴趣，你也可以在本地构建管道。接下来，我们将看到如何在 Slurm 集群上开始执行，并且如何进行并行运行。
 - en: Orchestrating on Slurm
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Slurm 上编排
 - en: For simplicity, we’ll show you how to launch a SLURM cluster with Docker, but
     if you have access to an existing cluster, you can use that one. We’ve created
     a tool called Soopervisor, which allows us to deploy pipelines to SLURM and other
     platforms such as Kubernetes, Airflow, and AWS Batch. We’ll be following the [Slurm
     guide here](https://soopervisor.readthedocs.io/en/latest/tutorials/slurm.html).
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了简化，我们将展示如何使用Docker启动一个SLURM集群，但如果你有现成的集群可以使用，也可以使用那个。我们创建了一个名为Soopervisor的工具，它允许我们将管道部署到SLURM以及其他平台如Kubernetes、Airflow和AWS
+    Batch。我们将遵循[Slurm指南](https://soopervisor.readthedocs.io/en/latest/tutorials/slurm.html)。
 - en: You have to have a running docker agent to launch the cluster, [read more here](https://docs.docker.com/get-docker/)
     on getting started with Docker.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你必须有一个正在运行的docker代理才能启动集群，[在这里阅读更多](https://docs.docker.com/get-docker/)关于如何开始使用Docker。
 - en: Step 1
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第一步
 - en: Create a docker-compose.yml.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个docker-compose.yml。
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Once it’s done, spin up the cluster:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦完成，启动集群：
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'We can now connect to the cluster via this command:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以通过以下命令连接到集群：
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Step 2
+  id: totrans-30
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第二步
 - en: Now that we’re inside the cluster, we need to bootstrap it and make sure we
     have the pipeline we want to run.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经进入集群，我们需要对其进行引导，并确保我们拥有要运行的管道。
 - en: 'Get the bootstrapping script and run it, this is the script to bootstrap the
     cluster:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取引导脚本并运行，这是引导集群的脚本：
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Get the time series pipeline template:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取时间序列管道模板：
 - en: '[PRE6]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Install requirements and add through soopervisor:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装需求并通过soopervisor添加：
 - en: '[PRE7]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: This will create a cluster directory with the template that soopervisor uses
     to submit Slurm tasks (template.sh).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将创建一个包含soopervisor用于提交Slurm任务的模板（template.sh）的集群目录。
 - en: 'We execute the export command to convert the pipeline and submit the jobs to
     the cluster. Once it’s done we can see all of our outputs in the `output` folder:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们执行导出命令以转换管道并将作业提交到集群。完成后，我们可以在`output`文件夹中查看所有输出：
 - en: '[PRE8]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'We can see here some of the predictions that were generated by the model:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到这里一些由模型生成的预测：
 - en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/7728da87e41838b878859dbf34b88ebd.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Ploomber、Arima、Python和Slurm进行时间序列预测](../Images/7728da87e41838b878859dbf34b88ebd.png)'
 - en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/14df096bc7bbac6d21e96a951f560a2a.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Ploomber、Arima、Python和Slurm进行时间序列预测](../Images/14df096bc7bbac6d21e96a951f560a2a.png)'
 - en: 'Note that if you’ll run it again, only the tasks that changed will run (there’s
     a cache to manage it). Once you’re done, don’t forget to shut down the cluster:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，如果你再次运行，只有变化的任务会运行（有一个缓存来管理它）。完成后，不要忘记关闭集群：
 - en: '[PRE9]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Summary
+  id: totrans-46
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结
 - en: This blog showed how to run time series as a modular pipeline that can scale
     into distribute cluster training. We started from a notebook, moved into a pipeline,
     and executed it on a SLURM cluster. Once we’re past the stage of an individual
@@ -189,14 +292,20 @@
     to make sure you can scale, collaborate and reliably execute your work. Since
     data science is an iterative process, Ploomber gives you an easy mechanism to
     standardize your work and move quickly between your dev and production environments.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客展示了如何将时间序列作为模块化管道运行，这样可以扩展到分布式集群训练。我们从一个笔记本开始，转移到管道中，并在SLURM集群上执行。一旦我们过了单个用户在笔记本上的阶段（例如团队或生产任务），确保能够扩展、协作并可靠地执行工作就变得很重要。由于数据科学是一个迭代过程，Ploomber为你提供了一个简单的机制来标准化工作，并在开发和生产环境之间快速移动。
 - en: Make sure to connect with us and hundreds of other community members [via slack](https://ploomber.io/community).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保与我们以及其他数百名社区成员[通过 slack](https://ploomber.io/community)进行连接。
 - en: If you have any feedback or comments, I’d love to hear them!
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何反馈或评论，我很乐意听取！
 - en: '**[Ido Michael](https://www.linkedin.com/in/ido-michael/)** co-founded Ploomber
     to help data scientists build faster. He''d been working at AWS leading data engineering/science
     teams. Single handedly he built 100’s of data pipelines during those customer
@@ -204,33 +313,49 @@
     his MS at Columbia University. He focused on building Ploomber after he constantly
     found that projects dedicated about 30% of their time just to refactor the dev
     work (prototype) into a production pipeline.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Ido Michael](https://www.linkedin.com/in/ido-michael/)** 共同创立了Ploomber，旨在帮助数据科学家更快地构建。他曾在AWS领导数据工程/科学团队。在这些客户合作中，他与团队一起独立构建了数百个数据管道。来自以色列的他来到纽约，获得了哥伦比亚大学的硕士学位。在发现项目常常需要将约30%的时间用于将开发工作（原型）重构为生产管道后，他专注于构建Ploomber。'
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题
 - en: '[Time Series Analysis: ARIMA Models in Python](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[时间序列分析：Python 中的 ARIMA 模型](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)'
 - en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 statsmodels 和 Prophet 进行时间序列预测](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
 - en: '[Ploomber vs Kubeflow: Making MLOps Easier](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Ploomber 与 Kubeflow：简化 MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
 - en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从 Google Colab 到 Ploomber 管道：利用 GPU 实现大规模机器学习](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用最先进的深度学习技术进行可解释的预测和即时预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
