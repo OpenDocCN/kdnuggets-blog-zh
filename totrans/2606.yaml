@@ -1,523 +1,799 @@
 - en: 'Shapash: Making Machine Learning Models Understandable'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'Shapash: 使机器学习模型易于理解'
 - en: 原文：[https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html](https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html](https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Yann Golhen](https://twitter.com/GolhenY), MAIF, Lead Data Scientist**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Yann Golhen](https://twitter.com/GolhenY)，MAIF，首席数据科学家**。'
 - en: '![](../Images/51fc6f2804c9a06c9bd2adee12ade00b.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/51fc6f2804c9a06c9bd2adee12ade00b.png)'
 - en: '*[Shapash Web App Demo](https://shapash-demo.ossbymaif.fr/)*'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[Shapash Web App 演示](https://shapash-demo.ossbymaif.fr/)*'
 - en: '[Shapash](https://github.com/MAIF/shapash) by [MAIF](https://www.maif.fr/) is
     a Python Toolkit that facilitates the understanding of Machine Learning models
     to data scientists. It makes it easier to share and discuss the model interpretability
     with non-data specialists: business analysts, managers, and end-users.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Shapash](https://github.com/MAIF/shapash) 由 [MAIF](https://www.maif.fr/) 提供，是一个帮助数据科学家理解机器学习模型的
+    Python 工具包。它使得与非数据专家（如业务分析师、经理和最终用户）分享和讨论模型可解释性变得更加容易。'
 - en: 'Concretely, Shapash provides easy-to-read visualizations and a [web app](https://shapash-demo.ossbymaif.fr/).
     Shapash displays results with appropriate wording (preprocessing inverse/post-processing).
     Shapashis useful in an operational context as it enables data scientists to use
     explicability from exploration to production: You can easily deploy local explainability
     in production to complete each of your forecasts/recommendations with a summary
     of the local explainability.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，Shapash 提供了易于阅读的可视化和一个 [Web 应用](https://shapash-demo.ossbymaif.fr/)。Shapash
+    使用适当的措辞展示结果（如预处理逆向/后处理）。Shapash 在操作上下文中非常有用，因为它使数据科学家能够从探索到生产阶段使用可解释性：你可以轻松地在生产环境中部署本地可解释性，为每个预测/推荐补充本地可解释性的摘要。
 - en: In this post, we will present the main features of Shapash and how it operates.
     We will illustrate the implementation of the library on a concrete use case.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将介绍 Shapash 的主要功能及其操作方式。我们将通过具体用例来说明该库的实现。
 - en: Elements of context
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 上下文要素
 - en: Interpretability and explicability of models are hot topics. There are many
     articles, publications, and open-source contributions about it. All these contributions
     do not deal with the same issues and challenges.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的可解释性和可说明性是热门话题。关于这些话题有很多文章、出版物和开源贡献。所有这些贡献并未涉及相同的问题和挑战。
 - en: 'Most data scientists use these techniques for many reasons: to better understand
     their models, to check that they are consistent and unbiased, as well as for debugging.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数数据科学家使用这些技术有很多原因：为了更好地理解他们的模型，检查模型的一致性和公平性，以及进行调试。
 - en: 'However, there is more to it:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这还有更多内容：
 - en: '*Intelligibility matters for pedagogic purposes. Intelligible Machine Learning
     models can be debated with people that are not data specialists: business analysts,
     final users…*'
+  id: totrans-13
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*可理解性对教学目的很重要。可理解的机器学习模型可以与非数据专家（如业务分析师、最终用户等）进行辩论…*'
 - en: 'Concretely, there are two steps in our Data Science projects that involve non-specialists:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，在我们的数据科学项目中，有两个步骤涉及非专家：
 - en: '**Exploratory step & Model fitting**'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**探索性步骤 & 模型拟合**'
 - en: At this step, data scientists and business analysts discuss what is at stake
     and define the essential data they will integrate into the projects. It requires
     understanding the subject well and the main drivers of the problem we are modeling.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一步，数据科学家和业务分析师讨论风险，并定义他们将集成到项目中的重要数据。这需要对主题有深入了解，并理解我们建模问题的主要驱动因素。
 - en: To do this, data scientists study global explicability, features importance,
     and which role the model’s top features play. They can also locally look at some
     individuals, especially outliers. A Web App is interesting at this phase because
     they need to look at visualizations and graphics. Discussing these results with
     business analysts is interesting to challenge the approach and validate the model.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，数据科学家研究全球可解释性、特征重要性以及模型的主要特征所起的作用。他们还可以局部地查看一些个体，特别是离群值。此阶段的 Web 应用很有趣，因为他们需要查看可视化和图形。与业务分析师讨论这些结果有助于挑战方法并验证模型。
 - en: '**Deploying the model in a production environment**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在生产环境中部署模型**'
 - en: 'That’s it! The model is validated, deployed, and gives predictions to the end-users.
     Local explicability can bring them a lot of value, only if there is a way to provide
     them with a good, useful, and understandable summary. It will be valuable to them
     for two reasons:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样！模型已经验证、部署，并给最终用户提供了预测。局部可解释性可以为他们带来很大价值，前提是能够提供一个良好、有用且易于理解的总结。这对他们来说有两个方面的价值：
 - en: 'Transparency brings trust: They will trust models if they understands them.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 透明度带来信任：他们会信任模型，如果他们理解模型。
 - en: 'Human stays in control: No model is 100% reliable. When they can understand
     the algorithm’s outputs, users can overturn the algorithm suggestions if they
     think they rest on incorrect data.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 人类保持控制：没有模型是 100% 可靠的。当用户能够理解算法的输出时，如果他们认为数据不正确，他们可以推翻算法建议。
 - en: Shapash has been developed to help data scientists to meet these needs.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: Shapash 的开发旨在帮助数据科学家满足这些需求。
 - en: '![](../Images/fecdf3e40f045d5ad620d22a65d0dab2.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fecdf3e40f045d5ad620d22a65d0dab2.png)'
 - en: Shapash key features
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Shapash 的主要特点
 - en: Easy-to-read visualizations, for everyone.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 易于阅读的可视化，适合所有人。
 - en: 'A web app: To understand how a model works, you have to look at multiple graphs,
     features importance, and global contribution of a feature to a model. A web app
     is a useful tool for this.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个网页应用程序：要理解模型的工作原理，你需要查看多个图表、特征重要性以及特征对模型的全局贡献。网页应用程序是一个有用的工具。
 - en: Several methods to show results with appropriate wording (preprocessing inverse,
     post-processing). You can easily add your data dictionaries, *category-encoders*object,
     or sklearn *ColumnTransformer* for more explicit outputs.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 几种方法展示结果，并用适当的措辞（预处理逆转，后处理）。你可以轻松添加数据字典、*category-encoders* 对象或 sklearn *ColumnTransformer*
+    以获得更明确的输出。
 - en: Functions to easily save *Pickle*files and to export results in tables.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 轻松保存 *Pickle* 文件和将结果导出为表格的功能。
 - en: 'Explainability summary: the summary is configurable to fit with your need and
     to focus on what matters for local explicability.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可解释性总结：总结是可配置的，以适应你的需求，并关注局部可解释性中的重点。
 - en: Ability to easily deploy in a production environment and to complete every prediction/recommendation
     with a local explicability summary for each operational apps (Batch or API)
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够轻松部署到生产环境，并为每个操作应用程序（批处理或 API）完成每个预测/推荐的局部可解释性总结。
 - en: 'Shapashis open to several ways of proceeding: It can be used to easily access
     results or to work on better wording. Very few arguments are required to display
     results. But the more you work with cleaning and documenting the dataset, the
     clearer the results will be for the end-user.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Shapash 允许多种操作方式：它可以用于轻松访问结果或改进措辞。显示结果所需的参数非常少。但你在清理和记录数据集时做得越多，结果对最终用户就会越清晰。
 - en: Shapash works for Regression, Binary Classification, or Multiclass problems.
     It is compatible with many models: *Catboost*, *Xgboost*, *LightGBM*, *Sklearn
     Ensemble*, *Linear models*, *SVM*.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Shapash 适用于回归、二分类或多分类问题。它与许多模型兼容：*Catboost*、*Xgboost*、*LightGBM*、*Sklearn Ensemble*、*线性模型*、*SVM*。
 - en: Shapash is based on local contributions calculated with Shap (shapley values),
     Lime, or any technique which allows computing summable local contributions.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: Shapash 基于通过 Shap（Shapley 值）、Lime 或任何允许计算可汇总局部贡献的技术计算的局部贡献。
 - en: Installation
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装
 - en: 'You can install the package through pip:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过 pip 安装这个包：
 - en: '[PRE0]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Shapash Demonstration
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Shapash 演示
 - en: Let’s useShapash on a concrete dataset. In the rest of this article, we will
     show you how Shapash can explore models.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在一个具体的数据集上使用 Shapash。接下来的文章中，我们将展示 Shapash 如何探索模型。
 - en: 'We will use the famous “House Prices” dataset from [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques) to
     fit a regressor and predict house prices! Let’s start by loading the Dataset:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用来自 [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+    的著名“房价”数据集来拟合回归模型并预测房价！让我们先加载数据集：
 - en: '[PRE1]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/20e1aaad4f5cddcee1e4273d8f4aa92d.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/20e1aaad4f5cddcee1e4273d8f4aa92d.png)'
 - en: 'Encode the categorical features:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 编码分类特征：
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Train, test split and model fitting:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练、测试拆分和模型拟合：
 - en: '[PRE3]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And predict test data:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 并预测测试数据：
 - en: '[PRE4]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Let’s discover and use Shapash SmartExplainer.
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 让我们发现并使用 Shapash SmartExplainer。
 - en: '*Step 1 — Import*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*步骤 1 — 导入*'
 - en: '[PRE5]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '*Step 2 — Initialise a SmartExplainer Object*'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*步骤 2 — 初始化 SmartExplainer 对象*'
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'features_dict: dict that specifies the meaning of each column name of the x
     pd.DataFrame.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'features_dict: dict，指定 x pd.DataFrame 中每列名称的含义。'
 - en: '*Step 3 — Compile*'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '*步骤 3 — 编译*'
 - en: '[PRE7]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The compile method permits to use of another optional parameter: *postprocess. *It
     gives the possibility to apply new functions to specify to have better wording
     (regex, mapping dict, …).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 编译方法允许使用另一个可选参数：*postprocess.* 它提供了应用新函数的可能性，以便获得更好的措辞（正则表达式、映射字典等）。
 - en: Now, we can display results and understand how the regression model works!
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以展示结果并理解回归模型是如何工作的！
 - en: '*Step 4 — Launching the Web App*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*步骤 4 — 启动网页应用程序*'
 - en: '[PRE8]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The web app link appears in Jupyter output (access the demo [here](https://shapash-demo.ossbymaif.fr/)).
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 网页应用程序的链接显示在 Jupyter 输出中（访问演示 [这里](https://shapash-demo.ossbymaif.fr/)）。
 - en: '**There are four parts to this Web App:**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**这个网页应用程序有四个部分：**'
 - en: '![](../Images/fed8547ee11acd20063b0ea415d750eb.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fed8547ee11acd20063b0ea415d750eb.png)'
 - en: Each one interacts to help to explore the model easily.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个图都有助于轻松探索模型。
 - en: '***Features Importance*****:** you can click on each feature to update the
     contribution plot below.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '***特征重要性*****:** 你可以点击每个特征以更新下面的贡献图。'
 - en: '***Contribution plot*****:** How does a feature influence the prediction? Display
     violin or scatter plot of each local contribution of the feature.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '***贡献图*****:** 特征如何影响预测？展示特征每个本地贡献的提琴图或散点图。'
 - en: '***Local Plot:***'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '***本地图：***'
 - en: 'Local explanation: which features contribute the most to the predicted value.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 本地解释：哪些特征对预测值贡献最大。
 - en: You can use several buttons/sliders/lists to configure the summary of this local
     explainability. We will describe below with the *filter *method the different
     parameters you can work your summary with.
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以使用多个按钮/滑块/列表来配置本地可解释性的总结。我们将下面使用*filter*方法描述你可以用来配置总结的不同参数。
 - en: This web app is a useful tool to discuss with business analysts the best way
     to summarize the explainability to meet operational needs.
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这个网页应用程序是一个有用的工具，用于与业务分析师讨论如何总结可解释性以满足操作需求。
 - en: '***Selection Table:*** It allows the Web App user to select:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '***选择表格：*** 它允许网页应用程序用户选择：'
 - en: A subset to focus the exploration on this subset
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个子集以集中探索此子集
 - en: A single row to display the associated local explanation
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单行显示相关的本地解释
 - en: 'How do you use the data table to select a subset? At the top of the table,
     just below the name of the column that you want to use to filter, specify:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何使用数据表选择子集？在表格的顶部，即你想用来过滤的列名下方，指定：
 - en: '*=Value, >Value, <Value*'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*=值, >值, <值*'
 - en: '*If you want to select every row containing a specific word, just type that
     word without “=”*'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*如果你想选择每一行包含特定单词的行，只需输入该单词，无需使用“=”*'
 - en: 'There are a few options available on this web app (top right button). The most
     important one is probably the size of the sample (default: 1000). To avoid latency,
     the web app relies on a sample to display the results. Use this option to modify
     this sample size.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个网页应用程序上有几个选项（右上角按钮）。最重要的可能是样本的大小（默认值：1000）。为了避免延迟，网页应用程序依赖样本来显示结果。使用这个选项可以修改样本大小。
 - en: 'To kill the app:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 关闭应用程序：
 - en: '[PRE9]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '*Step 5 — The plots*'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '*步骤 5 — 图表*'
 - en: All the plots are available in jupyter notebooks, and the paragraph below describes
     the key points of each plot.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有的图表都可以在 Jupyter notebooks 中查看，下面的段落描述了每个图表的要点。
 - en: '**Feature Importance**'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**特征重要性**'
 - en: This parameter allows comparing features importance of a subset. It is useful
     to detect specific behavior in a subset.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个参数允许比较子集的特征重要性。这对于检测子集中的特定行为很有用。
 - en: '[PRE10]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![](../Images/63a1ec40bd82fef446f805462e1b6c03.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/63a1ec40bd82fef446f805462e1b6c03.png)'
 - en: '**Contribution plot**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**贡献图**'
 - en: 'Contribution plots are used to answer questions like:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 贡献图用于回答类似的问题：
 - en: How a feature impacts my prediction? Does it contribute positively? Is the feature
     increasingly contributing? decreasingly? Are there any threshold effects? For
     a categorical variable, how does each modality contributes? This plot completes
     the importance of the features for the interpretability, the global intelligibility
     of the model to better understand the influence of a feature on a model.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征如何影响我的预测？它是否有积极贡献？该特征的贡献是越来越多还是越来越少？是否存在阈值效应？对于分类变量，每种模式的贡献如何？这个图展示了特征的重要性，以便于解释模型，从而更好地理解特征对模型的影响。
 - en: There are several parameters on this plot. Note that the plot displayed adapts
     depending on whether you are interested in a categorical or continuous variable
     (Violin or Scatter) and depending on the type of use case you address (regression,
     classification).
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个图有几个参数。请注意，显示的图表会根据您对分类变量还是连续变量（小提琴图或散点图）以及您所处理的用例类型（回归、分类）而有所不同。
 - en: '[PRE11]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/d361f2b143a435b2e754e9f26f978b40.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d361f2b143a435b2e754e9f26f978b40.png)'
 - en: Contribution plot applied to a continuous feature.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 对连续特征应用的贡献图。
 - en: 'Classification Case: Titanic Classifier — Contribution plot applied to categorical
     feature.'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类案例：泰坦尼克号分类器 — 对分类特征应用的贡献图。
 - en: '![](../Images/8e8f2b9b10e345aaf31c24e2f09765e6.png)'
+  id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e8f2b9b10e345aaf31c24e2f09765e6.png)'
 - en: '![](../Images/dc03bafa2582a69592c94f8d65ff3311.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dc03bafa2582a69592c94f8d65ff3311.png)'
 - en: '**Local plot**'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '**局部图**'
 - en: You can use local plots for local explainability of models.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以使用局部图来进行模型的局部可解释性分析。
 - en: The *filter()* and *local_plot()* methods allow you to test and choose the best
     way to summarize the signal that the model has picked up. You can use it during
     the exploratory phase. You can then deploy this summary in a production environment
     for the end-user to understand in a few seconds what are the most influential
     criteria for each recommendation.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '*filter()*和*local_plot()*方法允许您测试和选择最佳方式来总结模型所捕捉的信号。您可以在探索阶段使用它。然后，您可以将此总结部署到生产环境中，以便终端用户在几秒钟内理解每个推荐的最具影响力的标准。'
 - en: We will publish a second article to explain how to deploy local explainability
     in production.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将发布第二篇文章，解释如何在生产环境中部署局部可解释性。
 - en: '**Combine the filter and local_plot methods**'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结合 filter 和 local_plot 方法**'
 - en: 'Use the *filter* method to specify how to summarize local explainability. You
     have four parameters to configure your summary:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*filter*方法来指定如何总结局部可解释性。您可以配置四个参数来总结您的内容：
 - en: 'max_contrib: maximum number of criteria to display'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'max_contrib: 显示的标准最大数量'
 - en: 'threshold: minimum value of the contribution (in absolute value) necessary
     to display a criterion'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'threshold: 显示标准所需的贡献的最小值（绝对值）'
 - en: 'positive: display only positive contribution? Negative? (default None)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'positive: 仅显示正贡献？负贡献？（默认值为 None）'
 - en: 'features_to_hide: list of features you don’t want to display'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'features_to_hide: 您不想显示的特征列表'
 - en: After defining these parameters, we can display the results with the *local_plot()*
     method, or export them with *to_pandas().*
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 在定义这些参数后，我们可以使用*local_plot()*方法来显示结果，或使用*to_pandas()*方法导出结果。
 - en: '[PRE12]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/d03e113c530d150bab918467be11a2ff.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d03e113c530d150bab918467be11a2ff.png)'
 - en: 'Export to pandas DataFrame:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 导出到 pandas DataFrame：
 - en: '[PRE13]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![](../Images/61069feea112c819793560776973a889.png)'
+  id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/61069feea112c819793560776973a889.png)'
 - en: '**Compare plot**'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '**比较图**'
 - en: With the *compare_plot()* method, the SmartExplainer object makes it possible
     to understand why two or more individuals do not have the same predicted values.
     The most decisive criterion appears at the top of the plot.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*compare_plot()*方法，SmartExplainer 对象可以帮助您理解为什么两个或更多个体的预测值不同。最关键的标准会出现在图表的顶部。
 - en: '[PRE14]'
+  id: totrans-113
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/5ebef70c948abff403a8f237c1017e12.png)'
+  id: totrans-114
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5ebef70c948abff403a8f237c1017e12.png)'
 - en: We hope that Shapash will be useful in building trust in AI. Thank you in advance
     to all those who will give us their feedback, idea… Shapash is opensource! Feel
     free to contribute by commenting on this post or directly on the [GitHub discussions](https://github.com/MAIF/shapash/discussions).
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望 Shapash 能在建立对 AI 的信任方面发挥作用。感谢所有将提供反馈和建议的人…… Shapash 是开源的！欢迎通过评论此帖子或直接在[GitHub
+    讨论区](https://github.com/MAIF/shapash/discussions)来贡献您的意见。
 - en: '[Original](https://pub.towardsai.net/shapash-making-ml-models-understandable-by-everyone-8f96ad469eb3).
     Reposted with permission.'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://pub.towardsai.net/shapash-making-ml-models-understandable-by-everyone-8f96ad469eb3)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Introduction to the White-Box AI: the Concept of Interpretability](https://www.kdnuggets.com/2021/03/introduction-white-box-ai-interpretability.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[白盒 AI 介绍：可解释性的概念](https://www.kdnuggets.com/2021/03/introduction-white-box-ai-interpretability.html)'
 - en: '[Deep learning doesn’t need to be a black box](https://www.kdnuggets.com/2021/02/deep-learning-not-black-box.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习不必是一个黑箱](https://www.kdnuggets.com/2021/02/deep-learning-not-black-box.html)'
 - en: '[Explaining the Explainable AI: A 2-Stage Approach](https://www.kdnuggets.com/2020/10/explaining-explainable-ai.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解释可解释 AI: 两阶段方法](https://www.kdnuggets.com/2020/10/explaining-explainable-ai.html)'
 - en: '* * *'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-122
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-127
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
