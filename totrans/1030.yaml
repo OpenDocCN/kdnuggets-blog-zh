@@ -1,54 +1,82 @@
 - en: Predicting Cryptocurrency Prices Using Regression Models
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用回归模型预测加密货币价格
 - en: 原文：[https://www.kdnuggets.com/2022/05/predicting-cryptocurrency-prices-regression-models.html](https://www.kdnuggets.com/2022/05/predicting-cryptocurrency-prices-regression-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/05/predicting-cryptocurrency-prices-regression-models.html](https://www.kdnuggets.com/2022/05/predicting-cryptocurrency-prices-regression-models.html)
 - en: '![Predicting Cryptocurrency Prices Using Regression Models](../Images/3d4f7e9f8bda70d2c337985befa89fb4.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用回归模型预测加密货币价格](../Images/3d4f7e9f8bda70d2c337985befa89fb4.png)'
 - en: 'Source: [https://unsplash.com/s/photos/cryptocurrency](https://unsplash.com/s/photos/cryptocurrency)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [https://unsplash.com/s/photos/cryptocurrency](https://unsplash.com/s/photos/cryptocurrency)'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: As of March 2022, the cryptocurrency market stands at over $2 trillion [1] but
     remains incredibly volatile, having previously hit $3 trillion in November 2021\.
     The same volatility is also seen within the individual cryptocurrencies, within
     the past month alone Etherium and Bitcoin have decreased by over 18% and 19% respectively.
     The number of new currencies coming onto the market is also increasing, with over
     18,000 cryptocurrencies in existence as of March 2022 [2].
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 截至 2022 年 3 月，加密货币市场市值超过 2 万亿美元 [1]，但仍然极其波动，曾在 2021 年 11 月达到 3 万亿美元。个别加密货币也表现出相同的波动性，仅在过去一个月内，以太坊和比特币分别下降了超过
+    18% 和 19%。新货币进入市场的数量也在增加，截至 2022 年 3 月，已有超过 18,000 种加密货币存在 [2]。
 - en: This volatility is what makes long-term cryptocurrency predictions more difficult.
     In this article, we will go through how to get started with cryptocurrency predictions
     using linear regression models. We will look at predictions over a number of time
@@ -56,120 +84,177 @@
     low price and volume. The cryptocurrencies looked at in this article include more
     established players Bitcoin and Etherium as well as those still in fairly early
     stages namely Polkadot and Stellar.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种波动性使得长期加密货币预测更加困难。本文将介绍如何使用线性回归模型开始进行加密货币预测。我们将查看多个时间间隔的预测，同时使用各种模型特征，如开盘价、最高价、最低价和交易量。本文中讨论的加密货币包括更为成熟的比特币和以太坊，以及仍处于相对早期阶段的
+    Polkadot 和 Stellar。
 - en: Method
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 方法
 - en: In this article, we will be using multiple linear regression. Regression models
     are used to determine the relationship between variables by fitting a line through
     the data. Simple linear regression is a model used to predict a dependent variable
     (for instance the closing price of a cryptocurrency) using one independent variable
     (such as opening price), whereas multiple linear regression takes into account
     several independent variables.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将使用多元线性回归。回归模型用于通过拟合一条线来确定变量之间的关系。简单线性回归是用来预测一个依赖变量（例如加密货币的收盘价），使用一个自变量（如开盘价），而多元线性回归则考虑多个自变量。
 - en: The data we will be using comes from CoinCodex [3] and provides daily opening,
     high, low and closing as well as the volume and the market cap. Various combinations
     of features were experimented with to produce the models with predictions also
     being made over daily and weekly intervals. The python sklearn package was used
     to train the models and the R2 value was used as a metric of the accuracy of the
     model, with 1 indicating a perfect model.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用的数据来自 CoinCodex [3]，提供了每日的开盘价、最高价、最低价和收盘价以及交易量和市值。我们实验了各种特征组合，以生成模型，并对每日和每周的间隔进行了预测。使用了
+    Python 的 sklearn 包来训练模型，并用 R2 值作为模型准确性的指标，其中 1 表示完美模型。
 - en: The data used and the models produced have been uploaded to a [Layer project](https://app.layer.ai/ellies/predictingCryptoPrices)
     and can be downloaded for further use and investigations. All the results and
     corresponding graphs can also be found in the [Layer project](https://app.layer.ai/ellies/predictingCryptoPrices).
     In this article we will discuss sections of the code used to implement the models.The
     full code can be accessed in this [collab notebook](https://colab.research.google.com/drive/1YpCQ2_V3hBjrIk_1plTwA3__w76krRYh#scrollTo=tfl6d3mifG4B).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用的数据和生成的模型已上传至[Layer项目](https://app.layer.ai/ellies/predictingCryptoPrices)，可以下载以供进一步使用和研究。所有结果和相应图表也可以在[Layer项目](https://app.layer.ai/ellies/predictingCryptoPrices)中找到。本文将讨论实现模型所用代码的各个部分。完整代码可在此[collab
+    notebook](https://colab.research.google.com/drive/1YpCQ2_V3hBjrIk_1plTwA3__w76krRYh#scrollTo=tfl6d3mifG4B)中访问。
 - en: 'In order to initialise the project and access the data and models you can run:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了初始化项目并访问数据和模型，您可以运行：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The data was uploaded to the Layer project for each of the 4 cryptocurrency
     datasets (Bitcoing, Ethereum, Polkadot and Stellar) by defining the functions
     used to read in the data and annotating them with the dataset and resources decorators.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据被上传到Layer项目中，涵盖了4个加密货币数据集（比特币、以太坊、Polkadot和Stellar），通过定义用于读取数据的函数，并用数据集和资源装饰器进行了注释。
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: You can run the following commands to access the datasets and save them to a
     pandas dataframe
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以运行以下命令来访问数据集并将其保存到pandas数据框中。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Predictions
+  id: totrans-23
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 预测
 - en: Daily predictions
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 每日预测
 - en: The first set of multiple regression models were built to predict the prices
     at daily intervals. The closing price was first predicted using opening, low and
     high price on that day. Daily prices over the course of 1 year were used with
     a 75%-25% train-test split. The below function was used to train the model for
     a given dataset.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一组多元回归模型是为了预测每日间隔的价格而构建的。首先使用当天的开盘价、最低价和最高价来预测收盘价。使用了一年的每日价格数据，并进行了75%-25%的训练-测试拆分。以下函数用于训练给定数据集的模型。
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The function was running with the model decorator to save the model to the Layer
     project as shown below.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数运行时使用了模型装饰器，以将模型保存到Layer项目中，如下所示。
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: To access all of the models used in this set of predictions you can run the
     below code.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 要访问此预测集中的所有模型，您可以运行以下代码。
 - en: '[PRE5]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Table 1 below summarises the R2 statistics for the 4 cryptocurrencies using
     this model.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 表1总结了使用该模型的4种加密货币的R2统计数据。
 - en: '![R2 statistics for the 4 cryptocurrencies using](../Images/90c4cd775c1228d08c14e3d1081f7655.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![4种加密货币的R2统计数据](../Images/90c4cd775c1228d08c14e3d1081f7655.png)'
 - en: 'Table 1: Accuracy of predictions of cryptocurrency closing price using opening,
     low and high prices on that day'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 表1：使用当天的开盘价、最低价和最高价预测加密货币收盘价的准确性
 - en: The graphs below show the predicted values against the true values for the best
     and worst-performing currencies Polkadot and Stellar (Figure 1a and 1b).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的图表显示了最佳和最差表现的货币Polkadot和Stellar（图1a和1b）的预测值与真实值的对比。
 - en: '![Stellar predicted closing price](../Images/745296eed6eeecf78472f4cb778dea97.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![Stellar预测的收盘价](../Images/745296eed6eeecf78472f4cb778dea97.png)'
 - en: 'Figure 1a: Stellar predicted closing price against the true closing price for
     the day using opening, low and high prices as features![Polkadot predicted closing
     price](../Images/264b3a4fefc056f5dd6f625797344b7e.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1a：Stellar预测的收盘价与当天真实收盘价的对比，使用开盘价、最低价和最高价作为特征！[Polkadot预测的收盘价](../Images/264b3a4fefc056f5dd6f625797344b7e.png)
 - en: 'Figure 1b: Polkadot predicted closing price against the true closing price
     for the day using opening, low and high prices as features'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1b：Polkadot预测的收盘价与当天真实收盘价的对比，使用开盘价、最低价和最高价作为特征
 - en: From the graph and the R2 values, we can see that the linear regression model
     using opening, low and high price is very accurate for all 4 currencies, regardless
     of their level of maturity.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图表和R2值中，我们可以看到使用开盘价、最低价和最高价的线性回归模型对于所有4种货币都非常准确，无论它们的成熟程度如何。
 - en: Next, we investigate whether adding the volume improves the model. The volume
     corresponds to the total number of trades taking place that day. Interestingly
     enough after fitting regression models using opening, low and high prices and
@@ -179,99 +264,144 @@
     for the volume variable was 0 across the 4 cryptocurrencies. This indicated the
     volume of trades of a cryptocurrency is not a good predictor of its price on that
     day.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们研究是否添加交易量可以改进模型。交易量对应于当天的总交易笔数。有趣的是，在使用开盘价、最低价、最高价和交易量拟合回归模型后，结果基本相同。你可以在Layer项目中访问bitcoin_prediction_with_volume、ethereum_prediction_with_volume、polkadot_prediction_with_volume和stellar_prediction_with_volume模型。进一步的调查显示，4种加密货币中交易量变量的系数都是0。这表明，加密货币的交易量并不是预测当天价格的良好指标。
 - en: Weekly predictions
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 每周预测
 - en: In the next model, we look at predicting the end of week prices using the data
     from that weeks opening price on a Monday along with the low and high prices that
     week. For this model data from the past 5 years was used for Bitcoin, Ethereum
     and Stellar. For Polkadot, which was only launched in 2020, all of the historical
     data was used.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一个模型中，我们查看了使用本周一的开盘价以及本周的最低价和最高价预测周末价格。对于这个模型，使用了过去5年的比特币、以太坊和Stellar的数据。对于2020年才发布的Polkadot，则使用了所有历史数据。
 - en: 'After downloading the data the low and high prices for each week were calculated
     and the opening and closing prices for the week were recorded. These datasets
     can also be accessed on Layer by running:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载数据后，计算了每周的最低价和最高价，并记录了本周的开盘价和收盘价。这些数据集也可以通过运行Layer来访问：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Again, a 75%-25% train-test split was used and a multiple linear regression
     model was fitted using the opening, high and low prices for the week. The models
     can also be accessed on the Layer project. The R2 metric was again used for comparison
     with the results shown in Table 2 below.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次使用了75%-25%的训练-测试拆分，并利用一周的开盘价、最高价和最低价拟合了多重线性回归模型。这些模型也可以在Layer项目中访问。R2指标再次用于与下表2中显示的结果进行比较。
 - en: '![ Accuracy of predictions of cryptocurrency closing price using opening, low
     and high prices](../Images/4701cb01eb8899d8ee5a66bf97e3b073.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![ 使用开盘价、最低价和最高价预测加密货币收盘价的准确性](../Images/4701cb01eb8899d8ee5a66bf97e3b073.png)'
 - en: 'Table 2: Accuracy of predictions of cryptocurrency closing price using opening,
     low and high prices'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 表2：使用开盘价、最低价和最高价预测加密货币收盘价的准确性
 - en: The accuracy of the models when predicting with data over the course of a week
     were slightly worse than when predicting over the course of a day however, the
     accuracy itself was still very high. Even the worst performing model for the cryptocurrency
     Stellar achieve and R2 score of 0.985.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在用一周的数据进行预测时，模型的准确性略低于用一天的数据进行预测，但准确性仍然非常高。即便是表现最差的加密货币Stellar，其R2分数也达到了0.985。
 - en: Conclusion
+  id: totrans-48
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Overall, linear regression models using the opening, low and high prices as
     features perform very well on both daily and weekly intervals. A natural extension
     of these models would be looking into predicting further into the future, for
     instance using this weeks data to predict the price next week.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，使用开盘价、最低价和最高价作为特征的线性回归模型在每日和每周间隔上表现都很好。这些模型的自然扩展是预测更远的未来，例如使用本周的数据预测下周的价格。
 - en: '[1] [https://fortune.com/2022/03/02/crypto-market-cap-2-trillion/#:~:text=As%20of%2010%3A15%20a.m.,when%20it%20topped%20%243%20trillion](https://fortune.com/2022/03/02/crypto-market-cap-2-trillion/#:~:text=As%20of%2010%3A15%20a.m.,when%20it%20topped%20%243%20trillion).'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] [https://fortune.com/2022/03/02/crypto-market-cap-2-trillion/#:~:text=As%20of%2010%3A15%20a.m.,when%20it%20topped%20%243%20trillion](https://fortune.com/2022/03/02/crypto-market-cap-2-trillion/#:~:text=As%20of%2010%3A15%20a.m.,when%20it%20topped%20%243%20trillion)。'
 - en: '[2] [https://www.investopedia.com/tech/most-important-cryptocurrencies-other-than-bitcoin/#:~:text=One%20reason%20for%20this%20is,communities%20of%20backers%20and%20investors](https://www.investopedia.com/tech/most-important-cryptocurrencies-other-than-bitcoin/#:~:text=One%20reason%20for%20this%20is,communities%20of%20backers%20and%20investors).'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] [https://www.investopedia.com/tech/most-important-cryptocurrencies-other-than-bitcoin/#:~:text=One%20reason%20for%20this%20is,communities%20of%20backers%20and%20investors](https://www.investopedia.com/tech/most-important-cryptocurrencies-other-than-bitcoin/#:~:text=One%20reason%20for%20this%20is,communities%20of%20backers%20and%20investors)。'
 - en: '[3] https://coincodex.com/crypto/stellar/historical-data/'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] https://coincodex.com/crypto/stellar/historical-data/'
 - en: '**[Eleonora Shantsila](https://www.linkedin.com/in/eleonora-shantsila-b51b2b124/)**
     is a full stack software engineer working at an events start up called Lounge,
     having previously worked as a full stack engineer in Financial Services. Eleonora
     has a background in Mathematics (BSc from St Andrews University) and Computational
     Science (MS from Harvard University) and enjoys working on data science projects
     in their spare time. Feel free to [connect on LinkedIn](https://www.linkedin.com/in/eleonora-shantsila-b51b2b124/).'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Eleonora Shantsila](https://www.linkedin.com/in/eleonora-shantsila-b51b2b124/)**
+    是一位全栈软件工程师，目前在名为Lounge的活动初创公司工作，之前曾在金融服务领域担任全栈工程师。Eleonora拥有数学（圣安德鲁斯大学本科）和计算科学（哈佛大学硕士）的背景，闲暇时喜欢从事数据科学项目。欢迎在[LinkedIn上连接](https://www.linkedin.com/in/eleonora-shantsila-b51b2b124/)。'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[您应该使用线性回归模型而不是…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
 - en: '[Building Predictive Models: Logistic Regression in Python](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建预测模型：Python中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)'
 - en: '[How to Make Large Language Models Play Nice with Your Software…](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何让大型语言模型与您的软件友好配合…](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)'
 - en: '[Strategies for Optimizing Performance and Costs When Using Large…](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用大型语言模型时优化性能和成本的策略](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)'
 - en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较线性回归和逻辑回归](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
 - en: '[An Overview of Logistic Regression](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逻辑回归概述](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
