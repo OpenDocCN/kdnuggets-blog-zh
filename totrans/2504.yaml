@@ -1,29 +1,41 @@
 - en: Visual Scoring Techniques for Classification Models
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 分类模型的可视化评分技术
 - en: 原文：[https://www.kdnuggets.com/2021/11/visual-scoring-techniques-classification-models.html](https://www.kdnuggets.com/2021/11/visual-scoring-techniques-classification-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/11/visual-scoring-techniques-classification-models.html](https://www.kdnuggets.com/2021/11/visual-scoring-techniques-classification-models.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Maarit Widmann](https://www.linkedin.com/in/maarit-widmann-02641a170/?originalSubdomain=de),
     Data Scientist, KNIME**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Maarit Widmann](https://www.linkedin.com/in/maarit-widmann-02641a170/?originalSubdomain=de)，数据科学家，KNIME**'
 - en: Is 99% accuracy good for a churn prediction model? If in reality 1% of the customers
     churn and 99% don’t, the model is doing equally well as a random guess. If 10%
     of the customers churn and 90% don’t, then the model is doing better than the
     random guess.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 99%的准确性对于流失预测模型来说好吗？如果实际情况是1%的客户流失，99%的客户未流失，那么模型的表现与随机猜测相当。如果10%的客户流失，90%的客户未流失，那么模型的表现则优于随机猜测。
 - en: Accuracy statistics, such as overall accuracy, quantify the expected performance
     of a Machine Learning model on new data without any baseline, such as a random
     guess or existing models.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 准确性统计信息，如总体准确性，量化了机器学习模型在新数据上的预期表现，没有任何基线，例如随机猜测或现有模型。
 - en: 'That’s why we also need visual model evaluation — or scoring — techniques that
     show the model performance in a broader context: for varying classification thresholds,
     compared to other models, and also from the perspective of resource usage. In
@@ -31,53 +43,75 @@
     a lift chart, and a cumulative gain chart, and provide a link to their practical
     implementation in a KNIME workflow, “ [Visual Scoring Techniques for Classification
     Models](https://kni.me/w/jYRUKhGL_ScaKGhV)”.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么我们还需要**可视化模型评估**——或评分——技术，这些技术显示模型在更广泛背景下的表现：对于不同的分类阈值，相对于其他模型，以及从资源使用的角度。在本文中，我们解释了如何通过ROC曲线、提升图和累计增益图来评估分类模型，并提供了在KNIME工作流中实际实施的链接，“[分类模型的可视化评分技术](https://kni.me/w/jYRUKhGL_ScaKGhV)”。
 - en: 'Use case: churn prediction model'
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 用例：流失预测模型
 - en: We’ll demonstrate the utility of visual model evaluation techniques through
     a Random Forest model (100 trees) for churn prediction.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过一个用于流失预测的随机森林模型（100棵树）展示可视化模型评估技术的实用性。
 - en: We use a dataset with 3333 telco customers, including their contract data and
     phone usage, available on [GitHub](https://github.com/albayraktaroglu/Datasets/blob/master/churn.csv).
     The target column “Churn?” shows whether the customer churned ( *True *) or not
     ( *False *). 483 customers (14%) churned, and 2850 customers (86%) didn’t churn.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用的数据集包含3333个电信客户的数据，包括他们的合同数据和电话使用情况，数据可在[GitHub](https://github.com/albayraktaroglu/Datasets/blob/master/churn.csv)上获得。目标列“Churn?”显示客户是否流失（*True*）或未流失（*False*）。483名客户（14%）流失，2850名客户（86%）未流失。
 - en: The accuracy statistics of the model are shown in Figure 1.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的准确性统计信息如图1所示。
 - en: The **overall accuracy **is around 94%, which means that 94 out of every 100
     customers in the test data got a correct class prediction as Churn = *True *or
     Churn = *False *.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**总体准确性**大约为94%，这意味着在测试数据中的每100个客户中，有94个获得了正确的类别预测，无论是流失 = *True* 还是流失 = *False*。'
 - en: The **sensitivity **value is around 59% for the class *True*. This implies that
     around 6 out of every 10 customers who churned (Churn=*True*) were predicted correctly
     to churn, while the remaining 4 were predicted incorrectly to not churn.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**敏感性**值在*True*类别大约为59%。这意味着在每10个流失的客户（Churn=*True*）中，大约6个被正确预测为流失，而剩余的4个被错误预测为未流失。'
 - en: The **specificity **value around 99% for the class *True* indicates that almost
     all of the customers who didn’t churn (Churn=*False*) were classified correctly.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**特异性**值在*True*类别大约为99%，这表明几乎所有未流失的客户（Churn=*False*）都被正确分类。'
 - en: '![](../Images/c12f72308b7591f6872a049ccae33fd6.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c12f72308b7591f6872a049ccae33fd6.png)'
 - en: Figure 1\. Confusion matrix, class statistics, and overall accuracy statistics
     of the Random Forest model for churn prediction.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1\. 混淆矩阵、类别统计信息以及随机森林模型在流失预测中的总体准确性统计信息。
 - en: Comparing performances across classification thresholds
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 比较不同分类阈值下的性能
 - en: The accuracy statistics are calculated based on the actual and predicted target
     classes. The predicted classes, here *True *and *False, *are based on class probabilities
     (or scores) predicted by the model, ranging between 0 and 1\. In a binary classification
@@ -87,163 +121,231 @@
     0.5 gets predicted. However, sometimes a different classification threshold can
     lead to a better performance. If this is the case, we can find it out in an ROC
     curve.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 准确率统计是基于实际和预测的目标类计算的。预测的类别，这里是*True*和*False*，是基于模型预测的类别概率（或得分），范围在0到1之间。在二分类问题中，模型输出两个概率，每个类一个。默认情况下，具有最高概率的类别决定了预测类别，在二分类问题中，这意味着概率超过0.5的类别被预测。然而，有时不同的分类阈值可能会导致更好的性能。如果是这种情况，我们可以在ROC曲线中发现它。
 - en: ROC Curve
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: ROC曲线
 - en: 'An [ROC curve ](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)(Receiving
     Operator Characteristics curve) plots the model performance for varying classification
     thresholds using two metrics: the false positive rate on the x-axis and the true
     positive rate on the y-axis.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个[ROC曲线](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)（接收操作特征曲线）绘制了模型在不同分类阈值下的性能，使用两个指标：x轴上的假阳性率和y轴上的真正率。
 - en: In a binary classification task, one of the target classes is arbitrarily assumed
     to be the positive class, while the other class becomes the negative class. In
     our churn prediction problem, we have selected *True *to be the positive class
     and *False *the negative class.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在二分类任务中，其中一个目标类被任意假定为正类，而另一个类成为负类。在我们的流失预测问题中，我们选择了*True*作为正类，*False*作为负类。
 - en: The number of true positives (TP), false negatives (FN), false positives (FP),
     and true negatives (TN), as reported in Figure 1, are used to calculate the false
     positive rate and true positive rate *.*
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 真阳性（TP）、假阴性（FN）、假阳性（FP）和真阴性（TN）的数量，如图1所示，用于计算假阳性率和真正率*。
 - en: The **false positive rate**
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**假阳性率**'
 - en: '![](../Images/e99a9a9024fa3c766e36e9831168a72b.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e99a9a9024fa3c766e36e9831168a72b.png)'
 - en: measures the proportion of the customers who didn’t churn, but were incorrectly
     predicted to churn. This equals *1-specificity *.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 衡量的是未流失的客户比例，但这些客户被错误地预测为流失。这等于*1-specificity*。
 - en: The **true positive rate**
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**真正率**'
 - en: '![](../Images/3935b8e84b53818b3bcce3a7ef123b25.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3935b8e84b53818b3bcce3a7ef123b25.png)'
 - en: measures the proportion of the customers who churned, and were correctly predicted
     to churn. This equals *sensitivity *.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 衡量的是流失客户的比例，以及这些客户被正确预测为流失。这等于*sensitivity*。
 - en: The first point of the ROC curve in the bottom left corner indicates the false
     positive rate (FPR) and true positive rate (TPR) obtained using the **maximum
     threshold value 1.0 **. With this threshold, all customers with probability *P(Churn=True)
     > 1.0 *will be predicted to churn, that is none. No customers are predicted to
     churn either correctly or incorrectly, and therefore FPR and TPR are both 0.0.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: ROC曲线底部左角的第一个点表示使用**最大阈值1.0**获得的假阳性率（FPR）和真正率（TPR）。使用这个阈值，所有*P(Churn=True) >
+    1.0*的客户将被预测为流失，即没有客户被预测为流失，无论是正确还是错误，因此FPR和TPR都是0.0。
 - en: The second point in the ROC curve is drawn by decreasing the threshold value,
     for example by 0.1\. Now all customers with *P(Churn=True) > 0.9 *will be predicted
     to churn. The threshold is still high, but it is now possible that some customers
     will be predicted to churn, therefore producing small non-zero values of TPR or
     FPR. So, this point will be located in the ROC curve close to the previous point.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: ROC曲线中的第二个点是通过降低阈值绘制的，例如降低0.1。现在所有*P(Churn=True) > 0.9*的客户将被预测为流失。阈值仍然较高，但现在有可能一些客户会被预测为流失，因此产生小的非零TPR或FPR值。所以，这个点将在ROC曲线中接近上一个点的位置。
 - en: The third point is drawn by decreasing the threshold value some more, and so
     on, till we reach the last point in the curve drawn for the **minimum classification
     threshold 0.0 **. With this threshold, **all **customers are assigned to the positive
     class *True *, either correctly or incorrectly, and therefore both TPR and FPR
     are 1.0.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 第三点是通过进一步降低阈值绘制的，依此类推，直到我们到达为**最小分类阈值0.0**绘制的曲线的最后一点。使用这个阈值，**所有**客户都被分配到正类*True*，无论是否正确，因此TPR和FPR都是1.0。
 - en: A perfect model would produce TPR=1.0 and FPR=0.0\. On the opposite, a random
     classifier would always make an equal number of correct and incorrect predictions
     into the positive class, which corresponds to the black diagonal line where FPR=TPR.
     This line is reported in each ROC curve as a reference for a useless model.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 完美模型会产生TPR=1.0和FPR=0.0\. 相反，随机分类器总是对正类做出相等数量的正确和错误预测，这对应于FPR=TPR的黑色对角线。每个ROC曲线中都报告了这条线，作为无用模型的参考。
 - en: Notice that a model can of course perform worse than the random guess, but that
     might be a mistake of the data scientist rather than the model! It would be enough
     to take the opposite of the model decision to implement a better performing solution.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，模型的表现当然可能比随机猜测更差，但这可能是数据科学家的错误，而不是模型的错误！只需采用模型决策的相反方向即可实现表现更好的解决方案。
 - en: Figure 2 shows an ROC Curve, drawn for the Random Forest model for churn prediction.
     Notice the black line corresponding to the random guess.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2显示了一个ROC曲线，为随机森林模型绘制，用于流失预测。注意与随机猜测对应的黑色线。
 - en: '![Visual scoring techniques for classification models](../Images/a8606041f7ce9b01fdc1fce5255cd420.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![分类模型的视觉评分技术](../Images/a8606041f7ce9b01fdc1fce5255cd420.png)'
 - en: Figure 2\. ROC curve shows the false positive rate on the x-axis and true positive
     rate on the y-axis for all possible classification thresholds from 0 to 1.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2\. ROC曲线显示了所有可能分类阈值从0到1的假阳性率（x轴）和真实阳性率（y轴）。
 - en: The optimal classification threshold for the model is located as close as possible
     to the top left corner — with TPR=1.0 and FPR=0.0 — occupied by the perfect model.
     This optimal point has the closest tangent to (0.0, 1.0). With this optimal classification
     threshold we have the least false positives for each true positive. Our example
     model predicts on average
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的最佳分类阈值应尽可能接近左上角——具有TPR=1.0和FPR=0.0——这是完美模型占据的位置。这个最佳点与（0.0, 1.0）的切线最接近。使用这个最佳分类阈值，我们每个真实阳性的假阳性最少。我们的示例模型平均预测
 - en: '![Visual scoring techniques for classification models](../Images/1c5989ce4b6e12eae9aabf83030159c4.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![分类模型的视觉评分技术](../Images/1c5989ce4b6e12eae9aabf83030159c4.png)'
 - en: true positives for each false positive, when we use the optimal classification
     threshold, as shown in Figure 2.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们使用最佳分类阈值时，每个假阳性的真实阳性，如图2所示。
 - en: If we compare these numbers to the class statistics in Figure 1, we can see
     that, after optimizing the classification threshold, the sensitivity increases
     quite a lot from 59% to 85%, while specificity decreases only a bit from 99% to
     1–0.05= 95%.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们将这些数字与图1中的类别统计数据进行比较，我们可以看到，在优化分类阈值后，灵敏度从59%显著提高到85%，而特异性仅稍微降低，从99%降到1–0.05=
+    95%。
 - en: Comparing multiple models
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 比较多个模型
 - en: An ROC curve is also useful for comparing models. Let’s train another model,
     a Decision Tree, for the same churn prediction task and compare its performance
     with the Random Forest model.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: ROC曲线对于比较模型也很有用。让我们为相同的流失预测任务训练另一个模型——决策树，并将其表现与随机森林模型进行比较。
 - en: Figure 3 shows two ROC curves in the same view. The blue curve is for the Random
     Forest model and the orange curve is for the Decision Tree. A curve closer to
     the top left corner, in this case the blue curve of the Random Forest model, implies
     better performance. The view also shows the Area under the Curve (AuC) statistics
     for both models in the bottom right corner. It measures the area underlying each
     ROC curve and allows for a more refined comparison between the performances.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3显示了同一视图中的两个ROC曲线。蓝色曲线是随机森林模型的，橙色曲线是决策树的。在这种情况下，更接近左上角的曲线，即随机森林模型的蓝色曲线，意味着表现更好。视图还显示了右下角两个模型的曲线下面积（AuC）统计数据。这测量了每个ROC曲线下的面积，并允许对性能进行更精细的比较。
 - en: '![Visual scoring techniques for classification models](../Images/6d9de6ec0aef2cfa48447ee979b99db9.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![分类模型的视觉评分技术](../Images/6d9de6ec0aef2cfa48447ee979b99db9.png)'
 - en: Figure 3\. ROC curves of two models — a Random Forest and a Decision Tree —
     for churn prediction. The model which reaches closer to the top left corner and
     has a greater AuC statistics performs better.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3\. 两个模型的ROC曲线——一个随机森林模型和一个决策树模型——用于流失预测。离左上角更近且AuC统计量更大的模型表现更好。
 - en: Saving resources with a model
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用模型节省资源
 - en: 'Besides getting accurate predictions, we can also save resources with the model.
     In our example of churn prediction, some kind of an action follows the prediction,
     and the action requires resources, such as less revenue or more time investment.
     A model can help us to use the resources more efficiently: contact fewer customers
     but still reach more of the customers who are likely to churn.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了获得准确预测外，我们还可以通过模型节省资源。在我们的流失预测示例中，预测之后会有某种行动，而这些行动需要资源，例如减少收入或增加时间投入。模型可以帮助我们更高效地利用资源：接触更少的客户，但仍能触达更多可能流失的客户。
 - en: The [lift and cumulative gain charts ](http://www2.cs.uregina.ca/~dbd/cs831/notes/lift_chart/lift_chart.html)compare
     the resource usage against the correct predictions.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提升和累计增益图](http://www2.cs.uregina.ca/~dbd/cs831/notes/lift_chart/lift_chart.html)对比了资源使用情况与正确预测的效果。'
 - en: Lift Chart
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 提升图
 - en: A lift chart compares the number of target customers — here the customers who
     churn — reached in a sample that has been extracted based on the model predictions
     vs in a random sample.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 提升图比较了在根据模型预测提取的样本中达到的目标客户数量——这里是流失的客户——与随机样本中的目标客户数量。
 - en: Figure 4 shows the lift chart of the Random Forest model. The x-axis shows each
     decile of the data ordered according to their predicted positive class probabilities
     from the highest to the lowest. For example, if we have 100 customers in the data,
@@ -252,15 +354,23 @@
     decile we have other 10 customers with a lower probability than the first 10 customers,
     but higher than the remaining 80 customers. The tenth decile contains 10 customers
     with the lowest probability; 10 customers who are least likely to churn.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4 显示了随机森林模型的提升图。x 轴展示了按照预测的正类概率从高到低排序的每个十分位的数据。例如，如果我们有 100 位客户，第一个十分位包含 10
+    位具有最高预测正类概率的客户，也就是最有可能流失的 10 位客户。在第二个十分位，我们有另外 10 位客户，其概率低于前 10 位客户，但高于剩下的 80
+    位客户。第十个十分位包含了概率最低的 10 位客户，即最不可能流失的 10 位客户。
 - en: '![](../Images/6deddf43709fe0535b4fca7f7bb39f6e.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6deddf43709fe0535b4fca7f7bb39f6e.png)'
 - en: Figure 4\. Lift chart shows the ratio of target customers reached in a sample
     which is drawn based on the model predictions vs in a random sample.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4\. 提升图显示了基于模型预测的样本中达到目标客户的比例与随机样本中的比例的对比。
 - en: The lift shown by the cumulative lift line (the blue line) is the ratio of target
     customers reached in a sample which is drawn from ordered data as shown on the
     x-axis vs in a random sample. The lift is about 6 for the first decile. Since
@@ -269,16 +379,23 @@
     out of 100 customers, we expect to reach 0.14*10=1.4 target customers. If we instead
     sample 10 first customers from the ordered data, we expect to reach 6 times more,
     that is 6*1.4 = 8.4 target customers.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 累积提升线（蓝线）所示的提升是从按照 x 轴展示的有序数据中抽取的样本中达到目标客户的比例与在随机样本中的比例。第一个十分位的提升大约为 6。由于原始数据中有
+    14% 的客户流失，随机样本中达到目标客户的概率为 14%。如果我们从 100 位客户中随机抽取 10 位客户，我们期望能接触到 0.14*10=1.4 位目标客户。如果我们从有序数据中抽取前
+    10 位客户，我们期望能接触到 6 倍，即 6*1.4=8.4 位目标客户。
 - en: If we increase the sample size by further 10%, the cumulative lift is around
     4\. We would now reach 0.14*20 = 2.8 target customers in a random sample of 20
     customers, and 4*2.8 = 11.2 target customers in a sample from the ordered data.
     The more data we sample, the more target customers are reached also by random
     sampling. This explains why the difference between the cumulative lift and the
     baseline (the green line) decreases towards the tenth decile.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们将样本量再增加 10%，累计提升约为 4。现在我们将在 20 位客户的随机样本中达到 0.14*20=2.8 位目标客户，而在有序数据的样本中达到
+    4*2.8=11.2 位目标客户。我们采样的数据越多，即使是随机采样，也会有更多的目标客户被接触到。这解释了为什么累计提升与基线（绿色线）的差异在第十个十分位时减少。
 - en: The lift line (the red line) shows the lift for each decile separately. The
     lift is above the baseline for the first two deciles and below it from the third
     decile forward. This means that if we sample the first decile from 100 customers,
@@ -287,18 +404,25 @@
     sample any of the 3th to the 10th decile, we expect to have maximum 0.25*1.4=0.35
     target customers, because among these 80% of the data, the lift stays at a very
     low level between 0 and 0.25.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 提升线（红色线条）展示了每个分位的提升情况。前两个分位的提升值高于基准线，从第三个分位开始则低于基准线。这意味着，如果我们从100个客户中抽取第一个分位样本，我们预计会有6*1.4
+    = 8.4个目标客户。如果我们抽取第二个分位而不抽取第一个分位，我们预计会有2*1.4 = 2.8个目标客户。如果我们抽取第3到第10个分位中的任何一个，我们预计最多会有0.25*1.4=0.35个目标客户，因为在这80%的数据中，提升值保持在0到0.25之间的非常低水平。
 - en: Cumulative Gain Chart
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 累积增益图
 - en: A cumulative gain chart shows which proportion of the target customers can be
     reached with which sample size. Similarly to the lift chart, the cumulative gain
     chart shows the data ordered by their positive class probabilities on the x-axis.
     On the y-axis it shows the proportion of target customers reached.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 累积增益图展示了在不同样本量下可以达到的目标客户比例。类似于提升图，累积增益图在x轴上展示了按照正类概率排序的数据。在y轴上展示了达到的目标客户比例。
 - en: Figure 5 shows the cumulative gain chart for the Random Forest model. If we
     follow the curve, we can see that if we only sample 10% of the customers, those
     with the highest probability (x-axis), we expect to reach around 60% of all customers
@@ -307,84 +431,122 @@
     point also has the closest tangent to the top left corner. With this number of
     sampled customers, the average sample size required to reach one target customer
     is the lowest.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 图5展示了随机森林模型的累积增益图。如果我们跟随曲线，可以看到如果我们仅抽取10%的客户，即那些概率最高的客户，我们预计能覆盖到大约60%的流失客户（y轴）。如果我们抽取20%的客户，依然是那些概率最高的客户，我们预计能覆盖到超过80%的流失客户。这个点还与左上角的切线距离最近。在这个样本量下，达到一个目标客户所需的平均样本量是最低的。
 - en: '![Visual scoring techniques for classification models](../Images/e071065e1723540cbc46907582eebea9.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![分类模型的视觉评分技术](../Images/e071065e1723540cbc46907582eebea9.png)'
 - en: Figure 5\. Cumulative gain chart shows which proportion of target customers
     we reach when we contact 10%, 20%, …, 100% of the customers ordered by their positive
     class probability.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 图5\. 累积增益图展示了当我们联系按照其正类概率排序的10%、20%、……、100%客户时，我们能达到的目标客户比例。
 - en: Visual Model Evaluation Techniques — Summary
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 视觉模型评估技术 — 总结
 - en: Table 1 collects the techniques described above and summarizes what they report
     about the model’s performance. These visual techniques complement the accuracy
     statistics in that they show the optimal classification threshold, compare the
     performance to a random guess, compare multiple models in one view, and indicate
     the optimal sample size and quality.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 表1收集了上述描述的技术，并总结了它们关于模型性能的报告。这些视觉技术通过展示最佳分类阈值、将性能与随机猜测进行比较、在一个视图中比较多个模型以及指示最佳样本量和质量来补充准确性统计数据。
 - en: The ROC curve shows the performances across different classification thresholds,
     compares the performance to a random guess, and also compares the performances
     of multiple models. The lift chart and cumulative gain charts show if the model
     enables us to invest less resources but still reach the desired outcome.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: ROC曲线展示了不同分类阈值下的性能，比对了模型与随机猜测的表现，并且也比较了多个模型的性能。提升图和累积增益图则显示了模型是否能使我们投入更少的资源仍能达到期望的结果。
 - en: These visual techniques complement but don’t replace the accuracy statistics.
     For a comprehensive model evaluation, it’s good to take a look at both.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些视觉技术补充但不替代准确性统计数据。为了全面评估模型，查看这两者都是很好的做法。
 - en: '![Visual scoring techniques for classification models](../Images/851d4cb77a57c23a5c740eb098687e5e.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![分类模型的视觉评分技术](../Images/851d4cb77a57c23a5c740eb098687e5e.png)'
 - en: Table 1\. Summary of the visual evaluation techniques for a classification model.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 表1\. 分类模型视觉评估技术的总结。
 - en: Tips & Tricks
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 小贴士与技巧
 - en: '[KNIME Analytics Platform](https://www.knime.com/software-overview) provides
     a [Binary Classification Inspector ](https://kni.me/n/3-JGPq9anCe8LGG6)node that
     can be used to compare the accuracy statistics and ROC curves of multiple models
     and also find the optimal classification threshold. Its interactive view (Figure
     6) shows:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[KNIME Analytics Platform](https://www.knime.com/software-overview) 提供了一个 [Binary
+    Classification Inspector](https://kni.me/n/3-JGPq9anCe8LGG6) 节点，可以用来比较多个模型的准确性统计数据和
+    ROC 曲线，并找到最佳分类阈值。其交互视图（图 6）显示：'
 - en: A bar chart for overall accuracy and class statistics
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 整体准确性和类别统计数据的条形图
 - en: An ROC curve
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ROC 曲线
 - en: The confusion matrix
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 混淆矩阵
 - en: The distribution of positive class probabilities
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 正类概率的分布
 - en: A slider widget for the classification threshold
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个用于分类阈值的滑块小部件
 - en: '![Visual scoring techniques for classification models](../Images/f663b89437f2134bce6751168efb56a3.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![分类模型的视觉评分技术](../Images/f663b89437f2134bce6751168efb56a3.png)'
 - en: Figure 6\. Binary classification inspector node’s interactive view displays
     a bar chart for accuracy statistics, ROC curve, confusion matrix, and distribution
     of positive class probabilities in one view for one or more classification models.
     All views will be updated when the slider widget is used to adjust the classification
     threshold.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 6\. Binary Classification Inspector 节点的交互视图显示了一个用于准确性统计、ROC 曲线、混淆矩阵和正类概率分布的条形图。在调整分类阈值时，所有视图都会更新。
 - en: The top part of the Binary Classification Inspector node’s view shows a bar
     chart for accuracy statistics and an ROC curve. Each model is displayed by a different
     color, here green for the Random Forest model and blue for the Decision Tree.
@@ -393,8 +555,11 @@
     part of the view activates and shows the confusion matrix and the distribution
     of the positive class probabilities for the selected model. The orange vertical
     line shows the current classification threshold.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: Binary Classification Inspector 节点视图的顶部部分显示准确性统计数据的条形图和 ROC 曲线。每个模型用不同的颜色显示，这里绿色代表随机森林模型，蓝色代表决策树。我们可以通过点击彩色条选择一个模型进行更详细的检查。我们在图
+    6 中选择了随机森林模型。视图的底部部分被激活，显示所选模型的混淆矩阵和正类概率的分布。橙色垂直线表示当前分类阈值。
 - en: 'The classification threshold is at 0.5 by default. Using the threshold slider
     widget we can change this value: to the left towards zero or to the right towards
     1\. When we do, all other charts and plots in the view are automatically adjusted
@@ -403,98 +568,153 @@
     threshold when the diamond reaches the point for the optimal threshold, in this
     case at 0.256 as shown in Figure 6\. This is the optimal classification threshold
     for the Random Forest model. Quite a lot different from the default 0.5!'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，分类阈值为 0.5。使用阈值滑块小部件，我们可以改变这个值：向左调整至接近零，或向右调整至接近 1。当我们这样做时，视图中的所有其他图表和图形会根据新的分类阈值自动调整。例如，当我们向左移动阈值时，ROC
+    曲线中的点会向右移动。当点到达最佳阈值位置时，我们停止移动阈值，在这种情况下，图 6 显示最佳阈值为 0.256。这是随机森林模型的最佳分类阈值。与默认的
+    0.5 相差很大！
 - en: Binary classification inspector view and the visual model evaluation techniques
     introduced in this article are implemented in the “ [Visual Scoring Techniques
     for a Classification Model](https://kni.me/w/jYRUKhGL_ScaKGhV)” workflow (Figure
     7). You can inspect and download it for free from the KNIME Hub.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 文章中介绍的 Binary Classification Inspector 视图和视觉模型评估技术已在 “[分类模型的视觉评分技术](https://kni.me/w/jYRUKhGL_ScaKGhV)”
+    工作流（图 7）中实现。你可以从 KNIME Hub 免费检查和下载。
 - en: '![](../Images/1088e043df56fe21dcc0371b2f51d83a.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1088e043df56fe21dcc0371b2f51d83a.png)'
 - en: Figure 7\. A KNIME workflow to build a churn prediction model and evaluate it
     with visual techniques.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 7\. 一个 KNIME 工作流，用于构建流失预测模型并使用视觉技术进行评估。
 - en: '**Bio: [Maarit Widmann](https://www.linkedin.com/in/maarit-widmann-02641a170/?originalSubdomain=de)**
     is a data scientist in the evangelism team at KNIME; the author behind the KNIME
     self-paced courses and a teacher in the KNIME instructor-led courses.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Maarit Widmann](https://www.linkedin.com/in/maarit-widmann-02641a170/?originalSubdomain=de)**
+    是 KNIME 宣传团队中的数据科学家；KNIME 自学课程的作者，以及 KNIME 讲师主导课程的教师。'
 - en: As first published in [Low Code for Advanced Data Science](https://medium.com/low-code-for-advanced-data-science).
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 首次发布于 [高级数据科学的低代码](https://medium.com/low-code-for-advanced-data-science)。
 - en: '[Original](https://medium.com/low-code-for-advanced-data-science/visual-scoring-techniques-for-classification-models-24f1c713385d).
     Reposted with permission.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/low-code-for-advanced-data-science/visual-scoring-techniques-for-classification-models-24f1c713385d)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Metric Matters, Part 1: Evaluating Classification Models](/2021/03/metrics-evaluating-classification-models-part1.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[指标重要性，第 1 部分：评估分类模型](/2021/03/metrics-evaluating-classification-models-part1.html)'
 - en: '[4 Machine Learning Concepts I Wish I Knew When I Built My First Model](/2021/03/4-machine-learning-concepts.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我希望在构建第一个模型时就了解的 4 个机器学习概念](/2021/03/4-machine-learning-concepts.html)'
 - en: '[ROC Curve Explained](/2021/07/roc-curve-explained.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ROC 曲线解释](/2021/07/roc-curve-explained.html)'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[AI: Large Language & Visual Models](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI：大型语言和视觉模型](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)'
 - en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学的基本数学：奇异值分解的视觉介绍](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[Visual ChatGPT: Microsoft Combine ChatGPT and VFMs](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Visual ChatGPT：微软结合 ChatGPT 和 VFMs](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)'
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
