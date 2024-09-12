@@ -1,588 +1,916 @@
 - en: Orchestrate a Data Science Project in Python With Prefect
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Prefect在Python中协调数据科学项目
 - en: 原文：[https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)
 - en: Motivation
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 动机
 - en: As a data scientist, why should you care about optimizing your data science
     workflow? Let’s start with an example of a basic data science project.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，为什么你应该关心优化你的数据科学工作流程？让我们以一个基本的数据科学项目为例来开始。
 - en: Imagine you were working with an Iris dataset. You started with building functions
     to process your data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下你在处理一个Iris数据集。你开始编写函数来处理你的数据。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: After defining the functions, you execute them.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义了函数后，你需要执行它们。
 - en: Your code ran fine, and you saw nothing wrong with the output, so you think
     the workflow is good enough. However, there can be many disadvantages with a linear
     workflow like above.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的代码运行正常，你没有看到输出中的任何问题，所以你认为工作流程已经足够好了。然而，像上述这样的线性工作流程可能存在许多缺点。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/d127665d6694b5015ed667a0f432c449.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Prefect在Python中协调数据科学项目](../Images/d127665d6694b5015ed667a0f432c449.png)'
 - en: Image by Author
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'The disadvantages are:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺点包括：
 - en: If there is an error in the function `get_classes` , the output produced by
     the function `encode_categorical_columns` will be lost, and the workflow will
     need to start from the beginning. This can be frustrating if it takes a long time
     to execute the function `encode_categorical_columns` .
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果函数`get_classes`出现错误，由函数`encode_categorical_columns`生成的输出将会丢失，工作流程将需要从头开始。这可能会很令人沮丧，特别是如果执行函数`encode_categorical_columns`需要很长时间的话。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/12ce19049288c80b227ee4e6b75aa423.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Prefect在Python中协调数据科学项目](../Images/12ce19049288c80b227ee4e6b75aa423.png)'
 - en: Image by Author
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'Since the functions `encode_categorical_columns` and `get_classes` are not
     dependent on each other, they can be executed at the same time to save time:'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于函数`encode_categorical_columns`和`get_classes`之间没有相互依赖，因此可以同时执行它们以节省时间：
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/fa139968159d706d7b42e62f2ac6640e.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Prefect在Python中协调数据科学项目](../Images/fa139968159d706d7b42e62f2ac6640e.png)'
 - en: Image by Author
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Running the functions this way can also prevent wasting unnecessary time on
     functions that don’t work. If there is an error in the function `get_classes` ,
     the workflow will restart right away without waiting for the function `encode_categorical_columns` to
     finish.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 以这种方式运行函数还可以防止在不工作的函数上浪费不必要的时间。如果函数`get_classes`出现错误，工作流程将立即重新启动，而无需等待函数`encode_categorical_columns`完成。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/cf9dda753060e43cfb10a577389c3543.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Prefect在Python中协调数据科学项目](../Images/cf9dda753060e43cfb10a577389c3543.png)'
 - en: Image by Author
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Now, you might agree with me that it is important to optimize the workflow of
     different functions. However, it can be a lot of works to manually manage the
     workflow.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你可能会同意我所说的，优化不同功能的工作流程是重要的。然而，手动管理工作流程可能需要大量的工作。
 - en: Is there a way that you can **automatically optimize the workflow **by adding
     only several lines of code? That is when Prefect comes in handy.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 是否有一种方法可以通过仅添加几行代码来**自动优化工作流程**？这就是Prefect发挥作用的地方。
 - en: What is Prefect?
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是Prefect？
 - en: '[Prefect](https://www.prefect.io/) is an open-sourced framework to build workflows
     in Python. Prefect makes it easy to build, run, and monitor data pipelines at
     scale.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Prefect](https://www.prefect.io/)是一个开源框架，用于在 Python 中构建工作流。Prefect 使得构建、运行和监控大规模数据管道变得容易。'
 - en: 'To install Prefect, type:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 要安装 Prefect，请输入：
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Build Your Workflow with Prefect
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 Prefect 构建你的工作流
 - en: To learn how Prefect works, let’s encapsulate the workflow at the beginning
     of the article with Prefect.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 要了解 Prefect 的工作原理，让我们用 Prefect 封装本文开头的工作流。
 - en: First Step — Create Tasks
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第一步 — 创建任务
 - en: 'A `Task` is a discrete action in a Prefect flow. Start with turning the functions
     defined above into tasks using the decorator `prefect.task` :'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个`Task`是在 Prefect 流中的一个离散操作。首先，使用装饰器`prefect.task`将上述定义的函数转换为任务：
 - en: Second Step — Create a Flow
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第二步 — 创建一个流
 - en: A `Flow` represents the entire workflow by managing the dependencies between
     tasks. To create a flow, simply insert the code to run your functions inside the `with
     Flow(...)` context manager.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个`Flow`表示通过管理任务之间的依赖关系来管理整个工作流。要创建一个流，只需将代码插入到`with Flow(...)`上下文管理器中运行你的函数即可。
 - en: Note that none of these tasks are executed when running the code above. Prefect
     allows you to either run the flow right away or schedule for later.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，上述代码运行时，这些任务都不会执行。Prefect 允许你立即运行流或安排以后执行。
 - en: 'Let’s try to execute the flow right away using `flow.run()`:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试立即使用`flow.run()`执行流：
 - en: 'Running the code above will give you the output similar to this:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行上述代码将得到类似于以下内容的输出：
 - en: To understand the workflow created by Prefect, let’s visualize the entire workflow.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了理解 Prefect 创建的工作流，让我们可视化整个工作流。
 - en: 'Start with installing `prefect[viz]` :'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先安装`prefect[viz]`：
 - en: '[PRE1]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Then add the method `visualize` to the code:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后将`visualize`方法添加到代码中：
 - en: And you should see the visualization of the `data-engineer` workflow like below!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该能看到如下所示的`data-engineer`工作流的可视化效果！
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/acfe31a541b6bd2197d85662e428e6dc.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中编排数据科学项目](../Images/acfe31a541b6bd2197d85662e428e6dc.png)'
 - en: Image by Author
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: Note that Prefect automatically manages the orders of execution among tasks
     so that the workflow is optimized. This is pretty cool for a few additional pieces
     of code!
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，Prefect 自动管理任务之间的执行顺序，以优化工作流。这对于增加几行代码来说相当酷！
 - en: Third step — Add Parameters
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第三步 — 添加参数
 - en: If you find yourself frequently experimenting with different values of one variable,
     it’s ideal to turn that variable into a `Parameter`.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你发现自己经常尝试不同的变量值，最好将该变量转换为`Parameter`。
 - en: You can consider a `Parameter` as a `Task` , except that it can receive user
     inputs whenever a flow is run. To turn a variable into a parameter, simply use `task.Parameter` .
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以将`Parameter`视为`Task`，只是它可以在每次运行流时接收用户输入。要将变量转换为参数，只需使用`task.Parameter`。
 - en: The first argument of `Parameter` specifies the name of the parameter. `default` is
     an optional argument that specifies the default value of the parameter.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Parameter`的第一个参数指定了参数的名称。`default`是一个可选参数，用于指定参数的默认值。'
 - en: 'Running `flow.visualize` again will give us an output like below:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次运行`flow.visualize`将得到如下输出：
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/44166d29185137f45ad8915794050701.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中编排数据科学项目](../Images/44166d29185137f45ad8915794050701.png)'
 - en: Image by Author
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: 'You can overwrite the default parameter for each run by:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过以下方式覆盖每次运行的默认参数：
 - en: 'adding the argument `parameters` to `flow.run()` :'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将参数`parameters`添加到`flow.run()`中：
 - en: 'or using Prefect CLI:'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或使用 Prefect CLI：
 - en: 'or using a JSON file:'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或使用 JSON 文件：
 - en: 'Your JSON file should look similar to this:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的 JSON 文件应类似于此：
 - en: You can also change parameters for each run using Prefect Cloud, which will
     be introduced in the next section.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以使用 Prefect Cloud 更改每次运行的参数，下一节将介绍此功能。
 - en: Monitor Your Workflow
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 监控你的工作流
 - en: Overview
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 概述
 - en: Prefect also allows you to monitor your workflow in Prefect Cloud. Follow [this
     instruction](https://docs.prefect.io/orchestration/getting-started/set-up.html#server-or-cloud) to
     install relevant dependencies for Prefect Cloud.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 还允许你在 Prefect Cloud 中监控工作流。请按照[此说明](https://docs.prefect.io/orchestration/getting-started/set-up.html#server-or-cloud)安装
+    Prefect Cloud 所需的相关依赖项。
 - en: 'After all of the dependencies are installed and set up, start with creating
     a project on Prefect by running:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装和设置所有依赖项后，首先通过运行以下命令创建 Prefect 项目：
 - en: '[PRE2]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Next, start a local agent to deploy our flows locally on a single machine:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，启动本地代理，将我们的流本地部署到单台计算机上：
 - en: '[PRE3]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Then add:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后添加：
 - en: '...at the end of your file.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '...在文件的末尾。'
 - en: 'After running the file, you should see something similar to the below:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行文件后，您应该会看到类似以下的内容：
 - en: Click the URL in the output, and you will be redirected to an Overview page.
     The Overview page shows the version of your flow, when it is created, the flow’s
     run history, and its runs summary.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 点击输出中的 URL，您将被重定向到概述页面。概述页面显示了您的流的版本、创建时间、流的运行历史和运行摘要。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/27be5414bd9ac912bc16daba19138177.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/27be5414bd9ac912bc16daba19138177.png)'
 - en: Image by Author
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: You can also view the summary of other runs, when they are executed, and their
     configurations.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 您还可以查看其他运行的摘要、执行时间和配置。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/900f750ad69f67d6a7de4c920241c509.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/900f750ad69f67d6a7de4c920241c509.png)'
 - en: Image by Author
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: It is pretty cool how these important pieces of information are automatically
     tracked by Perfect!
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些重要信息能够自动跟踪，真是太酷了！
 - en: Run the Workflow with Default Parameters
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用默认参数运行工作流
 - en: Note that the workflow is registered to Prefect Cloud, but it is not executed
     yet. To execute the workflow with the default parameters, click Quick Run in the
     top right corner.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，工作流已注册到 Prefect Cloud，但尚未执行。要使用默认参数执行工作流，请点击右上角的“快速运行”。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/b52b6e1a8515b1625fa18af129404492.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/b52b6e1a8515b1625fa18af129404492.png)'
 - en: Image by Author
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Click the run that is created. Now you will be able to see the activity for
     your new flow run in real-time!
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 点击创建的运行。现在您将能够实时查看新流运行的活动！
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/53f3ed04303e6959f9622c1b148d7a6d.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/53f3ed04303e6959f9622c1b148d7a6d.png)'
 - en: Image by Author
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Run the Workflow with Custom Parameters
+  id: totrans-85
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用自定义参数运行工作流
 - en: To run the workflow with custom parameters, click the Run tab, then change the
     parameters under Inputs.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用自定义参数运行工作流，请点击“运行”标签，然后更改“输入”下的参数。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/500f29953a51ba46520a7507a9297495.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/500f29953a51ba46520a7507a9297495.png)'
 - en: Image by Author
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: When you are satisfied with the parameters, simply click the Run button to start
     the run.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 当您对参数满意时，只需点击“运行”按钮即可开始运行。
 - en: View the Graph of the Workflow
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查看工作流图表
 - en: Clicking Schematic will give you the graph of the entire workflow.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 点击“示意图”将显示整个工作流的图表。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/8f95084821ddf3cb25a4b6e757a38a67.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/8f95084821ddf3cb25a4b6e757a38a67.png)'
 - en: Image by Author
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Other Features
+  id: totrans-94
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 其他功能
 - en: Besides some basic features mentioned above, Prefect also provides some other
     cool features that will significantly increase the efficiency of your workflow.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了上述提到的一些基本功能外，Prefect 还提供了一些其他酷炫的功能，这些功能将显著提高您的工作流效率。
 - en: Input Caching
+  id: totrans-96
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 输入缓存
 - en: Remember the problem we mentioned at the beginning of the article? Normally,
     if the function `get_classes` fails, the data created by the function `encode_categorical_columns` will
     be discarded and the entire workflow needs to start from the beginning.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 记得我们在文章开头提到的问题吗？通常，如果函数 `get_classes` 失败，则函数 `encode_categorical_columns` 创建的数据将被丢弃，整个工作流需要从头开始。
 - en: However, with Prefect, the output of `encode_categorical_columns` is stored.
     Next time when the workflow is rerun, the output of `encode_categorical_columns` will
     be used by the next task **without rerunning** the task `encode_categorical_columns` .
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，使用 Prefect 时，`encode_categorical_columns` 的输出会被存储。下次重新运行工作流时，`encode_categorical_columns`
+    的输出将被下一个任务**无需重新运行** `encode_categorical_columns` 使用。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/5837902e6ee1f5ecfb8f7c04207e0f27.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Prefect 在 Python 中协调数据科学项目](../Images/5837902e6ee1f5ecfb8f7c04207e0f27.png)'
 - en: Image by Author
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: This can result in a huge decrease in the time it takes to run the workflow.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能会大幅减少运行工作流所需的时间。
 - en: Persist Output
+  id: totrans-102
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 持久化输出
 - en: Sometimes, you might want to export your task’s data to an external location.
     This can be done by inserting to the task function the code to save the data.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，您可能希望将任务的数据导出到外部位置。这可以通过在任务函数中插入保存数据的代码来实现。
 - en: However, doing that will make it difficult to test the function.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，这样做会使得测试函数变得困难。
 - en: 'Prefect makes it easy to save the output of a task for each run by:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 通过以下方式简化了每次运行任务的输出保存：
 - en: setting the checkpoint to `True`
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将检查点设置为 `True`
 - en: '[PRE4]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: and adding `result = LocalResult(dir=...))` to the decorator `@task` .
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并将 `result = LocalResult(dir=...))` 添加到装饰器 `@task` 中。
 - en: 'Now the output of the task `split_data` will be saved to the directory `data/processed` !
     The name will look something similar to this:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在任务 `split_data` 的输出将被保存到目录 `data/processed` 中！名称会类似于这样：
 - en: '[PRE5]'
+  id: totrans-110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'If you want to customize the name of your file, you can add the argument `target` to `@task` :'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想自定义文件名称，可以在 `@task` 中添加 `target` 参数：
 - en: Prefect also provides other `Result` classes such as `GCSResult` and `S3Result` .
     You can check out API docs for results [here](https://docs.prefect.io/api/latest/engine/results.html).
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 还提供了其他 `Result` 类，比如 `GCSResult` 和 `S3Result`。你可以在[这里](https://docs.prefect.io/api/latest/engine/results.html)查看
+    API 文档。
 - en: Use Output of Another Flow for the Current Flow
+  id: totrans-113
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在当前流中使用另一个流的输出
 - en: If you are working with multiple flows, for example, `data-engineer` flow and `data-science` flow,
     you might want to use the output of the `data-engineer` flow for the `data-science` flow.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你正在处理多个流，例如 `data-engineer` 流和 `data-science` 流，你可能希望将 `data-engineer` 流的输出用于
+    `data-science` 流。
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/e298c783aeb52920e3bee451ac6043ab.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![用 Prefect 在 Python 中组织数据科学项目](../Images/e298c783aeb52920e3bee451ac6043ab.png)'
 - en: Image by Author
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: 'After saving the output of your `data-engineer` flow as a file, you can read
     that file using the `read` method:'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将 `data-engineer` 流的输出保存为文件后，你可以使用 `read` 方法读取该文件：
 - en: Connect Dependent Flows
+  id: totrans-118
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 连接相关流
 - en: 'Imagine this scenario: You created two flows that depend on each other. The
     flow `data-engineer` needs to be executed before the flow `data-science`'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象这种情况：你创建了两个互相依赖的流。流 `data-engineer` 需要在流 `data-science` 之前执行。
 - en: Somebody who looked at your workflow didn’t understand the relationship between
     these two flows. As a result, they executed the flow `data-science` and the flow `data-engineer `at
     the same time and encountered an error!
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 有人查看了你的工作流但没有理解这两个流之间的关系。结果，他们同时执行了流 `data-science` 和流 `data-engineer`，并遇到了错误！
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/179c539b21ae399aa7928b8c2ce53252.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![用 Prefect 在 Python 中组织数据科学项目](../Images/179c539b21ae399aa7928b8c2ce53252.png)'
 - en: Image by Author
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: To prevent this from happening, we should specify the relationship between flows.
     Luckily, Prefect makes it easier for us to do so.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了防止这种情况发生，我们应该指定流之间的关系。幸运的是，Prefect 使这变得更简单。
 - en: Start with grabbing two different flows using `StartFlowRun` . Add `wait=True` to
     the argument so that the downstream flow is executed only after the upstream flow
     finishes executing.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先使用 `StartFlowRun` 获取两个不同的流。将 `wait=True` 添加到参数中，以确保下游流仅在上游流执行完毕后才执行。
 - en: Next, calling `data_science_flow` under the `with Flow(...)` context manager.
     Use `upstream_tasks` to specify the tasks/flows that will be executed before the `data-science` flow
     is executed.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，在 `with Flow(...)` 上下文管理器下调用 `data_science_flow`。使用 `upstream_tasks` 指定将在
+    `data-science` 流执行前执行的任务/流。
 - en: 'Now the two flows are connected like below:'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在两个流连接如下：
 - en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/5deddfed0f278e9a0dffe9340d89edf3.png)'
+  id: totrans-127
   prefs: []
   type: TYPE_IMG
+  zh: '![用 Prefect 在 Python 中组织数据科学项目](../Images/5deddfed0f278e9a0dffe9340d89edf3.png)'
 - en: Image by Author
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Pretty cool!
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 相当酷！
 - en: Schedule Your Flow
+  id: totrans-130
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 调度你的流
 - en: Prefect also makes it seamless to execute a flow at a certain time or at a certain
     interval.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 也使得在特定时间或特定间隔执行流变得无缝。
 - en: 'For example, to run a flow every 1 minute, you can initiate the class `IntervalSchedule` and
     add `schedule` to the `with Flow(...)` context manager:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，要每分钟运行一次流，你可以初始化 `IntervalSchedule` 类，并将 `schedule` 添加到 `with Flow(...)`
+    上下文管理器中：
 - en: Now your flow will be rerun every 1 minute!
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你的流将每分钟重新运行一次！
 - en: Learn more about different ways to schedule your flow [here](https://docs.prefect.io/core/concepts/schedules.html#overview).
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解更多关于调度流的不同方式，请访问[这里](https://docs.prefect.io/core/concepts/schedules.html#overview)。
 - en: Logging
+  id: totrans-135
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 日志记录
 - en: 'You can log the print statements within a task by simply adding `log_stdout=True` to `@task` :'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过简单地将 `log_stdout=True` 添加到 `@task` 中来记录任务中的打印语句：
 - en: 'And you should see an output like below when executing the task:'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行任务时，你应该会看到如下输出：
 - en: '[PRE6]'
+  id: totrans-138
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Conclusion
+  id: totrans-139
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Congratulations! You have just learned how Prefect can optimize your data science
     workflow in a few lines of Python code. Small optimization in your code can result
     in a huge increase in efficiency in the long run.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 恭喜！你刚刚了解了如何用几行 Python 代码优化你的数据科学工作流程。代码中的小优化在长远中可能会带来巨大的效率提升。
 - en: Feel free to play and [fork the source code of this article here](https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/prefect_example).
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 随意玩耍并 [在这里 fork 这篇文章的源代码](https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/prefect_example)。
 - en: I like to write about basic data science concepts and play with different data
     science tools. You could connect with me on [LinkedIn](https://www.linkedin.com/in/khuyen-tran-1ab926151/) and [Twitter](https://twitter.com/KhuyenTran16).
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 我喜欢写关于基本数据科学概念的文章，并玩各种数据科学工具。你可以在 [LinkedIn](https://www.linkedin.com/in/khuyen-tran-1ab926151/)
+    和 [Twitter](https://twitter.com/KhuyenTran16) 上与我联系。
 - en: 'Star [this repo](https://github.com/khuyentran1401/Data-science) if you want
     to check out the codes for all of the articles I have written. Follow me on Medium
     to stay informed with my latest data science articles like these:'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想查看我撰写的所有文章的代码，请给[this repo](https://github.com/khuyentran1401/Data-science)打星。关注我的
+    Medium，获取最新的数据科学文章：
 - en: '[**Great Expectations: Always Know What to Expect From Your Data**](https://towardsdatascience.com/great-expectations-always-know-what-to-expect-from-your-data-51214866c24)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**Great Expectations：始终了解你的数据期望**](https://towardsdatascience.com/great-expectations-always-know-what-to-expect-from-your-data-51214866c24)'
 - en: '[**Kedro — A Python Framework for Reproducible Data Science Project**](https://towardsdatascience.com/kedro-a-python-framework-for-reproducible-data-science-project-4d44977d4f04)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**Kedro — 用于可重复数据科学项目的 Python 框架**](https://towardsdatascience.com/kedro-a-python-framework-for-reproducible-data-science-project-4d44977d4f04)'
 - en: '[**Introduction to Weight & Biases: Track and Visualize your Machine Learning
     Experiments in 3 Lines…**](https://towardsdatascience.com/introduction-to-weight-biases-track-and-visualize-your-machine-learning-experiments-in-3-lines-9c9553b0f99d)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**Weight & Biases 介绍：用 3 行代码跟踪和可视化你的机器学习实验**](https://towardsdatascience.com/introduction-to-weight-biases-track-and-visualize-your-machine-learning-experiments-in-3-lines-9c9553b0f99d)'
 - en: '[**Introduction to Datapane: A Python Library to Build Interactive Reports**](https://towardsdatascience.com/introduction-to-datapane-a-python-library-to-build-interactive-reports-4593fd3cb9c8)'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**Datapane 介绍：构建互动报告的 Python 库**](https://towardsdatascience.com/introduction-to-datapane-a-python-library-to-build-interactive-reports-4593fd3cb9c8)'
 - en: '**[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** is a prolific
     data science writer, and has written [an impressive collection of useful data
     science topics along with code and articles](https://github.com/khuyentran1401/Data-science).
     She has shared over 400 tips about data science and Python on **[Data Science
     Simplified](https://mathdatasimplified.com/)**. Subscribe to her newsletter to
     receive her daily tips.'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** 是一位多产的数据科学作家，她撰写了
+    [一系列令人印象深刻的有用数据科学话题，包括代码和文章](https://github.com/khuyentran1401/Data-science)。她在
+    **[Data Science Simplified](https://mathdatasimplified.com/)** 分享了超过 400 个关于数据科学和
+    Python 的技巧。订阅她的新闻通讯，接收她的每日提示。'
 - en: '[Original](https://towardsdatascience.com/orchestrate-a-data-science-project-in-python-with-prefect-e69c61a49074).
     Reposted with permission.'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/orchestrate-a-data-science-project-in-python-with-prefect-e69c61a49074)。转载已获许可。'
 - en: More On This Topic
+  id: totrans-150
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Prefect 构建数据管道](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
 - en: '[Free Python Project Coding Course](https://www.kdnuggets.com/2022/08/free-python-project-coding-course.html)'
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 Python 项目编码课程](https://www.kdnuggets.com/2022/08/free-python-project-coding-course.html)'
 - en: '[From Data Collection to Model Deployment: 6 Stages of a Data…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)'
 - en: '[KDnuggets News, July 5: A Rotten Data Science Project • 10 AI…](https://www.kdnuggets.com/2023/n24.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 AI…](https://www.kdnuggets.com/2023/n24.html)'
 - en: '[Stop Hard Coding in a Data Science Project - Use Config Files Instead](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在数据科学项目中停止硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)'
 - en: '[19 Data Science Project Ideas for Beginners](https://www.kdnuggets.com/2021/11/19-data-science-project-ideas-beginners.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[19 个适合初学者的数据科学项目想法](https://www.kdnuggets.com/2021/11/19-data-science-project-ideas-beginners.html)'
