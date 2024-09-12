@@ -3,87 +3,109 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用计算机视觉模型进行道路车道线检测
 - en: 原文：[https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html](https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html](https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html)
 - en: '**By Vijay Ramakrishnan**.'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：维贾伊·拉马克里希南**。'
 - en: Detecting lane lines is a fundamental task for autonomous vehicles while driving
     on the road. It is the building block to other path planning and control actions
     like breaking and steering. Lets get started implementing them!
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 检测车道线是自动驾驶车辆在道路上行驶时的基本任务。这是其他路径规划和控制动作如刹车和转向的基础。让我们开始实现吧！
 - en: '* * *'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在 IT 领域'
 - en: '* * *'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/7a992963ff20ff065c613a4986e26864.png)'
   id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7a992963ff20ff065c613a4986e26864.png)'
 - en: '**Fig 1\. Final output of this project**'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1\. 本项目的最终输出**'
 - en: 'Note: This project was derived from [Udacity blog](https://github.com/udacity/CarND-LaneLines-P1).
     All media generated used custom CV configurations explained in this article.'
   id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 注意：该项目源自 [Udacity 博客](https://github.com/udacity/CarND-LaneLines-P1)。所有生成的媒体使用了本文中解释的自定义
+    CV 配置。
 - en: '**Step 0: Introduction**'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 0: 介绍**'
 - en: Before we work with videos, lets work with static images since it is much easier
     to debug with. Here is the image we will be working with.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理视频之前，我们先处理静态图像，因为这更容易调试。这是我们将要使用的图像。
 - en: '![](../Images/e8f072f35ceec435a7d0e66babd21c0d.png)'
   id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8f072f35ceec435a7d0e66babd21c0d.png)'
 - en: '***Fig. Input image***'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '***图. 输入图像***'
 - en: 'I am running python 3 with the following imports in a jupyter notebook:'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在 Jupyter Notebook 中运行 Python 3，导入了以下库：
 - en: '[PRE0]'
   id: totrans-18
   prefs: []
@@ -98,45 +120,54 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 车道检测流程遵循以下步骤：
 - en: Pre-process image using grayscale and gaussian blur
   id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用灰度图像和高斯模糊进行图像预处理
 - en: Apply canny edge detection to the image
   id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对图像应用 Canny 边缘检测
 - en: Apply masking region to the image
   id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对图像应用掩膜区域
 - en: Apply Hough transform to the image
   id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对图像应用霍夫变换
 - en: Extrapolate the lines found in the hough transform to construct the left and
     right lane lines
   id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将霍夫变换中发现的线条外推以构建左右车道线
 - en: Add the extrapolated lines to the input image
   id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将延伸线添加到输入图像
 - en: '**Step 1: Pre-processing of image**'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 1: 图像预处理**'
 - en: We grayscale the input image which is needed for canny edge detection.
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将输入图像转换为灰度图像，这是 Canny 边缘检测所需的。
 - en: '[PRE2]'
   id: totrans-29
   prefs: []
@@ -156,15 +187,18 @@
   id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3890713a560d8e34476af175fcf028a9.png)'
 - en: '***Fig. Gray-scaled image***'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '***图. 灰度图像***'
 - en: We then apply a gaussian smoothing function to the image. Again, this is needed
     for the canny edge detection to average out anomalous gradients in the image.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们对图像应用高斯平滑函数。同样，这对于 Canny 边缘检测是必要的，以平滑图像中的异常梯度。
 - en: '[PRE5]'
   id: totrans-35
   prefs: []
@@ -184,18 +218,21 @@
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 2: Canny 边缘检测**'
 - en: We need to detect edges for lane detection since the contrast between the lane
     and the surrounding road surface provides us with useful information on detecting
     the lane lines.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要检测边缘以进行车道检测，因为车道与周围路面之间的对比提供了检测车道线的有用信息。
 - en: Canny edge detection is an operator that uses the horizontal and vertical gradients
     of the pixel values of an image to detect edges. A more deeper understanding of
     the algorithm can be found [here](http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html).
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: Canny 边缘检测是一种运算符，利用图像像素值的水平和垂直梯度来检测边缘。对算法的更深入理解可以在[这里](http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html)找到。
 - en: '[PRE8]'
   id: totrans-41
   prefs: []
@@ -215,11 +252,13 @@
   id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e9646d2efb5b21233e6fae0a2961584.png)'
 - en: '*Notice the edge detector captures all the lane lines, along with surrounding
     edges like trees*'
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意边缘检测器捕捉到了所有车道线以及周围的边缘，如树木*'
 - en: '**Step 3: Mask out points that are not in the region of interest**'
   id: totrans-46
   prefs: []
