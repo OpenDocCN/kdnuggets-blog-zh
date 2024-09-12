@@ -1,11 +1,15 @@
 - en: How to Digest 15 Billion Logs Per Day and Keep Big Queries Within 1 Second
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在一天内处理150亿条日志并保持大查询在1秒内完成
 - en: 原文：[https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second](https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second](https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second)
 - en: This data warehousing use case is about **scale**. The user is [China Unicom](https://en.wikipedia.org/wiki/China_Unicom),
     one of the world's biggest telecommunication service providers. Using Apache Doris,
     they deploy multiple petabyte-scale clusters on dozens of machines to support
@@ -14,153 +18,220 @@
     need of real-time monitoring, threat tracing, and alerting, they require a log
     analytic system that can automatically collect, store, analyze, and visualize
     logs and event records.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据仓储用例涉及到**规模**。用户是[中国联通](https://en.wikipedia.org/wiki/China_Unicom)，世界上最大的电信服务提供商之一。利用Apache
+    Doris，他们在数十台机器上部署了多个PB级别的集群，以支持其来自30多条业务线的150亿条日志的每日添加。这样一个庞大的日志分析系统是其网络安全管理的一部分。为了实现实时监控、威胁追踪和警报，他们需要一个能够自动收集、存储、分析和可视化日志及事件记录的日志分析系统。
 - en: From an architectural perspective, the system should be able to undertake real-time
     analysis of various formats of logs, and of course, be scalable to support the
     huge and ever-enlarging data size. The rest of this post is about what their log
     processing architecture looks like, and how they realize stable data ingestion,
     low-cost storage, and quick queries with it.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 从架构角度来看，系统应能够实时分析各种格式的日志，并且当然要具备可扩展性，以支持庞大且不断增长的数据量。本文的其余部分将介绍他们的日志处理架构是什么样的，以及他们如何实现稳定的数据摄取、低成本存储和快速查询。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: System Architecture
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 系统架构
 - en: This is an overview of their data pipeline. The logs are collected into the
     data warehouse, and go through several layers of processing.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是他们数据管道的概述。日志被收集到数据仓库中，并经过几层处理。
 - en: '![How to Digest 15 Billion Logs Per Day and Keep Big Queries Within 1 Second](../Images/b108109efb2bb3713cad25563eb774f0.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在一天内处理150亿条日志并保持大查询在1秒内完成](../Images/b108109efb2bb3713cad25563eb774f0.png)'
 - en: '**ODS**: Original logs and alerts from all sources are gathered into Apache
     Kafka. Meanwhile, a copy of them will be stored in HDFS for data verification
     or replay.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ODS**：所有来源的原始日志和警报被汇总到Apache Kafka中。同时，它们的副本将存储在HDFS中，以便进行数据验证或重放。'
 - en: '**DWD**: This is where the fact tables are. Apache Flink cleans, standardizes,
     backfills, and de-identifies the data, and write it back to Kafka. These fact
     tables will also be put into Apache Doris, so that Doris can trace a certain item
     or use them for dashboarding and reporting. As logs are not averse to duplication,
     the fact tables will be arranged in the [Duplicate Key model](https://doris.apache.org/docs/dev/data-table/data-model#duplicate-model)
     of Apache Doris.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**DWD**：这里存放着事实表。Apache Flink清洗、标准化、回填和去标识化数据，并将其写回Kafka。这些事实表还会被放入Apache Doris中，以便Doris能够跟踪某一项或用于仪表盘和报告。由于日志不怕重复，事实表将按照Apache
+    Doris的[Duplicate Key model](https://doris.apache.org/docs/dev/data-table/data-model#duplicate-model)进行安排。'
 - en: '**DWS**: This layer aggregates data from DWD and lays the foundation for queries
     and analysis.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**DWS**：这一层聚合DWD中的数据，为查询和分析奠定基础。'
 - en: '**ADS**: In this layer, Apache Doris auto-aggregates data with its Aggregate
     Key model, and auto-updates data with its Unique Key model.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ADS**：在这一层，Apache Doris 使用其聚合键模型自动聚合数据，并使用其唯一键模型自动更新数据。'
 - en: Architecture 2.0 evolves from Architecture 1.0, which is supported by ClickHouse
     and Apache Hive. The transition arised from the user's needs for real-time data
     processing and multi-table join queries. In their experience with the old architecture,
     they found inadequate support for concurrency and multi-table joins, manifested
     by frequent timeouts in dashboarding and OOM errors in distributed joins.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Architecture 2.0 由 Architecture 1.0 发展而来，后者由 ClickHouse 和 Apache Hive 支持。这一过渡源于用户对实时数据处理和多表联接查询的需求。在他们使用旧架构的经验中，他们发现对并发和多表联接的支持不足，这表现在仪表板中的频繁超时和分布式联接中的
+    OOM 错误。
 - en: '![How to Digest 15 Billion Logs Per Day and Keep Big Queries Within 1 Second](../Images/1f417c578ba07a2feb49352f7afd467e.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在一天内处理150亿条日志并将大查询保持在1秒内](../Images/1f417c578ba07a2feb49352f7afd467e.png)'
 - en: Now let's take a look at their practice in data ingestion, storage, and queries
     with Architecture 2.0.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来看看他们在数据摄取、存储和查询方面的 Architecture 2.0 实践。
 - en: Real-Case Practice
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实际案例实践
 - en: Stable ingestion of 15 billion logs per day
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 每天稳定摄取150亿条日志
 - en: In the user's case, their business churns out 15 billion logs every day. Ingesting
     such data volume quickly and stably is a real problem. With Apache Doris, the
     recommended way is to use the Flink-Doris-Connector. It is developed by the Apache
     Doris community for large-scale data writing. The component requires simple configuration.
     It implements Stream Load and can reach a writing speed of 200,000~300,000 logs
     per second, without interrupting the data analytic workloads.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在用户的案例中，他们的业务每天生成150亿条日志。快速且稳定地摄取如此大规模的数据量确实是一个问题。使用 Apache Doris，推荐的方式是使用 Flink-Doris-Connector。它由
+    Apache Doris 社区为大规模数据写入开发。该组件需要简单配置。它实现了流加载，并且可以达到每秒200,000~300,000条日志的写入速度，不会中断数据分析工作负载。
 - en: 'A lesson learned is that when using Flink for high-frequency writing, you need
     to find the right parameter configuration for your case to avoid data version
     accumulation. In this case, the user made the following optimizations:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 一项经验教训是，当使用 Flink 进行高频写入时，需要为你的案例找到合适的参数配置，以避免数据版本积累。在这种情况下，用户进行了以下优化：
 - en: '**Flink Checkpoint**: They increase the checkpoint interval from 15s to 60s
     to reduce writing frequency and the number of transactions processed by Doris
     per unit of time. This can relieve data writing pressure and avoid generating
     too many data versions.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Flink Checkpoint**：他们将检查点间隔从15秒增加到60秒，以减少写入频率和 Doris 每单位时间处理的事务数量。这可以减轻数据写入压力，避免生成过多的数据版本。'
 - en: '**Data Pre-Aggregation**: For data of the same ID but comes from various tables,
     Flink will pre-aggregate it based on the primary key ID and create a flat table,
     in order to avoid excessive resource consumption caused by multi-source data writing.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据预聚合**：对于来自不同表但 ID 相同的数据，Flink 将根据主键 ID 进行预聚合，并创建一个平面表，以避免因多源数据写入而导致的资源过度消耗。'
 - en: '**Doris Compaction**: The trick here includes finding the right Doris backend
     (BE) parameters to allocate the right amount of CPU resources for data compaction,
     setting the appropriate number of data partitions, buckets, and replicas (too
     much data tablets will bring huge overheads), and dialing up max_tablet_version_num
     to avoid version accumulation.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Doris Compaction**：这里的技巧包括找到合适的 Doris 后端（BE）参数，以分配适量的 CPU 资源用于数据压缩，设置适当的数据分区、桶和副本数量（过多的数据平板会带来巨大的开销），以及将
+    max_tablet_version_num 调高以避免版本积累。'
 - en: These measures together ensure daily ingestion stability. The user has witnessed
     stable performance and low compaction score in Doris backend. In addition, the
     combination of data pre-processing in Flink and the [Unique Key model](https://doris.apache.org/docs/dev/data-table/data-model#unique-model)
     in Doris can ensure quicker data updates.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些措施共同确保了每日摄取的稳定性。用户在 Doris 后端见证了稳定的性能和低的压缩分数。此外，Flink 中的数据预处理和 Doris 中的 [唯一键模型](https://doris.apache.org/docs/dev/data-table/data-model#unique-model)
+    的结合可以确保更快的数据更新。
 - en: Storage strategies to reduce costs by 50%
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 降低成本50%的存储策略
 - en: The size and generation rate of logs also impose pressure on storage. Among
     the immense log data, only a part of it is of high informational value, so storage
     should be differentiated. The user has three storage strategies to reduce costs.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 日志的大小和生成速率也对存储造成压力。在庞大的日志数据中，只有一部分具有较高的信息价值，因此存储应该有所区分。用户有三种存储策略来降低成本。
 - en: '**ZSTD (ZStandard) compression algorithm**: For tables larger than 1TB, specify
     the compression method as "ZSTD" upon table creation, it will realize a compression
     ratio of 10:1.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ZSTD（ZStandard）压缩算法**：对于大于1TB的表，在表创建时指定压缩方法为“ZSTD”，可以实现10:1的压缩比。'
 - en: '**Tiered storage of hot and cold data**: This is supported by the [new feature](https://blog.devgenius.io/hot-cold-data-separation-what-why-and-how-5f7c73e7a3cf)
     of Doris. The user sets a data "cooldown" period of 7 days. That means data from
     the past 7 days (namely, hot data) will be stored in SSD. As time goes by, hot
@@ -169,62 +240,83 @@
     to object storage for much lower storage costs. Plus, in object storage, data
     will be stored with only one copy instead of three. This further cuts down costs
     and the overheads brought by redundant storage.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**冷热数据分层存储**：这由Doris的[新功能](https://blog.devgenius.io/hot-cold-data-separation-what-why-and-how-5f7c73e7a3cf)支持。用户设置了数据“冷却”期为7天。这意味着过去7天的数据（即热数据）将存储在SSD中。随着时间的推移，热数据会“冷却”（超过7天），它将自动转移到成本较低的HDD中。随着数据变得更加“冷”，它将被转移到对象存储中以进一步降低存储成本。此外，在对象存储中，数据将以单副本存储，而不是三副本。这进一步减少了成本和冗余存储带来的开销。'
 - en: '**Differentiated replica numbers for different data partitions**: The user
     has partitioned their data by time range. The principle is to have more replicas
     for newer data partitions and less for the older ones. In their case, data from
     the past 3 months is frequently accessed, so they have 2 replicas for this partition.
     Data that is 3~6 months old has two replicas, and data from 6 months ago has one
     single copy.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**不同数据分区的副本数量**：用户按照时间范围对数据进行了分区。原则是对较新的数据分区有更多副本，对较旧的数据分区有较少副本。在他们的情况下，过去3个月的数据被频繁访问，因此该分区有2个副本。3~6个月的数据有两个副本，6个月前的数据只有一个副本。'
 - en: With these three strategies, the user has reduced their storage costs by 50%.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这三种策略，用户将存储成本降低了50%。
 - en: Differentiated query strategies based on data size
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 基于数据大小的差异化查询策略
 - en: 'Some logs must be immediately traced and located, such as those of abnormal
     events or failures. To ensure real-time response to these queries, the user has
     different query strategies for different data sizes:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 某些日志必须立即跟踪和定位，例如异常事件或故障日志。为了确保对这些查询的实时响应，用户针对不同的数据大小采用了不同的查询策略：
 - en: '**Less than 100G**: The user utilizes the dynamic partitioning feature of Doris.
     Small tables will be partitioned by date and large tables will be partitioned
     by hour. This can avoid data skew. To further ensure balance within a data partition,
     they use the snowflake ID as the bucketing field. They also set a starting offset.
     Data of the recent 20 days will be kept. This is the balance point between data
     backlog and analytic needs.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**少于100G**：用户利用Doris的动态分区功能。小表按日期分区，大表按小时分区。这可以避免数据倾斜。为了进一步确保数据分区内的平衡，他们使用snowflake
+    ID作为分桶字段。他们还设置了起始偏移量。最近20天的数据将被保留。这是在数据积压和分析需求之间的平衡点。'
 - en: '**100G~1T**: These tables have their materialized views, which are the pre-computed
     result sets stored in Doris. Thus, queries on these tables will be much faster
     and less resource-consuming. The DDL syntax of materialized views in Doris is
     the same as those in PostgreSQL and Oracle.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**100G~1T**：这些表有其物化视图，这些视图是在Doris中存储的预计算结果集。因此，对这些表的查询将会更快且资源消耗更少。Doris中的物化视图DDL语法与PostgreSQL和Oracle中的相同。'
 - en: '**More than 100T**: These tables are put into the Aggregate Key model of Apache
     Doris and pre-aggregate them. **In this way, we enable queries of 2 billion log
     records to be done in 1~2s.**'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**超过100T**：这些表被放入Apache Doris的聚合键模型中，并进行预聚合。**这样，我们可以使20亿条日志记录的查询在1~2秒内完成。**'
 - en: These strategies have shortened the response time of queries. For example, a
     query of a specific data item used to take minutes, but now it can be finished
     in milliseconds. In addition, for big tables that contain 10 billion data records,
     queries on different dimensions can all be done in a few seconds.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些策略缩短了查询的响应时间。例如，以前查询特定数据项需要几分钟，但现在可以在毫秒内完成。此外，对于包含100亿条数据记录的大表，查询不同维度的数据都可以在几秒钟内完成。
 - en: Ongoing Plans
+  id: totrans-40
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 进行中的计划
 - en: 'The user is now testing with the newly added [inverted index](https://blog.devgenius.io/what-is-inverted-index-and-how-we-made-log-analysis-10-times-more-cost-effective-with-it-6afc6cc81d20)
     in Apache Doris. It is designed to speed up full-text search of strings as well
     as equivalence and range queries of numerics and datetime. They have also provided
@@ -237,37 +329,57 @@
     decide the number of buckets is the data size and distribution of the previous
     day. They''ve come to the [Apache Doris community](https://join.slack.com/t/apachedoriscommunity/shared_invite/zt-1t3wfymur-0soNPATWQ~gbU8xutFOLog)
     and we are now working on this optimization.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户现在正在测试Apache Doris中新增的[倒排索引](https://blog.devgenius.io/what-is-inverted-index-and-how-we-made-log-analysis-10-times-more-cost-effective-with-it-6afc6cc81d20)。该索引旨在加快字符串的全文搜索以及数值和日期时间的等效性和范围查询。他们还提供了关于Doris自动分桶逻辑的宝贵反馈：目前，Doris根据前一个分区的数据大小来决定一个分区的桶数。用户的问题是，他们的大部分新数据在白天到达，而夜间的数据很少。因此，在他们的情况下，Doris在夜间创建了过多的桶，而在白天则创建了过少的桶，这与他们的需求相反。他们希望添加一种新的自动分桶逻辑，使Doris决定桶数的参考依据为前一天的数据大小和分布。他们已经来到了[Apache
+    Doris社区](https://join.slack.com/t/apachedoriscommunity/shared_invite/zt-1t3wfymur-0soNPATWQ~gbU8xutFOLog)，我们现在正在进行这一优化。
 - en: '**[Zaki Lu](https://www.linkedin.com/in/zaki-lu-99a06b148/)** is a former product
     manager at Baidu and now DevRel for the Apache Doris open source community.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[扎基·卢](https://www.linkedin.com/in/zaki-lu-99a06b148/)** 曾是百度的产品经理，现在是Apache
+    Doris开源社区的DevRel。'
 - en: More On This Topic
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Deep Learning with Python: Second Edition by François Chollet](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[《Python深度学习：第二版》by François Chollet](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)'
 - en: '[Kubernetes In Action: Second Edition](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[《Kubernetes实战：第二版》](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
 - en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Rotten Tomatoes电影评分预测的数据科学项目：…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
 - en: '[Python in Finance: Real Time Data Streaming within Jupyter Notebook](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融中的Python：Jupyter Notebook中的实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
 - en: '[Effective Small Language Models: Microsoft’s 1.3 Billion Parameter phi-1.5](https://www.kdnuggets.com/effective-small-language-models-microsoft-phi-15)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高效的小型语言模型：微软的13亿参数phi-1.5](https://www.kdnuggets.com/effective-small-language-models-microsoft-phi-15)'
 - en: '[5 Things to Keep in Mind Before Selecting Your Next Data Science Job](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择下一个数据科学职位前需要考虑的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)'
