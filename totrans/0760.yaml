@@ -1,322 +1,496 @@
 - en: 'Converting JSONs to Pandas DataFrames: Parsing Them the Right Way'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将 JSON 转换为 Pandas DataFrames：正确解析
 - en: 原文：[https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)
 - en: '![Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](../Images/4c8ffa1017679f5afc34ea6344d20936.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![将 JSON 转换为 Pandas DataFrames：正确解析](../Images/4c8ffa1017679f5afc34ea6344d20936.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Diving into the world of data science and machine learning, one of the fundamental
     skills you'll encounter is the art of reading data. If you have already some experience
     with it,  you're probably familiar with JSON (JavaScript Object Notation) - a
     popular format for both storing and exchanging data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 深入数据科学和机器学习的世界，你会遇到的基本技能之一就是数据读取的艺术。如果你已经有一些经验，你可能对 JSON（JavaScript 对象表示法）很熟悉，它是一种流行的数据存储和交换格式。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的
+    IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Think of how NoSQL databases like MongoDB love to store data in JSON, or how
     REST APIs often respond in the same format.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下 NoSQL 数据库如 MongoDB 喜欢以 JSON 格式存储数据，或者 REST API 经常以相同的格式响应。
 - en: However, JSON, while perfect for storage and exchange, isn't quite ready for
     in-depth analysis in its raw form. This is where we transform it into something
     more analytically friendly – a tabular format.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，虽然 JSON 非常适合存储和交换，但在原始形式下，它还不适合深入分析。这时我们需要将其转换成更适合分析的格式——表格格式。
 - en: So, whether you're dealing with a single JSON object or a delightful array of
     them, in Python's terms, you're essentially handling a dict or a list of dicts.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，无论你是处理单个 JSON 对象还是一个令人愉快的 JSON 数组，从 Python 的角度来看，你实际上是在处理一个字典或一个字典列表。
 - en: Let's explore together how this transformation unfolds, making our data ripe
     for analysis ????
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 一起探索这种转换如何展开，使我们的数据准备好进行分析 ????
 - en: Today I’ll be explaining a magic command that allows us to easily parse any
     JSON into a tabular format in seconds.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天我将解释一个神奇的命令，它能让我们在几秒钟内轻松地将任何 JSON 解析为表格格式。
 - en: And it is… pd**.**json_normalize()
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是…… pd**.**json_normalize()
 - en: So let’s see how it works with different types of JSONs.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么让我们看看不同类型的 JSON 是如何工作的。
 - en: 1\. Dealing with simple JSONs and lists of JSONs
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 1\. 处理简单的 JSON 和 JSON 列表
 - en: 'The first type of JSON that we can work with is single-leveled JSONs with a
     few keys and values. We define our first simple JSONs as follows:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以处理的第一种类型的 JSON 是单级 JSON，具有少量的键和值。我们定义我们的第一个简单 JSON 如下：
 - en: Code by Author
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码由作者提供
 - en: So let’s simulate the need to work with these JSON. We all know there’s not
     much to do in their JSON format. We need to transform these JSONs into some readable
     and modifiable format… which means Pandas DataFrames!
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以让我们模拟一下处理这些 JSON 的需要。我们都知道，在 JSON 格式下做的事情不多。我们需要将这些 JSON 转换成一些可读且可修改的格式……这就意味着
+    Pandas DataFrames！
 - en: 1.1 Dealing with simple JSON structures
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1.1 处理简单的 JSON 结构
 - en: 'First, we need to import the pandas library and then we can use the command
     pd.json_normalize(), as follows:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要导入 pandas 库，然后可以使用命令 pd.json_normalize()，如下所示：
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: By applying this command to a JSON with a single record, we obtain the most
     basic table. However, when our data is a little bit more complex and presents
     a list of JSONs, we can still use the same command with no further complications
     and the output will correspond to a table with multiple records.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将此命令应用于单条记录的 JSON，我们得到最基本的表格。然而，当我们的数据稍微复杂一些并呈现 JSON 列表时，我们仍然可以使用相同的命令，且不会出现进一步的复杂情况，输出将对应于一个包含多个记录的表格。
 - en: '![Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](../Images/2276b03bfa4c46301c146e806f7236df.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/2276b03bfa4c46301c146e806f7236df.png)'
 - en: Image by Author
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: Easy… right?
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单吧？
 - en: The next natural question is what happens when some of the values are missing.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一个自然的问题是当一些值丢失时会发生什么。
 - en: 1.2 Dealing with null values
+  id: totrans-30
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1.2 处理空值
 - en: Imagine some of the values are not informed, like for instance, the Income record
     for David is missing. When transforming our JSON into a simple pandas dataframe,
     the corresponding value will appear as NaN.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设某些值没有被提供，例如，David 的收入记录丢失。当我们将 JSON 转换为简单的 pandas 数据框时，相应的值将显示为 NaN。
 - en: '![Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](../Images/6f73df019796f8cd437090538bfdee19.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/6f73df019796f8cd437090538bfdee19.png)'
 - en: Image by Author
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: And what about if I only want to get some of the fields?
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我只想获取一些字段怎么办？
 - en: 1.3 Selecting only those columns of interest
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1.3 仅选择感兴趣的列
 - en: In case we just want to transform some specific fields into a tabular pandas
     DataFrame, the json_normalize() command does not allow us to choose what fields
     to transform.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们只想将某些特定字段转换为表格 pandas DataFrame，则 `json_normalize()` 命令不允许我们选择要转换的字段。
 - en: Therefore, a small preprocessing of the JSON should be performed where we filter
     just those columns of interest.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，应对 JSON 进行小规模预处理，过滤出那些感兴趣的列。
 - en: '[PRE1]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: So, let’s move to some more advanced JSON structure.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，让我们深入研究一些更复杂的 JSON 结构。
 - en: 2\. Dealing with multiple-level JSONs
+  id: totrans-40
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 2\. 处理多级 JSON
 - en: When dealing with multiple-leveled JSONs we find ourselves with nested JSONs
     within different levels. The procedure is the same as before, but in this case,
     we can choose how many levels we want to transform. By default, the command will
     always expand all levels  and generate new columns containing the concatenated
     name of all the nested levels.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理多级 JSON 时，我们会发现不同级别中存在嵌套的 JSON。程序与之前相同，但在这种情况下，我们可以选择想要转换的层级数量。默认情况下，命令总是扩展所有层级，并生成包含所有嵌套层级名称的列。
 - en: So if we normalize the following JSONs.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以如果我们规范化以下 JSON。
 - en: Code by Author
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的代码
 - en: 'We would get the following table with 3 columns under the field skills:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将获得如下表格，其中在字段 skills 下有 3 列：
 - en: skills.python
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: skills.python
 - en: skills.SQL
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: skills.SQL
 - en: skills.GCP
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: skills.GCP
 - en: and 4 columns under the field roles
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 并在字段 roles 下有 4 列
 - en: roles.project manager
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: roles.项目经理
 - en: roles.data engineer
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: roles.数据工程师
 - en: roles.data scientist
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: roles.数据科学家
 - en: roles.data analyst
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: roles.数据分析师
 - en: '![Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](../Images/61d6d8f305b831a591028a14b9fc22fc.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/61d6d8f305b831a591028a14b9fc22fc.png)'
 - en: Image by Author
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: However, imagine we just want to transform our top level. We can do so by specifically
     defining the parameter max_level to 0 (the max_level we want to expand).
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，假设我们只想转换顶层。我们可以通过将参数 `max_level` 设定为 0（我们想扩展的最大层级）来实现。
 - en: '[PRE2]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The pending values will be maintained within JSONs within our pandas DataFrame.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 待处理的值将保留在 JSON 中，并存在于我们的 pandas DataFrame 中。
 - en: '![Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](../Images/89e11109652ab5577b6db0630ba4d993.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/89e11109652ab5577b6db0630ba4d993.png)'
 - en: Image by Author
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: 3\. Dealing with a nested List JSON
+  id: totrans-60
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 3\. 处理嵌套列表 JSON
 - en: The last case we can find is having a nested List within a JSON field. So we
     first define our JSONs to use.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一种情况是 JSON 字段中包含嵌套列表。所以我们首先定义要使用的 JSON。
 - en: Code by Author
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的代码
 - en: We can effectively manage this data using Pandas in Python. The pd.json_normalize()
     function is particularly useful in this context. It can flatten the JSON data,
     including the nested list, into a structured format suitable for analysis. When
     this function is applied to our JSON data, it produces a normalized table that
     incorporates the nested list as part of its fields.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 Python 中的 Pandas 有效管理这些数据。`pd.json_normalize()` 函数在这种情况下特别有用。它可以将 JSON
+    数据（包括嵌套列表）展平为适合分析的结构化格式。当此函数应用于我们的 JSON 数据时，它会生成一个规范化的表格，其中将嵌套列表作为字段的一部分。
 - en: Moreover, Pandas offers the capability to further refine this process. By utilizing
     the record_path parameter in pd.json_normalize(), we can direct the function to
     specifically normalize the nested list.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，Pandas 提供了进一步完善此过程的能力。通过利用 `pd.json_normalize()` 中的 `record_path` 参数，我们可以指定函数专门规范化嵌套列表。
 - en: This action results in a dedicated table exclusively for the list's contents.
     By default, this process will only unfold the elements within the list. However,
     to enrich this table with additional context, such as retaining an associated
     ID for each record, we can use the meta parameter.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个操作会生成一个专门的表格，仅包含列表的内容。默认情况下，此过程只会展开列表中的元素。然而，为了丰富该表格的额外上下文，例如为每条记录保留相关的 ID，我们可以使用
+    meta 参数。
 - en: '![Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](../Images/034c44ebd509147c75c500ce585bf44c.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![将 JSON 转换为 Pandas DataFrames：正确解析它们](../Images/034c44ebd509147c75c500ce585bf44c.png)'
 - en: Image by Author
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Conclusion
+  id: totrans-68
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In summary, the transformation of JSON data into CSV files using Python's Pandas
     library is easy and effective.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 总之，使用 Python 的 Pandas 库将 JSON 数据转换为 CSV 文件既简单又有效。
 - en: JSON is still the most common format in modern data storage and exchange, notably
     in NoSQL databases and REST APIs. However, it presents some important analytic
     challenges when dealing with data in its raw format.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: JSON 仍然是现代数据存储和交换中最常见的格式，特别是在 NoSQL 数据库和 REST API 中。然而，当处理原始格式的数据时，它也带来了一些重要的分析挑战。
 - en: The pivotal role of Pandas' pd.json_normalize() emerges as a great way to handle
     such formats and convert our data into pandas DataFrame.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 的 pd.json_normalize() 在处理此类格式并将数据转换为 pandas DataFrame 方面发挥了关键作用。
 - en: I hope this guide was useful, and next time you are dealing with JSON, you can
     do it in a more effective way.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望本指南对你有所帮助，下次处理 JSON 数据时，你可以更有效地进行操作。
 - en: You can go check the corresponding Jupyter Notebook in the [following GitHub
     repo.](https://github.com/rfeers/Twitter/blob/main/Python/JSON_to_CSVs.ipynb)
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[以下 GitHub 仓库](https://github.com/rfeers/Twitter/blob/main/Python/JSON_to_CSVs.ipynb)查看对应的
+    Jupyter Notebook。
 - en: '**[](https://www.linkedin.com/in/josep-ferrer-sanchez/)**[Josep Ferrer](https://www.linkedin.com/in/josep-ferrer-sanchez)****
     is an analytics engineer from Barcelona. He graduated in physics engineering and
     is currently working in the data science field applied to human mobility. He is
     a part-time content creator focused on data science and technology. Josep writes
     on all things AI, covering the application of the ongoing explosion in the field.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/josep-ferrer-sanchez/)**[Josep Ferrer](https://www.linkedin.com/in/josep-ferrer-sanchez)**
+    是一位来自巴塞罗那的分析工程师。他拥有物理工程学位，目前在应用于人类流动的数据科学领域工作。他还是一名兼职内容创作者，专注于数据科学和技术。Josep 撰写有关
+    AI 的所有内容，涵盖了该领域的持续爆炸性应用。'
 - en: More On This Topic
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 查询你的 Pandas DataFrames](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Pandas DataFrames 中使用 apply() 方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
 - en: '[Combining Pandas DataFrames Made Simple](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[简化合并 Pandas DataFrames](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
 - en: '[How to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何合并 Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
 - en: '[3 Ways to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[合并 Pandas DataFrames 的 3 种方法](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
 - en: '[How to Merge Large DataFrames Efficiently with Pandas](https://www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何高效合并大型 DataFrames 使用 Pandas](https://www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas)'
