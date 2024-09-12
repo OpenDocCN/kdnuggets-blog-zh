@@ -1,32 +1,46 @@
 - en: Deep Learning in H2O using R
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用R进行H2O中的深度学习
 - en: 原文：[https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html](https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html](https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '![H2O](../Images/1206680a6d4c333920230edabcf8470e.png)This article is about
     implementing Deep Learning using the H2O package in R.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '![H2O](../Images/1206680a6d4c333920230edabcf8470e.png)这篇文章介绍了如何在R中使用H2O包进行深度学习。'
 - en: H2O is an open-source Artificial Intelligence platform that allows us to use
     Machine Learning techniques such as Naïve Bayes, K-means, PCA, Deep Learning,
     Autoencoders using Deep Learning, among others. Using H2O, we can build predictive
     models using programming environments such as R, Python, Scala and a web-based
     UI called Flow.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: H2O是一个开源的人工智能平台，允许我们使用机器学习技术，如朴素贝叶斯、K均值、PCA、深度学习、使用深度学习的自编码器等。使用H2O，我们可以在R、Python、Scala等编程环境中构建预测模型，还可以通过一个称为Flow的基于Web的UI进行操作。
 - en: 'I. Deep Learning: A Background'
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: I. 深度学习：背景
 - en: '[(Source)](http://qspace.library.queensu.ca/handle/1974/792/browse?value=Muthalaly%2C+Reena+Shaw&type=author)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[(来源)](http://qspace.library.queensu.ca/handle/1974/792/browse?value=Muthalaly%2C+Reena+Shaw&type=author)'
 - en: Deep Learning is a branch of Machine Learning algorithms that are inspired by
     the functioning of the human brain and the nervous system. The input data is clamped
     to the input layer of the deep network. The network then uses a hierarchy of hidden
@@ -34,16 +48,20 @@
     of the input data. It thus produces pseudo-features of the input features. Neural
     networks with [3 layers]( https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf)
     or more are considered ‘Deep’.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 深度学习是受人脑和神经系统功能启发的机器学习算法的一个分支。输入数据被固定到深度网络的输入层。网络随后使用层次化的隐藏层，逐步生成输入数据的紧凑、更高级的抽象（表示）。因此，它生成输入特征的伪特征。具有[3层](https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf)或更多层的神经网络被认为是“深度”的。
 - en: As an example, for the task of face detection, the raw input is usually a vector
     of pixel values. The first abstraction may identify pixels of light and shade;
     the second abstraction may identify edges and shapes; the third abstraction may
     put together these edges and shapes to form parts such as the eyes, nose; the
     next abstraction may put these parts together to form a face. Thus, complex representations
     are learnt using the composition of simpler representations.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个例子，对于面部检测任务，原始输入通常是一个像素值向量。第一次抽象可能识别光影像素；第二次抽象可能识别边缘和形状；第三次抽象可能将这些边缘和形状组合成眼睛、鼻子等部分；下一个抽象可能将这些部分组合成一个面孔。因此，通过简单表示的组合来学习复杂的表示。
 - en: At the output layer, the network error (cost) is calculated. This cost is successively
     minimized using a method called stochastic gradient descent and propagated backwards,
     back to the input layer, using an algorithm called backpropagation. This causes
@@ -51,61 +69,85 @@
     newer representations are propagated forward to the output layer and again checked
     for the network error. The process of forward and backward propagation continues
     until the weights have been adjusted to accurately predict the output.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在输出层，计算网络误差（成本）。这个成本通过一种称为随机梯度下降的方法逐步最小化，并通过一种称为反向传播的算法向后传播到输入层。这会导致网络中权重和偏置的重新校准。使用新的权重，新的表示被向前传播到输出层，并再次检查网络误差。前向和后向传播的过程会持续进行，直到权重被调整到准确预测输出为止。
 - en: '![](../Images/0d1688eee568f168fba64f3f71c4474e.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0d1688eee568f168fba64f3f71c4474e.png)'
 - en: 'Figure 1: Pyramid illustrating Deep Learning [(Source)](http://qspace.library.queensu.ca/handle/1974/792/browse?value=Muthalaly%2C+Reena+Shaw&type=author)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1：示意深度学习的金字塔 [(来源)](http://qspace.library.queensu.ca/handle/1974/792/browse?value=Muthalaly%2C+Reena+Shaw&type=author)
 - en: For Figure 1, let us consider an input dataset of 150 * 12000 dimensions (150
     rows, 12000 columns). We create a Deep network with 4 hidden layers consisting
     of 4000, 750, 200, 30 neurons. All the 12000 data points in the input layer are
     used to construct the 4000 pseudo-features of the first hidden layer. As the size
     of the network here progressively decreases towards the final hidden layer, it
     forms a pyramid. The 5 steps shown in the figure have been explained below.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于图 1，我们考虑一个150 * 12000维的输入数据集（150行，12000列）。我们创建一个具有4个隐藏层的深度网络，包含4000、750、200、30个神经元。输入层中的所有12000个数据点都用于构建第一个隐藏层的4000个伪特征。由于这里网络的规模逐渐减小到最后一个隐藏层，它形成了一个金字塔。图中显示的5个步骤如下所述。
 - en: '**Step 1:** Feed the input records (150* 12000) into the network.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 1：** 将输入记录（150* 12000）输入到网络中。'
 - en: '**Step 2:** The Deep Learning algorithm begins to learn inherent patterns in
     the dataset. It does so by associating a weight and bias to every feature formed
     from the input layer and hidden layers. This is the model-building stage. As it
     passes through each successive hidden layer, it forms narrower abstractions of
     the data. Each abstraction takes the abstraction of the previous layer as its
     input.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 2：** 深度学习算法开始学习数据集中的固有模式。它通过将权重和偏置关联到从输入层和隐藏层形成的每个特征来实现。这是模型构建阶段。随着它通过每个连续的隐藏层，它形成了数据的更窄的抽象。每个抽象将前一层的抽象作为输入。'
 - en: Dropout is a hyper-parameter specified during the model-building stage.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Dropout 是在模型构建阶段指定的超参数。
 - en: '**Step 3:** After passing through the last hidden layer here, an abstraction
     of 150* 30 features is formed. The class labels (150* 1) are exposed to this abstraction.
     It has been a feedforward neural network so far.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 3：** 经过最后一个隐藏层后，形成了150* 30特征的抽象。类别标签（150* 1）暴露于此抽象中。到目前为止，它仍然是一个前馈神经网络。'
 - en: '**Step 4:** The class labels help the model associate an outcome to the patterns
     created for every input record. Accordingly, now the weights and biases can be
     tuned to better match the labels and minimize the cost (difference between the
     predicted output and actual output for the record).'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 4：** 类别标签帮助模型将结果与为每个输入记录创建的模式相关联。因此，现在可以调整权重和偏置，以更好地匹配标签并最小化成本（记录的预测输出与实际输出之间的差异）。'
 - en: Stochastic Gradient Descent uses random training set samples iteratively to
     minimize the cost. This is done by going backwards from the output layer towards
     the input layer and is called backpropagation. Backpropagation trains deep networks,
     using the algorithm of Stochastic Gradient Descent.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机梯度下降使用随机训练集样本迭代以最小化成本。这是通过从输出层向输入层反向传播来实现的，称为反向传播。反向传播训练深度网络，使用随机梯度下降算法。
 - en: '**Step 5:** Backpropagation occurs n times, where n = number of epochs, or
     until there is no change in the weights.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 5：** 反向传播发生了n次，其中n = 纪元数，或者直到权重没有变化为止。'
 - en: 'II. Deep Learning in H2O:'
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: II. H2O中的深度学习：
 - en: Deep Learning in H2O is implemented natively as a Multi-Layer Perceptron (MLP).
     But, H2O also allows us to build autoencoders (an autoencoder is a neural net
     that takes a set of inputs, compresses and encodes them, and then tries to reconstruct
@@ -113,198 +155,298 @@
     Neural Networks can be constructed using [H2O’s Deep Water Project]( https://www.h2o.ai/deep-water/)
     through third-party integrations of other Deep Learning libraries such as Caffe
     and TensorFlow.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: H2O中的深度学习本地实现为多层感知器（MLP）。但是，H2O还允许我们构建自编码器（自编码器是一个神经网络，它接受一组输入，对其进行压缩和编码，然后尝试尽可能准确地重建输入）。可以通过
+    [H2O的Deep Water项目]( https://www.h2o.ai/deep-water/) 通过其他深度学习库（如Caffe和TensorFlow）的第三方集成来构建递归神经网络和卷积神经网络。
 - en: "The user has to specify the values of the hyper-parameters of the Deep Learning\
     \ model. Parameters refer to the weights and biases of a deep learning model.\
     \ Hyper-parameters are the options one needs to design a neural net, like number\
     \ of layers, nodes per layer, activation, choice of regularizer, among others.\uFEFF"
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户需要指定深度学习模型的超参数值。参数指的是深度学习模型的权重和偏置。超参数是设计神经网络所需的选项，如层数、每层的节点数、激活函数、正则化器的选择等。
 - en: The computations of the global model parameters can be run on a single node
     or a multi-node cluster. For a multi-node cluster, a copy of the global model
     parameters is trained on the local data of a compute node, through multi-threaded
     and distributed parallel computation. The model is averaged across the network
     with each compute node contributing periodically to the global model.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 全局模型参数的计算可以在单个节点或多节点集群上运行。对于多节点集群，全局模型参数的副本在计算节点的本地数据上进行训练，通过多线程和分布式并行计算。模型在网络中进行平均，每个计算节点定期对全局模型做出贡献。
 - en: 'Some of the features of H2O’s Deep Learning models are:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: H2O 深度学习模型的一些特性包括：
 - en: '**1) Automatic ‘adaptive learning rate:**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1) 自动 ‘adaptive learning rate:**'
 - en: ADADELTA algorithm’(‘adaptive_rate’ hyper-parameter) for faster convergence
     and reduced oscillation around ravines, optional value of slower learning rate
     called ‘rate_annealing’ to slow down the learning rate as the model approaches
     a minima in the optimization landscape.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: ADADELTA 算法（‘adaptive_rate’ 超参数）用于加快收敛速度和减少在峡谷周围的振荡，提供一个名为 ‘rate_annealing’
+    的可选值，以在模型接近优化空间中的最小值时减慢学习率。
 - en: '**2) Model regularization:**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2) 模型正则化：**'
 - en: To avoid overfitting, H2O’s Deep Learning uses l1 and l2 regularization; and
     the concept of ‘dropouts’.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免过拟合，H2O 的深度学习使用 l1 和 l2 正则化，并且使用 ‘dropouts’ 的概念。
 - en: '*l1 :* l1 constrains the absolute value of the weights. It causes many weights
     to become 0.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*l1:* l1 约束权重的绝对值。它使许多权重变为 0。'
 - en: '*l2:* l2 constrains the sum of the squared weights. It causes many weights
     to become small.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*l2:* l2 约束权重的平方和。它使许多权重变得很小。'
 - en: '*input_dropout_ratio:* input_dropout_ratio refers to the fraction of features
     to be dropped out / omitted from each training record, in order to improve generalization.
     As an example, ‘ input_dropout_ratio = 0.1’ means 10% of input features are being
     dropped.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*input_dropout_ratio:* input_dropout_ratio 指每个训练记录中要丢弃/省略的特征的比例，以提高泛化能力。例如，‘
+    input_dropout_ratio = 0.1’ 表示 10% 的输入特征被丢弃。'
 - en: '*hidden_dropout_ratios:* hidden_dropout_ratios refers to the fraction of features
     to be dropped out / omitted from each hidden layer, in order to improve generalization.
     As an example, ‘ hidden_dropout_ratios = c( 0.1, 0.1)’ means 10% of hidden features
     are dropped in each hidden layer, in a DL model having 2 hidden layers.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*hidden_dropout_ratios:* hidden_dropout_ratios 指每个隐藏层中要丢弃/省略的特征的比例，以提高模型的泛化能力。例如，‘
+    hidden_dropout_ratios = c( 0.1, 0.1)’ 表示在一个有两个隐藏层的深度学习模型中，每个隐藏层中有 10% 的隐藏特征被丢弃。'
 - en: '**3) Model checkpointing:**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3) 模型检查点：**'
 - en: Checkpointing (using its key= ‘model_id’) is used to resume the training of
     the saved previous model with more data, changed values of hyper-parameters and
     so forth.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 检查点（使用其键 = ‘model_id’）用于在更多数据、更改超参数等情况下恢复先前保存模型的训练。
 - en: '**4) Grid Search:**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**4) 网格搜索：**'
 - en: In order to compare the performance of models and tune the values of hyper-parameters,
     a Grid Search model trains all possible models obtained by combining sets of hyper-parameters.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了比较模型的性能并调整超参数值，网格搜索模型训练了通过组合超参数集合获得的所有可能模型。
 - en: The example below [(source)]( http://docs.h2o.ai/h2o/latest-stable/h2o-docs/booklets/DeepLearningBooklet.pdf)
     shows 3 different topologies of hidden layers and the number of neurons, 2 different
     values of l1 regularization. Thus, the model Model_Grid1 trains 6 different models.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例 [(source)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/booklets/DeepLearningBooklet.pdf)
+    显示了 3 种不同的隐藏层拓扑结构和神经元数量，2 种不同的 l1 正则化值。因此，模型 Model_Grid1 训练了 6 种不同的模型。
 - en: 5) H2O also allows to perform Cross-validation on the training_frame and can
     also implement the GBM method (Gradient Boosting Machine).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 5) H2O 还允许对 training_frame 执行交叉验证，并且还可以实现 GBM 方法（梯度提升机）。
 - en: 'III. Common R Commands for Deep Learning:'
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: III. 深度学习的常见 R 命令：
 - en: 'From [this source]( http://docs.h2o.ai/h2o/latest-stable/h2o-docs/booklets/DeepLearningBooklet.pdf):'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 [这个来源](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/booklets/DeepLearningBooklet.pdf)：
 - en: 'library(h2o): Imports the H2O R package.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'library(h2o): 导入 H2O R 包。'
 - en: 'h2o.init(): Connects to (or starts) an H2O cluster.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'h2o.init(): 连接到（或启动）H2O 集群。'
 - en: 'h2o.shutdown(): Shuts down the H2O cluster.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'h2o.shutdown(): 关闭 H2O 集群。'
 - en: 'h2o.importFile(path): Imports a file into H2O.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'h2o.importFile(path): 将文件导入 H2O。'
 - en: 'h2o.deeplearning(x,y,training frame,hidden,epochs): Creates a Deep Learning
     model.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'h2o.deeplearning(x,y,training frame,hidden,epochs): 创建一个深度学习模型。'
 - en: 'h2o.grid(algorithm,grid id,...,hyper params = list()): Starts H2O grid support
     and gives results.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'h2o.grid(algorithm,grid id,...,hyper params = list()): 启动 H2O 网格支持并给出结果。'
 - en: 'h2o.predict(model, newdata): Generate predictions from an H2O model on a test
     set.'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'h2o.predict(model, newdata): 从H2O模型生成对测试集的预测。'
 - en: 'IV. R Script:'
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: IV. R脚本：
 - en: I have used the UCI Machine Learning ['Pima Indians' dataset](https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes).
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用了UCI机器学习的['Pima Indians'数据集](https://archive.ics.uci.edu/ml/datasets/pima+indians+diabetes)。
 - en: '**Related:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Deep Learning for Internet of Things Using H2O](/2016/04/deep-learning-iot-h2o.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于H2O的物联网深度学习](/2016/04/deep-learning-iot-h2o.html)'
 - en: '[Decision Boundaries for Deep Learning and other Machine Learning classifiers](/2015/06/decision-boundaries-deep-learning-machine-learning-classifiers.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习和其他机器学习分类器的决策边界](/2015/06/decision-boundaries-deep-learning-machine-learning-classifiers.html)'
 - en: '[Interview: Arno Candel, H20.ai on How to quick start Deep Learning with H2O](/2015/01/interview-arno-candel-h20-deep-learning.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[访谈：Arno Candel，H20.ai谈如何快速启动H2O深度学习](/2015/01/interview-arno-candel-h20-deep-learning.html)'
 - en: '* * *'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT需求'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Datawig，一个AWS深度学习库进行缺失值插补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
 - en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
 - en: '[15 Free Machine Learning and Deep Learning Books](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[15本免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)'
 - en: '[KDnuggets News, November 2: The Current State of Data Science…](https://www.kdnuggets.com/2022/n43.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)'
 - en: '[15 More Free Machine Learning and Deep Learning Books](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[15本更多免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)'
