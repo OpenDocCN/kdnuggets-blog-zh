@@ -209,11 +209,14 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你无法获取原始数据并需要依赖于次级数据源，请提醒你的利益相关者潜在的缺陷，以便每个人对项目有正确的期望。概述你能提供的分析范围，以及如果能够获取原始数据时需要的再加工量。只要你明确告知利益相关者潜在的下游影响，基于
+    expediency 做出决策本身没有什么问题。
 - en: 2\. Is source data sufficiently granular?
   id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 数据源是否足够细粒度？
 - en: 'According to [Kimball](https://www.kimballgroup.com/2007/07/keep-to-the-grain-in-dimensional-modeling/),
     it’s important to “stick to rich, expressive, atomic-level data that’s closely
     connected to the original source and collection process.” I couldn’t agree more:
@@ -221,6 +224,8 @@
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据[Kimball](https://www.kimballgroup.com/2007/07/keep-to-the-grain-in-dimensional-modeling/)，重要的是“坚持使用与原始来源和收集过程紧密相关的丰富、表达性强的原子级数据。”
+    我完全同意：细粒度数据给你更多的*选择*，而汇总数据则有限制。
 - en: 'One of the most common examples of this in practice is the difference between
     Google Analytics data exported via the API and Google Analytics 360 data loaded
     automatically into Bigquery. Via the API, GA will only give you aggregated metrics,
@@ -231,6 +236,8 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 实践中最常见的一个例子是Google Analytics通过API导出的数据与Google Analytics 360自动加载到Bigquery中的数据之间的差异。通过API，GA只会提供汇总指标，而GA
+    360会将每一个会话和每一个事件导出到Bigquery中。汇总数据仅在创建极高层次的分析时有用，例如页面浏览量或独立访客的趋势线。利用细粒度数据，你可以回答任何问题——多触点归因、漏斗分析、A/B测试等。
 - en: Ideally, you want to have access to the absolute most granular data available
     from the source data system. At this early stage, you don’t yet know all of the
     followup questions you’re going to be asked to investigate, and you want to be
@@ -240,11 +247,13 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 理想情况下，你希望能访问来源数据系统中绝对最细粒度的数据。在这个早期阶段，你还不知道将来会被要求调查的所有后续问题，你希望能够跟踪任何可能的线索。即使你的顶层问题可以通过汇总导出得到答案，你的后续问题几乎肯定无法回答。
 - en: It’s important to actually learn about the source data systems whose data you’re
     interacting with.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上了解你所交互的数据源系统非常重要。
 - en: '**If it’s a SaaS product**, read the API docs. What data will the API give
     you? Good APIs give you all of the objects you need; *great*APIs will give you
     change tracking on top of those objects. For example, the Salesforce API will
@@ -255,6 +264,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**如果是SaaS产品**，阅读API文档。API会提供什么数据？好的API会提供你所需的所有对象；*优秀*的API会在这些对象上提供变更跟踪。例如，Salesforce
+    API会提供一个包含所有机会及其状态变化的历史表。这表明，机会历史表对Salesforce管道报告的一个大部分至关重要。'
 - en: '**If it’s an internal product database**, read whatever internal documentation
     is available or sit down with an experienced engineer to understand what data
     is stored in the product.'
@@ -262,6 +273,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**如果是内部产品数据库**，请阅读所有可用的内部文档或与有经验的工程师坐下来了解产品中存储的数据。'
 - en: 'Overall, the closer you can get to events, the better off you’ll be. If you
     have all state changes for a given system, you can always reconstruct the state
     at any given point in time—a very powerful position to be in. For example, the
@@ -272,6 +284,8 @@
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体来说，你离事件越近，情况就越好。如果你拥有一个系统的所有状态变更，你总是可以在任何给定时间点重建该状态——这是一种非常强大的状态。例如，你实际需要的唯一
+    Stripe API 端点是事件端点：从那个单一端点，你可以在任何时间点推导出所有其他端点的输出。你可以用类似的方式使用 Mailchimp 的事件表来分析电子邮件营销表现。
 - en: Fortunately, most Stitch and Fivetran integrations pull maximally granular data
     by default—both of these products were built for the modern analytics stack and
     want to give you complete control. It’s important to check for yourself, though.
@@ -284,11 +298,14 @@
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，大多数 Stitch 和 Fivetran 集成默认会提取最大粒度的数据——这两个产品都是为现代分析栈构建的，旨在给予你完全的控制。然而，还是需要自己进行检查。前不久，我在与客户制定销售管道报告的计划时，发现Stitch
+    Close.io集成（这是社区支持的）不包含机会历史端点。这显著改变了项目的范围，因为我们实际上无法在不将该额外端点添加到集成中的情况下进行所需的分析。最好在一开始就发现这个问题。
 - en: 3\. Has this data set been used before?
   id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 这个数据集以前用过吗？
 - en: 'If your organization *has not* previously used the data from a given ingestion
     pipeline, you should treat it as guilty until proven innocent. There are a large
     number of ways in which data that you haven’t used before can be wrong, and many
@@ -296,6 +313,7 @@
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的组织*以前没有*使用过来自某个数据管道的数据，你应该将其视为有罪，直到证明其清白。数据未使用过的情况下，可能存在大量错误方式，而且许多错误是微妙的。主要有两个类别：
 - en: '**Broken ingestion.**There can be errors in the ingestion that cause data in
     your warehouse to be incorrect. Even when you’re dealing with Stitch and Fivetran
     integrations, *shit happens*. Every time I’ve seen an integration break, it is
@@ -304,6 +322,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**加载错误。**在加载过程中可能会出现错误，导致你的数据仓库中的数据不正确。即使你处理的是 Stitch 和 Fivetran 集成，*错误总会发生*。每次我看到集成出现问题时，都是由于最奇怪、最深奥的问题，每个问题都是独一无二的。'
 - en: '**Unanticipated ingestion behavior.**Sometimes, loading happens in a way that
     you wouldn’t have anticipated. For example, Stitch loads many tables that it calls
     “reporting tables” as an immutable log and then gives specific instructions on
@@ -314,6 +333,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**意外的加载行为。**有时，加载发生的方式是你意想不到的。例如，Stitch 将许多它称之为“报告表”的表作为不可变日志进行加载，然后提供如何从这些表中查询的具体指示。如果你不阅读它们的指示，而是直接开始编写查询，你会得到令人困惑的错误数据。'
 - en: Both of these types of errors can be caught by *auditing the data* from new
     data sets before building mission-critical analyses on top of them. What exactly
     does auditing a data set mean? For us, it means producing straightforward metrics
@@ -326,35 +346,41 @@
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两种类型的错误都可以通过在建立关键任务分析之前对新数据集进行*数据审计*来捕捉。审计数据集究竟意味着什么？对我们来说，这意味着在表格上生成直观的指标，并将这些指标与另一个系统（通常是数据提取自的系统）中的输出进行比较。例如，我们经常计算订单和收入，并将这些指标与我们在Shopify中本地获得的结果进行比较。这些指标计算起来非常简单，如果数字匹配，你可以立即对数据集的状态有很高的信心。
 - en: 'Problems with your raw data are typically cross-cutting: they’ll affect all
     records in a table or all records in a certain date range. If you audit 2-3 metrics,
     you can generally feel pretty good about the data quality overall.'
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 原始数据的问题通常是跨切的：它们会影响表中的所有记录或某个日期范围内的所有记录。如果你审核 2-3 个指标，你通常可以对数据质量感到相当满意。
 - en: 'If your organization *has* previously used the data from a given ingestion
     pipeline, it’s incumbent that you invest in learning what’s already been built.
     If you’re using dbt:'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的组织*曾经*使用过来自某个数据摄取管道的数据，那么你有责任去学习已经建立的内容。如果你使用的是 dbt：
 - en: lookup the existing modeling work that’s been done using dbt docs
   id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查阅使用 dbt 文档进行的现有建模工作。
 - en: read all of the descriptive text for models and columns and make sure you actually
     grok the code
   id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 阅读所有模型和列的描述文本，确保你真正理解代码。
 - en: find the authors in the git commit history and ask them if there are any gotchas
     you should know about
   id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查找 git 提交历史中的作者，询问是否有任何你需要知道的注意事项。
 - en: '**Do not just say “screw it” and start your own work from scratch.** The primary
     source of analytics engineering tech debt and errors result from multiple code
     bases attempting to transform and analyze fundamentally the same data. Two code
@@ -367,11 +393,13 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**不要只是说“算了”，然后从头开始你的工作。** 分析工程技术债务和错误的主要来源是多个代码库试图转化和分析本质上相同的数据。两个代码路径意味着双倍的错误面和无限的混淆机会。跟踪之前的工作并不总是容易，但*将现有代码库融入其中，而不是从零开始，是至关重要的*。我见过一些团队不愿意以这种方式协作编写代码，而是每个分析师都建立自己的孤岛。**这是一种极其低效的数据团队做法。**'
 - en: 4\. Do the necessary keys exist to join all of the data together?
   id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4. 是否存在必要的关键字来将所有数据连接在一起？
 - en: 'New analysis typically builds on existing concepts by attaching new data to
     data that has already been modeled. It’s typical to start with your application
     database or shopping cart and then spider outwards into other data systems: event
@@ -381,11 +409,13 @@
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的分析通常会基于现有概念，通过将新数据附加到已经建模的数据上。通常的做法是从你的应用数据库或购物车开始，然后向外扩展到其他数据系统：事件跟踪、客户成功、广告、电子邮件等。当你将这些系统引入你的管道和数据模型时，你需要至少一个关键字来连接数据。
 - en: 'It seems like that would be fairly straightforward, but often it just isn’t.
     Here are some examples:'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 这看起来应该相当简单，但通常情况并非如此。以下是一些例子：
 - en: You’re registering your trial signups as leads in your Salesforce instance,
     but the web form on the marketing site that submits to Salesforce doesn’t have
     the user’s account number at that point in the flow. No key!
@@ -393,6 +423,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你在 Salesforce 实例中将试用注册登记为线索，但提交到 Salesforce 的营销网站上的网页表单在流程中的那个点没有用户的账户号码。没有关键字！
 - en: Your event tracking only shows 15,000 identified users over the past week, but
     your application database is confident that there have been 20,000 users logging
     in over the same time period. The user identification code for your event tracking
@@ -401,6 +432,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的事件跟踪在过去一周只显示了 15,000 个识别用户，但你的应用数据库确信在同一时间段内有 20,000 个用户登录。你的事件跟踪管道的用户识别代码是“漏的”——一些识别调用丢失了！哪些？
 - en: You want to track customer acquisition cost (CAC) across your entire funnel,
     starting with ad spend. But when you go to integrate your data from your various
     ad sources, you realize that the marketing team hasn’t been adding URL parameters
@@ -410,6 +442,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你想跟踪整个漏斗中的客户获取成本（CAC），从广告支出开始。但当你整合来自各种广告来源的数据时，你意识到市场团队没有在他们使用的链接中添加 URL 参数！没有这些参数，你就无法将来自你仓库其余部分的数据与广告成本数据连接起来。
 - en: This stuff happens *constantly*, and knowing where to look for problems before
     you hit them is absolutely critical. If you’re missing a key between two systems,
     it can stop an entire analytics project dead in its tracks, because often a) adding
@@ -418,6 +451,8 @@
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种情况*经常*发生，知道在哪里寻找问题至关重要。如果两个系统之间缺少一个密钥，可能会使整个分析项目陷入停滞，因为通常a) 添加密钥涉及从组织的其他部分引入利益相关者，b)
+    没有办法追溯获取数据。
 - en: 'Make sure to check your keys before diving in. If they’re missing, go through
     the effort of working with the stakeholders to create them. This “process instrumentation”
     is a critical part of what makes a great analytics engineer: you can’t always
@@ -426,11 +461,13 @@
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保在深入之前检查你的密钥。如果缺少密钥，请与利益相关者合作创建它们。这种“过程仪表化”是优秀分析工程师的关键部分：你不能总是指望业务流程自然输出所需的数据，有时你需要卷起袖子确保数据被收集。
 - en: Know the answers before you dive in
   id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在深入之前了解答案
 - en: 'As a consultant, I have to have a strong process: if I mis-scope a sprint,
     it probably means that I’m not going to be getting enough sleep over the coming
     two weeks. Or maybe it means that we lose $$ on the project—the stakes are real.
@@ -438,6 +475,7 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为顾问，我必须有一个强有力的流程：如果我对一个迭代范围估算错误，这可能意味着接下来的两周我将没有足够的睡眠。或者这可能意味着我们在项目上亏损——风险是真实的。这就是为什么我（以及Fishtown的每个人）如此专注于精确范围估算。
 - en: On an internal data team, the stakes are just as high, but the feedback typically
     isn’t as clear or immediate. Your stakeholders will notice if you consistently
     miss deadlines or fail to deliver key results, *they just might not say anything
@@ -447,6 +485,7 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 在内部数据团队中，风险同样很高，但反馈通常不如外部那样明确或即时。你的利益相关者会注意到如果你持续错过截止日期或未能交付关键结果，*他们可能不会直接告诉你*。给同事直接反馈往往很困难——你上次说“你们团队错过了那个截止日期导致我错过了季度承诺的OKR，我很生气”是什么时候？
 - en: Even if it isn’t made explicit, consistent failure by a data team to deliver
     predictable outcomes damages trust and thereby damages the team’s ability to make
     an impact on the larger org. Avoid this outcome by identifying issues during the
@@ -455,46 +494,55 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使没有明确说明，数据团队一致未能交付可预测的结果也会损害信任，从而影响团队对更大组织的影响力。通过在项目范围确定阶段识别问题，并与利益相关者沟通你的方法的局限性，避免这种结果。
 - en: '[Original](https://blog.getdbt.com/4-questions-to-help-you-more-accurately-scope-analytics-engineering-projects/).
     Reposted with permission.'
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.getdbt.com/4-questions-to-help-you-more-accurately-scope-analytics-engineering-projects/)。经许可转载。'
 - en: '**Bio:** [Tristan Handy](https://twitter.com/jthandy)is currently building
     Fishtown Analytics to help venture-funded companies implement advanced analytics
     through  building tools to facilitate an opinionated analytics workflow.'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [Tristan Handy](https://twitter.com/jthandy)目前正在构建Fishtown Analytics，以帮助获得风险投资的公司通过构建工具来实施先进的分析，从而促进一种有主见的分析工作流程。'
 - en: '**Related:**'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Future of Analytics and Data Science](https://www.kdnuggets.com/2019/09/future-analytics-data-science.html)'
   id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析与数据科学的未来](https://www.kdnuggets.com/2019/09/future-analytics-data-science.html)'
 - en: '[On Building Effective Data Science Teams](https://www.kdnuggets.com/2019/03/building-effective-data-science-teams.html)'
   id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建高效数据科学团队](https://www.kdnuggets.com/2019/03/building-effective-data-science-teams.html)'
 - en: '[A Beginner’s Guide to Data Engineering  –  Part I](https://www.kdnuggets.com/2018/01/beginners-guide-data-engineering-1.html)'
   id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据工程初学者指南  –  第一部分](https://www.kdnuggets.com/2018/01/beginners-guide-data-engineering-1.html)'
 - en: More On This Topic
   id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Handle Time Zones and Timestamps Accurately with Pandas](https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas)'
   id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 准确处理时区和时间戳](https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas)'
 - en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
   id: totrans-68
   prefs:
