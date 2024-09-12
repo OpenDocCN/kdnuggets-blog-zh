@@ -1,0 +1,701 @@
+- en: 'Decision Tree Intuition: From Concept to Application'
+  id: totrans-0
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+  zh: 决策树直觉：从概念到应用
+- en: 原文：[https://www.kdnuggets.com/2020/02/decision-tree-intuition.html](https://www.kdnuggets.com/2020/02/decision-tree-intuition.html)
+  id: totrans-1
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/decision-tree-intuition.html](https://www.kdnuggets.com/2020/02/decision-tree-intuition.html)
+- en: '[comments](#comments)'
+  id: totrans-2
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '[评论](#comments)'
+- en: '![](../Images/2fbcc0528a1f4b47e01961814dfb1c2e.png)'
+  id: totrans-3
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/2fbcc0528a1f4b47e01961814dfb1c2e.png)'
+- en: A decision tree is one of the popular and powerful machine learning algorithms
+    that I have learned. It is a non-parametric supervised learning method that can
+    be used for both classification and regression tasks. The goal is to create a
+    model that predicts the value of a target variable by learning simple decision
+    rules inferred from the data features. For a classification model, the target
+    values are discrete in nature, whereas, for a regression model, the target values
+    are represented by continuous values. Unlike the black box type of algorithms
+    such as Neural Network,** Decision Trees** are comparably easier to understand
+    because it shares internal decision-making logic (you will find details in the
+    following session).
+  id: totrans-4
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 决策树是我学习过的流行且强大的机器学习算法之一。它是一种非参数的监督学习方法，可用于分类和回归任务。其目标是通过学习从数据特征中推断出的简单决策规则来创建一个预测目标变量值的模型。对于分类模型，目标值是离散的，而对于回归模型，目标值是连续的。与神经网络等黑箱算法不同，**决策树**相对更容易理解，因为它共享内部决策逻辑（你将在以下章节中找到详细信息）。
+- en: '* * *'
+  id: totrans-5
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '* * *'
+- en: Our Top 3 Course Recommendations
+  id: totrans-6
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  id: totrans-7
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  id: totrans-8
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  id: totrans-9
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行IT工作'
+- en: '* * *'
+  id: totrans-10
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '* * *'
+- en: Despite the fact that many data scientists believe it’s an old method and they
+    may have some doubts of its accuracy due to an overfitting problem, the more recent
+    tree-based models, for example, Random forest (bagging method), gradient boosting
+    (boosting method) and XGBoost (boosting method) are built on the top of decision
+    tree algorithm. Therefore, the concepts and algorithms behind **Decision Trees **are
+    strongly worth understanding!
+  id: totrans-11
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 尽管许多数据科学家认为这是一种旧方法，并且由于过拟合问题可能对其准确性有所怀疑，但更近期的树模型，例如随机森林（袋装方法）、梯度提升（提升方法）和XGBoost（提升方法），都是建立在决策树算法之上的。因此，**决策树**背后的概念和算法非常值得理解！
+- en: '![](../Images/43782b4091a23968fac7a66a5190701f.png)'
+  id: totrans-12
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/43782b4091a23968fac7a66a5190701f.png)'
+- en: There are 4 popular types of decision tree algorithms: **ID3**, **CART (Classification
+    and Regression Trees)**, **Chi-Square**, and **Reduction in Variance.**
+  id: totrans-13
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 有4种流行的决策树算法：**ID3**、**CART（分类与回归树）**、**卡方检验**和**方差减少**。
+- en: '*In this blog, I will only focus on the classification trees and the explanations
+    of ID3 and CART.*'
+  id: totrans-14
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*在这篇博客中，我将只关注分类树以及ID3和CART的解释。*'
+- en: '![](../Images/0d9817fea6ecd8c71e50a13cd69f391a.png)'
+  id: totrans-15
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/0d9817fea6ecd8c71e50a13cd69f391a.png)'
+- en: Imagine you play tennis every Sunday and you invite your best friend, Clare
+    to come with you every time. Clare sometimes comes to join but sometimes not.
+    For her, it depends on a number of factors, for example, weather, temperature,
+    humidity, and wind. I would like to use the dataset below to predict whether or
+    not Clare will join me to play tennis. An intuitive way to do this is through
+    a Decision Tree.
+  id: totrans-16
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 想象一下，你每个星期天打网球，并且每次都邀请你最好的朋友Clare一起去。Clare有时会来，有时不会。对于她来说，这取决于很多因素，例如天气、温度、湿度和风。我想利用下面的数据集来预测Clare是否会和我一起打网球。一种直观的方法是通过决策树。
+- en: '![](../Images/87d51f688db1932e95e90fcebcc9b8ba.png)'
+  id: totrans-17
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/87d51f688db1932e95e90fcebcc9b8ba.png)'
+- en: '![](../Images/891149077bc9ab94fff3f171781152ce.png)'
+  id: totrans-18
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/891149077bc9ab94fff3f171781152ce.png)'
+- en: 'In this **Decision Tree** diagram, we have:'
+  id: totrans-19
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 在这个**决策树**图中，我们有：
+- en: '**Root Node:**The first split which decides the entire population or sample
+    data should further get divided into two or more homogeneous sets. In our case,
+    the Outlook node.'
+  id: totrans-20
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+  zh: '**根节点**：第一次划分决定整个数据集是否应该进一步分为两个或多个同质集合。在我们的例子中是“天气”节点。'
+- en: '**Splitting:**It is a process of dividing a node into two or more sub-nodes.'
+  id: totrans-21
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+  zh: '**划分**：将一个节点分成两个或多个子节点的过程。'
+- en: '**Decision Node:**This node decides whether/when a sub-node splits into further
+    sub-nodes or not. Here we have, Outlook node, Humidity node, and Windy node.'
+  id: totrans-22
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+  zh: '**决策节点**：决定是否/何时将子节点进一步划分为更多子节点的节点。在这里，我们有“天气”节点、“湿度”节点和“风”节点。'
+- en: '**Leaf:**Terminal Node that predicts the outcome (categorical or continuous
+    value). The coloured nodes, i.e., Yes and No nodes, are the leaves.'
+  id: totrans-23
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+  zh: '**叶节点**：预测结果的终端节点（分类值或连续值）。上色的节点，即“是”和“否”节点，是叶节点。'
+- en: '*Question: Base on which attribute (feature) to split? What is the best split?*'
+  id: totrans-24
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: '*问题：基于哪个属性（特征）进行划分？什么是最佳划分？*'
+- en: ''
+  id: totrans-25
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*Answer: Use the attribute with the highest **I*****nformation Gain **or** Gini
+    Gain**'
+  id: totrans-26
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: '*回答：使用具有最高**信息增益**或**基尼增益**的属性*'
+- en: ID3 (Iterative Dichotomiser)
+  id: totrans-27
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: ID3（迭代二分法）
+- en: ID3 decision tree algorithm uses Information Gain to decide the splitting points.
+    In order to measure how much information we gain, we can use ***entropy ***to
+    calculate the homogeneity of a sample.
+  id: totrans-28
+  prefs: []
+  type: TYPE_NORMAL
+  zh: ID3决策树算法使用信息增益来决定划分点。为了测量我们获得了多少信息，我们可以使用***熵***来计算样本的同质性。
+- en: '*Question: What is “Entropy”? and What is its function?*'
+  id: totrans-29
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: '*问题：“熵”是什么？它的功能是什么？*'
+- en: 'Answer: It is a measure of the amount of uncertainty in a data set. *Entropy
+    controls how a Decision Tree decides to splitthe data. It actually affects how
+    a **Decision Tree** draws its boundaries.*'
+  id: totrans-30
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 回答：它是数据集中不确定性量的度量。*熵控制决策树如何划分数据。它实际上影响了**决策树**如何绘制边界。*
+- en: '**The equation of Entropy:**'
+  id: totrans-31
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**熵的公式：**'
+- en: '![](../Images/4b834c414864cbedc2eb53f2e081cac1.png)'
+  id: totrans-32
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/4b834c414864cbedc2eb53f2e081cac1.png)'
+- en: '*The logarithm of the **probability** distribution is useful as a measure of **entropy**.*'
+  id: totrans-33
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*概率分布的对数作为熵的度量是有用的。*'
+- en: '![](../Images/ba5a1a41aff720c6a6ad6af99478fa30.png)'
+  id: totrans-34
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/ba5a1a41aff720c6a6ad6af99478fa30.png)'
+- en: '*Entropy vs. Probability.*'
+  id: totrans-35
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*熵与概率。*'
+- en: 'Definition: Entropy in Decision Tree stands for homogeneity.'
+  id: totrans-36
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 定义：决策树中的熵表示同质性。
+- en: If the sample is completely homogeneous, the entropy is 0 (prob= 0 or 1), and
+    if the sample is evenly distributed across classes, it has an entropy of 1 (prob
+    =0.5).
+  id: totrans-37
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如果样本完全同质，熵为0（概率=0或1）；如果样本在各个类别之间均匀分布，熵为1（概率=0.5）。
+- en: The next step is to make splits that minimize entropy. We use *information gain* to
+    determine the best split.
+  id: totrans-38
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 下一步是进行最小化熵的划分。我们使用*信息增益*来确定最佳划分。
+- en: Let me show you how to calculate the information gain step by step in the case
+    of playing tennis. Here I will only show you how to calculate the Information
+    Gain and Entropy of Outlook.
+  id: totrans-39
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 让我一步步向你展示在打网球的情况下如何计算信息增益。在这里，我将仅展示如何计算“天气”的信息增益和熵。
+- en: '**Step 1**: Calculate the Entropy of one attribute — Prediction: Clare Will
+    Play Tennis/ Clare Will Not Play Tennis'
+  id: totrans-40
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**步骤1**：计算一个属性的熵——预测：克莱尔会打网球/克莱尔不会打网球'
+- en: 'For this illustration, I will use this contingency table to calculate the entropy
+    of our target variable: Played? (Yes/No). There are 14 observations (10 “Yes”
+    and 4 “No”). The probability (p) of ‘Yes’ is 0.71428(10/14), and the probability
+    of ‘No’ is 0.28571 (4/14). You can then calculate the entropy of our target variable
+    using the equation above.'
+  id: totrans-41
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 在这个示例中，我将使用这个列联表来计算目标变量的熵：是否玩？（是/否）。共有14个观察值（10个“是”和4个“否”）。‘是’的概率（p）为0.71428（10/14），‘否’的概率为0.28571（4/14）。然后，你可以使用上述公式计算目标变量的熵。
+- en: '![](../Images/efc3f408ef6a106271d0c31beb37241b.png)'
+  id: totrans-42
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/efc3f408ef6a106271d0c31beb37241b.png)'
+- en: '**Step 2**: Calculate the Entropy for each feature using the contingency table'
+  id: totrans-43
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**步骤2**：使用列联表计算每个特征的熵'
+- en: To illustrate, I use Outlook as an example to explain how to calculate its Entropy.
+    There are a total of 14 observations. Summing across the rows we can see there
+    are 5 of them belong to Sunny, 4 belong to Overcast, and 5 belong to Rainy. Therefore,
+    we can find the probability of Sunny, Overcast, and Rainy and then calculate their
+    entropy one by one using the above equation. The calculation steps are shown below.
+  id: totrans-44
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 为了说明，我使用“天气”作为例子来解释如何计算它的熵。共有14个观察值。我们可以看到，有5个属于“晴天”，4个属于“阴天”，5个属于“雨天”。因此，我们可以找到“晴天”、“阴天”和“雨天”的概率，然后分别使用上述公式计算它们的熵。计算步骤如下。
+- en: '![](../Images/2fb40a421db809a2042308f87f5da082.png)'
+  id: totrans-45
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/2fb40a421db809a2042308f87f5da082.png)'
+- en: '*An example of calculating the entropy of feature 2 (Outlook).*'
+  id: totrans-46
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*计算特征2（Outlook）熵值的示例。*'
+- en: 'Definition: **Information Gain** is the decrease or increase in Entropy value
+    when the node is split.'
+  id: totrans-47
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 定义：**信息增益**是节点分裂时熵值的减少或增加。
+- en: '**The equation of Information Gain:**'
+  id: totrans-48
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**信息增益的公式：**'
+- en: '![](../Images/e36bf0e62f86308085e0a38a54ee98eb.png)'
+  id: totrans-49
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/e36bf0e62f86308085e0a38a54ee98eb.png)'
+- en: '*Information Gain from* X *on* Y*.*'
+  id: totrans-50
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*X对Y的增益。*'
+- en: '![](../Images/c5045d95b030d831e2ba8e733b7f66d3.png)'
+  id: totrans-51
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/c5045d95b030d831e2ba8e733b7f66d3.png)'
+- en: '*The information gain of outlook is 0.147.*'
+  id: totrans-52
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*Outlook的信息增益为0.147。*'
+- en: '![](../Images/b10c92744ac10621b92dbadd39d50e5c.png)'
+  id: totrans-53
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/b10c92744ac10621b92dbadd39d50e5c.png)'
+- en: '*sklearn.tree.**DecisionTreeClassifier: **“entropy” means for the information
+    gain.*'
+  id: totrans-54
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*sklearn.tree.**DecisionTreeClassifier:** “entropy”代表信息增益。*'
+- en: In order to visualise how to construct a decision tree using **information gain**,
+    I have simply applied sklearn.tree.**DecisionTreeClassifier **to generate the
+    diagram.
+  id: totrans-55
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 为了可视化如何使用**信息增益**构建决策树，我简单地应用了sklearn.tree.**DecisionTreeClassifier**来生成图示。
+- en: '***Step 3***: Choose attribute with the **largest Information Gain** as the
+    Root Node'
+  id: totrans-56
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '***步骤3***：选择**信息增益最大**的属性作为根节点'
+- en: The information gain of ‘Humidity’ is the highest at 0.918\. Humidity is the
+    root node.
+  id: totrans-57
+  prefs: []
+  type: TYPE_NORMAL
+  zh: ‘湿度’的信息增益最高，为0.918。湿度是根节点。
+- en: '***Step 4****: A *branch with an entropy of 0 is a leaf node, while a branch
+    with entropy more than 0 needs further splitting.'
+  id: totrans-58
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '***步骤4***：一个*熵为0的分支是叶子节点，而熵大于0的分支需要进一步分裂。'
+- en: '***Step 5***: Nodes are grown recursively in the ID3 algorithm until all data
+    is classified.'
+  id: totrans-59
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '***步骤5***：在ID3算法中，节点会递归地增长，直到所有数据都被分类。'
+- en: You might hear of the **C4.5 algorithm**, an improvement of ID3 uses the **Gain
+    Ratio **as an extension to information gain. The advantage of using Gain Ratio
+    is to handle the issue of bias by normalizing the information gain using Split
+    Info. I won’t go into details of C4.5 here. For more information, please check
+    out [here](https://www.datacamp.com/community/tutorials/decision-tree-classification-python) (DataCamp).
+  id: totrans-60
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 你可能听说过**C4.5算法**，它是ID3算法的改进版，使用**增益比**作为信息增益的扩展。使用增益比的优点是通过使用分裂信息（Split Info）来规范化信息增益，以解决偏差问题。我不会在这里详细讨论C4.5。如需更多信息，请查看[这里](https://www.datacamp.com/community/tutorials/decision-tree-classification-python)（DataCamp）。
+- en: CART (Classification and Regression Tree)
+  id: totrans-61
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: CART（分类与回归树）
+- en: Another decision tree algorithm CART uses the *Gini method *to create split
+    points, including the *Gini Index (Gini Impurity) and Gini Gain.*
+  id: totrans-62
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 另一种决策树算法CART使用*基尼方法*来创建分裂点，包括*基尼指数（基尼不纯度）和基尼增益*。
+- en: 'Definition of Gini Index: The probability of assigning a wrong label to a sample
+    by picking the label randomly and is also used to measure feature importance in
+    a tree.'
+  id: totrans-63
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 基尼指数的定义：随机挑选标签并为样本分配错误标签的概率，也用于测量树中特征的重要性。
+- en: '![](../Images/00887d6088d38cb1d3729ed790915cdc.png)'
+  id: totrans-64
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/00887d6088d38cb1d3729ed790915cdc.png)'
+- en: '*The equation of Gini Index.*'
+  id: totrans-65
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*基尼指数的公式。*'
+- en: Let me show you how to calculate Gini Index and Gini Gain :)
+  id: totrans-66
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 让我来展示一下如何计算基尼指数和基尼增益 :)
+- en: '![](../Images/fb84c8dacf63d3025eb36e55330c1ee9.png)'
+  id: totrans-67
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/fb84c8dacf63d3025eb36e55330c1ee9.png)'
+- en: After calculating Gini Gain for every attribute, sklearn.tree.**DecisionTreeClassifier **will
+    choose the attribute with the **largest Gini Gain** as the Root Node. *A *branch
+    with Gini of 0 is a leaf node, while a branch with Gini more than 0 needs further
+    splitting. Nodes are grown recursively until all data is classified (see the detail
+    below).
+  id: totrans-68
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 计算每个属性的基尼增益后，sklearn.tree.**DecisionTreeClassifier**会选择**基尼增益最大**的属性作为根节点。*一个*基尼值为0的分支是叶子节点，而基尼值大于0的分支需要进一步分裂。节点会递归地增长，直到所有数据都被分类（见下文详细说明）。
+- en: 'As mentioned, CART can also handle the regression problem using a different
+    splitting criterion: Mean Squared Error (MSE) to determine the splitting points.
+    The output variable of a Regression Tree is numerical, and the input variables
+    allow a mixture of continuous and categorical variables. You can check out more
+    information about the regression trees through [DataCamp](https://www.datacamp.com/courses/machine-learning-with-tree-based-models-in-python).'
+  id: totrans-69
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如前所述，CART还可以使用不同的分裂标准处理回归问题：均方误差（MSE）来确定分裂点。回归树的输出变量是数值型的，输入变量可以是连续变量和分类变量的混合。您可以通过[DataCamp](https://www.datacamp.com/courses/machine-learning-with-tree-based-models-in-python)获取更多关于回归树的信息。
+- en: Great! You now should understand how to calculate Entropy, Information Gain,
+    Gini Index, and Gini Gain!
+  id: totrans-70
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 太好了！现在你应该理解如何计算熵、信息增益、基尼指数和基尼增益！
+- en: '*Question: so…which should I use? Gini Index or Entropy?*'
+  id: totrans-71
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: '*问题：那么，我应该使用哪个？基尼指数还是熵？*'
+- en: ''
+  id: totrans-72
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*Answer: Generally, the result should be the same… I personally prefer Gini
+    Index because it doesn’t involve a more computationally intensive *log* to calculate.
+    But why not try both.*'
+  id: totrans-73
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: '*回答：一般来说，结果应该是相同的……我个人更倾向于使用基尼指数，因为它的计算不涉及更复杂的*log*。但为什么不同时尝试这两者呢。*'
+- en: Let me summarize in a table format!
+  id: totrans-74
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 让我以表格形式总结一下！
+- en: '![](../Images/3315c10ab0a6e178568a71af31dcbe1f.png)'
+  id: totrans-75
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/3315c10ab0a6e178568a71af31dcbe1f.png)'
+- en: Building a Decision Tree using Scikit Learn
+  id: totrans-76
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 使用Scikit Learn构建决策树
+- en: '[Scikit Learn](https://en.wikipedia.org/wiki/Scikit-learn) is a free software
+    machine learning library for the Python programming language.'
+  id: totrans-77
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '[Scikit Learn](https://en.wikipedia.org/wiki/Scikit-learn)是一个用于Python编程语言的免费机器学习库。'
+- en: '**Step 1**: importing data'
+  id: totrans-78
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**第1步**：导入数据'
+- en: '[PRE0]'
+  id: totrans-79
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE0]'
+- en: '**Step 2**: converting categorical variables into dummies/indicator variables'
+  id: totrans-80
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**第2步**：将分类变量转换为虚拟/指示变量'
+- en: '[PRE1]'
+  id: totrans-81
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE1]'
+- en: '![](../Images/947b8248bd1ba382a2f2555152a100b4.png)'
+  id: totrans-82
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/947b8248bd1ba382a2f2555152a100b4.png)'
+- en: '*The categorical variables of ‘Temperature’, ‘Outlook’ and ‘Windy’ are all
+    converted into dummies.*'
+  id: totrans-83
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*“温度”、“天气”和“风力”的分类变量都转换为虚拟变量。*'
+- en: '**Step 3**: separating the training set and test set'
+  id: totrans-84
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**第3步**：分离训练集和测试集'
+- en: '[PRE2]'
+  id: totrans-85
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE2]'
+- en: '**Step 4**: importing Decision Tree Classifier via sklean'
+  id: totrans-86
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**第4步**：通过sklearn导入决策树分类器'
+- en: '[PRE3]'
+  id: totrans-87
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE3]'
+- en: '**Step 5**: visualising the decision tree diagram'
+  id: totrans-88
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**第5步**：可视化决策树图'
+- en: '[PRE4]'
+  id: totrans-89
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE4]'
+- en: '![](../Images/cc72ce5e277e6deceff8a808e12a74b9.png)'
+  id: totrans-90
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/cc72ce5e277e6deceff8a808e12a74b9.png)'
+- en: '*The tree depth: 3.*'
+  id: totrans-91
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*树的深度：3。*'
+- en: '**For the coding and dataset, please check out [here](https://github.com/clareyan/Decision-Tree-Intuition-From-Concept-to-Application).**'
+  id: totrans-92
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**有关编码和数据集，请查看[这里](https://github.com/clareyan/Decision-Tree-Intuition-From-Concept-to-Application)。**'
+- en: '![](../Images/4018a9a410d788a450707a01e439ad58.png)'
+  id: totrans-93
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/4018a9a410d788a450707a01e439ad58.png)'
+- en: '*If the condition of ‘Humidity’ is lower or equal to 73.5, it is pretty sure
+    that Clare will play tennis!*'
+  id: totrans-94
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '*如果“湿度”的条件低于或等于73.5，Clare很可能会打网球！*'
+- en: '![](../Images/8c9976be945714d5da3a03469c4f3534.png)'
+  id: totrans-95
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/8c9976be945714d5da3a03469c4f3534.png)'
+- en: In order to improve the model performance (Hyperparameters Optimization), you
+    should adjust the hyperparameters. For more details, please check out [here](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html).
+  id: totrans-96
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 为了提高模型性能（超参数优化），你需要调整超参数。有关详细信息，请查看[这里](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)。
+- en: The major disadvantage of Decision Trees is overfitting, especially when a tree
+    is particularly deep. Fortunately, the more recent tree-based models, including
+    random forest and XGBoost, are built on the top of the decision tree algorithm,
+    and they generally perform better with a strong modeling technique and much more
+    dynamic than a single decision tree. Therefore, understanding the concepts and
+    algorithms behind **Decision Trees **thoroughlyis super helpful in constructing
+    a good foundation of learning data science and machine learning.
+  id: totrans-97
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 决策树的主要缺点是过拟合，尤其是当树特别深的时候。幸运的是，近年来的树模型，包括随机森林和XGBoost，都是建立在决策树算法基础上的，它们通常在建模技术上表现更强，且比单一决策树更加动态。因此，深入理解**决策树**背后的概念和算法对于构建良好的数据科学和机器学习基础非常有帮助。
+- en: 'Summary: Now you should know'
+  id: totrans-98
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 总结：现在你应该知道
+- en: How to construct a Decision Tree
+  id: totrans-99
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 如何构建决策树
+- en: How to calculate ‘Entropy’ and ‘Information Gain’
+  id: totrans-100
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 如何计算“熵”和“信息增益”
+- en: How to calculate the ‘Gini Index’ and ‘Gini Gain’
+  id: totrans-101
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 如何计算“基尼指数”和“基尼增益”
+- en: What is the best split?
+  id: totrans-102
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 什么是最佳分裂？
+- en: How to plot a Decision Tree Diagram in Python
+  id: totrans-103
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 如何在Python中绘制决策树图
+- en: '[Original](https://towardsdatascience.com/decision-tree-intuition-from-concept-to-application-530744294bb6).
+    Reposted with permission.'
+  id: totrans-104
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/decision-tree-intuition-from-concept-to-application-530744294bb6)。转载经许可。'
+- en: '**Related:**'
+  id: totrans-105
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**相关：**'
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  id: totrans-106
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[决策树算法解析](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+- en: '[Understanding Decision Trees for Classification in Python](https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html)'
+  id: totrans-107
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[理解Python中的分类决策树](https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html)'
+- en: '[Decision Trees — An Intuitive Introduction](https://www.kdnuggets.com/2019/02/decision-trees-introduction.html)'
+  id: totrans-108
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[决策树——直观介绍](https://www.kdnuggets.com/2019/02/decision-trees-introduction.html)'
+- en: More On This Topic
+  id: totrans-109
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 更多相关话题
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-110
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[使用 Python 和 Scikit-learn 简化决策树解释](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  id: totrans-111
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[决策树算法解析](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+- en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  id: totrans-112
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[通过实现理解：决策树](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+- en: '[Telling a Great Data Story: A Visualization Decision Tree](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+  id: totrans-113
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[讲述精彩数据故事：可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+- en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-114
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[随机森林与决策树：关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+- en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  id: totrans-115
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n09, 3月2日：讲述精彩数据故事：…](https://www.kdnuggets.com/2022/n09.html)'
