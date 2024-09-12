@@ -1,18 +1,26 @@
 - en: How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
     3
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特征工程如何帮助你在 Kaggle 竞赛中表现出色 – 第三部分
 - en: 原文：[https://www.kdnuggets.com/2017/07/feature-engineering-help-kaggle-competition-3.html](https://www.kdnuggets.com/2017/07/feature-engineering-help-kaggle-competition-3.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/07/feature-engineering-help-kaggle-competition-3.html](https://www.kdnuggets.com/2017/07/feature-engineering-help-kaggle-competition-3.html)
 - en: '**By Gabriel Moreira, CI&T.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Gabriel Moreira，CI&T。**'
 - en: '![Header image](../Images/f1e89e36ceb486d673bddb4fa9cd5de5.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/f1e89e36ceb486d673bddb4fa9cd5de5.png)'
 - en: In the [first](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)
     and [second](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
     parts of this series, I introduced the [Outbrain Click Prediction machine learning
@@ -20,23 +28,33 @@
     tasks to tackle the challenge. I presented the main techniques used for exploratory
     data analysis, feature engineering, cross-validation strategy and modeling of
     baseline predictors using basic statistics and machine learning.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[第一部分](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)和[第二部分](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)中，我介绍了[Outbrain
+    点击预测机器学习竞赛](https://www.kaggle.com/c/outbrain-click-prediction)和我为应对挑战而进行的初步任务。我展示了用于探索性数据分析、特征工程、交叉验证策略和使用基本统计和机器学习建模基线预测器的主要技术。
 - en: In this last post of the series, I describe how I used more powerful machine
     learning algorithms for the click prediction problem as well as the ensembling
     techniques that took me up to the 19th position on the leaderboard (top 2%).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在系列文章的最后一篇中，我描述了我如何使用更强大的机器学习算法来解决点击预测问题，以及使我在排行榜上升到第19位（前2%）的集成技术。
 - en: Follow-the-Regularized-Leader
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Follow-the-Regularized-Leader
 - en: One of the popular approaches for CTR Prediction is Logistic Regression with
     a [Follow-the-Regularized-Leader (FTRL)](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)
     optimizer, which have been used in [production by Google](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)
     to predict billions of events per day, using a correspondingly large feature space.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种流行的 CTR 预测方法是带有[Follow-the-Regularized-Leader (FTRL)](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)优化器的逻辑回归，该优化器已在[Google
+    的生产环境中使用](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)，用于预测每天数十亿的事件，并使用相应的大型特征空间。
 - en: It is a linear model with a lazy representation of the coefficients (*weights*)
     and, in conjunction with L1 regularization, it leads to very sparse coefficient
     vectors. This sparsity property shrinks memory usage, making it scalable for feature
@@ -44,18 +62,27 @@
     only a few hundreds of nonzero values. FTRL provides efficient training on large
     datasets by streaming examples from disk or over the network — each training example
     only needs to be processed once (online learning).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种线性模型，具有惰性表示的系数（*权重*），并且与 L1 正则化结合使用时，会导致非常稀疏的系数向量。这种稀疏性特征减少了内存使用，使其能够扩展到具有数十亿维度的特征向量，因为每个实例通常只有几百个非零值。FTRL
+    通过从磁盘或网络流式传输示例来提供高效的大数据集训练——每个训练示例只需处理一次（在线学习）。
 - en: I tried two different FTRL implementations, available in [Kaggler](https://github.com/jeongyoonlee/Kaggler)
     and [Vowpal Wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) (VW) frameworks.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我尝试了两种不同的 FTRL 实现，分别在[Kaggler](https://github.com/jeongyoonlee/Kaggler)和[Vowpal
+    Wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki)（VW）框架中可用。
 - en: For CTR prediction, it is important to understand the interactions between the
     features. For example, the average conversion of an ad from “Nike” advertiser
     might be very different, depending on the publisher that is displaying the ad
     (e.g. ESPN vs. Vogue).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 CTR 预测，理解特征之间的交互非常重要。例如，来自“耐克”广告商的广告的平均转化率可能会有所不同，这取决于展示广告的发布者（例如 ESPN 与
+    Vogue）。
 - en: 'I considered all categorical features for models trained on [Kaggler](https://github.com/jeongyoonlee/Kaggler)
     FTRL. The feature interactions option was enabled, meaning that for all possible
     two-paired feature combinations, feature values were multiplied and hashed (read
@@ -63,8 +90,11 @@
     to a position in a sparse feature vector with dimension of 2²⁸. This was my slowest
     model and the training time took more than 12 hours. But my LB score jumped to
     0.67659 for this **Approach #6**.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '我考虑了所有类别特征用于在[Kaggler](https://github.com/jeongyoonlee/Kaggler)上训练的FTRL模型。启用了特征交互选项，即对于所有可能的两特征组合，特征值被乘以并哈希（阅读[第一篇文章](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)了解特征哈希），映射到一个维度为2²⁸的稀疏特征向量的位置。这是我最慢的模型，训练时间超过12小时。但我的LB得分跳升至**0.67659**，在**方法
+    #6**中取得了较好表现。'
 - en: 'I also tried FTRL on [VW](https://github.com/JohnLangford/vowpal_wabbit/wiki),
     which is a very fast and efficient framework in the usage of CPU and memory resources.
     The input data was again categorical features, with the addition of some selected
@@ -72,22 +102,32 @@
     My best model was trained in two hours and lead to a LB score of 0.67512 in this
     **Approach #7**. The accuracy was a little bit lower, but much faster than the
     previous model.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '我还尝试了在[VW](https://github.com/JohnLangford/vowpal_wabbit/wiki)上使用FTRL，VW是一个在CPU和内存资源使用上非常快速高效的框架。输入数据仍然是类别特征，并增加了一些选定的数值分箱特征（阅读[第一篇文章](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)了解特征分箱）。我的最佳模型训练了两个小时，结果在**方法
+    #7**中得到了0.67512的LB得分。准确率稍低，但比之前的模型要快得多。'
 - en: 'In a second FTRL model on VW, I used a VW hyperparameter to configure interactions
     (feature pairing) of only a subset of features (namespace). In this case, interactions
     paired only categorical features and some selected numeric features (without binning
     transformation). That change lead to a better mode in this **Approach #8**: 0.67697.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '在第二个VW上的FTRL模型中，我使用了VW超参数配置仅对特征（命名空间）的一个子集进行交互（特征配对）。在这种情况下，交互仅配对类别特征和一些选定的数值特征（不进行分箱转换）。这一变化在**方法
+    #8**中导致了更好的模型得分：0.67697。'
 - en: All those three FTRL models were ensembled for my final submissions, as we’ll
     describe in next sections.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这三种FTRL模型都被集成在我的最终提交中，具体细节将在下一部分中描述。
 - en: Field-aware Factorization Machines
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 领域感知因子分解机
 - en: A recent variant of Factorization Machines, named [Field-aware Factorization
     Machines (FFM)](http://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf) was used in
     winning solutions for two CTR prediction competitions in 2014\. FFM tries to model
@@ -95,33 +135,43 @@
     pair. This algorithm was made available as the [LibFFM](https://www.csie.ntu.edu.tw/~cjlin/libffm/)
     framework and used by many competitors. LibFFM makes a very efficient usage of
     parallel processing and memory for large datasets.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近的一种因子分解机变体，称为[领域感知因子分解机（FFM）](http://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf)，在2014年的两个CTR预测竞赛中取得了胜利。FFM尝试通过学习每对特征交互的潜在因子来建模特征交互。这种算法作为[LibFFM](https://www.csie.ntu.edu.tw/~cjlin/libffm/)框架发布，并被许多竞争者使用。LibFFM非常高效地利用了大数据集的并行处理和内存。
 - en: 'In the **Approach #9**, I used categorical features with paired-interactions
     hashed to a dimensionality of 700,000\. My best model took me only 37 minutes
     to train and it turned out to be my best single model, with a LB score of **0.67932**.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '在**方法 #9**中，我使用了类别特征与成对交互的哈希映射，维度为700,000。我的最佳模型训练时间仅37分钟，结果是我最好的单一模型，LB得分为**0.67932**。'
 - en: 'In **Approach #10**, the input data contained some selected binned numeric
     features in addition to categorical features. Training data increased to 214 minutes,
     and LB score was **0.67841**.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '在**方法 #10**中，输入数据除了类别特征外，还包含了一些选定的分箱数值特征。训练数据增加到214分钟，LB得分为**0.67841**。'
 - en: 'For **Approach #11**, I tried to train a FFM model considering only the last
     30% of events of the training set, under the hypothesis that training on the last
     days could improve the prediction of the next two days (50%) of test set. The
     LB score was **0.6736**, increasing accuracy for those two last days, but decreasing
     accuracy for previous events of test set.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '对于**方法 #11**，我尝试训练一个仅考虑训练集最后30%事件的FFM模型，假设在最后几天进行训练可以改善对测试集接下来两天（50%）的预测。LB得分为**0.6736**，提高了这两天的准确性，但降低了对测试集前期事件的准确性。'
 - en: In Machine Learning projects it is not rare that some promising approaches end
     up failing miserably. That happened with some FFM models. I tried to transfer
     learning from a GBDT model to a FFM model with leaf encoding, a [winning approach](http://www.csie.ntu.edu.tw/~r01922136/kaggle-2014-criteo.pdf)
     in a Criteo competition. However, the FFM model accuracy dropped, probably because
     the GBDT model was not accurate enough in this context, adding more noise than
     signal.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习项目中，一些有前景的方法最终惨败并不罕见。这发生在一些FFM模型中。我尝试将从GBDT模型中获得的学习迁移到带有叶编码的FFM模型，这是一个[Criteo竞赛中的获胜方法](http://www.csie.ntu.edu.tw/~r01922136/kaggle-2014-criteo.pdf)。然而，FFM模型的准确性下降了，这可能是因为GBDT模型在这种情况下的准确性不够，添加了更多的噪声而不是信号。
 - en: Another unsuccessful approach was to train separate FFM models, specific for
     geographic regions with more events in test dataset, like some countries (US ~
     80%, CA ~ 5%, GB ~ 5%, AU ~ 2%, Others ~ 8%) and U.S. states (CA ~ 10%, TX ~ 7%,
@@ -129,16 +179,23 @@
     the model specialized on those region. Models specialized to the U.S. performed
     well predicting clicks for that region, but for other regions the accuracy was
     lower. Thus, using world-wide FFM models performed better.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个不成功的方法是训练针对测试数据集中事件更多的地理区域的单独FFM模型，例如某些国家（美国 ~ 80%，加拿大 ~ 5%，英国 ~ 5%，澳大利亚
+    ~ 2%，其他 ~ 8%）和美国各州（加州 ~ 10%，德州 ~ 7%，佛罗里达 ~ 5%，纽约 ~ 5%）。为了生成预测，每个测试集事件都被送到专门针对这些区域的模型中。专门针对美国的模型在预测该区域的点击时表现良好，但对于其他区域的准确性较低。因此，使用全球范围的FFM模型效果更好。
 - en: The three selected FFM approaches were used in my final ensemble, as I show
     next.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在最终集成中使用了三个选定的FFM方法，如下所示。
 - en: Ensembling methods
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 集成方法
 - en: '[Ensembling methods](http://mlwave.com/kaggle-ensembling-guide/) consist of
     combining predictions from different models to increase accuracy and generalization.
     The less correlated models'' predictions are, the better the ensemble accuracy
@@ -146,20 +203,28 @@
     not only by signal, but also by random noise. Taking a diverse set of models and
     by combining their predictions, considerable noise may be cancelled, leading to
     better model generalization, like shown below.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[集成方法](http://mlwave.com/kaggle-ensembling-guide/)包括将来自不同模型的预测结果结合起来，以提高准确性和泛化能力。模型预测之间的相关性越低，集成的准确性可能越高。集成的主要思想是，单个模型不仅受到信号的影响，还受到随机噪声的影响。通过采取一组多样化的模型并结合它们的预测，可能会取消大量噪声，从而实现更好的模型泛化，如下所示。'
 - en: '![](../Images/2684f72c212750e2759b372eaffb703b.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2684f72c212750e2759b372eaffb703b.png)'
 - en: From the competition [Don’t overfit](https://www.kaggle.com/c/overfitting#description)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自竞赛[不要过拟合](https://www.kaggle.com/c/overfitting#description)
 - en: A simple, yet powerful, ensembling approach is to merge models predictions by
     [averaging](https://en.wikipedia.org/wiki/Average). For this competition, I tested
     many types of weighted averages types like Arithmetic, Geometric, Harmonic and
     Ranking averages, among others.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种简单而有效的集成方法是通过[平均](https://en.wikipedia.org/wiki/Average)合并模型预测。对于这次竞赛，我测试了多种加权平均类型，如算术平均、几何平均、调和平均和排序平均等。
 - en: 'The best approach I could find was to use a Weighted Arithmetic Average of
     the [logit (inverse of sigmoidal logistic)](https://en.wikipedia.org/wiki/Logit)
     of predicted CTR (probabilities), shown in Equation 1\. It considered predictions
@@ -167,26 +232,40 @@
     the FTRL models (Approach #6). Such averaging gave me a LB score of **0.68418**
     for this **Approach #12**, a nice jump from my best single model (Approach #10,
     with a score of 0.67932).'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '我找到的最佳方法是使用预测CTR（概率）的[logit（sigmoidal logistic的反函数）](https://en.wikipedia.org/wiki/Logit)的加权算术平均，如方程1所示。它考虑了三个选定FFM模型（方法
+    #9、#10 和 #11）以及一个FTRL模型（方法 #6）的预测。这种平均给我的**方法 #12**带来了**0.68418**的LB得分，相较于我最好的单一模型（方法
+    #10，得分0.67932）有了不错的提升。'
 - en: '![](../Images/74c390999bb9c9f2d3837d6cc21c02a6.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/74c390999bb9c9f2d3837d6cc21c02a6.png)'
 - en: Equation 1 — Ensembling by Weighted Average of logit of models predictions
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 方程 1 — 通过模型预测的逻辑回归加权平均进行集成
 - en: At that time, competition submission deadline was only a few days away. My choice
     for the remaining time was to ensemble using a Learning-to-Rank model to merge
     up best models predictions.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 那时，比赛提交截止日期只有几天了。我在剩下的时间里选择使用 Learning-to-Rank 模型进行集成，以合并最佳模型的预测。
 - en: That model was a [GBDT](https://en.wikipedia.org/wiki/Gradient_boosting) with
     100 trees and ranking objective using [XGBoost](https://xgboost.readthedocs.io/).
     This ensemble considered as input features the best 3 FFM and 3 FTRL model predictions
     as well as 15 selected engineered numeric features (like user views count, user
     preference similarity and average CTR by categories).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型是一个 [GBDT](https://en.wikipedia.org/wiki/Gradient_boosting) 模型，包含 100 棵树，使用
+    [XGBoost](https://xgboost.readthedocs.io/) 的排名目标。这个集成模型将最佳的 3 个 FFM 和 3 个 FTRL
+    模型预测以及 15 个选择的工程化数值特征（如用户观看次数、用户偏好相似性和按类别计算的平均 CTR）作为输入特征。
 - en: 'That ensemble layer was trained only using validation set data (described in
     the [second post](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)),
     in a setting named [Blending](http://mlwave.com/kaggle-ensembling-guide/). The
@@ -196,176 +275,259 @@
     gave me my best Public LB score (**0.68688**). The competition then finished,
     my Private LB Score was revealed (**0.68716**) and kept me at 19th position in
     the final leaderboard, as illustrated below.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '该集成层仅使用验证集数据进行训练（如 [第二篇文章](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
+    中所述），在一种名为 [Blending](http://mlwave.com/kaggle-ensembling-guide/) 的设置中。这样做的原因是，如果训练集的预测也被集成模型考虑，那么它会优先考虑更多的过拟合模型，从而降低其对测试集的泛化能力。在最后一天的比赛中，**Approach
+    #13** 给了我最佳的公开 LB 分数 (**0.68688**)。比赛结束后，我的私人 LB 分数被揭示为 (**0.68716**)，使我在最终排行榜中保持第
+    19 位，如下图所示。'
 - en: '![](../Images/ad9fac701d8bac781d91c18751023241.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad9fac701d8bac781d91c18751023241.png)'
 - en: Kaggle’s Outbrain Click Prediction final leaderboard
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: Kaggle 的 Outbrain 点击预测最终排行榜
 - en: I have not tracked the exact submission days, but the graph below gives a sense
     of how my LB scores evolved during the competition. It can be seen that first
     submissions provided nice jumps on the score, but improving upon that became harder,
     which is quite common in machine learning projects.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我没有跟踪具体的提交日期，但下面的图表展示了我在比赛期间 LB 分数的变化情况。可以看出，最初的提交提供了分数的显著跃升，但进一步提高变得更加困难，这在机器学习项目中是很常见的。
 - en: '![](../Images/aca13969e6171642ff0693e191e62df1.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aca13969e6171642ff0693e191e62df1.png)'
 - en: LB scores for my approaches during competition
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在比赛期间的 LB 分数
 - en: Conclusions
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'Some of the things I learned from this competition were:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这次比赛中我学到的一些东西包括：
 - en: A good Cross-Validation strategy is essential for competing.
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个好的交叉验证策略对比赛至关重要。
 - en: One should spend a good chunk of time in feature engineering. Adding new features
     on datasets afterwards requires much more effort and time.
+  id: totrans-42
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 应该在特征工程上花费大量时间。之后在数据集上添加新特征需要更多的努力和时间。
 - en: Hashing is a must for sparse data. In fact, it performed better than One-Hot
     Encoding (OHE) in terms of simplicity and efficient.
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于稀疏数据，哈希是必不可少的。事实上，在简便性和效率方面，它比 One-Hot Encoding (OHE) 表现更好。
 - en: OHE categorical features were not optimal for decision trees ensembles. Based
     on competitors shared experiences, tree ensembles could perform better with original
     categorical values (ids) with enough trees, because it would reduce feature vectors
     to a much lower dimensionality, increasing the chance that the random feature
     sets contained more predictive features.
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: OHE 类别特征对于决策树集成并不理想。根据竞争对手分享的经验，树形集成使用原始类别值（ids）加上足够的树木可能表现更好，因为这会将特征向量的维度降低到更低的维度，从而增加随机特征集合包含更多预测特征的机会。
 - en: Testing many different frameworks is great for learning, but usually takes tons
     of time to transform data to the required format, read documentation and tune
     hyperparameters.
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 测试许多不同的框架对学习非常有帮助，但通常需要大量时间来将数据转换为所需格式、阅读文档和调整超参数。
 - en: Reading scientific papers about the main techniques (FTRL and FFM) were essential
     for guidance on hyperparameter tuning.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 阅读有关主要技术（FTRL 和 FFM）的科学论文对超参数调整的指导至关重要。
 - en: Studying forums posts, public Kernels (shared code) and past solutions shared
     by competitors was great way to learn and is essential for competing. Everyone
     should share something back!
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 学习论坛帖子、公开的 Kernels（共享代码）以及竞争对手分享的过往解决方案是很好的学习方式，对参赛至关重要。每个人都应该有所回馈！
 - en: Ensembling based on average improves accuracy a lot, *blending* with ML models
     leverages the bar, and *stacking* is a must. I had not time to explore stacking,
     but according to other competitors, using out-of-fold predictions on fixed folds
     increases the available data for ensemble training (full train set) and improves
     final ensemble accuracy.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 基于平均值的集成大大提高了准确性，*混合* 与 ML 模型提高了标准，而 *堆叠* 是必不可少的。我没有时间去探索堆叠，但根据其他竞争对手的说法，使用固定折叠的外折预测增加了可用于集成训练的数据量（完整训练集），并提高了最终集成的准确性。
 - en: One shouldn't leave generating one's submission files until the final hours
     of the competition!
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 不应该把生成提交文件的工作留到比赛的最后时刻！
 - en: Kaggle is like a university for cutting-edge machine learning, for those who
     decide to embrace the challenges and learn from the process and peers. It was
     a highly engaging experience to compete against and learn from world-class data
     scientists.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: Kaggle 就像是前沿机器学习的大学，为那些决定接受挑战并从过程中和同伴中学习的人提供了一个平台。与世界级数据科学家竞争和学习的经历非常有趣。
 - en: Google Cloud Platform was a great hiking partner during that journey, providing
     all the necessary climbing tools to overcome cliffs of big data and distributed
     computing, while my focus and effort was directed to get to the top of the mountain.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: Google Cloud Platform 是在这次旅程中出色的合作伙伴，提供了克服大数据和分布式计算悬崖所需的所有工具，而我的注意力和努力则集中在登顶。
 - en: '**Bio: [Gabriel Moreira](https://about.me/gspmoreira)** is a scientist passionate
     about solving problems with data. He is a Doctoral student at Instituto Tecnológico
     de Aeronáutica - ITA, researching on Recommender Systems and Deep Learning. Currently,
     he is [Lead Data Scientist at CI&T](https://medium.com/unstructured), leading
     the team in the solution of customer''s challenging problems using machine learning
     on big and unstructured data.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Gabriel Moreira](https://about.me/gspmoreira)** 是一位热衷于用数据解决问题的科学家。他是
+    Instituto Tecnológico de Aeronáutica - ITA 的博士生，研究领域包括推荐系统和深度学习。目前，他是 [CI&T 的首席数据科学家](https://medium.com/unstructured)，带领团队通过在大数据和非结构化数据上使用机器学习来解决客户面临的挑战性问题。'
 - en: '[Original](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-iii-f67567aaf57c).
     Reposted with permission.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-iii-f67567aaf57c)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
     1](/2017/06/feature-engineering-help-kaggle-competition-1.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征工程如何帮助你在 Kaggle 比赛中表现优异 – 第 1 部分](/2017/06/feature-engineering-help-kaggle-competition-1.html)'
 - en: '[How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
     2](/2017/06/feature-engineering-help-kaggle-competition-2.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征工程如何帮助你在 Kaggle 比赛中表现优异 – 第 2 部分](/2017/06/feature-engineering-help-kaggle-competition-2.html)'
 - en: '[Exclusive: Interview with Jeremy Howard on Deep Learning, Kaggle, Data Science,
     and more](/2017/01/exclusive-interview-jeremy-howard-deep-learning-kaggle-data-science.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[独家：与 Jeremy Howard 讨论深度学习、Kaggle、数据科学等话题的采访](/2017/01/exclusive-interview-jeremy-howard-deep-learning-kaggle-data-science.html)'
 - en: '* * *'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 需求'
 - en: '* * *'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feature Store Summit 2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Data Science Projects That Can Help You Solve Real World Problems](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学项目帮助你解决现实世界问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)'
 - en: '[5 Rare Data Science Skills That Can Help You Get Employed](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 种稀有的数据科学技能助你就业](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)'
 - en: '[How Generative AI Can Help You Improve Your Data Visualization Charts](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[生成式 AI 如何帮助你改善数据可视化图表](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)'
 - en: '[Free Python Resources That Can Help You Become a Pro](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 Python 资源帮助你成为专家](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
 - en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[等级系统如何帮助预测 AI 成本](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
