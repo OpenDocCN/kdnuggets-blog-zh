@@ -1,51 +1,78 @@
 - en: 'Optimal Estimation Algorithms: Kalman and Particle Filters'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 最优估计算法：卡尔曼滤波器和粒子滤波器
 - en: 原文：[https://www.kdnuggets.com/2020/02/optimal-estimation-algorithms-kalman-particle-filters.html](https://www.kdnuggets.com/2020/02/optimal-estimation-algorithms-kalman-particle-filters.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/optimal-estimation-algorithms-kalman-particle-filters.html](https://www.kdnuggets.com/2020/02/optimal-estimation-algorithms-kalman-particle-filters.html)
 - en: '[comments](#comments)![Figure](../Images/8ae2004fa40ce0a4f9822d071de4611c.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/8ae2004fa40ce0a4f9822d071de4611c.png)'
 - en: Photo by [Daniel Jerez](https://unsplash.com/@danieljerez?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由[Daniel Jerez](https://unsplash.com/@danieljerez?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: Optimal Estimation Algorithms
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最优估计算法
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Optimal Estimation Algorithms plays a really important role in our everyday
     life. Today, I will introduce you to two of them (Kalman and Particle Filters)
     using some practical examples.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 最优估计算法在我们日常生活中扮演着非常重要的角色。今天，我将通过一些实际的例子向你介绍两种算法（卡尔曼滤波器和粒子滤波器）。
 - en: Let’s imagine we are driving in a driverless car, and we are about to go through
     a long tunnel. In this example, our car makes use different sensors such as GPS
     estimation, accelerometers and cameras in order to keep track of its position
@@ -53,258 +80,378 @@
     travelling in a tunnel (especially in a really long one) our GPS signal becomes
     weaker because of interferences. Therefore, it might become more difficult for
     our car to estimate its position. What could we do in order to solve this problem?
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们设想一下我们正在驾驶一辆无人驾驶汽车，我们即将进入一个长隧道。在这个例子中，我们的汽车利用不同的传感器，如GPS估计、加速度计和摄像头，以便跟踪它在地图上的位置以及与其他车辆或行人的互动。然而，当在隧道中旅行时（特别是非常长的隧道），我们的GPS信号因干扰而变弱。因此，我们的汽车可能更难以估计其位置。我们可以做些什么来解决这个问题呢？
 - en: One simple solution could be to use our accelerometer sensor data in combination
     with our weak GPS signal. In fact, taking a double integral of our acceleration
     we can be able to calculate our car position. Although, this simple measurement
     will contain some drift and will therefore not be totally accurate as our measurement
     errors will propagate through time (Figure 1). In order to solve this problem,
     we can use either a Kalman Filter or a Particle Filter.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个简单的解决方案是将我们的加速度计传感器数据与弱GPS信号结合使用。事实上，通过对加速度进行双重积分，我们可以计算出汽车的位置。然而，这种简单的测量会包含一些漂移，因此不完全准确，因为我们的测量误差会随时间传播（见图1）。为了解决这个问题，我们可以使用卡尔曼滤波器或粒子滤波器。
 - en: '![Figure](../Images/b7ea8f09063ca914a5612a8543a38579.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/b7ea8f09063ca914a5612a8543a38579.png)'
 - en: 'Figure 1: Autonomous car position estimation against time'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1：自主汽车在时间上的位置估计
 - en: Kalman Filter
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器
 - en: Kalman Filters have common applications in Robotics (eg. [SLAM Systems](https://ieeexplore.ieee.org/document/8321612))
     and Reinforcement Learning. Kalman Filters can be used in Robotis in order to
     keep track of the movements of a swarm of robots in an environment and in Reinforcement
     Learning in order to keep track of different Software Agents.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器在机器人技术（例如[SLAM系统](https://ieeexplore.ieee.org/document/8321612)）和强化学习中有广泛应用。卡尔曼滤波器可以用于机器人技术中以追踪环境中一群机器人的运动，也可以在强化学习中用于追踪不同的软件代理。
 - en: A Kalman Filter is an iterative mathematical process which uses a set of equations
     and consecutive data inputs in order to estimate the true position, velocity,
     etc… of an object when the measured values contain uncertainties or errors. [1]
+  id: totrans-18
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器是一个迭代的数学过程，使用一组方程和连续的数据输入，以估计物体的真实位置、速度等，当测量值包含不确定性或误差时。[1]
 - en: 'Kalman FIlters can, therefore, be simplistically compared to Machine Learning
     models. They take some input data, perform some calculations in order to make
     an estimate, calculate its estimation error and iteratively repeat this process
     in order to reduce the final loss. The iterative process performed by a Kalmar
     Filter can be summarised in 3 main steps:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，卡尔曼滤波器可以简单地与机器学习模型进行比较。它们接受一些输入数据，执行一些计算以进行估计，计算其估计误差，并迭代地重复这一过程，以减少最终损失。卡尔曼滤波器执行的迭代过程可以总结为三个主要步骤：
 - en: '**Kalman Gain Calculation**: is computed by using the error in the input data
     and in the estimation.'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**卡尔曼增益计算**：通过使用输入数据和估计中的误差来计算。'
 - en: '**Current Estimate Calculation**: is computed using the raw input data, our
     previous estimate and the Kalman Gain.'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**当前估计计算**：通过使用原始输入数据、我们的前一估计和卡尔曼增益来计算。'
 - en: '**Estimation Error Calculation**: is finally calculated using the Kalman Gain
     and our Current Estimate.'
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**估计误差计算**：最终通过使用卡尔曼增益和我们的当前估计来计算。'
 - en: This process is briefly summarised in Figure 2.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一过程在图2中简要总结。
 - en: '![Figure](../Images/63317cfae456002885b066daef264ebf.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/63317cfae456002885b066daef264ebf.png)'
 - en: 'Figure 2: Kalman Filter WorkFlow (Adapted from [1])'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2：卡尔曼滤波器工作流程（改编自[1]）
 - en: 'There exist different varieties of Kalman Filters, some examples are: linear
     Kalmar Filter, Extended Kalman filter and Unscented Kalman Filter. If you are
     interested in a more detailed mathematical explanation of Kalman Filters, [this ](http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf)tutorial
     by MIT Tony Lacey is a great place where to start [2].'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 存在不同种类的卡尔曼滤波器，示例包括：线性卡尔曼滤波器、扩展卡尔曼滤波器和无迹卡尔曼滤波器。如果你对卡尔曼滤波器的详细数学解释感兴趣，[这个](http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf)由MIT的Tony
+    Lacey提供的教程是一个很好的起点[2]。
 - en: One of the main problems of Kalman Filters is that they can only be used in
     order to model situations which can be described in terms of Gaussian Noises.
     Although, many non-gaussian processes can be either approximated in gaussian terms
     or transformed in Gaussian distributions through some form of transformation (eg.
     logarithmic, square root, etc..).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 卡尔曼滤波器的主要问题之一是它们只能用于建模可以用高斯噪声描述的情况。然而，许多非高斯过程可以用高斯术语进行近似，或者通过某种变换（例如对数变换、平方根变换等）转换为高斯分布。
 - en: 'In order to overcome this type of limitation, an alternative method can be
     used: Particle Filters.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了克服这种限制，可以使用一种替代方法：粒子滤波器。
 - en: Particle Filter
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 粒子滤波器
 - en: Particle FIlters can be used in order to solve non-gaussian noises problems,
     but are generally more computationally expensive than Kalman Filters. That’s because
     Particle Filters uses simulation methods instead of analytical equations in order
     to solve estimation tasks.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 粒子滤波器可以用于解决非高斯噪声问题，但通常比卡尔曼滤波器计算上更为昂贵。这是因为粒子滤波器使用模拟方法而不是解析方程来解决估计任务。
 - en: 'Particle Filters are commonly used in:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 粒子滤波器通常用于：
 - en: Financial Markets Analysis (especially in [stochastic processes analysis](https://towardsdatascience.com/stochastic-processes-analysis-f0a116999e4))
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 金融市场分析（尤其是[随机过程分析](https://towardsdatascience.com/stochastic-processes-analysis-f0a116999e4)）
 - en: Reinforcement Learning
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 强化学习
 - en: Robots Localization (eg. direct global policy search)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 机器人定位（例如直接全局策略搜索）
 - en: Particle Filters are based on [Monte Carlo Methods](https://en.wikipedia.org/wiki/Monte_Carlo_method) and
     manage to handle not gaussian problems by discretizing the original data into
     particles (each of them representing a different state). The greater the number
     of particles and the better our Particle Filter would be able to handle any possible
     type of distribution.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 粒子滤波器基于[蒙特卡罗方法](https://en.wikipedia.org/wiki/Monte_Carlo_method)，通过将原始数据离散化为粒子（每个粒子代表不同的状态）来处理非高斯问题。粒子数量越多，我们的粒子滤波器能够处理的分布类型就越广泛。
 - en: 'Like Kalman Filters, Particle Filters also make use of an iterative process
     in order to produce its estimations. Each iteration can be broken down into three
     main steps [3]:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 像卡尔曼滤波器一样，粒子滤波器也利用迭代过程来生成其估计。每次迭代可以分解为三个主要步骤 [3]：
 - en: Take multiple samples (***particles***) from an original distribution.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从原始分布中提取多个样本（***粒子***）。
 - en: Weight all the sampled particles in order of importance (the more particles
     fall in a given interval and the higher is their probability density).
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 按重要性对所有采样粒子进行加权（粒子落在特定区间的数量越多，其概率密度越高）。
 - en: Resampling by replacing more unlikely particles with more likely ones (like
     in evolutionary algorithms, only the fittest elements of a population survive).
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过用更可能的粒子替换更不可能的粒子来进行重采样（类似于进化算法，只有最适合的元素才能存活）。
 - en: This process is summed up in Figure 3\. As we can see from the figure below,
     in this example, our Particle Filter is able just after one iteration to understand
     in which range is more likely to be our object. Repeating iteratively this process,
     our filter would then be able to restrict even more its dispersion range.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 该过程总结在图 3 中。从下图可以看到，在这个例子中，我们的粒子滤波器在一次迭代后能够了解我们的对象更可能处于哪个范围。通过反复进行这一过程，我们的滤波器将能够进一步缩小其分散范围。
 - en: '![Figure](../Images/82793d41a5afe78a2f3898015e83249f.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/82793d41a5afe78a2f3898015e83249f.png)'
 - en: 'Figure 3: Single Particle Filter Iteration'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3：单粒子滤波器迭代
 - en: If you are interested in implementing optimal estimation algorithms in Python,
     the [FilterPy](https://filterpy.readthedocs.io/en/latest/) or [Pyro](http://docs.pyro.ai/en/stable/) libraries
     are two great solutions. In particular, Pyro is a universal probabilistic programming
     language developed by Uber which can be used for various Bayesian analysis using
     PyTorch as backend.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有兴趣在 Python 中实现最优估计算法，[FilterPy](https://filterpy.readthedocs.io/en/latest/)
+    或 [Pyro](http://docs.pyro.ai/en/stable/) 库是两个很好的解决方案。特别是，Pyro 是 Uber 开发的通用概率编程语言，可用于各种贝叶斯分析，使用
+    PyTorch 作为后端。
 - en: '*I hope you enjoyed this article, thank you for reading!*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*希望你喜欢这篇文章，谢谢阅读！*'
 - en: Contacts
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 联系方式
 - en: 'If you want to keep updated with my latest articles and projects [follow me
     on Medium](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------) and
     subscribe to my [mailing list](http://eepurl.com/gwO-Dr?source=post_page---------------------------).
     These are some of my contacts details:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想获取我最新的文章和项目，请[关注我在 Medium](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------)并订阅我的[邮件列表](http://eepurl.com/gwO-Dr?source=post_page---------------------------)。以下是我的一些联系信息：
 - en: '[Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)'
 - en: '[Personal Blog](https://pierpaolo28.github.io/blog/?source=post_page---------------------------)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[个人博客](https://pierpaolo28.github.io/blog/?source=post_page---------------------------)'
 - en: '[Personal Website](https://pierpaolo28.github.io/?source=post_page---------------------------)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[个人网站](https://pierpaolo28.github.io/?source=post_page---------------------------)'
 - en: '[Medium Profile](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Medium 个人资料](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)'
 - en: '[GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)'
 - en: '[Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)'
 - en: Bibliography
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考书目
 - en: '[1] Special Topics — The Kalman Filter (2 of 55) Flowchart of a Simple Example
     (Single Measured Value), Michel van Biezen. Accessed at: [https://www.youtube.com/watch?v=CaCcOwJPytQ](https://www.youtube.com/watch?v=CaCcOwJPytQ)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] 特殊主题 — 卡尔曼滤波器 (2 of 55) 简单示例的流程图 (单一测量值)，Michel van Biezen。访问链接：[https://www.youtube.com/watch?v=CaCcOwJPytQ](https://www.youtube.com/watch?v=CaCcOwJPytQ)'
 - en: '[2] Chapter 11\. Tutorial: The Kalman Filter, Tony Lacey. Accessed at: [http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf](http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf)'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] 第 11 章：教程：卡尔曼滤波器，Tony Lacey。访问链接：[http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf](http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf)'
 - en: '[3] Short Introduction to Particle Filters and Monte Carlo Localization, Cyrill
     Stachniss. Accessed at: [http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter-4.pdf](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter-4.pdf)'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] 粒子滤波器和蒙特卡罗定位简介，Cyrill Stachniss。访问链接：[http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter-4.pdf](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter-4.pdf)'
 - en: '**Bio: [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** is
     a Data Scientist and MSc in Artificial Intelligence graduate from the University
     of Southampton. He has a strong interest in AI advancements and machine learning
     applications (such as finance and medicine). Connect with him on [Linkedin](https://www.linkedin.com/in/pierpaolo28/).'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是数据科学家和南安普顿大学人工智能硕士毕业生。他对人工智能进展和机器学习应用（如金融和医学）有浓厚兴趣。通过
+    [Linkedin](https://www.linkedin.com/in/pierpaolo28/) 与他联系。'
 - en: '[Original](https://towardsdatascience.com/optimal-estimation-algorithms-kalman-and-particle-filters-be62dcb5e83).
     Reposted with permission.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/optimal-estimation-algorithms-kalman-and-particle-filters-be62dcb5e83)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Data Science of IoT: Sensor fusion and Kalman filters, Part 1](/2015/10/data-science-iot-sensor-fusion-kalman-filters-part1.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[物联网的数据科学：传感器融合与卡尔曼滤波器，第1部分](/2015/10/data-science-iot-sensor-fusion-kalman-filters-part1.html)'
 - en: '[How to Optimize Your Jupyter Notebook](/2020/01/optimize-jupyter-notebook.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何优化你的 Jupyter Notebook](/2020/01/optimize-jupyter-notebook.html)'
 - en: '[GPU Accelerated Data Analytics & Machine Learning](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GPU 加速的数据分析与机器学习](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[A Brief Introduction to Kalman Filters](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卡尔曼滤波器简介](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)'
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[广义和可扩展的最优稀疏决策树(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Pandas fillna() 填充缺失数据的最佳方式](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
 - en: '[Reinforcement Learning: Teaching Computers to Make Optimal Decisions](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[强化学习：教计算机做出最优决策](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)'
 - en: '[Tackle computer science problems using both fundamental and modern…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过基础和现代方法解决计算机科学问题…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)'
 - en: '[Machine Learning Algorithms - What, Why, and How?](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习算法 - 什么、为什么以及如何？](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)'

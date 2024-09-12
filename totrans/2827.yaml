@@ -1,43 +1,60 @@
 - en: Serverless Machine Learning with R on Cloud Run
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 R 在 Cloud Run 上进行无服务器机器学习
 - en: 原文：[https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html](https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html](https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/), Data
     Scientist, Econometrician**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/)，数据科学家，计量经济学家**'
 - en: 'One of the main challenges that every data scientist face is model deployment.
     Unless you are one of the lucky few who has loads of data engineers to help you
     deploy a model, it’s really an issue in enterprise projects. I am not even implying
     that the model needs to be production ready but even a seemingly basic issue of
     making the model and insights accessible to business users is more of a hassle
     then it needs to be. There used to be 2 main ways of solving the problem:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 每位数据科学家面临的主要挑战之一是模型部署。除非你是那些幸运的少数人之一，拥有大量数据工程师来帮助你部署模型，否则在企业项目中这确实是一个问题。我甚至没有暗示模型需要准备好生产使用，但即使是将模型和见解提供给业务用户这样一个看似简单的问题，也比实际需要的要麻烦得多。过去解决这个问题主要有两种方法：
 - en: Ad-hoc manual runs at every request
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 每次请求的临时手动运行
 - en: Hosting the code on a server and writing an API interface to make the results
     available
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将代码托管在服务器上并编写 API 接口以使结果可用
 - en: These are two ends of the spectrum. Ad-hoc runs are just too tedious and clients
     typically demand for some self-serve interface but good luck trying to get a permanent
     server to host your code. Turns out there is a third way - the serverless way!
     AWS Lambdas and Google Cloud Platform Cloud Functions have really opened up a
     new way of serving results without having to manage any infrastructure. If you
     have access to the cloud, this is a very attractive option.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两种方法代表了一个光谱的两端。临时运行太过繁琐，客户通常会要求某种自助服务界面，但要获得一个永久服务器来托管你的代码则要运气好。事实证明还有一种第三种方法——无服务器方法！AWS
+    Lambdas 和 Google Cloud Platform Cloud Functions 确实开辟了一种新的结果服务方式，而无需管理任何基础设施。如果你可以访问云，这是一个非常有吸引力的选项。
 - en: If you are from the javascript or python world you might have already used some
     of these tools. The problem with cloud functions is that it is restricted to particular
     environments. However, with the recent introduction of GCP’s [Cloud Run](https://cloud.google.com/run/docs/reference/container-contract),
@@ -45,405 +62,611 @@
     to be served on the cloud, opening up the serverless realm to many interesting
     possibilities. This means that R users can also finally have a way to develop
     and deploy serverless ML models!????¹
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你来自 JavaScript 或 Python 领域，你可能已经使用过这些工具。云函数的问题在于它限制于特定环境。然而，随着 GCP 的 [Cloud
+    Run](https://cloud.google.com/run/docs/reference/container-contract) 的引入，我们不再受此问题的限制。Cloud
+    Run 允许在云上提供自定义 Docker 镜像，从而为无服务器领域开辟了许多有趣的可能性。这意味着 R 用户也终于有了开发和部署无服务器机器学习模型的方式！????
 - en: This post documents some of my experience with cloud run and hopefully serves
     as a good reference template for anyone who might want to try it out. I take inspiration
     from two other sources, namely [Mark’s blog](https://code.markedmondson.me/googleCloudRunner-intro/) and [Eric’s
     post](https://ericjinks.com/blog/2019/serverless-R-cloud-run/). Mark actually
     has a package on CRAN that automates some of the deployment work and Eric has
     a nice bit on continuous integration pipelines so do check it out.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章记录了我在使用 Cloud Run 时的一些经验，希望能作为一个好的参考模板，供任何可能想尝试的人使用。我从两个其他来源中获得了灵感，即 [Mark
+    的博客](https://code.markedmondson.me/googleCloudRunner-intro/) 和 [Eric 的文章](https://ericjinks.com/blog/2019/serverless-R-cloud-run/)。Mark
+    实际上在 CRAN 上有一个自动化一些部署工作的包，Eric 还介绍了持续集成管道的一些内容，所以一定要去看看。
 - en: This post is more of a practical guide with a real world machine learning application
     that an analyst might develop and wish to deploy, which I think makes the application
     a lot more concrete and useful. It’s also a really fun little side project.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章更像是一个实用指南，包含一个分析师可能开发并希望部署的真实世界机器学习应用，这使得应用变得更加具体和有用。这也是一个非常有趣的小副项目。
 - en: If you are a coding person, you could skip the rest of the post and dive into
     the [github code](https://github.com/timlrx/serverless-ml), otherwise read on
     :)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你是一个编程人员，你可以跳过剩下的文章，直接查看 [github 代码](https://github.com/timlrx/serverless-ml)，否则继续阅读
+    :)
 - en: Will My Project Run on the Cloud Run?
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我的项目会在 Cloud Run 上运行吗？
 - en: Cloud run is not a panacea. Check out the [requirement specification](https://cloud.google.com/run/docs/reference/container-contract) and [limits](https://cloud.google.com/run/quotas) for
     more details but here are some limitations that you should be aware of.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Cloud run 并不是万能的。查看 [需求规格说明](https://cloud.google.com/run/docs/reference/container-contract) 和 [限制](https://cloud.google.com/run/quotas) 以获取更多详细信息，但这里有一些你应该注意的限制。
 - en: States are not persisted (if you want to persist them you need an external database)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 状态不会被持久化（如果你想持久化它们，你需要一个外部数据库）
 - en: The maximum memory limit is 2GB
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最大内存限制为 2GB
 - en: The container must start a server within 4 minutes after receiving a request
     and it times out after 15 minutes
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 容器必须在收到请求后的 4 分钟内启动服务器，并在 15 分钟后超时
 - en: This makes it well suited for short computations, but not tasks which might
     require lots of memory or are very CPU intensive. 15 minutes in reality is not
     too bad! You could probably run some regressions, decision trees, even solve a
     linear programming problem but maybe not train a neural network.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使其非常适合短时间计算，但不适合需要大量内存或非常 CPU 密集的任务。15 分钟实际上还算不错！你可能可以运行一些回归分析、决策树，甚至解决线性规划问题，但可能无法训练神经网络。
 - en: Twitter Project ????
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Twitter 项目 ????
 - en: '![](../Images/42efd06b01197b8373875beb2914f7ee.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/42efd06b01197b8373875beb2914f7ee.png)'
 - en: 'Here’s my fun serverless-ml weekend project: an application that analyzes the
     twitter-verse. I wanted to generate two plots: a graph which compares the frequency
     of tweets over time and another one which does a sentiment analysis on the tweets.
     As an added bonus, I decided to make it interactive - this means serving static
     plots as well as interactive plotly results.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我有趣的 serverless-ml 周末项目：一个分析 Twitter 领域的应用程序。我想生成两个图表：一个比较推文频率随时间变化的图表，以及另一个对推文进行情感分析的图表。作为额外奖励，我决定使其具有交互性——这意味着既提供静态图表，也提供交互式
+    plotly 结果。
 - en: 'The main package I used were: rtweet, dplyr, ggplot2, tidytext, tidyr and stringr.
     If you are new to tidytext, check out some of my previous posts such as this one
     way back in 2017 which analyzes [recipe books](https://www.timlrx.com/2017/06/24/thesis-thursday-4-analysing-recipes/).'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用的主要包有：rtweet, dplyr, ggplot2, tidytext, tidyr 和 stringr。如果你对 tidytext 不熟悉，可以查看我之前的一些帖子，例如2017年的这篇，分析了[食谱书](https://www.timlrx.com/2017/06/24/thesis-thursday-4-analysing-recipes/)。
 - en: rtweet provides a convenient api to collect users timeline information. You
     would need a twitter API account to get started. It’s a simple process and you
     can register for one here: [https://developer.twitter.com/en/apply-for-access](https://developer.twitter.com/en/apply-for-access).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: rtweet 提供了一个方便的 API 来收集用户时间线信息。你需要一个 Twitter API 账户才能开始使用。这是一个简单的过程，你可以在这里注册： [https://developer.twitter.com/en/apply-for-access](https://developer.twitter.com/en/apply-for-access)。
 - en: Take note of the four keys/tokens. They should be saved as an environment variable
     in your system.² These four keys correspond to API_KEY, API_SECRET_KEY, ACCESS_TOKEN
     and ACCESS_SECRET in the tweet.R file and will be retrieved programmatically when
     needed.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意这四个密钥/令牌。它们应该作为环境变量保存在你的系统中。²这四个密钥对应于 tweet.R 文件中的 API_KEY、API_SECRET_KEY、ACCESS_TOKEN
+    和 ACCESS_SECRET，并将在需要时以编程方式检索。
 - en: '![](../Images/66daf56784262c7a5fe71ed865665954.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/66daf56784262c7a5fe71ed865665954.png)'
 - en: '[Tweet.R](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/(https://github.com/timlrx/serverless-ml/blob/master/twitter-r/tweet.R))'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[Tweet.R](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/(https://github.com/timlrx/serverless-ml/blob/master/twitter-r/tweet.R))'
 - en: Won’t go much into the data science code but you can check it out over [here](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/tweet.R).
     The important part of it is that we are encapsulating each part as a function
     which we then call in the main api routing file (app.R).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 不会深入探讨数据科学代码，但你可以在 [这里](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/tweet.R)查看。重要的是，我们将每一部分封装成函数，然后在主
+    API 路由文件 (app.R) 中调用这些函数。
 - en: For the sentiment analysis, we are counting the number of positive and negative
     words as matched by a dictionary.³ The lexical dictionary is from [Bing Liu et
     al.](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html). Doesn’t this require
     at external database? Not really - external dependencies or data files are fine,
     as long as they are stateless. We can package it together with our docker file
     or in this case it comes installed with the tidytext package!
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于情感分析，我们通过字典匹配来统计正面和负面词汇的数量。³ 词汇字典来自于[Bing Liu et al.](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)。这是否需要外部数据库？实际上不需要
+    - 外部依赖项或数据文件是可以的，只要它们是无状态的。我们可以将其与我们的docker文件一起打包，或者在这种情况下，它随tidytext包一起安装！
 - en: '[App.R](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/app.R)'
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[App.R](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/app.R)'
 - en: This file contains the serving logic. We are using the [plumber package](https://www.rplumber.io/) which
     allows us to create a REST API in R by decorating it in with some markup. You
     can specify query parameters by using a `#* @param` markup and specify the type
     of output to return such as `#* @png` for a static image or `#* @html` for html.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个文件包含了服务逻辑。我们使用[plumber package](https://www.rplumber.io/)，它允许我们通过一些标记在R中创建REST
+    API。你可以通过使用`#* @param`标记来指定查询参数，并指定返回的输出类型，如`#* @png`用于静态图像，或`#* @html`用于html。
 - en: 'As an added bonus, there’s also an out of the box option to make htmlwidgets
     work (`#* @serializer htmlwidget`). This makes our serving plotly results really
     simple. I decided to create two paths for each plot, a static one as well as a
     plotly interactive result. So in total we have four paths:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为额外的好处，还有一个开箱即用的选项来使htmlwidgets工作（`#* @serializer htmlwidget`）。这使得我们的plotly结果展示变得非常简单。我决定为每个图创建两个路径，一个静态的和一个plotly交互式的。所以总共有四个路径：
 - en: /frequency (ggplot)
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: /frequency (ggplot)
 - en: /html/frequency (plotly)
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: /html/frequency (plotly)
 - en: /sentiment (ggplot)
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: /sentiment (ggplot)
 - en: /html/sentiment (plotly)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: /html/sentiment (plotly)
 - en: The functions all accept two arguments: `n` - the number of tweets, and `users` which
     could be a comma separated list of user IDs which we will then query the twitter
     API via rtweet for the relevant information.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些函数都接受两个参数：`n` - 推文数量，以及`users`，这可以是一个用逗号分隔的用户ID列表，我们将通过rtweet查询Twitter API获取相关信息。
 - en: '[Server.R](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/server.R)'
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[Server.R](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/server.R)'
 - en: This is the bit of code that starts our plumber server. We infer the port as
     defined by an environment variable (PORT).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码启动了我们的plumber服务器。我们通过环境变量（PORT）推断端口。
 - en: That’s it for the R code. Now you should have a working application which you
     can run locally from your computer. Next, we get into the grimy details of ML-ops
     ????‍♀. This involves packaging our dependencies with docker and deploying it
     on cloud run.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是R代码的全部内容。现在你应该有一个可以在本地计算机上运行的应用程序了。接下来，我们将深入探讨ML-ops的复杂细节 ????‍♀。这涉及到使用Docker打包我们的依赖项，并将其部署到云端。
 - en: Docker
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Docker
 - en: Docker is a platform which packages different software, configurations and environments
     into containers which neatly encapsulate your application. The end user just needs
     to list out the installation steps to build the image which can subsequently be
     run on the docker platform ????.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker是一个将不同的软件、配置和环境打包成容器的平台，这些容器整洁地封装了你的应用程序。最终用户只需要列出安装步骤以构建镜像，然后可以在docker平台上运行????。
 - en: 'To jump start the configuration, we build on top of the official [r-base image](https://hub.docker.com/_/r-base).
     It’s a Linux image and we need to install some additional dependencies to make
     the application work, namely libssl-dev for rtweet and pandoc for dealing with
     htmlwidgets. This forms the start of our [Dockerfile](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/Dockerfile):'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了启动配置，我们在官方的[r-base image](https://hub.docker.com/_/r-base)上进行构建。这是一个Linux镜像，我们需要安装一些额外的依赖项以使应用程序正常工作，即rtweet的libssl-dev和处理htmlwidgets的pandoc。这是我们的[Dockerfile](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/Dockerfile)的开始：
 - en: '[PRE0]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Next, we copy the scripts in our directory to the app directory in the container
     and install the necessary R libraries using the Rscript function:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将目录中的脚本复制到容器中的应用程序目录，并使用Rscript函数安装必要的R库：
 - en: '[PRE1]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We expose port 8000 (this is more for documentation) and run the server when
     the container is launched:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们暴露端口8000（这主要用于文档），并在容器启动时运行服务器：
 - en: '[PRE2]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'let’s build the docker image and give it a run:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们构建docker镜像并运行它：
 - en: '[PRE3]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`${IMAGE}` here represents the name which you can assign to the image. Remember
     the environment variables that we need for the application? Port for plumber and
     the API keys to access twitter API? We pass it to the container when we are running
     it. Note: The build process is quite long, with the image being 1.22GB big.⁴'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`${IMAGE}`这里代表你可以分配给镜像的名称。还记得我们需要的环境变量吗？Plumber 的端口和访问推特 API 的 API 密钥？我们在运行容器时将其传递给容器。注意：构建过程相当长，镜像大小为
+    1.22GB。⁴'
 - en: If the image runs successfully, you should be able to access the routes on your
     browser. Now, we can take it from your local machine to the web!
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果图像成功运行，你应该能够在浏览器上访问这些路由。现在，我们可以将它从本地机器带到网络上！
 - en: Cloud Run
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Cloud Run
 - en: You can use my [deploy.sh](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/deploy.sh) script
     as a guide on how to build and deploy your image. Before doing so, I recommend
     that you assign the Cloud Run Admin role to the account or user you are running
     the script in order for it to be deployed correctly. You can do it from the [IAM
     panel](https://console.cloud.google.com/iam-admin) within GCP.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用我的[deploy.sh](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/deploy.sh)脚本作为构建和部署镜像的指南。在这样做之前，我建议你将
+    Cloud Run Admin 角色分配给运行脚本的账户或用户，以确保其正确部署。你可以通过 GCP 内的[IAM 面板](https://console.cloud.google.com/iam-admin)完成。
 - en: 'In the script, I retrieved the project ID programmatically, but feel free to
     substitute it with your GCP project. All the script does is to upload the local
     docker image to Google’s container repository and run cloud run to deploy the
     image from the repository:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在脚本中，我程序化地检索了项目 ID，但可以用你的 GCP 项目替换它。脚本的作用是将本地 docker 镜像上传到 Google 的容器仓库，并运行
+    cloud run 从仓库中部署镜像：
 - en: '[PRE4]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'We add an `allow-unauthenticated` to allow public traffic and increase the
     memory as the default was too low. You can start with the default 256MB first
     but if you encounter any errors, do check the cloud run logs which is very useful
     for debugging any errors. If all goes well, you should be greeted with an image
     like this:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们添加了`allow-unauthenticated`来允许公共流量，并增加了内存，因为默认内存太低。你可以先从默认的256MB开始，但如果遇到任何错误，请检查
+    cloud run 日志，这对调试任何错误非常有用。如果一切顺利，你应该会看到这样的图像：
 - en: '![](../Images/b85f4c428b7b6a3c3679eb5f06c07c18.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b85f4c428b7b6a3c3679eb5f06c07c18.png)'
 - en: Our twitter project is now successfully hosted on Cloud Run!
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的推特项目现在成功托管在 Cloud Run 上！
 - en: Test it out
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测试一下
 - en: Here’s the fun part - try it out and visualize and analyse live twitter data!
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣的部分来了 - 尝试一下，实时可视化和分析推特数据吧！
 - en: You can try out my hosted cloud run with one of the 4 endpoints listed above: [https://twitter-r-cvdvxo3vga-uc.a.run.app/](https://twitter-r-cvdvxo3vga-uc.a.run.app/)
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以尝试我的托管 cloud run 服务，使用上面列出的4个端点之一：[https://twitter-r-cvdvxo3vga-uc.a.run.app/](https://twitter-r-cvdvxo3vga-uc.a.run.app/)
 - en: Some fun examples!
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些有趣的例子！
 - en: Frequency of Obama tweets
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 奥巴马推文的频率
 - en: 'The most followed person on Twitter with 112 million followers does not actually
     tweet too frequently ????:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在推特上拥有1.12亿粉丝的最受关注人物实际上并不常常发推 ????：
 - en: '[https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama](https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama](https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama)'
 - en: '![](../Images/7f9e48e5df9219eff0f80ab9524e028d.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7f9e48e5df9219eff0f80ab9524e028d.png)'
 - en: Sentiment analysis comparison between BBCworld and realDonaldTrump
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: BBCworld和realDonaldTrump的情感分析对比
 - en: Sad!⁵
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 伤心！⁵
 - en: '[https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump](https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump)'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump](https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump)'
 - en: '![](../Images/42efd06b01197b8373875beb2914f7ee.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/42efd06b01197b8373875beb2914f7ee.png)'
 - en: What do politicians and entertainers have in common?
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 政治家和娱乐圈人士有什么共同之处？
 - en: They are overwhelmingly positive (here we use our plotly html endpoint)
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们 overwhelmingly positive（在这里我们使用我们的 plotly html 端点）
 - en: '[https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow](https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow)'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow](https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow)'
 - en: '![](../Images/4a5195bfb62dc19b985472e8f761d1d8.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4a5195bfb62dc19b985472e8f761d1d8.png)'
 - en: Conclusion
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: That’s it for this serverless + R tutorial. Hope you managed to learn something
     useful or at the very least find the twitter analysis interesting ????. The nice
     part about having this application running is that you can analyze real-time twitter
     frequency or sentiment plots with whatever account you choose (even your own),
     so feel free to try it out.⁶
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是本次无服务器 + R 教程的全部内容。希望你能学到一些有用的东西，或者至少觉得 Twitter 分析很有趣 😃。拥有这个应用程序的好处是，你可以用你选择的任何账号（甚至你自己的）分析实时
+    Twitter 频率或情感图，因此随意尝试吧。⁶
 - en: There are some very nice benefits of using a serverless stack as well such as
     per second billing, automatically scalable containers which makes it a perfect
     fit to deploy a hobby project.
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用无服务器架构还有一些非常好的好处，比如按秒计费、自动扩展的容器，这使得它非常适合部署爱好项目。
 - en: If you are in R, you can call `Sys.setenv()` or just export it using the CLI
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你在 R 环境中，可以调用 `Sys.setenv()` 或者直接使用 CLI 导出。
 - en: '[https://www.tidytextmining.com/sentiment.html](https://www.tidytextmining.com/sentiment.html)[↩](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/#fnref3)'
+  id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://www.tidytextmining.com/sentiment.html](https://www.tidytextmining.com/sentiment.html)[↩](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/#fnref3)'
 - en: I took about 15 minutes to build the image. That’s one of the downsides of R
     - it’s really convenient for analyzing data but not really friendly for production.
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我花了大约 15 分钟来构建这个镜像。这是 R 的一个缺点 - 它对于数据分析非常方便，但对生产环境不太友好。
 - en: There are some issues scraping data from realDonaldTrump ([https://github.com/ropensci/rtweet/issues/382](https://github.com/ropensci/rtweet/issues/382))
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从 realDonaldTrump 抓取数据存在一些问题 ([https://github.com/ropensci/rtweet/issues/382](https://github.com/ropensci/rtweet/issues/382))
 - en: I will keep it up and running as long as I can as long as the usage does not
     suddenly spike up and exceed the free tier limit
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 只要使用量没有突然激增并超过免费套餐限制，我会尽可能保持它运行。
 - en: '**Bio: [Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/)**
     is a Data Scientist and Econometrician. Timothy''s is interested in applying data
     science techniques to solve business problems. He consults for multiple companies
     on projects involving big data analysis, consumer research, and graph theory.
     While not at work, he often muses about how models can be better deployed in productions
     settings and blog about his latest findings at [https://www.timlrx.com](https://www.timlrx.com)'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/)** 是一名数据科学家和计量经济学家。Timothy
+    有兴趣将数据科学技术应用于解决商业问题。他为多个公司提供咨询，涉及大数据分析、消费者研究和图论等项目。在工作之外，他常常思考如何在生产环境中更好地部署模型，并在
+    [https://www.timlrx.com](https://www.timlrx.com) 上博客分享他的最新发现。'
 - en: '[Original](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/).
     Reposted with permission.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Customer Segmentation for R Users](/2019/09/customer-segmentation-r-users.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R 用户的客户细分](/2019/09/customer-segmentation-r-users.html)'
 - en: '[Beginner’s Guide to K-Nearest Neighbors in R: from Zero to Hero](/2020/01/beginners-guide-nearest-neighbors-r.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R 中 K-最近邻的初学者指南：从零到英雄](/2020/01/beginners-guide-nearest-neighbors-r.html)'
 - en: '[R Users’ Salaries from the 2019 Stackoverflow Survey](/2019/08/r-users-salaries-2019-stackoverflow-survey.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2019 年 Stackoverflow 调查中的 R 用户薪资](/2019/08/r-users-salaries-2019-stackoverflow-survey.html)'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多内容
 - en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何让 Python 代码运行得极快](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
 - en: '[Schedule & Run ETLs with Jupysql and GitHub Actions](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Jupysql 和 GitHub Actions 计划和运行 ETL](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
 - en: '[Learn How to Run Alpaca-LoRA on Your Device in Just a Few Steps](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习如何在您的设备上仅用几步运行 Alpaca-LoRA](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
 - en: '[Run an LLM Locally with LM Studio](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在本地使用 LM Studio 运行 LLM](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
 - en: '[Getting Started with PyTest: Effortlessly Write and Run Tests in Python](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTest 入门：轻松编写和运行 Python 测试](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)'
 - en: '[Distribute and Run LLMs with llamafile in 5 Simple Steps](https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 llamafile 分发和运行 LLM 的 5 个简单步骤](https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps)'
