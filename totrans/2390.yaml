@@ -1,374 +1,552 @@
 - en: How to Deal with Categorical Data for Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何处理机器学习中的分类数据
 - en: 原文：[https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
 - en: '![How to Deal with Categorical Data for Machine Learning](../Images/6322628f527456028b1a4b9a7ff78f6b.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何处理机器学习中的分类数据](../Images/6322628f527456028b1a4b9a7ff78f6b.png)'
 - en: '**In this blog we will explore and implement:**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在这篇博客中，我们将探索并实现：**'
 - en: 'One-hot Encoding using:'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用独热编码：
 - en: Python’s category_encoding library
+  id: totrans-5
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python的category_encoding库
 - en: Scikit-learn preprocessing
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Scikit-learn预处理
 - en: Pandas' get_dummies
+  id: totrans-7
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Pandas的get_dummies
 - en: Binary Encoding
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 二进制编码
 - en: Frequency Encoding
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 频率编码
 - en: Label Encoding
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标签编码
 - en: Ordinal Encoding
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 顺序编码
 - en: '* * *'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在IT方面'
 - en: '* * *'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What is Categorical Data?
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是分类数据？
 - en: Categorical data is a type of data that is used to group information with similar
     characteristics, while numerical data is a type of data that expresses information
     in the form of numbers.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类数据是一种用于将信息按类似特征分组的数据类型，而数值数据则是以数字形式表达信息的数据类型。
 - en: 'Example of categorical data: **gender**'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类数据的例子：**性别**
 - en: '**Why do we need encoding?**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为什么我们需要编码？**'
 - en: Most machine learning algorithms cannot handle categorical variables unless
     we convert them to numerical values
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大多数机器学习算法无法处理分类变量，除非我们将它们转换为数值。
 - en: Many algorithm’s performances even vary based upon how the categorical variables
     are encoded
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 许多算法的表现甚至会因分类变量的编码方式而有所不同
 - en: '**Categorical variables can be divided into two categories:**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**分类变量可以分为两类：**'
 - en: 'Nominal: no particular order'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 名义型：没有特定顺序
 - en: 'Ordinal: there is some order between values'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 顺序型：值之间有一定顺序
 - en: We will also refer to a cheat sheet that shows when to use which type of encoding.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还会参考一张速查表，显示何时使用哪种类型的编码。
 - en: 'Method 1: Using Python’s Category Encoder Library'
+  id: totrans-28
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 方法1：使用Python的Category Encoder库
 - en: category_encoders is an amazing Python library that provides 15 different encoding
     schemes.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: category_encoders是一个很棒的Python库，提供了15种不同的编码方案。
 - en: '**Here is the list of the 15 types of encoding the library supports:**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**这是库支持的15种编码类型的列表：**'
 - en: One-hot Encoding
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 独热编码
 - en: Label Encoding
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标签编码
 - en: Ordinal Encoding
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 顺序编码
 - en: Helmert Encoding
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 赫尔梅特编码
 - en: Binary Encoding
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 二进制编码
 - en: Frequency Encoding
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 频率编码
 - en: Mean Encoding
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平均编码
 - en: Weight of Evidence Encoding
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 证据权重编码
 - en: Probability Ratio Encoding
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 概率比编码
 - en: Hashing Encoding
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 哈希编码
 - en: Backward Difference Encoding
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向后差分编码
 - en: Leave One Out Encoding
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 留一法编码
 - en: James-Stein Encoding
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 詹姆斯-斯坦编码
 - en: M-estimator Encoding
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: M估计量编码
 - en: Thermometer Encoder
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 温度计编码器
 - en: 'Importing libraries:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入库：
 - en: '[PRE0]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Creating a dataframe:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个数据框：
 - en: '[PRE1]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Figure](../Images/8cf59ccc89dbc94e8940e4ef6d8f1cec.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/8cf59ccc89dbc94e8940e4ef6d8f1cec.png)'
 - en: Image By Author
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: '**Implementing one-hot encoding through category_encoder**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**通过category_encoder实现独热编码**'
 - en: In this method, each category is mapped to a vector that contains 1 and 0 denoting
     the presence or absence of the feature. The number of vectors depends on the number
     of categories for features.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种方法中，每个类别映射到一个包含1和0的向量，以表示特征的存在或不存在。向量的数量取决于特征的类别数量。
 - en: 'Create an object of the one-hot encoder:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个独热编码对象：
 - en: '[PRE2]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Figure](../Images/7d4fa552c9a733a558105561be2314f6.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/7d4fa552c9a733a558105561be2314f6.png)'
 - en: Image By Author
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: '**Binary Encoding**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**二进制编码**'
 - en: Binary encoding converts a category into binary digits. Each binary digit creates
     one feature column.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 二进制编码将一个类别转换为二进制数字。每个二进制数字创建一个特征列。
 - en: '![Figure](../Images/8aa6cbf7c85b8903cf0fa35e9cfffa16.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
 - en: '[Image Ref](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Figure](../Images/2d3d6da3ab40c5bcc269b64f18bf2792.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: Similarly, there are another 14 types of encoding provided by this library.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: 'Method 2: Using Pandas'' Get Dummies'
+  id: totrans-66
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Figure](../Images/8487fc1978e7bc43233e90125815090e.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: We can assign a prefix if we want to, if we do not want the encoding to use
     the default.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Figure](../Images/b493f95a98e4568c9532722c2ccd6cc7.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: 'Method 3: Using Scikit-learn'
+  id: totrans-74
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: Scikit-learn also has 15 different types of built-in encoders, which can be
     accessed from sklearn.preprocessing.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: Scikit-learn One-hot Encoding
+  id: totrans-76
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'Let''s first get the list of categorical variables from our data:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Applying on the gender column:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Figure](../Images/b71fbfc60524485cda26dec1cf2cc2f3.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: 'Applying on the city column:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Figure](../Images/89e995edc0d8ef8119ca95db1e464b96.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: 'Applying on the class column:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Figure](../Images/2252a75c773a03c90cda6c45f9cefc70.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: This is because the class column has 4 unique values.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: 'Applying to the list of categorical variables:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![Figure](../Images/245e25af4d01851981273dc3395c0944.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: Here the first 2 columns represent gender, the next 4 columns represent class,
     and the remaining 2 represent city.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: Scikit-learn Label Encoding
+  id: totrans-97
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: In label encoding, each category is assigned a value from 1 through N where
     N is the number of categories for the feature. There is no relation or order between
     these assignments.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '**Comparing with one-hot encoding**'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![Figure](../Images/2252a75c773a03c90cda6c45f9cefc70.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: Ordinal Encoding
+  id: totrans-104
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -376,181 +554,256 @@
     the variable. It looks similar to label encoding, the only difference being that
     label coding doesn't consider whether a variable is ordinal or not; it will then
     assign a sequence of integers.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: '**Example: Ordinal encoding will assign values as Very Good(1) < Good(2) <
     Bad(3) < Worse(4)**'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: First, we need to assign the original order of the variable through a dictionary.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Figure](../Images/d39a870d7c717360bf6b97d521cb97b8.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: Then we can map each row for the variable as per the dictionary.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE14]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![Figure](../Images/9963853ad5088d787831007bef6cccba.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
 - en: Frequency Encoding
+  id: totrans-115
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The category is assigned as per the frequency of values in its total lot.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Grouping by class column:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'Dividing by length:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Mapping and rounding off:'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE18]'
+  id: totrans-123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '![Figure](../Images/28ddbb0f094ff1ed7b89bf61b7b08ae8.png)'
+  id: totrans-124
   prefs: []
   type: TYPE_IMG
 - en: Image By Author
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
 - en: 'In this article, we saw 5 types of encoding schemes. Similarly, there are 10
     other types of encoding which we have not looked at:'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
 - en: Helmert Encoding
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Mean Encoding
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Weight of Evidence Encoding
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Probability Ratio Encoding
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Hashing Encoding
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Backward Difference Encoding
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Leave One Out Encoding
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: James-Stein Encoding
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: M-estimator Encoding
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Thermometer Encoder
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Which Encoding Method is Best?
+  id: totrans-137
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 哪种编码方法最佳？
 - en: There is no single method that works best for every problem or dataset. I personally
     think that the get_dummies method has an advantage in its ability to be implemented
     very easily.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有一种方法适用于所有问题或数据集。我个人认为 get_dummies 方法在其易于实现的优势上具有优势。
 - en: If you want to read about all 15 types of encoding, [here is a very good article
     to refer to](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02).
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解所有 15 种编码方式，[这里有一篇很好的文章可供参考](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)。
 - en: 'Here is a cheat sheet on when to use what type of encoding:'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个有关何时使用何种编码类型的备忘单：
 - en: '![Figure](../Images/be62853cce4ddd9c821bb5928030c26e.png)'
+  id: totrans-141
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/be62853cce4ddd9c821bb5928030c26e.png)'
 - en: '[Image Ref](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图片参考](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)'
 - en: 'References:'
+  id: totrans-143
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考资料：
 - en: '[https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)'
+  id: totrans-144
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)'
 - en: '[https://pypi.org/project/category-encoders/](https://pypi.org/project/category-encoders/)'
+  id: totrans-145
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://pypi.org/project/category-encoders/](https://pypi.org/project/category-encoders/)'
 - en: '[https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html)'
+  id: totrans-146
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html)'
 - en: '**[Shelvi Garg](https://www.linkedin.com/in/shelvi-garg-3a7421108/)** is a
     Data Scientist at Spinny'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Shelvi Garg](https://www.linkedin.com/in/shelvi-garg-3a7421108/)** 是 Spinny
+    的数据科学家'
 - en: More On This Topic
+  id: totrans-148
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[5 Ways to Deal with the Lack of Data in Machine Learning](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理机器学习中数据不足的 5 种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
 - en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[黑色星期五优惠 - 以更少的费用掌握 DataCamp 机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
 - en: '[Encoding Categorical Features with MultiLabelBinarizer](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 MultiLabelBinarizer 编码分类特征](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)'
 - en: '[How to Deal with Missing Data Using Interpolation Techniques in Pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 中的插值技术处理缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位机器学习工程师都应该掌握的 5 种机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)'
