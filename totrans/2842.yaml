@@ -1,21 +1,31 @@
 - en: The Ultimate Guide to Model Retraining
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 模型重训练终极指南
 - en: 原文：[https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Luigi Patruno](https://mlinproduction.com/about/), Data Scientist and
     the founder of ML in Production**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Luigi Patruno](https://mlinproduction.com/about/)，数据科学家及“ML in Production”创始人**。'
 - en: '![](../Images/8fc6ca9cef42f54a2d66263d0f17d448.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8fc6ca9cef42f54a2d66263d0f17d448.png)'
 - en: Machine learning models are trained by learning a mapping between a set of input
     features and an output target. Typically, this mapping is learned by optimizing
     some cost function to minimize prediction error. Once the optimal model is found,
@@ -24,8 +34,10 @@
     generated from user interactions, scheduled processes, or requests from other
     software systems. Ideally, we hope that our models predict these future instances
     as accurately as the data used during the training process.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型通过学习一组输入特征与输出目标之间的映射来进行训练。通常，这个映射是通过优化某个成本函数来最小化预测误差而学习到的。一旦找到最优模型，它就会被投入使用，目标是对未来未见数据生成准确的预测。根据问题的不同，这些新数据示例可能来自用户交互、计划的处理过程或其他软件系统的请求。理想情况下，我们希望我们的模型对这些未来实例的预测与训练过程中使用的数据一样准确。
 - en: When we deploy models to production and expect to observe error rates, like
     those we saw during model evaluation, we are making an assumption that future
     data will be similar to past observed data. Specifically, we are assuming that
@@ -33,8 +45,10 @@
     this assumption usually does not hold. Trends change over time, people’s interests
     vary with the seasons, and the stock market ebbs and wanes. And so our models
     must adapt.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们将模型部署到生产环境中并期望观察到与模型评估期间相似的错误率时，我们假设未来的数据将类似于过去观察到的数据。具体来说，我们假设特征和目标的分布将保持相对稳定。但这种假设通常并不成立。趋势会随时间变化，人们的兴趣随季节变化，股市也会涨落。因此，我们的模型必须适应这些变化。
 - en: Since we expect the world to change over time, model deployment should be treated
     as a continuous process. Rather than deploying a model once and moving on to another
     project, machine learning practitioners need to retrain their models if they find
@@ -42,68 +56,92 @@
     training set. This concept, known as **model drift**, can be mitigated but involves
     additional overhead in the forms of monitoring infrastructure, oversight, and
     process.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们预期世界会随着时间变化，模型部署应被视为一个持续的过程。机器学习从业者需要重新训练他们的模型，如果发现数据分布与原始训练集有显著偏离的话，而不是仅仅部署一个模型后转向另一个项目。这个概念被称为**模型漂移**，可以通过额外的监控基础设施、监督和流程来缓解，但也涉及到额外的开销。
 - en: In this post, I’d like to define model drift and discuss strategies of identifying
     and tracking when a model drifts over time. I’ll then describe how to use model
     retraining to mitigate the effects of drift on predictive performance and suggest
     how frequently models should be retrained. Finally, I’ll mention a few ways to
     enable model retraining.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将定义模型漂移并讨论识别和跟踪模型漂移的策略。我将描述如何使用模型重训练来缓解漂移对预测性能的影响，并建议模型应该多频繁地进行重训练。最后，我将提到几种启用模型重训练的方法。
 - en: What is Model Drift?
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是模型漂移？
 - en: Model Drift refers to a model’s predictive performance degrading over time due
     to a change in the environment that violates the model’s assumptions. Model drift
     is a bit of a misnomer because it’s not the model that is changing, but rather
     the environment in which the model is operating. For that reason, the term [concept
     drift](https://machinelearningmastery.com/gentle-introduction-concept-drift-machine-learning/) may
     actually be a better name, but both terms describe the same phenomenon.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型漂移是指由于环境变化违背了模型的假设，导致模型的预测性能随着时间的推移而下降。模型漂移这个术语有些误导，因为变化的不是模型，而是模型操作的环境。因此，[概念漂移](https://machinelearningmastery.com/gentle-introduction-concept-drift-machine-learning/)可能更适合这个名称，但这两个术语描述的是相同的现象。
 - en: Notice that my definition of model drift actually includes several different
     variables that can change. Predictive performance will degrade, it will degrade
     over some period of time and at some rate, and this degradation will be due to
     changes in the environment that violate the modeling assumptions. Each of these
     variables should be taken into account when determining how to diagnose model
     drift and how to correct it through model retraining.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，我对模型漂移的定义实际上包括几个可以变化的变量。预测性能会退化，它会在一段时间内以某种速率退化，这种退化将由于违反建模假设的环境变化。确定如何诊断模型漂移以及如何通过模型再训练进行纠正时，应该考虑这些变量。
 - en: '**How do you track model drift?**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你如何跟踪模型漂移？**'
 - en: There are a variety of techniques for identifying and tracking model drift.
     Before describing a few strategies, let me point out that there is no one-size-fits-all
     approach. Different modeling problems require different solutions and you may
     or may not have the infrastructure or resources to take advantage of certain strategies.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 有多种技术可以识别和跟踪模型漂移。在描述一些策略之前，让我指出没有一种通用的方法。不同的建模问题需要不同的解决方案，而且你可能有或没有基础设施或资源来利用某些策略。
 - en: '**MODEL PERFORMANCE DEGRADATION**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型性能退化**'
 - en: 'The most direct way to identify model drift is to explicitly determine that
     predictive performance has deteriorated and to quantify this decline. Measuring
     the accuracy of a deployed model on live data is a [notoriously difficult problem](https://www.oreilly.com/ideas/lessons-learned-turning-machine-learning-models-into-real-products-and-services).
     This difficulty arises in part because we need access to both the predictions
     the model generated and the ground truth signal. This may not be possible for
     a number of reasons including:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 识别模型漂移的最直接方法是明确确定预测性能是否恶化并量化这种下降。在实时数据上测量已部署模型的准确性是一个[臭名昭著的难题](https://www.oreilly.com/ideas/lessons-learned-turning-machine-learning-models-into-real-products-and-services)。这种困难部分是因为我们需要同时访问模型生成的预测和真实标签。由于多种原因，这可能是不可能的，包括：
 - en: The predictions weren’t stored after they were generated. Don’t let this be
     you.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预测在生成后未被存储。不要让这种情况发生在你身上。
 - en: The predictions are stored, but you can’t access the ground truth labels.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预测被存储了，但你无法访问真实标签。
 - en: The predictions and labels are both available but can’t be joined together.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预测和标签都是可用的，但不能将它们结合在一起。
 - en: Even if the predictions and labels can be joined together, it may be a while
     until the labels become available. Consider a financial forecasting model that
     predicts the next quarter’s revenue. In this case, the actual revenue won’t be
@@ -112,8 +150,10 @@
     i.e., training models that would have been deployed in the past and generating
     predictions on past historical data, can give you a sense of the rate at which
     a model’s performance will fall off.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使预测和标签可以结合在一起，标签可能还要一段时间才能获得。考虑一个预测下季度收入的财务预测模型。在这种情况下，实际收入要等到该季度结束后才能观察到，因此你不能在那时之前量化模型的表现。在这种预测问题中，**回填**预测，即训练过去本该部署的模型并在过去的历史数据上生成预测，可以让你了解模型性能下降的速度。
 - en: As Josh Wills [points out](https://www.infoq.com/presentations/instrumentation-observability-monitoring-ml),
     one of the most important things you can do before deploying a model is to try
     to understand model drift in an offline environment. Data scientists should seek
@@ -124,11 +164,17 @@
     the rate at which a model’s performance falls off and how often you’ll need to
     retrain. Of course, this approach is predicated on having a [time machine](https://medium.com/netflix-techblog/distributed-time-travel-for-feature-generation-389cccdd3907) to
     access the data that was live at any point in the past.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如 Josh Wills [指出的](https://www.infoq.com/presentations/instrumentation-observability-monitoring-ml)，在部署模型之前你能做的最重要的事情之一是尝试在离线环境中理解模型漂移。数据科学家应该努力回答这个问题：“如果我使用这组特征对六个月前的数据训练一个模型，并将其应用于今天生成的数据，这个模型比我之前从一个月前的数据中训练出来的模型在今天的数据上表现更差多少？”在离线环境中进行这种分析可以让你估计模型性能下降的速度以及你需要重新训练的频率。当然，这种方法以拥有一个
+    [时间机器](https://medium.com/netflix-techblog/distributed-time-travel-for-feature-generation-389cccdd3907)
+    为前提，以便访问过去任何时间点的数据。
 - en: '**EXAMINING THE FEATURE DISTRIBUTIONS OF TRAINING AND LIVE DATA**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**检查训练数据和实时数据的特征分布**'
 - en: Since model performance is expected to degrade as the distributions of the input
     features deviate from those of the training data, comparing these distributions
     is a great way to infer model drift. Notice that I said *infer* rather than *detect* model
@@ -136,54 +182,79 @@
     but rather expecting that a decline will occur. This can be incredibly useful
     in cases where you can’t observe the actual ground truth due to the nature of
     the data generating process.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于模型性能预期会随着输入特征的分布偏离训练数据的分布而下降，因此比较这些分布是推测模型漂移的好方法。请注意，我使用了 *推测* 而不是 *检测* 模型漂移，因为我们不是观察到预测性能的实际下降，而是预期会发生这种下降。这在由于数据生成过程的性质无法观察实际的真实情况时非常有用。
 - en: 'There are a number of different things to monitor per feature including:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个特征有许多不同的监控项目，包括：
 - en: the range of possible values
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可能值的范围
 - en: histograms of values
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 值的直方图
 - en: whether the feature accepts NULLs and if so, the number of NULLs expected
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征是否接受 NULL 值，如果接受，预计有多少 NULL 值
 - en: Being able to quickly monitor these distributions [via dashboards](https://pair-code.github.io/facets/) is
     a step in the right direction. This can be taken even further by automatically
     tracking training-serving skew and issuing alerts when the divergence in features
     is significant.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 能够通过 [仪表盘](https://pair-code.github.io/facets/) 快速监控这些分布是朝着正确方向迈出的第一步。进一步的做法是自动跟踪训练和服务偏差，并在特征的偏离显著时发出警报。
 - en: '**EXAMINING THE CORRELATIONS BETWEEN FEATURES**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**检查特征之间的相关性**'
 - en: 'Many models assume that the relationships between features must remain fixed.
     Therefore you’ll also want to monitor pairwise correlations between individual
     input features. As mentioned in [What’s your ML Test Score? A rubric for ML production
     systems](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf),
     you can do this by:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多模型假设特征之间的关系必须保持不变。因此，你还需要监控单独输入特征之间的成对相关性。如 [《你的 ML 测试评分是什么？ML 生产系统的评分标准》](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf)
+    中提到的，你可以通过以下方式实现：
 - en: monitoring correlation coefficients between features
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 监控特征之间的相关系数
 - en: training models with one or two features
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用一个或两个特征训练模型
 - en: training a set of models that each have one of the features removed
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练一组模型，每个模型移除一个特征
 - en: '**EXAMINING THE TARGET DISTRIBUTIONS**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**检查目标分布**'
 - en: 'If the distributions of the target variables change significantly, a model’s
     predictive performance will almost certainly deteriorate. The authors of [Machine
     Learning: The High-Interest Credit Card of Technical Debt](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43146.pdf) state
@@ -192,12 +263,17 @@
     quality of your deployed model. But keep in mind that "This is by no means a comprehensive
     test, as it can be met by a null model that simply predicts average values of
     label occurrences without regard to the input features."'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '如果目标变量的分布发生显著变化，模型的预测性能几乎肯定会恶化。*Machine Learning: The High-Interest Credit
+    Card of Technical Debt* 的作者指出，一个简单而有用的诊断方法是跟踪目标分布。该指标与训练数据的偏差可能意味着是时候重新评估你部署的模型的质量了。但请记住，“这绝不是一个全面的测试，因为它可以被一个简单预测标签发生平均值的空模型所满足，而不考虑输入特征。”'
 - en: What exactly do we mean by model retraining?
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们所说的模型再训练究竟是什么意思？
 - en: At times, model retraining seems to be an [overloaded operator](https://en.wikipedia.org/wiki/Operator_overloading).
     Does it only refer to finding new parameters of an existing model architecture?
     What about changing the hyperparameter search space? What about searching over
@@ -206,31 +282,44 @@
     important to be as explicit as possible. To answer these questions, it’s important
     to think directly about the problem we are trying to solve. That is, reducing
     the effect of model drift on our deployed models.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，模型再训练似乎是一个[重载运算符](https://en.wikipedia.org/wiki/Operator_overloading)。这是否仅指寻找现有模型架构的新参数？改变超参数搜索空间呢？不同模型类型（如
+    RandomForest、SVMs 等）的搜索呢？我们能否包括新的特征或排除以前使用的特征？这些都是很好的问题，明确这些非常重要。要回答这些问题，我们必须直接思考我们试图解决的问题。也就是说，减少模型漂移对我们部署模型的影响。
 - en: 'Prior to deploying a model to production data scientists go through a rigorous
     process of model validation which includes:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将模型部署到生产环境之前，数据科学家会经过一个严格的模型验证过程，包括：
 - en: Assembling datasets – Gathering datasets from different sources such as different
     databases.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集组装 – 从不同来源（如不同的数据库）收集数据集。
 - en: Feature Engineering – Deriving columns from raw data that will improve predictive
     performance.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征工程 – 从原始数据中提取能提高预测性能的列。
 - en: Model Selection – Comparing different learning algorithms.
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型选择 – 比较不同的学习算法。
 - en: Error Estimation – Optimizing over a search space to find the best model and
     estimate its generalization error.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 错误估计 – 在搜索空间中进行优化，以找到最佳模型并估计其泛化误差。
 - en: This process results in some **best** model, which is then deployed to production.
     Since model drift refers specifically to the predictive performance of the selected
     model degrading due to the distributions of feature/target data changing, model
@@ -240,8 +329,10 @@
     hyperparameter search space should all remain the same. One way to think about
     this is that retraining doesn’t involve any code changes. It only involves changing
     the training data set.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程会产生一些**最佳**模型，然后将其部署到生产环境中。由于模型漂移特别指选择的模型由于特征/目标数据的分布变化而导致的预测性能退化，模型再训练**不**应该导致不同的模型生成过程。再训练仅指在新的训练数据集上重新运行生成之前选择的模型的过程。特征、模型算法和超参数搜索空间都应保持不变。可以这样理解，再训练不涉及任何代码更改，仅涉及更改训练数据集。
 - en: This is not to say that future iterations of the model shouldn’t include new
     features or consider additional algorithm types/architectures. I’m just saying
     that those types of changes result in a different type of model altogether – which
@@ -249,12 +340,16 @@
     of your machine learning organization, such changes would ideally be introduced
     with A/B tests that measure the impact of the new model on predetermined metrics
     of interest, such as user engagement or retention.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这并不是说未来版本的模型不应该包括新特性或考虑其他算法类型/架构。我只是说，这些类型的变化会导致完全不同的模型——在部署到生产环境之前，你应该以不同的方式进行测试。根据你的机器学习组织的成熟度，这些变化理想情况下应通过A/B测试引入，以测量新模型对预定指标（如用户参与度或留存率）的影响。
 - en: How often should you retrain your model
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你应该多久重新训练一次模型
 - en: So far we’ve discussed what model drift is and a number of ways to identify
     it. So the question becomes, how do we remedy it? If a model’s predictive performance
     has fallen due to changes in the environment, the solution is to retrain the model
@@ -262,8 +357,10 @@
     retrain your model? And how do you determine your new training set? As with most
     difficult questions, the answer is that *it depends*. But what does it depend
     on?
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们已经讨论了模型漂移是什么以及识别它的多种方法。那么问题变成了，我们如何解决它？如果由于环境变化导致模型的预测性能下降，解决方案是用反映当前现实的新训练集重新训练模型。你应该多久重新训练一次模型？你如何确定新的训练集？像大多数困难的问题一样，答案是*这要根据情况而定*。但这究竟取决于什么呢？
 - en: Sometimes the problem setting itself will suggest when to retrain your model.
     For instance, suppose you’re working for a university admissions department and
     are tasked with building a student attrition model that predicts whether a student
@@ -271,8 +368,10 @@
     on the current cohort of students directly after midterms. Students identified
     as being at risk of churning will automatically be enrolled in tutoring or some
     other such intervention.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时问题设置本身会提示你何时重新训练模型。例如，假设你在一个大学招生部门工作，负责构建一个预测学生是否会在下学期回归的学生流失模型。这个模型将在期中考试后直接用来生成当前学生群体的预测。被识别为有流失风险的学生将自动被注册参加辅导或其他干预措施。
 - en: Let’s think about the time horizon of such a model. Since we’re generating predictions
     in batch once a semester, it doesn’t make sense to retrain the model any more
     often than this because we won’t have access to any new training data. Therefore
@@ -283,8 +382,10 @@
     to retrain. Quickly changing training sets might require you to train as often
     as daily or weekly. Slower varying distributions might require monthly or annual
     retraining.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑一下这种模型的时间范围。由于我们每学期生成批量预测，因此没有新的训练数据的情况下，模型不应更频繁地重新训练。因此，我们可能会选择在每学期开始时重新训练模型，在观察到上一学期哪些学生退学后。这是一个**周期性**重新训练的例子。通常，从这种简单的策略开始是一个好主意，但你需要确定确切的重新训练频率。快速变化的训练集可能要求你每天或每周训练一次。变化较慢的分布可能需要每月或每年重新训练。
 - en: If your team has the infrastructure in place to monitor the metrics discussed
     in the previous section, then it may make sense to [automate the management of
     model drift](https://www.inawisdom.com/machine-learning/machine-learning-automated-model-retraining-sagemaker/).
@@ -299,45 +400,63 @@
     must be collected in order to represent the new state of the world. Even if the
     world has changed, there is no point in replacing the existing model with one
     whose training set size is too small.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的团队已经具备了监控前面讨论的指标的基础设施，那么可能有意义去[自动化模型漂移管理](https://www.inawisdom.com/machine-learning/machine-learning-automated-model-retraining-sagemaker/)。这个解决方案需要跟踪诊断信息，然后在实时数据的诊断信息与训练数据的诊断信息出现偏差时触发模型重新训练。但这种方法也有自己的挑战。首先，你需要确定一个触发模型重新训练的偏差阈值。如果阈值设置得过低，你可能会面临过于频繁的重新训练，从而导致计算成本的高昂。如果阈值设置得过高，你则有可能不会足够频繁地进行重新训练，从而导致生产中的模型表现不佳。这比看起来要复杂，因为你需要确定需要收集多少新的训练数据才能代表世界的新状态。即使世界发生了变化，用一个训练集过小的模型来替换现有模型也没有意义。
 - en: Special considerations need to be taken if your model is operating in an adversarial
     environment. In settings such as fraud detection, the adversary changes the data
     distribution to profit themselves. These problems may benefit from [online learning](https://en.wikipedia.org/wiki/Online_machine_learning) where
     the model is updated incrementally as new data becomes available.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的模型在对抗环境中运行，则需要特别考虑。在欺诈检测等环境中，对手会改变数据分布以获取利益。这些问题可能会从[在线学习](https://en.wikipedia.org/wiki/Online_machine_learning)中受益，在这种学习中，模型会随着新数据的到来而逐步更新。
 - en: How can you retrain your model?
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你如何重新训练你的模型？
 - en: Last but not least, let’s discuss **how** to retrain a model. The approach you
     employ for model retraining is directly related to how often you decide to retrain.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后但同样重要的是，让我们讨论**如何**重新训练模型。你采用的模型重新训练方法直接与决定重新训练的频率相关。
 - en: If you decide to retrain your model periodically, then batch retraining is perfectly
     sufficient. This approach involves scheduling model training processes on a recurring
     basis using a job scheduler such as Jenkins or [Kubernetes CronJobs](https://mlinproduction.com/k8s-cronjobs/).
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你决定定期重新训练你的模型，那么批量重新训练是完全足够的。这种方法涉及使用诸如 Jenkins 或 [Kubernetes CronJobs](https://mlinproduction.com/k8s-cronjobs/)
+    等作业调度程序来安排模型训练过程。
 - en: If you’ve automated model drift detection, then it makes sense to trigger model
     retraining when drift is identified. For instance, you may have periodic jobs
     that compare the feature distributions of live data sets to those of the training
     data. When a significant deviation is identified, the system can automatically
     schedule model retraining to automatically deploy a new model. Again this can
     be performed with a job scheduler like Jenkins or by using [Kubernetes Jobs](https://mlinproduction.com/k8s-jobs/).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你已经自动化了模型漂移检测，那么在识别到漂移时触发模型重新训练是有意义的。例如，你可能会有定期作业来比较实时数据集的特征分布与训练数据的特征分布。当发现显著偏差时，系统可以自动安排模型重新训练以自动部署新模型。这也可以通过像
+    Jenkins 这样的作业调度程序或使用 [Kubernetes Jobs](https://mlinproduction.com/k8s-jobs/) 来实现。
 - en: Finally, it may make sense to utilize online learning techniques to update the
     model that is currently in production. This approach relies on "seeding" a new
     model with the model that is currently deployed. As new data arrives, the model
     parameters are updated with the new training data.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，利用在线学习技术来更新当前生产中的模型可能是有意义的。这种方法依赖于用当前部署的模型来“播种”一个新模型。随着新数据的到来，模型参数会用新的训练数据进行更新。
 - en: Conclusion
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: A machine learning model’s predictive performance is expected to decline as
     soon as the model is deployed to production. For that reason, it’s imperative
     that practitioners prepare for degraded performance by setting up ML-specific
@@ -345,44 +464,64 @@
     of retraining will vary from problem-to-problem, ML engineers can start with a
     simple strategy that retrains models on a periodic basis as new data arrives and
     evolve to more complex processes that quantify and react to model drift.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型的预测性能在模型部署到生产环境后通常会下降。因此，实践者必须通过建立针对机器学习的监控解决方案和工作流程，为性能下降做好准备，从而实现模型重新训练。虽然重新训练的频率会因问题而异，但机器学习工程师可以从一个简单的策略开始，即定期在新数据到达时重新训练模型，然后逐步演变为更复杂的过程，以量化和应对模型漂移。
 - en: References
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[Retraining Models on New Data](https://docs.aws.amazon.com/machine-learning/latest/dg/retraining-models-on-new-data.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于新数据重新训练模型](https://docs.aws.amazon.com/machine-learning/latest/dg/retraining-models-on-new-data.html)'
 - en: '[Should a machine learning model be retrained each time new observations are
     available?](https://www.quora.com/Should-a-machine-learning-model-be-retrained-each-time-new-observations-are-available)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型是否应在每次有新观测数据时进行重新训练？](https://www.quora.com/Should-a-machine-learning-model-be-retrained-each-time-new-observations-are-available)'
 - en: '[MACHINE LEARNING AND AUTOMATED MODEL RETRAINING WITH SAGEMAKER](https://www.inawisdom.com/machine-learning/machine-learning-automated-model-retraining-sagemaker/)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用SAGEMAKER的机器学习和自动化模型重新训练](https://www.inawisdom.com/machine-learning/machine-learning-automated-model-retraining-sagemaker/)'
 - en: '[A Gentle Introduction to Concept Drift in Machine Learning](https://machinelearningmastery.com/gentle-introduction-concept-drift-machine-learning/)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中概念漂移的温和介绍](https://machinelearningmastery.com/gentle-introduction-concept-drift-machine-learning/)'
 - en: '[Lessons learned turning machine learning models into real products and services](https://www.oreilly.com/ideas/lessons-learned-turning-machine-learning-models-into-real-products-and-services)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习模型转化为实际产品和服务的经验教训](https://www.oreilly.com/ideas/lessons-learned-turning-machine-learning-models-into-real-products-and-services)'
 - en: '[What’s your ML Test Score? A rubric for ML production systems](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你的机器学习测试评分是多少？机器学习生产系统的评分标准](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf)'
 - en: '[Machine Learning: The High-Interest Credit Card of Technical Debt](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43146.pdf)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习：技术债务的高利贷](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43146.pdf)'
 - en: '[Original](https://mlinproduction.com/model-retraining/). Reposted with permission.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://mlinproduction.com/model-retraining/)。经许可转载。'
 - en: '**Bio:** [Luigi Patruno](https://mlinproduction.com/about/) is a data scientist
     and machine learning consultant. He is currently the Director of Data Science
     at 2U, where he leads a team of data scientists responsible for building machine
@@ -391,73 +530,114 @@
     initiatives. He founded [MLinProduction.com](http://MLinProduction.com) to collect
     and share best practices for operationalizing machine learning and he''s taught
     graduate courses in statistics, data analysis, and big data engineering.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [Luigi Patruno](https://mlinproduction.com/about/) 是一位数据科学家和机器学习顾问。他目前是2U的数据科学总监，领导一个负责构建机器学习模型和基础设施的数据科学团队。作为顾问，Luigi
+    帮助公司通过将现代数据科学方法应用于战略业务和产品计划来创造价值。他创办了 [MLinProduction.com](http://MLinProduction.com)
+    以收集和分享机器学习运维的最佳实践，并且教授过统计学、数据分析和大数据工程的研究生课程。'
 - en: '**Related:**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Why is Machine Learning Deployment Hard?](https://www.kdnuggets.com/2019/10/machine-learning-deployment-hard.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么机器学习部署如此困难？](https://www.kdnuggets.com/2019/10/machine-learning-deployment-hard.html)'
 - en: '[How to Monitor Machine Learning Models in Real-Time](https://www.kdnuggets.com/2019/01/monitor-machine-learning-real-time.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何实时监控机器学习模型](https://www.kdnuggets.com/2019/01/monitor-machine-learning-real-time.html)'
 - en: '[Overview of Different Approaches to Deploying Machine Learning Models in Production](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[部署机器学习模型的不同方法概述](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)'
 - en: '* * *'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业之路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求。'
 - en: '* * *'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关话题
 - en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bark：终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
 - en: '[The Ultimate Open-Source Large Language Model Ecosystem](https://www.kdnuggets.com/2023/05/ultimate-opensource-large-language-model-ecosystem.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极开源大型语言模型生态系统](https://www.kdnuggets.com/2023/05/ultimate-opensource-large-language-model-ecosystem.html)'
 - en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极指南：NLP 中不同的词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
 - en: '[Your Ultimate Guide to Chat GPT and Other Abbreviations](https://www.kdnuggets.com/2023/06/ultimate-guide-chat-gpt-abbreviations.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你的终极指南：Chat GPT 和其他缩略语](https://www.kdnuggets.com/2023/06/ultimate-guide-chat-gpt-abbreviations.html)'
 - en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极指南：掌握季节性变化并提升商业成果](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
 - en: '[Master Data Science in a Year: The Ultimate Guide to Affordable,…](https://www.kdnuggets.com/master-data-science-in-a-year-the-ultimate-guide-to-affordable-self-paced-learning)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一年内掌握数据科学：终极指南](https://www.kdnuggets.com/master-data-science-in-a-year-the-ultimate-guide-to-affordable-self-paced-learning)'
