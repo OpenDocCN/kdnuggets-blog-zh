@@ -1,175 +1,227 @@
 - en: Simple and Fast Data Streaming for Machine Learning Projects
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/b9f199330321477dc272afb77c29bb8e.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: Image Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Have you ever wondered why you have to wait for DVC to pull all the files to
     access a single file? Maybe you have created custom scripts to work around this
     problem. But what if I tell you there is a better solution for this issue?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '[Direct Data Access](https://github.com/DagsHub/client/) makes it fairly easy
     for you to load single or multiple files from the DagsHub DVC server. You can
     also upload a single file or multiple files using Upload API. It will help you
     save time, as you won’t be pulling the entire dataset to push a single file.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Direct Data Access works better with all kinds of Python libraries. Especially
     those that use high levels of functionalities. In the case of a training machine
     learning model, you can pull the data directly into DataLoader and start training
     or fine-tuning the model.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: In this tutorial, we will look deep into DagsHub's Direct Data Access and train
     simple Yoga pose classification models using FastAI-2 and Direct Data Access.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: Getting Started with Direct Data Access
+  id: totrans-8
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: Direct Data Access comes with [DagsHub](https://github.com/DagsHub/client/)
     client API. Instead of using `dvc pull` to download all the data, you can access
     the files on demand from DagsHub servers.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: The streamed files are indistinguishable from the local files saved on your
     disk. You can provide a local file path, and it will fetch files from DagsHub.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Install the DagsHub API using GitHub URL and pip command.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: <class></class>
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: Or
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Note:** currently, the Direct Data Access is in beta version with minor issues.'
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Manual Method
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The manual method lets you stream files using DagsHubFilesystem.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '**You just have to replace:**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '| **Python API** | **DagsHub File System** |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
 - en: '| open() | fs.open() |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
 - en: '| os.stat() | fs.stat() |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
 - en: '| os.listdir() | fs.listdir() |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
 - en: '| os.scandir() | fs.scandir() |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
 - en: If you are in a Git repository, you don’t have to provide configuration parameters.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: 'To override automatically detected configuration, use:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: repo_url
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: username
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Password
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If you are outside the Git repository, you can also point to the project directory
     using the `project_root` argument.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: In the example, we have created a DagsHubFilesystem and displayed a list of
     files and folders using listdir().
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: It is showing “Mobilenet-Weights” and “Saved_Models” folders that are not available
     in the local directory but on the DVC server. In short, you have access to all
     the files that you can see in the DagsHub repository without performing the `dvc
     pull` command.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Automatic Method
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The `install_hooks` allows Python libraries (*some exceptions apply) to access
     DVC tracked files as if they are on your system. It is simple and fast.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: In the example below, we have invoked `install_hooks()` and used PIL.Image to
     display the image of a woman in a down dog yoga pose.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/789836de3311bdae8f95c1da58639861.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
 - en: I know, it is magic. It will also amaze you with faster loading time.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** While using the DagsHubFilesystem or install_hooks command you will
     be asked to generate a temporary OAuth key for additive security.'
+  id: totrans-41
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Yoga Pose Classification Using Direct Data Access
+  id: totrans-42
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: In this tutorial, we will fine-tune the Resnet34 model on the Yoga pose [dataset](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)
     using Direct Data Access. The dataset consists of 5 classes of Yoga pose images
     and the images were extracted using Bing API.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/5ccfbe25f6d40cd47cc6a4c3dda2ea88.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
 - en: Image by Author
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: Setting Up
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -177,60 +229,81 @@
     and run the command below on a Google Colab or Jupyter Notebook. The command requires
     a branch name, repo name, username, and access token. You can simply replace the
     placeholders with your configurations.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** make sure you are inside the repository to activate Streaming.'
+  id: totrans-48
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: If you are facing problems with getting started, check out the [Colab notebook](https://colab.research.google.com/drive/1h-vikoiyOd5heR_-U76ScpJuov2vtzin?usp=sharing).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: Next, we will import Pytorch, FastAI, os, and Matplotlib. The project is based
     on the FastAI framework. Read the [documentation](https://docs.fast.ai/) to learn
     more.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Data Loader
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'After invoking install_hooks(), we can automatically access the files using:
     `ImageDataloaders`.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: It took 6.54 seconds to load and download the 18.1 MB dataset. It is fast compared
     to 73.84 seconds with `dvc pull` + ImageDataLoaders.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Visualization
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Our dataset is pretty simple and consists of various Yoga poses with labels.
     We will be using it to train our model. The Resnet34 does not require large data,
     even a few hundred images can provide state-of-the-art results.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/46d4008e4fecddd9536514de05b294d1.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
 - en: Model Fine-Tuning
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -238,205 +311,273 @@
     DagsHub provides a free MLflow server. You just need to set the tracking URI,
     and we are good to go. You can find URI by clicking on the green button(Remote)
     on the repo page and accessing it through the MLflow tab.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: The `get_experiment_id` function generates and returns experiment id.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: After that, activate tracking using mlflow.fastai.autolog(). It will log the
     experiment and send it to the MLflow server on DagsHub.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: Finally, we will build our learner with resnet34 and set metrics to accuracy
     and error_rate.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: After fine-tuning for 3 epochs, we got state-of-the-art results with 95.9% accuracy
     and 0.04 loss.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '| **epoch** | **train_loss** | **valid_loss** | **accuracy** | **error_rate**
     | **time** |'
+  id: totrans-70
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 0.368970 | 0.154318 | 0.954315 | 0.045685 | 00:05 |'
+  id: totrans-71
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0.220782 | 0.127155 | 0.964467 | 0.035533 | 00:05 |'
+  id: totrans-72
   prefs: []
   type: TYPE_TB
 - en: '| 2 | 0.145330 | 0.116135 | 0.959391 | 0.040609 | 00:05 |'
+  id: totrans-73
   prefs: []
   type: TYPE_TB
 - en: '[PRE12]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '**Note:** If you are using Colab to train a model, you need to set tag to link
     commit with experiment results using: `mlflow.set_tag(''mlflow.source.git.commit'',
     "<commit-id>")`'
+  id: totrans-75
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Save the model and use it for Inference and reproducibility.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Simple Prediction
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Let’s get a random image from a training set to predict the label.  As you can
     see, we get the Downdog label with 99.99% certainty.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE14]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Evaluation
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The model evaluation shows that the model has accurately predicted all of the
     images.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/84bedd1062e31a73f982431661497eba.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
 - en: MLflow
+  id: totrans-85
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: You can review past experiments and results using the DagsHub experiment tab.
     I was first training with Keras MobilenetV3 and various other models. In the end,
     I chose FastAI and Resnet34 for simplicity and better results.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/ffcba172d5d27efeb1b76a45ae94f463.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
 - en: Image from [kingabzpro/Yoga-Pose-Classification](https://dagshub.com/kingabzpro/Yoga-Pose-Classification/experiments/#/)
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: DagsHub Data Upload API
+  id: totrans-89
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: The streaming goes both ways. You can also upload single or multiple files using
     the DagsHub Upload API.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: To test our model on unseen data, let's download the Yoga Pose images from Google.
     We will be uploading the images and by using Streaming, we will be accessing them
     for prediction.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/1115add7eec3555469eb1c571f93d32c.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
 - en: Image form Google search
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: We will use upload.Repo to create a repo object. It will help us directly upload
     files using a username, access token, repository name, and branch.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** For uploading, you don’t even need to clone any git repository.'
+  id: totrans-95
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Uploading Multiple Files
+  id: totrans-97
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: To Upload multiple files, we need to provide a folder directory. If the folder
     name does not exist, it will create one for you.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: In the next step, we are using a loop to add 2 new yoga pose image files and
     committing it with message and versioning.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: By using the versioning, you can upload the files that are tracked by Git or
     DVC.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: The files are successfully uploaded. Hurray!!!
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: It is awesome.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: I was so happy when I uploaded the files for the first time without cloning
     the Git repository and pulling dvc data.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/e873359bb8cdb21bb587928894987b64.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
 - en: Uploading Single File
+  id: totrans-106
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: You can also upload a file using a single line, by providing a local file and
     repository file path. With this you can upload files in any folder.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: In our case, we are uploading the third file to the Sample folder using message
     and dvc versioning.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE18]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: The third image is successfully uploaded to the DagsHub repository.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/6271de110fa4911b3ed5f9a56a69d7ca.png)'
+  id: totrans-111
   prefs: []
   type: TYPE_IMG
 - en: Model Prediction
+  id: totrans-112
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Now, we will use the uploaded images to predict the Yoga Pose.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: The model has accurately predicted the Warrior2 pose with 99.9% certainty.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
 - en: '![Simple and Fast Data Streaming for Machine Learning Projects](../Images/5d4d3cf4ab050928f77e953971ab1795.png)'
+  id: totrans-116
   prefs: []
   type: TYPE_IMG
 - en: '[PRE20]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '**Note:** to access recently uploaded files, you have to run `install_hooks()`
     again.'
+  id: totrans-118
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Benchmark
+  id: totrans-119
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
@@ -445,23 +586,29 @@
     pull`. There are still minor bugs that you will always see in the Beta version,
     but overall, I was impressed by the DagsHub team, who came up with an amazing
     solution.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '|  | **Streaming(s)** | **No-streaming(s)** |'
+  id: totrans-121
   prefs: []
   type: TYPE_TB
 - en: '| **Dataloader** | 6.54 | 73.84 |'
+  id: totrans-122
   prefs: []
   type: TYPE_TB
 - en: '| **Training** | 74 | 72 |'
+  id: totrans-123
   prefs: []
   type: TYPE_TB
 - en: '| **Total** | **80.54** | **145.84** |'
+  id: totrans-124
   prefs: []
   type: TYPE_TB
 - en: In the end, I will ask everyone to give [Direct Data Access](https://github.com/DagsHub/client/)
     a try and ask questions in the [Discord](https://discord.com/invite/9gU36Y6) support
     channel, if you are facing issues.
+  id: totrans-125
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -472,58 +619,74 @@
     in Technology Management and a bachelor''s degree in Telecommunication Engineering.
     His vision is to build an AI product using a graph neural network for students
     struggling with mental illness.'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-128
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-133
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Fast and Effective Way to Audit ML for Fairness](https://www.kdnuggets.com/2023/01/fast-effective-way-audit-ml-fairness.html)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Practical Deep Learning from fast.ai is Back!](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Python in Finance: Real Time Data Streaming within Jupyter Notebook](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融中的 Python：在 Jupyter Notebook 中实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
 - en: '[How to Build a Streaming Semi-structured Analytics Platform on Snowflake](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Snowflake 上构建流式半结构化分析平台](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)'
