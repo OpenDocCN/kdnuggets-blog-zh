@@ -1,21 +1,31 @@
 - en: Building a Question-Answering System from Scratch
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从头构建一个问答系统
 - en: 原文：[https://www.kdnuggets.com/2018/10/building-question-answering-system-from-scratch.html](https://www.kdnuggets.com/2018/10/building-question-answering-system-from-scratch.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/10/building-question-answering-system-from-scratch.html](https://www.kdnuggets.com/2018/10/building-question-answering-system-from-scratch.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin), University
     of San Francisco**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)，旧金山大学**'
 - en: '![Image](../Images/ffaad18510a91a7f920a2e0b2e449237.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/ffaad18510a91a7f920a2e0b2e449237.png)'
 - en: As my Masters is coming to an end, I wanted to work on an interesting NLP project
     where I can use all the techniques(not exactly) I have learned at [USF](https://www.usfca.edu/arts-sciences/graduate-programs/data-science).
     With the help of my professors and discussions with the batch mates, I decided
@@ -25,8 +35,12 @@
     and using advanced techniques like attention based RNN models to get the best
     accuracy. All the GitHub repositories that I found related to SQuAD by other people
     have also used RNNs.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着我的硕士学业即将结束，我希望从事一个有趣的 NLP 项目，运用我在 [USF](https://www.usfca.edu/arts-sciences/graduate-programs/data-science)
+    学到的所有技术（不完全准确）。在教授的帮助和与同学们的讨论之后，我决定从零开始构建一个问答模型。我使用了 [斯坦福问答数据集 (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer/)。这个问题非常有名，各大公司都在争先恐后地进入排行榜，并使用像基于注意力的
+    RNN 模型这样的高级技术来获得最佳准确度。我找到的与 SQuAD 相关的 GitHub 仓库也都使用了 RNN。
 - en: However, my goal is not to reach the state of the art accuracy but to learn
     different NLP concepts, implement them and explore more solutions. I always believed
     in starting with basic models to know the baseline and this has been my approach
@@ -34,136 +48,203 @@
     how it can be used in building QA systems. In the future parts, we will try to
     implement deep learning techniques, specifically sequence modeling for this problem.
     All the codes can be found on this [Github repository](https://github.com/aswalin/SQuAD).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我的目标不是达到最先进的准确度，而是学习不同的 NLP 概念，实施它们并探索更多解决方案。我一直相信从基本模型开始以了解基线，这也是我在这里的做法。这一部分将重点介绍
+    **Facebook 句子嵌入** 及其在构建 QA 系统中的应用。在未来的部分中，我们将尝试实现深度学习技术，特别是针对该问题的序列建模。所有代码可以在这个
+    [Github 仓库](https://github.com/aswalin/SQuAD) 中找到。
 - en: But let’s first understand the problem. I will give a brief overview, however,
     a detailed understanding of the problem can be found [here](https://rajpurkar.github.io/mlx/qa-and-squad/).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 但让我们首先理解问题。我将给出一个简要概述，然而对问题的详细理解可以在 [这里](https://rajpurkar.github.io/mlx/qa-and-squad/)
+    找到。
 - en: '****SQuAD Dataset****'
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****SQuAD 数据集****'
 - en: '**S**tanford **Qu**estion **A**nswering **D**ataset (SQuAD) is a new reading
     comprehension dataset, consisting of questions posed by crowdworkers on a set
     of Wikipedia articles, where the answer to every question is a segment of text,
     or *span*, from the corresponding reading passage. With 100,000+ question-answer
     pairs on 500+ articles, SQuAD is significantly larger than previous reading comprehension
     datasets.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**S**坦福 **问**题 **答**案 **数**据集（SQuAD）是一个新的阅读理解数据集，包含由众包工作者在一组维基百科文章上提出的问题，每个问题的答案都是对应阅读段落中的一段文本或
+    *跨度*。SQuAD 拥有超过 100,000 个问答对和 500 多篇文章，规模显著大于以往的阅读理解数据集。'
 - en: '**Problem**'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**问题**'
 - en: For each observation in the training set, we have a **context, question, and
     text. **Example of one such observation-
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于训练集中的每个观察，我们有一个 **上下文、问题和文本**。一个这样的观察示例 -
 - en: '![](../Images/d2e67ce3ed9c8e12b607144dede178a9.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d2e67ce3ed9c8e12b607144dede178a9.png)'
 - en: The goal is to find the text for any new question and context provided. This
     is a closed dataset meaning that the answer to a question is always a part of
     the context and also a continuous span of context. I have broken this problem
     into two parts for now -
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标是找到针对任何新问题和提供的上下文的文本。这是一个封闭的数据集，意味着问题的答案始终是上下文的一部分，并且是连续的上下文跨度。我目前将这个问题分为两个部分
+    -
 - en: Getting the sentence having the right answer (highlighted yellow)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取包含正确答案的句子（高亮为黄色）
 - en: Once the sentence is finalized, getting the correct answer from the sentence
     (highlighted green)
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一旦句子确定，从句子中获取正确的答案（高亮绿色）
 - en: Introducing Infersent, Facebook Sentence Embedding
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍 Infersent，Facebook 句子嵌入
 - en: These days we have all types of embeddings [word2vec](https://deeplearning4j.org/word2vec.html), [doc2vec](https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e), [food2vec](https://jaan.io/food2vec-augmented-cooking-machine-intelligence/), [node2vec](https://docs.google.com/presentation/d/1L-633fYUokbYqTC8R5FUfhlmWnpCO5ey6JMZ_kAnJlM/edit?usp=sharing),
     so why not sentence2vec. The basic idea behind all these embeddings is to use
     vectors of various dimensions to represent entities numerically, which makes it
     easier for computers to understand them for various downstream tasks. Articles
     explaining these concepts are linked for your understanding.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有各种类型的嵌入 [word2vec](https://deeplearning4j.org/word2vec.html)、[doc2vec](https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)、[food2vec](https://jaan.io/food2vec-augmented-cooking-machine-intelligence/)、[node2vec](https://docs.google.com/presentation/d/1L-633fYUokbYqTC8R5FUfhlmWnpCO5ey6JMZ_kAnJlM/edit?usp=sharing)，那么为什么不试试
+    sentence2vec 呢。所有这些嵌入的基本思想是使用不同维度的向量来表示实体，从而使计算机更容易理解它们用于各种下游任务。解释这些概念的文章链接在此，以供参考。
 - en: Traditionally, we used to average the vectors of all the words in a sentence
     called the bag of words approach. Each sentence is tokenized to words, vectors
     for these words can be found using glove embeddings and then take the average
     of all these vectors. This technique has performed decently, but this is not a
     very accurate approach as it does not take care of the order of words.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统上，我们会对句子中所有单词的向量取平均，这被称为词袋模型。每个句子被标记为单词，这些单词的向量可以通过 glove 嵌入找到，然后对所有这些向量取平均。这种技术表现尚可，但这并不是一种非常准确的方法，因为它没有考虑单词的顺序。
 - en: Here comes [**Infersent**](https://github.com/facebookresearch/InferSent), it
     is a *sentence embeddings* method that provides semantic sentence representations.
     It is trained on natural language inference data and generalizes well to many
     different tasks.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是 [**Infersent**](https://github.com/facebookresearch/InferSent)，它是一种 *句子嵌入*
+    方法，提供语义句子表示。它在自然语言推理数据上进行了训练，并且在许多不同任务上泛化良好。
 - en: The process goes like this-
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 过程如下-
 - en: Create a vocabulary from the training data and use this vocabulary to train
     infersent model. Once the model is trained, provide sentence as input to the encoder
     function which will return a 4096-dimensional vector irrespective of the number
     of words in the sentence. [[demo](https://github.com/facebookresearch/InferSent/blob/master/encoder/demo.ipynb)]
+  id: totrans-21
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 从训练数据中创建词汇表，并使用该词汇表训练 infersent 模型。一旦模型训练完成，提供句子作为输入到编码器函数，它将返回一个 4096 维的向量，而不考虑句子中的单词数量。
+    [[demo](https://github.com/facebookresearch/InferSent/blob/master/encoder/demo.ipynb)]
 - en: These embeddings can be used for various downstream tasks like finding similarity
     between two sentences. I have implemented the same for Quora-Question Pair kaggle
     competition. You can check it out [here](https://github.com/aswalin/Kaggle/blob/master/Quora.ipynb).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些嵌入可以用于各种下游任务，例如查找两个句子之间的相似性。我在 Quora-Question Pair kaggle 比赛中实现了相同的功能。你可以在
+    [这里](https://github.com/aswalin/Kaggle/blob/master/Quora.ipynb) 查看。
 - en: Coming to the SQuAD problem, below are the ways I have tried using sentence
     embedding to solve the first part of the problem described in the previous section-
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于 SQuAD 问题，下面是我尝试使用句子嵌入解决上一节描述的第一个问题的方式-
 - en: 'Break the paragraph/context into multiple sentences. The two packages that
     I know for processing text data are - [Spacy](https://spacy.io/usage/spacy-101) & [Textblob](http://textblob.readthedocs.io/en/dev/).
     I have used package TextBlob for the same. It does intelligent splitting, unlike
     spacy’s sentence detection which can give you random sentences on the basis of
     period. An example is provided below:'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将段落/上下文拆分成多个句子。我知道的用于处理文本数据的两个包是 - [Spacy](https://spacy.io/usage/spacy-101)
+    和 [Textblob](http://textblob.readthedocs.io/en/dev/)。我已经使用了 TextBlob 包。它进行智能拆分，不像
+    spacy 的句子检测，它会根据句号给出随机的句子。下面是一个示例：
 - en: '![](../Images/ca4451fbbd3a0c447b6c7e972aebb1cb.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ca4451fbbd3a0c447b6c7e972aebb1cb.png)'
 - en: '**Example: Paragraph**![](../Images/18cb89bff424258612e9078996a36da2.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例：段落**![](../Images/18cb89bff424258612e9078996a36da2.png)'
 - en: '**TextBlob is splitting it into 7 sentences which makes sense**![](../Images/91c395758fe4a535ffc4a4695a281ba3.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**TextBlob 将其拆分成 7 个句子，这很合理**![](../Images/91c395758fe4a535ffc4a4695a281ba3.png)'
 - en: '**Spacy is splitting it into 12 sentences**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Spacy 将其拆分成 12 个句子**'
 - en: Get the vector representation of each sentence and question using Infersent
     model
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用Infersent模型获取每个句子和问题的向量表示。
 - en: Create features like distance, based on cosine similarity and Euclidean distance
     for each sentence-question pair
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为每对句子-问题创建基于余弦相似度和欧几里得距离的特征。
 - en: Models
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型
 - en: I have further solved the problem using two major methods-
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我进一步使用了两种主要方法来解决这个问题——
 - en: Unsupervised Learning where I am not using the target variable. Here, I am returning
     the sentence form the paragraph which has the minimum distance from the given
     question
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 无监督学习中，我没有使用目标变量。在这里，我返回段落中与给定问题距离最小的句子。
 - en: Supervised Learning - Creation of training set has been very tricky for this
     part, the reason being the fact that there is no fixed number of sentences in
     each part and answer can range from one word to multiple words. The only paper
@@ -174,52 +255,72 @@
     was 79%)**, but it is not clear how they have defined the target variable. If
     anyone has any idea, please, clarify the same in the comments. I will explain
     my solution later.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 监督学习 - 训练集的创建在这一部分非常棘手，原因在于每个部分的句子数量没有固定，并且答案可以从一个词到多个词不等。我找到的唯一实现了逻辑回归的论文是斯坦福团队发布的这次比赛和数据集。他们使用了在这篇[论文](https://arxiv.org/pdf/1606.05250.pdf)中解释的多项式逻辑回归，并创建了**1.8亿个特征（该模型的句子检测准确率为79%）**，但不清楚他们是如何定义目标变量的。如果有人知道，请在评论中澄清一下。我稍后会解释我的解决方案。
 - en: '**Unsupervised Learning Model**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**无监督学习模型**'
 - en: Here, I first tried using euclidean distance to detect the sentence having minimum
     distance from the question. The accuracy of this model came around 45%. Then,
     I switched to cosine similarity and the accuracy improved from **45% to 63%**.
     This makes sense because euclidean distance does not care for alignment or angle
     between the vectors whereas cosine takes care of that. Direction is important
     in case of vectorial representations.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我首先尝试使用欧几里得距离来检测与问题距离最小的句子。该模型的准确率约为45%。然后，我转而使用余弦相似度，准确率从**45%提升到63%**。这很有道理，因为欧几里得距离不考虑向量之间的对齐或角度，而余弦相似度考虑了这些因素。在向量表示的情况下，方向是重要的。
 - en: But this method does not leverage the rich data with target labels that we are
     provided with. However, considering the simple nature of the solution, this is
     still giving a good result without any training. I think the credit for the decent
     performance goes to Facebook sentence embedding.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这种方法没有利用我们所提供的带有目标标签的丰富数据。然而，考虑到解决方案的简单性质，这仍然能在没有任何训练的情况下给出良好的结果。我认为这份不错的表现归功于Facebook的句子嵌入。
 - en: '**Supervised Learning Models**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**监督学习模型**'
 - en: Here, I have transformed the target variable form text to the sentence index
     having that text. For the sake of simplicity, I have restricted my paragraph length
     to 10 sentences (around 98% of the paragraphs have 10 or fewer sentences). Hence,
     I have 10 labels to predict in this problem.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我将目标变量从文本形式转换为包含该文本的句子索引。为了简化，我将段落长度限制为10个句子（大约98%的段落包含10个或更少的句子）。因此，在这个问题中我需要预测10个标签。
 - en: For each sentence, I have built one feature based on cosine distance. If a paragraph
     has less number of sentences, then I am replacing it’s feature value with 1 (maximum
     possible cosine distance) to make total 10 sentences for uniformity. It will be
     easier to explain this process with an example.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个句子，我根据余弦距离构建了一个特征。如果一个段落的句子数量较少，那么我将其特征值替换为1（最大可能的余弦距离），以使总句子数达到10个，以保持一致性。通过示例解释这一过程会更容易。
 - en: 'Let’s take the first observation/row of the training set. The sentence having
     the answer is bolded in the context.:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以训练集的第一条观察/行作为例子。回答所在的句子在上下文中加粗：
 - en: '**Example**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例**'
 - en: Question — “To whom did the Virgin Mary allegedly appear in 1858 in Lourdes
     France?”
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题——“1858年，圣母玛利亚在法国鲁尔德显现给了谁？”
 - en: '**Context** — “Architecturally, the school has a Catholic character. Atop the
     Main Building\’s gold dome is a golden statue of the Virgin Mary. Immediately
     in front of the Main Building and facing it, is a copper statue of Christ with
@@ -229,71 +330,107 @@
     France where the Virgin Mary reputedly appeared to Saint Bernadette Soubirous
     in 1858**. At the end of the main drive (and in a direct line that connects through
     3 statues and the Gold Dome), is a simple, modern stone statue of Mary.”'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**背景**—“从建筑学上讲，这所学校具有天主教特色。在主楼的金色圆顶上是一尊金色的圣母玛利亚雕像。主楼前面立即是基督铜像，双臂高举，上面刻有“Venite
+    Ad Me Omnes”的字样。主楼旁边是圣心大教堂。大教堂的后面是洞窟，这是一个玛利亚祈祷和沉思的地方。**它是法国卢尔德的一个洞窟的复制品，圣母玛利亚据说在1858年显现给圣贝尔纳黛特·苏比鲁斯。**
+    在主车道的尽头（通过3尊雕像和金色圆顶的直线连接），是一尊简单的现代石雕圣母玛利亚像。”'
 - en: '**Text** — “Saint Bernadette Soubirous”'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**文本**—“圣贝尔纳黛特·苏比鲁斯”'
 - en: In this case, the target variable will become 5, because that’s the index of
     the bolded sentence. We will have 10 features each corresponding to one sentence
     in the paragraph. The missing values for column_cos_7, column_cos_8, and column_cos_9
     are filled with 1 because these sentences do not exists in the paragraph
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，目标变量将变为5，因为这是加粗句子的索引。我们将有10个特征，每个特征对应段落中的一句话。由于这些句子在段落中不存在，column_cos_7、column_cos_8和column_cos_9的缺失值填充为1。
 - en: '![](../Images/7ec4f696e582859ebe279d905caab25d.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7ec4f696e582859ebe279d905caab25d.png)'
 - en: '**Dependency Parsing**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**依赖解析**'
 - en: Another feature that I have used for this problem is the **“Dependency Parse
     Tree”**. This is marginally improving the accuracy of the model by 5%. Here, I
     have used Spacy tree parsing as it is has a rich API for navigating through the
     tree.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我为这个问题使用的另一个特征是**“依赖解析树”**。这略微提高了模型的准确性，提升了5%。在这里，我使用了Spacy树解析，因为它有丰富的API用于导航树结构。
 - en: '![](../Images/4f431c6bf4bc8837ebb7120539b02d2a.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4f431c6bf4bc8837ebb7120539b02d2a.png)'
 - en: '![](../Images/dd61f1c282f3cb4d254fdd035a864dab.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dd61f1c282f3cb4d254fdd035a864dab.png)'
 - en: 'For more details: Please check out [Stanford Lecture](https://web.stanford.edu/~jurafsky/slp3/14.pdf)'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 详情请查阅 [斯坦福讲座](https://web.stanford.edu/~jurafsky/slp3/14.pdf)
 - en: Relations among the words are illustrated above the sentence with directed,
     labeled arcs from heads to dependents. We call this a Typed Dependency structure
     because the labels are drawn from a fixed inventory of grammatical relations.
     It also includes a root node that explicitly marks the root of the tree, the head
     of the entire structure.
+  id: totrans-53
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 单词之间的关系通过从头到依赖词的有向标记弧图示在句子上方。我们称之为类型化依赖结构，因为标签来自一个固定的语法关系库存。它还包括一个根节点，明确标记了树的根，即整个结构的头部。
 - en: Let’s visualize our data using Spacy tree parse. I am using the same example
     provided in the previous section.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用Spacy树解析来可视化我们的数据。我使用的是上一节提供的相同示例。
 - en: '**Question — “**To whom did the Virgin Mary allegedly appear in 1858 in Lourdes
     France?”'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题—**“圣母玛利亚在1858年在法国卢尔德显现给了谁？”'
 - en: '![](../Images/4ee78a27dfb5465d1b781369fce13092.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4ee78a27dfb5465d1b781369fce13092.png)'
 - en: '**Sentence having the answer —** “It is a replica of the grotto at Lourdes,
     France where the Virgin Mary reputedly appeared to Saint Bernadette Soubirous
     in 1858”'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**包含答案的句子—** “它是法国卢尔德的一个洞窟的复制品，圣母玛利亚据说在1858年显现给圣贝尔纳黛特·苏比鲁斯。”'
 - en: '![](../Images/2a333ad526351d87dcad356a1ffa0675.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2a333ad526351d87dcad356a1ffa0675.png)'
 - en: '**Roots of All the Sentences in the Paragraph**'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**段落中所有句子的根**'
 - en: '![](../Images/212b7aca80799750cf331fae8e684db8.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/212b7aca80799750cf331fae8e684db8.png)'
 - en: The idea is to match the root of the question which is “**appear**” in this
     case to all the roots/sub-roots of the sentence. Since there are multiple verbs
     in a sentence, we can get multiple roots. If the root of the question is contained
@@ -301,149 +438,223 @@
     is answered by that sentence. Considering that in mind, I have created one feature
     for each sentence whose value is either 1 or 0\. Here, 1 represents that the root
     of question is contained in the sentence roots and 0 otherwise.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个想法是将问题的词根（在这种情况下是“**appear**”）与句子的所有词根/子词根进行匹配。由于一个句子中可能有多个动词，我们可以得到多个词根。如果问题的词根包含在句子的词根中，则该句子更有可能回答该问题。考虑到这一点，我为每个句子创建了一个特征，其值为1或0。这里，1表示问题的词根包含在句子的词根中，0则相反。
 - en: 'Note: It is important to do stemming before comparing the roots of sentences
     with the question root. In the previous example, root word for question is **appear **while
     the root word in the sentence is **appeared**. If you don’t stem **appear** &
     **appeared** to a common term, them matching won’t be possible.'
+  id: totrans-62
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '注意: 在比较句子的词根与问题词根之前进行词干提取很重要。在之前的例子中，问题的词根是**appear**，而句中的词根是**appeared**。如果不将**appear**和**appeared**归并为一个共同的术语，它们将无法匹配。'
 - en: The example below is the transposed data with 2 observations from the processed
     training data. So, we have 20 features in total combining cosine distance and
     root match for 10 sentences in a paragraph. The target variable ranges from 0
     to 9.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下示例是经过处理的训练数据中具有2个观察值的转置数据。因此，我们总共有20个特征，结合了10个句子的余弦距离和根匹配。目标变量的范围是0到9。
 - en: '![](../Images/7b616d1d1df8e6e2ad0a747de57bc06f.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7b616d1d1df8e6e2ad0a747de57bc06f.png)'
 - en: 'Note: It is very important to standardize all the columns in your data for
     logistic regression.'
+  id: totrans-65
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '注意: 对于逻辑回归，标准化数据中的所有列非常重要。'
 - en: Once, the training data is created, I have used **multinomial logistic regression,
     random forest & gradient boosting techniques**.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦训练数据创建完成，我使用了**多项逻辑回归、随机森林和梯度提升技术**。
 - en: The accuracy of **multinomial logistic regression **is **65%** for the validation
     set. Considering the original model which had a lot of features with an accuracy
     of **79%**, this one is quite simpler. The **random forest** gave an accuracy
     of **67%** and finally, **XGBoost** worked best with an accuracy of **69%**on
     the validation set.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**多项逻辑回归**的验证集准确率为**65%**。考虑到原始模型有很多特征且准确率为**79%**，这个模型要简单得多。**随机森林**的准确率为**67%**，最终，**XGBoost**在验证集上的表现最好，准确率为**69%**。'
 - en: I will be adding more features (NLP related) to improve these models.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将添加更多功能（与NLP相关）来改进这些模型。
 - en: Ideas related to feature engineering or other improvements are highly welcomed.
     All the codes related to above concepts are provided [here](https://github.com/aswalin/SQuAD).
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 与特征工程或其他改进相关的想法非常欢迎。所有与上述概念相关的代码都提供 [这里](https://github.com/aswalin/SQuAD)。
 - en: In the next part, we will focus on the text extraction (correct span) from the
     sentences shortlisted in this part. In the meantime, check out my other blogs [here](https://medium.com/@aswalin)!
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一部分，我们将重点关注从本部分筛选出的句子中提取文本（正确跨度）。与此同时，查看我的其他博客 [这里](https://medium.com/@aswalin)!
 - en: '**References**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考资料**'
 - en: '[Github Repository with Codes](https://github.com/aswalin/SQuAD)'
+  id: totrans-72
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[包含代码的Github仓库](https://github.com/aswalin/SQuAD)'
 - en: '[Facebook Repo for Infersent](https://github.com/facebookresearch/InferSent)'
+  id: totrans-73
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[Infersent的Facebook Repo](https://github.com/facebookresearch/InferSent)'
 - en: '[Best Resource Paper explaining the Logistic Regression](https://arxiv.org/pdf/1606.05250.pdf)'
+  id: totrans-74
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[解释逻辑回归的最佳资源论文](https://arxiv.org/pdf/1606.05250.pdf)'
 - en: '[Blog Explaining the Problem](https://rajpurkar.github.io/mlx/qa-and-squad/)'
+  id: totrans-75
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[解释问题的博客](https://rajpurkar.github.io/mlx/qa-and-squad/)'
 - en: '[Leaderboard & Dataset](https://rajpurkar.github.io/SQuAD-explorer/)'
+  id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[排行榜与数据集](https://rajpurkar.github.io/SQuAD-explorer/)'
 - en: '**Bio: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
     is currently pursuing Master''s in Data Science at USF, I am particularly interested
     in Machine Learning & Predictive Modeling. She is a Data Science Intern at Price
     (Fx).'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
+    目前正在USF攻读数据科学硕士学位，我特别感兴趣于机器学习与预测建模。她是Price (Fx)的数据科学实习生。'
 - en: '[Original](https://towardsdatascience.com/building-a-question-answering-system-part-1-9388aadff507).
     Reposted with permission.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文档](https://towardsdatascience.com/building-a-question-answering-system-part-1-9388aadff507)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关信息:**'
 - en: '[CatBoost vs. Light GBM vs. XGBoost](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CatBoost 与 Light GBM 与 XGBoost 比较](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 1](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择合适的指标来评估机器学习模型 – 第1部分](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 2](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择合适的指标来评估机器学习模型 – 第2部分](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
 - en: '* * *'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-84
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT工作'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多主题
 - en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Python为亚马逊产品构建推荐系统](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
 - en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Hugging Face Transformers构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
 - en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过级别系统预测AI成本](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
 - en: '[Learning System Design: Top 5 Essential Reads](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习系统设计：前5名必读书单](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
 - en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Python的Watchdog监控你的文件系统](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
 - en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始学习机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
