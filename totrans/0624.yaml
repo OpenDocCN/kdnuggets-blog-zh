@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用平均精度均值评估对象检测模型
 - en: 原文：[https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html](https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html](https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: To evaluate object detection models like R-CNN and [YOLO](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/),
     the **mean average precision (mAP)** is used. The mAP compares the ground-truth
     bounding box to the detected box and returns a score. The higher the score, the
@@ -19,6 +22,7 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了评估像R-CNN和[YOLO](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/)这样的对象检测模型，使用**平均精度均值（mAP）**。mAP比较真实边界框和检测到的边界框，并返回一个分数。分数越高，模型的检测越准确。
 - en: In my last article we looked in detail at the [confusion matrix, model accuracy,
     precision, and recall](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy).
     We used the Scikit-learn library to calculate these metrics as well. Now we'll
@@ -27,85 +31,105 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上一篇文章中，我们详细讨论了[混淆矩阵、模型准确性、精确度和召回率](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy)。我们还使用了Scikit-learn库来计算这些指标。现在我们将扩展讨论，看看精确度和召回率如何用于计算mAP。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT工作'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'Here are the sections covered in this tutorial:'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程涵盖的部分如下：
 - en: From Prediction Score to Class Label
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从预测分数到类别标签
 - en: Precision-Recall Curve
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 精确度-召回率曲线
 - en: Average Precision (AP)
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平均精度（AP）
 - en: Intersection over Union (IoU)
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交并比（IoU）
 - en: Mean Average Precision (mAP) for Object Detection
   id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对象检测的平均精度均值（mAP）
 - en: Let's get started.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始吧。
 - en: '**From Prediction Score to Class Label**'
   id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**从预测分数到类别标签**'
 - en: In this section we'll do a quick review of how a class label is derived from
     a prediction score.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将快速回顾如何从预测分数中推导出类别标签。
 - en: Given that there are two classes, *Positive* and *Negative*, here are the ground-truth
     labels of 10 samples.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定有两个类别，*正类* 和 *负类*，以下是10个样本的真实标签。
 - en: '[PRE0]'
   id: totrans-21
   prefs: []
@@ -117,6 +141,7 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 当这些样本输入模型时，它返回以下预测分数。根据这些分数，我们如何对样本进行分类（即为每个样本分配一个类别标签）？
 - en: '[PRE1]'
   id: totrans-23
   prefs: []
@@ -130,6 +155,7 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了将分数转换为类别标签，**使用一个阈值**。当分数等于或高于阈值时，样本被分类为一个类别。否则，它被分类为另一个类别。我们约定，如果样本的分数高于或等于阈值，则样本为*正类*。否则，为*负类*。下一个代码块将分数转换为类别标签，阈值为**0.5**。
 - en: '[PRE2]'
   id: totrans-25
   prefs: []
@@ -146,6 +172,7 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在真实标签和预测标签都可以在`y_true`和`y_pred`变量中找到。根据这些标签，可以计算[混淆矩阵、精确度和召回率](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/)。
 - en: '[PRE4]'
   id: totrans-28
   prefs: []
@@ -161,11 +188,13 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在快速回顾了计算精度和召回后，在下一节我们将讨论如何创建精度-召回曲线。
 - en: '**Precision-Recall Curve**'
   id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**精度-召回曲线**'
 - en: From the definition of both the precision and recall given in [Part 1](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/),
     remember that the higher the precision, the more confident the model is when it
     classifies a sample as *Positive*. The higher the recall, the more positive samples
@@ -173,6 +202,7 @@
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 从[第1部分](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/)中给出的精度和召回的定义中记住，精度越高，模型在将样本分类为*正样本*时越自信。召回率越高，模型正确分类的正样本数量越多。
 - en: When a model has high recall but low precision, then the model classifies most
     of the positive samples correctly but it has many false positives (i.e. classifies
     many *Negative* samples as *Positive*). When a model has high precision but low
@@ -182,37 +212,44 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 当模型具有高召回率但低精度时，模型可以正确分类大多数正样本，但也有许多假阳性（即将许多*负样本*分类为*正样本*）。当模型具有高精度但低召回率时，模型在将样本分类为*正样本*时准确，但可能仅分类了一部分正样本。
 - en: Due to the importance of both precision and recall, there is a **precision-recall
     curve** the shows the tradeoff between the precision and recall values for different
     thresholds. This curve helps to select the best threshold to maximize both metrics.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于精度和召回率的重要性，有一个**精度-召回曲线**，显示了不同阈值下精度和召回值之间的权衡。此曲线有助于选择最佳阈值，以最大化这两个指标。
 - en: 'There are some inputs needed to create the precision-recall curve:'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建精度-召回曲线需要一些输入：
 - en: The ground-truth labels.
   id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 真实标签。
 - en: The prediction scores of the samples.
   id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 样本的预测分数。
 - en: Some thresholds to convert the prediction scores into class labels.
   id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将预测分数转换为类别标签的阈值。
 - en: The next block of code creates the `y_true` list to hold the ground-truth labels,
     the `pred_scores` list for the prediction scores, and finally the `thresholds` list
     for different threshold values.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一块代码创建了`y_true`列表以保存真实标签，`pred_scores`列表用于预测分数，最后`thresholds`列表用于不同的阈值。
 - en: '[PRE6]'
   id: totrans-40
   prefs: []
@@ -223,6 +260,7 @@
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是保存在`thresholds`列表中的阈值。由于有10个阈值，因此将创建10个精度和召回值。
 - en: '[PRE7]'
   id: totrans-42
   prefs: []
@@ -234,6 +272,7 @@
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步函数`precision_recall_curve()`接受真实标签、预测分数和阈值。它返回两个相等长度的列表，表示精度和召回值。
 - en: '[PRE8]'
   id: totrans-44
   prefs: []
@@ -245,6 +284,7 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一个代码在传递了三个之前准备好的列表后调用`precision_recall_curve()`函数。它返回`precisions`和`recalls`列表，分别保存了所有精度和召回值。
 - en: '[PRE9]'
   id: totrans-46
   prefs: []
@@ -254,6 +294,7 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是`precisions`列表中返回的值。
 - en: '[PRE10]'
   id: totrans-48
   prefs: []
@@ -263,6 +304,7 @@
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是`recalls`列表中的值列表。
 - en: '[PRE11]'
   id: totrans-50
   prefs: []
@@ -273,6 +315,7 @@
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定两个相等长度的列表，可以在下图所示的二维图中绘制它们的值。
 - en: '[PRE12]'
   id: totrans-52
   prefs: []
@@ -286,16 +329,19 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 精度-召回曲线在下图中显示。请注意，随着召回率的增加，精度会下降。原因是，当正样本数量增加（高召回率）时，每个样本正确分类的准确性下降（低精度）。这是可以预期的，因为当样本数量较多时，模型更容易出现失败。
 - en: '![](../Images/485ef820cd31ff4ef7c85f2abce540ba.png)'
   id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/485ef820cd31ff4ef7c85f2abce540ba.png)'
 - en: The precision-recall curve makes it easy to decide the point where both the
     precision and recall are high. According to the previous figure, the best point
     is `(recall, precision)=(0.778, 0.875)`.
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 精度-召回曲线使决定精度和召回率都高的点变得容易。根据之前的图表，最佳点是`(recall, precision)=(0.778, 0.875)`。
 - en: Graphically deciding the best values for both the precision and recall might
     work using the previous figure because the curve is not complex. A better way
     is to use a metric called the `f1` score, which is calculated according to the
@@ -303,16 +349,19 @@
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的图中，图形化决定精准率和召回率的最佳值可能是有效的，因为曲线不复杂。更好的方法是使用一种称为`f1`的指标，该指标根据下列公式计算。
 - en: '![](../Images/55be9dd9d291f369c35c1c9908412e0f.png)'
   id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/55be9dd9d291f369c35c1c9908412e0f.png)'
 - en: The `f1` metric measures the balance between precision and recall. When the
     value of `f1` is high, this means both the precision and recall are high. A lower `f1` score
     means a greater imbalance between precision and recall.
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '`f1`指标衡量精准率和召回率之间的平衡。当`f1`值较高时，意味着精准率和召回率都较高。较低的`f1`分数表示精准率和召回率之间的不平衡较大。'
 - en: According to the previous example, the `f1` is calculated according to the code
     below. According to the values in the `f1` list, the highest score is `0.82352941`.
     It is the 6th element in the list (i.e. index 5). The 6th elements in the `recalls` and `precisions` lists
@@ -320,6 +369,7 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据前面的示例，`f1`的计算方法如下代码所示。根据`f1`列表中的值，最高分数是`0.82352941`。它是列表中的第6个元素（即索引5）。`recalls`和`precisions`列表中的第6个元素分别是`0.778`和`0.875`。相应的阈值是`0.45`。
 - en: '[PRE13]'
   id: totrans-60
   prefs: []
@@ -337,6 +387,7 @@
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一图中以蓝色显示了最佳平衡点的位置，该点对应于召回率和精准率之间的最佳平衡。总之，平衡精准率和召回率的最佳阈值是`0.45`，在此阈值下，精准率为`0.875`，召回率为`0.778`。
 - en: '[PRE15]'
   id: totrans-63
   prefs: []
@@ -346,16 +397,19 @@
   id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9d90ccf37d25964e2c5bb5fe5eb218d1.png)'
 - en: After the precision-recall curve is discussed, the next section discusses how
     to calculate the **average precision**.
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 讨论了精准率-召回率曲线后，下一部分讨论如何计算**平均精准率**。
 - en: '**Average Precision (AP)**'
   id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**平均精准率 (AP)**'
 - en: The **average precision (AP)** is a way to summarize the precision-recall curve
     into a single value representing the average of all precisions. The AP is calculated
     according to the next equation. Using a loop that goes through all precisions/recalls,
@@ -365,10 +419,12 @@
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**平均精准率 (AP)**是一种将精准率-召回率曲线汇总为一个值的方式，该值表示所有精准率的平均值。AP根据下列公式计算。通过循环遍历所有的精准率/召回率，计算当前和下一召回率之间的差异，然后乘以当前的精准率。换句话说，AP是每个阈值下精准率的加权总和，其中权重是召回率的增加。'
 - en: '![](../Images/b4fb8d00f4ebb4cfde3e78063126b80e.png)'
   id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b4fb8d00f4ebb4cfde3e78063126b80e.png)'
 - en: It is important to append the recalls and precisions lists by 0 and 1, respectively.
     For example, if the `recalls` list is0.8,0.60.8,0.6, then it should have 0 appended
     to be0.8,0.6,0.00.8,0.6,0.0\. The same happens for the `precisions` list but have
@@ -376,11 +432,13 @@
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是将`recalls`和`precisions`列表分别用0和1进行扩展。例如，如果`recalls`列表为0.8,0.60.8,0.6，则应添加0，使其变为0.8,0.6,0.00.8,0.6,0.0。`precisions`列表也要这样做，但应添加1而不是0（例如0.8,0.2,1.00.8,0.2,1.0）。
 - en: Given that both `recalls` and `precisions` are NumPy arrays, the previous equation
     is modeled according to the next Python line.
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于`recalls`和`precisions`都是NumPy数组，前面的公式可以通过以下Python代码建模。
 - en: '[PRE16]'
   id: totrans-71
   prefs: []
@@ -390,6 +448,7 @@
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是计算AP的完整代码。
 - en: '[PRE17]'
   id: totrans-73
   prefs: []
@@ -400,60 +459,72 @@
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是关于平均精准率的所有内容。以下是计算AP的步骤总结：
 - en: Generate the **prediction scores** using the model.
   id: totrans-75
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用模型生成**预测分数**。
 - en: Convert the **prediction scores** to **class labels**.
   id: totrans-76
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将**预测分数**转换为**类别标签**。
 - en: Calculate the **confusion matrix**.
   id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算**混淆矩阵**。
 - en: Calculate the **precision** and **recall** metrics.
   id: totrans-78
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算**精准率**和**召回率**指标。
 - en: Create the **precision-recall curve**.
   id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建**精准率-召回率曲线**。
 - en: Measure the **average precision**.
   id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 测量**平均精准率**。
 - en: The next section talks about the **intersection over union (IoU)** which is
     how an object detection generates the prediction scores.
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一部分讨论**交并比 (IoU)**，这是对象检测如何生成预测分数的方式。
 - en: '**Intersection over Union (IoU)**'
   id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**交并比 (IoU)**'
 - en: 'To train an object detection model, usually, there are 2 inputs:'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练对象检测模型通常有两个输入：
 - en: An image.
   id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一张图片。
 - en: Ground-truth bounding boxes for each object in the image.
   id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 图像中每个物体的实际边界框。
 - en: The model predicts the bounding boxes of the detected objects. It is expected
     that the predicted box will not match exactly the ground-truth box. The next figure
     shows a cat image. The ground-truth box of the object is in red while the predicted
@@ -462,89 +533,106 @@
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型预测了检测到的物体的边界框。预计预测框不会完全匹配实际框。下图展示了一张猫的图像。物体的实际框为红色，而预测框为黄色。根据这两个框的可视化，模型是否做出了一个高匹配分数的良好预测？
 - en: It is difficult to subjectively evaluate the model predictions. For example,
     someone may conclude that there is a 50% match while someone else notices that
     there is a 60% match.
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 主观评估模型预测是困难的。例如，有人可能认为匹配度为50%，而其他人则认为匹配度为60%。
 - en: '![](../Images/3db505280cbb6dd521581b900e6e1d7c.png)'
   id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3db505280cbb6dd521581b900e6e1d7c.png)'
 - en: '[Image](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) without
     labels from [Pixabay](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) by [susannp4](https://pixabay.com/users/susannp4-1777190)'
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Image](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) 来自 [Pixabay](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) ，由 [susannp4](https://pixabay.com/users/susannp4-1777190) 提供'
 - en: A better alternative is to use a quantitative measure to score how the ground-truth
     and predicted boxes match. This measure is the **intersection over union (IoU)**.
     The IoU helps to know if a region has an object or not.
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 更好的替代方法是使用定量度量来评分实际框和预测框的匹配程度。这一度量是**交并比 (IoU)**。IoU有助于判断一个区域是否包含物体。
 - en: The IoU is calculated according to the next equation by dividing the area of
     intersection between the 2 boxes by the area of their union. The higher the IoU,
     the better the prediction.
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: IoU是通过将两个框之间的交集面积除以它们的并集面积来计算的。IoU越高，预测越好。
 - en: '![](../Images/65c006c1e81f14f0dffb941e8ddf7fcf.png)'
   id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/65c006c1e81f14f0dffb941e8ddf7fcf.png)'
 - en: The next figure shows 3 cases with different IoUs. Note that the IoUs at the
     top of each case are objectively measured and may differ a bit from the reality
     but it makes sense.
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图展示了三个具有不同IoU的情况。请注意，每个案例顶部的IoU是客观测量的，可能与实际情况略有不同，但还是有意义的。
 - en: For case A, the predicted box in yellow is so far from being aligned on the
     red ground-truth box and thus the IoU score is **0.2** (i.e. there is only a 20%
     overlap between the 2 boxes).
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于案例A，黄色预测框与红色实际框相距较远，因此IoU分数为**0.2**（即两个框之间只有20%的重叠）。
 - en: For case B, the intersection area between the 2 boxes is larger but the 2 boxes
     are still not aligned well and thus the IoU score is **0.5**.
   id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于案例B，两个框之间的交集面积较大，但两个框仍未对齐，因此IoU分数为**0.5**。
 - en: For case C, the coordinates of the 2 boxes are so close and thus their IoU is **0.9** (i.e.
     there is a 90% overlap between the 2 boxes).
   id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于案例C，两个框的坐标非常接近，因此它们的IoU为**0.9**（即两个框之间有90%的重叠）。
 - en: Note that the IoU is 0.0 when there is a 0% overlap between the predicted and
     ground-truth boxes. The IoU is **1.0** when the 2 boxes fit each other 100%.
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，当预测框和实际框之间重叠度为0%时，IoU为0.0。当两个框完全重合时，IoU为**1.0**。
 - en: '![](../Images/7bb321e12b722d04b585731116b71d26.png)'
   id: totrans-98
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7bb321e12b722d04b585731116b71d26.png)'
 - en: 'To calculate the IoU for an image, here is a function named `intersection_over_union()`.
     It accepts the following 2 parameters:'
   id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算图像的IoU，这里有一个名为`intersection_over_union()`的函数。它接受以下两个参数：
 - en: '`gt_box`: Ground-truth bounding box.'
   id: totrans-100
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`gt_box`：实际边界框。'
 - en: '`pred_box`: Predicted bounding box.'
   id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`pred_box`：预测边界框。'
 - en: It calculates the intersection and union between the 2 boxes in the `intersection` and `union` variables,
     respectively. Moreover, the IoU is calculated in the `iou` variable. It returns
     all of these 3 variables.
   id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 它计算了`intersection`和`union`变量中两个框之间的交集和并集。此外，IoU在`iou`变量中计算。它返回这三个变量。
 - en: '[PRE18]'
   id: totrans-103
   prefs: []
@@ -554,30 +642,36 @@
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 传递给函数的边界框是一个包含4个元素的列表，其中包括：
 - en: The x-axis of the top-left corner.
   id: totrans-105
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 左上角的x轴。
 - en: The y-axis of the top-left corner.
   id: totrans-106
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 左上角的y轴。
 - en: Width.
   id: totrans-107
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 宽度。
 - en: Height.
   id: totrans-108
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 高度。
 - en: Here are the ground-truth and predicted bounding boxes of the car image.
   id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是汽车图像的实际和预测边界框。
 - en: '[PRE19]'
   id: totrans-110
   prefs: []
@@ -588,6 +682,7 @@
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定图像名为`cat.jpg`，这是绘制边界框的完整代码。
 - en: '[PRE20]'
   id: totrans-112
   prefs: []
@@ -597,15 +692,18 @@
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一个图示显示了带有边界框的图像。
 - en: '![](../Images/3081d86d1a81996b3a304c922d647b98.png)'
   id: totrans-114
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3081d86d1a81996b3a304c922d647b98.png)'
 - en: To calculate the IoU, just call the `intersection_over_union()` function. Based
     on the bounding boxes, the IoU score is `0.54`.
   id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算IoU，只需调用`intersection_over_union()`函数。根据边界框，IoU分数为`0.54`。
 - en: '[PRE21]'
   id: totrans-116
   prefs: []
@@ -624,6 +722,7 @@
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: IoU分数**0.54**意味着真实框与预测框之间有54%的重叠。观察这些框，有人可能会直观地觉得模型检测到猫物体已经足够好。也有人可能觉得模型还不够准确，因为预测框与真实框的契合度不高。
 - en: To objectively judge whether the model predicted the box location correctly
     or not, a **threshold** is used. If the model predicts a box with an IoU score
     greater than or equal to the **threshold**, then there is a high overlap between
@@ -633,6 +732,7 @@
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了客观判断模型是否正确预测了框的位置，使用了一个**阈值**。如果模型预测的框的IoU分数大于或等于**阈值**，则预测框与真实框之一之间有很高的重叠。这意味着模型能够成功检测到物体。检测到的区域被分类为**Positive**（即包含物体）。
 - en: On the other hand, when the IoU score is smaller than the threshold, then the
     model made a bad prediction as the predicted box does not overlap with the ground-truth
     box. This means the detected region is classified as **Negative** (i.e. does not
@@ -640,10 +740,12 @@
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，当IoU分数小于阈值时，模型做出了错误的预测，因为预测框与真实框没有重叠。这意味着检测到的区域被分类为**Negative**（即不包含物体）。
 - en: '![](../Images/66f31d5e3d700c35d5db1fab90bd1ace.png)'
   id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/66f31d5e3d700c35d5db1fab90bd1ace.png)'
 - en: Let's have an example to clarify how the IoU scores help to classify a region
     as an object or not. Assume the object detection model is fed by the next image
     where there are 2 target objects with their ground-truth boxes in red and the
@@ -651,12 +753,14 @@
   id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过一个例子来澄清IoU分数如何帮助将区域分类为物体或非物体。假设物体检测模型输入了下一张图像，其中有2个目标物体，真实框用红色标出，预测框用黄色标出。
 - en: The next code reads the image (given it is named `pets.jpg`), draws the boxes,
     and calculates the IoU for each object. The IoU for the left object is **0.76** while
     the other object has an IoU score of **0.26**.
   id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一段代码读取图像（假设文件名为`pets.jpg`），绘制框，并计算每个物体的IoU。左侧物体的IoU为**0.76**，而另一个物体的IoU分数为**0.26**。
 - en: '[PRE23]'
   id: totrans-124
   prefs: []
@@ -668,19 +772,23 @@
   id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果IoU阈值为0.6，则只有IoU分数大于或等于0.6的区域被分类为**Positive**（即有物体）。因此，IoU分数为0.76的框为Positive，而IoU为0.26的另一个框为**Negative**。
 - en: '![](../Images/d66ca57f3e5d41315a023aabd18ea039.png)'
   id: totrans-126
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d66ca57f3e5d41315a023aabd18ea039.png)'
 - en: Image without Labels from [hindustantimes.com](https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2019/05/25/Pictures/_b336a8c4-7e7b-11e9-8a88-8b84fe2ad6da.png)
   id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 无标签的图像来自[hindustantimes.com](https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2019/05/25/Pictures/_b336a8c4-7e7b-11e9-8a88-8b84fe2ad6da.png)
 - en: If the threshold changed to be **0.2** rather than 0.6, then both predictions
     are **Positive**. If the threshold is **0.8**, then both predictions are **Negative**.
   id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果阈值改为**0.2**而不是0.6，则两个预测都是**Positive**。如果阈值为**0.8**，则两个预测都是**Negative**。
 - en: As a summary, the IoU score measures how close is the predicted box to the ground-truth
     box. It ranges from 0.0 to 1.0 where 1.0 is the optimal result. When the IoU is
     greater than the threshold, then the box is classified as **Positive** as it surrounds
@@ -688,16 +796,19 @@
   id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，IoU分数衡量的是预测框与真实框的接近程度。它的范围从0.0到1.0，其中1.0是最佳结果。当IoU大于阈值时，框被分类为**Positive**，因为它包围了一个物体。否则，分类为**Negative**。
 - en: The next section shows how to benefit from the IoUs to calculate the mean average
     precision (mAP) for an object detection model.
   id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一节展示了如何利用IoU来计算物体检测模型的平均精度均值（mAP）。
 - en: '**Mean Average Precision (mAP) for Object Detection**'
   id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**物体检测的平均精度均值（mAP）**'
 - en: Usually, the object detection models are evaluated with different IoU thresholds
     where each threshold may give different predictions from the other thresholds.
     Assume that the model is fed by an image that has 10 objects distributed across
@@ -705,17 +816,20 @@
   id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，目标检测模型会使用不同的IoU阈值进行评估，其中每个阈值可能会给出不同的预测。假设模型输入了一张包含10个物体、分布在2个类别中的图像。如何计算mAP？
 - en: To calculate the mAP, start by calculating the AP for each class. The mean of
     the APs for all classes is the mAP.
   id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算mAP，首先需要计算每个类别的AP。所有类别的AP的均值即为mAP。
 - en: Assuming that the dataset used has only 2 classes. For the first class, here
     are the ground-truth labels and predicted scores in the `y_true` and `pred_scores` variables,
     respectively.
   id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设使用的数据集只有2个类别。对于第一类，以下是`y_true`和`pred_scores`变量中的真实标签和预测分数。
 - en: '[PRE24]'
   id: totrans-135
   prefs: []
@@ -725,6 +839,7 @@
   id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是第二类的`y_true`和`pred_scores`变量。
 - en: '[PRE25]'
   id: totrans-137
   prefs: []
@@ -734,6 +849,7 @@
   id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: IoU阈值列表从0.2到0.9，步长为0.25。
 - en: '[PRE26]'
   id: totrans-139
   prefs: []
@@ -744,6 +860,7 @@
   id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算一个类别的AP，只需将其`y_true`和`pred_scores`变量输入到下列代码中。
 - en: '[PRE27]'
   id: totrans-141
   prefs: []
@@ -754,31 +871,38 @@
   id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于第一类，这里是其精确率-召回率曲线。根据这条曲线，AP为`0.949`。
 - en: '![](../Images/e4291b5f650a2af303082cb38dbe712b.png)'
   id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e4291b5f650a2af303082cb38dbe712b.png)'
 - en: The precision-recall curve of the second class is shown below. Its AP is `0.958`.
   id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二类的精确率-召回率曲线如下所示。它的AP为`0.958`。
 - en: '![](../Images/7e8d11fad5d3e86f59a810c177fa82ae.png)'
   id: totrans-145
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7e8d11fad5d3e86f59a810c177fa82ae.png)'
 - en: Based on the APs of the 2 classes (0.949 and 0.958), the mAP of the object detection
     model is calculated according to the next equation.
   id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据这两个类别的AP（0.949和0.958），目标检测模型的mAP按照下列公式计算。
 - en: '![](../Images/365f7ef8e3a3e4bbdb735aaad8aabed7.png)'
   id: totrans-147
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/365f7ef8e3a3e4bbdb735aaad8aabed7.png)'
 - en: Based on this equation, the mAP is `0.9535`.
   id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据这个公式，mAP为`0.9535`。
 - en: '[PRE28]'
   id: totrans-149
   prefs: []
@@ -789,6 +913,7 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: This tutorial discussed how to calculate the mean average precision (mAP) for
     an object detection model. We started by discussing how to convert a prediction
     score to a class label. Using different thresholds, a precision-recall curve is
@@ -796,12 +921,14 @@
   id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程讨论了如何为目标检测模型计算均值平均精度（mAP）。我们首先讨论了如何将预测分数转换为类别标签。通过使用不同的阈值，创建了一个精确率-召回率曲线。从这条曲线中，测量出平均精度（AP）。
 - en: For an object detection model, the threshold is the intersection over union
     (IoU) that scores the detected objects. Once the AP is measured for each class
     in the dataset, the mAP is calculated.
   id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于目标检测模型，阈值是检测物体的交并比（IoU）。一旦计算出数据集中每个类别的AP，即可计算mAP。
 - en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
     degree with excellent with honors in information technology from the Faculty of
     Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
@@ -813,36 +940,43 @@
   id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术学士学位，并荣获优秀学位。因在学院排名第一，他于2015年被推荐到埃及的一个学院担任教学助理，随后在2016年转为学院的教学助理及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。'
 - en: '[Original](https://blog.paperspace.com/mean-average-precision/). Reposted with
     permission.'
   id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.paperspace.com/mean-average-precision/)。经授权转载。'
 - en: '**Related:**'
   id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Evaluating Deep Learning Models: The Confusion Matrix, Accuracy, Precision,
     and Recall](/2021/02/evaluating-deep-learning-models-confusion-matrix-accuracy-precision-recall.html)'
   id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[评估深度学习模型：混淆矩阵、准确率、精确率和召回率](/2021/02/evaluating-deep-learning-models-confusion-matrix-accuracy-precision-recall.html)'
 - en: '[Working With The Lambda Layer in Keras](/2021/01/working-lambda-layer-keras.html)'
   id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Keras中使用Lambda层](/2021/01/working-lambda-layer-keras.html)'
 - en: '[How to Create Custom Real-time Plots in Deep Learning](/2020/12/create-custom-real-time-plots-deep-learning.html)'
   id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在深度学习中创建自定义实时图](/2020/12/create-custom-real-time-plots-deep-learning.html)'
 - en: More On This Topic
   id: totrans-159
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Idiot''s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
   id: totrans-160
   prefs:
