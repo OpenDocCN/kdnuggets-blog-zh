@@ -1,240 +1,343 @@
 - en: An Intuitive Introduction to Gradient Descent
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 梯度下降的直观介绍
 - en: 原文：[https://www.kdnuggets.com/2018/06/intuitive-introduction-gradient-descent.html](https://www.kdnuggets.com/2018/06/intuitive-introduction-gradient-descent.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/06/intuitive-introduction-gradient-descent.html](https://www.kdnuggets.com/2018/06/intuitive-introduction-gradient-descent.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Keshav Dhandhania](https://www.linkedin.com/in/keshav-dhandhania-b3246028/)
     and [Savan Visalpara](https://www.linkedin.com/in/savanvisalpara/)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Keshav Dhandhania](https://www.linkedin.com/in/keshav-dhandhania-b3246028/)
+    和 [Savan Visalpara](https://www.linkedin.com/in/savanvisalpara/)**'
 - en: '**Gradient Descent** is one of the most popular and widely used **optimization
     algorithms**. Given a [machine learning](https://www.commonlounge.com/discussion/9325cf512f514e21815ec4c2e2e6e0e3) model
     with parameters (weights and biases) and a cost function to evaluate how good
     a particular model is, our learning problem reduces to that of finding a good
     set of weights for our model which minimizes the cost function.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '**梯度下降** 是最受欢迎和广泛使用的 **优化算法** 之一。给定一个具有参数（权重和偏差）和用于评估特定模型好坏的成本函数的 [机器学习](https://www.commonlounge.com/discussion/9325cf512f514e21815ec4c2e2e6e0e3)
+    模型，我们的学习问题就变成了找到一组好的权重，以最小化成本函数。'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/dc63f6509182c24acc1f8db752d95b28.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dc63f6509182c24acc1f8db752d95b28.png)'
 - en: Gradient descent is an **iterative method**. We start with some set of values
     for our model parameters (weights and biases), and improve them slowly. To improve
     a given set of weights, we try to get a sense of the value of the cost function
     for weights similar to the current weights (by calculating the gradient) and move
     in the direction in which the cost function reduces. By repeating this step thousands
     of times we’ll continually minimize our cost function.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度下降是一种 **迭代方法**。我们从一组模型参数（权重和偏差）开始，并逐渐改进它们。为了改进给定的权重，我们尝试了解类似于当前权重的权重的成本函数值（通过计算梯度），然后沿着成本函数减少的方向移动。通过重复这个步骤数千次，我们将持续最小化我们的成本函数。
 - en: Pseudocode for Gradient Descent
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度下降的伪代码
 - en: Gradient descent is used to minimize a cost function *J(w)* parametrized by
     model parameters ***w***. The gradient (or derivative) tells us the incline or
     slope of the cost function. Hence, to minimize the cost function, we move in the
     direction opposite to the gradient.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度下降用于最小化由模型参数 ***w*** 参数化的成本函数 *J(w)*。梯度（或导数）告诉我们成本函数的斜率或坡度。因此，为了最小化成本函数，我们沿着与梯度相反的方向移动。
 - en: '**initialize**the weights *w* randomly'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**随机初始化** 权重 *w*'
 - en: '**calculate the gradients** G of cost function w.r.t parameters [1]'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**计算梯度** G，相对于参数的成本函数 [1]'
 - en: '**update the weights** by an amount proportional to G, i.e. *w* = *w - *ηG'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**通过与 G 成比例的量更新权重**，即 *w* = *w - ηG*'
 - en: repeat till cost *J*(*w*) stops reducing or other pre-defined **termination
     criteria**is met
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 重复直到成本 *J*(*w*) 不再降低或满足其他预定义的 **终止标准**
 - en: In step 3, η is the **learning rate** which determines the size of the steps
     we take to reach a minimum. We need to be very careful about this parameter since
     high values of η may overshoot the minimum and very low value will reach minimum
     very slowly.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第3步中，η 是 **学习率**，它决定了我们达到最小值的步伐大小。我们需要对这个参数非常小心，因为η 的高值可能会超越最小值，而非常低的值则会非常缓慢地达到最小值。
 - en: A popular sensible choice for the termination criteria is that the cost *J*(*w*)
     stops reducing on the *validation* dataset.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个流行的合理选择作为终止标准是成本 *J*(*w*) 在 *验证* 数据集上停止降低。
 - en: Intuition for Gradient Descent
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度下降的直观理解
 - en: Imagine you’re blind folded in a rough terrain, and your objective is to reach
     the lowest altitude. One of the simplest strategies you can use, is to feel the
     ground in every direction, and take a step in the direction where the ground is
     descending the fastest. If you keep repeating this process, you might end up at
     the lake, or even better, somewhere in the huge valley.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下你被蒙上眼睛在崎岖地形中行走，你的目标是到达**最低点**。你可以使用的一个简单策略是感觉地面在各个方向上的倾斜，并朝着地面下降最快的方向迈出一步。如果你不断重复这个过程，你可能会到达湖泊，甚至更好的是，某个巨大山谷中的位置。
 - en: '![](../Images/59bb9127f3f9f358f23b88646516e848.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/59bb9127f3f9f358f23b88646516e848.png)'
 - en: The rough terrain is analogous to the cost function. Minimizing the cost function
     is analogous to trying to reach lower altitudes. You are blind folded, since we
     don’t have the luxury of evaluating (seeing) the value of the function for every
     possible set of parameters. Feeling the slope of the terrain around you is analogous
     to calculating the gradient, and taking a step is analogous to one iteration of
     update to the parameters.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 崎岖地形类似于成本函数。最小化成本函数类似于试图到达更低的高度。你被蒙上眼睛，因为我们没有条件评估（查看）每一组参数的函数值。感觉你周围地形的坡度类似于计算梯度，而迈出一步类似于对参数进行一次更新迭代。
 - en: By the way — as a small aside — this tutorial is part of the [free Data Science
     Course](https://www.commonlounge.com/discussion/367fb21455e04c7c896e9cac25b11b47) and [free
     Machine Learning Course](https://www.commonlounge.com/discussion/33a9cce246d343dd85acce5c3c505009%2Fmain) on [Commonlounge](https://www.commonlounge.com/).
     The courses include many hands-on assignments and projects. If you’re interested
     in learning Data Science / ML, definitely recommend checking it out.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 顺便提一下——作为一个小插曲——本教程是[免费数据科学课程](https://www.commonlounge.com/discussion/367fb21455e04c7c896e9cac25b11b47)和[免费机器学习课程](https://www.commonlounge.com/discussion/33a9cce246d343dd85acce5c3c505009%2Fmain)的一部分，均在[Commonlounge](https://www.commonlounge.com/)平台上提供。这些课程包括许多动手作业和项目。如果你有兴趣学习数据科学/机器学习，强烈推荐查看一下。
 - en: Variants of Gradient Descent
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度下降的变体
 - en: There are multiple variants of gradient descent depending on how much of the
     data is being used to calculate the gradient. The main reason behind these variations
     is computational efficiency. A dataset may have millions of data points, and calculating
     the gradient over the entire dataset can be computationally expensive.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度下降有多种变体，具体取决于计算梯度时使用了多少数据。这些变体的主要原因是计算效率。一个数据集可能有数百万个数据点，计算整个数据集的梯度可能非常耗费计算资源。
 - en: '**Batch gradient descent** computes the gradient of the cost function w.r.t
     to parameter w for **entire training data**. Since we need to calculate the gradients
     for the whole dataset to perform one parameter update, batch gradient descent
     can be very slow.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**批量梯度下降**计算成本函数相对于参数w的梯度，基于**整个训练数据**。由于我们需要计算整个数据集的梯度以进行一次参数更新，因此批量梯度下降可能非常慢。'
 - en: '**Stochastic gradient descent (SGD)** computes the gradient for each update
     using a **single training data point ***x_i* (chosen at random). The idea is that
     the gradient calculated this way is a *stochastic approximation* to the gradient
     calculated using the entire training data. Each update is now much faster to calculate
     than in batch gradient descent, and over many updates, we will head in the same
     general direction.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**随机梯度下降（SGD）**使用**单个训练数据点**`*x_i*`（随机选择）计算每次更新的梯度。其思想是，这种方式计算的梯度是对使用整个训练数据计算的梯度的*随机逼近*。每次更新的计算速度比批量梯度下降要快得多，经过多次更新，我们将朝着相同的大致方向前进。'
 - en: In **mini-batch gradient descent**, we calculate the gradient for each small
     mini-batch of training data. That is, we first divide the training data into small
     batches (say M samples / batch). We perform one update per mini-batch. M is usually
     in the range 30–500, depending on the problem. Usually mini-batch GD is used because
     computing infrastructure - compilers, CPUs, GPUs - are often optimized for performing
     vector additions and vector multiplications.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在**小批量梯度下降**中，我们计算每个小批量训练数据的梯度。也就是说，我们首先将训练数据分成小批量（例如每批次M个样本）。我们对每个小批量执行一次更新。M通常在30到500的范围内，具体取决于问题。通常使用小批量梯度下降，因为计算基础设施——编译器、CPU、GPU——通常针对向量加法和向量乘法进行了优化。
 - en: Of these, SGD and mini-batch GD are most popular. In a typical scenario, we
     do several passes over the training data before the termination criteria is met.
     Each pass is called an *epoch*. Also note that since the update step is much more
     computationally efficient in SGD and mini-batch GD, we typically perform 100s-1000s
     of updates in between checks for termination criteria being met.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中，SGD和小批量GD最为流行。在典型的情况下，我们会在训练数据上进行若干次遍历，直到满足终止标准。每次遍历称为*epoch*。另请注意，由于SGD和小批量GD的更新步骤计算效率更高，我们通常会在检查终止标准是否满足时执行100到1000次更新。
 - en: Choosing the learning rate
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 选择学习率
 - en: Typically, the value of the learning rate is chosen manually. We usually start
     with a small value such as 0.1, 0.01 or 0.001 and adapt it based on whether the
     cost function is reducing very slowly (increase learning rate) or is exploding
     / being erratic (decrease learning rate).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，学习率的值是手动选择的。我们通常从一个较小的值开始，例如0.1、0.01或0.001，并根据成本函数的变化情况来调整它，如果成本函数减少非常缓慢（增加学习率），或是爆炸/不稳定（降低学习率）。
 - en: Although manually choosing a learning rate is still the most common practice,
     several methods such as Adam optimizer, AdaGrad and RMSProp have been proposed
     to automatically choose a suitable learning rate.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管手动选择学习率仍然是最常见的做法，但已经提出了多种方法，如Adam优化器、AdaGrad和RMSProp，用于自动选择合适的学习率。
 - en: Footnote
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 脚注
 - en: The value of the gradient G depends on the inputs, the current values of the
     model parameters, and the cost function. You might need to revisit the topic of
     differentiation if you are calculating the gradient by hand.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 梯度G的值取决于输入、模型参数的当前值和成本函数。如果你是手动计算梯度，你可能需要重新学习微分的相关知识。
 - en: Originally published as part of the [free Machine Learning Course](https://www.commonlounge.com/discussion/33a9cce246d343dd85acce5c3c505009/main)
     and [free Data Science Course](https://www.commonlounge.com/discussion/367fb21455e04c7c896e9cac25b11b47)
     on [www.commonlounge.com](https://www.commonlounge.com/discussion/69a34ad6029549f39087d00d052607ab/main).
     Reposted with permission.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 原文首次发布于[免费机器学习课程](https://www.commonlounge.com/discussion/33a9cce246d343dd85acce5c3c505009/main)和[免费数据科学课程](https://www.commonlounge.com/discussion/367fb21455e04c7c896e9cac25b11b47)的[www.commonlounge.com](https://www.commonlounge.com/discussion/69a34ad6029549f39087d00d052607ab/main)。经许可重新发布。
 - en: '**Related:**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Deep Learning in H2O using R](https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在H2O中使用R进行深度学习](https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html)'
 - en: '[The 10 Deep Learning Methods AI Practitioners Need to Apply](https://www.kdnuggets.com/2017/12/10-deep-learning-methods-ai-practitioners-need-apply.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI从业者需要掌握的10种深度学习方法](https://www.kdnuggets.com/2017/12/10-deep-learning-methods-ai-practitioners-need-apply.html)'
 - en: '[Understanding Objective Functions in Neural Networks](https://www.kdnuggets.com/2017/11/understanding-objective-functions-neural-networks.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解神经网络中的目标函数](https://www.kdnuggets.com/2017/11/understanding-objective-functions-neural-networks.html)'
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你应该了解的5个梯度下降和成本函数的概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
 - en: '[Back To Basics, Part Dos: Gradient Descent](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回到基础，第二部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
 - en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[梯度下降：山地徒步旅行者的优化指南](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
 - en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机：直观的方法](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
 - en: '[An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[协同过滤的直观解释](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
 - en: '[Vanishing Gradient Problem: Causes, Consequences, and Solutions](https://www.kdnuggets.com/2022/02/vanishing-gradient-problem.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[消失梯度问题：原因、后果和解决方案](https://www.kdnuggets.com/2022/02/vanishing-gradient-problem.html)'
