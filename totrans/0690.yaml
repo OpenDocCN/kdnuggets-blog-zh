@@ -1,14 +1,20 @@
 - en: 'Introduction to Trainspotting: Computer Vision, Caltrain, and Predictive Analytics'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Trainspotting 简介：计算机视觉、Caltrain 和预测分析
 - en: 原文：[https://www.kdnuggets.com/2016/11/introduction-trainspotting.html](https://www.kdnuggets.com/2016/11/introduction-trainspotting.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/11/introduction-trainspotting.html](https://www.kdnuggets.com/2016/11/introduction-trainspotting.html)
 - en: '**By Chloe Mawer, Colin Higgins & Matthew Rubashkin, [Silicon Valley Data Science](http://svds.com/)**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Chloe Mawer、Colin Higgins 和 Matthew Rubashkin，[硅谷数据科学](http://svds.com/)**。'
 - en: Here at Silicon Valley Data Science, we have a slight obsession with the Caltrain.
     Our interest stems from the fact that half of our employees rely on the Caltrain
     to get to work each day. We also want to give back to the community, and we love
@@ -21,36 +27,57 @@
     the sounds](http://www.svds.com/listening-caltrain/?utm_source=kdnuggets&utm_medium=referral) of
     passing trains to tell them apart. In this post we’ll start looking at the nuts
     and bolts of making our Caltrain work possible.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在硅谷数据科学，我们对 Caltrain 有些许痴迷。我们的兴趣源于我们的一半员工每天依赖 Caltrain 上班。我们也希望回馈社区，我们喜欢用数据来做到这一点。除了帮助客户[构建强大的数据系统](http://www.svds.com/building-data-systems-what-do-you-need/?utm_source=kdnuggets&utm_medium=referral)或[利用数据解决业务挑战](http://www.svds.com/five-business-challenges-data-can-solve/?utm_source=kdnuggets&utm_medium=referral)，我们还喜欢从事研发项目，探索新技术，尝试新的算法、假设和创意。我们之前[分析过延迟](http://www.svds.com/the-trains-project-analyzing-caltrain-delays/?utm_source=kdnuggets&utm_medium=referral)使用
+    Caltrain 的实时 API 来改进到达预测，并且我们[建模过声音](http://www.svds.com/listening-caltrain/?utm_source=kdnuggets&utm_medium=referral)以区分不同的火车。在这篇文章中，我们将开始了解实现
+    Caltrain 功能的细节。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: <http://www.svds.com/wp-content/uploads/2016/09/side-by-side.mp4?_=1>
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: <http://www.svds.com/wp-content/uploads/2016/09/side-by-side.mp4?_=1>
 - en: If you have ever ridden the train, you know that the delay estimates Caltrain
     provides can be a bit... off. Sometimes a train will remain “two minutes delayed”
     for ten minutes after the train was already supposed to have departed, or delays
@@ -60,86 +87,130 @@
     whistles, we thought it would be fun to validate the data coming from the Caltrain
     API by capturing real-time video and audio of trains passing by our office near
     the Mountain View station.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你曾经乘坐过火车，你就会知道 Caltrain 提供的延迟估算有时会有些...不准确。有时一列火车会在原本已经应该离开的十分钟后仍然显示“延迟两分钟”，或者当火车准时到达时却报告延迟。Trainspotting
+    的想法来源于我们希望将新的数据源整合到延迟预测中，而不仅仅是抓取 Caltrain 的 API 数据。由于我们之前已经设置了一个 Raspberry Pi
+    来分析火车的鸣笛，我们觉得通过捕捉经过我们靠近 Mountain View 车站的办公室的实时视频和音频来验证来自 Caltrain API 的数据会很有趣。
 - en: 'There were several questions we wanted our IoT Raspberry Pi train detector
     to answer:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望我们的物联网 Raspberry Pi 火车检测器回答几个问题：
 - en: Is there a train passing?
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 是否有火车经过？
 - en: Which direction is it going?
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 火车的行进方向是哪个？
 - en: How fast is the train moving?
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 火车移动的速度有多快？
 - en: Sound alone is pretty good at answering the first question because trains are
     rather loud. To help answer the rest of the questions, we added a camera to our
     Raspberry Pi to capture video.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 单靠声音对第一个问题的回答效果还不错，因为火车的声音相当响亮。为了帮助回答其他问题，我们在 Raspberry Pi 上增加了一个摄像头来捕捉视频。
 - en: 'We’ll describe this process in a series of posts. They will focus on:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过一系列文章来描述这一过程。它们将重点介绍：
 - en: Introduction to Trainspotting (you are here)
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Trainspotting 介绍（你在这里）
 - en: '[Image Processing in Python](http://www.svds.com/image-processing-python/)'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[Python 中的图像处理](http://www.svds.com/image-processing-python/)'
 - en: '[Streaming Video Analysis with Python](http://www.svds.com/streaming-video-analysis-python/)'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[使用 Python 进行流媒体视频分析](http://www.svds.com/streaming-video-analysis-python/)'
 - en: Streaming Audio Analysis and Sensor Fusion
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 流媒体音频分析与传感器融合
 - en: Recognizing Images on a Raspberry Pi
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 Raspberry Pi 上识别图像
 - en: Connecting an IoT device to the Cloud
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将 IoT 设备连接到云端
 - en: Building a Deployable IoT Device
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 构建可部署的 IoT 设备
 - en: Let’s quickly look at what these pieces will cover.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们快速了解一下这些内容将涵盖什么。
 - en: Walking through Trainspotting
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 探索 Trainspotting
 - en: In the upcoming “Image Processing in Python” post, Data Scientist Chloe Mawer
     demonstrates how to use open-source Python libraries to process images and videos
     for detecting trains and their direction using OpenCV. You can also see her recent
     talk from [PyCon 2016](https://www.youtube.com/watch?v=MC00XWdl-ms).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在即将发布的《Python 中的图像处理》文章中，数据科学家 Chloe Mawer 展示了如何使用开源 Python 库（如 OpenCV）来处理图像和视频，以检测火车及其方向。你还可以观看她最近在
+    [PyCon 2016](https://www.youtube.com/watch?v=MC00XWdl-ms) 的演讲。
 - en: 'In “Streaming Video Analysis with Python,” Data Scientist Colin Higgins and
     Data Engineer Matt Rubashkin describe the steps to take the video analysis to
     the next level: implementing streaming, on-Pi video analysis with multithreading,
     and light/dark adaptation. The figure below gives a peek into some of the challenges
     in detecting trains in varied light conditions.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在《使用 Python 进行流媒体视频分析》中，数据科学家 Colin Higgins 和数据工程师 Matt Rubashkin 描述了将视频分析提升到新水平的步骤：实现带有多线程的流媒体
+    Pi 视频分析，以及光/暗适应。下图展示了一些在不同光照条件下检测火车的挑战。
 - en: '[![Challenges in detecting trains in varied light conditions](../Images/bb086b83b9de10013d770d92663f6561.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_variedlight.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![检测火车在不同光照条件下的挑战](../Images/bb086b83b9de10013d770d92663f6561.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_variedlight.png)'
 - en: '**Challenges in detecting trains in varied light conditions**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在不同光照条件下检测火车的挑战**'
 - en: In a previous post mentioned above, [Listening to Caltrain](http://www.svds.com/listening-caltrain/),
     we analyzed frequency profiles to discriminate between local and express trains
     passing our Sunnyvale office. Since that post, SVDS has grown and moved to Mountain
@@ -147,11 +218,17 @@
     in the new location, so we needed a more flexible approach. In “Streaming Audio
     Analysis and Sensor Fusion,” Colin describes the audio processing and a custom
     sensor fusion architecture that controls both video and audio.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上面提到的上一篇文章《[监听 Caltrain](http://www.svds.com/listening-caltrain/)》中，我们分析了频率谱，以区分在我们
+    Sunnyvale 办公室经过的本地列车和快车。自那篇文章以来，SVDS 已经发展并迁移到了 Mountain View。自搬迁后，我们发现新地点的火车声音模式有所不同，因此我们需要一个更灵活的方法。在《流媒体音频分析与传感器融合》中，Colin
+    描述了音频处理和控制视频及音频的自定义传感器融合架构。
 - en: '[![](../Images/1fcec7d9aee0e355d38eb427c4dc20c9.png)](http://www.svds.com/wp-content/uploads/2016/09/Pasted-image-at-2016_09_09-12_01-PM.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/1fcec7d9aee0e355d38eb427c4dc20c9.png)](http://www.svds.com/wp-content/uploads/2016/09/Pasted-image-at-2016_09_09-12_01-PM.png)'
 - en: 'After we were able to detect trains, their speed and their direction, we ran
     into a new problem: our Pi was not only detecting Caltrains (true positive), but
     also detecting Union Pacific freight trains and the VTA light rail (false positive).
@@ -161,26 +238,42 @@
     on thousands of images of vehicles to identify different types of trains with
     >95% accuracy. Matt details this solution in “Recognizing Images on a Raspberry
     Pi.”'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们能够检测到火车、其速度和方向后，我们遇到了一个新问题：我们的 Pi 不仅检测到 Caltrains（真正的正例），还检测到 Union Pacific
+    的货运列车和 VTA 轻轨（虚假正例）。为了提高检测器的虚假正例率，我们使用了在 Google 的机器学习 [TensorFlow 库](https://www.tensorflow.org/versions/r0.9/tutorials/image_recognition/index.html)
+    中实现的卷积神经网络。我们实现了一个 [自定义的 Inception-V3 模型](https://www.tensorflow.org/versions/r0.8/how_tos/image_retraining/index.html)，并在数千张车辆图像上进行训练，以
+    >95% 的准确率识别不同类型的火车。Matt 在《在 Raspberry Pi 上识别图像》中详细介绍了这一解决方案。
 - en: '[![Trainspotting_tensorflow](../Images/9fe6d3b5514d8e048d0586b01579554f.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_tensorflow.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Trainspotting_tensorflow](../Images/9fe6d3b5514d8e048d0586b01579554f.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_tensorflow.png)'
 - en: In “Connecting an IoT Device to the Cloud,” Matt shows how we connected our
     Pi to the cloud using Kafka, allowing monitoring with Grafana and persistence
     in HBase.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在《将 IoT 设备连接到云端》中，Matt 展示了我们如何使用 Kafka 将我们的 Pi 连接到云端，从而实现通过 Grafana 监控和在 HBase
+    中持久化。
 - en: '[![Monitoring our Pi with Grafana](../Images/2b07f5193a5f2914c5807134d46d1c80.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_grafana.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![用 Grafana 监控我们的 Pi](../Images/2b07f5193a5f2914c5807134d46d1c80.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_grafana.png)'
 - en: '**Monitoring our Pi with Grafana**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用 Grafana 监控我们的 Pi**'
 - en: The tools and next steps
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 工具和下一步计划
 - en: Before we even finished the development on our first device, we wanted to set
     up more of these devices to get ground truth at other points along the track.
     With this in mind, we realized that we couldn’t always guarantee that we’d have
@@ -192,90 +285,136 @@
     libraries. In “Building a Deployable IoT Device,” we’ll walk through the device
     hardware and setup in detail and show you where you can get the code so you can
     start Trainspotting for yourself.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们完成第一个设备的开发之前，我们希望设置更多这样的设备，以便在轨道上的其他点获取实际数据。考虑到这一点，我们意识到不能总是保证有快速的互联网连接，并且我们希望保持设备本身的低成本。这些要求使得
+    Raspberry Pi 成为一个极好的选择。Pi 具有足够的计算能力来进行设备端流处理，因此我们可以通过互联网连接发送较小的处理数据流，而且组件便宜。我们为传感器的硬件总成本为
+    130 美元，并且代码仅依赖于开源库。在《构建可部署的 IoT 设备》中，我们将详细讲解设备硬件和设置，并展示代码的获取方式，帮助你开始自己的 Trainspotting。
 - en: '[![Device and hardware setup supplies](../Images/19032c6e2f399c4a3bd05f7b0a998f2b.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_supplies.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![设备和硬件设置用品](../Images/19032c6e2f399c4a3bd05f7b0a998f2b.png)](http://www.svds.com/wp-content/uploads/2016/09/Trainspotting_supplies.png)'
 - en: '**Device and hardware setup supplies**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**设备和硬件设置用品**'
 - en: If you want to learn more about Trainspotting and Data Science at SVDS, stay
     tuned for our future Trainspotting blog posts, and you can sign up for our newsletter [here](http://www.svds.com/newsletter/?utm_source=kdnuggets&utm_medium=referral). Let
     us know which pieces of this series you’re most interested in.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于 Trainspotting 和 SVDS 数据科学的内容，请关注我们未来的 Trainspotting 博客文章，并可以通过 [这里](http://www.svds.com/newsletter/?utm_source=kdnuggets&utm_medium=referral)
+    注册我们的新闻通讯。告诉我们你对这个系列中哪些内容最感兴趣。
 - en: You can also find our “Caltrain Rider” in the [Android](https://play.google.com/store/apps/details?id=interprone.caltrain&hl=en) and [Apple](https://itunes.apple.com/us/app/caltrain-rider/id897315176?mt=8) app
     stores. Our app is built upon the Hadoop Ecosystem including HBase and Spark,
     and relies on Kafka and Spark Streaming for ingestion and processing of Twitter
     sentiment and Caltrain API data.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以在 [Android](https://play.google.com/store/apps/details?id=interprone.caltrain&hl=en)
+    和 [Apple](https://itunes.apple.com/us/app/caltrain-rider/id897315176?mt=8) 应用商店找到我们的“Caltrain
+    Rider”。我们的应用程序基于包括HBase和Spark在内的Hadoop生态系统，并依赖Kafka和Spark Streaming进行Twitter情感和Caltrain
+    API数据的摄取和处理。
 - en: '**[Chloe Mawer](https://www.linkedin.com/in/chloemawer)** comes from a background
     in geophysics and hydrology, and is well-versed in leveraging data to make predictions
     and provide valuable insights. Her experience in both academic research and engineering
     makes her capable of tackling novel problems and creating practical, effective
     solutions.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[克洛伊·毛尔](https://www.linkedin.com/in/chloemawer)** 背景涉及地球物理学和水文学，擅长利用数据进行预测和提供有价值的见解。她在学术研究和工程领域的经验使她能够应对新颖的问题，并创造切实有效的解决方案。'
 - en: '**[Colin Higgins](https://www.linkedin.com/in/colinahiggins)**'' background
     is in early-phase Parkinson’s disease drug discovery, wherein he used high-dimensional
     biophysical datasets to model the effects of dynamic protein structures on drug
     selectivity. Prior to joining SVDS, he consulted for a startup, developing a user-matching
     algorithm based on natural language processing.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[科林·希金斯](https://www.linkedin.com/in/colinahiggins)** 的背景是早期帕金森病药物发现，他利用高维生物物理数据集来建模动态蛋白质结构对药物选择性的影响。在加入SVDS之前，他为一家初创公司提供咨询，开发了一种基于自然语言处理的用户匹配算法。'
 - en: '**[Matthew Bubashkin](https://www.linkedin.com/in/mrubash1)** comes from a
     background in optical physics and biomedical research, and has a broad range of
     experiences in software development, database engineering, and data analytics.
     He enjoys working closely with clients to develop straightforward and robust solutions
     to difficult problems.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[马修·布巴什金](https://www.linkedin.com/in/mrubash1)** 背景涵盖光学物理和生物医学研究，并在软件开发、数据库工程和数据分析方面拥有广泛的经验。他喜欢与客户紧密合作，开发简单而强大的解决方案来解决困难的问题。'
 - en: '[Original](http://svds.com/introduction-to-trainspotting/?utm_source=kdnuggets&utm_medium=referral).
     Reposted with permission.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始链接](http://svds.com/introduction-to-trainspotting/?utm_source=kdnuggets&utm_medium=referral)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 Steps to Understanding Computer Vision](/2016/08/seven-steps-understanding-computer-vision.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解计算机视觉的7个步骤](/2016/08/seven-steps-understanding-computer-vision.html)'
 - en: '[Predicting Future Human Behavior with Deep Learning](/2016/09/predicting-future-human-behavior-deep-learning.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用深度学习预测未来人类行为](/2016/09/predicting-future-human-behavior-deep-learning.html)'
 - en: '[5 More Machine Learning Projects You Can No Longer Overlook](/2016/06/five-more-machine-learning-projects-cant-overlook.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你不能再忽视的5个机器学习项目](/2016/06/five-more-machine-learning-projects-cant-overlook.html)'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据管理的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算机视觉中的TensorFlow - 简化迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[发现计算机视觉的世界：介绍MLM最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
 - en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算机视觉的5种应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
 - en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DINOv2: Meta AI 的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
 - en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻 2022年3月9日：在5…中构建一个机器学习Web应用](https://www.kdnuggets.com/2022/n10.html)'
