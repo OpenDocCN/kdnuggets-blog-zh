@@ -1,67 +1,99 @@
 - en: Would You Survive the Titanic? A Guide to Machine Learning in Python Part 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 你会在泰坦尼克号上幸存吗？Python 中的机器学习指南 第二部分
 - en: 原文：[https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-2.html](https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-2.html](https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-2.html)
 - en: '**Patrick Triest, SocialCops**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Patrick Triest, SocialCops**。'
 - en: '**Editor''s note**: This is the second part of a 3 part introductory series
     on machine learning with Python. Catch up with [yesterday''s post](/2016/07/titanic-machine-learning-guide-part-1.html)
     first if you need.'
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑备注**：这是关于使用 Python 进行机器学习的三部分入门系列的第二部分。如果需要，请首先查看 [昨天的文章](/2016/07/titanic-machine-learning-guide-part-1.html)。'
 - en: '**Why Machine Learning?**'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为什么是机器学习？**'
 - en: 'We can draw some fairly straightforward conclusions from this data: Being a
     woman, being in 1st class, and being a child were all factors that could boost
     your chances of survival during this disaster.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以从这些数据中得出一些相当简单的结论：女性、处于头等舱和儿童都是在这场灾难中提高生存几率的因素。
 - en: Let’s say we wanted to write a program to predict whether a given passenger
     would survive the disaster. This could be done through an elaborate system of
     nested if-else statements with some sort of weighted scoring system, but such
     a program would be long, tedious to write, difficult to generalize, and would
     require extensive fine tuning.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想编写一个程序来预测给定乘客是否会在灾难中幸存。这可以通过一个复杂的嵌套 if-else 语句系统以及某种加权评分系统来完成，但这样的程序将会很长，编写起来繁琐，难以概括，并且需要广泛的微调。
 - en: 'This is where machine learning comes in: we will build a program that learns
     from the sample data in order to predict whether a given passenger would survive.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是机器学习的作用所在：我们将构建一个从样本数据中学习的程序，以预测给定乘客是否会生存。
 - en: '**Preparing The Data**'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**准备数据**'
 - en: Before we can feed our dataset into a machine learning algorithm, we have to
     remove missing values and split it into training and test sets.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将数据集输入到机器学习算法之前，我们必须移除缺失值，并将数据集拆分为训练集和测试集。
 - en: If we perform a count of each column, we will see that much of the data on certain
     fields is missing. Most machine learning algorithms will have a difficult time
     handling missing values, so we will need to make sure that each row has a value
     for each column.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们对每一列进行计数，我们会发现某些字段的数据缺失严重。大多数机器学习算法难以处理缺失值，因此我们需要确保每一行在每一列中都有一个值。
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '*[Click here for the gist.](https://gist.github.com/triestpa/257c261111b03fede4e2580017a21727)*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[点击这里查看概要。](https://gist.github.com/triestpa/257c261111b03fede4e2580017a21727)*'
 - en: Most of the rows are missing values for “boat” and “cabin”, so we will remove
     these columns from the data frame. A large number of rows are also missing the
     “home.dest” field; here we fill the missing values with “NA”. A significant number
@@ -69,18 +101,26 @@
     effect on survival chances, so we will have to drop all of rows that are missing
     an age value. When we run the count command again we can see that all remaining
     columns now contain the same number of values.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数行缺少“boat”和“cabin”字段的值，因此我们将从数据框中移除这些列。还有大量的行缺少“home.dest”字段；在这里我们将缺失值填充为“NA”。还有相当多的行缺少年龄值。我们上面已经看到，年龄可能会对生存机会产生显著影响，因此我们需要删除所有缺少年龄值的行。当我们再次运行计数命令时，可以看到所有剩余的列现在包含相同数量的值。
 - en: Now we need to format the remaining data in a way that our machine learning
     algorithms will accept.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们需要以机器学习算法可以接受的方式格式化剩余的数据。
 - en: '[PRE4]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '*[Click here for the gist.](https://gist.github.com/triestpa/e10aff22cb9c2945142735dc0d315723)*'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[点击这里查看概要。](https://gist.github.com/triestpa/e10aff22cb9c2945142735dc0d315723)*'
 - en: The “sex” and “embarked” fields are both string values that correspond to categories(i.e
     “Male” and “Female”) so we will run each through a preprocessor. This preprocessor
     will convert these strings into integer keys, making it easier for the classification
@@ -88,79 +128,118 @@
     to 0 and 1 respectively. The “name”, “ticket”, and “home.dest” columns consist
     of non-categorical string values, and as such are difficult to use in a classification
     algorithm, so we will drop them from the dataset.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: “性别”和“登船港口”字段都是对应于类别（即“男性”和“女性”）的字符串值，因此我们将每个字段通过预处理器。这一预处理器将这些字符串转换为整数键，使得分类算法更容易找到模式。例如，“男性”和“女性”将分别转换为0和1。“姓名”、“票号”和“家乡”列包含非类别的字符串值，因此在分类算法中使用起来比较困难，我们将从数据集中删除这些列。
 - en: '[PRE5]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '*[Click here for the gist.](https://gist.github.com/triestpa/0bce50e357c6c5f19811b975c5f9b604)*'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[点击这里查看要点。](https://gist.github.com/triestpa/0bce50e357c6c5f19811b975c5f9b604)*'
 - en: Next we separate the dataset into two arrays, “X” containing all of the values
     for each row besides “survived”, and “y” containing only the “survived” value
     for that row. The classification algorithms will compare the attribute values
     of “X” to the corresponding values of “y” in order to detect patterns in how different
     attributes values tend to affect the survival of a passenger.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将数据集分为两个数组，“X”包含每行的所有值，除了“是否幸存”，而“y”仅包含该行的“是否幸存”值。分类算法将比较“X”的属性值与“y”的对应值，以检测不同属性值如何影响乘客的生存。
 - en: Finally we break the “X” and “y” array into two parts each - a training set
     and a testing set. We will feed the training set into the classification algorithm
     in order to form a trained model. Once the model is formed, we will use it to
     classify the testing set, allowing us to determine the accuracy of the model.
     Here we have have made a 20/80 split, such that 80% of the dataset will be used
     for training and 20% will be used for testing.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将“X”和“y”数组分别拆分成两个部分——一个训练集和一个测试集。我们将训练集输入分类算法，以形成一个训练好的模型。模型形成后，我们将使用它来对测试集进行分类，从而确定模型的准确性。在这里，我们进行了20/80的拆分，其中80%的数据集用于训练，20%用于测试。
 - en: '* * *'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT工作'
 - en: '* * *'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Data Scientists Need to Specialize to Survive the Tech Winter](https://www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家需要专业化才能在科技寒冬中生存](https://www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html)'
 - en: '[If I Had To Start Learning Data Science Again, How Would I Do It?](https://www.kdnuggets.com/2020/08/start-learning-data-science-again.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如果我必须重新开始学习数据科学，我会怎么做？](https://www.kdnuggets.com/2020/08/start-learning-data-science-again.html)'
 - en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么时候集成技术会是一个好的选择？](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
 - en: '[Data Science Interview Guide - Part 2: Interview Resources](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)'
 - en: '[Data Science Interview Guide - Part 1: The Structure](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学面试指南 - 第1部分：结构](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)'
 - en: '[Want to Become a Data Scientist? Part 1: 10 Hard Skills You Need](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[想成为数据科学家？第1部分：你需要的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)'
