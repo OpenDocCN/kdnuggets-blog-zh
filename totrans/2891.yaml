@@ -3,20 +3,25 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 训练 sklearn 快速 100 倍
 - en: 原文：[https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html](https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html](https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/), Manager,
     Machine Learning and Data Science at Ibotta, Inc.**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/)，Ibotta,
+    Inc. 机器学习与数据科学经理**'
 - en: At Ibotta we train a lot of machine learning models. These models power our
     recommendation system, search engine, pricing optimization engine, data quality,
     and more. They make predictions for millions of users as they interact with our
@@ -24,6 +29,7 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Ibotta，我们训练了大量的机器学习模型。这些模型为我们的推荐系统、搜索引擎、定价优化引擎、数据质量等提供支持。它们为数百万用户在使用我们的移动应用程序时进行预测。
 - en: While we do much of our data processing with [Spark](https://spark.apache.org/),
     our preferred machine learning framework is [scikit-learn](https://scikit-learn.org/stable/).
     As compute gets cheaper and time to market for machine learning solutions becomes
@@ -33,11 +39,14 @@
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然我们在数据处理方面大多使用[Spark](https://spark.apache.org/)，但我们首选的机器学习框架是[scikit-learn](https://scikit-learn.org/stable/)。随着计算成本的下降和机器学习解决方案市场时间的日益重要，我们探索了加速模型训练的选项。我们的一种解决方案是将
+    Spark 和 scikit-learn 的元素结合成我们自己的混合解决方案。
 - en: Introducing sk-dist
   id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍 sk-dist
 - en: We are excited to announce the launch of our open source project [sk-dist](https://github.com/Ibotta/sk-dist).
     The goal of the project is to provide a general framework for distributing scikit-learn
     meta-estimators with Spark. Examples of meta-estimators are decision tree ensembles
@@ -50,10 +59,16 @@
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们很高兴地宣布我们开源项目[sk-dist](https://github.com/Ibotta/sk-dist)的发布。该项目的目标是提供一个通用框架，用于将
+    scikit-learn 元估计器与 Spark 进行分发。元估计器的示例包括决策树集成（[随机森林](https://en.wikipedia.org/wiki/Random_forest)
+    和 [额外随机树](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)），[超参数调优器](https://scikit-learn.org/stable/modules/grid_search.html)（[网格搜索](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV)
+    和 [随机搜索](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV)）以及多类技术（[一对其余](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier)
+    和 [一对一](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier)）。
 - en: '![](../Images/4df608e27f8783fb241b1762eed6f489.png)'
   id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4df608e27f8783fb241b1762eed6f489.png)'
 - en: Our primary motivation is to fill a void in the space of options for distributing
     traditional machine learning models. Outside of the space of neural networks and
     deep learning, we find that much of our compute time for training models is not
@@ -63,11 +78,13 @@
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的主要动机是填补传统机器学习模型分发选项中的空白。在神经网络和深度学习领域之外，我们发现，训练模型的大部分计算时间并非用于在单一数据集上训练单个模型。大量时间用于在多个数据集的多个迭代上训练模型，通常使用像网格搜索或集成方法这样的元估计器。
 - en: Example
   id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例
 - en: Consider the [hand written digits dataset](https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html).
     Here we have encoded images of hand written digits to be classified appropriately.
     We can train a [support vector machine](https://en.wikipedia.org/wiki/Support-vector_machine) on
@@ -77,6 +94,8 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑 [手写数字数据集](https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html)。我们这里有编码好的手写数字图像需要进行分类。我们可以在这个包含
+    1797 条记录的数据集上很快地在单台机器上训练一个 [支持向量机](https://en.wikipedia.org/wiki/Support-vector_machine)。这只需不到一秒钟。但超参数调整需要在训练数据的不同子集上进行多个训练作业。
 - en: Shown below, we’ve built a parameter grid totaling 1050 required training jobs.
     It takes only 3.4 seconds with sk-dist on a Spark cluster with over a hundred
     cores. The total task time of this job is 7.2 minutes, meaning it would take this
@@ -84,6 +103,8 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如下所示，我们构建了一个总计需要 1050 个训练作业的参数网格。在拥有百余个核心的 Spark 集群上，使用 sk-dist 只需 3.4 秒。这项工作的总任务时间为
+    7.2 分钟，这意味着在没有并行化的情况下，在单台机器上训练需要这么长时间。
 - en: '[PRE0]'
   id: totrans-13
   prefs: []
@@ -96,14 +117,17 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个例子展示了一个常见的场景，即将数据适配到内存中并训练单个分类器是简单的，但超参数调整所需的拟合次数会迅速增加。下面是使用 sk-dist 运行如上例所示的网格搜索问题的幕后情况：
 - en: '![Figure](../Images/282b2a6db0d1e7459055893272e39ba7.png)'
   id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/282b2a6db0d1e7459055893272e39ba7.png)'
 - en: Grid Search with sk-dist
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 sk-dist 的网格搜索
 - en: 'For real-world applications of traditional machine learning at Ibotta, we often
     find ourselves in a similar situation: small to medium sized data (100k to 1M
     records) with many iterations of simple classifiers to fit for hyperparameter
@@ -111,11 +135,13 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Ibotta 进行传统机器学习的实际应用中，我们常常发现自己处于类似的情况：中小型数据（100k 到 1M 条记录），需要对多个简单分类器进行超参数调整、集成和多类解决方案的多个迭代。
 - en: Existing Solutions
   id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 现有解决方案
 - en: 'There are existing solutions to distributing traditional machine learning meta-estimator
     training. The first is the simplest: scikit-learn’s built-in parallelization of
     meta-estimators using [joblib](https://joblib.readthedocs.io/en/latest/). This
@@ -129,6 +155,10 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 有现有的解决方案来分布式训练传统机器学习元估计器。第一个是最简单的：scikit-learn 内置的使用 [joblib](https://joblib.readthedocs.io/en/latest/)
+    的元估计器并行化。这与 sk-dist 的操作非常相似，只是有一个主要限制：性能受限于任何一台机器的资源。即使与理论上的单台拥有数百个核心的机器相比，Spark
+    仍具有如 [执行器的精细内存规格](https://spark.apache.org/docs/latest/tuning.html)、[容错](https://techvidvan.com/tutorials/fault-tolerance-in-spark/)
+    以及使用 [竞价实例](https://aws.amazon.com/ec2/spot/) 作为工作节点的成本控制选项等优势。
 - en: Another existing solution is [Spark ML](https://spark.apache.org/docs/latest/ml-guide.html).
     This is Spark’s native machine learning library, supporting many of the same algorithms
     as scikit-learn for classification and regression problems. It also has meta-estimators
@@ -139,14 +169,19 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种现有的解决方案是 [Spark ML](https://spark.apache.org/docs/latest/ml-guide.html)。这是
+    Spark 的原生机器学习库，支持许多与 scikit-learn 相同的分类和回归算法。它还具有如树集成和网格搜索等元估计器，并支持多类问题。尽管这听起来可能是分布式
+    scikit-learn 风格机器学习工作负载的充分解决方案，但它以一种不能解决我们感兴趣的并行性问题的方式进行训练分配。
 - en: '![Figure](../Images/3fcf7a970a8832f2998bd8ca037f6870.png)'
   id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3fcf7a970a8832f2998bd8ca037f6870.png)'
 - en: Distributed on Different Dimensions
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同维度的分布
 - en: As shown above, Spark ML will train a single model on data that is distributed
     on many executors. This works well when data is large and won’t fit into memory
     on a single machine. However, when data is small this can *underperform* scikit-learn
@@ -157,6 +192,8 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，Spark ML 会在分布在多个执行器上的数据上训练一个单一模型。当数据量很大且无法在单台机器上容纳时，这种方法效果很好。然而，当数据量较小时，这种方法可能会*不如*单台机器上的
+    scikit-learn。进一步地，例如，在训练随机森林时，Spark ML 会按顺序训练每棵决策树。这个任务的实际时间将随着决策树数量的增加而线性增长，无论分配给该任务的资源是多少。
 - en: For [grid search, Spark ML](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator) does
     implement a [parallelism](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator.parallelism) parameter
     that will train [individual models in parallel](https://issues.apache.org/jira/browse/SPARK-19357).
@@ -166,6 +203,7 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于[网格搜索，Spark ML](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator)确实实现了一个[并行度](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator.parallelism)参数，该参数将[并行训练单独模型](https://issues.apache.org/jira/browse/SPARK-19357)。然而，每个单独的模型仍然在分布在执行器上的数据上进行训练。该任务的总并行度是[其可能达到的水平的一个小部分](https://github.com/Ibotta/sk-dist/blob/master/examples/search/spark_ml.py)，如果按模型维度而不是数据维度进行分发的话。
 - en: Ultimately, we want to distribute our training on a different dimension than
     that of Spark ML. When using small or medium data, fitting the data into memory
     is not a problem. For the random forest example, we want to broadcast the training
@@ -177,17 +215,20 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们希望在不同于 Spark ML 的维度上分发我们的训练。当使用小数据或中等数据时，将数据适配到内存中不是问题。以随机森林为例，我们希望将训练数据完整地广播到每个执行器，在每个执行器上拟合一个独立的决策树，然后将这些拟合好的决策树带回驱动程序以组装随机森林。在这个维度上进行分发可以比将数据分发和按顺序训练决策树要[快几个数量级](https://github.com/Ibotta/sk-dist/blob/master/examples/search/spark_ml.py)。这种行为对于网格搜索和多类等其他元估计器技术也类似。
 - en: Features
   id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特性
 - en: Given the limitations of these existing solutions in our problem space, we decided
     to develop sk-dist in-house. The bottom line is that we want to **distribute models,
     not data**.
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于现有解决方案在我们问题领域中的局限性，我们决定内部开发 sk-dist。底线是我们想要**分发模型，而不是数据**。
 - en: While the primary focus is on distributed training of meta-estimators, sk-dist
     also includes modules for distributed prediction of scikit-learn models with Spark,
     several pre/post processing scikit-learn transformers for use without Spark, and
@@ -195,6 +236,8 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然主要关注于元估计器的分布式训练，但 sk-dist 还包括用于与 Spark 一起使用的 scikit-learn 模型的分布式预测模块、用于不使用
+    Spark 的几个预处理/后处理 scikit-learn 转换器，以及一个灵活的特征编码器，适用于有或没有 Spark 的情况。
 - en: '**Distributed Training** — Distribute meta-estimator training with Spark. The
     following algorithms are supported: [Hyperparameter optimization](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/search.py) with
     grid search and randomized search, [tree ensembles](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/ensemble.py) with
@@ -205,6 +248,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**分布式训练** — 使用 Spark 分发元估计器训练。支持以下算法：[超参数优化](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/search.py)（包括网格搜索和随机搜索）、[树集成](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/ensemble.py)（包括随机森林、额外树和随机树嵌入）以及[多类策略](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/multiclass.py)（包括一对多和一对一）。所有这些元估计器在拟合后都能镜像其
+    scikit-learn 对应物。'
 - en: '**Distributed Prediction** — [Distribute the prediction methods](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/predict.py) of
     fitted scikit-learn estimators with [Spark DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html).
     This enables large scale distributed prediction with portable scikit-learn estimators
@@ -213,6 +258,9 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**分布式预测** — [分布式预测方法](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/predict.py)
+    可以使用[Spark DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html)对拟合的
+    scikit-learn 估计器进行预测。这使得可以使用或不使用 Spark 的便携式 scikit-learn 估计器进行大规模分布式预测。'
 - en: '**Feature Encoding** — Distribute feature encoding with a flexible feature
     transformer called [Encoderizer](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/encoder.py).
     It functions with or without Spark parallelization. It will infer data types and
@@ -224,16 +272,21 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**特征编码** — 使用一种名为[Encoderizer](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/encoder.py)的灵活特征转换器进行特征编码分发。它可以在有或没有
+    Spark 并行化的情况下运行。它将推断数据类型和形状，自动应用默认特征转换器，作为标准特征编码技术的最佳猜测实现。它还可以作为一个完全可定制的类似特征联合的编码器使用，具有通过
+    Spark 分布式转换器拟合的额外优势。'
 - en: Use Cases
   id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用案例
 - en: 'Here are some guidelines for deciding whether or not sk-dist is a good fit
     for your machine learning problem space:'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一些指南来决定 sk-dist 是否适合你的机器学习问题领域：
 - en: '**Traditional Machine Learning** — Methods like [generalized linear models](https://scikit-learn.org/stable/modules/linear_model.html), [stochastic
     gradient descent](https://scikit-learn.org/stable/modules/sgd.html), [nearest
     neighbors](https://scikit-learn.org/stable/modules/neighbors.html), [decision
@@ -244,6 +297,8 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**传统机器学习** — 方法如[广义线性模型](https://scikit-learn.org/stable/modules/linear_model.html)、[随机梯度下降](https://scikit-learn.org/stable/modules/sgd.html)、[最近邻](https://scikit-learn.org/stable/modules/neighbors.html)、[决策树](https://scikit-learn.org/stable/modules/tree.html)和[朴素贝叶斯](https://scikit-learn.org/stable/modules/naive_bayes.html)与
+    sk-dist 兼容良好。这些方法在 scikit-learn 中都有实现，已准备好与 sk-dist 元估计器直接实施。'
 - en: '**Small to Medium Sized Data** — Big data won’t work well with sk-dist. Keep
     in mind that the dimensionality of distribution of training is along the axis
     of the models, not the data. Data needs to not only fit in memory on each executor,
@@ -253,6 +308,8 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**小到中型数据** — 大数据不适用于 sk-dist。请记住，训练的分布维度沿着模型的轴，而不是数据的轴。数据不仅需要适合每个执行器的内存，还需要足够小以便进行广播。根据
+    Spark 配置，最大广播大小可能会成为限制因素。'
 - en: '**Spark Orientation and Access** — The core functionality of sk-dist requires
     running Spark. This isn’t always feasible for individuals or small data science
     teams. Additionally, some Spark tuning and configuration will be necessary to
@@ -262,6 +319,8 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Spark 定向和访问** — sk-dist 的核心功能需要运行 Spark。这对于个人或小型数据科学团队来说并不总是可行的。此外，为了以经济高效的方式充分利用
+    sk-dist，还需要进行一些 Spark 调优和配置，这需要一些 Spark 基础知识的培训。'
 - en: An important note here is that while neural networks and deep learning could
     technically be used with sk-dist, these techniques require large amounts of training
     data and sometimes specialized infrastructure to be effective. Deep learning is
@@ -272,11 +331,15 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要注意的是，虽然神经网络和深度学习技术可以与 sk-dist 一起使用，但这些技术需要大量的训练数据，有时还需要专门的基础设施才能有效。深度学习不是
+    sk-dist 的预期用途，因为它违背了上述 (1) 和 (2) 点。作为替代方案，在 Ibotta [我们一直在使用](https://medium.com/building-ibotta/heating-up-word2vec-blazingtext-for-real-time-search-c2121bd1396) [Amazon
+    SageMaker](https://aws.amazon.com/sagemaker/) 进行这些技术应用，我们发现它比 Spark 更有效。
 - en: Getting Started
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 入门指南
 - en: To get started with sk-dist, check out the [installation guide](https://github.com/Ibotta/sk-dist#installation).
     The code repository also contains a library of [examples](https://github.com/Ibotta/sk-dist/tree/master/examples) to
     illustrate some of the use cases of sk-dist. [All are welcome](https://github.com/Ibotta/sk-dist/blob/master/CODE_OF_CONDUCT.md) to
@@ -284,15 +347,19 @@
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始使用 sk-dist，请查看 [安装指南](https://github.com/Ibotta/sk-dist#installation)。代码库还包含一个 [示例](https://github.com/Ibotta/sk-dist/tree/master/examples) 库，展示
+    sk-dist 的一些用例。 [欢迎大家](https://github.com/Ibotta/sk-dist/blob/master/CODE_OF_CONDUCT.md) 提交问题并参与项目。
 - en: If these kinds of projects and challenges sound interesting to you, Ibotta is
     hiring! Check out our [jobs page](https://ibotta.com/careers) for more information.
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这些项目和挑战对你有吸引力，Ibotta 正在招聘！查看我们的 [招聘页面](https://ibotta.com/careers) 获取更多信息。
 - en: Thanks to charley frazier, Chad Foley, and Sam Weiss.
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢 Charley Frazier、Chad Foley 和 Sam Weiss。
 - en: '**Bio: [Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/)** is
     an experienced technologist specializing in data science and machine learning.
     He is currently leading a machine learning team which is building services for
@@ -301,67 +368,83 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/)** 是一位经验丰富的技术专家，专注于数据科学和机器学习。他目前领导一个机器学习团队，致力于为搜索相关性、内容推荐、定价优化和欺诈检测构建服务，为数百万用户提供移动应用支持。'
 - en: '[Original](https://medium.com/building-ibotta/train-sklearn-100x-faster-bec530fc1f45).
     Reposted with permission.'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/building-ibotta/train-sklearn-100x-faster-bec530fc1f45)。转载已获许可。'
 - en: '**Related:**'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Understanding Decision Trees for Classification in Python](/2019/08/understanding-decision-trees-classification-python.html)'
   id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Python中理解分类决策树](/2019/08/understanding-decision-trees-classification-python.html)'
 - en: '[Advanced Keras — Accurately Resuming a Training Process](/2019/03/advanced-keras-accurately-resuming-training-process.html)'
   id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高级 Keras — 准确恢复训练过程](/2019/03/advanced-keras-accurately-resuming-training-process.html)'
 - en: '[Distributed Artificial Intelligence: A primer on Multi-Agent Systems, Agent-Based
     Modeling, and Swarm Intelligence](/2019/04/distributed-artificial-intelligence-multi-agent-systems-agent-based-modeling-swarm-intelligence.html)'
   id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分布式人工智能：多智能体系统、基于代理的建模和群体智能入门](/2019/04/distributed-artificial-intelligence-multi-agent-systems-agent-based-modeling-swarm-intelligence.html)'
 - en: '* * *'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
   id: totrans-55
   prefs:
