@@ -1,55 +1,86 @@
 - en: There and Back Again… a RAPIDS Tale
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 再回首… RAPIDS 故事
 - en: 原文：[https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
 - en: By [Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/) & [Kevin
     Baboolal](https://www.linkedin.com/in/kevin-baboolal-b3313595/)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 由[Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/)和[Kevin
+    Baboolal](https://www.linkedin.com/in/kevin-baboolal-b3313595/)撰写
 - en: '![There and Back Again… a RAPIDS Tale](../Images/0aaf39d85cdb9016557725d139bcb00e.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![再回首… RAPIDS 故事](../Images/0aaf39d85cdb9016557725d139bcb00e.png)'
 - en: Image by Editor
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由编辑提供
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的
+    IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Editor''s Note:** We are thrilled to announce that this post has been selected
     as the winner of the KDnuggets & NVIDIA Blog Writing Contest.'
+  id: totrans-11
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑备注：** 我们很高兴宣布这篇文章被选为KDnuggets & NVIDIA博客写作比赛的获奖者。'
 - en: Introduction
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Machine learning has revolutionized various domains by leveraging vast amounts
     of data. However, there are situations where acquiring sufficient data becomes
     a challenge due to cost or scarcity. In such cases, traditional approaches often
@@ -58,12 +89,16 @@
     harnesses the power of the nearest neighbor approach and a specialized kernel.
     We will delve into the details of their algorithm, its benefits, and how GPU optimization
     accelerates its execution.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习通过利用大量数据彻底改变了各个领域。然而，在数据获取因成本或稀缺而变得困难的情况下，传统方法往往难以提供准确的预测。本文探讨了小数据集带来的限制，并揭示了TTLAB提出的一种创新解决方案，该方案利用了最近邻方法和专门的核函数。我们将深入探讨他们的算法、其优势以及GPU优化如何加速其执行。
 - en: The Challenge of Limited Data
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 有限数据的挑战
 - en: In machine learning, having a substantial amount of data is crucial for training
     accurate models. However, when faced with a small dataset comprising only a few
     hundred rows, the shortcomings become evident. One common issue is the zero frequency
@@ -74,12 +109,16 @@
     in the training set. You may even find your choice of algorithm is improved (though
     sub-optimal)  when these missing features are excluded.  These issues also manifest
     in larger datasets with highly imbalanced classes.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，拥有大量数据对于训练准确的模型至关重要。然而，当面临只有几百行的小数据集时，其不足之处变得显而易见。一个常见的问题是某些分类算法（如朴素贝叶斯分类器）中遇到的零频率问题。这发生在算法在测试期间遇到未见过的类别值时，导致该案例的概率估计为零。类似地，回归任务在测试集包含训练集中不存在的值时也面临挑战。你可能会发现，当这些缺失特征被排除时，你选择的算法虽然次优但有所改进。这些问题在具有高度不平衡类别的大型数据集中也会显现。
 - en: Overcoming Data Scarcity
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 克服数据稀缺
 - en: Although train-test splits often mitigate these issues, there remains a hidden
     problem when dealing with smaller datasets. Forcing an algorithm to generalize
     based on fewer samples can lead to suboptimal predictions. Even if the algorithm
@@ -87,12 +126,16 @@
     acquiring more data is not always feasible due to cost or availability constraints.
     In such situations, an innovative approach proposed by TTLAB proves to be robust
     and accurate.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管训练-测试拆分通常能缓解这些问题，但在处理较小数据集时仍然存在隐性问题。强迫算法根据较少的样本进行泛化可能会导致次优预测。即使算法能够运行，其预测也可能缺乏稳健性和准确性。由于成本或可用性限制，获取更多数据的简单解决方案并不总是可行。在这种情况下，TTLAB提出的创新方法被证明是稳健且准确的。
 - en: The TTLAB Algorithm
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: TTLAB算法
 - en: TTLAB's algorithm tackles the challenges posed by biased and limited datasets.
     Their approach involves taking the weighted average of all rows in the training
     dataset to predict the value for a target variable in a test sample. The key lies
@@ -109,8 +152,10 @@
     process, a successive quadratic approximation is being explored, promising faster
     parameter optimization. Additionally, ongoing peer reviews aim to validate and
     refine the algorithm for broader adoption.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: TTLAB的算法应对了偏倚和有限数据集带来的挑战。他们的方法包括对训练数据集中的所有行进行加权平均，以预测测试样本中目标变量的值。关键在于根据参数化的非线性函数调整每个训练行的权重，这个函数计算特征空间中两个点之间的距离。虽然使用的加权函数有一个单一参数（训练样本与测试样本距离增加时影响衰减率），但优化这个参数的计算工作量可能很大。通过考虑整个训练数据集，该算法提供了稳健的预测。这种方法在提高随机森林和朴素贝叶斯等流行模型的性能方面取得了显著成功。随着算法的普及，正在努力进一步提升其效率。目前的实现涉及调整超参数kappa，这需要网格搜索。为了加快这一过程，正在探索连续二次近似法，这有望实现更快的参数优化。此外，正在进行的同行评审旨在验证和完善该算法，以便更广泛地采用。
 - en: To implement the TTLAB algorithm for classification for loops and numpy proved
     inefficient resulting in very long runtimes. The CPU implementation showcased
     in the linked publication focuses on classification problems, demonstrating the
@@ -121,51 +166,75 @@
     validation would have taken weeks for the multitude of datasets being tested.
     By leveraging the power of GPUs, the computations were distributed effectively,
     resulting in improved performance.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现TTLAG算法时，使用循环和numpy进行分类证明效率低下，导致运行时间非常长。展示在链接出版物中的CPU实现专注于分类问题，展示了方法的多功能性和有效性。
+    [https://arxiv.org/pdf/2205.14779.pdf](https://arxiv.org/pdf/2205.14779.pdf)。出版物还显示该算法从向量化中获益良多，暗示了通过使用CuPy进行GPU加速可以获得进一步的速度提升。事实上，对超参数调优和随机K折交叉验证的执行在测试的多个数据集上需要几周时间。通过利用GPU的强大计算能力，计算任务得到了有效分配，从而提升了性能。
 - en: Accelerating Execution with GPUs
+  id: totrans-21
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用GPU加速执行
 - en: Even with optimizations like vectorization and .apply refactoring, the execution
     time remains impractical for real-world applications. However, with GPU optimization,
     the runtime is drastically reduced, bringing execution times down from hours to
     minutes. This remarkable acceleration opens up possibilities for using the algorithm
     in scenarios where prompt results are essential.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使有了像矢量化和 `.apply` 重构这样的优化，执行时间对于实际应用仍然不切实际。然而，通过 GPU 优化，运行时间显著减少，将执行时间从小时缩短到分钟。这种显著的加速打开了在需要快速结果的场景中使用算法的可能性。
 - en: Following the lessons learnt from the CPU implementation, we attempted to further
     optimize our implementation. For this, we moved up the layer to CuDF Dataframes.
     Vectorizing calculations onto the GPU is a breeze with CuDF. For us, it was as
     simple as changing import pandas to import CuDF (you must vectorize properly in
     pandas.)
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据从 CPU 实现中获得的经验教训，我们尝试进一步优化我们的实现。为此，我们将层级上移至 CuDF 数据框。将计算矢量化到 GPU 上对于 CuDF
+    来说是轻而易举的。对我们来说，就像将 `import pandas` 改为 `import CuDF` 一样简单（你必须在 pandas 中正确进行矢量化。）
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Further down our rabbit hole we need to rely on Numba kernels. At this point,
     things get tricky. Recall why the algorithm’s predictions are robust because each
     prediction uses all the rows in the training dataframe. However,  the Numba kernels
     don’t support passing CuDF dataframes. Right now the we are experimenting with
     some tricks suggested on Github to handle this case. ([https://github.com/rapidsai/cudf/issues/13375](https://github.com/rapidsai/cudf/issues/13375))
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的探索中，我们需要依赖 NumPy 内核。这时，事情变得棘手。回顾一下为什么算法的预测如此可靠，因为每个预测都使用了训练数据框中的所有行。然而，NumPy
+    内核不支持传递 CuDF 数据框。目前，我们正在尝试一些在 Github 上建议的技巧来处理这种情况。 ([https://github.com/rapidsai/cudf/issues/13375](https://github.com/rapidsai/cudf/issues/13375))
 - en: For now, we can at least pass of the raw compute to a numba kernel via the `.apply_rows`
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们至少可以通过 `.apply_rows` 将原始计算传递给 NumPy 内核
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: At this point, we did not eliminate all for loops, but simply pushing most of
     the number crunching to Numba reduced the CuDf runtime > 50% landing us in around
     the 2 to 4 seconds for the standard 80-20 train-test split.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，我们没有消除所有的 for 循环，但将大部分计算推送到 NumPy 内核使 CuDF 运行时间减少了超过 50%，标准的 80-20 训练测试拆分的时间约为
+    2 到 4 秒。
 - en: Wrap up
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结
 - en: It has been an exhilarating and delightful journey exploring the capabilities
     of the rapids, cupy, and cudf libraries for various machine learning tasks. These
     libraries have proven to be user-friendly and easily understandable, making it
@@ -177,37 +246,57 @@
     micro-second barrier with large datasets ranging from 20K to 30K. Once this milestone
     is reached, we plan to release the algorithm as a pip package powered by rapids,
     making it available for wider adoption and usage.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 探索 RAPIDS、CuPy 和 CuDF 库在各种机器学习任务中的能力是一次令人振奋和愉快的旅程。这些库证明了它们用户友好且易于理解，使大多数用户都能轻松使用。库的设计和维护值得称赞，使得用户在必要时可以深入了解其复杂性。在一周的时间里，每天只需几个小时，我们就能够从新手进展到通过实现一个高度定制的预测算法来推动库的边界。我们的下一个目标是实现前所未有的速度，力争突破微秒级别的障碍，处理从
+    20K 到 30K 的大数据集。一旦达成这一里程碑，我们计划将该算法作为一个由 RAPIDS 提供支持的 pip 包发布，以便更广泛地采用和使用。
 - en: '**[Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/)** is
     a executive director at ICPC, Trinidad and Tobago.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/)** 是
+    ICPC, Trinidad 和 Tobago 的执行董事。'
 - en: More On This Topic
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关信息
 - en: '[RAPIDS cuDF Cheat Sheet](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 速查表](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 RAPIDS cuDF 利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
 - en: '[RAPIDS cuDF to Speed up Your Next Data Science Workflow](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 提升您的下一个数据科学工作流速度](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
 - en: '[RAPIDS cuDF for Accelerated Data Science on Google Colab](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAPIDS cuDF 在 Google Colab 上加速数据科学](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
 - en: '[Is There a Way to Bridge the MLOps Tools Gap?](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是否有方法弥合 MLOps 工具的差距？](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)'
 - en: '[R vs Python (Again): A Human Factor Perspective](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R 与 Python（再次）：从人因角度的观点](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)'
