@@ -1,325 +1,490 @@
 - en: 'The Data Fabric for Machine Learning – Part 2: Building a Knowledge-Graph'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习的数据结构 – 第2部分：构建知识图谱
 - en: 原文：[https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html](https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html](https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '![Header image](../Images/308bd52c9fbd57d3079f3d5c7449feb1.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/308bd52c9fbd57d3079f3d5c7449feb1.png)'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'In the last articles of the series:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在系列文章的最后：
 - en: '[**The Data Fabric for Machine Learning. Part 1.**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**机器学习的数据结构。第1部分。**'
 - en: '*How the new advances in semantics can help us be better at Machine Learning.*
     towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-2c558b7035d7)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如何利用语义的新进展提高我们在机器学习中的表现。* [towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-2c558b7035d7)'
 - en: '[**The Data Fabric for Machine Learning. Part 1-b: Deep Learning on Graphs.**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**机器学习的数据结构。第1-b部分：图上的深度学习。**'
 - en: '*Deep learning on graphs is taking more importance by the day. Here I’ll show
     the basics of thinking about machine…* towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-b-deep-learning-on-graphs-309316774fe7)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图上的深度学习日益重要。在这里，我将展示思考机器学习的基础...* [towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-b-deep-learning-on-graphs-309316774fe7)'
 - en: 'I’ve been talking about the data fabric in general, and giving some concepts
     of Machine Learning and Deep Learning in the data fabric. And also gave my definition
     of the data fabric:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经在谈论数据结构的一般情况，并给出了一些数据结构中机器学习和深度学习的概念。同时也给出了我对数据结构的定义：
 - en: '*The Data Fabric is the platform that supports all the data in the company.
     How it’s managed, described, combined and universally accessed. This platform
     is formed from an ****Enterprise Knowledge Graph**** to create an uniform and
     unified data environment.*'
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*数据结构是支持公司中所有数据的平台。它的管理、描述、组合和普遍访问方式。该平台由****企业知识图谱****构成，以创建统一的数据环境。*'
 - en: If you take a look at the definition, it says that the data fabric is formed
     from an **Enterprise Knowledge Graph. **So we better know how to create and manage
     it.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你查看定义，它会说数据结构是由**企业知识图谱**形成的。因此，我们最好了解如何创建和管理它。
 - en: Objectives
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标
 - en: '**General**'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一般**'
 - en: Set up the basis of knowledge-graphs theory and construction.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 建立知识图谱理论和构建的基础。
 - en: '**Specifics**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**细节**'
 - en: Explain the concepts of knowledge-graphs related to enterprises.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解释与企业相关的知识图谱概念。
 - en: Give some recommendation about building a successful enterprise knowledge-graph.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于建立成功的企业知识图谱提供一些建议。
 - en: Show examples of knowledge-graphs.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 展示知识图谱的例子。
 - en: Main theory
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主要理论
 - en: The **fabric** in the data fabric is built from a knowledge-graph, to create
     a knowledge-graph you need semantics and ontologies to find an useful way of linking
     your data that uniquely identifies and connects data with common business terms.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据结构中的**数据结构**是通过知识图谱构建的，要创建知识图谱，你需要语义和本体来寻找有效的方式将数据链接起来，以独特地识别和连接具有共同业务术语的数据。
 - en: Section 1\. What is a Knowledge-Graph?
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第1部分。什么是知识图谱？
 - en: '![Figure](../Images/f516d6eb035014dab710bcce7ef5aa5a.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/f516d6eb035014dab710bcce7ef5aa5a.png)'
 - en: '[https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214](https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214](https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214)'
 - en: The knowledge graph consists in integrated collections of data and information
     that also contains huge numbers of links between different data.
+  id: totrans-31
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 知识图谱由整合的数据和信息集合组成，并且还包含大量不同数据之间的链接。
 - en: The key here is that instead of looking for possible answers, under this new
     model **we’re seeking an answer.** We want the facts — where those facts come
     from is less important. The data here can represent concepts, objects, things,
     people and actually whatever you have in mind. The graph fills in the relationships,
     the connections between the concepts.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 关键在于，在这种新模型下，**我们正在寻找答案**。我们希望获得事实——这些事实来自哪里并不那么重要。这里的数据可以表示概念、对象、事物、人物，实际上可以是你脑海中想到的任何东西。图谱填补了概念之间的关系和连接。
 - en: 'In this context we can ask this question to our data lake:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们可以向数据湖提问：
 - en: What exists here?
+  id: totrans-34
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这里有什么？
 - en: We are in a different here. A one where it’s possible to set up a framework
     to study data and its relation to other data. In a knowledge-graph information
     represented in a particular formal [ontology](https://towardsdatascience.com/ontology-and-data-science-45e916288cc5) can
     be more easily accessible to automated information processing, and how best to
     do this is an active area of research in computer science like data science.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里的情况不同。一个可以建立框架来研究数据及其与其他数据关系的地方。在知识图谱中，以特定形式的[本体](https://towardsdatascience.com/ontology-and-data-science-45e916288cc5)表示的信息可以更容易被自动信息处理访问，如何最好地实现这一点是计算机科学如数据科学中的一个活跃研究领域。
 - en: All data modeling statements (along with everything else) in ontological languages
     and the world of knowledge-graphs for data are incremental, by their very nature.
     Enhancing or modifying a data model after the fact can be easily accomplished
     by modifying the concept.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有数据建模声明（以及其他所有内容）在本体语言和知识图谱的世界中本质上都是渐进的。事后增强或修改数据模型可以通过修改概念来轻松完成。
 - en: With a knowledge-graph what we are building is a human-readable representation
     of data that uniquely identifies and connects data with common business terms.
     This “layer” helps end users access data autonomously, securely and confidently.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过知识图谱，我们正在构建一个人类可读的数据表示，这个表示唯一标识并连接了带有共同业务术语的数据。这个“层”帮助最终用户自主、安全、可靠地访问数据。
 - en: Remember this image?
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 记得这个图像吗？
 - en: '![](../Images/63cc73deaadd6274524d992f1650360d.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/63cc73deaadd6274524d992f1650360d.png)'
 - en: I proposed before that insights in the data fabric can be an insight can be
     thought as a **dent** in it. And the automatic process of discovering what that
     insight is, it’s machine learning.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我之前提出过，数据结构中的洞察力可以被看作是其中的一个**缺口**。发现这种洞察力的自动化过程就是机器学习。
 - en: But what is this **fabric**? Is the object formed by the knowledge-graph. Like
     in Einstein’s theory of relativity, where the fabric is made by the continuum
     ([or discrete?](https://www.amazon.com/Road-Reality-Complete-Guide-Universe/dp/0679776311))
     of spacetime, here the fabric is built when you create a knowledge-graph.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这个**结构**是什么？它是由知识图谱形成的对象。就像在爱因斯坦的相对论中，结构是由时空的连续体（[或离散体？](https://www.amazon.com/Road-Reality-Complete-Guide-Universe/dp/0679776311)）构成的，这里，结构是在你创建知识图谱时建立的。
 - en: For building the knowledge-graph you need linked data. The goal of linked data
     is to publish structured data in such a way that it can be easily consumed and
     combined with other linked data, and ontologies as the way we can connect entities
     and understand their relationships.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建知识图谱需要链接数据。链接数据的目标是以一种可以轻松消费并与其他链接数据结合的方式发布结构化数据，本体则是我们连接实体并理解它们关系的方式。
 - en: Section 2\. Creating a Successful Enterprise Knowledge Graph
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第2节：创建成功的企业知识图谱
 - en: '![Figure](../Images/2a11b3a96705c8935a7715c2ff1ee097.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/2a11b3a96705c8935a7715c2ff1ee097.png)'
 - en: '[https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm](https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm](https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm)'
 - en: 'A while ago [Sebastien Dery](https://medium.com/@sderymail) wrote an interesting
     article about the challenges of knowledge-graphs. Here you can take a look:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 不久前，[**Sébastien Dery**](https://medium.com/@sderymail) 撰写了一篇关于知识图谱挑战的有趣文章。你可以查看一下：
 - en: '[**Challenges of Knowledge Graphs**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**知识图谱的挑战**'
 - en: '*From Strings to Things — An Introduction* medium.com](https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214)'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*从字符串到事物——介绍* medium.com](https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214)'
 - en: And from the great blog at [cambridgesemantis.com](https://www.cambridgesemantics.com/)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自伟大的博客[cambridgesemantics.com](https://www.cambridgesemantics.com/)
 - en: '[**Learn RDF**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**学习 RDF**'
 - en: '*Introduction This set of lessons is an introduction to RDF, the core data
     model of the Semantic Web and the foundation…* www.cambridgesemantics.com](https://www.cambridgesemantics.com/blog/semantic-university/learn-rdf/)'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*介绍 这组课程是对 RDF 的介绍，RDF 是语义网的核心数据模型和基础……* www.cambridgesemantics.com](https://www.cambridgesemantics.com/blog/semantic-university/learn-rdf/)'
 - en: and more resources, one of the concepts that I haven’t even mention in any article,
     but is very important, is the concept of **triples**: **subject, object, and predicate **(or *entity-attribute-value*).
     Commonly when you study triplets they actually mean the Resource Description Framework
     (RDF).
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有更多的资源，其中一个我在任何文章中都没有提到但非常重要的概念是**三元组**：**主题、对象和谓词**（或*实体-属性-值*）。通常，当你学习三元组时，它们实际上指的是资源描述框架（RDF）。
 - en: RDF is one of the three foundational Semantic Web technologies, the other two
     being SPARQL and OWL. RDF is the data model of the Semantic Web.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: RDF 是三种基础语义网技术之一，另外两种是 SPARQL 和 OWL。RDF 是语义网的数据模型。
 - en: '**NOTE: Oh btw, almost all this concepts came with the new definition of semantics
     for the world wide web, but we will use it for knowledge-graphs in general.**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：哦，顺便提一下，几乎所有这些概念都是随着对万维网语义的新定义而来的，但我们将其用于一般的知识图谱。**'
 - en: I’m not going to give a full description of the framework here, but I’ll give
     you an example on how they work. Remember that I’m doing this because is the way
     we start building ontologies, linking data and the knowledge-graph.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不打算在这里提供框架的完整描述，但我会给你一个它们如何工作的示例。请记住，我这样做是因为这是我们开始构建本体、链接数据和知识图谱的方式。
 - en: Let’s take a look at an example to see what this triples are. This is closely
     related to the example from Sebastien.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看一个示例，看看这些三元组是什么。这与 Sebastien 的示例密切相关。
 - en: We will start with the string “geoffrey hinton”.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从字符串“geoffrey hinton”开始。
 - en: '![](../Images/d567a103a11f2381d44dd3c009bbaea4.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d567a103a11f2381d44dd3c009bbaea4.png)'
 - en: Here we have a simple string that represents first edge, the thing I want to
     know more about
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里我们有一个简单的字符串，它表示第一个边界，即我想了解更多的内容。
 - en: Now to start building a knowledge-graaph first the system recognizes the that
     string actually meant the person Geoffrey Hinton. And then it will recognize the
     related entities to that person.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在开始构建知识图谱，系统首先会识别到该字符串实际上指的是**Geoffrey Hinton**。然后，它会识别与此人相关的实体。
 - en: '![](../Images/01aba6e26e24ce07cfb242646406fd6a.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/01aba6e26e24ce07cfb242646406fd6a.png)'
 - en: Then we have some entities that are related to Geoffrey but we don’t know what
     they are yet.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们有一些与 Geoffrey 相关的实体，但我们还不知道它们是什么。
 - en: 'Btw, this is Geoffrey Hinton if you don’t know him:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 顺便提一下，如果你不认识这是**Geoffrey Hinton**：
 - en: '![Figure](../Images/b33108e0370c8acbf02dd59c080edfc7.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b33108e0370c8acbf02dd59c080edfc7.png)'
 - en: '[https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html](https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html)'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html](https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html)'
 - en: 'And then the system will start giving names to the relationships:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后系统会开始给关系命名：
 - en: '![](../Images/6ea856b2d35fdee6ecdd6a9f044b83ef.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6ea856b2d35fdee6ecdd6a9f044b83ef.png)'
 - en: Now we have named relationships where we know what type of connection we have
     for our main entity.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了命名的关系，我们知道我们的主要实体的连接类型。
 - en: This system can go for a while finding connections of connections and thus creating
     a huge graph representing the different relationships for our “search string”.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 该系统可以继续寻找连接的连接，从而创建一个巨大的图谱，代表我们“搜索字符串”的不同关系。
 - en: 'To do this the knowledge-graph uses the triples. Like this:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，知识图谱使用三元组。像这样：
 - en: '![](../Images/e412593903a7bf86f11406b3b25fbb8b.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e412593903a7bf86f11406b3b25fbb8b.png)'
 - en: To have a triple we need a subject and object, and a predicate linking the two.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获得一个三元组，我们需要一个主题和对象，以及一个连接这两者的谓词。
 - en: So as you can see we have the **subject **<Geoffrey Hinton> related to the **object **<Researcher>
     by the **predicate **<is a>. This may sound easy for us humans, but it needs a
     very comprehensive framework to do this with machines.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所看到的，我们有**主体**<Geoffrey Hinton> 与 **对象**<Researcher> 通过 **谓词**<is a> 相关。这对我们人类来说可能听起来很简单，但要用机器完成这项工作需要一个非常全面的框架。
 - en: This is the way the knowledge-graph gets formed and how we link data using ontologies
     and semantics.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是知识图谱形成的方式，以及我们如何使用本体论和语义来链接数据。
 - en: 'So, what do we need to create a successful knowledge-graph? Partha Sarathi
     from Cambridge Semantics wrote a great blog about that. You can read it here:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，我们需要什么来创建一个成功的知识图谱？来自 Cambridge Semantics 的 Partha Sarathi 写了一篇关于此的精彩博客。你可以在这里阅读：
 - en: '[**Creating a Successful Enterprise Knowledge Graph**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**创建成功的企业知识图谱**](https://info.cambridgesemantics.com/build-your-enterprise-knowledge-graph)'
 - en: '*Ever since Google mainstreamed knowledge graphs in 2012 through a popular
     blog on enhanced web search, enterprises have…* blog.cambridgesemantics.com](https://blog.cambridgesemantics.com/creating-a-successful-enterprise-knowledge-graph?utm_campaign=data%20fabric%20drip%20campaign%202019&utm_source=hs_automation&utm_medium=email&utm_content=69101454&_hsenc=p2ANqtz-9BB7227QOhvpzRuILO6HfQFdI4PR1o-4SfjbxqhPYv3rlfuL27w3y9AKEfZ3cs3cbEFc4hmDnnCeu6heguyt8AwCwtcw&_hsmi=69101454)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '*自从 Google 在 2012 年通过一篇关于增强网页搜索的流行博客主流化知识图谱以来，企业们……* [blog.cambridgesemantics.com](https://blog.cambridgesemantics.com/creating-a-successful-enterprise-knowledge-graph?utm_campaign=data%20fabric%20drip%20campaign%202019&utm_source=hs_automation&utm_medium=email&utm_content=69101454&_hsenc=p2ANqtz-9BB7227QOhvpzRuILO6HfQFdI4PR1o-4SfjbxqhPYv3rlfuL27w3y9AKEfZ3cs3cbEFc4hmDnnCeu6heguyt8AwCwtcw&_hsmi=69101454)'
 - en: 'And to sum up, he says we need:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，他表示我们需要：
 - en: '**People that envision it: **You need people with the intersection of some
     form of business-critical subject matter expertise and technology.'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构思它的人：** 你需要具备一些形式的业务关键领域专业知识和技术交集的人才。'
 - en: '**Data diversity and probably a high volume of it**: The value and scale of
     adoption of an Enterprise Knowledge Graph are directly proportional to the diversity
     of data encompassed by it.'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据多样性及其可能的高容量**：企业知识图谱的价值和采用规模与其所涵盖的数据多样性成正比。'
 - en: '**A good product to built it*: ***The knowledge graph needs to be, among others,
     well-governed, secure, easily connectable to upstream and downstream systems,
     analyzable at scale, and, more often than not, cloud-friendly. The product used
@@ -327,144 +492,217 @@
     automation, support connectors for a wide array of input systems, offer standards-based
     data output to downstream systems, render any volume of its data analyzable rapidly,
     and make governance user-friendly.'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构建它的好产品：** ***知识图谱需要具备其他要求，包括良好的治理、安全性、与上游和下游系统的易连接性、可规模化分析性，并且通常需要适应云环境。因此，用于创建现代企业知识图谱的产品需要优化自动化，支持多种输入系统的连接器，提供基于标准的数据输出到下游系统，迅速分析任何数据量，并使治理用户友好。***'
 - en: 'You can read more here:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这里阅读更多内容：
 - en: '[**Build Your Enterprise Knowledge Graph**'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**构建您的企业知识图谱**](https://info.cambridgesemantics.com/build-your-enterprise-knowledge-graph)'
 - en: '*Enterprise Knowledge Graphs are helping companies connect their complex data
     sources. With Anzo® you can design, build…* info.cambridgesemantics.com](https://info.cambridgesemantics.com/build-your-enterprise-knowledge-graph)'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '*企业知识图谱帮助公司连接复杂的数据源。通过 Anzo®，你可以设计、构建……* [info.cambridgesemantics.com](https://info.cambridgesemantics.com/build-your-enterprise-knowledge-graph)'
 - en: Section 3\. Knowledge-Graphs examples
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第 3 节 知识图谱示例
 - en: '**Google:**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Google：**'
 - en: '![](../Images/b769d2371fa4c9e47ff88c9b33262f8e.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b769d2371fa4c9e47ff88c9b33262f8e.png)'
 - en: Google is a basically a huge knowledge (with more additions) graph and they
     created maybe the biggest data fabric there is upon that. Google has billions
     of facts that includes information about and relationships between millions of
     objects. And allow us to search through their system to discover insights inside
     it.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: Google 基本上是一个庞大的知识（不断扩展）图谱，他们基于此创建了也许是最大的数据结构。Google 拥有数十亿个事实，包括有关数百万个对象的信息及其之间的关系。它允许我们在其系统中进行搜索，以发现其中的见解。
 - en: 'Here you can learn more:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里你可以了解更多：
 - en: '**LinkedIn:**'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**LinkedIn：**'
 - en: '![](../Images/d0f7a497a6f0c47a1a6fd52beff7757c.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d0f7a497a6f0c47a1a6fd52beff7757c.png)'
 - en: My favorite social network LinkedIn has a huge knowledge graph base built upon
     “entities” on LinkedIn, such as members, jobs, titles, skills, companies, geographical
     locations, schools, etc. These entities and the relationships among them form
     the ontology of the professional world.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最喜欢的社交网络 LinkedIn 拥有一个庞大的知识图谱基础，建立在 LinkedIn 上的“实体”之上，如成员、职位、头衔、技能、公司、地理位置、学校等。这些实体及其之间的关系构成了职业世界的本体论。
 - en: 'Insights help leaders and sales make business decisions, and increase member
     engagement with LinkedIn:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 洞察帮助领导者和销售人员做出业务决策，并提升LinkedIn的会员参与度：
 - en: '![Figure](../Images/70723f2f8624f325fc671226aeffdd66.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/70723f2f8624f325fc671226aeffdd66.png)'
 - en: '[https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)'
 - en: Remember that LinkedIn (and almost every) knowledge-graph needs to scale as
     new members register, new jobs are posted, new companies, skills, and titles appear
     in member profiles and job descriptions, etc.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，LinkedIn（以及几乎所有）知识图谱需要随着新成员注册、新职位发布、新公司、技能和职位在成员资料和职位描述中出现等情况进行扩展。
 - en: 'You can read more here:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这里阅读更多内容：
 - en: '[**Building The LinkedIn Knowledge Graph**'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**构建 LinkedIn 知识图谱**](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)'
 - en: '*Authors: Qi He, Bee-Chung Chen, Deepak Agarwal* engineering.linkedin.com](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '*作者：Qi He, Bee-Chung Chen, Deepak Agarwal* engineering.linkedin.com](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)'
 - en: '****Knowledge-graphs for financial institutions:****'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '****金融机构的知识图谱：****'
 - en: '![Figure](../Images/6cc9084d0ab9a4aba87aad15195ed526.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/6cc9084d0ab9a4aba87aad15195ed526.png)'
 - en: Conceptual model to harmonize data from diverse sources and to create governed
     data sets for business use case consumption.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 概念模型用于协调来自不同来源的数据，并创建受管控的数据集以供业务使用。
 - en: In [this article](https://blog.cambridgesemantics.com/why-knowledge-graph-for-financial-services-real-world-use-cases) by
     Marty Loughlin, he showed an example of what the platform [Anzo](https://www.cambridgesemantics.com/product/) can
     do for a bank, and there you can see that this technology is not only related
     to search engines and works with disparate data.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [这篇文章](https://blog.cambridgesemantics.com/why-knowledge-graph-for-financial-services-real-world-use-cases) 中，Marty
+    Loughlin 展示了平台 [Anzo](https://www.cambridgesemantics.com/product/) 如何帮助银行，你可以看到这项技术不仅与搜索引擎相关，而且能够处理不同的数据。
 - en: 'There he shows how a knowledge-graph can help this kind of institution with:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 在那里，他展示了知识图谱如何帮助这种机构：
 - en: Alternative Data for Analytics and Machine Learning
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 替代数据用于分析和机器学习
 - en: Interest Rate Swap Risk Analytics
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 利率互换风险分析
 - en: Trade Surveillance
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易监控
 - en: Fraud Analytics
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 欺诈分析
 - en: Feature Engineering & Selection
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征工程与选择
 - en: Data Migration
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据迁移
 - en: and more. Go take a look.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有更多内容。去看看吧。
 - en: Conclusion
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![](../Images/445f6767c2a9a344124e4802b7c06eae.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/445f6767c2a9a344124e4802b7c06eae.png)'
 - en: To create a knowledge-graph you need semantics and ontologies to find an useful
     way of linking your data that uniquely identifies and connects data with common
     business terms and thus building the underlaying structure of the data fabric.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 要创建知识图谱，你需要语义学和本体来找到一种有效的方式将数据链接起来，这样可以唯一标识并连接具有共同业务术语的数据，从而建立数据结构的基础。
 - en: 'When we build a knowledge-graph we need to form triples to link data using
     ontologies and semantics. Also the manufacturing of the knowledge-graph depends
     on basically three things: People that envision it, data diversity and a good
     product to built it.'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们构建知识图谱时，需要形成三元组以使用本体和语义连接数据。同时，知识图谱的制造基本上依赖于三点：构思它的人、数据的多样性和一个良好的构建产品。
 - en: There are many examples of knowledge-graphs around us that we don’t even know.
     Most successful companies in the world are implementing and migrating their systems
     to build a data fabric and of course all the things inside of it.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们周围有许多我们甚至不知道的知识图谱。世界上最成功的公司正在实施和迁移他们的系统，以构建数据结构，并且当然包括其中的所有内容。
 - en: '**Bio: [Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)** is a physicist
     and computer engineer working on Data Science and Computational Cosmology. He
     has a passion for science, philosophy, programming, and music. He is the creator
@@ -473,52 +711,79 @@
     of Apache Spark collaboration, helping in MLlib, Core and the Documentation. He
     loves applying his knowledge and expertise in science, data analysis, visualization,
     and automatic learning to help the world become a better place.'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)** 是一名物理学家和计算机工程师，专注于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是西班牙语数据科学出版物Ciencia
+    y Datos的创作者。他喜欢新挑战，和优秀团队合作，以及解决有趣的问题。他是Apache Spark合作项目的一部分，帮助开发MLlib、Core和文档。他热衷于运用自己的知识和专长于科学、数据分析、可视化和自动学习，助力世界变得更美好。'
 - en: '[Original](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-2-building-a-knowledge-graph-2fdd1370bb0a).
     Reposted with permission.'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-2-building-a-knowledge-graph-2fdd1370bb0a)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关链接：**'
 - en: '[My Best Tips for Agile Data Science Research](/2019/03/best-tips-agile-data-science-research.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我在敏捷数据科学研究中的最佳技巧](/2019/03/best-tips-agile-data-science-research.html)'
 - en: '[How to Monitor Machine Learning Models in Real-Time](/2019/01/monitor-machine-learning-real-time.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何实时监控机器学习模型](/2019/01/monitor-machine-learning-real-time.html)'
 - en: '[The year in AI/Machine Learning advances: Xavier Amatriain 2018 Roundup](/2019/01/xamat-ai-machine-learning-roundup.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2018年AI/机器学习进展：Xavier Amatriain总结](/2019/01/xamat-ai-machine-learning-roundup.html)'
 - en: More On This Topic
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[Calculus: The hidden building block of machine learning](https://www.kdnuggets.com/2022/02/mlm-hidden-building-block-machine-learning.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[微积分：机器学习的隐藏基石](https://www.kdnuggets.com/2022/02/mlm-hidden-building-block-machine-learning.html)'
 - en: '[Step-by-Step Tutorial to Building Your First Machine Learning Model](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一步步教程：构建你的第一个机器学习模型](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)'
 - en: '[A Structured Approach To Building a Machine Learning Model](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建机器学习模型的结构化方法](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)'
 - en: '[Machine Learning Is Not Like Your Brain Part One: Neurons Are Slow,…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习不像你的大脑 第一步：神经元的缓慢,…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)'
