@@ -1,114 +1,173 @@
 - en: Building an image search service from scratch
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从零开始构建图像搜索服务
 - en: 原文：[https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html/2](https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html/2](https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/01/building-image-search-service-from-scratch.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/01/building-image-search-service-from-scratch.html?page=2#comments)'
 - en: Text -> Text
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本 -> 文本
 - en: '*Not so different after all*'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*毕竟没那么不同*'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Embeddings for text**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**文本的嵌入**'
 - en: Taking a detour to the world of natural language processing (NLP), we can use
     a similar approach to** index and search for words**.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 转到自然语言处理（NLP）的领域，我们可以使用类似的方法**索引和搜索词汇**。
 - en: We loaded a set of pre-trained vectors from [GloVe](https://nlp.stanford.edu/projects/glove/),
     which were obtained by crawling through all of Wikipedia and learning the semantic
     relationships between words in that dataset.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们加载了一组来自[GloVe](https://nlp.stanford.edu/projects/glove/)的预训练向量，这些向量是通过爬取整个维基百科并学习数据集中词汇之间的语义关系获得的。
 - en: Just like before, we will create an index, this time containing all of the GloVe
     vectors. Then, we can **search our embeddings** for similar words.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像之前一样，我们将创建一个索引，这次包含所有的 GloVe 向量。然后，我们可以**搜索我们的嵌入**以查找相似的词汇。
 - en: 'Searching for `said`, for example, returns this list of [`word`, `distance`]:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，搜索`said`返回这个[`word`, `distance`]的列表：
 - en: '`[''said'', 0.0]`'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''said'', 0.0]`'
 - en: '`[''told'', 0.688713550567627]`'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''told'', 0.688713550567627]`'
 - en: '`[''spokesman'', 0.7859575152397156]`'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''spokesman'', 0.7859575152397156]`'
 - en: '`[''asked'', 0.872875452041626]`'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''asked'', 0.872875452041626]`'
 - en: '`[''noting'', 0.9151610732078552]`'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''noting'', 0.9151610732078552]`'
 - en: '`[''warned'', 0.915908694267273]`'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''warned'', 0.915908694267273]`'
 - en: '`[''referring'', 0.9276227951049805]`'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''referring'', 0.9276227951049805]`'
 - en: '`[''reporters'', 0.9325974583625793]`'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''reporters'', 0.9325974583625793]`'
 - en: '`[''stressed'', 0.9445104002952576]`'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''stressed'', 0.9445104002952576]`'
 - en: '`[''tuesday'', 0.9446316957473755]`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[''tuesday'', 0.9446316957473755]`'
 - en: This seems very reasonable, most words are quite similar in meaning to our original
     word, or represent an appropriate concept. The last result (`tuesday`) also shows
     that this model is far from perfect, but it will get us started. Now, let’s try
     to incorporate both words and images in our model.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这似乎很合理，大多数词汇与我们原始词汇的含义相似，或者代表了一个合适的概念。最后的结果（`tuesday`）也显示这个模型远非完美，但它能让我们开始。现在，让我们尝试将词汇和图像都融入我们的模型中。
 - en: '**A sizable issue**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一个相当大的问题**'
 - en: Using the distance between embeddings as a method for search is a pretty general
     method, but our representations for words and images seem **incompatible**. The
     embeddings for images are of size 4096, while those for words are of size 300 — how
@@ -116,212 +175,313 @@
     were the same size, they were trained in a completely different fashion, so it
     is incredibly unlikely that images and related words would happen to have the
     same embeddings randomly. We need to train a **joint model**.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用嵌入之间的距离作为搜索的方法是相当通用的，但我们对词汇和图像的表示似乎**不兼容**。图像的嵌入大小为 4096，而词汇的嵌入大小为 300——我们如何用一种来搜索另一种呢？此外，即使两个嵌入的大小相同，它们的训练方式也完全不同，因此图像和相关词汇随机具有相同的嵌入的可能性极低。我们需要训练一个**联合模型**。
 - en: Image <-> Text
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 图像 <-> 文本
 - en: '*Worlds collide*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*世界碰撞*'
 - en: Let’s now create a **hybrid** model that can go from words to images and vice
     versa.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们创建一个**混合**模型，可以在词汇和图像之间相互转换。
 - en: For the first time in this tutorial, we will actually be training our own model,
     drawing inspiration from a great paper called [DeViSE](https://papers.nips.cc/paper/5204-devise-a-deep-visual-semantic-embedding-model).
     We will not be re-implementing it exactly, though we will heavily lean on its
     main ideas. (For another slightly different take on the paper, check out fast.ai’s
     implementation in their [lesson 11](http://course.fast.ai/lessons/lesson11.html).)
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将首次实际训练自己的模型，灵感来自一篇名为[DeViSE](https://papers.nips.cc/paper/5204-devise-a-deep-visual-semantic-embedding-model)的优秀论文。我们不会完全重新实现它，但会在其主要思想上大量借鉴。（有关该论文的另一种略有不同的看法，请查看fast.ai在其[lesson
+    11](http://course.fast.ai/lessons/lesson11.html)中的实现。）
 - en: The idea is to combine both representations by re-training our image model and **changing
     the type of its labels**.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个想法是通过重新训练我们的图像模型并**改变标签类型**来结合这两种表示。
 - en: 'Usually, image classifiers are trained to pick a category out of many (1000
     for Imagenet). What this translates to is that — using the example of Imagenet — the
     last layer is a vector of size 1000 representing the **probability of each class**.
     This means our model has no semantic understanding of which classes are similar
     to others: classifying an image of a `cat` as a `dog` results in as much of an
     error as classifying it as an `airplane`.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，图像分类器被训练从许多类别中选择一个（Imagenet有1000个）。这意味着——以Imagenet为例——最后一层是一个大小为1000的向量，表示**每个类别的概率**。这意味着我们的模型对哪些类别彼此相似没有语义理解：将`cat`的图像分类为`dog`和将其分类为`airplane`的错误程度相同。
 - en: For our hybrid model, we replace this last layer of our model with the **word
     vector of our category**. This allows our model to learn to map the semantics
     of images to the semantics of words, and means that similar classes will be closer
     to each other (as the word vector for `cat` is closer to `dog` than `airplane`).
     Instead of a target of size 1000, with all zeros except for a one, we will predict
     a **semantically rich word vector** of size 300.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的混合模型，我们用**类别的词向量**替换模型的最后一层。这使得我们的模型可以学习将图像的语义映射到词语的语义，并且意味着相似的类别会彼此更接近（因为`cat`的词向量比`airplane`更接近`dog`）。我们将预测一个**语义丰富的词向量**，其大小为300，而不是一个大小为1000的全零目标。
 - en: 'We do this by adding two dense layers:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过添加两个密集层来实现这一点：
 - en: One intermediate layer of size 2000
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个大小为2000的中间层
 - en: One output layer of size 300 (the size of GloVe’s word vectors).
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个大小为300的输出层（GloVe词向量的大小）。
 - en: 'Here is what the model looked like when it was trained on Imagenet:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是模型在Imagenet上训练时的样子：
 - en: '![](../Images/cf1d7ca19487c4ecfd529a923d805dca.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cf1d7ca19487c4ecfd529a923d805dca.png)'
 - en: 'Here is what it looks like now:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在它的样子是这样的：
 - en: '![](../Images/550d43127fbaec99e1423125966513ea.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/550d43127fbaec99e1423125966513ea.png)'
 - en: '**Training the model**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练模型**'
 - en: We then re-train our model on a training split of our dataset, to learn to **predict
     the word vector **associated with the label of the image. For an image with the
     category cat for example, we are trying to predict the 300-length vector associated
     with cat.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们在数据集的训练分割上重新训练模型，以学习**预测与图像标签相关的词向量**。例如，对于类别为猫的图像，我们试图预测与猫相关的300长度的向量。
 - en: This training takes a bit of time, but is still much faster than on Imagenet.
     For reference, it took about 6–7 hours on my laptop that has **no GPU**.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个训练需要一些时间，但仍然比在Imagenet上的速度快很多。作为参考，在我没有**GPU**的笔记本上大约花了6-7小时。
 - en: It is important to note how ambitious this approach is. The training data we
     are using here (80% of our dataset, so 800 images) is minuscule, compared to usual
     datasets (Imagenet has **a million** images, **3 orders of magnitude more**).
     If we were using a traditional technique of training with categories, we would
     not expect our model to perform very well on the test set, and would certainly
     not expect it to perform at all on completely new examples.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要注意的是，这种方法的雄心壮志。我们这里使用的训练数据（数据集的80%，即800张图像）相对于通常的数据集来说微不足道（Imagenet有**一百万**张图像，**多三个数量级**）。如果我们使用传统的类别训练方法，我们不期望模型在测试集上表现很好，更不用说在完全新的示例上表现了。
 - en: Once our model is trained, we have our GloVe word index from above, and we build
     a new fast index of our image features by running all images in our dataset through
     it, saving it to disk.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们的模型训练完成，我们将获得上述的GloVe词索引，并通过将数据集中所有图像通过它来构建一个新的快速图像特征索引，保存到磁盘。
 - en: '**Tagging**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**标记**'
 - en: We can now easily extract tags from any image by simply feeding our image to
     our trained network, saving the vector of size 300 that comes out of it, and finding
     the closest words in our index of English words from GloVe. Let’s try with this
     image — it’s in the `bottle` class, though it contains a variety of items.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以通过将图像输入到我们训练的网络中，轻松提取任何图像的标签，保存出来的大小为300的向量，并在GloVe的英文单词索引中找到最接近的词。让我们试试这张图像——它属于`bottle`类别，但包含各种物品。
 - en: '![](../Images/f6f739f1fad0973eb883c4aea63e303c.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f6f739f1fad0973eb883c4aea63e303c.png)'
 - en: 'Here are the generated tags:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是生成的标签：
 - en: '`[6676, ''bottle'', 0.3879561722278595]`'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[6676, ''bottle'', 0.3879561722278595]`'
 - en: '`[7494, ''bottles'', 0.7513495683670044]`'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[7494, ''bottles'', 0.7513495683670044]`'
 - en: '`[12780, ''cans'', 0.9817070364952087]`'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[12780, ''cans'', 0.9817070364952087]`'
 - en: '`[16883, ''vodka'', 0.9828150272369385]`'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[16883, ''vodka'', 0.9828150272369385]`'
 - en: '`[16720, ''jar'', 1.0084964036941528]`'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[16720, ''jar'', 1.0084964036941528]`'
 - en: '`[12714, ''soda'', 1.0182772874832153]`'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[12714, ''soda'', 1.0182772874832153]`'
 - en: '`[23279, ''jars'', 1.0454961061477661]`'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[23279, ''jars'', 1.0454961061477661]`'
 - en: '`[3754, ''plastic'', 1.0530102252960205]`'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[3754, ''plastic'', 1.0530102252960205]`'
 - en: '`[19045, ''whiskey'', 1.061428427696228]`'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[19045, ''whiskey'', 1.061428427696228]`'
 - en: '`[4769, ''bag'', 1.0815287828445435]`'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[4769, ''bag'', 1.0815287828445435]`'
 - en: That’s a pretty amazing result, as most of the tags are **very relevant**. This
     method still has room to grow, but it picks up on most of the items in the image
     fairly well. The model learns to extract **many relevant tags**, even from categories
     that it was not trained on!
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个相当惊人的结果，因为大多数标签**非常相关**。这种方法仍有成长空间，但它相当好地识别了图像中的大部分项目。模型学会了提取**许多相关标签**，即使是从它未经过训练的类别中！
 - en: '**Searching for images using text**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用文本搜索图像**'
 - en: Most importantly, we can use our joint embedding to search through our image
     database using **any word**. We simply need to get our pre-trained word embedding
     from GloVe, and find the images that have the most similar embeddings (which we
     get by running them through our model).
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 最重要的是，我们可以使用我们的联合嵌入通过**任何词**在我们的图像数据库中进行搜索。我们只需从GloVe获取我们的预训练词嵌入，然后找到与之最相似的图像（通过我们的模型运行它们来获得）。
 - en: '**Generalized image search with minimal data**.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用最少的数据进行图像搜索的泛化**。'
 - en: Let’s start first with a word that was actually in our training set by searching
     for `dog:`
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先从一个实际存在于我们训练集中的词开始，搜索`dog:`。
 - en: '![](../Images/ae17e0fcb1686cfae30e42b933d5d579.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ae17e0fcb1686cfae30e42b933d5d579.png)'
 - en: Results for search term “`dog"`
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 搜索词“`dog`”的结果
 - en: OK, pretty good results — but we could get this from any classifier that was
     trained just on the labels! Let’s try something harder by searching for the keyword
     `ocean`, which is not in our dataset.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，结果相当不错——但这可以从任何仅仅在标签上训练的分类器中得到！让我们尝试更困难的任务，通过搜索关键字`ocean`，这是我们数据集中没有的。
 - en: '![](../Images/40608dc265c7e9ee4ed46bd9450c703f.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/40608dc265c7e9ee4ed46bd9450c703f.png)'
 - en: Results for search term “`ocean"`
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 搜索词“`ocean`”的结果
 - en: That’s awesome — our model understands that `ocean` is similar to `water`, and
     returns many items from the `boat` class.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 这太棒了——我们的模型理解`ocean`类似于`water`，并返回了许多来自`boat`类别的项。
 - en: What about searching for `street`?
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么搜索`street`怎么样？
 - en: '![](../Images/48f0297f5b9471a38fc2ed2726c267df.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/48f0297f5b9471a38fc2ed2726c267df.png)'
 - en: Results for search term “`street"`
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 搜索词“`street`”的结果
 - en: Here, our images returned come from plenty of classes (`car`, `dog`, `bicycles`, `bus`, `person`),
     yet most of them contain or are near a street, despite us having never used that
     concept when training our model. Because we are **leveraging outside knowledge** through
     pre-trained word vectors to learn a mapping from images to vectors that is more **semantically
     rich** than a simple category, our model can generalize well to outside concepts.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们返回的图像来自许多类别（`car`、`dog`、`bicycles`、`bus`、`person`），尽管我们从未在训练模型时使用过这个概念，但大多数图像包含或接近街道。因为我们通过预训练的词向量**利用外部知识**来学习从图像到向量的映射，这种映射比简单的类别更具**语义丰富性**，所以我们的模型能够很好地泛化到外部概念。
 - en: '**Beyond words**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**超越词汇**'
 - en: The English language has come far, but not far enough to invent a word for everything.
     For example, at the time of publishing this article, there is no English word
     for “a cat lying on a sofa,” which is a perfectly valid query to type into a search
@@ -331,107 +491,164 @@
     to just search for our images by using the average word vector for `cat` and `sofa`,
     we could hope to get images that are very cat-like, very sofa-like, or have a
     cat on a sofa.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   英语虽然进步很大，但还不足以为每个事物发明一个词。例如，在发布这篇文章时，英语中没有“猫躺在沙发上”的词汇，而这是一个完全有效的搜索引擎查询。如果我们想同时搜索多个单词，我们可以使用一种非常简单的方法，利用词向量的算术性质。结果表明，两个词向量的相加通常效果很好。因此，如果我们只是使用`cat`和`sofa`的平均词向量来搜索图像，我们可以期望得到非常像猫的、非常像沙发的图像，或者是猫躺在沙发上的图像。'
 - en: '![](../Images/ddebc9fcad6f827cc7f9ff0e25a62c6d.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ddebc9fcad6f827cc7f9ff0e25a62c6d.png)'
 - en: Getting a combined embedding for multiple words
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   获取多个单词的联合嵌入'
 - en: Let’s try using this hybrid embedding and searching!
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   让我们试试使用这种混合嵌入进行搜索吧！'
 - en: '![](../Images/f35d3fc3b4a2a49984204cdbc0ac0e38.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f35d3fc3b4a2a49984204cdbc0ac0e38.png)'
 - en: Results for search term “`cat"+"sofa"`
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   搜索词“`cat"+"sofa"`的结果'
 - en: This is a fantastic result, as most those images contain some version of a furry
     animal and a sofa (I especially enjoy the leftmost image on the second row, which
     seems like a bag of furriness next to a couch)! Our model, which was only trained
     on single words, can handle combinations of two words. We have not built Google
     Image Search yet, but this is definitely impressive for a relatively simple architecture.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   这是一个令人惊叹的结果，因为大多数这些图像包含了某种版本的毛茸茸的动物和沙发（我特别喜欢第二行最左侧的图像，看起来像是一堆毛茸茸的东西靠在沙发旁边）！我们的模型虽然只在单词上进行过训练，但可以处理两个单词的组合。我们还没有建立
+    Google 图像搜索，但对于相对简单的架构来说，这确实令人印象深刻。'
 - en: This method can actually extend quite naturally to a variety of domains (see
     this [example](https://towardsdatascience.com/semantic-code-search-3cd6d244a39c) for
     a joint code-English embedding), so we’d love to hear about what you end up applying
     it to.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   这种方法实际上可以自然地扩展到各种领域（参见这个 [示例](https://towardsdatascience.com/semantic-code-search-3cd6d244a39c) 以了解联合代码-英语嵌入），所以我们非常想知道你将其应用于什么。'
 - en: Conclusion
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: I hope you found this post informative, and that it has demystified some of
     the world of content-based recommendation and semantic search. If you have any
     questions or comments, or want to share what you built using this tutorial, reach
     out to me on [Twitter](https://twitter.com/EmmanuelAmeisen)!
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我希望你觉得这篇文章有用，并且对基于内容的推荐系统和语义搜索有了更多了解。如果你有任何问题或评论，或者想分享你使用这个教程构建的东西，请通过 [Twitter](https://twitter.com/EmmanuelAmeisen)联系我！'
 - en: '***Want to learn applied Artificial Intelligence from top professionals in
     Silicon Valley or New York?***Learn more about the [Artificial Intelligence](http://insightdata.ai/?utm_source=representations&utm_medium=blog&utm_content=top)program.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '***想从硅谷或纽约的顶级专业人士那里学习应用人工智能吗？*** 了解更多关于 [人工智能](http://insightdata.ai/?utm_source=representations&utm_medium=blog&utm_content=top)
+    计划的信息。'
 - en: '***Are you a company working in AI and would like to get involved in the Insight
     AI Fellows Program?**** Feel free to *[*get in touch*](http://insightdatascience.com/partnerships?utm_source=representations&utm_medium=blog&utm_content=top)*.*'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '***你是一家从事人工智能的公司，想参与 Insight AI Fellows 计划吗？*** 随时 *[*联系我们*](http://insightdatascience.com/partnerships?utm_source=representations&utm_medium=blog&utm_content=top)*。 '
 - en: Thanks to [Stephanie Mari](https://medium.com/@stephaniemari?source=post_page), [Bastian
     Haase](https://medium.com/@bastianhaase?source=post_page), [Adrien Treuille](https://medium.com/@adrien_37234?source=post_page),
     and [Matthew Rubashkin](https://medium.com/@mrubash1?source=post_page).
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   感谢 [Stephanie Mari](https://medium.com/@stephaniemari?source=post_page)， [Bastian
+    Haase](https://medium.com/@bastianhaase?source=post_page)， [Adrien Treuille](https://medium.com/@adrien_37234?source=post_page)
+    和 [Matthew Rubashkin](https://medium.com/@mrubash1?source=post_page)。'
 - en: '**Bio: [Emmanuel Ameisen](https://www.linkedin.com/in/ameisen/) ([@EmmanuelAmeisen](https://twitter.com/EmmanuelAmeisen))**
     is Head of AI at Insight Data Science.'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **简介：[Emmanuel Ameisen](https://www.linkedin.com/in/ameisen/) ([@EmmanuelAmeisen](https://twitter.com/EmmanuelAmeisen))**
+    是 Insight Data Science 的 AI 负责人。'
 - en: '[Original](https://blog.insightdatascience.com/the-unreasonable-effectiveness-of-deep-learning-representations-4ce83fc663cf).
     Reposted with permission.'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   [原文](https://blog.insightdatascience.com/the-unreasonable-effectiveness-of-deep-learning-representations-4ce83fc663cf)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **相关：**'
 - en: '[How to solve 90% of NLP problems: a step-by-step guide](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解决 90% 自然语言处理问题的步骤指南](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)'
 - en: '[Implementing ResNet with MXNET Gluon and Comet.ml for Image Classification](/2018/12/implementing-resnet-mxnet-gluon-comet-ml-image-classification.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 MXNET Gluon 和 Comet.ml 实现 ResNet 进行图像分类](/2018/12/implementing-resnet-mxnet-gluon-comet-ml-image-classification.html)'
 - en: '[Solve any Image Classification Problem Quickly and Easily](/2018/12/solve-image-classification-problem-quickly-easily.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[快速轻松解决任何图像分类问题](/2018/12/solve-image-classification-problem-quickly-easily.html)'
 - en: More On This Topic
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关阅读
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中使用网格搜索和随机搜索进行超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Uplimit 的机器学习搜索课程提升您的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[311 Call Centre Performance: Rating Service Levels](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[311 呼叫中心性能：服务水平评级](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
 - en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始的机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
