@@ -1,183 +1,268 @@
 - en: Introduction to AutoEncoder and Variational AutoEncoder (VAE)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自编码器与变分自编码器（VAE）介绍
 - en: 原文：[https://www.kdnuggets.com/2021/10/introduction-autoencoder-variational-autoencoder-vae.html](https://www.kdnuggets.com/2021/10/introduction-autoencoder-variational-autoencoder-vae.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/10/introduction-autoencoder-variational-autoencoder-vae.html](https://www.kdnuggets.com/2021/10/introduction-autoencoder-variational-autoencoder-vae.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/7aefaceef06727cc22d841d3a1bd86a9.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7aefaceef06727cc22d841d3a1bd86a9.png)'
 - en: '*[Image Credits](https://www.quantilus.com/will-this-video-go-viral-explaining-and-predicting-the-popularity-of-youtube-videos/)*'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[图片来源](https://www.quantilus.com/will-this-video-go-viral-explaining-and-predicting-the-popularity-of-youtube-videos/)*'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行IT工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In recent years, deep learning-based generative models have gained more and
     more interest due to some astonishing advancements in the field of Artificial
     Intelligence (AI). Relying on a huge amount of data, well-designed networks architectures,
     and smart training techniques, deep generative models have shown an incredible
     ability to produce highly realistic pieces of content of various kinds, such as
     images, texts, and sounds.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 近年来，基于深度学习的生成模型因在人工智能（AI）领域取得了一些惊人的进展而受到越来越多的关注。依赖大量数据、精心设计的网络架构和智能训练技术，深度生成模型展示了生成各种高度逼真的内容的惊人能力，例如图像、文本和声音。
 - en: In this article, we will dive deep into these generative networks, specifically
     on Autoencoders, Variational Autoencoders (VAE), and their implementation using
     Keras.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将深入探讨这些生成网络，特别是自编码器、变分自编码器（VAE）及其使用Keras的实现。
 - en: What is an Autoencoder?
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是自编码器？
 - en: Autoencoders (AE) are neural networks that aim to copy their inputs to their
     outputs. They work by compressing the input into a latent-space representation
     and then reconstructing the output from this representation.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 自编码器（AE）是旨在将其输入复制到输出的神经网络。它们通过将输入压缩成潜在空间表示，然后从该表示重建输出。
 - en: 'An autoencoder consists of two primary components:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 自编码器由两个主要组件组成：
 - en: '**Encoder:** Learns to compress (reduce) the input data into an encoded representation.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**编码器：** 学习将输入数据压缩（减少）成编码表示。'
 - en: '**Decoder:** Learns to reconstruct the original data from the encoded representation
     to be as close to the original input as possible.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**解码器：** 学习从编码表示中重建原始数据，以尽可能接近原始输入。'
 - en: '**Bottleneck/Latent space:** The layer that contains the compressed representation
     of the input data.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**瓶颈/潜在空间：** 包含输入数据压缩表示的层。'
 - en: '**Reconstruction loss:** The method measures how well the decoder is performing,
     i.e., measures the difference between the encoded and decoded vectors. Lesser,
     the better.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**重建损失：** 该方法衡量解码器的表现，即衡量编码向量和解码向量之间的差异。越小越好。'
 - en: '![](../Images/19a47e51111ed60ac4c5fb07afbab979.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/19a47e51111ed60ac4c5fb07afbab979.png)'
 - en: '*[Autoencoder](https://www.compthree.com/blog/autoencoder/).*'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[自编码器](https://www.compthree.com/blog/autoencoder/)。*'
 - en: 'The model involves encoded function **g** parameterized by **ϕ** and a decoder
     function **f** parameterized by **θ**. The bottleneck layer is:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型包含由**ϕ**参数化的编码函数**g**和由**θ**参数化的解码函数**f**。瓶颈层为：
 - en: '![](../Images/04e75588502248873285911f29d12665.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/04e75588502248873285911f29d12665.png)'
 - en: 'the reconstructed input:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 重建的输入：
 - en: '![](../Images/733f3936c0a6c9282dfdc06b8d9a6b24.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/733f3936c0a6c9282dfdc06b8d9a6b24.png)'
 - en: 'For measuring the reconstruction loss, we can use the cross-entropy (when activation
     function is sigmoid) or basic **Mean Squared Error (MSE)**:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于衡量重建损失的方法包括交叉熵（当激活函数为sigmoid时）或基本的**均方误差（MSE）**：
 - en: '![](../Images/ea273e4c08350a07e82e4bd509dcb33a.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ea273e4c08350a07e82e4bd509dcb33a.png)'
 - en: Types of vanilla autoencoders
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 经典自编码器类型
 - en: '**Undercomplete Autoencoders:** An autoencoder whose latent space is less than
     the input dimension is called Undercomplete. Learning an undercomplete representation
     forces the autoencoder to capture the most salient features of the training data.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**不足编码器：** 潜在空间小于输入维度的自编码器称为不足编码器。学习不足的表示迫使自编码器捕捉训练数据中最显著的特征。'
 - en: '**Regularized Autoencoder:** They use a loss function that encourages the model
     to have other properties besides the ability to copy its input to its output.
     In practice, we usually find two types of regularized autoencoder: the sparse
     autoencoder and the denoising autoencoder.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**正则化自编码器：** 他们使用一种损失函数来鼓励模型具有除了将输入复制到输出的能力之外的其他特性。在实践中，我们通常发现两种类型的正则化自编码器：稀疏自编码器和去噪自编码器。'
 - en: '**Sparse Autoencoder:** Sparse autoencoders are usually used to learn features
     for another task, such as classification. An autoencoder that has been regularized
     to be sparse must respond to unique statistical features of the dataset it has
     been trained on, rather than simply acting as an identity function. In this way,
     training to perform the copying task with a sparsity penalty can yield a model
     that has learned useful features as a byproduct.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**稀疏自编码器：** 稀疏自编码器通常用于学习其他任务的特征，如分类。一个经过正则化使其稀疏的自编码器必须响应数据集的独特统计特征，而不仅仅是充当恒等函数。通过这种方式，训练一个具有稀疏性惩罚的复制任务可以产生一个作为副产品学习有用特征的模型。'
 - en: '**Denoising Autoencoder:** The goal is no longer to reconstruct the input data.
     Rather than adding a penalty to the loss function, we can obtain an autoencoder
     that learns something useful by changing the reconstruction error term of the
     loss function. This can be done by adding some noise to the input image and making
     the autoencoder learn to remove it. By this means, the encoder will extract the
     most important features and learn a robust representation of the data.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**去噪自编码器：** 目标不再是重建输入数据。我们可以通过改变损失函数的重建误差项来获得一个学习有用信息的自编码器，而不是对损失函数添加惩罚。这可以通过在输入图像中添加一些噪声并使自编码器学会去除它来实现。这样，编码器将提取最重要的特征并学习数据的鲁棒表示。'
 - en: '![](../Images/a39ae1b8cf855841209a443ef6033a12.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a39ae1b8cf855841209a443ef6033a12.png)'
 - en: '*Different types of Autoencoders.*'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '*不同类型的自编码器。*'
 - en: Applications of Autoencoders
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自编码器的应用
 - en: 'There are two main applications for traditional autoencoders:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统自编码器有两个主要应用：
 - en: '**Noise removal:** As we’ve seen above, Noise removal is the process of removing
     noise from an image. Noise reduction techniques exist for audio and images.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**噪声去除：** 如上所述，噪声去除是从图像中去除噪声的过程。音频和图像都有噪声减少技术。'
 - en: '![](../Images/e106dce48d4c930dbc737e289fb2bfa2.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e106dce48d4c930dbc737e289fb2bfa2.png)'
 - en: '*[Denoising image](https://www.machinecurve.com/index.php/2019/12/20/building-an-image-denoiser-with-a-keras-autoencoder-neural-network/).*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[去噪图像](https://www.machinecurve.com/index.php/2019/12/20/building-an-image-denoiser-with-a-keras-autoencoder-neural-network/)。*'
 - en: '**Dimensionality reduction:** As the encoder segment learns representations
     of your input data with much lower dimensionality, the encoder segments of autoencoders
     are useful when you wish to perform dimensionality reduction. This can especially
     be handy when, e.g., PCA doesn’t work, but you suspect that nonlinear dimensionality
     reduction does (i.e., using neural networks with nonlinear activation functions).'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**降维：** 由于编码器部分以更低的维度学习输入数据的表示，当你希望执行降维时，自编码器的编码器部分是有用的。这在例如 PCA 无法工作但你怀疑非线性降维有效（即使用具有非线性激活函数的神经网络）时尤其有用。'
 - en: '**Anomaly detection:** By learning to replicate the most salient features in
     the training data under some of the constraints, the model is encouraged to learn
     to precisely reproduce the most frequently observed characteristics. When facing
@@ -187,52 +272,76 @@
     so with unfamiliar anomalous data. Reconstruction error (the error between the
     original data and its low dimensional reconstruction) is used as an anomaly score
     to detect anomalies.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**异常检测：** 通过学习在一些约束条件下复制训练数据中最显著的特征，模型被鼓励学习精确重现最常见的特征。在面对异常时，模型的重建性能应该会恶化。在大多数情况下，只有正常实例的数据用于训练自编码器。训练后，自编码器将准确重建“正常”数据，而对不熟悉的异常数据则无法做到。重建误差（原始数据与其低维重建之间的误差）被用作检测异常的异常分数。'
 - en: '**Machine translation:** Autoencoders have been applied to machine translation,
     which is usually referred to as Neural machine translation (NMT). Unlike traditional
     autoencoders, the output does not match the input — it is in another language.
     In NMT, texts are treated as sequences to be encoded into the learning procedure,
     while on the decoder side, sequences in the target language(s) are generated.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**机器翻译：** 自编码器已被应用于机器翻译，通常被称为神经机器翻译（NMT）。与传统自编码器不同，输出与输入不匹配——它是另一种语言。在 NMT
+    中，文本被视为序列进行编码，而在解码器端，生成目标语言的序列。'
 - en: '![](../Images/caca27c06ef04a58c73b787fd6a3ff4d.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/caca27c06ef04a58c73b787fd6a3ff4d.png)'
 - en: '*[Dimensionality reduction in action](https://www.kaggle.com/c/osic-pulmonary-fibrosis-progression/discussion/167025).*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[维度减少的实际应用](https://www.kaggle.com/c/osic-pulmonary-fibrosis-progression/discussion/167025)。*'
 - en: Keras Implementation of Autoencoders
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Keras 实现的自编码器
 - en: Let us use the famous MNIST dataset and apply autoencoders to recreate it. The
     MNIST dataset is comprised of 70000, 28 pixels by 28 pixels images of handwritten
     digits, and 70000 vectors containing information on which digit each one is.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用著名的 MNIST 数据集并应用自编码器来重新创建它。MNIST 数据集包含 70000 张 28 像素乘 28 像素的手写数字图像，以及 70000
+    个向量，其中包含每个数字的具体信息。
 - en: '[PRE0]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here’s what we get. The top row is the original digits, and the bottom row is
     the reconstructed digits. We are losing quite a bit of detail with this basic
     approach.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们得到的结果。顶行是原始数字，底行是重建的数字。这个基本方法损失了相当多的细节。
 - en: '![](../Images/e8097214573494ec91c0e68dfea4f3b5.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8097214573494ec91c0e68dfea4f3b5.png)'
 - en: Limitations of Autoencoders for Content Generation
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自编码器在内容生成中的局限性
 - en: After we train an autoencoder, we might think about whether we can use the model
     to create new content. Particularly, we may ask can we make a point randomly from
     that latent space and decode it to get new content?
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练自编码器之后，我们可能会考虑是否可以使用该模型生成新的内容。特别是，我们可能会问，是否可以从那个潜在空间中随机生成一个点，并解码以获取新内容？
 - en: The answer is “yes,” but the quality and relevance of generated data depend
     on the regularity of the latent space. The latent space regularity depends on
     the distribution of the initial data, the dimension of the latent space, and the
@@ -240,21 +349,29 @@
     encoder will organize the latent space in a smart way compatible with the generative
     process I mentioned. No regularization means overfitting, which leads to meaningless
     content once decoded for some point.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 答案是“是的”，但生成数据的质量和相关性取决于潜在空间的规则性。潜在空间的规则性取决于初始数据的分布、潜在空间的维度和编码器的架构。很难确保编码器会以与我提到的生成过程兼容的聪明方式组织潜在空间。没有正则化意味着过拟合，这会导致解码后的某些点生成无意义的内容。
 - en: How can we make sure the latent space is regularized enough? We can explicitly
     introduce regularization during the training process. Therefore, we introduce
     **Variational Autoencoders**.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们如何确保潜在空间得到足够的正则化？我们可以在训练过程中显式地引入正则化。因此，我们引入**变分自编码器**。
 - en: What is Variational Autoencoder (VAE)?
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是变分自编码器（VAE）？
 - en: Variational autoencoder (VAE) is a slightly more modern and interesting take
     on autoencoding.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 变分自编码器（VAE）是对自编码的稍微现代且有趣的变体。
 - en: A VAE assumes that the source data has some sort of underlying probability distribution
     (such as Gaussian) and then attempts to find the parameters of the distribution.
     Implementing a variational autoencoder is much more challenging than implementing
@@ -263,194 +380,287 @@
     data is good for is hard to say. A variational autoencoder is a generative system
     and serves a similar purpose as a generative adversarial network (although GANs
     work quite differently).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: VAE 假设源数据有某种潜在的概率分布（如高斯分布），然后尝试找到该分布的参数。实现变分自编码器比实现自编码器要复杂得多。变分自编码器的主要用途之一是生成与原始源数据相关的新数据。现在，确切来说这些额外数据的用途很难说。变分自编码器是一个生成系统，具有与生成对抗网络类似的目的（尽管
+    GAN 的工作方式完全不同）。
 - en: '![](../Images/4762a152b455485cf09df1959ce24967.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4762a152b455485cf09df1959ce24967.png)'
 - en: '*[Variational Autoencoders(VAE)](https://stats.stackexchange.com/questions/423758/variational-autoencoder-understanding-this-diagram).*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[变分自编码器 (VAE)](https://stats.stackexchange.com/questions/423758/variational-autoencoder-understanding-this-diagram)*。'
 - en: Mathematics behind Variational Autoencoder (VAE)
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 变分自编码器 (VAE) 背后的数学
 - en: VAE uses [KL-divergence](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained)
     as its loss function. The goal of this is to minimize the difference between a
     supposed distribution and the original distribution of a dataset.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: VAE 使用 [KL 散度](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained)
+    作为其损失函数。其目标是最小化假定分布与数据集原始分布之间的差异。
 - en: 'Suppose we have a distribution **z**, and we want to generate the observation
     **x** from it. In other words, we want to calculate:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们有一个分布 **z**，我们希望从中生成观察 **x**。换句话说，我们想计算：
 - en: '![](../Images/768e6f4280c52a6106109cd107db1148.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/768e6f4280c52a6106109cd107db1148.png)'
 - en: 'We can do it by following way:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过以下方式来实现：
 - en: '![](../Images/59621938e5d42fab05415f49df7796dc.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/59621938e5d42fab05415f49df7796dc.png)'
 - en: 'But, the calculation of **p(x)** can be done by using integration as:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，**p(x)** 的计算可以通过以下积分进行：
 - en: '![](../Images/67714276339c2823eed593047300846b.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/67714276339c2823eed593047300846b.png)'
 - en: 'This usually makes it an intractable distribution(take equal to or more than
     exponential-time). Hence, we need to approximate **p(z|x)** to **q(z|x)** to make
     it a tractable distribution. To better approximate **p(z|x)** to **q(z|x)**, we
     will minimize the **KL-divergence** loss, which calculates how similar two distributions
     are:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这通常使得它成为一个不可处理的分布（需要等于或更高的指数时间）。因此，我们需要将 **p(z|x)** 近似为 **q(z|x)** 以使其成为一个可处理的分布。为了更好地将
+    **p(z|x)** 近似为 **q(z|x)**，我们将最小化 **KL 散度** 损失，该损失计算两个分布的相似性：
 - en: '![](../Images/32c7d583cf7c43e583e90447b0c535b1.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/32c7d583cf7c43e583e90447b0c535b1.png)'
 - en: 'By simplifying, the above minimization problem is equivalent to the following
     maximization problem :'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过简化，上述最小化问题等同于以下最大化问题：
 - en: '![](../Images/2990a1ce07456baf7419c4e8a72d058b.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2990a1ce07456baf7419c4e8a72d058b.png)'
 - en: The first term represents the reconstruction likelihood, and the other term
     ensures that our learned distribution **q** is similar to the true prior distribution
     **p**.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个项表示重构可能性，另一个项确保我们学习到的分布 **q** 类似于真实的先验分布 **p**。
 - en: 'Thus our total loss consists of two terms, one is reconstruction error, and
     the other is KL-divergence loss:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们的总损失包括两个部分，一个是重构误差，另一个是 KL 散度损失：
 - en: '![](../Images/4bc36f91871415ec8dc70e9d19224d83.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4bc36f91871415ec8dc70e9d19224d83.png)'
 - en: Keras Implementation of Variational Autoencoder (VAEs)
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Keras 实现变分自编码器（VAEs）
 - en: For implementing VAE, First, an encoder network turns the input samples **x**
     into two parameters in a latent space, which we will note **z_mean** and **z_log_sigma**.
     Then, we randomly sample similar points z from the latent normal distribution
     that is assumed to generate the data, via **z = z_mean + exp(z_log_sigma) * epsilon**,
     where epsilon is a random normal tensor.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实现 VAE 时，首先，编码器网络将输入样本 **x** 转换为潜在空间中的两个参数，我们将其记作 **z_mean** 和 **z_log_sigma**。然后，通过
+    **z = z_mean + exp(z_log_sigma) * epsilon** 随机从假定生成数据的潜在正态分布中采样类似点 z，其中 epsilon
+    是一个随机正态张量。
 - en: Finally, a decoder network maps these latent space points back to the original
     input data.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，解码器网络将这些潜在空间点映射回原始输入数据。
 - en: 'The parameters of the model are trained via two loss functions: a **reconstruction
     loss** forcing the decoded samples to match the initial inputs (just like in our
     previous autoencoders), and the **KL divergence** between the learned latent distribution
     and the prior distribution, acting as a regularization term. You could actually
     get rid of this latter term entirely, although it does help in learning well-formed
     latent spaces and reducing overfitting to the training data.'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的参数通过两个损失函数进行训练：一个**重构损失**，强制解码样本与初始输入匹配（就像在我们之前的自编码器中一样），另一个是**KL散度**，它测量学习到的潜在分布与先验分布之间的差异，作为正则化项。你实际上可以完全去掉这个后者的项，尽管它确实有助于学习良好形成的潜在空间并减少对训练数据的过拟合。
 - en: '[PRE1]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Now since our latent space is two-dimensional, there are a few awesome visualizations
     that can be done. One, for example, is to look at the neighborhoods of different
     classes on the latent 2D plane:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，由于我们的潜在空间是二维的，可以做一些很棒的可视化。例如，可以查看潜在二维平面上不同类别的邻域：
 - en: '[PRE2]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/ac17b0a49f8df671b56c837a192e0c19.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ac17b0a49f8df671b56c837a192e0c19.png)'
 - en: '*Different digits on the latent 2D plane.*'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '*潜在二维平面上的不同数字。*'
 - en: Each of these colored clusters is a type of digit. In the above figure, close
     clusters are digits that are structurally similar (i.e., digits that share information
     in the latent space).
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个这些彩色簇都是一种数字。在上图中，接近的簇是结构上相似的数字（即在潜在空间中共享信息的数字）。
 - en: Because the VAE is a generative model, we can also use it to generate new digits!
     Here we will scan the latent plane, sampling latent points at regular intervals
     and generating the corresponding digit for each of these points. This gives us
     a visualization of the latent manifold that “generates” the MNIST digits.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为VAE是一个生成模型，我们也可以用它来生成新的数字！在这里，我们将扫描潜在平面，以规则的间隔采样潜在点，并生成每个点对应的数字。这为我们提供了一个可视化的潜在流形，该流形“生成”了MNIST数字。
 - en: '[PRE3]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/e25b8defda4a6ed6ddd14043788547b0.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e25b8defda4a6ed6ddd14043788547b0.png)'
 - en: '*Generating digits using VAE.*'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用VAE生成数字。*'
 - en: Variational Autoencoder (VAE) vs. Generative Adversarial Networks (GAN)
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 变分自编码器（VAE）与生成对抗网络（GAN）
 - en: Both VAE and GANs are very exciting approaches to learning the underlying data
     distribution using unsupervised learning GANs yield better results as compared
     to VAE.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: VAE和GAN都是非常令人兴奋的无监督学习方法，用于学习潜在数据分布。与VAE相比，GAN通常能获得更好的结果。
 - en: '![](../Images/1864e920f8db7c8a27e2d65ea538d2a4.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1864e920f8db7c8a27e2d65ea538d2a4.png)'
 - en: '*[Network architecture of VAE and GAN](https://towardsdatascience.com/what-a-disentangled-net-we-weave-representation-learning-in-vaes-pt-1-9e5dbc205bd1).*'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[VAE和GAN的网络架构](https://towardsdatascience.com/what-a-disentangled-net-we-weave-representation-learning-in-vaes-pt-1-9e5dbc205bd1)。*'
 - en: A GAN’s generator samples from a relatively low dimensional random variable
     and produces an image. Then the discriminator takes that image and predicts whether
     the image belongs to a target distribution or not. Once trained, I can generate
     a variety of images just by sampling the initial random variable and forwarding
     it through the generator.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: GAN的生成器从相对低维的随机变量中采样并生成图像。然后，鉴别器接收该图像，并预测图像是否属于目标分布。一旦训练完成，我可以通过采样初始随机变量并通过生成器传递来生成各种图像。
 - en: A VAE’s encoder takes an image from a target distribution and compresses it
     into a low-dimensional latent space. Then the decoder’s job is to take that latent
     space representation and reproduce the original image. Once the network is trained,
     I can generate latent space representations of various images and interpolate
     between these before forwarding them through the decoder, which produces new images.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: VAE的编码器从目标分布中获取图像并将其压缩到低维潜在空间中。然后，解码器的工作是将该潜在空间表示转换回原始图像。一旦网络训练完成，我可以生成各种图像的潜在空间表示，并在通过解码器传递之前在这些表示之间插值，从而生成新的图像。
 - en: 'They are different techniques as they optimize different objective functions.
     It’s not like one of them will win across all of these situations. They will be
     useful in different situations. The objective function a learning method optimizes
     should ideally match the task we want to apply them for. In this sense, theory
     suggests that:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们是不同的技术，因为它们优化不同的目标函数。并不是说其中之一会在所有情况下表现最佳。它们在不同的情况下会有用。学习方法优化的目标函数理想情况下应与我们希望应用的任务相匹配。在这方面，理论表明：
 - en: GANs should be best at generating nice-looking samples — avoiding generating
     samples that don’t look plausible, at the cost of potentially underestimating
     the entropy of data.
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GAN 应该在生成美观样本方面表现最佳——避免生成看起来不合乎逻辑的样本，但可能会低估数据的熵。
 - en: VAEs should be best at compressing data, as they maximize (a lower bound to)
     the likelihood. That said, evaluating the likelihood in VAE models is intractable,
     so it cannot be used very directly for direct entropy encoding.
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: VAE 应该最擅长数据压缩，因为它们最大化（对）似然性的下界。也就是说，评估 VAE 模型中的似然性是不可处理的，因此不能非常直接地用于直接熵编码。
 - en: There are many models these days where the likelihood can be computed, such
     as pixel-RNNs, spatial LSTMs, RIDE, NADE, NICE, etc. These should also be best
     in terms of compression performance (shortest average codelength under lossless
     entropy coding).
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如今有许多模型可以计算似然性，例如 pixel-RNN、空间 LSTM、RIDE、NADE、NICE 等。这些模型在压缩性能方面也应该表现最佳（在无损熵编码下的平均编码长度最短）。
 - en: 'I would recommend one paper comparing GANs and VAEs models: [A Probe Towards
     Understanding GAN and VAE Models](https://arxiv.org/pdf/1812.05676.pdf)'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 我推荐一篇比较 GAN 和 VAE 模型的论文：[理解 GAN 和 VAE 模型的探索](https://arxiv.org/pdf/1812.05676.pdf)
 - en: Conclusion
+  id: totrans-99
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: As we have seen in this article, an autoencoder is a neural network architecture
     capable of pioneering structure within data in order to develop a compressed representation
     of the input data/image. Many different variants of the general autoencoder architecture
@@ -458,76 +668,114 @@
     significant traits of the original input data; typically, the biggest defiance
     when working with autoencoder is getting your model to actually learn a meaningful
     and generalizable latent space representation.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在这篇文章中看到的，自动编码器是一种神经网络架构，能够在数据中开创结构，以开发输入数据/图像的压缩表示。存在许多不同的通用自动编码器架构变体，其目标是确保压缩表示能够体现原始输入数据的显著特征；通常，使用自动编码器时最大的问题是让你的模型真正学习到一个有意义且可泛化的潜在空间表示。
 - en: We also looked at how variational autoencoders perform better at generalizing
     a meaningful representation and can also be used as a generative model. Further,
     we saw how VAEs are different from generative adversarial networks (GANs).
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还研究了变分自动编码器如何更好地泛化有意义的表示，并且还可以用作生成模型。此外，我们还看到 VAE 如何与生成对抗网络（GAN）不同。
 - en: '***Credits:***'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '***致谢：***'
 - en: '[https://www.jeremyjordan.me/variational-autoencoders/](https://www.jeremyjordan.me/variational-autoencoders/)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.jeremyjordan.me/variational-autoencoders/](https://www.jeremyjordan.me/variational-autoencoders/)'
 - en: '[https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained)'
 - en: '[https://blog.keras.io/building-autoencoders-in-keras.html](https://blog.keras.io/building-autoencoders-in-keras.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://blog.keras.io/building-autoencoders-in-keras.html](https://blog.keras.io/building-autoencoders-in-keras.html)'
 - en: '[https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73](https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73](https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73)'
 - en: '[Original](https://www.theaidream.com/post/an-introduction-to-autoencoder-and-variational-autoencoder-vae).
     Reposted with permission.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.theaidream.com/post/an-introduction-to-autoencoder-and-variational-autoencoder-vae)。转载经许可。'
 - en: '**Related:**'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Unsupervised Learning for Predictive Maintenance using Auto-Encoders](https://www.kdnuggets.com/2021/01/unsupervised-learning-predictive-maintenance-auto-encoders.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于预测性维护的无监督学习：自动编码器](https://www.kdnuggets.com/2021/01/unsupervised-learning-predictive-maintenance-auto-encoders.html)'
 - en: '[Neural Networks 201: All About Autoencoders](https://www.kdnuggets.com/2019/11/all-about-autoencoders.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络 201：全关于自动编码器](https://www.kdnuggets.com/2019/11/all-about-autoencoders.html)'
 - en: '[Variational Autoencoders Explained in Detail](https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[详细解释变分自动编码器](https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html)'
 - en: More On This Topic
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目的，并寻找目的以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个 $9B AI 失败的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么Python是初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
