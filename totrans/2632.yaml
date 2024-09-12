@@ -1,363 +1,566 @@
 - en: Saving and loading models in TensorFlow — why it is important and how to do
     it
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 中保存和加载模型——为什么这很重要以及如何做到
 - en: 原文：[https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html](https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html](https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![](../Images/d6d138bf9bad0178ad0122d702dcb071.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d6d138bf9bad0178ad0122d702dcb071.png)'
 - en: '*Photo by [Nana Smirnova](https://unsplash.com/@nananadolgo?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [Nana Smirnova](https://unsplash.com/@nananadolgo?utm_source=medium&utm_medium=referral)
+    提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this article, we are going to discuss the following topics
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将讨论以下主题
 - en: Importance of saving deep learning models (in general, not limited to TensorFlow).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保存深度学习模型的重要性（一般而言，不限于 TensorFlow）。
 - en: How to save deep learning models in TensorFlow 2, and different types, categories,
     and techniques of saving the models.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何在 TensorFlow 2 中保存深度学习模型，以及不同类型、类别和保存模型的技术。
 - en: Loading the saved models in TensorFlow 2.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 2 中加载保存的模型。
 - en: Importance of saving deep learning models
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 保存深度学习模型的重要性
 - en: Remember, in gradient descent, we update the weights and bias based on the error
     or loss function.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，在梯度下降中，我们根据误差或损失函数更新权重和偏差。
 - en: '![](../Images/886dd93c4d1cf92b9b527e2ae87af6d6.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/886dd93c4d1cf92b9b527e2ae87af6d6.png)'
 - en: Now imagine you trained a model for thousands of epochs for days or weeks or
     even hours, and get pretty good weights for your model, meaning that your model
     is performing a lot well, and then you lose all the weights when you close your
     program/jupyter notebook.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在想象一下，你训练了一个模型数千个周期，可能是几天、几周甚至几小时，并且得到了相当好的权重，这意味着你的模型表现非常好，然后当你关闭程序/Jupyter
+    notebook 时丢失了所有权重。
 - en: This will turn into a more hectic problem when you want to reuse that model
     in another application, and you have no saved progress. You have to start the
     training process from scratch, which might waste your hours or days.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你想在另一个应用程序中重用该模型而没有保存进度时，这将变成一个更繁琐的问题。你必须从头开始训练，这可能浪费你几个小时或几天。
 - en: Practically you can imagine a scenario that you have coded a really good facial
     recognition model application with above 99% accuracy, precision, etc., and it
     took you around 30 hours to train that model on a big dataset. Now, if you have
     not saved the model, and you want to use it in any application, you would have
     to retrain the whole model for 30 hours.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，你可以想象这样一个场景：你已经编码了一个准确率超过 99%、精确度极高的面部识别模型应用，且训练该模型在大数据集上花费了大约 30 小时。现在，如果你没有保存模型，而你希望在任何应用程序中使用它，你将不得不重新训练整个模型
+    30 小时。
 - en: This is why saving the model is a very important step and can save you a ton
     of time and resources with just some extra lines of code.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么保存模型是一个非常重要的步骤，只需额外的几行代码就能节省大量时间和资源。
 - en: Saving models in TensorFlow 2
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 2 中保存模型
 - en: There are 2 different formats to save the model weights in TensorFlow. The first
     one is the **TensorFlow native format**, and the second one is the **hdf5** format,
     also known as **h5** or **HDF** format.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 中保存模型权重有 2 种不同的格式。第一种是**TensorFlow 原生格式**，第二种是**hdf5** 格式，也称为**h5**
+    或**HDF** 格式。
 - en: Also, there are 2 different ways of saving models.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，还有 2 种不同的保存模型的方法。
 - en: Simple, and less complex way, but gives you no freedom.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单且不复杂的方法，但不提供自由度。
 - en: '**Using callbacks**to save the model that allows you a lot of freedom, such
     as saving per-epoch, saving after every n number of examples etc.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**使用回调**来保存模型，允许你进行很多自由操作，例如每个 epoch 保存，保存每隔 n 个示例后等。'
 - en: We will discuss both in detail.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将详细讨论这两种方法。
 - en: Let’s load important python libraries and dataset first.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先加载重要的 Python 库和数据集。
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Simple Way
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 简单方法
 - en: The simple way to save the model in TensorFlow is that we can use the built-in
     function of *Tensorflow.Keras.models* “Model saving & serialization APIs” that
     is the *save_weights* method.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 中保存模型的简单方法是使用 *Tensorflow.Keras.models* 的内置函数“模型保存与序列化 API”，即 *save_weights*
+    方法。
 - en: Let’s say we have a sequential model in TensorFlow.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们有一个 TensorFlow 中的顺序模型。
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And now we fit the model using *model.fit* function in TensorFlow.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们使用 *model.fit* 函数在 TensorFlow 中拟合模型。
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: We can evaluate the performance of our model via,
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过以下方式评估模型的性能，
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/6026b662eede755193b243e4b32a56e8.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6026b662eede755193b243e4b32a56e8.png)'
 - en: Now we can save our model just by calling *model.save* function and passing
     in the *filepath *as the argument. This will save the model’s
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们只需调用 *model.save* 函数并传入 *filepath* 作为参数，就可以保存模型。
 - en: Model Architecture
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型架构
 - en: Model Weights
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型权重
 - en: Model optimizer state (so that you can continue the training from where you
     left)
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型优化器状态（以便你可以从中断处继续训练）
 - en: '[PRE4]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Now adding the extension is important. If you add *.h5* as the extension, it
     will save the model as *hdf5* format, and if no extension is provided, the model
     is saved as TensorFlow native format.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在添加扩展名很重要。如果你添加 *.h5* 作为扩展名，它会将模型保存为 *hdf5* 格式，如果没有提供扩展名，模型将以 TensorFlow 原生格式保存。
 - en: Now when the model is saved in the current directory as *myModel.h5* file, you
     can simply load it in a new program, or same program as a different model via,
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，当模型保存在当前目录中的 *myModel.h5* 文件时，你可以通过以下方式在新程序中或同一程序中作为不同模型加载它，
 - en: '[PRE5]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We can check the accuracy of the new loaded model via,
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过以下方式检查新加载模型的准确率，
 - en: '[PRE6]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/090fb3395a9d3e21f58be16eb3c7a893.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/090fb3395a9d3e21f58be16eb3c7a893.png)'
 - en: And we can see that we are getting exactly the same accuracy as the old model.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到我们得到的准确率与旧模型完全相同。
 - en: We can confirm it further by checking the model summary.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过检查模型摘要进一步确认。
 - en: '[PRE7]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: And the new summary is precisely identical to our original model’s summary.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的摘要与我们原始模型的摘要完全相同。
 - en: '[PRE8]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Similarly, we can save the weights in TensorFlow native format via,
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，我们可以通过以下方式以 TensorFlow 原生格式保存权重，
 - en: '[PRE9]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: See how we have not added any file format after the name. This will save our
     model in TensorFlow native format in the folder *newmodel*. If we peak into the
     folder, then we can check what the files are with
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 看看我们在名称后没有添加任何文件格式。这会将我们的模型以 TensorFlow 原生格式保存在 *newmodel* 文件夹中。如果我们查看该文件夹，我们可以检查文件的
 - en: '[PRE10]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: This command will only run in the jupyter notebook, so alternatively, you can
     open the folder and check the files.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个命令只会在 jupyter notebook 中运行，因此你也可以打开文件夹查看文件。
 - en: 'You will always have 1 file and 2 folders that are:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将始终有 1 个文件和 2 个文件夹，它们是：
 - en: assets (folder)
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: assets (文件夹)
 - en: pb
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pb
 - en: variables (folder)
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: variables (文件夹)
 - en: We will have a look at what these folders and files are later. But simply to
     load the model, we just have to give the pathname which we used to save the model,
     such as with
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们稍后会查看这些文件夹和文件是什么。但要简单地加载模型，我们只需提供用于保存模型的路径名，例如
 - en: '[PRE11]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: And you can confirm that it is the same model simply via checking its *summary *or
     evaluating it to match the results.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过检查其 *summary* 或评估结果来确认它是相同的模型。
 - en: Now to save the **weights only** using the simple way, you just have to call
     the built-in function *save_weights* on your model.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在以简单的方法仅保存 **权重**，你只需在模型上调用内置函数 *save_weights*。
 - en: Let's take the same old model,
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用同一个旧模型，
 - en: '[PRE12]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: and train it for a few epochs.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 并训练几个 epoch。
 - en: '[PRE13]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Now you can simply save the weights via,
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以简单地通过以下方式保存权重，
 - en: '[PRE14]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: This will create a folder named *weights_folder* and save the weights in Tensorflow
     native format with the name of *my_weight*s. It is going to have 3 files.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将创建一个名为 *weights_folder* 的文件夹，并将权重以 TensorFlow 原生格式保存，文件名为 *my_weights*。它将包含
+    3 个文件。
 - en: checkpoint
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: checkpoint
 - en: data-00000-of-00001
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: data-00000-of-00001
 - en: index
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: index
 - en: Let's take a look at these files.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看这些文件。
 - en: '****my_weights.**index**'
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '****my_weights.**index**'
 - en: This file tells TensorFlow which weights are stored where. When running models
     on distributed systems, there may be different *shards*, meaning the full model
     may have to be recomposed from multiple sources. In the last notebook, you created
     a single model on a single machine, so there is only one *shard*, and all weights
     are stored in the same place.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个文件告诉 TensorFlow 权重存储的位置。当在分布式系统上运行模型时，可能会有不同的 *分片*，这意味着整个模型可能需要从多个来源重新组合。在上一个笔记本中，你在一台机器上创建了一个单一模型，所以只有一个
+    *分片*，所有权重都存储在同一个地方。
 - en: '**my_weights.data-00000-of-00001**'
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**my_weights.data-00000-of-00001**'
 - en: This file contains the actual weights from the model. It is by far the largest
     of the 3 files. Recall that the model you trained had around 14000 parameters,
     meaning this file is roughly 12 bytes per saved weight.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 该文件包含模型的实际权重。它是这三个文件中最大的。回想一下，你训练的模型有大约 14000 个参数，这意味着这个文件的大小大约是每个保存的权重 12 字节。
 - en: '**checkpoint**'
+  id: totrans-83
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**检查点**'
 - en: This file is by far the smallest. It’s actually so small that we can just look
     at it directly. It’s a human-readable file with the following text,
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个文件是迄今为止最小的。实际上小到我们可以直接查看。它是一个人类可读的文件，包含以下文本，
 - en: '[PRE15]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Now when you have saved the weights, you can simply load them by just calling,
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，当你保存了权重后，你可以通过简单地调用来加载它们，
 - en: '[PRE16]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: This will load the weights for that model at that specific path.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将会在特定路径加载该模型的权重。
 - en: Alternatively, you can save the weights only in the *hdf5 *format via,
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者，你可以仅通过 *hdf5* 格式保存权重，方法是，
 - en: '[PRE17]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: This will create a *my_weights.h5* file in your working directory, and you can
     simply load them via *model.load_weights('my_weights.h5')*.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将会在你的工作目录中创建一个 *my_weights.h5* 文件，你可以通过 *model.load_weights('my_weights.h5')*
+    轻松加载它们。
 - en: Important Point
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重要提示
 - en: When you are loading the weights for a model, you need to have the correct architecture
     of that model.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你为模型加载权重时，你需要有该模型的正确架构。
 - en: 'For example:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如：
 - en: You can not load the weights of our *model *we just created to a sequential
     model with 1 Dense layer, as both are not compatible. So you might be thinking,
     what is the use of saving the weights only?
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 你不能将我们刚创建的 *模型* 的权重加载到具有 1 个 Dense 层的顺序模型中，因为两者不兼容。所以你可能会想，保存权重的用途是什么？
 - en: Well, the answer is that if you are looking at some big SOTA application, such
     as YOLO, or something like that where they give you the source code. But, to train
     them on your machines is a long and lengthy task, so they also give you the pre-trained
@@ -366,12 +569,18 @@
     for other numbers of epochs. In this way, you can check the performance of the
     model on the number of training epochs based on how the model is performing on
     X number of epochs without explicitly training it.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，答案是，如果你在看一些大型的 SOTA 应用，比如 YOLO，或者类似的东西，它们会给你源代码。但是，在你的机器上训练它们是一项漫长的任务，所以它们也会给你在不同
+    epochs 上的预训练权重，例如，如果你想查看这个模型在 50 epochs 时的表现，那么你可以加载保存的 50 epochs 权重，以此类推。这样，你可以根据模型在
+    X 次训练 epochs 上的表现检查模型的性能，而无需明确训练它。
 - en: TensorFlow Native format vs. hdf5, which to use and when
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TensorFlow 原生格式与 hdf5，什么时候使用哪一个？
 - en: You have seen that using the .h5 format is simple and clean as it only creates
     one single file, whereas using tensorflow native format creates multiple folders
     and files, which is difficult to read. So, you might be thinking that why should
@@ -379,151 +588,232 @@
     native format, everything is structural and organized in its place. For example,
     the .pb file contains structural data that can be loaded by multiple languages.
     Some of the advantages of TF native format are listed in the following.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 你已经看到，使用 .h5 格式简单而干净，因为它只创建一个单一的文件，而使用 TensorFlow 原生格式会创建多个文件夹和文件，这样不易阅读。所以，你可能会想，为什么我们还要使用
+    TensorFlow 原生格式？答案是，在 TensorFlow 原生格式中，一切都是结构化的，并且组织得井井有条。例如，.pb 文件包含结构数据，可以被多种语言加载。TF
+    原生格式的一些优点列在下面。
 - en: '**Advantages of the TensorFlow native format**'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '**TensorFlow 原生格式的优点**'
 - en: '[TensorFlow’s Serving](https://www.tensorflow.org/tfx/guide/serving)uses it
     when you want to take your model to production.'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow’s Serving](https://www.tensorflow.org/tfx/guide/serving) 在你想将模型投入生产时使用它。'
 - en: Language-agnostic — binary format can be read by multiple languages (Java, Python,
     Objective-C, and C++, among others).
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 语言无关 — 二进制格式可以被多种语言读取（如 Java、Python、Objective-C 和 C++ 等）。
 - en: Advised to use since 0, you can see the [official serializing guide](https://www.tensorflow.org/guide/keras/save_and_serialize)of
     TensorFlow, which recommends using TensorFlow Native format.
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自 0 版以来建议使用，你可以查看 TensorFlow 的[官方序列化指南](https://www.tensorflow.org/guide/keras/save_and_serialize)，它推荐使用
+    TensorFlow 原生格式。
 - en: Saves various metadata of the model such as optimizer information, losses, learning
     rate, etc., which can help later.
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保存模型的各种元数据，如优化器信息、损失、学习率等，这些信息以后可能会有帮助。
 - en: '**Disadvantages**'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点**'
 - en: SavedModelis conceptually harder to grasp than a single file
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SavedModel 在概念上比单个文件更难理解
 - en: Creates a separate folder to store the weights.
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个单独的文件夹来存储权重。
 - en: '**Advantages of h5**'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '**h5 的优势**'
 - en: Used to save giant data, which might not be tabular.
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于保存可能不是表格数据的大型数据。
 - en: Common file saving format.
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 常见的文件保存格式。
 - en: Everything saved in one file (weights, losses, optimizers used with keras)
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有内容保存在一个文件中（权重、损失、使用的优化器）
 - en: '**Disadvantages**'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点**'
 - en: Cannot be used with Tensorflow Servingbut you can simply convert it to .pb via experimental.export_saved_model(model,
     'path_to_saved_model')
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不能与 TensorFlow Serving 一起使用，但你可以通过 experimental.export_saved_model(model, 'path_to_saved_model')
+    将其简单转换为 .pb 格式
 - en: '**What to use**'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '**应该使用什么**'
 - en: If you are not going to use TensorFlow while serving or deploying your model,
     then for simplicity, you can use .hdf5 format, but if you are going to use TensorFlow
     serving, then you should use tensorflow native format.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在服务或部署模型时不打算使用 TensorFlow，为了简便起见，你可以使用 .hdf5 格式，但如果你打算使用 TensorFlow 服务，那么你应该使用
+    tensorflow 原生格式。
 - en: Learning Outcome
+  id: totrans-115
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 学习成果
 - en: In this article, you learned
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，你学到了
 - en: Why should you save your machine learning model.
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为什么你应该保存你的机器学习模型。
 - en: How to save model weights only using the simple method.
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何仅使用简单的方法保存模型权重。
 - en: How to save a complete model using the simple method.
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用简单的方法保存完整模型。
 - en: Saving in TensorFlow Native format or HDF5 format.
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 TensorFlow 原生格式或 HDF5 格式中保存。
 - en: Difference between TensorFlow Native and HDF5 format and what to use.
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TensorFlow 原生格式和 HDF5 格式的区别以及该使用什么。
 - en: 'For more details, check out:'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 欲了解更多详情，请查看：
 - en: '[Getting Started with TensorFlow 2 by Imperial College London](https://www.coursera.org/learn/getting-started-with-tensor-flow2)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[伦敦帝国学院的 TensorFlow 2 入门](https://www.coursera.org/learn/getting-started-with-tensor-flow2)'
 - en: '[Difference between h5 and pb](https://stackoverflow.com/questions/62079274/difference-between-pb-and-h5)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[h5 和 pb 的区别](https://stackoverflow.com/questions/62079274/difference-between-pb-and-h5)'
 - en: '**Related:**'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Getting Started with TensorFlow 2](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 2 入门](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html)'
 - en: '[Deploying Trained Models to Production with TensorFlow Serving](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow Serving 部署训练好的模型](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)'
 - en: '[A TensorFlow Modeling Pipeline Using TensorFlow Datasets and TensorBoard](https://www.kdnuggets.com/2020/06/tensorflow-modeling-pipeline-tensorflow-datasets-tensorboard.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 数据集和 TensorBoard 的 TensorFlow 建模流程](https://www.kdnuggets.com/2020/06/tensorflow-modeling-pipeline-tensorflow-datasets-tensorboard.html)'
 - en: More On This Topic
+  id: totrans-129
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How Big Data Is Saving Lives in Real Time: IoV Data Analytics Helps…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据如何实时挽救生命：物联网数据分析帮助…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)'
 - en: '[What are Vector Databases and Why Are They Important for LLMs?](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是向量数据库，它们为何对 LLMs 重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)'
 - en: '[Why is Data Management so Important to Data Science?](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据管理对数据科学为何如此重要？](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)'
 - en: '[What is Superalignment & Why It is Important?](https://www.kdnuggets.com/2023/07/superalignment-important.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是超级对齐及其重要性？](https://www.kdnuggets.com/2023/07/superalignment-important.html)'
 - en: '[How to Use Hugging Face’s Datasets Library for Efficient Data Loading](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face 的数据集库进行高效的数据加载](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)'
 - en: '[Is Domain Knowledge Important for Machine Learning?](https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[领域知识对机器学习重要吗？](https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html)'
