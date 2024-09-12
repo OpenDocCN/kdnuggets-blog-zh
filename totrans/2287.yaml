@@ -1,11 +1,15 @@
 - en: 'Back To Basics, Part Dos: Gradient Descent'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 回到基础，第二部分：梯度下降
 - en: 原文：[https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
 - en: Welcome to the second part of our ***Back To Basics*** series. In the [first
     part](https://medium.com/towards-data-science/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46),
     we covered how to use Linear Regression and Cost Function to find the best-fitting
@@ -14,97 +18,135 @@
     Descent, a powerful technique that can help us find the perfect *intercept* and
     optimize our model. We’ll explore the math behind it and see how it can be applied
     to our linear regression problem.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 欢迎来到我们***回到基础***系列的第二部分。在 [第一部分](https://medium.com/towards-data-science/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46)中，我们介绍了如何使用线性回归和成本函数来找到适合我们房价数据的最佳拟合线。然而，我们也发现测试多个*截距*值可能是繁琐且低效的。在这一部分中，我们将深入探讨梯度下降，这是一种强大的技术，可以帮助我们找到完美的*截距*并优化我们的模型。我们将探讨其背后的数学原理，并了解如何将其应用于我们的线性回归问题。
 - en: Gradient descent is a powerful optimization algorithm that ***aims to quickly
     and efficiently find the minimum point of a curve.*** The best way to visualize
     this process is to imagine you are standing at the top of a hill, with a treasure
     chest filled with gold waiting for you in the valley.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯度下降是一种强大的优化算法，***旨在快速而高效地找到曲线的最小点。***最好的可视化方式是想象你站在山顶，山谷中等着你的是一个装满黄金的宝箱。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/5d19f0944f791eb0a9d6f16b1facfe4f.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第二部分：线性回归、成本函数和梯度下降](../Images/5d19f0944f791eb0a9d6f16b1facfe4f.png)'
 - en: However, the exact location of the valley is unknown because it’s super dark
     out and you can’t see anything. Moreover, you want to reach the valley before
     anyone else does (because you want all of the treasure for yourself duh). Gradient
     descent helps you navigate the terrain and reach this *optimal* point ***efficiently
     and quickly***. At each point it’ll tell you how many steps to take and in what
     direction you need to take them.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，山谷的确切位置未知，因为外面非常黑暗，你什么也看不见。此外，你希望在其他人之前到达山谷（因为你想独占所有的宝藏）。梯度下降帮助你在地形中导航，并***高效而快速***地到达这个*最优*点。在每个点，它会告诉你该走多少步以及需要朝哪个方向走。
 - en: 'Similarly, gradient descent can be applied to our linear regression problem
     by using the steps laid out by the algorithm. To visualize the process of finding
     the minimum, let’s plot the **MSE** curve. We already know that the equation of
     the curve is:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，梯度下降可以通过使用算法中规定的步骤应用于我们的线性回归问题。为了可视化寻找最小值的过程，让我们绘制**MSE**曲线。我们已经知道曲线的方程是：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/737e52874ea32b77d4d6154e51555832.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第二部分：线性回归、成本函数和梯度下降](../Images/737e52874ea32b77d4d6154e51555832.png)'
 - en: the equation of the curve is the equation used to calculate the MSE
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 曲线的方程是用来计算MSE的方程
 - en: 'And from the [previous article](https://towardsdatascience.com/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46#e9d3),
     we know that the equation of **MSE** in our problem is:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/b5eb66fcef8e423ecf363808f778b8c6.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
 - en: 'If we zoom out we can see that an **MSE** curve (which resembles our valley)
     can be found by substituting a bunch of *intercept* values in the above equation.
     So let’s plug in 10,000 values of the *intercept*, to get a curve that looks like
     this:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/6829eca33ad9d3c887892fd49d136e6b.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
 - en: in reality, we won’t know what the MSE curve looks like
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: 'The goal is to reach the bottom of this **MSE** curve, which we can do by following
     these steps:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: 'Step 1: Start with a random initial guess for the intercept value'
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: In this case, let’s assume our initial guess for the *intercept* value is 0.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: 'Step 2: Calculate the gradient of the MSE curve at this point'
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -112,304 +154,421 @@
     way of saying that the line touches the curve only at that point) at that point.
     For example, at Point A, the *gradient* of the **MSE**curve can be represented
     by the red tangent line, when the intercept is equal to 0.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/c1d5e0542e80349a3afd325459352d65.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
 - en: the gradient of the MSE curve when intercept = 0
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: 'In order to determine the value of the *gradient*, we apply our knowledge of
     calculus. Specifically, the *gradient* is equal to the derivative of the curve
     with respect to the *intercept *at a given point. This is denoted as:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/d5d5a9ed724645ca6957ec078416236e.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
 - en: 'NOTE: If you’re unfamiliar with derivatives, I recommend watching this [Khan
     Academy video](https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-1-new/ab-2-6a/v/derivative-properties-and-polynomial-derivatives) if
     interested. Otherwise you can glance over the next part and still be able to follow
     the rest of the article.'
+  id: totrans-29
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 'We calculate the ***derivative of the MSE curve***as follows:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/776088318fa18a2c2d17d391277c7dfe.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
 - en: 'Now to find the ***gradient at point A***, we substitute the value of the *intercept* at
     point A in the above equation. Since *intercept* = 0, the derivative at point
     A is:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/67db4fea0b447240477d8ff003773e9f.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
 - en: So when the *intercept* = 0, the *gradient* = -190
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '**NOTE:** As we approach the optimal value, the gradient values approach zero.
     At the optimal value, the gradient is equal to zero. Conversely, the farther away
     we are from the optimal value, the larger the gradient becomes.'
+  id: totrans-35
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 当我们接近最优值时，梯度值接近于零。在最优值处，梯度等于零。相反，离最优值越远，梯度就越大。'
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/31ba9dc3a9f7fd31faeca6e279b1fae6.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/31ba9dc3a9f7fd31faeca6e279b1fae6.png)'
 - en: From this, we can infer that the step size should be related to the *gradient*,
     since it tells us if we should take a baby step or a big step. This means that
     when the *gradient* of the curve is close to 0, then we should take baby steps
     because we are close to the optimal value. And if the *gradient* is bigger, we
     should take bigger steps to get to the optimal value faster.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 从中我们可以推断，步长应该与*梯度*有关，因为它告诉我们是采取小步还是大步。这意味着当曲线的*梯度*接近0时，我们应该采取小步，因为我们接近最优值。而当*梯度*较大时，我们应该采取更大的步伐，以更快地达到最优值。
 - en: '**NOTE:** However, if we take a super huge step, then we could make a big jump
     and miss the optimal point. So we need to be careful.'
+  id: totrans-38
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 然而，如果我们采取一个非常大的步骤，可能会跳过最优点。因此我们需要小心。'
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/83feba1c3c30a9ae017ea84520ec0d4a.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/83feba1c3c30a9ae017ea84520ec0d4a.png)'
 - en: 'Step 3: Calculate the Step Size using the gradient and the Learning Rate and
     update the intercept value'
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 步骤3：使用梯度和学习率计算步长并更新截距值
 - en: Since we see that the ***Step Size*** and *gradient* are proportional to each
     other, the *Step Size *is determined by multiplying the *gradient* by a pre-determined
     constant value called the ***Learning Rate:***
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们看到***步长***和*梯度*是成比例的，因此*步长*由将*梯度*乘以一个预定的常数值——即***学习率***——来确定。
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/dd61f74bee009d27cdc05eebc65dbbc6.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/dd61f74bee009d27cdc05eebc65dbbc6.png)'
 - en: The *Learning Rate* controls the magnitude of the *Step Size* and ensures that
     the step taken is not too large or too small.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '*学习率*控制*步长*的大小，并确保所采取的步骤既不过大也不过小。'
 - en: In practice, the Learning Rate is usually a small positive number that is ?
     0.001\. But for our problem let’s set it to 0.1.
+  id: totrans-44
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 实际上，学习率通常是一个小的正数，大约是0.001。但对于我们的问题，让我们将其设置为0.1。
 - en: So when the intercept is 0, the *Step Size = gradient *x* Learning Rate* *=
     -190*0.1 = -19.*
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，当截距为0时，*步长 = 梯度 * x * 学习率* = -190*0.1 = -19*。
 - en: 'Based on the *Step Size* we calculated above, we update the *intercept *(aka
     change our current location)using any of these equivalent formulas:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我们上面计算的*步长*，我们使用以下等效公式中的任何一个来更新*截距*（即改变我们当前位置）：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/c2d6b9191a2cc8c8a311fdfe637632ef.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/c2d6b9191a2cc8c8a311fdfe637632ef.png)'
 - en: To find the new *intercept *in this step, we plug in the relevant values…
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在此步骤中找到新的*截距*，我们代入相关值…
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/bfdea6e65612c731551a91113de67952.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/bfdea6e65612c731551a91113de67952.png)'
 - en: …and find that the new *intercept* = 19.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: …并且发现新的*截距* = 19。
 - en: Now plugging this value in the **MSE** equation, we find that the **MSE** when
     the *intercept* is 19 = 8064.095\. We notice that in one big step, we moved closer
     to our optimal value and reduced the **MSE**.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在将这个值代入**均方误差**（**MSE**）方程中，我们发现当*截距*为19时，**MSE**为8064.095。我们注意到，通过一步大的调整，我们更接近了最优值，并减少了**MSE**。
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/bd224aa9af161fda1ef3a1fea6d57077.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/bd224aa9af161fda1ef3a1fea6d57077.png)'
 - en: 'Even if we look at our graph, we see how much better our new line with *intercept* 19
     is fitting our data than our old line with *intercept* 0:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使我们查看图表，也可以看到新的*截距*为19的直线比旧的*截距*为0的直线更好地拟合了我们的数据：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/dac783aa1dc1c8852610d966da3fe552.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第2部分：线性回归，成本函数和梯度下降](../Images/dac783aa1dc1c8852610d966da3fe552.png)'
 - en: 'Step 4: Repeat steps 2–3'
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 步骤4：重复步骤2–3
 - en: We repeat Steps 2 and 3 using the updated *intercept* value.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用更新后的*截距*值重复步骤 2 和 3。
 - en: 'For example, since the new *intercept* value in this iteration is 19, following [Step
     2](https://medium.com/towards-data-science/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#6ab4),
     we will calculate the gradient at this new point:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，由于此迭代中新*截距*值为 19，根据[步骤 2](https://medium.com/towards-data-science/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#6ab4)，我们将计算这个新点的梯度：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/d62bfd120ad7554a8260635b17c84b4d.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/d62bfd120ad7554a8260635b17c84b4d.png)'
 - en: And we find that the *gradient* of the **MSE** curve at the intercept value
     of 19 is -152 (as represented by the red tangent line in the illustration below).
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们发现**MSE**曲线在截距值 19 处的*梯度*是 -152（如下面插图中的红色切线所示）。
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/a9c9701640ea3e7d14fa5b8db8c323eb.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/a9c9701640ea3e7d14fa5b8db8c323eb.png)'
 - en: 'Next, in accordance with [Step 3](https://medium.com/towards-data-science/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#67b0),
     let’s calculate the* Step Size*:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，根据[步骤 3](https://medium.com/towards-data-science/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#67b0)，我们来计算*步长*：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/a4603c5f6fb177ed11418ac5814bd0e4.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/a4603c5f6fb177ed11418ac5814bd0e4.png)'
 - en: 'And subsequently, update the *intercept* value:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 随后，更新*截距*值：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/8715781f8c423fa69ffd05f4488d00f7.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/8715781f8c423fa69ffd05f4488d00f7.png)'
 - en: Now we can compare the line with the previous *intercept *of 19 to the new line
     with the new intercept 34.2…
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以将具有 19 的旧*截距*的线与具有新截距 34.2 的新线进行比较…
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/f4bfe4b7beb6b83bdbdfaf11f59901b2.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/f4bfe4b7beb6b83bdbdfaf11f59901b2.png)'
 - en: …and we can see that the new line fits the data better.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: …我们可以看到新线更好地拟合了数据。
 - en: Overall, the **MSE** is getting smaller…
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，**MSE**正在变小…
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/f618bd0080bb66d326a5826a7d63eed6.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/f618bd0080bb66d326a5826a7d63eed6.png)'
 - en: '…and our *Step Sizes* are getting smaller:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: …我们的*步长*正在变小：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/15c541dcac99271f58f96df770e10797.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/15c541dcac99271f58f96df770e10797.png)'
 - en: 'We repeat this process iteratively until we converge toward the optimal solution:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们重复这个过程，直到我们收敛到最优解：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/2b5b643559ce6e7ac8f7d06d8e7a1293.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/2b5b643559ce6e7ac8f7d06d8e7a1293.png)'
 - en: As we progress toward the minimum point of the curve, we observe that the *Step
     Size* becomes increasingly smaller. After 13 steps, the gradient descent algorithm
     estimates the *intercept* value to be 95\. If we had a crystal ball, this would
     be confirmed as the minimum point of the **MSE** curve. And it is clear to see
     how this method is more efficient compared to the brute force approach that we
     saw in the [previous article](https://medium.com/towards-data-science/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着我们接近曲线的最小点，我们观察到*步长*变得越来越小。经过 13 步，梯度下降算法估计*截距*值为 95。如果我们有一只水晶球，这将被确认是**MSE**曲线的最小点。显然，这种方法相比于我们在[上一篇文章](https://medium.com/towards-data-science/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46)中看到的蛮力方法更加高效。
 - en: 'Now that we have the optimal value of our *intercept*, the linear regression
     model is:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们拥有了*截距*的最优值，线性回归模型是：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/61244bb741c82f91f42c98bb02a639c0.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![回到基础，第 Dos 部分：线性回归，成本函数和梯度下降](../Images/61244bb741c82f91f42c98bb02a639c0.png)'
 - en: 'And the linear regression line looks like this:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归线看起来是这样的：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/5527a5bf8aa4e535e29e6a878f42e46a.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
 - en: best fitting line with intercept = 95 and slope = 0.069
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: Finally, going back to our friend Mark’s question — What value should he sell
     his 2400 feet² house for?
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/ba1f1c05b426df495c7bae00bed79768.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
 - en: Plug in the house size of 2400 feet² into the above equation…
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/5bd96e8a9a7ebe978819d16426e395f0.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
 - en: …and voila. We can tell our unnecessarily worried friend Mark that based on
     the 3 houses in his neighborhood, he should look to sell his house for around
     $260,600.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: Now that we have a solid understanding of the concepts, let’s do a quick Q&A
     sesh answering any lingering questions.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: Why does finding the gradient actually work?
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'To illustrate this, consider a scenario where we are attempting to reach the
     minimum point of curve C, denoted as *x**. And we are currently at point A at *x*,
     located to the left of *x**:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/c445f16302e50d42ce0b4d94f6bcfa6e.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
 - en: If we take the derivative of the curve at point A with respect to *x*, represented
     as *dC(x)/dx*, we obtain a negative value (this means the *gradient* is sloping
     downwards). We also observe that we need to move to the right to reach *x**. Thus,
     we need to increase *x* to arrive at the minimum *x*.*
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/0e4d00a3fc662b0d31e8163a471d6378.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
 - en: the red line, or the gradient, is sloping downwards => a negative Gradient
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: Since *dC(x)/dx* is negative, *x-??*dC(x)/dx* will be larger than *x*, thus
     moving towards *x**.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: Similarly, if we are at point A located to the right of the minimum point x*,
     then we get a **positive *gradient*** (*gradient* is sloping upwards), *dC(x)/dx*.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/c6c8d53b45f3bcfa2f039351007c88e5.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
 - en: the red line, or the Gradient, is sloping upwards => a positive Gradient
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: So *x-??*dC(x)/dx* will be less than *x*, thus moving towards *x**.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: How does gradient decent know when to stop taking steps?
+  id: totrans-97
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -418,50 +577,69 @@
     the *gradient* approaches 0\. Therefore, when the *gradient* at a point is close
     to 0 or in the vicinity of the minimum point, the *Step Size* will also be close
     to 0, indicating that the algorithm has reached the optimal solution.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/b351ad5b83c9a126f86ca31bd7c0d72a.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
 - en: when we are close to the minimum point, the gradient is close to 0, and subsequently
     Step Size is close to 0
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: In practice the Minimum Step Size = 0.001 or smaller
+  id: totrans-101
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 实际中，最小步长 = 0.001 或更小
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/76186f8d24893a15731b57b79e5db9af.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![基础知识回顾，第二部分：线性回归、成本函数和梯度下降](../Images/76186f8d24893a15731b57b79e5db9af.png)'
 - en: That being said, gradient descent also includes a limit on the number of steps
     it will take before giving up called the *Maximum Number of Steps*.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 也就是说，梯度下降还包括一个在放弃之前的步数限制，称为*最大步数*。
 - en: In practice, the Maximum Number of Steps = 1000 or greater
+  id: totrans-104
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 实际中，最大步数 = 1000 或更多
 - en: So even if the* Step Size* is larger than the *Minimum Step Size*, if there
     have been more than the *Maximum Number of Steps*, gradient descent will stop.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使*步长*大于*最小步长*，如果已经超过了*最大步数*，梯度下降仍然会停止。
 - en: What if the minimum point is more challenging to identify?
+  id: totrans-106
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如果最小点更难识别会怎样？
 - en: 'Until now, we have been working with a curve where it’s easy to identify the
     minimum point (these kinds of curves are called ***convex***). But what if we
     have a curve that’s not as pretty (technically aka ***non-convex***) and looks
     like this:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们一直在处理易于识别最小点的曲线（这些曲线被称为***凸性***）。但如果我们有一条不那么漂亮的曲线（技术上称为***非凸性***）并且看起来像这样：
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/95362b61547e16eaa6527163af4d0472.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![基础知识回顾，第二部分：线性回归、成本函数和梯度下降](../Images/95362b61547e16eaa6527163af4d0472.png)'
 - en: Here, we can see that Point B is the *global minimum* (actual minimum), and
     Points A and C are* local minimums* (points that can be confused for the *global
     minimum* but aren’t). So if a function has multiple *local minimums* and a *global
@@ -469,24 +647,34 @@
     Moreover, which local minimum it finds will depend on the position of the initial
     guess (as seen in [Step 1 ](https://towardsdatascience.com/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#87cf)of
     gradient descent).
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们可以看到点B是*全局最小值*（实际最小值），而点A和C是*局部最小值*（可能被误认为是*全局最小值*但实际上不是）。因此，如果一个函数有多个*局部最小值*和一个*全局最小值*，并不能保证梯度下降会找到*全局最小值*。此外，找到哪个局部最小值将取决于初始猜测的位置（如在[第1步](https://towardsdatascience.com/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#87cf)的梯度下降中所示）。
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/c935384e980297c511af9d0eeaa79146.png)'
+  id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![基础知识回顾，第二部分：线性回归、成本函数和梯度下降](../Images/c935384e980297c511af9d0eeaa79146.png)'
 - en: Taking this non-convex curve above as an example, if the initial guess is at
     Block A or Block C, gradient descent will declare that the minimum point is at
     local minimums A or C, respectively when in reality it’s at B. Only when the initial
     guess is at Block B, the algorithm will find the global minimum B.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 以上面的非凸曲线为例，如果初始猜测在区块A或区块C，梯度下降将分别宣称最小点在局部最小值A或C，而实际上在B。只有当初始猜测在区块B时，算法才能找到全局最小值B。
 - en: '**Now the question is — how do we make a good initial guess?**'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '**现在的问题是——我们如何做出一个好的初始猜测？**'
 - en: '*Simple answer: *Trial and Error. Kind of.'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '*简单的回答：*试错法。可以算是。'
 - en: '*Not-so-simple answer: *From the graph above, if our minimum guess of *x* was
     0 since that lies in Block A, it’ll lead to the local minimum A. Thus, as you
     can see, 0 may not be a good initial guess in most cases. A common practice is
@@ -495,28 +683,37 @@
     initial guesses and comparing their results can provide insight into whether the
     guesses differ significantly from each other. This helps in identifying the global
     minimum more efficiently.'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '*复杂的回答：*从上图可以看出，如果我们对*x*的最小猜测为0，因为它位于区块A，将会导致局部最小值A。因此，如你所见，0在大多数情况下可能不是一个好的初始猜测。一个常见的做法是基于x所有可能值范围的均匀分布应用一个随机函数。此外，如果可行，可以运行算法使用不同的初始猜测并比较它们的结果，这可以提供有关猜测是否存在显著差异的见解。这有助于更高效地识别全局最小值。'
 - en: Okay, we’re almost there. Last question.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，我们快到了。最后一个问题。
 - en: What if we are trying to find more than one optimal value?
+  id: totrans-116
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如果我们尝试找到多个最优值会怎样？
 - en: Until now, we were focused on only finding the optimal intercept value because
     we magically knew the *slope* value of the linear regression is 0.069\. But what
     if don’t have a crystal ball and don't know the optimal *slope* value? Then we
     need to optimize both the slope and intercept values, expressed as *x?* and *x?* respectively.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: In order to do that, we must utilize partial derivatives instead of just derivatives.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: 'NOTE: Partial derivates are calculated in the same way as reglar old derivates,
     but are denoted differently because we have more than one variable we are trying
     to optimize for. To learn more about them, read this [article](https://www.mathsisfun.com/calculus/derivatives-partial.html) or
     watch this [video](https://www.youtube.com/watch?v=JAf_aSIJryg).'
+  id: totrans-119
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -524,73 +721,93 @@
     value. The cost function (such as **MSE**) must still be defined and the gradient
     descent algorithm must be applied, but with the added step of finding partial
     derivatives for both x? and x?.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '**Step 1: Make initial guesses for x₀ and x₁**'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
 - en: '**Step 2: Find the partial derivatives with respect to x₀ and x₁ at these points**'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/a7339e26b9ad52d4263bc524b7b94e3f.png)'
+  id: totrans-123
   prefs: []
   type: TYPE_IMG
 - en: '**Step 3: Simultaneously update x₀ and x₁ based on the partial derivatives
     and the Learning Rate**'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
 - en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
     Descent](../Images/a2f81be7d310c4a5c9cfd8b68e863f78.png)'
+  id: totrans-125
   prefs: []
   type: TYPE_IMG
 - en: '**Step 4: Repeat Steps 2–3 until the Maximum Number of Steps is reached or
     the Step Size is less that the Minimum Step Size**'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
 - en: '*And we can extrapolate these steps to 3, 4, or even 100 values to optimize
     for.*'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
 - en: In conclusion, gradient descent is a powerful optimization algorithm that helps
     us reach the optimal value efficiently. The gradient descent algorithm can be
     applied to many other optimization problems, making it a fundamental tool for
     data scientists to have in their arsenal. Onto bigger and better algorithms now!
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
 - en: '**[Shreya Rao](https://www.linkedin.com/in/shreyarao24/)** illustrate and explain
     Machine Learning algorithms in layman''s terms.'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd).
     Reposted with permission.'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Back to Basics Week 1: Python Programming & Data Science Foundations](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Back to Basics Week 3: Introduction to Machine Learning](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回到基础第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
 - en: '[Back to Basics Bonus Week: Deploying to the Cloud](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回到基础附加周：云部署](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)'

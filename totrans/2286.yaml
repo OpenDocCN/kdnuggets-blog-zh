@@ -1,354 +1,540 @@
 - en: Dealing with Position Bias in Recommendations and Search
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 处理推荐和搜索中的位置偏差
 - en: 原文：[https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)
 - en: People click on top items in search and recommendations more often because they
     are on top, not because of their relevancy. If you order your search results with
     an ML model, they may eventually degrade in quality because of such a positive
     self-reinforcing feedback loop. How can this problem be solved?
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们更常点击搜索和推荐中的顶部项目，是因为它们在顶部，而不是因为它们的相关性。如果你用机器学习模型来排序搜索结果，它们可能会因为这种正向自我增强的反馈循环而最终质量下降。这个问题如何解决？
 - en: Biases in Ranking
+  id: totrans-3
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 排名中的偏差
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Every time you present a list of things, such as search results or recommendations,
     to a human being, rarely can we fairly evaluate all the items in the list.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 每次你向人们展示列表，如搜索结果或推荐时，我们很难公正地评估列表中的所有项目。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/e19a71c400cd938cf225370850923471.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/e19a71c400cd938cf225370850923471.png)'
 - en: Item rankings are all around us.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 项目排名无处不在。
 - en: 'A [cascade click model](https://www.semanticscholar.org/paper/An-experimental-comparison-of-click-position-bias-Craswell-Zoeter/1ba36a2a1609cf09e2a08eb4712555848d5d728c)
     assumes that people evaluate all the items in the list sequentially before they
     find the relevant one. But then it means that things on the bottom have a smaller
     chance to be evaluated at all, hence will organically have fewer clicks:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [级联点击模型](https://www.semanticscholar.org/paper/An-experimental-comparison-of-click-position-bias-Craswell-Zoeter/1ba36a2a1609cf09e2a08eb4712555848d5d728c)
+    假设人们在找到相关项之前会顺序评估列表中的所有项。但这意味着底部的项目被评估的机会较小，因此自然点击较少：
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/2e7edb8662ba3f6f989e173d03097a11.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/2e7edb8662ba3f6f989e173d03097a11.png)'
 - en: Higher in the list?—?more clicks.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 列表中的位置越高？——点击越多。
 - en: 'Top items receive more clicks only because of their position?—?this behavior
     is called **position bias**. However, the position bias is not the only bias in
     item lists, there are plenty of other dangerous things to watch out for:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶部项目仅因为其位置获得更多点击？——这种行为称为**位置偏差**。然而，位置偏差并不是列表中唯一的偏差，还有很多其他危险因素需要注意：
 - en: '**Presentation bias**: for example, due to a 3x3 grid layout, an item on position
     #4 (right under the #1 top one) may receive more clicks than item #3 in the corner.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**展示偏差**：例如，由于3x3网格布局，位于第4位（紧接在第1位下方）的项目可能比第3位角落的项目获得更多点击。'
 - en: '**Model bias**: when you train an ML model on historical data generated by
     the same model.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型偏差**：当你用由同一模型生成的历史数据来训练机器学习模型时。'
 - en: In practice, the position bias is the strongest one?—?and removing it while
     training may improve your model reliability.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，位置偏差是最强的偏差之一？——去除它可能会提高模型的可靠性。
 - en: 'Experiment: Measuring Position Bias'
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实验：测量位置偏差
 - en: We conducted a small crowd-sourced research about position bias. With a [RankLens](https://github.com/metarank/ranklens)
     dataset, we used a [Google Keyword Planner](https://ads.google.com/home/tools/keyword-planner/)
     tool to generate a set of queries to find each particular movie.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们进行了一项小规模的众包研究关于位置偏差。使用 [RankLens](https://github.com/metarank/ranklens) 数据集，我们用
+    [Google 关键词规划师](https://ads.google.com/home/tools/keyword-planner/) 工具生成了一系列查询以查找每部特定电影。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/249f75f099d86dba77d2f6a3ae7801e8.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/249f75f099d86dba77d2f6a3ae7801e8.png)'
 - en: Abusing Google Keyword Planner to get real queries people use for finding movies.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 滥用Google关键字规划师获取人们用来寻找电影的真实查询。
 - en: With a set of movies and corresponding actual queries, we have a perfect search
     evaluation dataset?—?all items are well-known for a wider audience, and we know
     correct labels in advance.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过一组电影和对应的实际查询，我们拥有一个完美的搜索评估数据集？——所有项目都为更广泛的观众所熟知，我们提前知道正确标签。
 - en: 'All major crowd-sourcing platforms like [Amazon Mechanical Turk](https://www.mturk.com/),
     [Scale.com](https://scale.com/) and [Toloka.ai](https://toloka.ai/) have out-of-the-box
     templates for typical search evaluation:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有主要的众包平台，如 [Amazon Mechanical Turk](https://www.mturk.com/)、[Scale.com](https://scale.com/)
+    和 [Toloka.ai](https://toloka.ai/) 都有针对典型搜索评估的现成模板：
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/88a42b1a6926e6a3dc460003015e66dc.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/88a42b1a6926e6a3dc460003015e66dc.png)'
 - en: A typical [search ranking evaluation template](https://toloka.ai/en/docs/template-builder/).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个典型的 [搜索排名评估模板](https://toloka.ai/en/docs/template-builder/)。
 - en: 'But there’s a nice trick in such templates, preventing you from shooting yourself
     in the foot with position bias: each item must be examined independently. Even
     if multiple items are present on screen, their ordering is random! But does random
     item order prevents people from clicking on the first results?'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这些模板中有一个巧妙的技巧，防止你因位置偏差而自找麻烦：每个项目必须独立检查。即使屏幕上出现多个项目，它们的排序也是随机的！但随机的项目顺序是否能阻止人们点击第一个结果？
 - en: The raw data for the experiment is available on [github.com/metarank/msrd](https://github.com/metarank/msrd),
     but the main observation is that **people still click more on the first position,
     even on randomly-ranked items**!
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验的原始数据可以在 [github.com/metarank/msrd](https://github.com/metarank/msrd) 上找到，但主要观察结果是**即使在随机排序的项目上，人们仍然更倾向于点击第一个位置**！
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/2e1ecb462c90ad95cd534aacbd1055c5.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/2e1ecb462c90ad95cd534aacbd1055c5.png)'
 - en: More clicks on first items, even for random ranking.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使在随机排名中，第一个项目的点击次数也更多。
 - en: Inverse Propensity Weighting
+  id: totrans-32
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 逆向倾向加权
 - en: 'But how can you offset the impact of position on implicit feedback you get
     from clicks? Each time you measure the click probability of an item, you observe
     the combination of two independent variables:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 但你如何抵消点击的隐性反馈中位置的影响？每次你测量一个项目的点击概率时，你观察到的是两个独立变量的组合：
 - en: '**Bias**: the probability of clicking on a specific position in the list.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**偏差**：点击列表中特定位置的概率。'
 - en: '**Relevance**: the importance of the item within the current context (like
     BM25 score coming from ElasticSearch, and cosine similarity in recommendations)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**相关性**：项目在当前上下文中的重要性（例如来自ElasticSearch的BM25得分和推荐中的余弦相似度）'
 - en: 'In the MSRD dataset mentioned in the previous paragraph, it’s hard to distinguish
     the impact of position independently from BM25 relevance as you only observe them
     combined together:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前一段提到的MSRD数据集中，很难将位置的影响与BM25相关性独立区分，因为你只能观察到它们的组合：
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/c4c4bbd8903d1fcbf0323e14c6ea84b9.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/c4c4bbd8903d1fcbf0323e14c6ea84b9.png)'
 - en: When sorted by BM25, people prefer relevant items.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 按BM25排序时，人们更喜欢相关项目。
 - en: 'For example, 18% of clicks are happening on position #1\. Does this only happen
     because we have the most relevant item presented there? Will the same item on
     position #20 get the same amount of clicks?'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，18%的点击发生在第1位。这只是因为我们在这里展示了最相关的项目吗？如果将相同的项目放在第20位，是否会获得相同数量的点击？
 - en: 'The [Inverse Propensity Weighting](https://arxiv.org/abs/1608.04468) approach
     suggests that the observed click probability on a position is just a combination
     of two independent variables:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[逆向倾向加权](https://arxiv.org/abs/1608.04468)方法表明，某个位置的观察点击概率只是两个独立变量的组合：'
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/e8e6f96d9f6535adcf8fe361113a7de2.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/e8e6f96d9f6535adcf8fe361113a7de2.png)'
 - en: Is true relevance independent from position?
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 真实的相关性是否独立于位置？
 - en: 'And then, if you estimate the click probability on each position (the propensity),
     you can weight all your relevance labels with it and get an actual unbiased relevance:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，如果你估算每个位置的点击概率（倾向性），你可以用它来加权所有相关性标签，并获得实际的无偏相关性：
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/830ebf60b98faa14e196324f7735eda8.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/830ebf60b98faa14e196324f7735eda8.png)'
 - en: Weighting by propensity
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过倾向性加权
 - en: But how can you estimate the propensity in practice? The most common method
     is introducing a minor shuffling to rankings so that the same items within the
     same context (e.g., for a search query) will be evaluated on different positions.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在实践中如何估算倾向性？最常见的方法是对排名进行轻微的随机排序，这样在相同上下文中（例如搜索查询）相同的项目会在不同的位置上进行评估。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/08616038c65c5c57ad67831e8031af39.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/08616038c65c5c57ad67831e8031af39.png)'
 - en: Estimating the propensity by shuffling.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过随机排序来估算倾向性。
 - en: But adding extra shuffling will definitely degrade your business metrics like
     CTR and Conversion Rate. Are there any less invasive alternatives not involving
     shuffling?
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 但额外的随机排序肯定会降低你的业务指标，如点击率和转化率。是否有不涉及随机排序的更少侵入性的替代方法？
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/b1b1ddd9d13976a75764f545f945a169.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/b1b1ddd9d13976a75764f545f945a169.png)'
 - en: 'A slide from MICES’19 talk [Personalizing Search results in real-time](https://www.youtube.com/watch?v=AYdOpfY8jQU):
     a 2.8% drop in conversion when shuffling search results!'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自 MICES’19 演讲的幻灯片[实时个性化搜索结果](https://www.youtube.com/watch?v=AYdOpfY8jQU)：搜索结果随机排序时转化率下降
+    2.8%！
 - en: Position-Aware Learning
+  id: totrans-52
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 位置感知学习
 - en: 'A [position-aware approach to ranking](https://www.semanticscholar.org/paper/PAL%3A-a-position-bias-aware-learning-framework-for-Guo-Yu/4eb8bb576a5603b82c27d7f40e508b7dc8c1c0cc)
     suggests asking your ML model to optimize both ranking relevancy and position
     impact at the same time:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个[位置感知的排名方法](https://www.semanticscholar.org/paper/PAL%3A-a-position-bias-aware-learning-framework-for-Guo-Yu/4eb8bb576a5603b82c27d7f40e508b7dc8c1c0cc)建议让你的机器学习模型同时优化排名相关性和位置影响：
 - en: on training time, you use item position as an input feature,
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在训练时，你使用项目位置作为输入特征，
 - en: In the prediction stage, you replace it with a **constant** value.
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在预测阶段，你用一个**常量**值来替代它。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/62291befb6c882510da1651b44375f6e.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/62291befb6c882510da1651b44375f6e.png)'
 - en: Replacing biased factors with constants during the inference
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在推断过程中用常量替代偏差因素
 - en: 'In other words, you trick your ranking ML model into detecting how position
     affects relevance during the training but zero out this feature during the prediction:
     all the items are simultaneously being presented in the same position.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 换句话说，你让你的排名机器学习模型在训练时检测位置如何影响相关性，但在预测时将这一特征归零：所有项目同时呈现在相同位置上。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/5a123555f3a5afe1ff2d3a3ea732d1a0.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/5a123555f3a5afe1ff2d3a3ea732d1a0.png)'
 - en: v
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: v
 - en: But which constant value should you choose? The authors of the [PAL](https://www.semanticscholar.org/paper/PAL%3A-a-position-bias-aware-learning-framework-for-Guo-Yu/4eb8bb576a5603b82c27d7f40e508b7dc8c1c0cc)
     paper did a couple of numerical experiments on selecting the optimal value?—?the
     rule of thumb is not to pick too high positions, as there’s too much noise.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 但你应该选择哪个常量值？[PAL](https://www.semanticscholar.org/paper/PAL%3A-a-position-bias-aware-learning-framework-for-Guo-Yu/4eb8bb576a5603b82c27d7f40e508b7dc8c1c0cc)
+    论文的作者做了一些数值实验来选择最佳值——经验法则是不选择过高的位置，因为噪声太多。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/495e2391d7d8b5e3d9a2cebeeb84f108.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/495e2391d7d8b5e3d9a2cebeeb84f108.png)'
 - en: Authors of [PAL](https://www.semanticscholar.org/paper/PAL%3A-a-position-bias-aware-learning-framework-for-Guo-Yu/4eb8bb576a5603b82c27d7f40e508b7dc8c1c0cc)
     tested different position constant values
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PAL](https://www.semanticscholar.org/paper/PAL%3A-a-position-bias-aware-learning-framework-for-Guo-Yu/4eb8bb576a5603b82c27d7f40e508b7dc8c1c0cc)
+    的作者测试了不同的位置常量值'
 - en: Practical PAL
+  id: totrans-64
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实用的PAL
 - en: 'The PAL approach is already a part of multiple open-source tools for building
     recommendations and search:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: PAL 方法已经成为多个开源推荐和搜索工具的一部分：
 - en: '[ToRecSys](https://github.com/p768lwy3/torecsys) implements PAL as a bias-elimination
     approach to train recommender systems on biased data.'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ToRecSys](https://github.com/p768lwy3/torecsys) 实现了 PAL 作为一种偏差消除方法，以在有偏数据上训练推荐系统。'
 - en: '[Metarank](https://github.com/metarank/metarank) can use a PAL-driven feature
     to train an unbiased LambdaMART Learn-to-Rank model.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Metarank](https://github.com/metarank/metarank) 可以使用基于 PAL 的特征来训练一个无偏的 LambdaMART
+    Learn-to-Rank 模型。'
 - en: 'As the position-aware approach is just a hack around feature engineering, in
     [Metarank](https://github.com/metarank/metarank), it is only a matter of adding
     yet another feature definition:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于位置感知方法仅仅是特征工程中的一个小窍门，在 [Metarank](https://github.com/metarank/metarank) 中，只需再添加一个特征定义即可：
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/9d3c0714d0aa703729e7b5e9541b2c3d.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/9d3c0714d0aa703729e7b5e9541b2c3d.png)'
 - en: Adding [position](https://docs.metarank.ai/reference/overview/feature-extractors/relevancy#position)
     as a ranking feature for a Learn-to-Rank model
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 [位置](https://docs.metarank.ai/reference/overview/feature-extractors/relevancy#position)
+    作为 Learn-to-Rank 模型的排名特征
 - en: 'On an MSRD dataset mentioned above, such a PAL-inspired ranking feature has
     quite a high SHAP importance value compared to other ranking features:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述 MSRD 数据集上，这种受 PAL 启发的排名特征相比其他排名特征具有较高的 SHAP 重要性值。
 - en: '![Dealing with Position Bias in Recommendations and Search](../Images/d3f30503972ffee1dfbc5eb671c512a6.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![处理推荐和搜索中的位置偏差](../Images/d3f30503972ffee1dfbc5eb671c512a6.png)'
 - en: Importance of the position while training the LambdaMART model
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练 LambdaMART 模型时位置的重要性
 - en: Last Words
+  id: totrans-74
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结束语
 - en: 'The position-aware learning approach is not only limited to pure ranking tasks
     and position de-biasing: you can use this trick to overcome any other type of
     bias:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 位置感知学习方法不仅限于纯排名任务和位置去偏：你可以使用这个技巧来克服任何其他类型的偏差：
 - en: For the **presentation bias** due to a grid layout, you can introduce a pair
     of features for an item’s row and column position during the training. But swap
     them to a constant during the prediction.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于由于网格布局造成的**展示偏差**，你可以在训练过程中引入一对特征，表示项目的行和列位置。但在预测时将它们交换为常数。
 - en: For the **model bias**, when items presented more often receive more clicks?—?you
     can introduce a “number of clicks” training feature and replace it with a constant
     value on prediction time.
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于**模型偏差**，当展示更多的项目获得更多的点击时？——你可以引入一个“点击次数”训练特征，并在预测时用一个常数值替换它。
 - en: The ML model trained with the PAL approach should produce an unbiased prediction.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 PAL 方法训练的机器学习模型应产生无偏的预测。
 - en: '**[Roman Grebennikov](https://www.linkedin.com/in/romangrebennikov/)** is a
     Principal Engineer at Delivery Hero SE, working on search personalization and
     recommendations. A pragmatic fan of functional programming, learn-to-rank models
     and performance engineering.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Roman Grebennikov](https://www.linkedin.com/in/romangrebennikov/)** 是 Delivery
+    Hero SE 的首席工程师，专注于搜索个性化和推荐。他是功能编程、Learn-to-Rank 模型和性能工程的务实爱好者。'
 - en: More On This Topic
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Dealing With Noisy Labels in Text Data](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理文本数据中的噪声标签](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调优（Python）](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Uplimit 的机器学习搜索课程提升您的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[Understanding Bias-Variance Trade-Off in 3 Minutes](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 3 分钟内理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)'
 - en: '[The Bias-Variance Trade-off](https://www.kdnuggets.com/2022/08/biasvariance-tradeoff.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[偏差-方差权衡](https://www.kdnuggets.com/2022/08/biasvariance-tradeoff.html)'

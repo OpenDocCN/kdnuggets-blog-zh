@@ -3,19 +3,23 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 高斯朴素贝叶斯解释
 - en: 原文：[https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)
 - en: '![Gaussian Naive Bayes, Explained](../Images/ee88ec80ea1eb5937228a0c928c54194.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯解释](../Images/ee88ec80ea1eb5937228a0c928c54194.png)'
 - en: The decision region of a Gaussian naive Bayes classifier. Image by the Author.
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 高斯朴素贝叶斯分类器的决策区域。图像由作者提供。
 - en: 'I think this is a classic at the beginning of each data science career: the *Naive
     Bayes Classifier*. Or I should rather say the *family* of naive Bayes classifiers,
     as they come in many flavors. For example, there is a multinomial naive Bayes,
@@ -25,30 +29,37 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我认为这在每个数据科学职业生涯的开始阶段都是一个经典：*朴素贝叶斯分类器*。或者我应该更准确地说是*朴素贝叶斯分类器家族*，因为它们有很多不同的变体。例如，有多项式朴素贝叶斯、伯努利朴素贝叶斯，以及高斯朴素贝叶斯分类器，它们在一个小细节上有所不同，正如我们将要发现的那样。朴素贝叶斯算法在设计上相当简单，但在许多复杂的现实世界场景中证明了其有用性。
 - en: In this article, you can learn
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，你可以学习到
 - en: how the naive Bayes classifiers work,
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 朴素贝叶斯分类器是如何工作的，
 - en: why it makes sense to define them the way they are and
   id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为什么这样定义它们是有意义的，以及
 - en: how to implement them in Python using NumPy.
   id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用 NumPy 在 Python 中实现它们。
 - en: You can find the code on [my Github](https://github.com/Garve/TDS/blob/main/TDS%20-%20Gaussian%20Naive%20Bayes.ipynb).
   id: totrans-9
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 你可以在 [我的 GitHub](https://github.com/Garve/TDS/blob/main/TDS%20-%20Gaussian%20Naive%20Bayes.ipynb)
+    上找到代码。
 - en: It might help a bit to check out my primer on Bayesian statistics [A gentle
     Introduction to Bayesian Inference](https://towardsdatascience.com/a-gentle-introduction-to-bayesian-inference-6a7552e313cb) to
     get used to the Bayes formula. As we will implement the classifier in a scikit
@@ -59,45 +70,57 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看我的贝叶斯统计入门文章 [贝叶斯推断的温柔介绍](https://towardsdatascience.com/a-gentle-introduction-to-bayesian-inference-6a7552e313cb)
+    可能会有所帮助，以便熟悉贝叶斯公式。由于我们将以符合 scikit-learn 的方式实现分类器，因此查看我的文章 [构建自定义 scikit-learn
+    回归器](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)
+    也很有价值。不过，scikit-learn 的开销相当小，你仍然应该能够跟上。
 - en: We will start exploring the astonishingly simple theory of naive Bayes classification
     and then turn to the implementation.
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将开始探索朴素贝叶斯分类的惊人简单理论，然后转向实现部分。
 - en: The Theory
   id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理论
 - en: 'What are we really interested in when classifying? What are we actually doing,
     what is the input and the output? The answer is simple:'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在分类时真正感兴趣的是什么？我们实际在做什么，输入和输出是什么？答案很简单：
 - en: Given a data point x, what is the probability of x belonging to some class c?
   id: totrans-14
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 给定一个数据点 x，x 属于某个类别 c 的概率是多少？
 - en: That’s all we want to answer with **any** classification. You can directly model
     this statement as a conditional probability: *p*(*c*|*x*).
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们希望通过**任何**分类来回答的所有问题。你可以将这个陈述直接建模为条件概率：*p*(*c*|*x*)。
 - en: For example, if there are
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果有
 - en: 3 classes *c₁*, *c₂*, *c₃*, and
   id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 3 个类别 *c₁*, *c₂*, *c₃*，以及
 - en: '*x *consists of 2 features *x₁*, *x₂*,'
   id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*x* 由 2 个特征 *x₁* 和 *x₂* 组成，'
 - en: the result of a classifier could be something like *p*(*c₁*|*x₁*, *x₂*)=0.3,
     *p*(*c₂*|*x₁*, *x₂*)=0.5 and *p*(*c₃*|*x₁*, *x₂*)=0.2\. If we care for a single
     label as the output, we would choose the one with the highest probability, i.e. *c₂*
@@ -105,80 +128,98 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类器的结果可能是这样的：*p*(*c₁*|*x₁*, *x₂*)=0.3，*p*(*c₂*|*x₁*, *x₂*)=0.5 和 *p*(*c₃*|*x₁*, *x₂*)=0.2。如果我们关心单一标签作为输出，我们会选择概率最高的那个，即这里的
+    *c₂*，概率为 50%。
 - en: The naive Bayes classifier tries to compute these probabilities directly.
   id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 朴素贝叶斯分类器尝试直接计算这些概率。
 - en: Naive Bayes
   id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 朴素贝叶斯
 - en: Ok, so given a data point *x*, we want to compute *p*(*c*|*x*) for all classes *c *and
     then output the* c* with the highest probability. In formulas you often see this
     as
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，给定一个数据点 *x*，我们想要计算所有类别 *c* 的 *p*(*c*|*x*)，然后输出概率最高的 *c*。在公式中你经常看到这样的表达
 - en: '![Gaussian Naive Bayes, Explained](../Images/a52355ef1a080e26c5fd8aa72c7256cf.png)'
   id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯解释](../Images/a52355ef1a080e26c5fd8aa72c7256cf.png)'
 - en: Image by the Author.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像由作者提供。
 - en: '**Note:** max *p*(*c*|*x*) returns the maximum probability while argmax *p*(*c*|*x*)
     returns the *c* with this highest probability.'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** max *p*(*c*|*x*) 返回最大概率，而 argmax *p*(*c*|*x*) 返回具有最高概率的 *c*。'
 - en: 'But before we can optimize *p*(*c*|*x*), we have to be able to compute it.
     For this, we use [Bayes’ theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem):'
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在我们能够优化 *p*(*c*|*x*)之前，我们必须能够计算它。为此，我们使用 [贝叶斯定理](https://en.wikipedia.org/wiki/Bayes%27_theorem)：
 - en: '![Gaussian Naive Bayes, Explained](../Images/06709efebc3ddc7d032db27c132ad470.png)'
   id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯解释](../Images/06709efebc3ddc7d032db27c132ad470.png)'
 - en: Bayes theorem. Image by the Author.
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 贝叶斯定理。图片由作者提供。
 - en: 'This is the Bayes part of naive Bayes. But now, we have the following problem:
     What are *p*(*x*|*c*) and *p*(*c*)?'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是朴素贝叶斯中的贝叶斯部分。但是现在我们面临以下问题：*p*(*x*|*c*)和 *p*(*c*)是什么？
 - en: '**This is what the training of a naive Bayes classifier is all about.**'
   id: totrans-30
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**这就是朴素贝叶斯分类器训练的全部内容。**'
 - en: The Training
   id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 训练
 - en: To illustrate everything, let us use a toy dataset with **two real features** *x₁*, *x₂*,
     and **three classes** *c₁*, *c₂*, *c₃* in the following.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明所有内容，以下我们使用一个包含 **两个实际特征** *x₁*、 *x₂*和 **三个类别** *c₁*、 *c₂*、 *c₃*的玩具数据集。
 - en: '![Gaussian Naive Bayes, Explained](../Images/480de29d9f4a217537ee3d8085c70468.png)'
   id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯解释](../Images/480de29d9f4a217537ee3d8085c70468.png)'
 - en: The data, visualized. Image by the Author.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据的可视化。图片由作者提供。
 - en: You can create this exact dataset via
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过以下方式创建这个确切的数据集
 - en: '[PRE0]'
   id: totrans-36
   prefs: []
@@ -191,12 +232,14 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从 **类别概率** *p*(*c*)开始，这是观察到某个类别 *c* 在标记数据集中的概率。估计这个概率的最简单方法是计算类别的相对频率并将其作为概率。我们可以用我们的数据集来看这到底意味着什么。
 - en: There are 7 out of 20 points labeled class *c₁* (blue) in the dataset, therefore
     we say *p*(*c₁*)=7/20\. We have 7 points for class *c₂* (red) as well, therefore
     we set *p*(*c₂*)=7/20\. The last class *c₃* (yellow) has only 6 points, hence *p*(*c₃*)=6/20.
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集中有20个点中有7个标记为类别 *c₁*（蓝色），因此我们说 *p*(*c₁*)=7/20。类别 *c₂*（红色）也有7个点，因此我们设定 *p*(*c₂*)=7/20。最后一个类别 *c₃*（黄色）只有6个点，因此 *p*(*c₃*)=6/20。
 - en: This simple calculation of the class probabilities resembles a maximum likelihood
     approach. You can, however, also use another *prior* distribution, if you like.
     For example, if you know that this dataset is not representative of the true population
@@ -205,6 +248,8 @@
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种简单的类别概率计算类似于最大似然方法。然而，如果你愿意，也可以使用其他 *先验* 分布。例如，如果你知道这个数据集不代表真实的总体，因为类别 *c₃*
+    应该在50%的情况下出现，那么你可以设定 *p*(*c₁*)=0.25、 *p*(*c₂*)=0.25 和 *p*(*c₃*)=0.5。任何有助于提高测试集性能的方法都是可行的。
 - en: We now turn to the **likelihood** *p*(*x*|*c*)=*p*(*x₁*, *x₂*|*c*). One approach
     to calculate this likelihood is to filter the dataset for samples with label *c *and
     then try to find a distribution (e.g. a 2-dimensional Gaussian) that captures
@@ -212,26 +257,31 @@
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们转向 **似然** *p*(*x*|*c*)=*p*(*x₁*, *x₂*|*c*)。计算这种似然的一种方法是过滤数据集中标签为 *c* 的样本，然后尝试找到一个能够捕捉特征 *x₁*、 *x₂*的分布（例如一个二维高斯分布）。
 - en: Unfortunately, usually, we don’t have enough samples per class to do a proper
     estimation of the likelihood.
   id: totrans-41
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 不幸的是，通常我们每个类别的样本不足以进行适当的似然估计。
 - en: To be able to build a more robust model, we make the **naive assumption **that
     the features *x₁*, *x₂* are *stochastically independent*, given *c*. This is just
     a fancy way of making the math easier via
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了建立一个更强健的模型，我们做出 **朴素假设**，即在给定 *c* 的情况下，特征 *x₁*、 *x₂* 是*随机独立*的。这只是通过贝叶斯定理使数学更简单的一种花哨方式。
 - en: '![Gaussian Naive Bayes, Explained](../Images/9fb96ba70552e0566460c7be1094fbfb.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯解释](../Images/9fb96ba70552e0566460c7be1094fbfb.png)'
 - en: Image by the Author
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: '**for every class *c***. This is where the **naive** part of naive Bayes comes
     from because this equation does not hold in general. Still, even then the naive
     Bayes yields good, sometimes outstanding results in practice. Especially for NLP
@@ -239,12 +289,15 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**对于每个类别 *c***。这就是朴素贝叶斯中 **朴素** 部分的来源，因为这个方程在一般情况下是不成立的。不过，即便如此，朴素贝叶斯在实践中仍能产生良好，有时甚至是出色的结果。特别是对于具有词袋特征的自然语言处理问题，多项式朴素贝叶斯表现尤为出色。'
 - en: The arguments given above are the same for any naive Bayes classifier you can
     find. Now it just depends on how you model *p(x₁|c₁), p(x₂|c₁), p(x₁|c₂), p(x₂|c₂),
     p(x₁|c₃)* and *p(x₂|c₃)*.
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面给出的参数对于任何朴素贝叶斯分类器都是相同的。现在只是取决于你如何建模*p(x₁|c₁), p(x₂|c₁), p(x₁|c₂), p(x₂|c₂),
+    p(x₁|c₃)*和*p(x₂|c₃)*。
 - en: If your features are 0 and 1 only, you could use a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution).
     If they are integers, a [Multinomial distribution](https://en.wikipedia.org/wiki/Multinomial_distribution).
     However, we have real feature values and decide for a **Gaussian** distribution,
@@ -252,14 +305,17 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的特征只有0和1，你可以使用一个[Bernoulli分布](https://en.wikipedia.org/wiki/Bernoulli_distribution)。如果它们是整数，则使用[多项分布](https://en.wikipedia.org/wiki/Multinomial_distribution)。然而，我们有实际的特征值，并决定使用**高斯**分布，因此称为高斯朴素贝叶斯。我们假设以下形式
 - en: '![Gaussian Naive Bayes, Explained](../Images/43e5b16b9a6b3eee4aba7934c23ede00.png)'
   id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯，解释](../Images/43e5b16b9a6b3eee4aba7934c23ede00.png)'
 - en: Image by the Author.
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: where *μᵢ,ⱼ *is the mean and* σᵢ,ⱼ *is the standard deviation that we have to
     estimate from the data. This means that we get one mean for each feature *i* coupled
     with a class *cⱼ**,* in our case 2*3=6 means. The same goes for the standard deviations. **This
@@ -267,12 +323,14 @@
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中*μᵢ,ⱼ*是均值，*σᵢ,ⱼ*是标准差，我们需要从数据中估计。这意味着我们为每个特征*i*和一个类*cⱼ*获得一个均值，在我们的例子中是2*3=6个均值。标准差也是如此。**这需要一个例子。**
 - en: 'Let us try to estimate *μ₂,₁* and *σ₂,₁*. Because *j*=1, we are only interested
     in class *c₁*, let us only keep samples with this label. The following samples
     remain:'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试估计*μ₂,₁*和*σ₂,₁*。因为*j*=1，我们只对类*c₁*感兴趣，所以只保留此标签的样本。剩下的样本如下：
 - en: '[PRE1]'
   id: totrans-52
   prefs: []
@@ -284,20 +342,25 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，由于*i*=2，我们只需考虑第二列。*μ₂*,₁是这一列的均值，*σ₂*,₁是这一列的标准差，即*μ₂*,₁ = 0.49985176和*σ₂*,₁
+    = 0.9789976。
 - en: These numbers make sense if you look at the scatter plot from above again. The
     features *x₂* of the samples from class *c₁* are around 0.5, as you can see from
     the picture.
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你再次查看上面的散点图，这些数字是合理的。类*c₁*的样本的特征*x₂*大约在0.5左右，从图片中可以看出。
 - en: We compute this now for the other five combinations and we are done!
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在计算其他五种组合，就完成了！
 - en: 'In Python, you can do it like this:'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Python中，你可以这样做：
 - en: '[PRE2]'
   id: totrans-57
   prefs: []
@@ -307,6 +370,7 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们接收到
 - en: '[PRE3]'
   id: totrans-59
   prefs: []
@@ -316,35 +380,43 @@
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是高斯朴素贝叶斯分类器训练的结果。
 - en: Making Predictions
   id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 进行预测
 - en: The complete prediction formula is
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的预测公式是
 - en: '![Gaussian Naive Bayes, Explained](../Images/4c2d5e28f9547e0dd95f9cb5c9a048eb.png)'
   id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯，解释](../Images/4c2d5e28f9547e0dd95f9cb5c9a048eb.png)'
 - en: Image by the Author.
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: Let’s assume a new data point *x*=*(-2, 5) comes in.
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设一个新的数据点*x*=*(-2, 5)进入。
 - en: '![Gaussian Naive Bayes, Explained](../Images/90959460a8c559b07e93067527e10527.png)'
   id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯，解释](../Images/90959460a8c559b07e93067527e10527.png)'
 - en: Image by the Author.
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: To see which class it belongs to, let us compute *p*(*c*|*x**) for all classes.
     From the picture, it should belong to class *c₃* = 2, but let’s see. Let us ignore
     the denominator *p*(*x*) for a second. Using the following loop computed the nominators
@@ -352,6 +424,8 @@
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了确定它属于哪个类，让我们计算*p*(*c*|*x*)对于所有类。从图片来看，它应该属于类*c₃* = 2，但我们来看一下。让我们暂时忽略分母*p*(*x*)。使用以下循环计算*j*
+    = 1, 2, 3的分子。
 - en: '[PRE4]'
   id: totrans-69
   prefs: []
@@ -361,6 +435,7 @@
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们接收到
 - en: '[PRE5]'
   id: totrans-71
   prefs: []
@@ -374,23 +449,28 @@
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，这些*概率*（我们不应该这样称呼）不加起来是1，因为我们忽略了分母。然而，这没有问题，因为我们可以将这些未标准化的概率除以它们的总和，这样它们的总和将加起来是1。因此，将这三个值除以约0.00032569的总和，我们得到
 - en: '![Gaussian Naive Bayes, Explained](../Images/e0a6e1d05ebe55271551267e08ace5e1.png)'
   id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯，解释](../Images/e0a6e1d05ebe55271551267e08ace5e1.png)'
 - en: Image by the Author.
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供。
 - en: A clear winner, as we expected. Now, let us implement it!
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所预期的那样，结果明显。现在，让我们实现它！
 - en: The Complete Implementation
   id: totrans-76
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 完整实现
 - en: This implementation is by far not efficient, not numerically stable, it only
     serves an educational purpose. We have discussed most of the things, so it should
     be easy to follow along now. You can ignore all the `check` functions, or read
@@ -399,6 +479,9 @@
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个实现目前还远远不够高效，也不够数值稳定，它只是用于教育目的。我们已经讨论了大部分内容，因此现在应该很容易跟进。你可以忽略所有的 `check` 函数，或者阅读我的文章
+    [构建你自己的自定义 scikit-learn](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)
+    如果你对它们的具体作用感兴趣。
 - en: Just note that I implemented a `predict_proba` method first to compute probabilities.
     The method `predict` just calls this method and returns the index (=class) with
     the highest probability using an argmax function (there it is again!). The class
@@ -406,6 +489,8 @@
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我首先实现了一个 `predict_proba` 方法来计算概率。`predict` 方法只是调用这个方法，并使用 argmax 函数返回具有最高概率的索引（类别）。类别从
+    0 到 *k*-1，其中 *k* 是类别的数量。
 - en: '[PRE6]'
   id: totrans-79
   prefs: []
@@ -416,12 +501,15 @@
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 测试实现
 - en: While the code is quite short it is still too long to be completely sure that
     we didn’t do any mistakes. So, let us check how it fares against the [scikit-learn
     GaussianNB classifier](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html).
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管代码非常简短，但仍然较长，无法完全确保没有任何错误。所以，让我们检查一下它与 [scikit-learn 高斯NB分类器](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html)
+    的比较。
 - en: '[PRE7]'
   id: totrans-82
   prefs: []
@@ -431,6 +519,7 @@
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '[PRE8]'
   id: totrans-84
   prefs: []
@@ -440,6 +529,7 @@
   id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `predict` 方法的预测结果是
 - en: '[PRE9]'
   id: totrans-86
   prefs: []
@@ -449,6 +539,7 @@
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们使用 scikit-learn。插入一些代码
 - en: '[PRE10]'
   id: totrans-88
   prefs: []
@@ -458,6 +549,7 @@
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果
 - en: '[PRE11]'
   id: totrans-90
   prefs: []
@@ -470,6 +562,8 @@
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 数字看起来与我们的分类器的结果有点类似，但在最后几个显示的数字上有一些偏差。我们做错了什么吗？ **没有。** scikit-learn 版本只是使用了另一个超参数
+    `var_smoothing=1e-09`。如果我们将其设置为 **零**，我们就能得到完全相同的结果。完美！
 - en: Have a look at the decision regions of our classifier. I also marked the three
     points we used for testing. That one point close to the border has only a 56.9%
     chance to belong to the red class, as you can see from the `predict_proba` outputs.
@@ -477,19 +571,23 @@
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 看一下我们分类器的决策区域。我还标记了我们用于测试的三个点。你可以从 `predict_proba` 的输出中看到，那些接近边界的点只有 56.9% 的概率属于红色类别。其他两个点的分类信心要高得多。
 - en: '![Gaussian Naive Bayes, Explained](../Images/8aecf2b50a46459e9453ce1b0dcc4844.png)'
   id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![高斯朴素贝叶斯，解释](../Images/8aecf2b50a46459e9453ce1b0dcc4844.png)'
 - en: The decision regions with the 3 new points. Image by the Author.
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有三个新点的决策区域。图片来源：作者。
 - en: Conclusion
   id: totrans-95
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'In this article, we have learned how the Gaussian naive Bayes classifier works
     and gave an intuition on why it was designed that way — it is a direct approach
     to model the probability of interest. Compare this with Logistic regression: there,
@@ -499,6 +597,8 @@
   id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们了解了高斯朴素贝叶斯分类器的工作原理，并对其设计方式进行了直观的解释——这是一种直接建模感兴趣概率的方法。与逻辑回归相比，逻辑回归中概率是通过线性函数建模，并在其上应用了一个
+    sigmoid 函数。这仍然是一个简单的模型，但不像朴素贝叶斯分类器那样自然。
 - en: We continued by calculating a few examples and collecting some useful pieces
     of code on the way. Finally, we have implemented a complete Gaussian naive Bayes
     classifier in a way that works well with scikit-learn. That means you can use
@@ -506,17 +606,21 @@
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们继续计算了几个例子，并在过程中收集了一些有用的代码片段。最后，我们实现了一个完整的高斯朴素贝叶斯分类器，并使其能够与 scikit-learn 良好配合。这意味着你可以在管道或网格搜索中使用它。
 - en: In the end, we did a small sanity check by importing scikit-learns own Gaussian
     naive Bayes classifier and testing if both, our and scikit-learn’s classifier
     yield the same result. This test was successful.
   id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们通过导入 scikit-learn 自身的高斯朴素贝叶斯分类器，并测试我们的分类器和 scikit-learn 的分类器是否产生相同的结果，进行了一个小的正确性检查。这个测试是成功的。
 - en: '**[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** is a Data
     Scientist at METRO.digital and Author at Towards Data Science.'
   id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[罗伯特·库布勒博士](https://www.linkedin.com/in/robert-kuebler/)** 是 METRO.digital
+    的数据科学家以及 Towards Data Science 的作者。'
 - en: '[Original](https://towardsdatascience.com/learning-by-implementing-gaussian-naive-bayes-3f0e3d2c01b2).
     Reposted with permission.'
   id: totrans-100
