@@ -3,55 +3,69 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在 Snowflake 上构建流式半结构化分析平台
 - en: 原文：[https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)
 - en: '![How to Build a Streaming Semi-structured Analytics Platform on Snowflake](../Images/0a41ce35c69079e4de0a6381e75f2dbb.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在 Snowflake 上构建流式半结构化分析平台](../Images/0a41ce35c69079e4de0a6381e75f2dbb.png)'
 - en: Image by Editor
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 编辑者图片
 - en: Introduction
   id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Snowflake is a SaaS, i.e., software as a service that is well suited for running
     analytics on large volumes of data. The platform is supremely easy to use and
     is well suited for business users, analytics teams, etc., to get value from the
@@ -61,11 +75,14 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Snowflake 是一种 SaaS，即软件即服务，特别适合对大量数据进行分析。该平台极其易于使用，非常适合业务用户、分析团队等从不断增长的数据集中获得价值。本文将深入探讨在
+    Snowflake 上为医疗数据创建流式半结构化分析平台的组件。我们还将讨论此阶段的一些关键考虑因素。
 - en: Context
   id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 背景
 - en: There are a lot of different data formats that the healthcare industry as a
     whole supports but we will consider one of the latest semi-structured formats
     i.e. FHIR (Fast Healthcare Interoperability Resources) for building our analytics
@@ -79,126 +96,151 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 医疗行业支持多种不同的数据格式，但我们将考虑最新的半结构化格式，即 FHIR（快速医疗互操作资源）来构建我们的分析平台。这种格式通常将所有以患者为中心的信息嵌入到一个
+    JSON 文档中。该格式包含大量信息，如所有医院接触、实验室结果等。当分析团队拥有一个可查询的数据湖时，可以提取有价值的信息，例如有多少患者被诊断为癌症等。假设所有这些
+    JSON 文件每 15 分钟通过不同的 AWS 服务或端 API 端点推送到 AWS S3（或其他公共云存储）。
 - en: Architectural Design
   id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 架构设计
 - en: '![How to Build a Streaming Semi-structured Analytics Platform on Snowflake](../Images/62bc8cb5a28e2c4ab13d65099ab2f1da.png)'
   id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在 Snowflake 上构建流式半结构化分析平台](../Images/62bc8cb5a28e2c4ab13d65099ab2f1da.png)'
 - en: Architectural Components
   id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 架构组件
 - en: '**AWS S3 to Snowflake RAW zone:**'
   id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**AWS S3 到 Snowflake RAW 区域：**'
 - en: Data needs to be continuously streamed from AWS S3 into the RAW zone of Snowflake.
   id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 数据需要不断地从 AWS S3 流式传输到 Snowflake 的 RAW 区域。
 - en: Snowflake offers Snowpipe managed service, which can read JSON files from S3
     in a continuous streaming way.
   id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Snowflake 提供 Snowpipe 管理服务，可以以连续流式方式读取 S3 中的 JSON 文件。
 - en: A table with a variant column needs to be created in the Snowflake RAW zone
     to hold the JSON data in the native format.
   id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 Snowflake RAW 区域中需要创建一个具有变体列的表，以保存原生格式的 JSON 数据。
 - en: '**Snowflake RAW Zone to Streams:**'
   id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Snowflake RAW 区域到流：**'
 - en: Streams is managed change data capture service which will essentially be able
     to capture all the new incoming JSON documents into Snowflake RAW zone
   id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Streams 是一种管理更改数据捕获服务，能够捕获所有新到达的 JSON 文档到 Snowflake RAW 区域
 - en: Streams would be pointed to the Snowflake RAW Zone table and should be set to
     append=true
   id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Streams应指向Snowflake RAW Zone表，并应设置为append=true
 - en: Streams are just like any table and easily queryable.
   id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Streams就像任何表一样，易于查询。
 - en: '**Snowflake Task 1:**'
   id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Snowflake任务1：**'
 - en: Snowflake Task is an object that is similar to a scheduler. Queries or stored
     procedures can be scheduled to run using cron job notations
   id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Snowflake任务类似于调度程序。查询或存储过程可以使用cron作业符号安排运行。
 - en: In this architecture, we create Task 1 to fetch the data from Streams and ingest
     them into a staging table. This layer would be truncated and reload
   id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在此架构中，我们创建任务1来从Streams中获取数据，并将其导入临时表。此层将被截断并重新加载。
 - en: This is done to ensure new JSON documents are processed every 15 minutes
   id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这样做是为了确保每15分钟处理一次新的JSON文档。
 - en: '**Snowflake Task 2:**'
   id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Snowflake任务2：**'
 - en: This layer will convert the raw JSON document into reporting tables that the
     analytics team can easily query.
   id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 此层将原始JSON文档转换为分析团队可以轻松查询的报告表。
 - en: To convert JSON documents into structured format, the lateral flatten feature
     of Snowflake can be used.
   id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 要将JSON文档转换为结构化格式，可以使用Snowflake的lateral flatten功能。
 - en: Lateral flatten is an easy-to-use function that explodes the nested array elements
     and can be easily extracted using the ‘:’ notation.
   id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Lateral flatten是一个易于使用的功能，可以展开嵌套的数组元素，并可以使用‘：’符号轻松提取。
 - en: Key Considerations
   id: totrans-33
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 关键考虑事项
 - en: Snowpipe is recommended to be used with a few large files. The cost may go high
     if small files on external storage aren’t clubbed together
   id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 推荐使用Snowpipe处理少量大文件。如果小文件在外部存储中未合并，成本可能会很高。
 - en: In a production environment, ensure automated processes are created to monitor
     streams since once they go stale, data can’t be recovered from them
   id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在生产环境中，确保创建自动化进程以监控streams，因为一旦它们变得陈旧，数据将无法从中恢复。
 - en: The maximum allowed size of a single JSON document is 16MB compressed that can
     be loaded into Snowflake. If you have huge JSON documents that exceed these size
     limits, ensure you have a process to split them before ingesting them into Snowflake
@@ -206,11 +248,13 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 单个JSON文档允许的最大大小为16MB压缩，能够加载到Snowflake中。如果您有超出这些大小限制的大型JSON文档，请确保在将其导入Snowflake之前有一个拆分的过程。
 - en: Conclusion
   id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Managing semi-structured data is always challenging due to the nested structure
     of elements embedded inside the JSON documents. Consider the gradual and exponential
     increase of the volume of incoming data before designing the final reporting layer.
@@ -219,6 +263,7 @@
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于JSON文档中嵌入的元素的嵌套结构，管理半结构化数据始终具有挑战性。在设计最终报告层之前，请考虑即将到来的数据量的逐步和指数增长。本文旨在展示如何轻松构建半结构化数据的流管道。
 - en: '**[Milind Chaudhari](https://www.linkedin.com/in/milind-chaudhari/)** is a
     seasoned data engineer/data architect who has a decade of work experience in building
     data lakes/lakehouses using a variety of conventional & modern tools. He is extremely
@@ -227,36 +272,43 @@
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Milind Chaudhari](https://www.linkedin.com/in/milind-chaudhari/)** 是一位经验丰富的数据工程师/数据架构师，拥有十年的工作经验，使用各种传统和现代工具构建数据湖/湖仓。他对数据流架构充满热情，并且还是Packt和O''Reilly的技术审稿人。'
 - en: More On This Topic
   id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
   id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[天高任鸟飞：了解JetBlue如何使用Monte Carlo和Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
 - en: '[Data Warehousing with Snowflake for Beginners](https://www.kdnuggets.com/2022/02/data-warehousing-snowflake-beginners.html)'
   id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Snowflake数据仓库初学者指南](https://www.kdnuggets.com/2022/02/data-warehousing-snowflake-beginners.html)'
 - en: '[Top 6 Tools to Improve Your Productivity on Snowflake](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)'
   id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升Snowflake生产力的6大工具](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)'
 - en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
   id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习项目的简单快速数据流](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
 - en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
   id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Kafka和Risingwave构建Formula 1流数据管道](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
 - en: '[Introduction to Streaming-LLM: LLMs for Infinite-Length Inputs](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
   id: totrans-46
   prefs:
