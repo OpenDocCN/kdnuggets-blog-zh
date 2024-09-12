@@ -1,50 +1,79 @@
 - en: How to Speed Up Pandas with Modin
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何用 Modin 加速 Pandas
 - en: 原文：[https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html](https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html](https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Developer
     Relations at Anyscale**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，Anyscale
+    的开发者关系**'
 - en: '![Image for post](../Images/a2f02e7845fa9265b33d32c62787f1ad.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/a2f02e7845fa9265b33d32c62787f1ad.png)'
 - en: A goal of Modin is to allow data scientists to use the same code for small (kilobytes)
     and large datasets (terabytes). Image by [Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin 的目标之一是允许数据科学家使用相同的代码处理小型（千字节）和大型数据集（太字节）。图片由 [Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122)
+    提供。
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The pandas library provides easy-to-use data structures like pandas DataFrames
     as well as tools for data analysis. One issue with pandas is that it can be slow
     with large amounts of data. It[ wasn’t designed for analyzing 100 GB or 1 TB datasets](https://wesmckinney.com/blog/apache-arrow-pandas-internals/).
@@ -53,286 +82,446 @@
     one line of code and integration with the Python ecosystem and[ Ray](https://github.com/ray-project/ray) clusters.
     This tutorial goes over how to get started with Modin and how it can speed up
     your pandas workflows.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: pandas 库提供了易于使用的数据结构，如 pandas DataFrames，以及数据分析工具。pandas 的一个问题是处理大量数据时可能会很慢。它[并不是为分析
+    100 GB 或 1 TB 数据集而设计的](https://wesmckinney.com/blog/apache-arrow-pandas-internals/)。幸运的是，还有
+    [Modin](https://github.com/modin-project/modin) 库，它具有像通过更改一行代码来扩展 pandas 工作流的能力以及与
+    Python 生态系统和 [Ray](https://github.com/ray-project/ray) 集群集成等优点。本教程介绍了如何开始使用 Modin
+    以及它如何加速你的 pandas 工作流。
 - en: How to get started with Modin
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何开始使用 Modin
 - en: '![Image for post](../Images/1b52d1194af0e14293f4580370996975.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/1b52d1194af0e14293f4580370996975.png)'
 - en: To determine which Pandas methods to implement in Modin first, the developers
     of Modin scraped 1800 of the most upvoted Python Kaggle Kernels ([code](https://github.com/adgirish/kaggleScape)).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了确定在 Modin 中首先实现哪些 Pandas 方法，Modin 的开发人员抓取了 1800 个最受欢迎的 Python Kaggle Kernels
+    ([code](https://github.com/adgirish/kaggleScape))。
 - en: Modin’s coverage of the pandas API is over 90% with a focus on the most commonly
     used pandas methods like pd.read_csv, pd.DataFrame, df.fillna, and df.groupby.
     This means if you have a lot of data, you can perform most of the same operations
     as the pandas library faster. This section highlights some commonly used operations.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin 对 pandas API 的覆盖率超过 90%，重点关注最常用的 pandas 方法，如 pd.read_csv、pd.DataFrame、df.fillna
+    和 df.groupby。这意味着如果你有大量数据，你可以更快地执行大多数与 pandas 库相同的操作。本节突出了某些常用操作。
 - en: To get started, you need to install modin.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始使用，你需要安装 modin。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Image for post](../Images/0078b35ddc8a136cef3436abad5562c3.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/0078b35ddc8a136cef3436abad5562c3.png)'
 - en: Don’t forgot the “” when pip installing
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 'pip 安装时别忘了 “” '
 - en: Import Modin
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入 Modin
 - en: A major advantage of Modin is that it doesn’t require you to learn a new API.
     You only need to change your import statement.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin 的一个主要优势是它不要求你学习新的 API。你只需更改你的导入语句即可。
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Image for post](../Images/68afbbcf93a4fb01f628dc05e56aa19d.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/68afbbcf93a4fb01f628dc05e56aa19d.png)'
 - en: You only need to change your import statement to use Modin.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 你只需更改你的导入语句以使用 Modin。
 - en: Load data (read_csv)
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 加载数据（read_csv）
 - en: '![Image for post](../Images/04a7ef18ab5d3d7b96c45e74e16d2886.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/04a7ef18ab5d3d7b96c45e74e16d2886.png)'
 - en: Modin really shines with larger datasets ([image source](https://github.com/devin-petersohn/presentations/tree/master/pydata_ny_2018))
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin 在处理更大的数据集时表现非常出色（[图片来源](https://github.com/devin-petersohn/presentations/tree/master/pydata_ny_2018)）
 - en: The dataset used in this tutorial is from the [Health Insurance Marketplace](https://www.kaggle.com/hhs/health-insurance-marketplace?select=Rate.csv) dataset
     which is around 2GB .The code below reads the data into a Modin DataFrame.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程使用的数据集来自 [健康保险市场](https://www.kaggle.com/hhs/health-insurance-marketplace?select=Rate.csv)
+    数据集，约为 2GB。以下代码将数据读取到 Modin DataFrame 中。
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Image for post](../Images/1063273d8350e825928a9b8fd93f9b7d.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/1063273d8350e825928a9b8fd93f9b7d.png)'
 - en: In this case, Modin is faster due to it taking work off the main thread to be
     asynchronous. The file was read in-parallel. A large portion of the improvement
     was from building the DataFrame components asynchronously.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，由于 Modin 将工作从主线程转移为异步操作，性能更快。文件被并行读取。改进的很大一部分来自异步构建 DataFrame 组件。
 - en: '**head**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**head**'
 - en: The code below utilizes the head command.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码使用了 head 命令。
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Image for post](../Images/aefc5be504a24020ceff65603ec068f6.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/aefc5be504a24020ceff65603ec068f6.png)'
 - en: In this case, Modin is slower as it requires collecting the data together. However,
     users should not be able to perceive this difference in their interactive workflow.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，由于 Modin 需要收集数据，性能会较慢。然而，用户在互动工作流程中不应能察觉到这种差异。
 - en: '**groupby**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**groupby**'
 - en: Similar to pandas, modin has a groupby operation.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于 pandas，modin 也有 groupby 操作。
 - en: '[PRE4]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Image for post](../Images/baaae59fe33dc2478cff073794afdc8d.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/baaae59fe33dc2478cff073794afdc8d.png)'
 - en: Note that there are plans to further optimize the performance of groupby operations
     in Modin.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，未来有计划进一步优化 Modin 中 groupby 操作的性能。
 - en: '**fillna**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**fillna**'
 - en: Filling in missing values with the fillna method can be much faster with Modin.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 fillna 方法填充缺失值在 Modin 中可以更快。
 - en: '[PRE5]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Image for post](../Images/cda4f0ac5fcba1228e3147466fc85ad0.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/cda4f0ac5fcba1228e3147466fc85ad0.png)'
 - en: Default to pandas implementation
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 默认使用 pandas 实现
 - en: As mentioned earlier, Modin’s API covers about 90% of the Pandas API. For methods
     not covered yet, Modin will default to a pandas implementation like in the code
     below.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，Modin 的 API 覆盖了约 90% 的 Pandas API。对于尚未覆盖的方法，Modin 将默认为 pandas 实现，如下代码所示。
 - en: '[PRE6]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Image for post](../Images/9e1fdc97bd1d098ab83c048e7a4c599f.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/9e1fdc97bd1d098ab83c048e7a4c599f.png)'
 - en: When Modin defaults to pandas, you will see a warning.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 Modin 默认使用 pandas 时，你会看到一个警告。
 - en: While there is a performance penalty for defaulting to pandas, Modin will complete
     all operations whether or not the command is currently implemented in Modin.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然默认使用 pandas 会有性能损失，但 Modin 无论命令是否在 Modin 中实现都会完成所有操作。
 - en: '![Image for post](../Images/32671e3a7bc2a5bfd91acf94014ecc25.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/32671e3a7bc2a5bfd91acf94014ecc25.png)'
 - en: If a method is not implemented, it will default to pandas.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果某个方法未实现，它将默认为 pandas。
 - en: '[Modin’s documentation](https://modin.readthedocs.io/en/latest/supported_apis/index.html) explains
     how this process works.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Modin 的文档](https://modin.readthedocs.io/en/latest/supported_apis/index.html)
+    解释了这个过程是如何工作的。'
 - en: '*We first convert to a pandas DataFrame, then perform the operation. There
     is a performance penalty for going from a partitioned Modin DataFrame to pandas
     because of the communication cost and single-threaded nature of pandas. Once the
     pandas operation has completed, we convert the DataFrame back into a partitioned
     Modin DataFrame. This way, operations performed after something defaults to pandas
     will be optimized with Modin.*'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '*我们首先转换为 pandas DataFrame，然后执行操作。由于通信成本和 pandas 的单线程特性，从分区的 Modin DataFrame
+    转到 pandas 会有性能损失。一旦 pandas 操作完成，我们会将 DataFrame 转换回分区的 Modin DataFrame。这样，在默认转换为
+    pandas 后执行的操作将会用 Modin 进行优化。*'
 - en: How Modin can Speed up your Pandas Workflows
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Modin 如何加速你的 Pandas 工作流
 - en: The three main ways modin makes pandas workflows faster are through it’s multicore/multinode
     support, system architecture, and ease of use.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin 使 pandas 工作流更快的三种主要方式是通过其多核/多节点支持、系统架构和易用性。
 - en: Multicore/Multinode Support
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多核/多节点支持
 - en: '![Image for post](../Images/17ca356b32ac8f0b35354ed884c2a9ba.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/17ca356b32ac8f0b35354ed884c2a9ba.png)'
 - en: Pandas can only utilize a single core. Modin is able to efficiently make use
     of all of the hardware available to it. The image shows resources (dark blue)
     that Modin can utilize with multiple cores (B) and multiple nodes available (C).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 只能使用单核。Modin 能够有效利用所有可用的硬件。图片显示了 Modin 可以利用的资源（深蓝色），包括多个核心（B）和多个节点（C）。
 - en: The pandas library can only utilize a single core. As virtually all computers
     today have multiple cores, there is a lot of opportunity to speed up your pandas
     workflow by having modin utilize all the cores on your computer.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: pandas库只能利用单核。由于如今几乎所有计算机都有多个核心，因此通过让modin利用计算机上的所有核心，有很大的机会加速你的pandas工作流程。
 - en: '![Image for post](../Images/4f2ba2500b54062ac386d089a631e1ac.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/4f2ba2500b54062ac386d089a631e1ac.png)'
 - en: For the purpose of this blog, you can think of the MacBook above as a single
     node with 4 cores.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了这篇博客的目的，你可以将上面的MacBook视为一个具有4个核心的单节点。
 - en: If you would like to scale your code to more than 1 node, [Modin has an API
     for switching between running code locally and on cloud providers/clusters](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122).
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你希望将代码扩展到多个节点，[Modin有一个API用于在本地运行代码和在云提供商/集群上运行代码之间切换](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122)。
 - en: System Architecture
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 系统架构
 - en: Another way Modin can be faster than pandas is due to how pandas itself was
     implemented. Wes McKinney, the creator of pandas, gave a famous talk “[10 Things
     I Hate about Pandas](https://www.slideshare.net/wesm/practical-medium-data-analytics-with-python)”
     where he went over some pandas’ lack of flexibility and performance issues.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin比pandas更快的另一种方式是由于pandas本身的实现方式。pandas的创建者Wes McKinney进行了一个著名的演讲“[我讨厌pandas的10件事](https://www.slideshare.net/wesm/practical-medium-data-analytics-with-python)”，在演讲中他讲述了pandas的一些灵活性和性能问题。
 - en: '![Image for post](../Images/b921ff827b7e1df741e2bc98b8420abc.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/b921ff827b7e1df741e2bc98b8420abc.png)'
 - en: Some of Wes McKinney’s issues with pandas are performance related.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: Wes McKinney对pandas的一些问题与性能相关。
 - en: Modin endeavors to solve some of these issues. To understand how, it’s important
     to understand some of its[ system architecture](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler).
     The diagram below outlines the general layered view to the components of Modin
     with a short description of each major section.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin努力解决一些这些问题。要了解如何解决这些问题，了解其[系统架构](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler)很重要。下面的图示概述了Modin组件的一般分层视图，并简要描述了每个主要部分。
 - en: '![Image for post](../Images/b02c04ec0cb1a52b2fc81caa6561b7ce.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/b02c04ec0cb1a52b2fc81caa6561b7ce.png)'
 - en: Modin’s System Architecture
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin的系统架构
 - en: '[APIs layer](https://modin.readthedocs.io/en/latest/developer/architecture.html#api):
     This is the user facing layer which primarily is Modin’s coverage of the pandas
     API. The SQLite API is experimental and the Modin API is something still being
     designed.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[APIs层](https://modin.readthedocs.io/en/latest/developer/architecture.html#api)：这是面向用户的层，主要是Modin对pandas
+    API的覆盖。SQLite API是实验性的，而Modin API仍在设计中。'
 - en: Modin Query Compiler:[ In addition to its other duties](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler),
     the Query Compiler layer closely follows the pandas API, but cuts out a large
     majority of the repetition.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin查询编译器：[除了其其他职责](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler)，查询编译器层紧跟pandas
+    API，但大幅减少了重复。
 - en: '[Modin DataFrame layer](https://modin.readthedocs.io/en/latest/developer/architecture.html#modin-dataframe):
     This is where Modin’s optimized dataframe algebra takes place.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Modin DataFrame层](https://modin.readthedocs.io/en/latest/developer/architecture.html#modin-dataframe)：这是Modin优化的数据框代数所在的地方。'
 - en: 'Execution: While Modin also supports other execution engines like Dask, the
     most commonly used execution engine is [Ray](https://github.com/ray-project/ray) which
     you can learn about in the next section.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：虽然Modin也支持Dask等其他执行引擎，但最常用的执行引擎是[Ray](https://github.com/ray-project/ray)，你可以在下一节中了解有关Ray的更多信息。
 - en: What is Ray
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是Ray
 - en: '![Image for post](../Images/7290b3665b8bec7400c07b160e5cbae0.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/7290b3665b8bec7400c07b160e5cbae0.png)'
 - en: Ray makes parallel and distributed processing work more like you would hope
     ([image source](https://www.reddit.com/r/aww/comments/2oagj8/multithreaded_programming_theory_and_practice/)).
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray使得并行和分布式处理的工作方式更接近你的期望 ([image source](https://www.reddit.com/r/aww/comments/2oagj8/multithreaded_programming_theory_and_practice/))。
 - en: Ray is the default execution engine for Modin. This section briefly goes over
     what Ray is and how it can be used as more than just a execution engine.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray是Modin的默认执行引擎。本节简要介绍Ray是什么以及它如何不仅仅作为执行引擎使用。
 - en: '![Image for post](../Images/75ba50e30d970764e1d2547840720791.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/75ba50e30d970764e1d2547840720791.png)'
 - en: 'The diagram above shows that at a high level, the Ray ecosystem consists of
     the core Ray system and scalable libraries for data science like [Modin](https://github.com/modin-project/modin).
     It is a library for[ scaling up Python applications](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8) across
     multiple cores or machines. It has a couple major advantages including:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的图表显示了在高层次上，Ray生态系统由核心Ray系统和用于数据科学的可扩展库组成，如[Modin](https://github.com/modin-project/modin)。它是一个[扩展Python应用程序](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8)的库，可以在多个核心或机器上运行。它具有几个主要优点，包括：
 - en: 'Simplicity: you can scale your Python applications without rewriting them,
     and the same code can run on one machine or multiple machines.'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单性：你可以在不重写代码的情况下扩展你的Python应用程序，并且相同的代码可以在一台机器或多台机器上运行。
 - en: 'Robustness: applications gracefully handle machine failures and preemption.'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 鲜明性：应用程序可以优雅地处理机器故障和抢占。
 - en: '[Performance](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1):
     tasks run with millisecond latencies, scale to tens of thousands of cores, and
     handle numerical data with minimal serialization overhead.'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[性能](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1)：任务运行的延迟为毫秒级，扩展到数万个核心，并且处理数值数据时最小化序列化开销。'
 - en: Because Ray is a general-purpose framework, the community has built many libraries
     and frameworks on top of it to accomplish different tasks like [Ray Tune](https://docs.ray.io/en/master/tune/index.html) for
     hyperparameter tuning at any scale,[ Ray Serve](https://docs.ray.io/en/master/serve/) for
@@ -340,88 +529,133 @@
     reinforcement learning. It also has [integrations for machine learning libraries
     like scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1) as
     well as support for data processing libraries [such as PySpark and Dask](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e).
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于Ray是一个通用框架，社区在其基础上构建了许多库和框架，以完成不同的任务，例如用于任何规模超参数调优的[Ray Tune](https://docs.ray.io/en/master/tune/index.html)、用于易于使用的可扩展模型服务的[Ray
+    Serve](https://docs.ray.io/en/master/serve/)以及用于强化学习的[RLlib](https://docs.ray.io/en/master/rllib.html)。它还具有[对机器学习库如scikit-learn的集成](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1)，以及对数据处理库的支持，如[PySpark和Dask](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e)。
 - en: While you don’t need to learn how to use Ray to use Modin, the image below shows
     that it generally only requires adding a couple lines of code to turn a simple
     Python program into a distributed one running across a compute cluster.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然你不需要学习如何使用Ray就能使用Modin，但下面的图片显示了将一个简单的Python程序转换为在计算集群上运行的分布式程序通常只需添加几行代码。
 - en: '![Image for post](../Images/3aa859324b01834c4aaba78c14b988f7.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![文章图片](../Images/3aa859324b01834c4aaba78c14b988f7.png)'
 - en: Example of how to turn a simple program into a distributed one using Ray ([code
     explanation](https://youtu.be/zRaWCFJcagI?t=754)).
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Ray将简单程序转换为分布式程序的示例（[代码解释](https://youtu.be/zRaWCFJcagI?t=754)）。
 - en: Conclusion
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![Image for post](../Images/0b02ae3662f15cf8ec2a6ffb4d8c5948.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![文章图片](../Images/0b02ae3662f15cf8ec2a6ffb4d8c5948.png)'
 - en: A goal of Modin is to allow data scientists to use the same code for small (kilobytes)
     and large datasets (terabytes). Image from [Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122).
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin的一个目标是让数据科学家能够使用相同的代码处理小型（千字节）和大型数据集（千兆字节）。图片来自[Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122)。
 - en: Modin allows you to use the same Pandas script for a 10KB dataset on a laptop
     as well as a 10TB dataset on a cluster. This is possible due to Modin’s easy to
     use API and system architecture. This architecture can utilize Ray as an execution
     engine to make scaling Modin easier. If you have any questions or thoughts about
     Ray, please feel free to join our community through[ Discourse](https://discuss.ray.io/) or[ Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin允许你使用相同的Pandas脚本来处理笔记本电脑上的10KB数据集和集群上的10TB数据集。这是因为Modin具有易于使用的API和系统架构。这种架构可以利用Ray作为执行引擎，使得Modin的扩展变得更加容易。如果你对Ray有任何问题或想法，请随时通过[Discourse](https://discuss.ray.io/)或[Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform)加入我们的社区。
 - en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** works
     in Developer Relations at Anyscale, the company behind the [Ray Project](https://github.com/ray-project/ray).
     You can find him on [Twitter](https://twitter.com/GalarnykMichael), [Medium](https://medium.com/@GalarnykMichael),
     and [GitHub](https://github.com/mGalarnyk).'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** 在 Anyscale
+    从事开发者关系工作，该公司是 [Ray Project](https://github.com/ray-project/ray) 的背后团队。你可以在 [Twitter](https://twitter.com/GalarnykMichael)、[Medium](https://medium.com/@GalarnykMichael)
+    和 [GitHub](https://github.com/mGalarnyk) 上找到他。'
 - en: '[Original](https://www.anyscale.com/blog/how-to-speed-up-pandas-with-modin).
     Reposted with permission.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原创](https://www.anyscale.com/blog/how-to-speed-up-pandas-with-modin)。已获得许可转载。'
 - en: '**Related:**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Getting Started with Distributed Machine Learning with PyTorch and Ray](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyTorch 和 Ray 开始分布式机器学习](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
 - en: '[Train sklearn 100x Faster](/2019/09/train-sklearn-100x-faster.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将 sklearn 训练速度提升 100 倍](/2019/09/train-sklearn-100x-faster.html)'
 - en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)'
 - en: More On This Topic
+  id: totrans-100
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Speed Up Python Pandas by Over 300x](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将 Python Pandas 加速超过 300 倍](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过快速克里金（FKR）加速机器学习](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
 - en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3 种简单方法加速你的 Python 代码](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
 - en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用索引加速 SQL 查询 [Python 版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
 - en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3 种基于研究的高级提示技术提升 LLM 效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
