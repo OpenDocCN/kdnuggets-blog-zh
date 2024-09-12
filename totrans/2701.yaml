@@ -1,90 +1,135 @@
 - en: Missing Value Imputation – A Review
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 缺失值填补 – 综述
 - en: 原文：[https://www.kdnuggets.com/2020/09/missing-value-imputation-review.html](https://www.kdnuggets.com/2020/09/missing-value-imputation-review.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/09/missing-value-imputation-review.html](https://www.kdnuggets.com/2020/09/missing-value-imputation-review.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Kathrin Melcher](https://www.linkedin.com/in/kathrin-melcher-b44542155/?originalSubdomain=de),
     Data Scientist at KNIME, and [Rosaria Silipo](https://www.linkedin.com/in/rosaria/?originalSubdomain=ch),
     Principal Data Scientist at KNIME**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Kathrin Melcher](https://www.linkedin.com/in/kathrin-melcher-b44542155/?originalSubdomain=de)，KNIME
+    数据科学家，和 [Rosaria Silipo](https://www.linkedin.com/in/rosaria/?originalSubdomain=ch)，KNIME
+    首席数据科学家**'
 - en: Missing values occur in all kinds of datasets from industry to academia. They
     can be represented differently  - sometimes by a question mark, or  -999, sometimes
     by “n/a”, or by  some other dedicated number or character. Detecting and handling
     missing values in the correct way is important, as they can impact the results
     of the analysis, and there are algorithms that can’t handle them. So what is the
     correct way?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺失值出现在从工业到学术的各种数据集中。它们可以以不同的方式表示 - 有时用问号，或 -999，有时用“n/a”，或用其他专用的数字或字符。正确检测和处理缺失值很重要，因为它们会影响分析结果，并且有些算法无法处理它们。那么正确的方法是什么？
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: How to choose the correct strategy
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何选择正确的策略
 - en: Two common approaches to imputing missing values is to replace all missing values
     with either a fixed value, for example zero, or with the mean of all available
     values. Which approach is better?
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 填补缺失值的两种常见方法是用固定值（例如零）或所有可用值的均值替代所有缺失值。哪种方法更好？
 - en: 'Let’s see the effects on two different case studies:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来看两个不同案例研究的效果：
 - en: 'Case Study 1: threshold-based anomaly detection on sensor data'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 案例研究 1：传感器数据中的基于阈值的异常检测
 - en: 'Case Study 2: a report of customer aggregated data'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 案例研究 2：客户聚合数据报告
 - en: '**Case Study 1: Imputation for threshold-based anomaly detection**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**案例研究 1：基于阈值的异常检测中的缺失值填补**'
 - en: In a classic threshold-based solution for anomaly detection, a threshold, calculated
     from the mean and variance of the original data, is applied to the sensor data
     to generate an alarm. If the missing values are imputed with a fixed value, e.g.
     zero, this will affect the calculation of the mean and variance used for the threshold
     definition. This would likely lead to a wrong estimate of the alarm threshold
     and to some expensive downtime.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在经典的基于阈值的异常检测解决方案中，从原始数据的均值和方差计算出的阈值会应用于传感器数据以生成警报。如果缺失值用固定值（例如零）填补，这将影响用于阈值定义的均值和方差的计算。这可能会导致警报阈值的错误估计以及一些昂贵的停机时间。
 - en: Here imputing the missing values with the mean of the available values is the
     right way to go.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，用可用值的均值填补缺失值是正确的做法。
 - en: '**Case Study 2: Imputation for aggregated customer data**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**案例研究 2：聚合客户数据中的缺失值填补**'
 - en: In a classic reporting exercise on customer data, the number of customers and
     the total revenue for each geographical area of the business needs to be aggregated
     and visualized, for example via bar charts. The customer dataset has missing values
@@ -92,265 +137,371 @@
     customers and no business have been recorded yet. In this case, using the mean
     value of the available numbers to impute the missing values would make up customers
     and revenues where neither customers nor revenues are present.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在经典的客户数据报告中，需要对每个地理区域的客户数量和总收入进行汇总和可视化，例如通过条形图。客户数据集在业务尚未开始或尚未发展时，有些区域的数据缺失，没有记录客户和业务。在这种情况下，使用可用数字的平均值来填补缺失值，将生成客户和收入的记录，但实际上客户和收入并不存在。
 - en: The right way to go here is to impute the missing values with a fixed value
     of zero.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里正确的做法是用固定值零来填补缺失值。
 - en: In both cases, it is our knowledge of the process that suggests to us the right
     way to proceed in imputing missing values. In the case of sensor data, missing
     values are due to a malfunctioning of the measuring machine and therefore real
     numerical values are just not recorded. In the case of the customer dataset, missing
     values appear where there is nothing to measure yet.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这两种情况下，我们对过程的了解可以指导我们填补缺失值的正确方法。在传感器数据的情况下，缺失值是由于测量设备故障，实际数值没有被记录。在客户数据集的情况下，缺失值出现的地方还没有需要测量的内容。
 - en: 'You see already from these two examples, that there is no panacea for all missing
     value imputation problems and clearly we can’t provide an answer to the classic
     question: “which strategy is correct for missing value imputation for my dataset?”
     The answer is too dependent on the domain and the business knowledge.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这两个例子中你已经可以看出，没有一种万能的解决方案来处理所有的缺失值填补问题，我们显然无法回答经典问题：“我的数据集缺失值填补的正确策略是什么？”答案过于依赖于领域和业务知识。
 - en: 'We can however provide a review of the most commonly used techniques to:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我们可以提供对最常用技术的回顾，以：
 - en: Detect whether the dataset contains missing values and of which type,
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 检测数据集中是否包含缺失值及其类型，
 - en: Impute the missing values.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 填补缺失值。
 - en: Detecting Missing Values and their Type
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 检测缺失值及其类型
 - en: Before trying to understand where the missing values come from and why, we need
     to detect them. Common encodings for missing values are n/a, NA,  -99, -999, ?,
     the empty string, or any other placeholder. When you open a new dataset, without
     instructions, you need to recognize if any such placeholders have been used to
     represent missing values.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在尝试理解缺失值的来源和原因之前，我们需要检测它们。缺失值的常见编码包括n/a、NA、-99、-999、?、空字符串或任何其他占位符。当你打开一个新的数据集时，没有说明书，你需要识别是否使用了任何这样的占位符来表示缺失值。
 - en: Histograms are a great tool to find the placeholder character, if any.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 直方图是查找占位符字符（如果有的话）的好工具。
 - en: For numerical values many datasets use a value far away from the distribution
     of the data to represent the missing values. A classic is the -999 for data in
     the positive range. In figure 1, the histogram shows most of the data in the range
     [3900-6600] are nicely Gaussian-distributed. The little bar towards the left around
     -99 looks quite displaced with respect to the rest of the data and could be a
     candidate for a placeholder number used to indicate missing values.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于数值型数据，许多数据集使用远离数据分布的值来表示缺失值。经典的例子是正值范围中的-999。在图1中，直方图显示大多数数据在[3900-6600]范围内呈现出良好的高斯分布。左侧的-99附近的小条形与其余数据相比显得很不自然，可能是用来指示缺失值的占位符号码。
 - en: Usually, for nominal data, it is easier to recognize the placeholder for missing
     values, since the string format allows us to write some reference to a missing
     value, like “unknown” or “N/A”. The histogram can also help us here. For nominal
     data, bins with non fitting values could be an indicator of the missing value
     placeholder.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通常，对于名义数据，识别缺失值的占位符更容易，因为字符串格式允许我们写出某些缺失值的参考，例如“未知”或“N/A”。直方图也可以在这里提供帮助。对于名义数据，具有不匹配值的区间可能是缺失值占位符的一个指示。
 - en: '![Figure](../Images/d1d63a4cf0b0d5b9cc5b174045d54925.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/d1d63a4cf0b0d5b9cc5b174045d54925.png)'
 - en: '*Figure 1: Histograms are a great tool to detect the placeholder character
     for missing values. In this example, we see that most values fall between 3900
     and 6600\. The value -99 looks rather displaced and, in this case, could be a
     placeholder for missing values.*'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1：直方图是检测缺失值占位符字符的好工具。在这个例子中，我们看到大多数值落在3900和6600之间。值-99看起来相当偏离，在这种情况下，可能是缺失值的占位符。*'
 - en: This step, to detect placeholder characters/numbers representing missing values,
     belongs to the data exploration phase, before the analysis starts. After detecting
     this placeholder character for missing values and prior to the real analysis,
     the missing value must be formatted properly, according to the data tool in use.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一步骤，即检测表示缺失值的占位符字符/数字，属于数据探索阶段，在分析开始之前。在检测到这个缺失值的占位符字符后，在真正的分析之前，必须根据所使用的数据工具对缺失值进行适当的格式化。
 - en: An interesting academic exercise consists in qualifying the type of the missing
     values. Missing values are usually classified into three different types [1][2].
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个有趣的学术练习是对缺失值的类型进行定性分析。缺失值通常被分类为三种不同类型[1][2]。
 - en: '*Missing Completely at Random (MCAR)*'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*完全随机缺失 (MCAR)*'
 - en: '*Definition:* The probability of an instance being missing does not depend
     on known values or the missing value itself.'
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*定义：* 实例缺失的概率不依赖于已知值或缺失值本身。'
 - en: '*Example*: A data table was printed with no missing values and someone accidentally
     dropped some ink on it so that some cells are no longer readable [2]. Here, we
     could assume that the missing values follow the same distribution as the known
     values.'
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*示例：* 一张数据表被打印出来，没有缺失值，但有人不小心在上面滴了一些墨水，导致一些单元格变得不可读[2]。在这种情况下，我们可以假设缺失值遵循与已知值相同的分布。'
 - en: '*Missing at Random (MAR)*'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*随机缺失 (MAR)*'
 - en: '*Definition:* The probability of an instance being missing may depend on known
     values but not on the missing value itself.'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*定义：* 实例缺失的概率可能依赖于已知值，但不依赖于缺失值本身。'
 - en: '*Sensor Example:* In the case of a temperature sensor, the fact that a value
     is missing doesn’t depend on the temperature, but might be dependent on some other
     factor, for example on the battery charge of the thermometer.'
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*传感器示例：* 在温度传感器的情况下，值的缺失并不依赖于温度，但可能依赖于其他因素，例如温度计的电池电量。'
 - en: '*Survey example:* Whether or not someone answers a question - e.g. about age-
     in a survey **doesn’t** depend on the answer itself, but may depend on the answer
     to another question, i.e. gender female.'
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*调查示例：* 无论某人是否回答一个问题——例如年龄——在调查中**并不**取决于答案本身，但可能依赖于另一个问题的答案，即女性性别。'
 - en: '*Not Missing at Random (NMAR)*'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*非随机缺失 (NMAR)*'
 - en: '*Definition*: the probability of an instance being missing could depend on
     the value of the variable itself.'
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*定义：* 实例缺失的概率可能依赖于变量本身的值。'
 - en: '*Sensor example:* In the case of a temperature sensor, the sensor doesn’t work
     properly when it is colder than 5°C.'
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*传感器示例：* 在温度传感器的情况下，当温度低于5°C时，传感器无法正常工作。'
 - en: '*Survey example:* Whether or not someone answers a question - e.g. number of
     sick days - in a survey **does** depend on the answer itself - as it could be
     for some overweight people.'
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*调查示例：* 无论某人是否回答了一个问题——例如病假天数——在调查中**确实**取决于答案本身——因为对一些超重的人来说可能会有所不同。'
 - en: Only the knowledge of the data collection process and the business experience
     can tell whether the missing values we have found are of type MAR, MCAR, or NMAR.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有数据收集过程的知识和业务经验才能告诉我们发现的缺失值是MAR、MCAR还是NMAR类型。
 - en: For this article, we will focus only on MAR or MCAR types of missing values.
     Imputing NMAR missing values is more complicated, since additional factors to
     just statistical distributions and statistical parameters have to be taken into
     account.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将仅关注MAR或MCAR类型的缺失值。填补NMAR缺失值更加复杂，因为需要考虑比统计分布和统计参数更多的额外因素。
 - en: Different Methods to Handle Missing Values
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理缺失值的不同方法
 - en: 'The many methods, proposed over the years, to handle missing values can be
     separated in two main groups: *deletion* and *imputation*.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 多年来提出的处理缺失值的多种方法可以分为两个主要组：*删除*和*填补*。
 - en: Deletion Methods
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 删除方法
 - en: 'There are three common deletion approaches: listwise deletion, pairwise deletion,
     and dropping features.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 有三种常见的删除方法：列表删除、成对删除和删除特征。
 - en: '**Listwise Deletion:** Delete all rows where one or more values are missing.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**列表删除：** 删除所有存在一个或多个缺失值的行。'
 - en: '**Pairwise Deletion:** Delete only the rows that have missing values in the
     columns used for the analysis. It is only recommended to use this method if the
     missing data are MCAR.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**配对删除：** 仅删除在用于分析的列中具有缺失值的行。如果缺失数据是MCAR，则仅推荐使用此方法。'
 - en: '**Dropping Features:** Drop entire columns with more missing values than a
     given threshold, e.g. 60%.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**特征删除：** 删除缺失值超过给定阈值（例如60%）的整个列。'
 - en: '![Figure](../Images/d69da6cf803044092b58f525067eac1e.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/d69da6cf803044092b58f525067eac1e.png)'
 - en: '*Figure 2: On the left, a table with missing values, where only F1, F2, and
     F3 are used in the analysis. On the right, the resulting table after applying
     different deletion methods. *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图2：左侧是一个包含缺失值的表格，其中只有F1、F2和F3被用于分析。右侧是应用不同删除方法后的结果表格。*'
 - en: Imputation Methods
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 插补方法
 - en: The idea behind the imputation approach is to replace missing values with other
     sensible values. As you always lose information with the deletion approach when
     dropping either samples (rows) or entire features (columns), imputation is often
     the preferred approach.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 插补方法的核心思想是用其他合理的值替代缺失值。由于使用删除方法时会丢失信息（无论是删除样本（行）还是整个特征（列）），插补通常是首选方法。
 - en: 'The many imputation techniques can be divided into two subgroups: *single imputation
     or multiple imputation*.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 多种插补技术可以分为两类：*单次插补或多次插补*。
 - en: In **single imputation**, a single / one imputation value for each of the missing
     observations is generated.  The imputed value is treated as the true value, ignoring
     the fact that no imputation method can provide the exact value. Therefore, single
     imputation does not reflect the uncertainty of the missing values.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在**单次插补**中，为每个缺失的观察值生成一个单一的插补值。插补值被视为真实值，忽略了没有插补方法可以提供确切值这一事实。因此，单次插补不能反映缺失值的不确定性。
 - en: In **multiple imputation**, many imputed values for each of the missing observations
     are generated. This means many complete datasets with different imputed values
     are created. The analysis (e.g. training a linear regression to predict a target
     column) is performed on each of these datasets and the results are polled. Creating
     multiple imputations, as opposed to single imputations, accounts for the statistical
     uncertainty in the imputations [3][4].
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 在**多次插补**中，为每个缺失的观察值生成多个插补值。这意味着创建了多个具有不同插补值的完整数据集。对每个数据集进行分析（例如，训练线性回归以预测目标列），然后汇总结果。创建多次插补，相对于单次插补，更能考虑插补中的统计不确定性[3][4]。
 - en: Single Imputation
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 单次插补
 - en: 'Most imputation methods are single imputation methods, following three main
     strategies: replacement by existing values, replacement by statistical values,
     and replacement by predicted values. Depending on the values used for each one
     of these strategies, we end up with methods that work on numerical values only
     and methods that work on both numerical and nominal columns. These methods are
     summarized in Table 1 and explained below.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数插补方法是单次插补方法，主要有三种策略：用现有值替代、用统计值替代和用预测值替代。根据这些策略中使用的值，我们最终得到只适用于数值型数据的方法和同时适用于数值型和名义型列的方法。这些方法在表格1中进行了总结，并在下面进行了详细说明。
 - en: '| **Replacement by:** | **Numerical Features Only** | **Numerical and Nominal
     Features** |'
+  id: totrans-65
   prefs: []
   type: TYPE_TB
+  zh: '| **替代方法：** | **仅数值特征** | **数值和名义特征** |'
 - en: '| **Existing values** | Minimum / Maximum | Previous / Next / Fixed |'
+  id: totrans-66
   prefs: []
   type: TYPE_TB
+  zh: '| **现有值** | 最小值 / 最大值 | 先前 / 后续 / 固定 |'
 - en: '| **Statistical values** | (Rounded) Mean / Median / Moving Average, Linear
     / Average Interpolation  | Most Frequent |'
+  id: totrans-67
   prefs: []
   type: TYPE_TB
+  zh: '| **统计值** | （四舍五入的）均值 / 中位数 / 移动平均，线性 / 平均插值 | 最频繁值 |'
 - en: '| **Predicted values** | Regression Algorithms | Regression & Classification
     Algorithms, k-Nearest Neighbours |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| **预测值** | 回归算法 | 回归和分类算法，k最近邻 |'
 - en: '*Table 1: Single imputation methods for numerical features only and for numerical
     and nominal features, based on existing values, statistical measures, and predicted
     values.*'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '*表1：仅对数值特征和对数值及名义特征的单次插补方法，基于现有值、统计测量和预测值。*'
 - en: '***Fixed Value ***'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '***固定值***'
 - en: Fixed value imputation is a general method that works for all data types and
     consists of substituting the missing value with a fixed value. The aggregated
     customer example we mentioned at the beginning of this article uses fixed value
     imputation for numerical values. As an example of using fixed value imputation
     on nominal features, you can impute the missing values in a survey with “not answered”.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 固定值填补是一种适用于所有数据类型的一般方法，包含将缺失值替代为固定值。我们在本文开头提到的聚合客户示例中使用了固定值填补来处理数值。作为在名义特征上使用固定值填补的示例，你可以在调查中用“未回答”填补缺失值。
 - en: '***Minimum / Maximum Value***'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '***最小 / 最大值***'
 - en: If you know that the data has to fit a given range [minimum, maximum], and if
     you know from the data collection process that  the measuring system stops recording
     and the signal saturates beyond one of such boundaries, you can use the range
@@ -358,56 +509,80 @@
     in the monetary exchange a minimum price has been reached and the exchange process
     has been stopped, the missing monetary exchange price can be replaced with the
     minimum value of the law’s exchange boundary.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你知道数据必须符合给定范围[最小值，最大值]，并且从数据收集过程中知道测量系统在超出这些边界之一时停止记录且信号饱和，你可以使用范围的最小值或最大值作为缺失值的替代值。例如，如果在货币兑换中已达到最低价格且兑换过程已停止，则可以用法律兑换边界的最小值替代缺失的货币兑换价格。
 - en: '***(Rounded) Mean / Median Value / Moving Average***'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '***(四舍五入的)均值 / 中位数 / 移动平均***'
 - en: Other common imputation methods for numerical features are mean, rounded mean,
     or median imputation. In this case, the method substitutes the missing value with
     the mean, the rounded mean, or the median value calculated for that feature on
     the whole dataset. In the case of a high number of outliers in your dataset, it
     is recommended to use the median instead of the mean.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他常见的数值特征填补方法包括均值、四舍五入均值或中位数填补。在这种情况下，该方法使用整个数据集中该特征计算出的均值、四舍五入均值或中位数值来替代缺失值。在数据集中异常值数量较多的情况下，建议使用中位数而不是均值。
 - en: '***Most Frequent Value***'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '***最频繁值***'
 - en: Another common method that works for both numerical and nominal features uses
     the most frequent value in the column to replace the missing values.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种适用于数值和名义特征的常见方法是使用列中最频繁的值来替代缺失值。
 - en: '***Previous / Next Value ***'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '***前一个 / 下一个值***'
 - en: There are special imputation methods for time series or ordered data. These
     methods take into account the sorted nature of the dataset, where close values
     are probably more similar than distant values. A common approach for imputing
     missing values in time series substitutes the next or previous value to the missing
     value in the time series. This approach works for both numerical and nominal values.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 有专门针对时间序列或有序数据的填补方法。这些方法考虑了数据集的排序特性，其中接近的值可能比远离的值更相似。时间序列中填补缺失值的一种常见方法是用时间序列中的下一个或上一个值替代缺失值。这种方法适用于数值和名义值。
 - en: '***Linear / Average Interpolation***'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '***线性 / 平均插值***'
 - en: Similarly to the previous/next value imputation, but only applicable to numerical
     values, is linear or average interpolation, which is calculated between the previous
     and next available value, and substitutes the missing value. Of course, as for
     all operations on ordered data, it is important to sort the data correctly in
     advance, e.g. according to a timestamp in the case of time series data.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于前一个/下一个值填补，但仅适用于数值，是线性或平均插值，该方法计算前一个和下一个可用值之间的插值，并替代缺失值。当然，对于有序数据的所有操作，提前正确排序数据是重要的，例如在时间序列数据中根据时间戳排序。
 - en: '***K Nearest Neighbors***'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '***K最近邻***'
 - en: The idea here is to look for the k closest samples in the dataset where the
     value in the corresponding feature is not missing and to take the feature value
     occurring most frequently in the group as a replacement for the missing value.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的想法是寻找数据集中k个最近的样本，其中相应特征的值不缺失，并将该组中最常出现的特征值作为缺失值的替代。
 - en: '***Missing Value Prediction***'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '***缺失值预测***'
 - en: Another common option for single imputation is to train a machine learning model
     to predict the imputation values for feature x based on the other features. The
     rows without missing values in feature x are used as a training set and the model
@@ -415,186 +590,261 @@
     or regression model, depending on the data type of the feature. After training,
     the model is applied to all samples with the feature missing value to predict
     its most likely value.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种常见的单次插补选项是训练机器学习模型，根据其他特征预测特征x的插补值。特征x中没有缺失值的行用作训练集，模型根据其他列的值进行训练。这里可以使用任何分类或回归模型，具体取决于特征的数据类型。训练后，将模型应用于所有缺失值的样本，以预测其最可能的值。
 - en: In the case of missing values in more than one feature column, all missing values
     are first temporarily imputed with a basic imputation method, e.g. the mean value.
     Then the values for one column are set back to missing. The model is then trained
     and applied to fill in the missing values. In this way, one model is trained for
     each feature with missing values, until all missing values are imputed by a model.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果有多个特征列存在缺失值，所有缺失值首先用基本插补方法临时填补，例如均值。然后将一列的值重新设为缺失。然后训练模型并应用于填补缺失值。通过这种方式，为每个有缺失值的特征训练一个模型，直到所有缺失值都通过模型插补完毕。
 - en: Multiple Imputation
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多重插补
 - en: Multiple imputation is an imputation approach stemming from statistics. Single
     imputation methods have the disadvantage that they don’t consider the uncertainty
     of the imputed values. This means they recognize the imputed values as actual
     values not taking into account the standard error, which causes bias in the results
     [3][4].
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 多重插补是一种源自统计学的插补方法。单次插补方法的缺点是没有考虑插补值的不确定性。这意味着它们将插补值视为实际值，而没有考虑标准误差，这会导致结果偏差[3][4]。
 - en: An approach that solves this problem is multiple imputation where not one, but
     many imputations are created for each missing value. This means filling in the
     missing values multiple times, creating multiple “complete” datasets [3][4].
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 解决此问题的一种方法是多重插补，即为每个缺失值创建多个插补，而不是一个。这意味着多次填补缺失值，创建多个“完整”的数据集[3][4]。
 - en: A number of algorithms have been developed for multiple imputation. One well
     known algorithm is Multiple Imputation by Chained Equation (MICE).
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 已经开发出多种算法用于多重插补。其中一个著名的算法是链式方程的多重插补（MICE）。
 - en: '***Multiple Imputation by Chained Equations (MICE)***'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '***链式方程的多重插补（MICE）***'
 - en: Multiple Imputation by Chained Equations (MICE) is a robust, informative method
     for dealing with missing values in datasets. MICE operates under the assumption
     that the missing data are Missing At Random (MAR) or Missing Completely At Random
     (MCAR) [3].
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 多重插补（Multiple Imputation by Chained Equations，简称MICE）是一种处理数据集中缺失值的强大而信息丰富的方法。MICE基于缺失数据是随机缺失（Missing
+    At Random，MAR）或完全随机缺失（Missing Completely At Random，MCAR）的假设[3]。
 - en: 'The procedure is an extension of the single imputation procedure by “Missing
     Value Prediction” (seen above): this is step 1\. However, there are two additional
     steps in the MICE procedure.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 该过程是“缺失值预测”单次插补过程的扩展（见上文）：这就是第1步。然而，MICE程序中还有两个额外的步骤。
 - en: 'Step 1: This is the process as in the imputation procedure by “Missing Value
     Prediction” on a subset of the original data. One model is trained to predict
     the missing values in one feature, using the other features in the data row as
     the independent variables for the model. This step is repeated for all features.
     This is a cycle or iteration.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 第1步：这是在原始数据子集上进行“缺失值预测”插补过程的步骤。训练一个模型来预测一个特征中的缺失值，使用数据行中的其他特征作为模型的自变量。这一步为所有特征重复进行。这是一个循环或迭代。
 - en: 'Step 2: Step 1 is repeated k times, each time using the most recent imputations
     for the independent variables, until convergence is reached. Most often, k=10
     cycles are sufficient.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 第2步：重复第1步k次，每次使用最新的插补值作为自变量，直到收敛为止。通常情况下，k=10次循环已经足够。
 - en: 'Step 3: The whole process is repeated N times on N different random subsets.
     The resulting N models will be slightly different, and will produce N slightly
     different predictions for each missing value.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 第3步：整个过程在N个不同的随机子集上重复N次。得到的N个模型会略有不同，并为每个缺失值产生N个略有不同的预测值。
 - en: The analysis, e.g. training a linear regression for a target variable, is now
     performed on each one of the N final datasets. Finally the results are combined,
     often this is also called pooling.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析，例如，为目标变量训练线性回归，现在在每一个最终的数据集上进行。最后，结果被合并，这通常也称为汇总。
 - en: This provides more robust results than by single imputation alone. Of course,
     the downside of such robustness is the increase in computational complexity.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 这比单一填补提供了更稳健的结果。当然，这种稳健性的缺点是计算复杂度的增加。
 - en: Comparing Imputation Techniques
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 比较填补技术
 - en: Many imputation techniques. Which one to choose?
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多填补技术。选择哪一种？
 - en: Sometimes we should already know what the best imputation procedure is, based
     on our knowledge of the business and of the data collection process. Sometimes,
     though, we have no clue so we just try a few different options and see which one
     works best.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时候我们应该已经知道最佳的填补方法是什么，基于我们对业务和数据收集过程的了解。然而，有时候我们没有线索，只能尝试几种不同的选项，看看哪种效果最好。
 - en: 'To define “best”, we need a task. The procedure that gets the best performance
     as regards to our specified task is the one that works “best”. And this is exactly
     what we have tried to do in this article: define a task, define a measure of success
     for the task, experiment with a few different missing value imputation procedures,
     and compare the results to find the most suitable one.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 要定义“最佳”，我们需要一个任务。对我们指定任务表现最佳的程序就是“最佳”程序。这正是我们在这篇文章中尝试做的：定义一个任务，为任务定义一个成功的度量，尝试几种不同的缺失值填补程序，并比较结果以找到最合适的方案。
 - en: Let’s limit our investigation to classification tasks. The measures for success
     will be the accuracy and the Cohen’s Kappa of the model predictions. The accuracy
     is a clear measure of task success in case of datasets with balanced classes.
     However, [Cohen’s Kappa](https://www.knime.com/blog/cohens-kappa-an-overview),
     though less easy to read and to interpret, represents a better measure of success
     for datasets with unbalanced classes.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将研究范围限定在分类任务上。成功的度量标准将是模型预测的准确度和Cohen’s Kappa。准确度是平衡类数据集中任务成功的明确度量。然而，[Cohen’s
+    Kappa](https://www.knime.com/blog/cohens-kappa-an-overview)，尽管不易读解，但对于不平衡类数据集来说，代表了更好的成功度量。
 - en: 'We implemented two classification tasks, each one on a dedicated dataset:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们实施了两个分类任务，每个任务在一个专用的数据集上：
 - en: Churn prediction on the Churn prediction dataset (3333 rows, 21 columns)
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在客户流失预测数据集上进行流失预测（3333行，21列）
 - en: Income prediction on the [Census income dataset](https://archive.ics.uci.edu/ml/datasets/Census+Income)
     (32561 rows, 15 columns)
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在[Census收入数据集](https://archive.ics.uci.edu/ml/datasets/Census+Income)上进行收入预测（32561行，15列）
 - en: For both classification tasks we chose a simple decision tree, trained on 80%
     of the original data and tested on the remaining 20%. The point here is to compare
     the effects of different imputation methods, by observing possible improvements
     in the model performance when using one imputation method rather than another.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这两个分类任务，我们选择了一个简单的决策树，训练数据使用原始数据的80%，测试数据使用剩余的20%。这里的重点是通过观察在使用某一种填补方法而非另一种时模型性能的可能改善来比较不同填补方法的效果。
 - en: 'We repeated each classification task four times: on the original dataset, and
     after introducing 10%, 20%, and 25% missing values of type MCAR across all input
     features. This means we randomly removed values across the dataset and transformed
     them into missing values.'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们重复了每个分类任务四次：在原始数据集上，以及在引入10%、20%和25% MCAR类型缺失值后。这意味着我们随机删除数据集中的值，并将其转换为缺失值。
 - en: Each time, we experimented with four different missing value imputation techniques
     (Fig. 3).
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 每次，我们都尝试了四种不同的缺失值填补技术（见图3）。
 - en: '**Deletion**: Listwise deletion (blue)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**删除**：逐行删除（蓝色）'
 - en: '**0 imputation**: Fixed value imputation with zero (orange)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**0填补**：用零进行固定值填补（橙色）'
 - en: '**Mean - most frequent**: Mean imputation for numerical values and most frequent
     value imputation for nominal values (green)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**均值 - 最频繁**：对数值进行均值填补，对名义值进行最频繁值填补（绿色）'
 - en: '**Linear regr - kNN**: Missing value prediction with linear regression for
     numerical values and kNN for nominal values (red)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**线性回归 - kNN**：用线性回归预测数值的缺失值，用kNN预测名义值的缺失值（红色）'
 - en: Figure 3 compares the accuracies and Cohen’s Kappas of the decision trees after
     the application of the four selected imputation methods on the original dataset
     and on the versions with artificially inserted missing values.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3比较了在对原始数据集和人工插入缺失值版本应用四种选择的插补方法后的决策树的准确性和Cohen's Kappa值。
 - en: '![Figure](../Images/61935d7013950b976d88e09e14cf6666.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/61935d7013950b976d88e09e14cf6666.png)'
 - en: '*Figure 3: Accuracies (on the left) and Cohen’s Kappas (on the right) of decision
     tree models, trained on two different classification tasks, after the application
     of the four selected imputation approaches on the original datasets and on their
     variations with randomly inserted missing values. *'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图3：应用四种选择的插补方法到原始数据集及其随机插入缺失值的变体后，决策树模型在两个不同分类任务上的准确性（左侧）和Cohen''s Kappa值（右侧）。*'
 - en: For three of the four imputation methods, we can see the general trend that
     the higher the percentage of missing values the lower the accuracy and the Cohen’s
     Kappa, of course. The exception is the deletion approach (blue lines).
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于四种插补方法中的三种，我们可以看到一个普遍趋势，即缺失值比例越高，准确性和Cohen's Kappa值通常越低。唯一的例外是删除方法（蓝线）。
 - en: In addition we can not see a clear winner approach. This sustains our statement
     that the best imputation method depends on the use case and on the data.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我们无法看到明确的最佳方法。这支持了我们关于最佳插补方法取决于使用案例和数据的观点。
 - en: The churn dataset is a dataset with unbalanced class churn, where class 0 (not
     churning) is much more numerous than class 1 (churning). The listwise deletion
     leads here to really small datasets and makes it impossible to train a meaningful
     model. In this example we end up with only one row in the test set, which is by
     chance predicted correctly (blue line). This explains the 100% accuracy and the
     missing Cohen’s Kappa.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 流失数据集是一个类别流失不平衡的数据集，其中类别0（未流失）远多于类别1（流失）。列表删除在这里导致非常小的数据集，使得无法训练出有意义的模型。在这个例子中，我们在测试集中只剩下一行数据，正好被预测正确（蓝线）。这解释了100%的准确率和缺失的Cohen's
+    Kappa值。
 - en: All other imputation techniques obtain more or less the same performance for
     the decision tree on all variants of the dataset, in terms of both accuracy and
     Cohen’s Kappa. The best results, though, are obtained by the missing value prediction
     approach, using linear regression and kNN.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有其他插补技术在所有数据集变体上的决策树性能在准确性和Cohen's Kappa值方面都差不多。然而，最好的结果是通过缺失值预测方法获得的，使用线性回归和kNN。
 - en: The Census income dataset is a larger dataset compared to the churn prediction
     dataset, where the two income classes, <=50K and  >50K, are also unbalanced. The
     plots in Figure 3 show that the mean and most frequent imputation outperforms
@@ -604,153 +854,217 @@
     deletion. In the setup used here, deletion (blue line) improves the performance
     for small percentages of missing values, but leads to a poor performance for 25%
     or more missing values.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 人口普查收入数据集相较于流失预测数据集更大，其中两个收入类别<=50K和>50K也是不平衡的。图3中的图示显示，均值和最频繁插补方法在准确性和Cohen's
+    Kappa值方面优于缺失值预测方法以及0插补方法。在删除方法的情况下，人口普查数据集的结果不稳定，并且依赖于由列表删除产生的子集。在这里使用的设置中，删除（蓝线）对于小比例缺失值的性能有所提升，但对于25%或更多缺失值的性能较差。
 - en: The Comparison Application
+  id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 比较应用程序
 - en: The application to compare all described techniques and generate the charts
     in figure 3 was developed using [KNIME Analytics Platform](http://link) (Fig.
     4).
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于比较所有描述的技术并生成图3中的图表的应用程序是使用[KNIME Analytics Platform](http://link)开发的（见图4）。
 - en: 'Here a loop iterates over the four variants of the datasets: with 0%, 10%,
     20% and 25% missing values. At each iteration, each one of the two branches within
     the loop implements one of the two classification tasks: churn prediction or income
     prediction. In particular each branch:'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，一个循环遍历数据集的四个变体：0%、10%、20%和25%缺失值。在每次迭代中，循环中的两个分支之一实现两个分类任务之一：流失预测或收入预测。特别是每个分支：
 - en: Reads the dataset and sprinkles missing data over it in the percentage set for
     this loop iteration
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 读取数据集并在此循环迭代设置的百分比上撒入缺失数据。
 - en: Randomly partitions the data in a 80%-20% proportion to respectively train and
     test the decision tree for the selected task
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机将数据划分为80%-20%的比例，分别用于训练和测试所选任务的决策树
 - en: Imputes the missing values according to the four selected methods and trains
     and tests the decision tree
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据四种选定的方法填充缺失值，并训练和测试决策树
 - en: Calculates the accuracies and Cohen’s Kappas for the different models.
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算不同模型的准确性和 Cohen 的 Kappa 系数。
 - en: Afterwards the two loop branches are concatenated and the Loop End node  collects
     the performance results from the different iterations, before they get visualized
     through the “Visualize results” component
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，两个循环分支被合并，Loop End 节点收集不同迭代的性能结果，然后通过“可视化结果”组件进行可视化
 - en: '[You can download the workflow, Comparing Missing Value Handling Methods, from
     the KNIME Hub.](https://kni.me/w/bCTrFr60t7fWWlDi)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你可以从 KNIME Hub 下载工作流“比较缺失值处理方法”。](https://kni.me/w/bCTrFr60t7fWWlDi)'
 - en: '![Figure](../Images/a18d495e96c3ddba6275570908bf03cd.png)'
+  id: totrans-131
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/a18d495e96c3ddba6275570908bf03cd.png)'
 - en: '*Figure. 4: The workflow uses a loop to randomly replace 10%, 20%, and 25%
     of the values with missing values. In each iteration, the missing values are imputed
     using four different approaches. Afterwards a decision tree is trained and applied
     on each of the dataset variants and finally the performance for the different
     iterations is visualized. *'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 4：该工作流使用循环随机替换10%、20%和25%的值为缺失值。在每次迭代中，使用四种不同的方法对缺失值进行填充。之后，训练并应用决策树于每个数据集变体，最后对不同迭代的性能进行可视化。*'
 - en: 'The component named “Impute missing values and train and apply models” is the
     one of interest here. Its content is shown in figure 5: Four branches, as it was
     to be expected, one for each imputation technique.'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里关注的组件是“填充缺失值并训练和应用模型”。其内容如图 5 所示：四个分支，每个分支对应一种填充技术。
 - en: The top three branches implement the listwise deletion (“deletion”), fixed value
     imputation with zero (“0 imputation”), statistical measure imputation using the
     mean for numerical features and the most frequent value for nominal features (“Mean
     - most frequent”).
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 前三条分支实现了逐列表删除（“删除”）、用零填充值（“0 填充”）、使用均值填充数值特征和使用最频繁值填充名义特征的统计度量（“均值 - 最频繁”）。
 - en: The last branch implements the missing value prediction imputation, using a
     linear regression for numerical features and a kNN for nominal features (“linear
     regre - kNN”).
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一条分支实现了缺失值预测填充，使用线性回归处理数值特征，kNN 处理名义特征（“线性回归 - kNN”）。
 - en: '![Figure](../Images/091a89df823826036cabc10ae60d6991.png)'
+  id: totrans-136
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/091a89df823826036cabc10ae60d6991.png)'
 - en: '*Figure 5: Inside of the “Impute missing values and train and apply models”
     component using the powerful Missing Value node for imputation as well as Linear
     regression, kNN and MICE.*'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 5：“填充缺失值并训练和应用模型”组件内部，使用强大的缺失值节点进行填充，同时包括线性回归、kNN 和 MICE。*'
 - en: Let’s conclude with a few words to describe the [Missing Value node](https://kni.me/n/uVmaGQkzUOFCTqUe),
     simple yet effective. The Missing Value node offers most of the introduced single
     imputation techniques (Only the kNN and predictive model approach are not available).
     Here you can impute missing values according to a selected strategy across all
     datasets or column (feature) by column (feature).
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们用几句话来描述一下[缺失值节点](https://kni.me/n/uVmaGQkzUOFCTqUe)，简单而有效。缺失值节点提供了大部分介绍的单一填充技术（仅
+    kNN 和预测模型方法不可用）。在这里，你可以根据选定的策略对所有数据集或逐列（特征）填充缺失值。
 - en: '![Figure](../Images/d09a2279e215d9e5d4beee3fe6c51fc2.png)'
+  id: totrans-139
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/d09a2279e215d9e5d4beee3fe6c51fc2.png)'
 - en: '*Figure 6\. Configuration window of the Missing Value node. In the first tab
     a default imputation method for each data type can be defined for the whole dataset
     and in the second tab for each column.*'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 6：缺失值节点的配置窗口。在第一个标签页中，可以为整个数据集定义每种数据类型的默认填充方法，在第二个标签页中可以为每一列定义。*'
 - en: Multiple Imputation in KNIME Analytics Platform
+  id: totrans-141
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: KNIME Analytics Platform 中的多重填充
 - en: In the workflow, [Comparing Missing Value Handling Methods](https://kni.me/w/bCTrFr60t7fWWlDi),
     shown above, we saw how different single imputation methods can be applied in
     KNIME Analytics Platform. And it would be clearly possible to build a loop to
     implement a multiple imputation approach using the MICE algorithm. One advantage
     of KNIME Analytics Platform though is that we don’t have to reinvent the wheel,
     but we can integrate algorithms available in Python and R easily.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述工作流中，[比较缺失值处理方法](https://kni.me/w/bCTrFr60t7fWWlDi)，我们看到了如何在 KNIME Analytics
+    Platform 中应用不同的单次插补方法。而且明显可以建立一个循环来实现使用 MICE 算法的多重插补方法。KNIME Analytics Platform
+    的一个优势是我们不必重新发明轮子，可以轻松集成 Python 和 R 中可用的算法。
 - en: The “mice” package in R allows you to impute mixes of continuous, binary, unordered
     categorical and ordered categorical data and selecting from many different algorithms,
     creating many complete datasets. [5]
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: R 中的“mice”包允许你插补混合的连续、二元、无序分类和有序分类数据，并从许多不同的算法中进行选择，创建多个完整的数据集。[5]
 - en: In Python the “IterativeImputar” function was inspired by the MICE algorithm.
     It performs the same round-robin fashion of iterating many times through the different
     columns, but creates only one imputed dataset. By using different random seeds,
     multiple complete datasets can be created. [6]
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 中，“IterativeImputar”函数受到了 MICE 算法的启发。它以相同的轮回方式多次迭代不同的列，但只创建一个插补数据集。通过使用不同的随机种子，可以创建多个完整的数据集。[6]
 - en: In general it is still an open problem how useful single vs. multiple imputation
     is in the context of prediction and classification, when the user is not interested
     in measuring uncertainty due to missing values.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，在用户不关心因缺失值导致的不确定性的情况下，单次插补与多重插补在预测和分类中的有效性仍然是一个未解问题。
 - en: The workflow, [Multiple Imputation for Missing Values](https://kni.me/w/FMVnse1-jvF_jZRw),
     in Figure 7 shows an example for multiple imputation using the R “mice” package
     to create five complete datasets.
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 7 中的工作流，[缺失值的多重插补](https://kni.me/w/FMVnse1-jvF_jZRw)，展示了如何使用 R 的“mice”包进行多重插补，创建五个完整的数据集。
 - en: '![Figure](../Images/2e9b3d394d56d2014cb1c7fadaf17f85.png)'
+  id: totrans-147
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/2e9b3d394d56d2014cb1c7fadaf17f85.png)'
 - en: '*Figure 7.**This workflow uses the R “mice” package to perform multiple imputation.
     The analysis is then performed on each complete dataset using KNIME Analytics
     Platform.*'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 7.**这个工作流使用 R 的“mice”包来执行多重插补。然后在每个完整的数据集上使用 KNIME Analytics Platform 进行分析。*'
 - en: The workflow reads the census dataset after 25% of the values of the input features
     were replaced with missing values. In the R snippet node, the R “mice” package
     is loaded and applied to create the five complete datasets. In addition, an index
     is added to each row identifying the different complete datasets.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作流读取了输入特征的 25% 值被替换为缺失值后的普查数据集。在 R 片段节点中，加载并应用了 R 的“mice”包以创建五个完整的数据集。此外，为每一行添加了一个索引，用于标识不同的完整数据集。
 - en: '[You can download the workflow, Multiple Imputation for Missing Values, from
     the KNIME Hub](https://kni.me/w/FMVnse1-jvF_jZRw).'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你可以从 KNIME Hub 下载工作流“缺失值的多重插补”](https://kni.me/w/FMVnse1-jvF_jZRw)。'
 - en: In the next step, a loop processes the different complete datasets, by training
     and applying a decision tree in each iteration. In the last part of the workflow,
     the predicted results are polled by counting how often each class has been predicted
@@ -758,116 +1072,175 @@
     the Scorer node. On the Iris “mice” imputed dataset, the model reached an accuracy
     of 83.867%. In comparison, the single imputation methods reached between 77% and
     80% accuracy on the dataset with 25% missing values.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一步骤中，一个循环处理不同的完整数据集，通过在每次迭代中训练和应用决策树。在工作流的最后部分，通过统计每个类别被预测的频率来汇总预测结果，并提取最多数预测的类别。最后，使用
+    Scorer 节点评估结果。在 Iris “mice”插补的数据集上，模型达到了 83.867% 的准确率。相比之下，单次插补方法在缺失值为 25% 的数据集上达到了
+    77% 到 80% 的准确率。
 - en: Wrapping up
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: All datasets have missing values. It is necessary to know how to deal with them.
     Should we remove the data rows entirely or substitute some reasonable value as
     the missing value?
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有数据集都有缺失值。需要知道如何处理这些缺失值。我们是应该完全删除数据行，还是用某个合理的值来替代缺失值？
 - en: In this blog post, we described some common techniques that can be used to delete
     and impute missing values. We then implemented four most representative techniques,
     and compared the effect of four of them in terms of performances on two different
     classification problems with a progressive number of missing values.
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我们描述了一些常见的删除和插补缺失值的技术。我们随后实现了四种最具代表性的技术，并在两个不同的分类问题上比较了它们在处理逐渐增加的缺失值时的表现效果。
 - en: Summarizing, we can reach the following conclusions.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，我们可以得出以下结论。
 - en: Use listwise deletion (“deletion”) carefully, especially on small datasets.
     When removing data, you are removing information. Not all datasets have redundant
     information to spare! We have seen this dramatic effect in the churn prediction
     task.
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用全列表删除（“删除”）时需谨慎，特别是在小数据集上。删除数据时，你是在删除信息。并非所有数据集都有多余的信息可以舍弃！我们在流失预测任务中见证了这种显著的效果。
 - en: When using fixed value imputation, you need to know what that fixed value means
     in the data domain and in the business problem. Here, you are injecting arbitrary
     information into the data, which can bias the predictions of the final model.
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用固定值插补时，你需要了解该固定值在数据领域和业务问题中的含义。在这里，你将任意信息注入到数据中，这可能会影响最终模型的预测。
 - en: If you want to impute missing values without prior knowledge it is hard to say
     which imputation method works best, as it is heavily dependent on the data itself.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想在没有先验知识的情况下插补缺失值，很难说哪种插补方法效果最佳，因为这高度依赖于数据本身。
 - en: A small last disclaimer here to conclude. All results obtained here refer to
     these two simple tasks, to a relatively simple decision tree, and to small datasets.
     The same results might not hold for more complex situations.
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后需要说明的一点是，所有结果仅适用于这两个简单任务、相对简单的决策树和小数据集。对于更复杂的情况，相同的结果可能不适用。
 - en: In the end, nothing beats prior knowledge of the task and of the data collection
     process!
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，没有什么比对任务和数据收集过程的先验知识更重要！
 - en: '**References:**'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: '[1] Peter Schmitt, Jonas Mandel and Mickael Guedj , “A comparison of six methods
     for missing data imputation”, Biometrics & Biostatistics'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] Peter Schmitt, Jonas Mandel 和 Mickael Guedj，“六种缺失数据插补方法的比较”，《生物统计与生物测定学》'
 - en: '[2] ] M.R. Berthold, C. Borgelt, F. Höppner, F. Klawonn, R. Silipo, “Guide
     to Intelligent Data Science”, Springer, 2020'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] M.R. Berthold, C. Borgelt, F. Höppner, F. Klawonn, R. Silipo，“智能数据科学指南”，Springer，2020'
 - en: '[3] lissa J. Azur, Elizabeth A. Stuart, Constantine Frangakis, and Philip J.
     Leaf 1, “Multiple imputation by chained equations: what is it and how does it
     work?” Link: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3074241/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3074241/)'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] lissa J. Azur, Elizabeth A. Stuart, Constantine Frangakis 和 Philip J. Leaf
+    1，“链式方程的多重插补：它是什么，它是如何工作的？”链接：[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3074241/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3074241/)'
 - en: '[4] Shahidul Islam Khan, Abu Sayed Md Latiful Hoque,” SICE: an improved missing
     data imputation technique”, Link: [https://link.springer.com/content/pdf/10.1186/s40537-020-00313-w.pdf](https://link.springer.com/content/pdf/10.1186/s40537-020-00313-w.pdf)'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] Shahidul Islam Khan, Abu Sayed Md Latiful Hoque，“SICE：一种改进的缺失数据插补技术”，链接：[https://link.springer.com/content/pdf/10.1186/s40537-020-00313-w.pdf](https://link.springer.com/content/pdf/10.1186/s40537-020-00313-w.pdf)'
 - en: '[5] Python documentation. Link: [https://scikit-learn.org/stable/modules/impute.html](https://scikit-learn.org/stable/modules/impute.html)'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5] Python 文档。链接：[https://scikit-learn.org/stable/modules/impute.html](https://scikit-learn.org/stable/modules/impute.html)'
 - en: '[6] Census Income Dataset: [https://archive.ics.uci.edu/ml/datasets/Census+Income](https://archive.ics.uci.edu/ml/datasets/Census+Income)'
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: '[6] 人口普查收入数据集：[https://archive.ics.uci.edu/ml/datasets/Census+Income](https://archive.ics.uci.edu/ml/datasets/Census+Income)'
 - en: '**Related:**'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Easy Guide To Data Preprocessing In Python](/2020/07/easy-guide-data-preprocessing-python.html)'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的数据预处理简易指南](/2020/07/easy-guide-data-preprocessing-python.html)'
 - en: '[Automated Machine Learning: Just How Much?](/2019/09/automated-machine-learning-just-how-much.html)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习：究竟有多大？](/2019/09/automated-machine-learning-just-how-much.html)'
 - en: '[How to Deal with Missing Values in Your Dataset](/2020/06/missing-values-dataset.html)'
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理数据集中的缺失值](/2020/06/missing-values-dataset.html)'
 - en: More On This Topic
+  id: totrans-172
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Datawig，AWS 的深度学习库进行缺失值插补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[3 Approaches to Data Imputation](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[三种数据插补方法](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
 - en: '[Approaches to Data Imputation](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据插补方法](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
 - en: '[Semantic Layers are the Missing Piece for AI-Enabled Analytics](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义层是 AI 驱动分析的缺失环节](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)'
 - en: '[How to Deal with Missing Data Using Interpolation Techniques in Pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 中的插值技术处理缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
 - en: '[Masked Arrays in NumPy to Handle Missing Data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NumPy 中的掩码数组处理缺失数据](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
