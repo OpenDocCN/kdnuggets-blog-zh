@@ -1,17 +1,25 @@
 - en: Implementing MLOps on an Edge Device
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在边缘设备上实施 MLOps
 - en: 原文：[https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html](https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html](https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Felix Baum](https://developer.qualcomm.com/blogs/fbaum), Qualcomm Technologies**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Felix Baum](https://developer.qualcomm.com/blogs/fbaum)，高通科技**'
 - en: The lifecycle of traditional software is arguably quite straight forward. At
     its simplest, you develop, test, and deploy the software, and then release a new
     version with features, updates, and/or fixes as needed. To facilitate this, traditional
@@ -21,33 +29,53 @@
     (CD), and [Continuous Testing](https://en.wikipedia.org/wiki/Continuous_testing)
     (CT) to reduce development time while continuously delivering new releases and
     maintaining quality.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统软件的生命周期可以说相当简单。最简单的形式是，你开发、测试和部署软件，然后根据需要发布新版本，添加功能、更新和/或修复。为此，传统的软件开发通常依赖于
+    [DevOps](https://en.wikipedia.org/wiki/DevOps)，它包括 [持续集成](https://en.wikipedia.org/wiki/Continuous_integration)
+    (CI)、[持续交付](https://en.wikipedia.org/wiki/Continuous_delivery) (CD) 和 [持续测试](https://en.wikipedia.org/wiki/Continuous_testing)
+    (CT)，以减少开发时间，同时不断交付新版本并保持质量。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: When it comes to machine learning (ML) modeling, it’s easy to think that the
     ML workflow follows a similar pattern. After all, it should just be a matter of
     creating and training an ML model, deploying it, and releasing a new version as
@@ -57,8 +85,12 @@
     global events have highlighted, our world is constantly changing, so ML practitioners
     must anticipate that the real-world data on which production models¹ infer, will
     inevitably change too.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于机器学习（ML）建模，人们很容易认为 ML 工作流程遵循类似的模式。毕竟，它应该只是创建和训练 ML 模型，部署它，并根据需要发布新版本。但 ML
+    系统操作的环境使事情变得复杂。首先，ML 系统本身由于其数据驱动的、非确定性的行为，本质上与传统软件不同。而最近的全球事件也强调了我们的世界不断变化，因此
+    ML 从业者必须预见到生产模型¹ 推断的真实世界数据也会不可避免地发生变化。
 - en: 'As a result, a special kind of DevOps for ML has emerged, called *MLOps* (short
     for “machine learning and operations”), to help manage this constant change and
     the subsequent need for model redeployments. MLOps embraces DevOps’ continuous
@@ -66,74 +98,105 @@
     with *continuous training*. This continuous training of new models, which includes
     redeployment of those new models and all of the technical efforts that go along
     with it, aims to address three notable aspects of ML projects:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是，一种特殊的 ML DevOps 被称为*MLOps*（即“机器学习与运维”的缩写）应运而生，以帮助管理这种不断变化及其随之而来的模型重新部署需求。MLOps
+    拥抱 DevOps 的持续集成和持续交付，但将持续测试阶段替换为*持续训练*。这种新的模型的持续训练，包括这些新模型的重新部署及所有相关的技术工作，旨在解决
+    ML 项目的三个显著方面：
 - en: The need for “explainability” as to how and why a model makes certain predictions.
     This is especially important for auditing purposes to meet regulations and/or
     certain levels of predictive performance.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 需要对模型如何及为何做出某些预测进行“可解释性”说明。这对于审计目的尤其重要，以满足法规和/或某些预测性能水平的要求。
 - en: Model decay, which is the reduction of the production model’s predictive performance
     over time, due to new and changing real-world data encountered by the model.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型衰退是指由于模型遇到的新变化的实际数据，生产模型的预测性能随时间减少。
 - en: The continuous development and enhancements to the model driven by business
     requirements.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由业务需求驱动的模型的持续开发和改进。
 - en: Continuous training, and indeed MLOps in general, embrace the idea that the
     model will constantly and inevitably change, which means organizations implement
     MLOps strategies and tactics to varying degrees.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 持续训练，实际上也包括 MLOps，一般都接受模型会不断且不可避免地变化的理念，这意味着组织在实施 MLOps 策略和战术时会有不同程度的体现。
 - en: 'As MLOps have evolved, a number of organizations have put forth frameworks
     for best practices. One prominent example is [Google’s MLOps](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation)
     guidelines which describes three levels of MLOps implementations adopted by organizations:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着 MLOps 的发展，许多组织提出了最佳实践框架。一个显著的例子是 [Google 的 MLOps](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation)
+    指南，它描述了组织采用的三种 MLOps 实施级别：
 - en: '**MLOps level 0: Manual Process**: the need for model training and deployment
     are formally recognized, but are performed manually, often in an ad-hoc fashion
     through scripts and interactive processes. This level generally lacks continuous
     integration and continuous delivery.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**MLOps 0 级：手动过程**：模型训练和部署的需求被正式认可，但通常通过脚本和交互过程以临时的方式手动完成。这个层级一般缺乏持续集成和持续交付。'
 - en: '**MLOps level 1: ML pipeline automation**: this level introduces a pipeline
     for continuous training. Data and model validation are automated, and triggers
     are in place to retrain the model with fresh data when its performance degrades.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**MLOps 1 级：ML 流水线自动化**：这一层级引入了用于持续训练的流水线。数据和模型验证被自动化，并且设有触发器，以便在模型性能下降时用新数据重新训练模型。'
 - en: '**MLOps level 2: CI/CD pipeline automation**: the ML workflow has been automated
     to the point where data scientists are able to update both the model and pipeline
     with reduced intervention from developers.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**MLOps 2 级：CI/CD 流水线自动化**：ML 工作流已经自动化到数据科学家能够更新模型和流水线，而开发人员的干预减少。'
 - en: Organizations that have implemented MLOps level 2 or MLOps level 3 may even
     make use of so called “shadow models”, which are models that are trained in parallel
     while the production model runs, using a different training dataset for each.
     When a new production model is needed, a shadow model can be quickly selected
     and deployed.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 实施了 MLOps 2 级或 MLOps 3 级的组织甚至可能使用所谓的“影子模型”，这些模型在生产模型运行时会并行训练，每个模型使用不同的训练数据集。当需要新的生产模型时，可以快速选择和部署一个影子模型。
 - en: '[![Figure](../Images/22938573f024a01b728b506138623974.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-01_0.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图示](../Images/22938573f024a01b728b506138623974.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-01_0.png)'
 - en: '*Figure 1 - A visual depiction of parallel training of shadow models on different
     datasets. Each model is a potential candidate to become the new production model.*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 1 - 影子模型在不同数据集上并行训练的可视化展示。每个模型都是成为新生产模型的潜在候选者。*'
 - en: To better understand how and when these different levels of MLOps can be implemented,
     consider the following examples.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地理解这些不同级别的 MLOps 如何以及何时实施，请考虑以下示例。
 - en: '**Example 1: Packaging Robots**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例 1：包装机器人**'
 - en: A simple example is a robot at the end of an assembly line, that uses computer
     vision powered by ML to analyze and package up products. The ML model may have
     been trained to recognize square and rectangular boxes of a limited range of sizes.
@@ -142,45 +205,63 @@
     at MLOps level 0 would manually create, train, and deploy a new model, pre-emptively
     before the new types of packages start rolling down the assembly line. Given the
     limited domain of the robot’s capabilities, this level of MLOps may suffice.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个简单的例子是，在装配线末端的机器人，利用 ML 支持的计算机视觉来分析和包装产品。ML 模型可能已经训练成识别一定范围的方形和矩形盒子。然而，业务现在会引入新的包装形状和尺寸，因此创建并部署了新的
+    ML 模型。在这种情况下，MLOps 0 级的开发团队将手动创建、训练和部署新模型，在新类型的包装开始下线之前进行预先准备。考虑到机器人的能力范围有限，这种
+    MLOps 层级可能已经足够。
 - en: '**Example 2: Speech Recognition**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例 2：语音识别**'
 - en: Consider a mobile app for speech recognition that can sense or identify context
     (e.g., tone or emotion) based on how people speak. Over time, new phrases and
     slangs come along, and the general style of how people talk changes. In this scenario
     an ML model will likely exhibit model decay over a long period of time.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑一个可以根据人们说话的方式感知或识别上下文（例如，语调或情感）的语音识别移动应用程序。随着时间的推移，新短语和俚语的出现，以及人们谈话风格的变化，机器学习模型可能会在长时间内出现模型衰退。
 - en: This is an example where the guidelines of MLOps level 1 could potentially help.
     Under MLOps level 1, a system could be run on the device, to monitor the model’s
     predictive performance. If performance approaches or falls below a threshold,
     the system triggers an alert to the team that a new model should be trained using
     fresh data, and then deployed to replace the production model.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个可能从 MLOps 1 级的指导方针中受益的例子。在 MLOps 1 级下，系统可以在设备上运行，以监控模型的预测性能。如果性能接近或低于阈值，系统会触发警报，提醒团队需要使用新数据训练一个新模型，并将其部署以替代生产模型。
 - en: '**Example 3: Sudden Outliers in the Stock Market**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例 3：股市中的突发异常值**'
 - en: Earlier this year, the price of oil entered negative territory. If an ML model
     makes predictions based on the price of oil but has only been trained with positive
     prices, how will it perform when it suddenly encounters a negative stock price?
     In this situation, team members will need to be alerted to the problem immediately,
     and must be in a position to quickly train and redeploy a new model.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 今年早些时候，油价进入了负值区域。如果一个机器学习模型是基于油价进行预测的，但只用过正油价进行训练，那么当它突然遇到负油价时，表现会如何？在这种情况下，团队成员需要立即被警告到这个问题，并且必须能够快速训练和重新部署一个新模型。
 - en: Here, an implementation of MLOps level 2 could be beneficial. At this level,
     much of the pipeline for training and deploying a new model has been automated,
     so data scientists should be able to handle most or all of the pipeline without
     developer assistance. Moreover, the degree of automation should allow them to
     focus updating, training, and deploying a new model as quickly and as reliably
     as possible.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，实现 MLOps 2 级可能会有所帮助。在这个级别，大部分训练和部署新模型的管道已经自动化，因此数据科学家应该能够在没有开发人员协助的情况下处理大部分或全部管道。此外，自动化的程度应该允许他们尽快且可靠地专注于更新、训练和部署新模型。
 - en: '**Implementing MLOps For Edge Devices**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为边缘设备实施 MLOps**'
 - en: Many of today’s premium edge devices are well positioned for MLOps. Not only
     are they more than capable of hosting large models, but they are often equipped
     with specialized vector processors optimized to run inference. On such example
@@ -191,69 +272,101 @@
     artificial intelligence (AI), that developers use to optimize and load models
     onto the device. It is these SDKs and tools that can be integrated into an MLOps
     pipeline to facilitate the model deployment process.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多今天的高端边缘设备非常适合 MLOps。它们不仅能够托管大型模型，而且通常配备了专门优化运行推断的向量处理器。例如，[Hexagon](https://developer.qualcomm.com/software/hexagon-dsp-sdk/dsp-processor)
+    数字信号处理器（DSP）就存在于高通® [Snapdragon](https://www.qualcomm.com/snapdragon)™ 系列的移动平台上，它为[今天许多高端设备提供动力](https://en.wikipedia.org/wiki/Devices_using_Qualcomm_Snapdragon_systems-on-chip)²。此外，这些处理器通常配备了丰富的人工智能（AI）SDK
+    和工具集，开发人员可以使用它们来优化和加载模型到设备上。这些 SDK 和工具可以集成到 MLOps 管道中，以促进模型部署过程。
 - en: 'The general process for working with the SDK in the context of the ML workflow
     is as follows:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 ML 工作流的上下文中，使用 SDK 的一般过程如下：
 - en: The ML model is designed and trained using a framework such as [TensorFlow](https://www.tensorflow.org/).
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 机器学习模型是使用如 [TensorFlow](https://www.tensorflow.org/) 这样的框架设计和训练的。
 - en: The converter tool in the [Qualcomm Neural Processing SDK](https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk)
     is used to convert that model to a proprietary format, optimized for execution
     on Snapdragon.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[Qualcomm 神经处理 SDK](https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk)
+    中的转换工具用于将模型转换为专有格式，优化以在 Snapdragon 上执行。'
 - en: API calls from the Qualcomm Neural Processing SDK are added to the app to load
     the data onto the Qualcomm® Hexagon™ processor and to run inference.
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从 Qualcomm 神经处理 SDK 的 API 调用被添加到应用程序中，以将数据加载到 Qualcomm® Hexagon™ 处理器上并进行推理。
 - en: Once loaded and the app is running, the model has been deployed to edge for
     inference on real-world data.
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一旦加载完成并且应用程序运行中，模型就会被部署到边缘进行实际数据的推理。
 - en: '[![Figure](../Images/4fc6183c11b6ba52714bfa3a5b8bba45.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-02.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/4fc6183c11b6ba52714bfa3a5b8bba45.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-02.png)'
 - en: '*Figure 2 - The basic workflow for integrating and executing an ML model on
     an edge device.*'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 2 - 在边缘设备上集成和执行机器学习模型的基本工作流程。*'
 - en: In the context of MLOps, steps 1, 2, and 4 from above, would be repeated throughout
     the product’s lifecycle as model updates are required. And depending on the level
     of MLOps that has been implemented, developers may build additional entities such
     as monitoring tools, that run on the edge device to gauge the model’s predictive
     performance. They may also build some sort of alert and/or trigger that can start
     a new iteration of the ML workflow.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 MLOps 的背景下，上述第 1、2 和 4 步骤会在产品生命周期内重复执行，随着模型更新的需求而不断进行。根据实施的 MLOps 级别，开发人员可能会构建一些额外的实体，例如在边缘设备上运行的监控工具，用于评估模型的预测性能。他们还可能构建某种警报和/或触发器，以启动机器学习工作流程的新迭代。
 - en: '**A Closer Looks at MLOps Pipeline**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**深入了解 MLOps 管道**'
 - en: 'Looking at this a bit closer, there are a number of tools and phases to integrate
     into an MLOps pipeline model deployment script. The following shows an example
     pipeline built on the Qualcomm Neural Processing SDK:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 进一步来看，将有许多工具和阶段需要集成到 MLOps 管道模型部署脚本中。以下展示了一个基于 Qualcomm 神经处理 SDK 构建的示例管道：
 - en: '[![Figure](../Images/52ae9f34f0b50b1a7484756abbd57a08.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-03.jpg)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图像](../Images/52ae9f34f0b50b1a7484756abbd57a08.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-03.jpg)'
 - en: '*Figure 3 – A more detailed view of the role of an edge device’s SDK in an
     ML workflow.*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 3 – 边缘设备 SDK 在机器学习工作流程中的角色的更详细视图。*'
 - en: In the upper half of the workflow, an ML model is trained in an ML framework.
     In the lower half of the workflow, the SDK’s tools are used to convert the model
     to edge device’s proprietary format, and optionally, to optimize the model for
     the edge device. In the context of MLOps, it’s these tools that would be invoked
     either manually or as part of automated build scripts.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在工作流程的上半部分，ML 模型在机器学习框架中进行训练。在工作流程的下半部分，使用 SDK 工具将模型转换为边缘设备的专有格式，并可以选择性地优化模型以适应边缘设备。在
+    MLOps 的背景下，这些工具会被手动调用或作为自动构建脚本的一部分调用。
 - en: Developers can also implement different methods to reload a new model into the
     app running on the edge device. One method is to run services on the device that
     automatically pull down the new model and restart the app (or even restart the
@@ -262,87 +375,131 @@
     new model files at runtime, and re-invoke the necessary APIs to load the new model.
     Yet another option is to use a *push* approach, in which over-the-air updates
     initiated by a server push a new model to the device.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 开发人员还可以实现不同的方法将新模型重新加载到运行中的边缘设备应用程序中。一种方法是在设备上运行服务，自动下载新模型并用新模型重启应用程序（甚至重启整个设备），但这可能会在重启过程中中断服务。另一种方法是应用程序本身在运行时监视新模型文件的存在，并重新调用必要的
+    API 来加载新模型。还有另一种选择是使用*推送*方法，通过服务器发起的空中更新将新模型推送到设备。
 - en: Depending on the app’s architecture, each of these options may incur different
     levels of downtime as the model is deployed and the app switches to using it.
     Developers will therefore need to weigh the complexity of implementing each technique,
     with the potential downtime required to deploy a new model.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据应用程序的架构，这些选项中的每一个可能会在模型部署和应用程序切换到使用新模型时产生不同程度的停机。因此，开发人员需要权衡实施每种技术的复杂性与部署新模型所需的潜在停机时间。
 - en: '**Conclusion**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: ML systems are inherently different to traditional software because they are
     non-deterministic, and operate in a world of constantly-evolving, ever-changing
     data. But thanks to formal methodologies like MLOps, developers have the tools
     they need to strategize and implement robust ML solutions.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: ML 系统本质上与传统软件不同，因为它们是非确定性的，并在一个不断发展的、不断变化的数据世界中运行。但由于像 MLOps 这样的正式方法，开发人员拥有了策略和实施强大
+    ML 解决方案所需的工具。
 - en: With ML gaining such prominence in edge computing on so many devices today,
     it’s exciting to see how this hardware, in conjunction with their SDKs and tools,
     can support an effective MLOps pipeline.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着机器学习在当今众多设备上的边缘计算中获得如此重要的地位，看到这些硬件与其 SDK 和工具结合，如何支持有效的 MLOps 流水线，令人兴奋。
 - en: A *production model* refers to the ML model that has been deployed for inference
     on real-world data.
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*生产模型* 是指已经部署用于在真实数据上进行推理的机器学习模型。'
 - en: '[https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/](https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/)'
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/](https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/)'
 - en: '**Bio: [Felix Baum](https://developer.qualcomm.com/blogs/fbaum)** manages the
     digital signal processor (DSP) software products for Qualcomm Technologies and
     is instrumental in supporting Hexagon DSP in connectivity, audio, voice, sensor
     fusion, computer vision and machine learning use cases.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Felix Baum](https://developer.qualcomm.com/blogs/fbaum)** 负责管理 Qualcomm
+    Technologies 的数字信号处理器 (DSP) 软件产品，并在支持 Hexagon DSP 在连接、音频、语音、传感器融合、计算机视觉和机器学习用例方面发挥了重要作用。'
 - en: '[Original](https://developer.qualcomm.com/blog/implementing-machine-learning-and-operations-mlops
     ). Reposted with permission.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://developer.qualcomm.com/blog/implementing-machine-learning-and-operations-mlops
+    )。转载获许可。'
 - en: '**Related:**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Taming Complexity in MLOps](/2020/05/taming-complexity-mlops.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[驾驭 MLOps 的复杂性](/2020/05/taming-complexity-mlops.html)'
 - en: '[Demystifying the AI Infrastructure Stack](/2020/05/demystifying-ai-infrastructure-stack.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开 AI 基础设施栈的面纱](/2020/05/demystifying-ai-infrastructure-stack.html)'
 - en: '[A Tour of End-to-End Machine Learning Platforms](/2020/07/tour-end-to-end-machine-learning-platforms.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[端到端机器学习平台的巡礼](/2020/07/tour-end-to-end-machine-learning-platforms.html)'
 - en: More On This Topic
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[On-device AI with Developer-Ready Software Stacks](https://www.kdnuggets.com/2022/03/qualcomm-ondevice-ai-developer-ready-software-stacks.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[带开发者准备好的软件堆栈的设备内 AI](https://www.kdnuggets.com/2022/03/qualcomm-ondevice-ai-developer-ready-software-stacks.html)'
 - en: '[Learn How to Run Alpaca-LoRA on Your Device in Just a Few Steps](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解如何在您的设备上仅需几步运行 Alpaca-LoRA](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
 - en: '[Machine Learning on the Edge](https://www.kdnuggets.com/2022/10/machine-learning-edge.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[边缘机器学习](https://www.kdnuggets.com/2022/10/machine-learning-edge.html)'
 - en: '[Maximize Performance in Edge AI Applications](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最大化边缘 AI 应用中的性能](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)'
 - en: '[Windows on Snapdragon Brings Hybrid AI to Apps at the Edge](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Snapdragon 上的 Windows 将混合 AI 带入边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)'
 - en: '[Introducing TPU v4: Googles Cutting Edge Supercomputer for Large…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 TPU v4: Google 的前沿超级计算机用于大型…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)'
