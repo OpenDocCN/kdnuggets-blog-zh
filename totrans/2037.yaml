@@ -1,211 +1,317 @@
 - en: How to build a DAG Factory on Airflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在Airflow上构建DAG工厂
 - en: 原文：[https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html](https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html](https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Axel Furlan](https://www.linkedin.com/in/axelfurlan/), Data Engineer**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Axel Furlan](https://www.linkedin.com/in/axelfurlan/)，数据工程师**'
 - en: '![](../Images/a9f359d219ec76580f36b27ce2a8d4ae.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a9f359d219ec76580f36b27ce2a8d4ae.png)'
 - en: Photo by [Chris Ried](https://unsplash.com/@cdr6934?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[Chris Ried](https://unsplash.com/@cdr6934?utm_source=medium&utm_medium=referral)提供，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT工作'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Why a DAG Factory?
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么需要DAG工厂？
 - en: Let’s look at a pretty simple DAG with 2 tasks…
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来看一个包含两个任务的相当简单的DAG…
 - en: Isn’t it weird the amount of boilerplate code necessary in order to execute
     2 simple python scripts on Airflow? No matter how many DAGs you write, most certainly
     you will find yourself writing almost all the same variables with the slightest
     of changes in a lot of different DAGs.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Airflow中执行两个简单的Python脚本需要这么多模板代码，这是不是很奇怪？无论你写多少个DAG，你肯定会发现自己在许多不同的DAG中几乎写着相同的变量，只是变化微小。
 - en: Remember that, in coding, it’s generally better to **write a piece of code that
     you can later call, instead of writing the same piece of code every time you need
     that procedure**. This is called being [**DRY**](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，在编码时，通常更好**编写一段代码，以后可以调用，而不是每次都写相同的代码**。这叫做[**DRY**](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)。
 - en: If many of your DAGs share similar values, e.g the *email address*, the *start
     date*, the *schedule interval*, the number of *retries*, and so-on, it’s probably
     better to have a piece of code that fulfills those values for you. This is what
     we try to achieve with a Factory class.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的许多DAG共享类似的值，例如*电子邮件地址*、*开始日期*、*计划间隔*、*重试次数*等等，最好有一段代码来为你填充这些值。这就是我们试图通过工厂类实现的目标。
 - en: Using a DAG Factory on Airflow, we can **reduce the number of lines necessary
     to create a DAG by half**.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Airflow上的DAG工厂，我们可以**将创建DAG所需的代码行数减少一半**。
 - en: Let’s look at the following examples
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们来看以下示例
 - en: Here, we want a simple DAG that prints today’s date and then prints “hi”.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们希望有一个简单的DAG，打印今天的日期，然后打印“hi”。
 - en: 'This is how it looks on Airflow:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是在Airflow中的样子：
 - en: '![DAG](../Images/28ce7700d8cfbc5cdf7afda622a439ab.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![DAG](../Images/28ce7700d8cfbc5cdf7afda622a439ab.png)'
 - en: Notice how much we reduced clutter. We haven’t specified what operator we use,
     what are the tasks’ ids, the schedule interval, who created the DAG nor when was
     it created.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意我们减少了多少杂乱。我们没有指定使用什么操作符、任务的ID、计划间隔、谁创建了DAG或创建时间。
 - en: We can also see that we specified tasks and dependencies using a dictionary
     and that ultimately translates into the correct tasks dependencies ????
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以看到我们使用字典指定了任务和依赖关系，并且这最终转化为正确的任务依赖关系????
 - en: 'Let’s look at a slightly more complex example:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来看一个稍微复杂一点的示例：
 - en: In this DAG, I specified 2 arguments that I wanted to override from the defaults.
     Those are the DAG’s owner and its number of retries. I also specified in the `get_airflow_dag()` method
     that I wanted for the schedule to be daily.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个DAG中，我指定了两个我希望覆盖默认值的参数。这些是DAG的所有者和重试次数。我还在`get_airflow_dag()`方法中指定了我希望计划为每日执行。
 - en: This DAG has 3 tasks. Both `say_bye()` and `print_date()` depend on `say_hi()`.
     Let’s see how this looks like on Airflow.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 DAG 有 3 个任务。`say_bye()` 和 `print_date()` 都依赖于 `say_hi()`。让我们看看在 Airflow 中这是什么样子的。
 - en: '![DAG](../Images/9a353147bdd205ed61664413027c2749.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![DAG](../Images/9a353147bdd205ed61664413027c2749.png)'
 - en: Now, let’s look at how we can build the DAG Factory ????
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们看看如何构建 DAG 工厂 ????
 - en: How to code it?
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何编写代码？
 - en: To be honest, it is pretty simple. We first create a class that will have all
     methods that we need to run in order to create a DAG with its tasks.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 说实话，这非常简单。我们首先创建一个类，包含所有创建 DAG 及其任务所需的方法。
 - en: Below is the full code for the DAG Factory.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是 DAG 工厂的完整代码。
 - en: The main method that we’re going to call in order to get a fully usable DAG
     is `get_airflow_dag()`.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将调用的主要方法以获得一个完全可用的 DAG 是 `get_airflow_dag()`。
 - en: 'This method will receive 2 mandatory parameters: the DAG’s name and the tasks
     that it should run. The rest of the parameters are optional since we can set a
     default in the function’s implementation. When implementing, feel free to make
     any of those optional parameters mandatory, depending on your use case, it may
     be useful to make the *cron* (`schedule_interval`) a mandatory parameter or even
     the DAG’s owner, for instance.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法将接收 2 个必需参数：DAG 的名称和它应该运行的任务。其余参数是可选的，因为我们可以在函数实现中设置默认值。在实现时，可以根据使用情况将任何这些可选参数设置为必需参数，比如将
+    *cron* (`schedule_interval`) 设置为必需参数，甚至 DAG 的所有者。
 - en: The `default_args` parameter is going to be a dictionary that will hold any
     keys and values that you may want to override. If not specified, the default default_args
     are going to be used.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`default_args` 参数将是一个字典，包含你可能想要覆盖的任何键值。如果没有指定，将使用默认的 default_args。'
 - en: 'In our case, the defaults are:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的情况下，默认值是：
 - en: '[PRE0]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The other 3 parameters are the main ones used to describe a DAG. There are more
     options so feel free to specify more.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他 3 个参数是描述 DAG 的主要参数。还有更多选项，可以随意指定更多。
 - en: '`get_airflow_dag()` will run `create_dag()` in order to create the DAG object
     and return it. `add_tasks_to_dag()` is a little bit more complicated since we
     want to make it easy for the user to specify a way to create dependencies on tasks
     without having to write the *Operators*.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '`get_airflow_dag()` 将运行 `create_dag()` 以创建 DAG 对象并返回它。`add_tasks_to_dag()`
+    有点复杂，因为我们希望让用户在不必编写 *Operators* 的情况下，方便地指定任务的依赖关系。'
 - en: In our case, we always use the *PythonOperator* for our tasks, so it made sense
     for us to assume that as the norm.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的情况下，我们总是为任务使用 *PythonOperator*，所以假设这是一种标准是合情合理的。
 - en: The implementation aims to facilitate the data engineer’s job, so we avoid setting
     extra things like the task’s name, we just assume it’s the same as the function’s
     name — so we use a little bit of *reflection* to figure it out.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现旨在简化数据工程师的工作，因此我们避免设置额外的内容，比如任务名称，我们只是默认它与函数名称相同——因此我们使用一些 *reflection* 来确定它。
 - en: '[PRE1]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The function first creates an auxiliary dictionary to hold a key value pair
     of task name: task object. This is done to only have one set of tasks objects
     and to use that later to set dependencies. Then for each key in the tasks dictionary
     provided originally, the dependencies get set making use of the auxiliary dictionary.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数首先创建一个辅助字典，以存储任务名称：任务对象的键值对。这是为了只有一组任务对象，并在后续用来设置依赖关系。然后，对于最初提供的任务字典中的每个键，依赖关系会利用辅助字典进行设置。
 - en: After this is done, the DAG object is ready to be returned and used by the team
     ????.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成后，DAG 对象就可以返回并由团队使用了 ????。
 - en: Gotcha!
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 明白了！
 - en: There’s a little trick in the file in order for Airflow to recognize it’s a
     proper DAG that we’re returning.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 文件中有一个小技巧，使 Airflow 能识别我们返回的是一个合适的 DAG。
 - en: 'When Airflow starts, the so-called DagBag process will parse all the files
     looking for DAGs. The way the current implementation works is something like this:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 Airflow 启动时，所谓的 DagBag 进程将解析所有文件以寻找 DAG。目前的实现方式是这样的：
 - en: The DagBag spawns different processes that look through the files of the dag
     folder.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: DagBag 会生成不同的进程，检查 dag 文件夹中的文件。
 - en: The function called `process_file` [here](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/models/dagbag.html) runs
     for each file to figure out if there’s a DAG there.
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 名为 `process_file` 的函数 [在这里](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/models/dagbag.html)
+    为每个文件运行，以确定是否存在 DAG。
 - en: The code runs `might_contain_dag` which returns a True depending if the file
     contains both “dag” and “airflow” in their code. Implementation [here](https://github.com/apache/airflow/blob/c61f3d45b4a1799e92ead1532d36f232ebc4686e/airflow/utils/file.py#L198).
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: That’s why the function `get_airflow_dag` is called like that, in order to have
     both keywords in the file that will result in the file being correctly parsed.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: This was a hard thing to find, I spent many hours trying to figure out why my
@@ -213,71 +319,88 @@
     into account in order to create DAGs in a non-traditional way, so this is one
     of the big gotchas that you will have to take into account when doing something
     like this.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: Conclusion
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: This simple article aimed to explain how to make a Data Engineer’s life easier
     by utilizing the [Factory pattern](https://www.tutorialspoint.com/design_pattern/factory_pattern.htm) on
     Airflow.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: Hope you liked it! Feel free to click on my profile to see other useful Airflow
     and Data Engineering articles! ????
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Axel Furlan](https://www.linkedin.com/in/axelfurlan/)** is a Data Engineer
     from Argentina ???????? and a software engineering student. Axel started as a
     Data Scientist and then combined both software eng and data and fell in love with
     how versatile the role can be. He is writing to make other DEs lives easier.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/how-to-build-a-dag-factory-on-airflow-9a19ab84084c).
     Reposted with permission.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[Data Science Learning Roadmap for 2021](/2021/02/data-science-learning-roadmap-2021.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[9 Skills You Need to Become a Data Engineer](/2021/03/9-skills-become-data-engineer.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Faster machine learning on larger graphs with NumPy and Pandas](/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[5 Airflow Alternatives for Data Orchestration](https://www.kdnuggets.com/5-airflow-alternatives-for-data-orchestration)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Build Strong Data Science Portfolio as a Beginner](https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[6 Data Science Technologies You Need to Build Your Supply Chain Pipeline](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
