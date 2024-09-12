@@ -1,87 +1,127 @@
 - en: Multivariate Time-Series Prediction with BQML
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 多变量时间序列预测与BQML
 - en: 原文：[https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
 - en: '![Multivariate Time-Series Prediction with BQML](../Images/f6601849ad09b52789b510bc3f570317.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![多变量时间序列预测与BQML](../Images/f6601849ad09b52789b510bc3f570317.png)'
 - en: Image from [Pexels](https://www.pexels.com/photo/graphs-display-on-an-ipad-187041/)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [Pexels](https://www.pexels.com/photo/graphs-display-on-an-ipad-187041/)
 - en: Last winter, I gave a presentation on ‘**More predictable time-series model
     with BQML**’ at [**GDG DevFest Tashkent 2022**](https://gdg.community.dev/events/details/google-gdg-tashkent-presents-devfest-tashkent-22/)
     in Tashkent, the capital of Uzbekistan.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 去年冬天，我在乌兹别克斯坦首都塔什干的[**GDG DevFest Tashkent 2022**](https://gdg.community.dev/events/details/google-gdg-tashkent-presents-devfest-tashkent-22/)上做了一个关于‘**使用BQML进行更可预测的时间序列模型**’的演讲。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: I was going to share some of the material and code after DevFest I used in the
     presentation, but time has passed, and new features have been released in BQML
     that overlap some of the content.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我本打算分享一些我在DevFest上使用的材料和代码，但时间已经过去，BQML中已发布一些新功能，这些功能与一些内容重叠。
 - en: Therefore, I’ll instead mention the new features and some of the things that
     are still valid briefly.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我将简要提及一些新功能和一些仍然有效的内容。
 - en: Time-Series Model and BQML
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 时间序列模型与BQML
 - en: '**Time series data** is used by many organizations for a variety of purposes,
     and it’s important to note that “**predictive analytic**s” is all about the “future”
     in time. Time series predictive analytics has been used in the short, medium,
     and long term, and while it has many inaccuracies and risks, it has also been
     steadily improving.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**时间序列数据**被许多组织用于各种目的，需要注意的是，“**预测分析**”关注的是时间上的“未来”。时间序列预测分析已经在短期、中期和长期中使用，虽然它有许多不准确性和风险，但也在稳步改进。'
 - en: Since “prediction” seems to be so useful, you might be tempted to apply a time
     series prediction model if you have time series data. But time series prediction
     models are usually computationally intensive, and if you have a lot of data, it
     will be more computationally intensive. So it’s cumbersome and hard to process
     it, load it to the analytics environment and analyze it
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于“预测”似乎非常有用，如果你有时间序列数据，你可能会被诱导去应用时间序列预测模型。但时间序列预测模型通常计算密集，如果数据量很大，它会更加计算密集。因此，这很繁琐，处理、加载到分析环境并进行分析都很困难。
 - en: If you are using **Google BigQuery** for data management, you can use **BQM**L
     (BigQuery ML) to apply machine learning algorithms to your data in a simple, easy,
     and fast way. A lot of people use BigQuery to process a lot of data, and a lot
     of that data is often time series data. And **BQML also supports time series models.**
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你使用**Google BigQuery**进行数据管理，可以使用**BQML**（BigQuery ML）以简单、便捷、快速的方式将机器学习算法应用于你的数据。许多人使用BigQuery处理大量数据，其中许多数据通常是时间序列数据。而**BQML也支持时间序列模型**。
 - en: The basis of the time series model currently supported by BQML is the [**AutoRegressive
     Integrated Moving Average (ARIMA)**](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average)
     model. The ARIMA model predicts using only existing time series data and is known
     to have good short-term prediction performance, and since it combines AR and MA,
     it is a popular model that can cover a wide range of time series models.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前 BQML 支持的时间序列模型的基础是 [**自回归积分滑动平均（ARIMA）**](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average)
+    模型。ARIMA 模型仅利用现有时间序列数据进行预测，已知其短期预测性能良好，并且由于它结合了 AR 和 MA，因此是一个能够覆盖广泛时间序列模型的流行模型。
 - en: However, this model is computationally intensive overall, and since it only
     utilizes time series data with normality, it is difficult to use it in cases with
     trends or seasonality. Therefore, ***ARIMA_PLUS*** in BQML includes several additional
@@ -91,123 +131,188 @@
     that you can adjust for periodicity by automatically incorporating holiday options,
     which is one of the benefits of using a platform that doesn’t require you to manually
     add informations related to dates.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这个模型整体上计算密集，并且由于它仅利用正常的时间序列数据，因此在存在趋势或季节性情况下使用起来很困难。因此，***ARIMA_PLUS*** 在
+    BQML 中包含了几个附加特性作为选项。你可以将时间序列分解、季节性因素、波动和下跌、系数变化等添加到模型中，或者可以分别处理它们并手动调整模型。我个人也喜欢可以通过自动包含假期选项来调整周期性，这也是使用一个不需要你手动添加日期相关信息的平台的好处之一。
 - en: '![Multivariate Time-Series Prediction with BQML](../Images/8791fc9a35fae94548b0139f3a6c3c30.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 BQML 的多变量时间序列预测](../Images/8791fc9a35fae94548b0139f3a6c3c30.png)'
 - en: Structure of ARIMA_PLUS (from [BQML Manual](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series))
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: ARIMA_PLUS 的结构（来自 [BQML 手册](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)）
 - en: You can refer to this [page](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
     for more information.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以参考这个 [页面](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+    以获取更多信息。
 - en: However, when it comes to real-world applications, time series prediction is
     not as simple as this. Of course, we’ve been able to identify multiple cycles
     and add interventions to multiple time series with ARIMA_PLUS, but there are many
     external factors related to time series data, and only very few events happen
     in isolation. **Stationarity can be hard to find in time-series data.**
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，当涉及到实际应用时，时间序列预测并不像这样简单。当然，我们已经能够利用 ARIMA_PLUS 识别多个周期并对多个时间序列进行干预，但时间序列数据中存在许多外部因素，并且很少有事件是孤立发生的。**时间序列数据中的平稳性可能很难找到。**
 - en: In the original presentation, I looked at how to deal with these real-world
     time series data for making prediction model- to **decompose these time series**,
     clean up the decomposed data, import it into Python, and then **weave it with
     other variables to create a multivariate time series function, estimate causality
     and incorporate it into a prediction model, and estimate the degree to which the
     effect varies with changes in events.**
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在原始演示中，我研究了如何处理这些实际时间序列数据以建立预测模型——**分解这些时间序列**，清理分解后的数据，将其导入 Python，然后**与其他变量结合创建多变量时间序列函数，估计因果关系并将其纳入预测模型中，评估事件变化对效果的影响程度。**
 - en: 'New Feature: ARIMA_PLUS_XREG'
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 新特性：ARIMA_PLUS_XREG
 - en: And in the only last few months, **a new feature for creating multivariate time
     series functions with external variables(*****ARIMA_PLUS_XREG, XREG*** **below)
     has become an outright feature in BQML**.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 而在仅仅过去几个月里，**用于创建带有外部变量的多变量时间序列函数（*****ARIMA_PLUS_XREG, XREG*** **）的新特性已经成为
+    BQML 的一项显著功能**。
 - en: You can read all about it [here](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)(it’s
     in preview as of July 2023, but I’m guessing it’ll be available later this year).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+    阅读全部内容（截至 2023 年 7 月仍处于预览阶段，但我猜它会在今年晚些时候推出）。
 - en: I apply [the official tutorial](https://cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial?hl=ko)
     to see how it compares to a traditional univariate time series model and we can
     see how it works.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我应用了[官方教程](https://cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial?hl=ko)，以查看它与传统的单变量时间序列模型的比较情况，并了解其工作原理。
 - en: The steps are the same as in the tutorial, so I won’t duplicate them, but here
     are the two models I created. First, I created a traditional *ARIMA_PLUS* model
     and then an *XREG* model using the same data but adding the temperature and wind
     speed at the time.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 步骤与教程中的相同，因此我不再重复，但这是我创建的两个模型。首先，我创建了一个传统的 *ARIMA_PLUS* 模型，然后使用相同的数据创建了一个 *XREG*
+    模型，同时加入了当时的温度和风速。
 - en: ARIMA_PLUS
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ARIMA_PLUS
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: A model that uses these multiple data would look something like this
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这些多数据的模型可能如下所示
 - en: '![Multivariate Time-Series Prediction with BQML](../Images/cd984e9f6e14ec62d2a62ec4ccf7b0b5.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![使用BQML的多元时间序列预测](../Images/cd984e9f6e14ec62d2a62ec4ccf7b0b5.png)'
 - en: Structure ARIMA_PLUS_XREG (from [BQML Manual](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series))
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 结构 ARIMA_PLUS_XREG（来自 [BQML 手册](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)）
 - en: Two models are compared with ML.Evaluate.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个模型通过 ML.Evaluate 进行比较。
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Results are below.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果如下。
 - en: '**ARIMA_PLUS**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ARIMA_PLUS**'
 - en: '![Multivariate Time-Series Prediction with BQML](../Images/53d50aecd494ec5e09b358e6a89863d8.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![使用BQML的多元时间序列预测](../Images/53d50aecd494ec5e09b358e6a89863d8.png)'
 - en: '**ARIMA_PLUS_XREG**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ARIMA_PLUS_XREG**'
 - en: '![Multivariate Time-Series Prediction with BQML](../Images/1857f75e7b6e853a6d79c20129d41b29.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![使用BQML的多元时间序列预测](../Images/1857f75e7b6e853a6d79c20129d41b29.png)'
 - en: You can see that the **XREG model is ahead on basic performance metrics such
     as MAE, MSE, and MAPE.** (Obviously, this is not a perfect solution, **data-dependent**,
     and we can just say that we got another useful tool.)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到**XREG模型在MAE、MSE和MAPE等基本性能指标上表现更好。**（显然，这不是一个完美的解决方案，**依赖于数据**，我们只能说这是一个有用的工具。）
 - en: Multivariate time series analysis is a much-needed option in many cases, but
     it’s often difficult to apply due to various reasons. Now, we can use it if the
     reasons are in data and analysis steps. It looks like we have a good option for
     that, so it’s good to know about it and hopefully it will be useful in many cases.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 多元时间序列分析在许多情况下是一个非常需要的选项，但由于各种原因，往往难以应用。现在，只要原因存在于数据和分析步骤中，我们就可以使用它。看起来我们有一个不错的选择，所以了解它是很好的，希望在许多情况下它会有用。
 - en: '**[JeongMin Kwon](https://www.linkedin.com/in/jeongmin-kwon-a5069734/)** is
     a freelance senior Data Scientist in 10+ years of hands-on experience leveraging
     machine learning models and data mining.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[权政敏](https://www.linkedin.com/in/jeongmin-kwon-a5069734/)** 是一名拥有超过10年实际操作经验的自由职业高级数据科学家，擅长利用机器学习模型和数据挖掘。'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为多元时间序列构建可处理的特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
 - en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[烂番茄电影评分预测的数据科学项目：…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
 - en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[烂番茄电影评分预测的数据科学项目：…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
